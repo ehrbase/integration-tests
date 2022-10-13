@@ -1,2 +1,2 @@
-# oss_robot_test_suite
-OSS robot test suite extract from EHRBase repository
+# integration_tests
+Integration Tests repository with Robot test suite, extracted from EHRBase repository
