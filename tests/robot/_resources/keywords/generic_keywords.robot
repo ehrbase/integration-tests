@@ -142,7 +142,13 @@ restart SUT
 
 
 get application version
-    ${root}=  Parse Xml    ${POM_FILE}
+    ${isPOMFileFound}   Run Keyword And Return Status   Parse Xml    ${POM_FILE}
+    IF  '${isPOMFileFound}' == '${FALSE}'
+        ${root}=  Parse Xml    ${POM_FILE_INTEGRATION_REPO}
+    ELSE
+        ${root}=  Parse Xml    ${POM_FILE}
+    END
+    #${root}=  Parse Xml    ${POM_FILE}
     ${version}=  Get Element Text   ${root}  version
     Set Global Variable    ${VERSION}    ${version}
 
