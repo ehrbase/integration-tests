@@ -43,7 +43,7 @@ Generate Event Trigger Id And Update File Content
 
 Commit Event Trigger
     [Documentation]     Create Event Trigger using JSON file content.
-    ...     - ENDPOINT: POST /plugin/event-trigger
+    ...     - ENDPOINT: POST /plugin/event-trigger/service
     ...     - Takes 3 arguments:
     ...     - json_event_trigger - to specify the JSON file location;
     ...     - event_trigger_state - to specify if event trigger is active or inactive;
@@ -68,7 +68,7 @@ Commit Event Trigger
     #$.definition.rules[0].high diastolic.when.aql
     Check If Session With Plugin Endpoint Exists
     ${resp}         POST On Session     eventtriggersut
-    ...             /event-trigger      expected_status=anything
+    ...             /event-trigger/service      expected_status=anything
     ...             data=${json_str}    headers=${headers}
                     #Log To Console      ${resp.content}
                     Should Be Equal As Strings          ${resp.status_code}     ${status_code}
@@ -81,10 +81,10 @@ Get Event Trigger By Criteria
     [Documentation]     Get Event Trigger using specific criteria.
     ...     - First argument `criteria` can be: event id or event uuid.
     ...     - Second argument (optional), `expected_code` can be 200 or 404
-    ...     - ENDPOINT: GET /plugin/event-trigger/{criteria}
+    ...     - ENDPOINT: GET /plugin/event-trigger/service/{criteria}
     [Arguments]     ${criteria}     ${expected_code}=200
     Check If Session With Plugin Endpoint Exists
-    ${resp}         GET On Session      eventtriggersut      /event-trigger/${criteria}      expected_status=anything
+    ${resp}         GET On Session      eventtriggersut      /event-trigger/service/${criteria}      expected_status=anything
                     #Log To Console      ${resp.content}
                     Should Be Equal As Strings       ${resp.status_code}     ${expected_code}
                     Set Suite Variable   ${response}     ${resp}
@@ -97,7 +97,7 @@ Delete Event Trigger By UUID
     ...                 - expected_code value is optional (default is 200).
     [Arguments]     ${uuid_val}     ${expected_code}=200
     Check If Session With Plugin Endpoint Exists
-    ${resp}         DELETE On Session   eventtriggersut      /event-trigger/${uuid_val}      expected_status=anything
+    ${resp}         DELETE On Session   eventtriggersut      /event-trigger/service/${uuid_val}      expected_status=anything
                     Should Be Equal As Strings      ${resp.status_code}     ${expected_code}
                     Set Suite Variable   ${response}     ${resp}
 
@@ -106,15 +106,27 @@ Get All Event Triggers
     [Documentation]     Get all event triggers.
     ...     - Expects status code to be 200.
     ...     - Sets 2 test variables: response (code) and all_event_triggers
-    ...     - ENDPOINT: GET /plugin/event-trigger
+    ...     - ENDPOINT: GET /plugin/event-trigger/service
     Check If Session With Plugin Endpoint Exists
-    ${resp}         GET On Session      eventtriggersut      /event-trigger
+    ${resp}         GET On Session      eventtriggersut      /event-trigger/service
                     #Log To Console      ${resp.content}
                     Should Be Equal As Strings      ${resp.status_code}     200
                     Set Test Variable   ${response}             ${resp}
                     Set Test Variable   ${all_event_triggers}   ${resp.json()}
                     ${event_triggers_len}    Get Length      ${all_event_triggers}
                     Should Be True      ${event_triggers_len}>2
+
+Activate Or Deactivate Event Trigger By UUID
+    [Documentation]     Deactivate event trigger using its UUID.
+    ...     - Expects status code to be 200.
+    ...     - ENDPOINT: PUT /plugin/event-trigger/service/{uuid}
+    ...     - parameter to be ?activate=false or ?activate=true
+    Check If Session With Plugin Endpoint Exists
+    [Arguments]     ${uuid_val}     ${status}=true     ${expected_code}=200
+    ${resp}         PUT On Session      eventtriggersut      /event-trigger/service/${uuid_val}
+    ...     params=activate=${status}
+                    Should Be Equal As Strings      ${resp.status_code}     ${expected_code}
+                    Set Test Variable   ${response}             ${resp}
 
 Check If Session With Plugin Endpoint Exists
     [Documentation]     Checks if SUT session with /plugin endoint exists.
@@ -125,4 +137,3 @@ Check If Session With Plugin Endpoint Exists
         Create Session      eventtriggersut    ${PLUGINURL}
         ...     debug=2     auth=${CREDENTIALS}     verify=True
     END
-

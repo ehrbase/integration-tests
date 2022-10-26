@@ -62,6 +62,21 @@ Delete Event Trigger
     Get Event Trigger By Criteria   ${event_uuid}   404
     Delete Event Trigger By UUID    ${event_uuid}   404
 
+Deactivate Created Event Trigger
+    [Documentation]     - Create Event Trigger.
+    ...                 - Get Event Trigger using uuid and expect 200.
+    ...                 - Check that Event Trigger state value is *active*.
+    ...                 - Update Event Trigger state using parameter active=false and expect 200.
+    ...                 - Check that Event Trigger state value is *inactive*.
+    [Tags]      Positive
+    Commit Event Trigger    ${event_trigger_file}
+    Log     EVENT_UUID: ${event_uuid}, EVENT_ID: ${event_id}
+    Get Event Trigger By Criteria   ${event_uuid}   200
+    Should Be Equal As Strings     ${response.json()[0]["state"]}   active
+    Activate Or Deactivate Event Trigger By UUID    ${event_uuid}   false   200
+    Get Event Trigger By Criteria   ${event_uuid}   200
+    Should Be Equal As Strings     ${response.json()[0]["state"]}   inactive
+
 Check That Event Trigger Cannot Be Created With Invalid AQL
     [Documentation]     - Check that Event Trigger cannot be created if AQL query is wrong.
     ...                 - 400 status code must be returned with explicit error message.
