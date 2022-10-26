@@ -59,7 +59,6 @@ ${BASEURL}             http://localhost:${PORT}/ehrbase/rest/openehr/v1
 ${MOCK_URL}             http://localhost:1080
 ${PROJECT_ROOT}          ${EXECDIR}${/}..
 ${POM_FILE}              ${PROJECT_ROOT}${/}pom.xml
-${POM_FILE_INTEGRATION_REPO}    ${PROJECT_ROOT}${/}..${/}pom.xml
 ${CREATING_SYSTEM_ID}    ${NODENAME}
 ${SMOKE_TEST_PASSED}     ${TRUE}
 
