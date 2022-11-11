@@ -425,6 +425,23 @@ get FOLDER in DIRECTORY at version - fake version_uid/path (JSON)
 #
 # [ HTTP POST ]
 
+Create Directory With Multitenant Token
+    [Documentation]     Create Directory with Multitenant token (on specific tenant).
+    ...                 \nTakes 2 mandatory arguments:
+    ...                 - valid_test_data_set file\n- multitenancy_token
+    [Arguments]      ${valid_test_data_set}      ${multitenancy_token}
+    load valid dir test-data-set    ${valid_test_data_set}
+    &{headers}          Create Dictionary
+                        ...     Content-Type=application/json
+                        ...     Accept=application/json
+                        ...     Prefer=return=representation
+                        ...     Authorization=Bearer ${multitenancy_token}
+    Set Suite Variable      &{headersMultitenancy}  &{headers}
+    ${resp}             POST On Session     ${SUT}   /ehr/${ehr_id}/directory   expected_status=anything
+                        ...                 json=${test_data}
+                        ...                 headers=${headers}
+                        Set Suite Variable   ${response}    ${resp}
+
 POST /ehr/ehr_id/directory
     [Arguments]         ${headers}
     [Documentation]     Executes HTTP method POST on /ehr/ehr_id/directory endpoint
@@ -480,18 +497,32 @@ PUT /ehr/ehr_id/directory
     ...                 DEPENDENCY: the following variables in test level scope:
     ...                 `\${ehr_id}`, \${preceding_version_uid}, `\${test_data}`
 
-    [Arguments]         ${format}
+    [Arguments]         ${format}       ${multitenancy_token}=${None}
 
+    IF  '${multitenancy_token}' == '${None}'
                         prepare new request session    ${format}
-                        ...                 Prefer=return=representation
-                        ...                 If-Match=${preceding_version_uid}
+                        ...     Prefer=return=representation
+                        ...     If-Match=${preceding_version_uid}
+    ELSE
+                        # return in JSON format by default
+                        Delete All Sessions
+                        &{headers}          Create Dictionary
+                        ...     Content-Type=application/json
+                        ...     Accept=application/json
+                        ...     Prefer=return=representation
+                        ...     If-Match=${preceding_version_uid}
+                        ...     Authorization=Bearer ${multitenancy_token}
+                        Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
+    END
 
     ${resp}=            Put On Session      ${SUT}   /ehr/${ehr_id}/directory   expected_status=anything
                         ...                 json=${test_data}
                         ...                 headers=${headers}
 
                         Set Test Variable   ${response}    ${resp}
-                        Output Debug Info:  PUT /ehr/ehr_id/directory
+                        IF  '${multitenancy_token}' == '${None}'
+                            Output Debug Info:  PUT /ehr/ehr_id/directory
+                        END
 
 
 PUT /ehr/ehr_id/directory (w/ headers)
@@ -534,16 +565,30 @@ DELETE /ehr/ehr_id/directory
     ...                 DEPENDENCY: the following variables in test level scope
     ...                 `\${ehr_id}`, `\${preceding_version_uid}`
 
-    [Arguments]         ${format}
 
+
+    [Arguments]         ${format}       ${multitenancy_token}=${None}
+    IF  '${multitenancy_token}' == '${None}'
                         prepare new request session    ${format}
-                        ...             If-Match=${preceding_version_uid}
+                        ...     If-Match=${preceding_version_uid}
+    ELSE
+                        # return in JSON format by default
+                        Delete All Sessions
+                        &{headers}     Create Dictionary
+                        ...     Content-Type=application/json
+                        ...     Accept=application/json
+                        ...     If-Match=${preceding_version_uid}
+                        ...     Authorization=Bearer ${multitenancy_token}
+                        Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
+    END
 
     ${resp}=            Delete On Session   ${SUT}   /ehr/${ehr_id}/directory   expected_status=anything
                         ...                 headers=${headers}
 
                         Set Test Variable   ${response}    ${resp}
-                        Output Debug Info:  DELETE /ehr/ehr_id/directory
+                        IF  '${multitenancy_token}' == '${None}'
+                            Output Debug Info:  DELETE /ehr/ehr_id/directory
+                        END
 
 
 
@@ -566,15 +611,28 @@ GET /ehr/ehr_id/directory/version_uid
     ...                 DEPENDENCY - variables in test level scope:
     ...                 `\${ehr_id}`, `\${version_uid}`
 
-    [Arguments]         ${format}
+    [Arguments]         ${format}       ${multitenancy_token}=${None}
 
+    IF  '${multitenancy_token}' == '${None}'
                         prepare new request session    ${format}
+    ELSE
+                        # return in JSON format by default
+                        Delete All Sessions
+                        &{headers}          Create Dictionary
+                        ...     Content-Type=application/json
+                        ...     Accept=application/json
+                        ...     Prefer=return=representation
+                        ...     Authorization=Bearer ${multitenancy_token}
+                        Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
+    END
 
     ${resp}=            GET On Session         ${SUT}   /ehr/${ehr_id}/directory/${version_uid}   expected_status=anything
                         ...                 headers=${headers}
 
                         Set Test Variable   ${response}    ${resp}
-                        Output Debug Info:  GET /ehr/ehr_id/directory/version_uid
+                        IF  '${multitenancy_token}' == '${None}'
+                            Output Debug Info:  GET /ehr/ehr_id/directory/version_uid
+                        END
 
 
 GET /ehr/ehr_id/directory/version_uid?path
@@ -598,15 +656,28 @@ GET /ehr/ehr_id/directory
     ...                 DEPENDENCY - variable in test level scope:
     ...                 `\${ehr_id}`
 
-    [Arguments]         ${format}
+    [Arguments]         ${format}       ${multitenancy_token}=${None}
 
+    IF  '${multitenancy_token}' == '${None}'
                         prepare new request session    ${format}
+    ELSE
+                        # return in JSON format by default
+                        Delete All Sessions
+                        &{headers}          Create Dictionary
+                        ...     Content-Type=application/json
+                        ...     Accept=application/json
+                        ...     Prefer=return=representation
+                        ...     Authorization=Bearer ${multitenancy_token}
+                        Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
+    END
 
     ${resp}=            GET On Session         ${SUT}   /ehr/${ehr_id}/directory   expected_status=anything
                         ...                 headers=${headers}
 
                         Set Test Variable   ${response}    ${resp}
-                        Output Debug Info:  GET /ehr/ehr_id/directory
+                        IF  '${multitenancy_token}' == '${None}'
+                            Output Debug Info:  GET /ehr/ehr_id/directory
+                        END
 
 
 GET /ehr/ehr_id/directory?version_at_time

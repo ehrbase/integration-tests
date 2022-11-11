@@ -299,6 +299,24 @@ POST /ehr/ehr_id/contribution without accept header
                         Output Debug Info:    POST /ehr/ehr_id/contribution
 
 
+Create Contribution With Multitenant Token
+    [Documentation]     Create Contribution with Multitenant token (on specific tenant).
+    ...                 \nTakes 2 mandatory arguments:
+    ...                 - valid_test_data_set file\n- multitenancy_token
+    [Arguments]      ${valid_test_data_set}      ${multitenancy_token}
+    load valid test-data-set    ${valid_test_data_set}
+    &{headers}      Create Dictionary
+                    ...     Content-Type=application/json
+                    ...     Accept=application/json
+                    ...     Authorization=Bearer ${multitenancy_token}
+    Set Suite Variable      &{headersMultitenancy}  &{headers}
+    ${resp}             POST On Session     ${SUT}   /ehr/${ehr_id}/contribution   expected_status=anything
+                        ...                 json=${test_data}
+                        ...                 headers=${headersMultitenancy}
+    Set Test Variable   ${response}     ${resp}
+    Set Test Variable   ${body}         ${response.json()}
+    Set Test Variable   ${contribution_uid}     ${body['uid']['value']}
+    Set Test Variable   ${versions}     ${body['versions']}
 
 
 
@@ -326,6 +344,20 @@ GET /ehr/ehr_id/contribution/contribution_uid
 
                         Set Test Variable   ${response}    ${resp}
                         Output Debug Info:    GET /ehr/ehr_id/contribution/contribution_uid
+
+
+Retrieve Contribution With Multitenant Token
+    [Arguments]         ${multitenancy_token}
+    &{headers}          Create Dictionary
+                        ...     Content-Type=application/json
+                        ...     Accept=application/json
+                        ...     Authorization=Bearer ${multitenancy_token}
+    Set Suite Variable      &{headersMultitenancy}          &{headers}
+    ${resp}             GET On Session      ${SUT}
+                        ...     /ehr/${ehr_id}/contribution/${contribution_uid}   expected_status=anything
+                        ...     headers=${headers}
+
+                        Set Test Variable   ${response}     ${resp}
 
 
 GET /ehr/ehr_id/contributions
