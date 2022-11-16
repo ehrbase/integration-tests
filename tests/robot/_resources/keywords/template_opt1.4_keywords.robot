@@ -143,7 +143,7 @@ verify server response
 
 server accepted OPT
                         @{expectedStatusCodesList}      Create List     200     201
-                        ${string_status_code}    Convert To String    ${response.status_code}
+                        ${string_status_code}    Convert To String    ${response_code}
                         List Should Contain Value   ${expectedStatusCodesList}      ${string_status_code}
 
 
