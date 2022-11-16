@@ -1245,7 +1245,7 @@ Upload OPT ECIS
 
                         get valid OPT file    ${opt_file}
                         upload OPT file ECIS
-                        IF  '${response.status_code}' != '409'
+                        IF  '${response_code}' != '409'
                             server accepted OPT
                         ELSE
                             server rejected OPT with status code 409
