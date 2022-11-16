@@ -110,6 +110,7 @@ upload OPT file ECIS
     ${resp}=            POST On Session      ${SUT}    ${ECISURL}/template   expected_status=anything
                         ...                  data=${file}    headers=${headers}
                         Set Suite Variable    ${response}    ${resp}
+                        Set Suite Variable    ${response_code}  ${response.status_code}
                         # Log To Console      ${resp.content}
 
 upload OPT file with version parameter
