@@ -56,6 +56,7 @@ commit CONTRIBUTION (JSON)
                         Set Test Variable    ${contribution_uid}    ${body['uid']['value']}
                         Set Test Variable    ${versions}    ${body['versions']}
 
+
 commit CONTRIBUTION (JSON) is modifiable false
     [Arguments]         ${valid_test_data_set}
                         Set Test Variable  ${KEYWORD NAME}  COMMIT CONTRIBUTION 1 (JSON)
@@ -242,6 +243,11 @@ check response: is negative indicating non-existent contribution_uid on ehr_id
                         # Should Be Equal As Strings  ${body['error']}  Contribution with given ID does not exist
 
 
+check response: is negative indicating internal server error
+                        Should Be Equal As Strings      ${response.status_code}         500
+                        Should Be Equal As Strings      ${response.json()["error"]}     Internal Server Error
+
+
 check response: is positive with list of ${x} contribution(s)
                         Length Should Be    ${versions}    ${x}
 
@@ -274,6 +280,34 @@ POST /ehr/ehr_id/contribution
 
                         Set Test Variable   ${response}    ${resp}
                         Output Debug Info:    POST /ehr/ehr_id/contribution
+
+
+POST transaction-management/ehr/ehr_id/contribution/contribution_id/rollback
+    [Arguments]         ${new_contribution_id}=${None}  ${multitenancy_token}=${None}
+    &{headers}          Create Dictionary   &{EMPTY}
+
+                        Set To Dictionary   ${headers}
+                        ...                 Content-Type=application/json
+                        ...                 Accept=application/json
+                        ...                 &{authorization}
+                        IF  '${multitenancy_token}' != '${None}'
+                            Set To Dictionary   ${headers}  Authorization=Bearer ${multitenancy_token}
+                        END
+                        IF  '${new_contribution_id}' != '${None}'
+                            Set Suite Variable  ${contribution_uid}     ${new_contribution_id}
+                        END
+    &{headers}          Set Headers         ${headers}
+    Create Session      ${SUT}    ${PLUGIN_URL}    debug=2
+                        ...                 headers=${headers}    verify=True
+
+                        Set Suite Variable   ${headers}    ${headers}
+    ${resp}             POST On Session     ${SUT}
+                        ...                 /transaction-management/ehr/${ehr_id}/contribution/${contribution_uid}/rollback
+                        ...                 expected_status=anything
+                        ...                 headers=${headers}
+                        Set Suite Variable  ${response_code}    ${resp.status_code}
+                        Set Suite Variable  ${body}     ${resp.text}
+
 
 
 POST /ehr/ehr_id/contribution without accept header
