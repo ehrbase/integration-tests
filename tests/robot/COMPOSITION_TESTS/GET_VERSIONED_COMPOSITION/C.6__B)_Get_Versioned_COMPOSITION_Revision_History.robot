@@ -35,6 +35,7 @@ Force Tags      COMPOSITION_get_versioned
 
 *** Test Cases ***
 1. Get Revision History of Versioned Composition Of Existing EHR (JSON)
+    [Tags]      CDR-560
     [Documentation]    Simple test
 
     create EHR and commit a composition for versioned composition tests
@@ -46,6 +47,8 @@ Force Tags      COMPOSITION_get_versioned
 
     ${item1} =    Get From List    ${response.body}    0
     Should Be Equal As Strings    ${version_uid}    ${item1.version_id.value}
+    #below line covers bug CDR-560
+    Should Contain Any     ${item1.audits[0].time_committed.value}      +   -   Z   timezone not present in timestamp
 
 
 2. Get Revision History Of Versioned Composition Of Existing EHR With Two Composition Versions (JSON)
@@ -128,3 +131,25 @@ Force Tags      COMPOSITION_get_versioned
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
     Should Be Equal As Strings    ${response.status}    404
+
+6. Get Revision History Time Committed Value With Timezone Indicator
+    [Documentation]     Test timezone indicator to be present in timestamp.
+    ...         \n Depends on where Robot scripts are executed (in which timezone).
+    ...         \n audits[0].time_committed.value should contain +xx:xx or -xx:xx or Z at the end of timestamp.
+    ...         \n Covers fixed bug: https://jira.vitagroup.ag/browse/CDR-560
+    ...         \n *Examples of valid timestamp formats with timezone indicator:*
+    ...         - 2022-11-21T16:01:25.952+02:00
+    ...         - 2022-11-21T16:01:25.952-01:00
+    ...         - 2022-11-21T16:01:25.952Z
+    [Tags]      CDR-560
+    prepare new request session    JSON    Prefer=return=representation
+    create new EHR
+    Should Be Equal As Strings    ${response.status}    201
+
+    Upload OPT    minimal/minimal_observation.opt
+    commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes_no_time_zone.xml
+
+    get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
+    Should Be Equal As Strings      ${response.status}      200
+    ${item1}    Get From List       ${response.body}        0
+    Should Contain Any     ${item1.audits[0].time_committed.value}      +   -   Z   timezone not present in timestamp
