@@ -99,6 +99,7 @@ ADMIN_DEV_CONFIG = {
     "HEARTBEAT_URL": HEARTBEAT_URL_FROM_YAML,
     "CREDENTIALS": ["ehrbase-admin", "EvenMoreSecretPassword"],
     "SECURITY_AUTHTYPE": "BASIC",
+    "SPRING_CACHE_TYPE": "SIMPLE",
     "AUTHORIZATION": {
         "Authorization": "Basic ZWhyYmFzZS1hZG1pbjpFdmVuTW9yZVNlY3JldFBhc3N3b3Jk"
     },
@@ -135,6 +136,7 @@ TEST_CONFIG = {
     "RABBITMQURL": RABBITMQ_URL_FROM_YAML,
     "CREDENTIALS": ["ehrbase-user", "SuperSecretPassword"],
     "SECURITY_AUTHTYPE": "BASIC",
+    "SPRING_CACHE_TYPE": "SIMPLE",
     "AUTHORIZATION": {
         "Authorization": "Basic ZWhyYmFzZS11c2VyOlN1cGVyU2VjcmV0UGFzc3dvcmQ="
     },
@@ -169,6 +171,7 @@ ADMIN_TEST_CONFIG = {
     "HEARTBEAT_URL": HEARTBEAT_URL_FROM_YAML,
     "CREDENTIALS": ["ehrbase-admin", "EvenMoreSecretPassword"],
     "SECURITY_AUTHTYPE": "BASIC",
+    "SPRING_CACHE_TYPE": "SIMPLE",
     "AUTHORIZATION": {
         "Authorization": "Basic ZWhyYmFzZS1hZG1pbjpFdmVuTW9yZVNlY3JldFBhc3N3b3Jk"
     },
