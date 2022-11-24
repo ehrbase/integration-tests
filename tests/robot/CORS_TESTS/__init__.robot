@@ -9,4 +9,4 @@ Resource    ../_resources/suite_settings.robot
 #Suite Setup  startup SUT
 #Suite Teardown  shutdown SUT
 
-Force Tags    CORS
+Force Tags    CORS_TESTS
