@@ -195,6 +195,10 @@ start openehr server
 
     IF    '${CODE_COVERAGE}' == 'True'
         start server process with coverage
+    ELSE IF     '${SECURITY_AUTHTYPE}' == 'BASIC' and '${SPRING_CACHE_TYPE}' == 'SIMPLE'
+        start server with security auth type basic and sprint cache type simple
+    ELSE IF     '${SECURITY_AUTHTYPE}' == '${None}' and '${SPRING_CACHE_TYPE}' == 'SIMPLE'
+        start server without security auth type and sprint cache type simple
     ELSE
         start server process without coverage
     END
@@ -227,13 +231,11 @@ start server process without coverage
                               ...    SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI    ${JWT_ISSUERURI}
                         END
 
-
     ${result}=          Start Process  java  -jar  ${PROJECT_ROOT}${/}application/target/application-${VERSION}.jar
                         ...                  --cache.enabled\=${CACHE-ENABLED}
                         ...                  --system.allow-template-overwrite\=${ALLOW-TEMPLATE-OVERWRITE}
                         ...                  --server.nodename\=${NODENAME}    alias=ehrserver
                         ...                    cwd=${PROJECT_ROOT}    stdout=stdout.txt    stderr=stderr.txt
-
 
 start server process with coverage
     ${result}=          Start Process  java  -javaagent:${JACOCO_LIB_PATH}/jacocoagent.jar\=output\=tcpserver,address\=127.0.0.1
@@ -242,6 +244,18 @@ start server process with coverage
                         ...                  --server.nodename\=${NODENAME}    alias=ehrserver
                         ...                    cwd=${PROJECT_ROOT}    stdout=stdout.txt    stderr=stderr.txt
 
+start server with security auth type basic and sprint cache type simple
+    ${result}=          Start Process  java  -jar    ${PROJECT_ROOT}${/}application/target/application-${VERSION}.jar
+                        ...                  --security.authType\=BASIC
+                        ...                  --spring.cache.type\=SIMPLE
+                        ...                  --server.nodename\=${NODENAME}    alias=ehrserver
+                        ...                    cwd=${PROJECT_ROOT}    stdout=stdout.txt    stderr=stderr.txt
+
+start server without security auth type and sprint cache type simple
+    ${result}=          Start Process  java  -jar    ${PROJECT_ROOT}${/}application/target/application-${VERSION}.jar
+                        ...                  --spring.cache.type\=SIMPLE
+                        ...                  --server.nodename\=${NODENAME}    alias=ehrserver
+                        ...                    cwd=${PROJECT_ROOT}    stdout=stdout.txt    stderr=stderr.txt
 
 wait until openehr server is ready
     Wait Until Keyword Succeeds  120 sec  3 sec  text "Started EhrBase ..." is in log
