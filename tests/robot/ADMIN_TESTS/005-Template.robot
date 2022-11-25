@@ -260,13 +260,11 @@ ${CACHE-ENABLED}        ${FALSE}
     upload valid OPT    minimal/minimal_admin.opt
     (admin) update OPT    minimal/minimal_action.opt    # NOTE: a different OPT is used as payload!!!
 
-        TRACE GITHUB ISSUE    444
-
-    #Connect With DB
+    Connect With DB
     ${opt_records}=     Count Rows In DB Table    ehr.template_store
                         Should Be Equal As Integers    ${opt_records}       ${1}
 
-    [Teardown]    Run Keywords    (admin) delete all OPTs
+    [Teardown]    Run Keywords    TRACE GITHUB ISSUE    444     AND     (admin) delete all OPTs
 
 
 
