@@ -256,6 +256,19 @@ Query For Composition [x] > Admin [x]
     #                        compare json-string with json-file  ${actual}  ${expected}
     ###################
 
+Query For CDR-631
+    [Tags]      CDR-631
+    [Documentation]     Covers case described in JIRA ticket CDR-631
+    ...     \nhttps://jira.vitagroup.ag/browse/CDR-631
+    ...     \nRobot script for https://github.com/ehrbase/openEHR_SDK/blob/develop/client/src/test/java/org/ehrbase/client/openehrclient/defaultrestclient/AqlTestIT.java
+    ...     \ntestExecute10()
+    Change EHR ID In Expected JSON File     q_for_cdr_631.json
+    Execute Query And Compare Actual Result With Expected
+    ...     q_for_cdr_631.json
+    ...     q_for_cdr_631.json
+    ...     test_set=${testSet}
+
+
 
 *** Keywords ***
 Prepare Test Set 1 From Query Execution
@@ -278,3 +291,46 @@ Prepare Test Set 1 From Query Execution
     ...     ${opt_file_name}__compo6_no_instruction_test_set_1.json
     Commit Composition FLAT And Check Response Status To Be 201
     ...     ${opt_file_name}__compo8_no_cluster_test_set_1.json
+	
+Change EHR ID In Expected JSON File
+    [Arguments]     ${compositionFilePath}
+    ${initalJson}           Load Json From File     ${EXPECTED JSON TO RECEIVE PAYLOAD}/${testSet}/${compositionFilePath}
+    ${returnedJsonFileLocation}     Change EHR ID and Save Back To Result File
+    ...     ${initalJson}   ${ehr_id}      ${compositionFilePath}
+
+Change EHR ID and Save Back To Result File
+    [Documentation]     Updates EHR ID value
+    ...     in Query result json, using arguments values.
+    ...     Takes 3 arguments:
+    ...     1 - jsonContent = Loaded Json content
+    ...     2 - value to be replaced with New EHR ID
+    ...     3 - compositionFilePath - File to be changed
+    [Arguments]     ${jsonContent}      ${newEhrIdValue}    ${compositionFilePath}
+    ${ehrValueJsonPath1}     Set Variable   rows[0].[0]
+    ${ehrValueJsonPath2}     Set Variable   rows[1].[0]
+    ${ehrValueJsonPath3}     Set Variable   rows[2].[0]
+    ${ehrValueJsonPath4}     Set Variable   rows[3].[0]
+    ${ehrValueJsonPath5}     Set Variable   rows[4].[0]
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${ehrValueJsonPath1}
+    ...             new_value=${newEhrIdValue}
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${ehrValueJsonPath2}
+    ...             new_value=${newEhrIdValue}
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${ehrValueJsonPath3}
+    ...             new_value=${newEhrIdValue}
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${ehrValueJsonPath4}
+    ...             new_value=${newEhrIdValue}
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${ehrValueJsonPath5}
+    ...             new_value=${newEhrIdValue}
+    ${changedEHRIdValue1}   Get Value From Json     ${jsonContent}      ${ehrValueJsonPath1}
+    ${changedEHRIdValue2}   Get Value From Json     ${jsonContent}      ${ehrValueJsonPath2}
+    ${changedEHRIdValue3}   Get Value From Json     ${jsonContent}      ${ehrValueJsonPath3}
+    ${changedEHRIdValue4}   Get Value From Json     ${jsonContent}      ${ehrValueJsonPath4}
+    ${changedEHRIdValue5}   Get Value From Json     ${jsonContent}      ${ehrValueJsonPath5}
+    ${json_str}     Convert JSON To String    ${json_object}
+    Create File     ${EXPECTED JSON TO RECEIVE PAYLOAD}/${testSet}/${compositionFilePath}    ${json_str}
+    [return]    ${EXPECTED JSON TO RECEIVE PAYLOAD}/${testSet}/${compositionFilePath}
