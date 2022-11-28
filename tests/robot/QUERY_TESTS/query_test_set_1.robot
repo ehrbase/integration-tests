@@ -253,7 +253,6 @@ Query For Composition [x] > Admin [x]
     ...     q_for_composition_x_admin_x.json
     ...     q_for_composition_x_admin_x.json
     ...     test_set=${testSet}
-    #                        compare json-string with json-file  ${actual}  ${expected}
     ###################
 
 Query For CDR-631
@@ -262,12 +261,18 @@ Query For CDR-631
     ...     \nhttps://jira.vitagroup.ag/browse/CDR-631
     ...     \nRobot script for https://github.com/ehrbase/openEHR_SDK/blob/develop/client/src/test/java/org/ehrbase/client/openehrclient/defaultrestclient/AqlTestIT.java
     ...     \ntestExecute10()
+    ${queryToApply}     Catenate    select e/ehr_id/value,
+    ...     o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude as systolic
+    ...     from EHR e[ehr_id/value = '${ehr_id}'] contains Observation o
+    ...     where o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude = 130.0
+    Log     ${ehr_id}
+    Set Test Variable   ${queryToSendAndExpected}   ${queryToApply}
+    Change Query Select In Request JSON File    q_for_cdr_631.json
     Change EHR ID In Expected JSON File     q_for_cdr_631.json
     Execute Query And Compare Actual Result With Expected
     ...     q_for_cdr_631.json
     ...     q_for_cdr_631.json
     ...     test_set=${testSet}
-
 
 
 *** Keywords ***
@@ -280,7 +285,7 @@ Prepare Test Set 1 From Query Execution
     Commit Composition FLAT And Check Response Status To Be 201
     ...     ${opt_file_name}__compo1_test_set_1.json
     Commit Composition FLAT And Check Response Status To Be 201
-    ...     ${opt_file_name}__compo2_test_set_1.json
+    ...     ${opt_file_name}__compo2_test_set_1.json    #130.0
     Commit Composition FLAT And Check Response Status To Be 201
     ...     ${opt_file_name}__compo3_no_obs_test_set_1.json
     Commit Composition FLAT And Check Response Status To Be 201
@@ -291,12 +296,32 @@ Prepare Test Set 1 From Query Execution
     ...     ${opt_file_name}__compo6_no_instruction_test_set_1.json
     Commit Composition FLAT And Check Response Status To Be 201
     ...     ${opt_file_name}__compo8_no_cluster_test_set_1.json
-	
+
 Change EHR ID In Expected JSON File
-    [Arguments]     ${compositionFilePath}
-    ${initalJson}           Load Json From File     ${EXPECTED JSON TO RECEIVE PAYLOAD}/${testSet}/${compositionFilePath}
+    [Arguments]     ${testDataFilePath}
+    ${initalJson}           Load Json From File     ${EXPECTED JSON TO RECEIVE PAYLOAD}/${testSet}/${testDataFilePath}
     ${returnedJsonFileLocation}     Change EHR ID and Save Back To Result File
-    ...     ${initalJson}   ${ehr_id}      ${compositionFilePath}
+    ...     ${initalJson}   ${ehr_id}      ${testDataFilePath}
+
+Change Query Select In Request JSON File
+    [Arguments]     ${testDataFilePath}
+    ${initalJson}           Load Json From File     ${ACTUAL JSON TO SEND PAYLOAD}/${testSet}/${testDataFilePath}
+    ${returnedJsonFileLocation}     Change EHR ID and Save Back To Request File
+    ...     ${initalJson}   ${queryToSendAndExpected}      ${testDataFilePath}
+
+Change EHR ID and Save Back To Request File
+    [Documentation]     Updates Query Select value
+    ...     using arguments values.
+    ...     Takes 3 arguments:
+    ...     1 - jsonContent = Loaded Json content
+    ...     2 - query to be replaced with new one
+    ...     3 - testDataFilePath - File to be changed
+     [Arguments]     ${jsonContent}      ${newQueryValue}    ${testDataFilePath}
+     ${json_object}      Update Value To Json    json_object=${jsonContent}
+    ...             json_path=q     new_value=${queryToSendAndExpected}
+    ${json_str}     Convert JSON To String    ${json_object}
+    Create File     ${ACTUAL JSON TO SEND PAYLOAD}/${testSet}/${testDataFilePath}    ${json_str}
+    [return]    ${ACTUAL JSON TO SEND PAYLOAD}/${testSet}/${testDataFilePath}
 
 Change EHR ID and Save Back To Result File
     [Documentation]     Updates EHR ID value
@@ -304,13 +329,15 @@ Change EHR ID and Save Back To Result File
     ...     Takes 3 arguments:
     ...     1 - jsonContent = Loaded Json content
     ...     2 - value to be replaced with New EHR ID
-    ...     3 - compositionFilePath - File to be changed
-    [Arguments]     ${jsonContent}      ${newEhrIdValue}    ${compositionFilePath}
+    ...     3 - testDataFilePath - File to be changed
+    [Arguments]     ${jsonContent}      ${newEhrIdValue}    ${testDataFilePath}
     ${ehrValueJsonPath1}     Set Variable   rows[0].[0]
     ${ehrValueJsonPath2}     Set Variable   rows[1].[0]
     ${ehrValueJsonPath3}     Set Variable   rows[2].[0]
     ${ehrValueJsonPath4}     Set Variable   rows[3].[0]
     ${ehrValueJsonPath5}     Set Variable   rows[4].[0]
+    ${json_object}      Update Value To Json    json_object=${jsonContent}
+    ...             json_path=q     new_value=${queryToSendAndExpected}
     ${json_object}          Update Value To Json	json_object=${jsonContent}
     ...             json_path=${ehrValueJsonPath1}
     ...             new_value=${newEhrIdValue}
@@ -332,5 +359,5 @@ Change EHR ID and Save Back To Result File
     ${changedEHRIdValue4}   Get Value From Json     ${jsonContent}      ${ehrValueJsonPath4}
     ${changedEHRIdValue5}   Get Value From Json     ${jsonContent}      ${ehrValueJsonPath5}
     ${json_str}     Convert JSON To String    ${json_object}
-    Create File     ${EXPECTED JSON TO RECEIVE PAYLOAD}/${testSet}/${compositionFilePath}    ${json_str}
-    [return]    ${EXPECTED JSON TO RECEIVE PAYLOAD}/${testSet}/${compositionFilePath}
+    Create File     ${EXPECTED JSON TO RECEIVE PAYLOAD}/${testSet}/${testDataFilePath}    ${json_str}
+    [return]    ${EXPECTED JSON TO RECEIVE PAYLOAD}/${testSet}/${testDataFilePath}
