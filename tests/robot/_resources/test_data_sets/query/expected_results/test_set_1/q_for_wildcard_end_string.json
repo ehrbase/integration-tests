@@ -1,0 +1,35 @@
+{
+    "q": "SELECT e1/name/value as Type, e1/data[at0001]/items[at0002]/value/value as Problem_DiagnosisName FROM EHR e contains COMPOSITION c0[openEHR-EHR-COMPOSITION.encounter.v1] contains EVALUATION e1[openEHR-EHR-EVALUATION.problem_diagnosis.v1] WHERE (c0/archetype_details/template_id/value = 'ehrbase.testcase05.v0' AND e1/data[at0001]/items[at0002]/value/value LIKE 'Fev%')",
+    "columns": [
+        {
+            "path": "/name/value",
+            "name": "Type"
+        },
+        {
+            "path": "/data[at0001]/items[at0002]/value/value",
+            "name": "Problem_DiagnosisName"
+        }
+    ],
+    "rows": [
+        [
+            "Problem/Diagnosis",
+            "Fever"
+        ],
+        [
+            "Problem/Diagnosis",
+            "Fever"
+        ],
+        [
+            "Problem/Diagnosis",
+            "Fever"
+        ],
+        [
+            "Problem/Diagnosis",
+            "Fever"
+        ],
+        [
+            "Problem/Diagnosis",
+            "Fever"
+        ]
+    ]
+}

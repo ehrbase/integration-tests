@@ -26,7 +26,7 @@ Resource        ../_resources/suite_settings.robot
 Resource        ../_resources/keywords/aql_query_keywords.robot
 
 Suite Setup         Clean DB
-Suite Teardown      Clean DB
+#Suite Teardown      Clean DB
 
 
 *** Variables ***
@@ -253,7 +253,6 @@ Query For Composition [x] > Admin [x]
     ...     q_for_composition_x_admin_x.json
     ...     q_for_composition_x_admin_x.json
     ...     test_set=${testSet}
-    ###################
 
 Query For CDR-631
     [Tags]      CDR-631
@@ -272,6 +271,36 @@ Query For CDR-631
     Execute Query And Compare Actual Result With Expected
     ...     q_for_cdr_631.json
     ...     q_for_cdr_631.json
+    ...     test_set=${testSet}
+
+Query For Like Operator - % Wildcard At The Beginning
+    [Tags]      CDR-517
+    [Documentation]     Covers case described in JIRA ticket CDR-631
+    ...     \nLike operator is used to get results where '%string'
+    ...     \nhttps://jira.vitagroup.ag/browse/CDR-517
+    Execute Query And Compare Actual Result With Expected
+    ...     q_for_wildcard_begin_string.json
+    ...     q_for_wildcard_begin_string.json
+    ...     test_set=${testSet}
+
+Query For Like Operator - % Wildcard At The End
+    [Tags]      CDR-517
+    [Documentation]     Covers case described in JIRA ticket CDR-631
+    ...     \nLike operator is used to get results where 'string%'
+    ...     \nhttps://jira.vitagroup.ag/browse/CDR-517
+    Execute Query And Compare Actual Result With Expected
+    ...     q_for_wildcard_end_string.json
+    ...     q_for_wildcard_end_string.json
+    ...     test_set=${testSet}
+
+Query For Like Operator - % Wildcard At The Start And End
+    [Tags]      CDR-517
+    [Documentation]     Covers case described in JIRA ticket CDR-631
+    ...     \nLike operator is used to get results where '%string%'
+    ...     \nhttps://jira.vitagroup.ag/browse/CDR-517
+    Execute Query And Compare Actual Result With Expected
+    ...     q_for_wildcard_start_end_string.json
+    ...     q_for_wildcard_start_end_string.json
     ...     test_set=${testSet}
 
 
