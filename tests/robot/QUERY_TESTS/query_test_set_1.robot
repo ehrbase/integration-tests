@@ -26,7 +26,7 @@ Resource        ../_resources/suite_settings.robot
 Resource        ../_resources/keywords/aql_query_keywords.robot
 
 Suite Setup         Clean DB
-#Suite Teardown      Clean DB
+Suite Teardown      Clean DB
 
 
 *** Variables ***
@@ -303,6 +303,23 @@ Query For Like Operator - % Wildcard At The Start And End
     ...     q_for_wildcard_start_end_string.json
     ...     test_set=${testSet}
 
+#Query For Medication Values
+#    [Tags]      807
+#    [Documentation]     Covers case described in https://github.com/ehrbase/ehrbase/pull/807
+#    ...     \nCase 2.1 for issue 728
+#    ${queryToApply}     Catenate    select e/ehr_id/value,
+#    ...     from EHR e[ehr_id/value = '${ehr_id}'] contains Observation o
+#    ...     SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value as medication
+#    ...     from EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i [openEHR-EHR-INSTRUCTION.medication_order.v3]
+#    ...     where c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'}
+#    ...     AND e/ehr_id/value='${ehr_id}'
+#    Execute Query And Compare Actual Result With Expected
+#    ...     q_for_medication.json
+#    ...     q_for_medication.json
+#    ...     test_set=${testSet}
+#    Set Test Variable   ${queryToSendAndExpected}   ${queryToApply}
+#    Change Query Select In Request JSON File    q_for_medication.json
+
 
 *** Keywords ***
 Prepare Test Set 1 From Query Execution
@@ -325,6 +342,12 @@ Prepare Test Set 1 From Query Execution
     ...     ${opt_file_name}__compo6_no_instruction_test_set_1.json
     Commit Composition FLAT And Check Response Status To Be 201
     ...     ${opt_file_name}__compo8_no_cluster_test_set_1.json
+
+#    ${opt_file_name}    Set Variable    vitagroup-medication-list.v0
+#    Upload OPT    query_test_sets/${opt_file_name}.opt
+#    Commit Composition FLAT And Check Response Status To Be 201
+#    ...     ${opt_file_name}__composition_with_medication_item.json
+
 
 Change EHR ID In Expected JSON File
     [Arguments]     ${testDataFilePath}
@@ -360,33 +383,16 @@ Change EHR ID and Save Back To Result File
     ...     2 - value to be replaced with New EHR ID
     ...     3 - testDataFilePath - File to be changed
     [Arguments]     ${jsonContent}      ${newEhrIdValue}    ${testDataFilePath}
-    ${ehrValueJsonPath1}     Set Variable   rows[0].[0]
-    ${ehrValueJsonPath2}     Set Variable   rows[1].[0]
-    ${ehrValueJsonPath3}     Set Variable   rows[2].[0]
-    ${ehrValueJsonPath4}     Set Variable   rows[3].[0]
-    ${ehrValueJsonPath5}     Set Variable   rows[4].[0]
+    ${length}         Get length          ${jsonContent['rows']}
+    Log     ${length}
     ${json_object}      Update Value To Json    json_object=${jsonContent}
     ...             json_path=q     new_value=${queryToSendAndExpected}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${ehrValueJsonPath1}
-    ...             new_value=${newEhrIdValue}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${ehrValueJsonPath2}
-    ...             new_value=${newEhrIdValue}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${ehrValueJsonPath3}
-    ...             new_value=${newEhrIdValue}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${ehrValueJsonPath4}
-    ...             new_value=${newEhrIdValue}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${ehrValueJsonPath5}
-    ...             new_value=${newEhrIdValue}
-    ${changedEHRIdValue1}   Get Value From Json     ${jsonContent}      ${ehrValueJsonPath1}
-    ${changedEHRIdValue2}   Get Value From Json     ${jsonContent}      ${ehrValueJsonPath2}
-    ${changedEHRIdValue3}   Get Value From Json     ${jsonContent}      ${ehrValueJsonPath3}
-    ${changedEHRIdValue4}   Get Value From Json     ${jsonContent}      ${ehrValueJsonPath4}
-    ${changedEHRIdValue5}   Get Value From Json     ${jsonContent}      ${ehrValueJsonPath5}
+    # below for is used in case rows contains multiple array results inside rows array
+    FOR     ${i}  IN RANGE  ${length}
+        ${json_object}          Update Value To Json	json_object=${jsonContent}
+        ...             json_path=rows[${i}].[0]
+        ...             new_value=${newEhrIdValue}
+    END
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${EXPECTED JSON TO RECEIVE PAYLOAD}/${testSet}/${testDataFilePath}    ${json_str}
     [return]    ${EXPECTED JSON TO RECEIVE PAYLOAD}/${testSet}/${testDataFilePath}
