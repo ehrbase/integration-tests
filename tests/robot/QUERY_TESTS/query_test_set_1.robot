@@ -303,23 +303,6 @@ Query For Like Operator - % Wildcard At The Start And End
     ...     q_for_wildcard_start_end_string.json
     ...     test_set=${testSet}
 
-#Query For Medication Values
-#    [Tags]      807
-#    [Documentation]     Covers case described in https://github.com/ehrbase/ehrbase/pull/807
-#    ...     \nCase 2.1 for issue 728
-#    ${queryToApply}     Catenate    select e/ehr_id/value,
-#    ...     from EHR e[ehr_id/value = '${ehr_id}'] contains Observation o
-#    ...     SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value as medication
-#    ...     from EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i [openEHR-EHR-INSTRUCTION.medication_order.v3]
-#    ...     where c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'}
-#    ...     AND e/ehr_id/value='${ehr_id}'
-#    Execute Query And Compare Actual Result With Expected
-#    ...     q_for_medication.json
-#    ...     q_for_medication.json
-#    ...     test_set=${testSet}
-#    Set Test Variable   ${queryToSendAndExpected}   ${queryToApply}
-#    Change Query Select In Request JSON File    q_for_medication.json
-
 
 *** Keywords ***
 Prepare Test Set 1 From Query Execution
@@ -342,12 +325,6 @@ Prepare Test Set 1 From Query Execution
     ...     ${opt_file_name}__compo6_no_instruction_test_set_1.json
     Commit Composition FLAT And Check Response Status To Be 201
     ...     ${opt_file_name}__compo8_no_cluster_test_set_1.json
-
-#    ${opt_file_name}    Set Variable    vitagroup-medication-list.v0
-#    Upload OPT    query_test_sets/${opt_file_name}.opt
-#    Commit Composition FLAT And Check Response Status To Be 201
-#    ...     ${opt_file_name}__composition_with_medication_item.json
-
 
 Change EHR ID In Expected JSON File
     [Arguments]     ${testDataFilePath}

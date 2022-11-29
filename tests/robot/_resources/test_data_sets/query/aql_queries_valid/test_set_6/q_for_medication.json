@@ -1,0 +1,1 @@
+{"q": "SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value as medication from EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i [openEHR-EHR-INSTRUCTION.medication_order.v3] where c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value='6572402e-b768-4333-ab73-52cc0cc03fb3'"}
