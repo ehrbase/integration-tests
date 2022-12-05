@@ -259,11 +259,16 @@ start server without security auth type and sprint cache type simple
                         ...                  --server.nodename\=${NODENAME}    alias=ehrserver
                         ...                    cwd=${PROJECT_ROOT}    stdout=stdout.txt    stderr=stderr.txt
 
+#start server with security auth type oauth
+#    ${result}=          Start Process  java  -jar    ${PROJECT_ROOT}${/}application/target/application-${VERSION}.jar
+#                        ...                  --security.authType\=oauth
+#                        ...                  --server.nodename\=${NODENAME}    alias=ehrserver
+#                        ...                    cwd=${PROJECT_ROOT}    stdout=stdout.txt    stderr=stderr.txt
+
 start server with security auth type oauth
-    ${result}=          Start Process  java  -jar    ${PROJECT_ROOT}${/}application/target/application-${VERSION}.jar
-                        ...                  --security.authType\=oauth
-                        ...                  --server.nodename\=${NODENAME}    alias=ehrserver
-                        ...                    cwd=${PROJECT_ROOT}    stdout=stdout.txt    stderr=stderr.txt
+    ${cdToApplication}     Execute Command     ${PROJECT_ROOT}${/}application
+    Log     ${cdToApplication}
+    ${result}=          Start Process  mvn spring-boot:run -Dspring-boot.run.profiles=authorization
 
 wait until openehr server is ready
     Wait Until Keyword Succeeds  120 sec  3 sec  text "Started EhrBase ..." is in log
