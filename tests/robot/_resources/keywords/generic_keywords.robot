@@ -268,7 +268,7 @@ start server without security auth type and sprint cache type simple
 start server with security auth type oauth
     ${cdToApplication}     Execute Command     ${PROJECT_ROOT}${/}application
     Log     ${cdToApplication}
-    ${result}=          Start Process  mvn spring-boot:run -Dspring-boot.run.profiles=authorization
+    ${result}=          Start Process  mvn spring-boot:run -Dspring-boot.run.profiles=local,authorization
 
 wait until openehr server is ready
     Wait Until Keyword Succeeds  120 sec  3 sec  text "Started EhrBase ..." is in log
