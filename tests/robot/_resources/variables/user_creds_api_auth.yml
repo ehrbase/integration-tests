@@ -1,0 +1,10 @@
+user:
+  doctor:
+      username: "doctor@vitagroup.ag"
+      password: "doctor"
+  nurse:
+      username: "nurse@vitagroup.ag"
+      password: "nurse"
+  superadmin:
+      username: "superadmin@vitagroup.ag"
+      password: "superadmin"
