@@ -199,6 +199,8 @@ start openehr server
         start server with security auth type basic and sprint cache type simple
     ELSE IF     '${SECURITY_AUTHTYPE}' == '${None}' and '${SPRING_CACHE_TYPE}' == 'SIMPLE'
         start server without security auth type and sprint cache type simple
+	ELSE IF     '${SECURITY_AUTHTYPE}' == 'oauth'
+        start server with security auth type oauth
     ELSE
         start server process without coverage
     END
@@ -254,6 +256,12 @@ start server with security auth type basic and sprint cache type simple
 start server without security auth type and sprint cache type simple
     ${result}=          Start Process  java  -jar    ${PROJECT_ROOT}${/}application/target/application-${VERSION}.jar
                         ...                  --spring.cache.type\=SIMPLE
+                        ...                  --server.nodename\=${NODENAME}    alias=ehrserver
+                        ...                    cwd=${PROJECT_ROOT}    stdout=stdout.txt    stderr=stderr.txt
+
+start server with security auth type oauth
+    ${result}=          Start Process  java  -jar    ${PROJECT_ROOT}${/}application/target/application-${VERSION}.jar
+                        ...                  --security.authType\=oauth
                         ...                  --server.nodename\=${NODENAME}    alias=ehrserver
                         ...                    cwd=${PROJECT_ROOT}    stdout=stdout.txt    stderr=stderr.txt
 
