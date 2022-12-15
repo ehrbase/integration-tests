@@ -47,3 +47,22 @@ Main flow has existing COMPOSITION and works without accept header
     check composition exists
 
     #[Teardown]    restart SUT
+
+
+Get Composition After Update And Check Number Of Participations
+    [Documentation]     Covers bug https://jira.vitagroup.ag/browse/CDR-647
+    ...         - Upload OPT
+    ...         - Create EHR
+    ...         - Commit composition with 1 participation
+    ...         - Update composition with the same content as in previous step
+    ...         - Get composition by latest version id (::2 is this case)
+    ...         - Check that returned composition contains only 1 participation
+    Upload OPT    minimal/minimal_observation.opt
+    create EHR
+    commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.xml
+    get composition by composition_uid    ${version_uid}
+    update composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.xml
+    Should Be Equal As Strings    ${response.status_code}    ${200}
+    Set Test Variable  ${version_uid}  ${version_uid[0:-1]}2
+    get version of versioned composition of EHR by UID    ${versioned_object_uid}    ${version_uid}
+    Length Should Be    ${response.body.data.context.participations}    1
