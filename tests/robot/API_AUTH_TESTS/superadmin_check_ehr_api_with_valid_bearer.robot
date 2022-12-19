@@ -29,39 +29,59 @@ ${typeOfUser}   superadmin
 *** Test Cases ***
 Create EHR
     [Setup]     Precondition
-    generate random ehr_id
-    REST.POST        ${BASEURL}/ehr
-        Integer         response status    204
+    Create Headers Dict And Set EHR Headers With Authorization Bearer
+    ${resp}     POST On Session      ${SUT}    /ehr     expected_status=anything
+                ...                  headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}         ${201}
+                Log     ${resp.json()['ehr_id']['value']}
 
 Update EHR
-    REST.PUT        ${BASEURL}/ehr/${ehr_id}
-        Integer         response status    204
-
-Get All EHRS
-    REST.GET        ${BASEURL}/ehr
-        Integer         response status    400
-        String          response body error    Bad Request
+    Create Headers Dict And Set EHR Headers With Authorization Bearer
+    create fake EHR
+    ${resp}     PUT On Session      ${SUT}    /ehr/${ehr_id}    expected_status=anything
+                ...                 headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}         ${201}
+                Set Suite Variable      ${ehr_id}               ${resp.json()['ehr_id']['value']}
+                Set Suite Variable      ${ehrstatus_uid}        ${resp.json()['ehr_status']['uid']['value']}
+                ${short_uid}            Remove String           ${ehrstatus_uid}    ::${CREATING_SYSTEM_ID}::1
+                Set Suite Variable      ${versioned_status_uid}     ${short_uid}
+                Log     ${ehr_id}
+                Log     ${ehr_status_uid}
+                Log     ${versioned_status_uid}
 
 Get EHR BY EHR Id
-    REST.GET        ${BASEURL}/ehr/${ehr_id}
-        Integer         response status    200
-        String          response body ehr_id value    ${ehr_id}
-
-Update EHR Status
-    REST.PUT        ${BASEURL}/ehr/${ehr_id}/ehr_status
-        Integer         response status    400
-        String          response body error    Bad Request
-
-Get EHR Status By Version Name
-    REST.GET        ${BASEURL}/ehr/${ehr_id}/ehr_status
-         Integer        response status    200
-         String         response body archetype_node_id    openEHR-EHR-EHR_STATUS.generic.v1
+    Create Headers Dict And Set EHR Headers With Authorization Bearer
+    ${resp}     GET On Session      ${SUT}    /ehr/${ehr_id}      expected_status=anything
+                ...                 headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}         ${200}
+                Should Be Equal As Strings      ${resp.json()['ehr_id']['value']}   ${ehr_id}
 
 Get EHR Status By Version Id
-    REST.GET        ${BASEURL}/ehr/${ehr_id}/ehr_status/${ehr_id}::${CREATING_SYSTEM_ID}::2
-         Integer        response status    404
-         String          response body error    Not Found
-    Delete All Sessions
+    Create Headers Dict And Set EHR Headers With Authorization Bearer
+    ${resp}     Get On Session      ${SUT}    /ehr/${ehr_id}/ehr_status/${ehrstatus_uid}
+                ...                 headers=${headers}      expected_status=anything
+                Should Be Equal As Strings      ${resp.status_code}         ${200}
+                Set Suite Variable      ${ehr_status}        ${resp.json()}
+
+Update EHR Status
+    Create Headers Dict And Set EHR Headers With Authorization Bearer
+    Set To Dictionary   ${headers}
+    ...     If-Match=${ehrstatus_uid}
+    ...     Content-Type=application/json
+    ${ehr_status_updated}       Update Value To Json    ${ehr_status}       $..is_queryable     ${FALSE}
+    ${json_string}=    evaluate    json.dumps(${ehr_status_updated})    json
+    ${resp}     PUT On Session      ${SUT}    /ehr/${ehr_id}/ehr_status     data=${json_string}
+                ...                 headers=${headers}      expected_status=anything
+                Should Be Equal As Strings      ${resp.status_code}         ${200}
+                Log     ${resp.json()['uid']['value']}
+
+Get EHR Status By Time
+    Create Headers Dict And Set EHR Headers With Authorization Bearer
+    ${resp}     Get On Session      ${SUT}    /ehr/${ehr_id}/ehr_status
+                ...                 headers=${headers}      expected_status=anything
+                Should Be Equal As Strings      ${resp.status_code}         ${200}
+                Should Be Equal As Strings      ${resp.json()['uid']['value']}
+                ...                 ${versioned_status_uid}::${CREATING_SYSTEM_ID}::2
 
 
 *** Keywords ***
@@ -71,4 +91,11 @@ Precondition
     Log     ${response_body}
     Log     ${response_access_token}
     Set Suite Variable      ${response_access_token}
-    Set Headers     { "Authorization": "Bearer ${response_access_token}" }
+    Create Session      ${SUT}    ${BASEURL}    debug=2
+
+Create Headers Dict And Set EHR Headers With Authorization Bearer
+    &{headers}          Create Dictionary     &{EMPTY}
+    Set To Dictionary   ${headers}
+    ...     content=application/json     accept=application/json      Prefer=return=representation
+    ...     Authorization=Bearer ${response_access_token}
+    Set Test Variable       ${headers}      ${headers}

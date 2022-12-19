@@ -29,39 +29,23 @@ ${typeOfUser}   nurse
 *** Test Cases ***
 Create EHR
     [Setup]     Precondition
-    generate random ehr_id
-    REST.POST        ${BASEURL}/ehr
-        Integer         response status    204
+    Create Headers Dict And Set EHR Headers With Authorization Bearer
+    ${resp}     POST On Session      ${SUT}    /ehr     expected_status=anything
+                ...                  headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}         ${403}
+                Should Be Equal As Strings      ${resp.json()['error']}     Forbidden
+                Should Be Equal As Strings      ${resp.json()['message']}
+                ...                 Access Denied because of missing scope: ehrbase:ehr:create
 
 Update EHR
-    REST.PUT        ${BASEURL}/ehr/${ehr_id}
-        Integer         response status    204
-
-Get All EHRS
-    REST.GET        ${BASEURL}/ehr
-        Integer         response status    400
-        String          response body error    Bad Request
-
-Get EHR BY EHR Id
-    REST.GET        ${BASEURL}/ehr/${ehr_id}
-        Integer         response status    200
-        String          response body ehr_id value    ${ehr_id}
-
-Update EHR Status
-    REST.PUT        ${BASEURL}/ehr/${ehr_id}/ehr_status
-        Integer         response status    400
-        String          response body error    Bad Request
-
-Get EHR Status By Version Name
-    REST.GET        ${BASEURL}/ehr/${ehr_id}/ehr_status
-         Integer        response status    200
-         String         response body archetype_node_id    openEHR-EHR-EHR_STATUS.generic.v1
-
-Get EHR Status By Version Id
-    REST.GET        ${BASEURL}/ehr/${ehr_id}/ehr_status/${ehr_id}::${CREATING_SYSTEM_ID}::2
-         Integer        response status    404
-         String          response body error    Not Found
-    Delete All Sessions
+    Create Headers Dict And Set EHR Headers With Authorization Bearer
+    create fake EHR
+    ${resp}     PUT On Session      ${SUT}    /ehr/${ehr_id}    expected_status=anything
+                ...                 headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}         ${403}
+                Should Be Equal As Strings      ${resp.json()['error']}     Forbidden
+                Should Be Equal As Strings      ${resp.json()['message']}
+                ...                 Access Denied because of missing scope: ehrbase:ehr:create
 
 
 *** Keywords ***
@@ -71,4 +55,11 @@ Precondition
     Log     ${response_body}
     Log     ${response_access_token}
     Set Suite Variable      ${response_access_token}
-    Set Headers     { "Authorization": "Bearer ${response_access_token}" }
+    Create Session      ${SUT}    ${BASEURL}    debug=2
+
+Create Headers Dict And Set EHR Headers With Authorization Bearer
+    &{headers}          Create Dictionary     &{EMPTY}
+    Set To Dictionary   ${headers}
+    ...     content=application/json     accept=application/json      Prefer=return=representation
+    ...     Authorization=Bearer ${response_access_token}
+    Set Test Variable       ${headers}      ${headers}
