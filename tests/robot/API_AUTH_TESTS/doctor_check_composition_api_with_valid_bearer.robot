@@ -24,39 +24,51 @@ Resource        ../_resources/keywords/composition_keywords.robot
 
 
 *** Variables ***
-${typeOfUser}   doctor
+${typeOfUserGeneral}    doctor
+${template_id}          minimal_observation
 
 
 *** Test Cases ***
 Create Composition
-    [Setup]     Precondition
-    generate random ehr_id
-    REST.POST        ${BASEURL}/ehr/${ehr_id}/composition/
-        Integer         response status    400
-        String          response body error    Bad Request
+    Create EHR With Super Admin User
+    Create Template With Super Admin User   minimal/minimal_observation.opt
+    ${typeOfUser}   Set Variable    ${EMPTY}
+    Set Test Variable      ${typeOfUser}   ${typeOfUserGeneral}
+    Set Suite Variable     ${typeOfUser}
+    Precondition
+    Create Session      ${SUT}    ${BASEURL}
+                        ...     debug=2     verify=True
+    get valid OPT file  minimal/minimal_observation.composition.participations.extdatetimes.xml
+    ${resp}     POST On Session     ${SUT}      /ehr/${ehr_id}/composition
+                ...     expected_status=anything
+                ...     data=${file}   headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}         ${201}
+                Set Suite Variable      ${composition_uid}      ${resp.json()['uid']['value']}
+                ${short_uid}            Remove String           ${composition_uid}    ::${CREATING_SYSTEM_ID}::1
+                Set Suite Variable      ${versioned_object_uid}     ${short_uid}
 
 Update Composition
-    REST.PUT        ${BASEURL}/ehr/${ehr_id}/composition/${versioned_object_uid}
-        Integer         response status    400
-        String          response body error    Bad Request
+    Set To Dictionary   ${headers}
+    ...     If-Match=${composition_uid}
+    get valid OPT file  minimal/minimal_observation.composition.participations.extdatetimes.v2.xml
+    ${resp}     PUT On Session      ${SUT}   /ehr/${ehr_id}/composition/${versioned_object_uid}
+                ...     data=${file}    expected_status=anything    headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}         ${200}
+                Should Be Equal As Strings      ${resp.json()['uid']['value']}
+                ...     ${versioned_object_uid}::${CREATING_SYSTEM_ID}::2
 
 Get Composition By Version Id
-    REST.GET        ${BASEURL}/ehr/${ehr_id}/composition/${version_uid}
-        Integer         response status    404
-        String          response body error    Not Found
-
-Get Composition By Version Id And Timestamp
-    ${date}=    DateTime.Get Current Date     result_format=%Y-%m-%dT%H:%M:%S.%f
-    REST.GET        ${BASEURL}/ehr/${ehr_id}/composition/${version_uid}?${date}
-        Integer         response status    404
-        String          response body error    Not Found
+    ${resp}     GET On Session      ${SUT}
+                ...     /ehr/${ehr_id}/composition/${versioned_object_uid}::${CREATING_SYSTEM_ID}::2
+                ...     headers=${headers}      expected_status=anything
+                Should Be Equal As Strings      ${resp.status_code}         ${200}
 
 Delete Composition
-    REST.GET        ${BASEURL}/ehr/${ehr_id}/composition/${version_uid}
-        Integer         response status    404
-        String          response body error    Not Found
+    ${resp}     DELETE On Session      ${SUT}
+                ...     /ehr/${ehr_id}/composition/${versioned_object_uid}::${CREATING_SYSTEM_ID}::2
+                ...     headers=${headers}      expected_status=anything
+                Should Be Equal As Strings      ${resp.status_code}         ${204}
     Delete All Sessions
-
 
 
 *** Keywords ***
@@ -66,9 +78,9 @@ Precondition
     Log     ${response_body}
     Log     ${response_access_token}
     Set Suite Variable      ${response_access_token}
-    Set Headers     { "Authorization": "Bearer ${response_access_token}" }
-    generate random composition_uid
-    Set Suite Variable   ${composition_uid}
-    Set Suite Variable   ${versioned_object_uid}
-    Set Suite Variable   ${version_uid}
-    Set Suite Variable   ${preceding_version_uid}
+    &{headers}          Create Dictionary     &{EMPTY}
+    ...         Content-Type=application/xml
+    ...         Accept=application/json
+    ...         Prefer=return=representation
+    ...         Authorization=Bearer ${response_access_token}
+    Set Suite Variable      ${headers}
