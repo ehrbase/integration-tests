@@ -20,26 +20,37 @@ Documentation   API Authorization Test Suite
 
 Resource        ../_resources/keywords/api_auth_keywords.robot
 Resource        ../_resources/keywords/ehr_keywords.robot
+Resource        ../_resources/keywords/template_opt1.4_keywords.robot
 Resource        ../_resources/keywords/contribution_keywords.robot
 
 
 *** Variables ***
-${typeOfUser}   doctor
+${typeOfUserGeneral}   doctor
 
 
 *** Test Cases ***
 Create Contribution
-    [Setup]     Precondition
-    generate random ehr_id
-    REST.POST        ${BASEURL}/ehr/${ehr_id}/contribution/
-        Integer         response status    400
-        String          response body error    Bad Request
+    Create EHR With Super Admin User
+    Create Template With Super Admin User   minimal/minimal_evaluation.opt
+    ${typeOfUser}   Set Variable    ${EMPTY}
+    Set Test Variable      ${typeOfUser}   ${typeOfUserGeneral}
+    Set Suite Variable     ${typeOfUser}
+    Precondition
+    load valid test-data-set    minimal/minimal_evaluation.contribution.json
+    ${resp}     POST On Session     ${SUT}   /ehr/${ehr_id}/contribution   expected_status=anything
+                ...                 json=${test_data}
+                ...                 headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}         ${201}
+                Set Suite Variable    ${contribution_uid}       ${resp.json()['uid']['value']}
+                Set Suite Variable    ${versions}       ${resp.json()['versions']}
+                Set Suite Variable    ${version_id}     ${resp.json()['versions'][0]['id']['value']}
+                Set Suite Variable    ${change_type}    ${resp.json()['audit']['change_type']['value']}
 
 Get Contribution By Id
-    generate random contribution_uid
-    REST.GET        ${BASEURL}/ehr/${ehr_id}/contribution/${contribution_uid}
-        Integer         response status    404
-        String          response body error    Not Found
+    ${resp}     GET On Session     ${SUT}   /ehr/${ehr_id}/contribution/${contribution_uid}   expected_status=anything
+                ...                 headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}         ${200}
+                Should Be Equal As Strings      ${contribution_uid}         ${resp.json()['uid']['value']}
 
 
 *** Keywords ***
@@ -49,4 +60,9 @@ Precondition
     Log     ${response_body}
     Log     ${response_access_token}
     Set Suite Variable      ${response_access_token}
-    Set Headers     { "Authorization": "Bearer ${response_access_token}" }
+    Create Session      ${SUT}    ${BASEURL}    debug=2
+    &{headers}          Create Dictionary     &{EMPTY}
+    Set To Dictionary   ${headers}
+    ...     Prefer=return=representation
+    ...     Authorization=Bearer ${response_access_token}
+    Set Suite Variable      ${headers}

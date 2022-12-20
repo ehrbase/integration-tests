@@ -61,6 +61,27 @@ Create EHR With Super Admin User
                 Should Be Equal As Strings      ${resp.status_code}         ${201}
                 Set Suite Variable     ${ehr_id}    ${resp.json()['ehr_id']['value']}
 
+Create Template With Super Admin User
+    [Arguments]     ${opt_file}=nested/nested.opt
+    Set Test Variable   ${typeOfUser}    superadmin
+    Set Credentials For User    ${typeOfUser}
+    Obtain Access Token From Keycloak Using User Credentials
+    &{headers}          Create Dictionary     &{EMPTY}
+    Set To Dictionary   ${headers}
+    ...     content=application/xml     accept=application/json      Prefer=return=representation
+    ...     Content-Type=application/xml
+    ...     Authorization=Bearer ${response_access_token}
+    Create Session      ${SUT}    ${BASEURL}    debug=2
+    get valid OPT file    ${opt_file}
+    ${resp}     POST On Session      ${SUT}    /definition/template/adl1.4   expected_status=anything
+                ...                  data=${file}    headers=${headers}
+                IF      ${resp.status_code} == ${201} or ${resp.status_code} == ${409}
+                    Log     Passed
+                ELSE
+                    Return From Keyword
+                END
+
+
 #Decode JWT And Get Access Token
 #    [Documentation]     Decode JWT token provided as argument and returns access_token value.
 #    ...         Takes 1 argument: in_token;
