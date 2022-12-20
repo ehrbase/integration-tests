@@ -46,6 +46,21 @@ Set Credentials For User
     Set Test Variable    ${usercreds}    ${user.${user_type}}
     Log To Console    \nNext steps will be performed with credentials from user > ${userType}
 
+Create EHR With Super Admin User
+    Set Test Variable   ${typeOfUser}    superadmin
+    Set Credentials For User    ${typeOfUser}
+    Obtain Access Token From Keycloak Using User Credentials
+    &{headers}          Create Dictionary     &{EMPTY}
+    Set To Dictionary   ${headers}
+    ...     content=application/json     accept=application/json      Prefer=return=representation
+    ...     Authorization=Bearer ${response_access_token}
+    Set Test Variable       ${headers}      ${headers}
+    Create Session      ${SUT}    ${BASEURL}    debug=2
+    ${resp}     POST On Session      ${SUT}    /ehr     expected_status=anything
+                ...                  headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}         ${201}
+                Set Suite Variable     ${ehr_id}    ${resp.json()['ehr_id']['value']}
+
 #Decode JWT And Get Access Token
 #    [Documentation]     Decode JWT token provided as argument and returns access_token value.
 #    ...         Takes 1 argument: in_token;
