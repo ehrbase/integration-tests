@@ -35,10 +35,11 @@ Execute AQL Query Ad-Hoc
     ...     e/system_id/value as system_id_value
     ...     FROM EHR e LIMIT 1
     Set Test Variable    ${payload}    {"q": "${query}"}
-    REST.POST        ${BASEURL}/query/aql   body=${payload}
-        Integer         response status    200
-        Output          response body q
-        Output          response body rows
+    ${resp}     POST On Session     ${SUT}   /query/aql   expected_status=anything
+                ...                 data=${payload}     headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}         ${200}
+                Log     ${resp.json()['q']}
+                Log     ${resp.json()['rows']}
 
 
 *** Keywords ***
@@ -48,4 +49,9 @@ Precondition
     Log     ${response_body}
     Log     ${response_access_token}
     Set Suite Variable      ${response_access_token}
-    Set Headers     { "Authorization": "Bearer ${response_access_token}" }
+    &{headers}          Create Dictionary     &{EMPTY}
+    Set To Dictionary   ${headers}
+    ...     Content-Type=application/json
+    ...     Authorization=Bearer ${response_access_token}
+    Set Suite Variable      ${headers}
+    Create Session      ${SUT}    ${BASEURL}    debug=2
