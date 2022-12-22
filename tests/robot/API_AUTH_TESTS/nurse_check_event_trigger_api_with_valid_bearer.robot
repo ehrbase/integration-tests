@@ -135,7 +135,7 @@ Create Session With Valid Authorization Bearer
                     ...     Authorization=Bearer ${response_access_token}
     Create Session      eventtriggersut    ${PLUGINURL}
                     ...     debug=2     headers=${headers}     verify=True
-                    Set Test Variable   ${headers}      ${headers}
+                    Set Suite Variable   ${headers}      ${headers}
 
 Create Session Without Authorization Bearer
     &{headers}      Create Dictionary   Content-Type=application/json
