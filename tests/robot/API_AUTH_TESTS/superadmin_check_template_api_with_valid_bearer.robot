@@ -59,7 +59,7 @@ Get Example By Template Id
     ${resp}     GET On Session      ${SUT}    /definition/template/adl1.4/nested.en.v1/example
                 ...     expected_status=anything    headers=${headers}
                 Should Be Equal As Strings      ${resp.status_code}         ${200}
-                Should Contain      ${resp.json()['uid']['value']}      -
+                Should Contain      ${resp.json()['archetype_details']['template_id']['value']}      .
     Delete All Sessions
 
 

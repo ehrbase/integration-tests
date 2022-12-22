@@ -35,7 +35,7 @@ Create Event Trigger With Valid Authorization Bearer
     ${resp}         POST On Session     eventtriggersut
     ...             /event-trigger/service      expected_status=anything
     ...             data=${json_str}
-                    Should Be Equal As Strings          ${resp.status_code}     200
+                    Should Be Equal As Strings          ${resp.status_code}     ${200}
                     Set Suite Variable     ${event_uuid}    ${resp.content}
 
 Create Event Trigger Without Authorization Bearer
@@ -45,19 +45,19 @@ Create Event Trigger Without Authorization Bearer
     ${resp}         POST On Session     eventtriggersut
     ...             /event-trigger/service      expected_status=anything
     ...             data=${json_str}
-                    Should Be Equal As Strings          ${resp.status_code}     401
+                    Should Be Equal As Strings          ${resp.status_code}     ${401}
 
 Get All Event Triggers With Valid Authorization Bearer
     Create Session With Valid Authorization Bearer
     ${resp}         GET On Session      eventtriggersut      /event-trigger/service
-                    Should Be Equal As Strings      ${resp.status_code}     200
+                    Should Be Equal As Strings      ${resp.status_code}     ${200}
                     Set Test Variable   ${all_event_triggers}   ${resp.json()}
                     ${event_triggers_len}    Get Length      ${all_event_triggers}
 
 Get All Event Triggers Without Authorization Bearer
     Create Session Without Authorization Bearer
     ${resp}         GET On Session      eventtriggersut      /event-trigger/service     expected_status=any
-                    Should Be Equal As Strings      ${resp.status_code}     401
+                    Should Be Equal As Strings      ${resp.status_code}     ${401}
 
 
 Get Event Trigger By UUId With Valid Authorization Bearer
@@ -65,14 +65,14 @@ Get Event Trigger By UUId With Valid Authorization Bearer
     Create Session With Valid Authorization Bearer
     ${resp}         GET On Session      eventtriggersut      /event-trigger/service/${event_uuid}
                     ...     expected_status=anything
-                    Should Be Equal As Strings       ${resp.status_code}     200
+                    Should Be Equal As Strings       ${resp.status_code}     ${200}
 
 Get Event Trigger By UUId Without Authorization Bearer
     [Documentation]     ${event_uuid} is took from first test, used to create Event Trigger
     Create Session Without Authorization Bearer
     ${resp}         GET On Session      eventtriggersut      /event-trigger/service/${event_uuid}
                     ...     expected_status=anything
-                    Should Be Equal As Strings       ${resp.status_code}     401
+                    Should Be Equal As Strings       ${resp.status_code}     ${401}
                     Set Test Variable   ${response}     ${resp}
                     Set Test Variable   ${response_event_trigger}   ${resp.content}
 
@@ -81,44 +81,44 @@ Deactivate Event Trigger With Valid Authorization Bearer
     ${resp}         PUT On Session      eventtriggersut      /event-trigger/service/${event_uuid}
                     ...     expected_status=anything
                     ...     params=activate=false
-                    Should Be Equal As Strings      ${resp.status_code}     200
+                    Should Be Equal As Strings      ${resp.status_code}     ${200}
 
 Deactivate Event Trigger Without Authorization Bearer
     Create Session Without Authorization Bearer
     ${resp}         PUT On Session      eventtriggersut      /event-trigger/service/${event_uuid}
                     ...     expected_status=anything
                     ...     params=activate=false
-                    Should Be Equal As Strings      ${resp.status_code}     401
+                    Should Be Equal As Strings      ${resp.status_code}     ${401}
 
 Activate Event Trigger With Valid Authorization Bearer
     Create Session With Valid Authorization Bearer
     ${resp}         PUT On Session      eventtriggersut      /event-trigger/service/${event_uuid}
                     ...     expected_status=anything
                     ...     params=activate=true
-                    Should Be Equal As Strings      ${resp.status_code}     200
+                    Should Be Equal As Strings      ${resp.status_code}     ${200}
 
 Activate Event Trigger Without Authorization Bearer
     Create Session Without Authorization Bearer
     ${resp}         PUT On Session      eventtriggersut      /event-trigger/service/${event_uuid}
                     ...     expected_status=anything
                     ...     params=activate=true
-                    Should Be Equal As Strings      ${resp.status_code}     401
+                    Should Be Equal As Strings      ${resp.status_code}     ${401}
 
 Delete Event Trigger By UUID Without Authorization Bearer
     Create Session Without Authorization Bearer
     ${resp}         DELETE On Session   eventtriggersut      /event-trigger/service/${event_uuid}
                     ...     expected_status=anything
-                    Should Be Equal As Strings      ${resp.status_code}     401
+                    Should Be Equal As Strings      ${resp.status_code}     ${401}
 
 Delete Event Trigger By UUID With Valid Authorization Bearer
     Create Session With Valid Authorization Bearer
     ${resp}         DELETE On Session   eventtriggersut      /event-trigger/service/${event_uuid}
                     ...     expected_status=anything
-                    Should Be Equal As Strings      ${resp.status_code}     200
+                    Should Be Equal As Strings      ${resp.status_code}     ${200}
     # get deleted event trigger and expect 404
     ${resp}         GET On Session      eventtriggersut      /event-trigger/service/${event_uuid}
                     ...     expected_status=anything
-                    Should Be Equal As Strings       ${resp.status_code}     404
+                    Should Be Equal As Strings       ${resp.status_code}     ${404}
 
 
 *** Keywords ***

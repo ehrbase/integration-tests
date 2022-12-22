@@ -41,7 +41,10 @@ Create Tenant With Valid Authorization Bearer
     ...     expected_status=anything   json=&{tenant}   headers=${headers}
     Set Test Variable      ${response}     ${resp}
     Set Test Variable      ${response_code}     ${resp.status_code}
-    should not be equal as strings     ${response_code}    ${401}
+    Should Be Equal As Strings     ${response_code}    ${403}
+    #Should Be Equal As Strings      ${resp.json()['error']}     Forbidden
+    #Should Be Equal As Strings      ${resp.json()['message']}
+    #...         Access Denied because of missing scope:
 
 Create Tenant Without Authorization Bearer
     ${tnt}     Decode JWT And Get TNT Value    ${encoded_token_1}
@@ -85,7 +88,10 @@ Update Tenant With Valid Authorization Bearer
     ...     expected_status=anything   json=&{tenant}   headers=${headers}
     Set Test Variable      ${response}     ${resp}
     Set Test Variable      ${response_code}     ${resp.status_code}
-    should be equal as strings     ${response_code}    ${200}
+    Should Be Equal As Strings      ${response_code}    ${403}
+    #Should Be Equal As Strings      ${resp.json()['error']}     Forbidden
+    #Should Be Equal As Strings      ${resp.json()['message']}
+    #...         Access Denied because of missing scope:
 
 Update Tenant Without Authorization Bearer
     ${tnt}     Decode JWT And Get TNT Value    ${encoded_token_1}
@@ -107,7 +113,10 @@ Get All Tenants With Valid Authorization Bearer
     ...     Authorization   Bearer ${response_access_token}
     ${resp}     GET On Session     multitenancy   /multi-tenant/service
     ...     expected_status=anything   headers=${headers}
-    Should Be Equal As Strings      ${resp.status_code}     ${200}
+    Should Be Equal As Strings      ${resp.status_code}     ${403}
+    #Should Be Equal As Strings      ${resp.json()['error']}     Forbidden
+    #Should Be Equal As Strings      ${resp.json()['message']}
+    #...         Access Denied because of missing scope:
 
 Get All Tenants Without Authorization Bearer
     Create Session      multitenancy    ${PLUGINURL}    debug=2     verify=True

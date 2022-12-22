@@ -44,7 +44,7 @@ Create Directory
 Update Directory
     Execute Precondition And Set Directory Headers
     Set To Dictionary   ${headers}
-    ...         If-Match=${preceding_version_uid}
+    ...         If-Match="${preceding_version_uid}"
     load valid dir test-data-set    update/2_add_subfolders.json
     ${resp}     PUT On Session      ${SUT}    /ehr/${ehr_id}/directory/     expected_status=anything
                 ...                  json=${test_data}      headers=${headers}
