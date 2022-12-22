@@ -81,6 +81,23 @@ Create Template With Super Admin User
                     Return From Keyword
                 END
 
+Create Event Trigger With Super Admin User
+    Set Test Variable   ${typeOfUser}    superadmin
+    Set Credentials For User    ${typeOfUser}
+    Obtain Access Token From Keycloak Using User Credentials
+    ${file}         Load Json From File     ${VALID EVENT TRIGGER DATA SETS}/create/main_event_trigger.json
+    ${json_str}     Generate Event Trigger Id And Update File Content       ${file}
+    &{headers}      Create Dictionary   Content-Type=application/json
+                    ...     Accept=application/json
+                    ...     Authorization=Bearer ${response_access_token}
+    Create Session      eventtriggersut    ${PLUGINURL}
+                    ...     debug=2     headers=${headers}     verify=True
+                    Set Suite Variable   ${headers}      ${headers}
+    ${resp}         POST On Session     eventtriggersut
+    ...             /event-trigger/service      expected_status=anything
+    ...             data=${json_str}
+                    Should Be Equal As Strings          ${resp.status_code}     200
+                    Set Suite Variable     ${event_uuid}    ${resp.content}
 
 #Decode JWT And Get Access Token
 #    [Documentation]     Decode JWT token provided as argument and returns access_token value.
