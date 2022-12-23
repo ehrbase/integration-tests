@@ -99,6 +99,24 @@ Create Event Trigger With Super Admin User
                     Should Be Equal As Strings          ${resp.status_code}     200
                     Set Suite Variable     ${event_uuid}    ${resp.content}
 
+Create Contribution With Super Admin User
+    Set Test Variable   ${typeOfUser}    superadmin
+    Set Credentials For User    ${typeOfUser}
+    Obtain Access Token From Keycloak Using User Credentials
+    &{headers}          Create Dictionary     &{EMPTY}
+    Set To Dictionary   ${headers}
+    ...     Prefer=return=representation
+    ...     Authorization=Bearer ${response_access_token}
+    load valid test-data-set    minimal/minimal_evaluation.contribution.json
+    ${resp}     POST On Session     ${SUT}   /ehr/${ehr_id}/contribution   expected_status=anything
+                ...                 json=${test_data}
+                ...                 headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}         ${201}
+                Set Suite Variable    ${contribution_uid}       ${resp.json()['uid']['value']}
+                Set Suite Variable    ${versions}       ${resp.json()['versions']}
+                Set Suite Variable    ${version_id}     ${resp.json()['versions'][0]['id']['value']}
+                Set Suite Variable    ${change_type}    ${resp.json()['audit']['change_type']['value']}
+
 #Decode JWT And Get Access Token
 #    [Documentation]     Decode JWT token provided as argument and returns access_token value.
 #    ...         Takes 1 argument: in_token;

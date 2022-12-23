@@ -21,18 +21,27 @@ Documentation   API Authorization Test Suite to check Compensation plugin
 Resource        ../_resources/keywords/api_auth_keywords.robot
 Resource        ../_resources/keywords/contribution_keywords.robot
 Resource        ../_resources/keywords/ehr_keywords.robot
+Resource        ../_resources/keywords/template_opt1.4_keywords.robot
 
 
 *** Variables ***
-${typeOfUser}   nurse
+${typeOfUserGeneral}    nurse
 ${SECURITY_AUTHTYPE}    oauth
 
 
 *** Test Cases ***
 Rollback Contribution With Valid Authorization Bearer
-    [Setup]     Precondition
-    generate random ehr_id
-    generate random contribution_uid
+    Create EHR With Super Admin User
+    Create Template With Super Admin User   minimal/minimal_evaluation.opt
+    Create Contribution With Super Admin User
+    ${typeOfUser}   Set Variable    ${EMPTY}
+    Set Test Variable       ${typeOfUser}   ${typeOfUserGeneral}
+    Set Suite Variable      ${typeOfUser}
+    Set Credentials For User    ${typeOfUser}
+    Obtain Access Token From Keycloak Using User Credentials
+    Log     ${response_body}
+    Log     ${response_access_token}
+    Set Suite Variable      ${response_access_token}
     Create Session With Valid Authorization Bearer
     ${resp}     POST On Session     compensationsut
                 ...     /transaction-management/ehr/${ehr_id}/contribution/${contribution_uid}/rollback
@@ -40,8 +49,6 @@ Rollback Contribution With Valid Authorization Bearer
    should be equal as strings       ${resp.status_code}     ${404}
 
 Rollback Contribution Without Authorization Bearer
-    generate random ehr_id
-    generate random contribution_uid
     Create Session Without Authorization Bearer
     ${resp}     POST On Session     compensationsut
                 ...     /transaction-management/ehr/${ehr_id}/contribution/${contribution_uid}/rollback
