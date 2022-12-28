@@ -365,6 +365,29 @@ commit composition
 
     capture point in time    1
 
+Commit Composition With Multitenant Token
+    [Documentation]     Create Composition with Multitenancy token (create composition inside tenant).
+    ...         Takes 2 mandatory arguments:
+    ...         - {composition} - file name with .json extension
+    ...         - {multitenancy_token} - multitenancy token
+    ...         Format of composition is CANONICAL_JSON,
+    ...         so will look for composition file inside CANONICAL_JSON folder.
+    ...         - {ehr_id} - is took from _Create New EHR With Multitenant Token_ keyword
+    [Arguments]         ${composition}      ${multitenancy_token}
+    Delete All Sessions
+    &{headers}      Create Dictionary
+    ...     Content-Type=application/json
+    ...     Accept=application/json
+    ...     Prefer=return=representation
+    ...     Authorization=Bearer ${multitenancy_token}
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ...                 verify=True     headers=${headers}
+    ${file}     Get File    ${COMPO DATA SETS}/CANONICAL_JSON/${composition}
+    ${resp}     POST On Session     ${SUT}      /ehr/${ehr_id}/composition
+    ...         data=${file}    headers=${headers}      expected_status=anything
+    Should Be Equal As Strings      ${resp.status_code}     ${201}
+    Set Test Variable       ${response}     ${resp}
+    Set Test Variable       ${composition_uid}      ${response.json()['uid']['value']}
 
 check the successful result of commit composition
     [Arguments]         ${template_for_path}=null
