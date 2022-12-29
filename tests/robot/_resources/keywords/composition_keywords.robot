@@ -458,6 +458,30 @@ check status_code of commit composition
     [Arguments]    ${status_code}
     Should Be Equal As Strings   ${response.status_code}   ${status_code}
 
+Update Composition With Multitenant Token
+    [Documentation]     Update composition with Multitenancy token provided in headers.
+    ...                 Takes 2 mandatory args:
+    ...                 - {new_composition} file in .json format located in CANONICAL_JSON
+    ...                 - {multitenancy_token} tenant token value
+    ...                 To update compositon, PUT method is used.
+    ...                 Expect *200* status code after PUT request.
+    [Arguments]         ${new_composition}      ${multitenancy_token}
+    ${file}     Get File    ${COMPO DATA SETS}/CANONICAL_JSON/${new_composition}
+    Delete All Sessions
+    &{headers}          Create Dictionary   Content-Type=application/json
+                        ...                 Accept=application/json
+                        ...                 Prefer=return=representation
+                        ...                 If-Match=${composition_uid}
+                        ...                 Authorization=Bearer ${multitenancy_token}
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ...                 verify=True         headers=${headers}
+    ${composition_id}   Remove String       ${composition_uid}    ::${CREATING_SYSTEM_ID}::1
+    &{params}           Create Dictionary   ehr_id=${ehr_id}    composition_id=${composition_id}
+    ${resp}             PUT On Session      ${SUT}          /ehr/${ehr_id}/composition/${composition_id}
+    ...                 data=${file}    headers=${headers}      params=${params}    expected_status=anything
+    Should Be Equal As Strings      ${resp.status_code}     ${200}
+    Set Test Variable       ${response}             ${resp}
+    Set Test Variable       ${updated_version_composition_uid}      ${resp.json()['uid']['value']}
 
 update composition (JSON)
     [Arguments]         ${new_version_of_composition}   ${file_type}=xml    ${multitenancy_token}=${None}
