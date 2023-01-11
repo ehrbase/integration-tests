@@ -1,7 +1,7 @@
 {
   "realm" : "ehrbase",
   "users" : [ {
-    "id" : "3b7a9210-d9f3-4310-aa79-b88eb8e08b09",
+    "id" : "ece377ad-24d7-4445-aeee-d078fd94a941",
     "createdTimestamp" : 1588588613473,
     "username" : "admin",
     "enabled" : true,
@@ -24,7 +24,7 @@
     "notBefore" : 1594638866,
     "groups" : [ ]
   }, {
-    "id" : "070fcd59-685a-4e1a-af15-38fa6568e003",
+    "id" : "04f36ef6-c966-4119-a03b-ade668aff1a9",
     "createdTimestamp" : 1594743152355,
     "username" : "ehrbase",
     "enabled" : true,
@@ -49,7 +49,7 @@
     "notBefore" : 0,
     "groups" : [ ]
   }, {
-    "id" : "b583da68-989f-4297-a89c-b437c528dd13",
+    "id" : "f1f84d9b-20fc-4ffd-b83b-30f238a57cfb",
     "createdTimestamp" : 1594638968008,
     "username" : "robot",
     "enabled" : true,
@@ -58,6 +58,12 @@
     "firstName" : "Robot",
     "lastName" : "Framework",
     "email" : "robot@ehrbase.org",
+    "attributes" : {
+      "sub" : [ "my-id" ],
+      "patient_id" : [ "58646121-fd71-4e8c-8157-7f7a5af03d97" ],
+      "email" : [ "test@test.org" ],
+      "organization_id" : [ "f47bfc11-ec8d-412e-aebf-c6953cc23e7d" ]
+    },
     "credentials" : [ {
       "id" : "2fbcd212-8d73-4759-a9cb-676856025b97",
       "type" : "password",
@@ -74,7 +80,7 @@
     "notBefore" : 0,
     "groups" : [ ]
   }, {
-    "id" : "1f6cf211-1b7a-41c7-9eb2-166f1f09e4e8",
+    "id" : "b90a73a5-4cd6-47ec-860c-ec7fb44a5263",
     "createdTimestamp" : 1636647762130,
     "username" : "service-account-ehrbase-custom-admin",
     "enabled" : true,
@@ -91,7 +97,7 @@
     "notBefore" : 0,
     "groups" : [ ]
   }, {
-    "id" : "519f4bb4-faaa-4e64-b029-d4a484bcdbcd",
+    "id" : "c688d7c6-9274-41ad-a7cd-1c572b1f9646",
     "createdTimestamp" : 1636647708827,
     "username" : "service-account-ehrbase-custom-user",
     "enabled" : true,
@@ -108,7 +114,7 @@
     "notBefore" : 0,
     "groups" : [ ]
   }, {
-    "id" : "45db7e6b-2f4d-4379-be7c-b3311d3e6595",
+    "id" : "bd6d293f-eba9-4c52-aae4-15b390c9c8df",
     "createdTimestamp" : 1589529727987,
     "username" : "user",
     "enabled" : true,
@@ -130,7 +136,7 @@
     "notBefore" : 0,
     "groups" : [ ]
   }, {
-    "id" : "d60a1805-4ad5-4c3e-9f86-68dc8787ea27",
+    "id" : "4c903415-1cfa-483e-bde1-4a4dde0da4f5",
     "createdTimestamp" : 1588588315022,
     "username" : "user1",
     "enabled" : true,
