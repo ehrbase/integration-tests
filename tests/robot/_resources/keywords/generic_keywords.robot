@@ -236,6 +236,7 @@ start server process without coverage
     ${result}=          Start Process  java  -jar  ${PROJECT_ROOT}${/}application/target/application-${VERSION}.jar
                         ...                  --cache.enabled\=${CACHE-ENABLED}
                         ...                  --system.allow-template-overwrite\=${ALLOW-TEMPLATE-OVERWRITE}
+						... 			     --abac.enabled=\true
 						... 				 --abac.server\=http://localhost:1080/rest/v1/policy/execute/name/
                         ...                  --server.nodename\=${NODENAME}    alias=ehrserver
                         ...                    cwd=${PROJECT_ROOT}    stdout=stdout.txt    stderr=stderr.txt
