@@ -200,7 +200,6 @@ ${client_credentials_grant}    grant_type=client_credentials&client_id=ehrbase-c
 #    For details check .circleci/config.yml --> search "SECURITY-test"
 
 Test GET EHR Endpoint Using Password Grant Valid Token
-        [Tags]      not-ready
         [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
         ...     \nCheck that on GET EHR, status code is *200*
         ...     \nand one call with POST request is present in Mock Server,
@@ -275,7 +274,6 @@ Test PUT EHR_STATUS Endpoint Using Password Grant Valid Token
         [Teardown]      Reset Mock Server
 
 Test POST Composition Endpoint Using Password Grant Valid Token
-        [Tags]      not-ready
         [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
         ...     \nCheck that on POST Composition, status code is *201*
         ...     \nand One call with POST request is present in Mock Server,
@@ -322,7 +320,6 @@ Test GET VERSIONED_COMPOSITION Endpoint Using Password Grant Valid Token
         [Teardown]      Reset Mock Server
 
 Test DELETE Composition Endpoint Using Password Grant Valid Token
-        [Tags]      not-ready
         [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
         ...     \nCheck that on DELETE Composition, status code is *204*
         ...     \nand One call with POST request is present in Mock Server,
@@ -362,7 +359,6 @@ Test GET (Deleted) Composition Endpoint Using Password Grant Valid Token
         [Teardown]      Reset Mock Server
 
 Test POST Contribution Endpoint Using Password Grant Valid Token
-        [Tags]      not-ready
         [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
         ...     \nCheck that on POST Contribution, status code is *201*
         ...     \nand One call with POST request is present in Mock Server,
