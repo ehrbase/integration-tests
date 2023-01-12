@@ -233,7 +233,6 @@ Test GET EHR Endpoint Using Password Grant Valid Token
         [Teardown]      Run Keywords    Reset Mock Server
 
 Test GET EHR_STATUS Endpoint Using Password Grant Valid Token
-        [Tags]      not-ready   bug     CDR-673
         [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
         ...     \nCheck that on GET ehr_status, status code is *200*
         ...     \nand One call with POST request is present in Mock Server,
@@ -252,9 +251,8 @@ Test GET EHR_STATUS Endpoint Using Password Grant Valid Token
         [Teardown]      Reset Mock Server
 
 Test PUT EHR_STATUS Endpoint Using Password Grant Valid Token
-        [Tags]      not-ready   bug     CDR-673
         [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
-        ...     \nCheck that on PUT ehr_status, status code is *201*
+        ...     \nCheck that on PUT ehr_status, status code is *200*
         ...     \nand One call with POST request is present in Mock Server,
         ...     with endpoint */rest/v1/policy/execute/name/has_consent_template*
         ...     \nBody of POST request from Mock Server should contain patient and organization id.
@@ -269,7 +267,7 @@ Test PUT EHR_STATUS Endpoint Using Password Grant Valid Token
         ${resp}     Put On Session      ${SUT}      /ehr/${ehr_id}/ehr_status   json=${ehr_status}
                     ...                 expected_status=anything
                     ...                 headers=${headers}
-                    Should Be Equal As Strings      ${resp.status_code}         ${201}
+                    Should Be Equal As Strings      ${resp.status_code}         ${200}
         Check That Organization And Patient Are Present In Mock Server
         [Teardown]      Reset Mock Server
 
