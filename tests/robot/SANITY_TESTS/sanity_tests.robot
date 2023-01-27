@@ -25,6 +25,7 @@ Metadata        TOP_TEST_SUITE    COMPOSITION
 Resource        ../_resources/keywords/composition_keywords.robot
 Resource        ../_resources/keywords/aql_query_keywords.robot
 Resource        ../_resources/keywords/directory_keywords.robot
+Resource        ../_resources/keywords/admin_keywords.robot
 
 Suite Setup       Precondition
 #Suite Teardown  restart SUT
@@ -49,11 +50,13 @@ Main flow Sanity Tests for FLAT Compositions
     Replace Uid With Actual  robot/_resources/test_data_sets/directory/empty_directory_items.json  ${composition_uid_short}  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
     create DIRECTORY (JSON)    empty_directory_items_uid_replaced.json
     Should Be Equal As Strings    ${response.status_code}    201
+    Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}
     remove File  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
 
     execute ad-hoc query    B/102_get_compositions_orderby_name.json
     check response: is positive
-
+    Set Variable With Short Compo Id And Delete Composition     ${composition_uid_short}
+    delete DIRECTORY (JSON)
 
     #[Teardown]    restart SUT
 
@@ -67,6 +70,8 @@ Main flow Sanity Tests for Canonical JSON Compositions
     check the successful result of commit composition
     get composition by composition_uid    ${composition_uid}
     check composition exists
+    ${version_uid_short}    Fetch From Left     ${composition_uid}      :
+    Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
 
     commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.xml
     check content of composition (JSON)
@@ -81,11 +86,13 @@ Main flow Sanity Tests for Canonical JSON Compositions
     Replace Uid With Actual  robot/_resources/test_data_sets/directory/empty_directory_items.json  ${version_uid_short}  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
     create DIRECTORY (JSON)    empty_directory_items_uid_replaced.json
     Should Be Equal As Strings    ${response.status_code}    201
+    Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}
     remove File  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
 
     execute ad-hoc query    B/102_get_compositions_orderby_name.json
     check response: is positive
-
+    Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
+    delete DIRECTORY (JSON)
     #[Teardown]    restart SUT
 
 Main flow Sanity Tests for Canonical XML Compositions
@@ -97,6 +104,9 @@ Main flow Sanity Tests for Canonical XML Compositions
     check the successful result of commit composition
     get composition by composition_uid    ${composition_uid}
     check composition exists
+
+    ${version_uid_short}    Fetch From Left     ${composition_uid}      :
+    Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
 
     commit composition (XML)    minimal/minimal_observation.composition.participations.extdatetimes.xml
     check content of composition (XML)
@@ -110,11 +120,13 @@ Main flow Sanity Tests for Canonical XML Compositions
     Replace Uid With Actual  robot/_resources/test_data_sets/directory/empty_directory_items.json  ${version_uid_short}  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
     create DIRECTORY (JSON)    empty_directory_items_uid_replaced.json
     Should Be Equal As Strings    ${response.status_code}    201
+    Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}
     remove File  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
 
     execute ad-hoc query    B/102_get_compositions_orderby_name.json
     check response: is positive
-
+    Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
+    delete DIRECTORY (JSON)
     #[Teardown]    restart SUT
 
 
@@ -125,3 +137,9 @@ Precondition
     Upload OPT    nested/nested.opt
     Upload OPT    minimal/minimal_observation.opt
     Extract Template Id From OPT File
+
+Set Variable With Short Compo Id And Delete Composition
+    [Arguments]     ${short_compo_id}
+    Set Test Variable       ${versioned_object_uid}
+    ...     ${short_compo_id}
+    Delete Composition Using API
