@@ -18,9 +18,9 @@
 
 *** Settings ***
 Metadata    Version    0.1.0
-Metadata    Author    *Wladislaw Wagner* www.trustincode.de
+Metadata    Author    *Vladislav Ploaia* CDR Core Team.
 Metadata    Created    2020.07.10
-Metadata    Updated    2021.11.12
+Metadata    Updated    2023.01.31
 
 Documentation  Testing authentication with Keycloak OAuth Server
 
@@ -297,7 +297,6 @@ Test POST Composition Endpoint Using Password Grant Valid Token
         [Teardown]      Reset Mock Server
 
 Test GET VERSIONED_COMPOSITION Endpoint Using Password Grant Valid Token
-        [Tags]      not-ready   bug     CDR-676
         [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
         ...     \nCheck that on GET versioned_composition, status code is *200*
         ...     \nand One call with POST request is present in Mock Server,
@@ -311,6 +310,25 @@ Test GET VERSIONED_COMPOSITION Endpoint Using Password Grant Valid Token
         Create Expectation For POST /rest/v1/policy/execute/name/has_consent_template
         ${resp}     GET On Session     ${SUT}
         ...         /ehr/${ehr_id}/versioned_composition/${composition_uid}/version/${full_composition_uid}
+        ...         expected_status=anything        headers=${headers}
+                    Should Be Equal As Strings      ${resp.status_code}     ${200}
+        Check That Organization And Patient Are Present In Mock Server
+        Check That Template Is Present In Mock Server
+        [Teardown]      Reset Mock Server
+
+Test GET Composition Endpoint Using Password Grant Valid Token
+        [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
+        ...     \nCheck that on GET Composition, status code is *200*
+        ...     \nand One call with POST request is present in Mock Server,
+        ...     with endpoint */rest/v1/policy/execute/name/has_consent_template*
+        ...     \nBody of POST request from Mock Server should contain patient, organization id and template.
+        ...     \npatient, organization id are set in JWT, keyword ObtainPasswordToken, called in first test from suite.
+        Create Session      ${SUT}    ${BASEURL}    debug=2
+        &{headers}          Create Dictionary
+        ...     Content-Type=application/json   Accept=application/json
+        ...     Authorization=Bearer ${password_access_token}
+        Create Expectation For POST /rest/v1/policy/execute/name/has_consent_template
+        ${resp}     GET On Session     ${SUT}      /ehr/${ehr_id}/composition/${full_composition_uid}
         ...         expected_status=anything        headers=${headers}
                     Should Be Equal As Strings      ${resp.status_code}     ${200}
         Check That Organization And Patient Are Present In Mock Server
@@ -337,7 +355,7 @@ Test DELETE Composition Endpoint Using Password Grant Valid Token
         [Teardown]      Reset Mock Server
 
 Test GET (Deleted) Composition Endpoint Using Password Grant Valid Token
-        [Tags]      not-ready   bug     CDR-676
+        [Tags]      not-ready   bug     CDR-724
         [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
         ...     \nCheck that on GET (deleted) Composition, status code is *204*
         ...     \nand One call with POST request is present in Mock Server,
@@ -347,7 +365,7 @@ Test GET (Deleted) Composition Endpoint Using Password Grant Valid Token
         Create Session      ${SUT}    ${BASEURL}    debug=2
         &{headers}          Create Dictionary
         ...     Content-Type=application/json   Accept=application/json
-        ...     Prefer=return=representation    Authorization=Bearer ${password_access_token}
+        ...     Authorization=Bearer ${password_access_token}
         Create Expectation For POST /rest/v1/policy/execute/name/has_consent_template
         ${resp}     GET On Session     ${SUT}      /ehr/${ehr_id}/composition/${full_composition_uid}
         ...         expected_status=anything        headers=${headers}
@@ -380,7 +398,6 @@ Test POST Contribution Endpoint Using Password Grant Valid Token
         [Teardown]      Reset Mock Server
 
 Test POST Query Endpoint Using Password Grant Valid Token
-        [Tags]      not-ready   bug     CDR-676
         [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
         ...     \nCheck that on POST Query, status code is *200*
         ...     \nand One call with POST request is present in Mock Server,
@@ -407,7 +424,6 @@ Test POST Query Endpoint Using Password Grant Valid Token
         [Teardown]      Reset Mock Server
 
 Test GET Query Endpoint Using Password Grant Valid Token
-        [Tags]      not-ready   bug     CDR-676
         [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
         ...     \nCheck that on GET Query, status code is *200*
         ...     \nand One call with POST request is present in Mock Server,
@@ -433,7 +449,6 @@ Test GET Query Endpoint Using Password Grant Valid Token
         [Teardown]      Reset Mock Server
 
 Test GET Query With Multiple EHRs And Templates Using Password Grant Valid Token
-        [Tags]      not-ready   bug     CDR-676
         [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
         ...     \nCheck that on POST Composition, status code is *201*.
         ...     \nCheck that on GET Query, status code is *200*.
