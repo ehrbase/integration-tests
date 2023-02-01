@@ -355,7 +355,6 @@ Test DELETE Composition Endpoint Using Password Grant Valid Token
         [Teardown]      Reset Mock Server
 
 Test GET (Deleted) Composition Endpoint Using Password Grant Valid Token
-        [Tags]      not-ready   bug     CDR-724
         [Documentation]     Covers: https://jira.vitagroup.ag/browse/CDR-614
         ...     \nCheck that on GET (deleted) Composition, status code is *204*
         ...     \nand One call with POST request is present in Mock Server,
