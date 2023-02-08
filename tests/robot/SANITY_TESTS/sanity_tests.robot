@@ -26,9 +26,13 @@ Resource        ../_resources/keywords/composition_keywords.robot
 Resource        ../_resources/keywords/aql_query_keywords.robot
 Resource        ../_resources/keywords/directory_keywords.robot
 Resource        ../_resources/keywords/admin_keywords.robot
+Resource        ../_resources/keywords/ehr_keywords.robot
 
 Suite Setup       Precondition
 #Suite Teardown  restart SUT
+
+*** Variables ***
+${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/ehr/valid
 
 
 *** Test Cases ***
@@ -63,7 +67,8 @@ Main flow Sanity Tests for FLAT Compositions
 
 Main flow Sanity Tests for Canonical JSON Compositions
     [Tags]
-    create EHR
+    #create EHR
+    Create EHR For Sanity Flow
     Get Web Template By Template Id (ECIS)  ${template_id}
     commit composition   format=CANONICAL_JSON
     ...                  composition=nested.en.v1__full_without_links.json
@@ -97,7 +102,8 @@ Main flow Sanity Tests for Canonical JSON Compositions
 
 Main flow Sanity Tests for Canonical XML Compositions
     [Tags]
-    create EHR
+    #create EHR
+    Create EHR For Sanity Flow
     Get Web Template By Template Id (ECIS)  ${template_id}
     commit composition   format=CANONICAL_XML
     ...                  composition=nested.en.v1__full_without_links.xml
@@ -130,7 +136,6 @@ Main flow Sanity Tests for Canonical XML Compositions
     #[Teardown]    restart SUT
 
 
-
 *** Keywords ***
 Precondition
     Upload OPT    all_types/family_history.opt
@@ -143,3 +148,14 @@ Set Variable With Short Compo Id And Delete Composition
     Set Test Variable       ${versioned_object_uid}
     ...     ${short_compo_id}
     Delete Composition Using API
+
+Create EHR For Sanity Flow
+    [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
+    create new EHR with ehr_status  ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
+                        Integer    response status    201
+    ${ehr_id_obj}=      Object    response body ehr_id
+    ${ehr_id_value}=    String    response body ehr_id value
+                        Set Suite Variable    ${ehr_id_obj}    ${ehr_id_obj}
+                        # comment: ATTENTION - RESTinstance lib returns a LIST!
+                        #          The value is at index 0 in that list
+                        Set Suite Variable    ${ehr_id}    ${ehr_id_value}[0]
