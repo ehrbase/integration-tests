@@ -21,11 +21,11 @@ from robot.api import logger
 client = docker.from_env()
 
 
-def run_postgresql_container():
+def run_postgresql_container(postgres_version=13.4):
     """run a postgresql container in background with given envs"""
     env = ["POSTGRES_USER=postgres", "POSTGRES_PASSWORD=postgres", "PGDATA=/tmp"]
     container = client.containers.run(
-        "ehrbase/ehrbase-postgres:13.4",
+        f'ehrbase/ehrbase-postgres:{postgres_version}',
         name="ehrdb",
         environment=env,
         ports={"5432/tcp": 5432},
