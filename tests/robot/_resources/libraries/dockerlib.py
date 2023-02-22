@@ -21,7 +21,7 @@ from robot.api import logger
 client = docker.from_env()
 
 
-def run_postgresql_container(postgres_version=13.4):
+def run_postgresql_container(postgres_version="13.4.v2"):
     """run a postgresql container in background with given envs"""
     env = ["POSTGRES_USER=postgres", "POSTGRES_PASSWORD=postgres", "PGDATA=/tmp"]
     container = client.containers.run(
