@@ -250,7 +250,6 @@ ${CACHE-ENABLED}        ${FALSE}
 
 
 016 ADMIN - PUT Method Should Not Create New DB Entries
-    [Tags]    444    not-ready    bug
     [Documentation]     1. Upload OPT via 'normal' REST endpoint \n\n
     ...                 2. Use 'admin' update endpoint with template_id from step 1 \n\n
     ...                    with a different payload than in step 1 \n\n
@@ -259,12 +258,11 @@ ${CACHE-ENABLED}        ${FALSE}
     ...                    no new records created in DB. \n\n
     upload valid OPT    minimal/minimal_admin.opt
     (admin) update OPT    minimal/minimal_action.opt    # NOTE: a different OPT is used as payload!!!
-
     Connect With DB
-    ${opt_records}=     Count Rows In DB Table    ehr.template_store
-                        Should Be Equal As Integers    ${opt_records}       ${1}
+    @{queryResult}      Query       SELECT COUNT(*) FROM ehr.template_store where template_id = '${template_id}'
+    Should Be Equal As Integers     ${queryResult}[0][0]    ${1}
 
-    [Teardown]    Run Keywords    TRACE GITHUB ISSUE    444     AND     (admin) delete all OPTs
+    [Teardown]    (admin) delete all OPTs
 
 
 

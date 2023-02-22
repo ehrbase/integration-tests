@@ -7,11 +7,11 @@ def get_variables():
         json_obj = \
             {
                 "GLOBAL_PORT":port,
-                "BASEURL": "http://localhost:" + port + "/ehrbase/rest/openehr/v1",
-                "ECISURL": "http://localhost:" + port + "/ehrbase/rest/ecis/v1",
-                "ADMIN_BASEURL": "http://localhost:" + port + "/ehrbase/rest/admin",
-                "HEARTBEAT_URL": "http://localhost:" + port + "/ehrbase/rest/status",
-                "PLUGIN_URL": "http://localhost:" + port + "/ehrbase/plugin",
+                "BASEURL": f'http://localhost:{port}/ehrbase/rest/openehr/v1',
+                "ECISURL": f'http://localhost:{port}/ehrbase/rest/ecis/v1',
+                "ADMIN_BASEURL": f'http://localhost:{port}/ehrbase/rest/admin',
+                "HEARTBEAT_URL": f'http://localhost:{port}/ehrbase/rest/status',
+                "PLUGIN_URL": f'http://localhost:{port}/ehrbase/plugin',
                 "RABBITMQ_URL": "http://127.0.0.1:15672/api"
              }
     return json_obj
