@@ -25,7 +25,7 @@ def run_postgresql_container():
     """run a postgresql container in background with given envs"""
     env = ["POSTGRES_USER=postgres", "POSTGRES_PASSWORD=postgres", "PGDATA=/tmp"]
     container = client.containers.run(
-        "ehrbase/ehrbase-postgres:13.4",
+        "ehrbase/ehrbase-postgres:13.4.v2",
         name="ehrdb",
         environment=env,
         ports={"5432/tcp": 5432},
