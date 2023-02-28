@@ -15,7 +15,6 @@
 # limitations under the License.
 
 
-
 *** Settings ***
 Documentation    Alternative flow 6: get directory at time on EHR with directory with multiple versions first version
 ...
@@ -43,26 +42,14 @@ Resource        ../../_resources/keywords/composition_keywords.robot
 Force Tags    xxx
 
 
-
 *** Test Cases ***
 Alternative flow 6: get directory at time on EHR with directory with multiple versions first version
-    [Tags]    674    bug    not-ready
-
     create EHR
-    
-    # TODO: remove all comments when bug is fixed
-    # comment: create & get (works)
     create DIRECTORY (JSON)    empty_directory.json
     get DIRECTORY at time (JSON)    ${time_of_first_version}
-    
-    # comment: update & get updated version (works, but is not the sense of this test, is just to demonstrate the issue)
     update DIRECTORY (JSON)    subfolders_in_directory_with_details_items.json
-    get DIRECTORY at time (JSON)    ${time_of_updated_version}    # TODO: remove after bugfix
-    validate GET-version@time response - 200 retrieved            #       remove 
-
-    # comment: get the first version (fails)
+    get DIRECTORY at time (JSON)    ${time_of_updated_version}
+    #validate GET-version@time response - 200 retrieved
     get DIRECTORY at time (JSON)    ${time_of_first_version}
-
-        TRACE GITHUB ISSUE    674
-
+    #TRACE GITHUB ISSUE    674
     validate GET-version@time response - 200 retrieved
