@@ -8,3 +8,12 @@ user:
   superadmin:
       username: "superadmin@vitagroup.ag"
       password: "superadmin"
+  devadmin:
+      username: "dev-admin"
+      password: "dev-admin"
+  hcp:
+      username: "hcp"
+      password: "hcp"
+  domainexpert:
+      username: "domain-expert"
+      password: "domain-expert"
