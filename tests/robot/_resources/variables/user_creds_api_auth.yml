@@ -9,11 +9,11 @@ user:
       username: "superadmin@vitagroup.ag"
       password: "superadmin"
   devadmin:
-      username: "dev-admin"
+      username: "dev-admin@testvitagroup.ag"
       password: "dev-admin"
   hcp:
-      username: "hcp"
+      username: "hcp@testvitagroup.ag"
       password: "hcp"
   domainexpert:
-      username: "domain-expert"
+      username: "domain-expert@testvitagroup.ag"
       password: "domain-expert"
