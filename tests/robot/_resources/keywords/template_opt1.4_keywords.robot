@@ -174,8 +174,18 @@ server returned specified version of OPT
 
 
 retrieve OPT by template_id
-    [Arguments]         ${template_id}
+    [Arguments]         ${template_id}      ${multitenancy_token}=${None}
     [Documentation]     Gets OPT from server with provided template_id
+
+    IF  '${multitenancy_token}' != '${None}'
+        &{headers}      Create Dictionary
+        ...     content=application/xml
+        ...     Content-Type=application/xml
+        ...     accept=application/xml
+        ...     Prefer=return=representation
+        ...     Authorization=Bearer ${multitenancy_token}
+        Set Test Variable      &{headers}   &{headers}
+    END
 
     ${resp}=            GET On Session          ${SUT}    /definition/template/adl1.4/${template_id}   expected_status=anything
                         ...                  headers=${headers}
