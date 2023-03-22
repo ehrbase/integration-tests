@@ -229,12 +229,17 @@ POST /query/aql
 
 
 POST /query/aql (REST)
-    [Arguments]         ${format}
+    [Arguments]         ${format}   ${multitenancy_token}=${None}
     [Documentation]     Executes HTTP method POST on /query/aql endpoint
     ...                 DEPENDENCY: following variables have to be in test-level scope:
     ...                 `${payload}`
 
-                        prepare new request session    ${format}
+
+                        IF  '${multitenancy_token}' != '${None}'
+                            prepare new request session    ${format}    Authorization=Bearer ${multitenancy_token}
+                        ELSE
+                            prepare new request session    ${format}
+                        END
 
     ${resp}             REST.POST   /query/aql    ${payload}
                         ...         headers=${headers}
@@ -265,9 +270,83 @@ POST /query (REST) - ECIS
 POST /query/{qualified_query_name}/{version}
     No Operation
 
+PUT AQL Query With Qualified Name And Version
+    [Documentation]     Send PUT AQL to store query.
+    ...                 Takes 1 mandatory arg {query_to_store}
+    ...                 {query_to_store} can be in one of 2 formats JSON or Text.
+    ...                 Takes 1 optional arg {format}: json or text.
+    ...                 Takes 1 optional arg {multitenancy_token}. Token value to be passed.
+    ...                 If format=json, headers will have Content-Type=application/json and Body in format {"q":"query"}.
+    ...                 If format=text, headers will have Content-Type=text/plain and Body in plain text format.
+    ...                 {qualified_query_name} and {version} are generated using Random function.
+    ...                 Expected status code 200.
+    ...                 Returns combination of qualified_query_name and version, in format
+    ...                 {random_query_qualified_name}/{random_query_version}
+    [Arguments]     ${query_to_store}    ${format}=json     ${multitenancy_token}=${None}
+    IF      '${format}' == 'json'
+        &{headers}      Create Dictionary       Content-Type=application/json
+        ${query}    Set Variable    {"q":"${query_to_store}"}
+    ELSE IF     '${format}' == 'text'
+        &{headers}      Create Dictionary       Content-Type=text/plain
+        ${query}    Set Variable    ${query_to_store}
+    END
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary   ${headers}
+        ...     Authorization=Bearer ${multitenancy_token}
+    ELSE
+        Set To Dictionary   ${headers}
+        ...     Authorization=Bearer ${response_access_token}
+    END
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${random_version}   Generate Version Number To Store Query
+    Set Test Variable   ${random_query_version}   ${random_version}
+    ${random_qualified_name}    Generate Qualified Query Name To Store Query
+    Set Test Variable   ${random_query_qualified_name}      ${random_qualified_name}
+    Set Test Variable   ${qualif_query_name_and_version}    ${random_query_qualified_name}/${random_query_version}
+    ${resp}     PUT On Session      ${SUT}
+    ...         /definition/query/${qualif_query_name_and_version}
+    ...         expected_status=anything
+    ...         data=${query}       headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                IF      '${format}' == 'json'
+                    Set Test Variable       ${resp}     ${resp.json()}
+                END
+    [Return]    ${qualif_query_name_and_version}
 
+Get AQL Stored Query Using Qualified Name And Version
+    [Documentation]     Get stored AQL from EHRBase.
+    ...                 Takes 1 mandatory arg {qualif_name_and_version} as criteria to get the query.
+    ...                 Takes 1 optional arg {multitenancy_token}. Token value to be passed.
+    ...                 Expected status code 200.
+    ...                 Returns {resp_query}, query from response.
+    [Arguments]     ${qualif_name_and_version}      ${multitenancy_token}=${None}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary   ${headers}
+        ...     Authorization=Bearer ${multitenancy_token}
+    ELSE
+        Set To Dictionary   ${headers}
+        ...     Authorization=Bearer ${response_access_token}
+    END
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${resp}     GET On Session      ${SUT}
+    ...         /definition/query/${qualif_name_and_version}
+    ...         expected_status=anything
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Set Test Variable       ${resp}         ${resp.json()}
+                Set Test Variable       ${resp_query}   ${resp['q']}
+    [Return]    ${resp_query}
 
+Generate Version Number To Store Query
+    ${part1}    Generate Random String	    1   [NUMBERS]
+    ${part2}    Generate Random String	    1   [NUMBERS]
+    ${part3}    Generate Random String	    1   [NUMBERS]
+    [Return]    ${part1}.${part2}.${part3}
 
+Generate Qualified Query Name To Store Query
+    ${qualified_name_extension}    Generate Random String   4   [LOWER]
+    [Return]    org.openehr.${qualified_name_extension}::compositions
 
 # oooo            .       .                                            .
 # `888          .o8     .o8                                          .o8
