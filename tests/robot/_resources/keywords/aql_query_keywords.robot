@@ -270,7 +270,7 @@ POST /query (REST) - ECIS
 POST /query/{qualified_query_name}/{version}
     No Operation
 
-PUT AQL Query With Qualified Name And Version
+PUT AQL Query With Qualified Name And Version Multitenancy
     [Documentation]     Send PUT AQL to store query.
     ...                 Takes 1 mandatory arg {query_to_store}
     ...                 {query_to_store} can be in one of 2 formats JSON or Text.
@@ -298,9 +298,9 @@ PUT AQL Query With Qualified Name And Version
         ...     Authorization=Bearer ${response_access_token}
     END
     Create Session      ${SUT}      ${BASEURL}      debug=2
-    ${random_version}   Generate Version Number To Store Query
+    ${random_version}   Generate Version Number To Store Query Multitenancy
     Set Test Variable   ${random_query_version}   ${random_version}
-    ${random_qualified_name}    Generate Qualified Query Name To Store Query
+    ${random_qualified_name}    Generate Qualified Query Name To Store Query Multitenancy
     Set Test Variable   ${random_query_qualified_name}      ${random_qualified_name}
     Set Test Variable   ${qualif_query_name_and_version}    ${random_query_qualified_name}/${random_query_version}
     ${resp}     PUT On Session      ${SUT}
@@ -313,7 +313,7 @@ PUT AQL Query With Qualified Name And Version
                 END
     [Return]    ${qualif_query_name_and_version}
 
-Get AQL Stored Query Using Qualified Name And Version
+Get AQL Stored Query Using Qualified Name And Version Multitenancy
     [Documentation]     Get stored AQL from EHRBase.
     ...                 Takes 1 mandatory arg {qualif_name_and_version} as criteria to get the query.
     ...                 Takes 1 optional arg {multitenancy_token}. Token value to be passed.
@@ -338,13 +338,13 @@ Get AQL Stored Query Using Qualified Name And Version
                 Set Test Variable       ${resp_query}   ${resp['q']}
     [Return]    ${resp_query}
 
-Generate Version Number To Store Query
+Generate Version Number To Store Query Multitenancy
     ${part1}    Generate Random String	    1   [NUMBERS]
     ${part2}    Generate Random String	    1   [NUMBERS]
     ${part3}    Generate Random String	    1   [NUMBERS]
     [Return]    ${part1}.${part2}.${part3}
 
-Generate Qualified Query Name To Store Query
+Generate Qualified Query Name To Store Query Multitenancy
     ${qualified_name_extension}    Generate Random String   4   [LOWER]
     [Return]    org.openehr.${qualified_name_extension}::compositions
 
