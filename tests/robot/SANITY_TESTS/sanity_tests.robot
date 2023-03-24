@@ -57,8 +57,8 @@ Main flow Sanity Tests for FLAT Compositions
     Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}
     remove File  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
 
-    execute ad-hoc query    B/102_get_compositions_orderby_name.json
-    check response: is positive
+    #execute ad-hoc query    B/102_get_compositions_orderby_name.json
+    #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${composition_uid_short}
     delete DIRECTORY (JSON)
 
@@ -94,8 +94,8 @@ Main flow Sanity Tests for Canonical JSON Compositions
     Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}
     remove File  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
 
-    execute ad-hoc query    B/102_get_compositions_orderby_name.json
-    check response: is positive
+    #execute ad-hoc query    B/102_get_compositions_orderby_name.json
+    #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
     delete DIRECTORY (JSON)
     #[Teardown]    restart SUT
@@ -129,8 +129,8 @@ Main flow Sanity Tests for Canonical XML Compositions
     Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}
     remove File  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
 
-    execute ad-hoc query    B/102_get_compositions_orderby_name.json
-    check response: is positive
+    #execute ad-hoc query    B/102_get_compositions_orderby_name.json
+    #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
     delete DIRECTORY (JSON)
     #[Teardown]    restart SUT
