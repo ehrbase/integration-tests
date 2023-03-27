@@ -1,4 +1,4 @@
-# Copyright (c) 2020 Wladislaw Wagner (www.trustincode.de) / (Vitasystems GmbH).
+# Copyright (c) 2019 Wladislaw Wagner (Vitasystems GmbH), Pablo Pazos (Hannover Medical School).
 #
 # This file is part of Project EHRbase
 #
@@ -17,11 +17,4 @@
 
 
 *** Settings ***
-Documentation    OAuth2 / OpenID-Connect w/ Keycloak
-
-Resource    ../../_resources/suite_settings.robot
-
-Suite Setup    startup SUT
-Suite Teardown    shutdown SUT
-
-Force Tags    SECURITY_oauth
+Force Tags    DIRECTORY_get_versioned

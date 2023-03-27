@@ -1,4 +1,4 @@
-# Copyright (c) 2020 Wladislaw Wagner (www.trustincode.de) / (Vitasystems GmbH).
+# Copyright (c) 2019 Wladislaw Wagner (Vitasystems GmbH), Pablo Pazos (Hannover Medical School).
 #
 # This file is part of Project EHRbase
 #
@@ -17,11 +17,4 @@
 
 
 *** Settings ***
-Metadata    Version    0.1.0
-Metadata    Authors    *Wladislaw Wagner*, *Pablo Pazos* www.trustincode.de
-Metadata    Created    2020.07.10
-Metadata    Updated    2020.07.13
-
-Documentation    Security related tests.
-
-Force Tags    SECURITY
+Force Tags    DIRECTORY_has_version    future
