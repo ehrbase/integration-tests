@@ -233,6 +233,5 @@
     "ehrbase.testcase.v0/language|code": "en",
     "ehrbase.testcase.v0/territory|code": "DE",
     "ehrbase.testcase.v0/territory|terminology": "ISO_3166-1",
-    "ehrbase.testcase.v0/composer|name": "Max Mustermann",
-    "ehrbase.testcase.v0/_uid": "60506a97-c96d-311d-8ac6-87882a186ac7"
+    "ehrbase.testcase.v0/composer|name": "Max Mustermann"
 }
