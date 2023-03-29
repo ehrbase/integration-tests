@@ -39,6 +39,5 @@
     "medications/language|code" : "en",
     "medications/language|terminology" : "ISO_639-1",
     "medications/territory|code" : "AU",
-    "medications/territory|terminology" : "ISO_3166-1",
-    "medications/_uid" : "288c90f7-5cd7-4c16-97be-44c52daa1cdc::local.ehrbase.org::5"
+    "medications/territory|terminology" : "ISO_3166-1"
 }

@@ -424,10 +424,6 @@
     "_type": "DV_TEXT",
     "value": "Nesting"
   },
-  "uid": {
-    "_type": "HIER_OBJECT_ID",
-    "value": "378d91ec-7a4b-4042-bcb0-ef1871188268::ehrdb::1"
-  },
   "links": [
     {
       "_type": "LINK",
