@@ -24,12 +24,12 @@
             }
           },
           "change_type": {
-            "value": "modification",
+            "value": "deleted",
             "defining_code": {
               "terminology_id": {
                 "value": "openehr"
               },
-              "code_string": "251"
+              "code_string": "523"
             }
           },
           "description": {
