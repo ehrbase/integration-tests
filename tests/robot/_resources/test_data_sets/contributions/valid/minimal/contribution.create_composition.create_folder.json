@@ -38,15 +38,15 @@
 				"name": "Dr. Yamamoto"
 			}
 		},
-		"uid": {
-			"_type": "OBJECT_VERSION_ID",
-			"value": "replaceme"
-		},
 		"data": {
 			"_type": "COMPOSITION",
 			"name": {
 				"_type": "DV_TEXT",
 				"value": "Minimal"
+			},
+			"uid": {
+				"_type": "OBJECT_VERSION_ID",
+				"value": "replaceme"
 			},
 			"archetype_details": {
 				"archetype_id": {
