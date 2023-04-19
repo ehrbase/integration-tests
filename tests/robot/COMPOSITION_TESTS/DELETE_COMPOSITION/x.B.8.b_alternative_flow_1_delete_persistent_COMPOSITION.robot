@@ -37,6 +37,9 @@ Alternative flow 1 delete persistent COMPOSITION
 
     delete composition    ${preceding_version_uid}
 
+    ${short_compo_id}       Remove String       ${del_version_uid}      ::${CREATING_SYSTEM_ID}::1
+    Set Test Variable       ${del_version_uid}      ${short_compo_id}
+
     get deleted composition
 
     # [Teardown]    restart SUT
