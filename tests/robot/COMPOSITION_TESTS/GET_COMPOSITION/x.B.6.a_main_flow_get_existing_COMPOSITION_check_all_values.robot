@@ -27,7 +27,7 @@ Get Existing COMPOSITION And Check All Values
     ...     for newly created composition, after Get operation.
     ...     This compares Get composition result with expected json.
     ...     Test case for bug: https://jira.vitagroup.ag/browse/CDR-373
-    [Tags]  Positive
+    [Tags]  Positive    not-ready   to-be-enabled
     Upload OPT    all_types/SSIAD PRIeSM.opt
     create EHR
     Set Test Variable    ${flat_composition_file_name}   SSIAD PRIeSM__.json

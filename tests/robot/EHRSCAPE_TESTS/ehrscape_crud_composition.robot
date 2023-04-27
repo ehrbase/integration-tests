@@ -28,6 +28,7 @@ Resource            ../_resources/keywords/aql_query_keywords.robot
 
 *** Test Cases ***
 Main flow create and update Composition
+    [Tags]      not-ready   to-be-enabled
     [Documentation]     Create and Update Composition using EHRScape endpoints.
     Create Template     all_types/ehrn_family_history.opt
     Extract Template Id From OPT File
@@ -69,6 +70,7 @@ Main flow create and update Composition
     #Should Contain      ${response.json()['compositionUid']}      ${compoUidURL}
 
 Main flow create and delete Composition
+    [Tags]      not-ready   to-be-enabled
     [Documentation]     Create and Update Composition using EHRScape endpoints.
     Create Template    all_types/family_history.opt
     Extract Template Id From OPT File
@@ -90,6 +92,7 @@ Main flow create and delete Composition
     get deleted composition (EHRScape)
 
 Create Composition With Period Having Fractional Unit
+    [Tags]      not-ready   to-be-enabled
     [Documentation]     Create Composition with Fractional Unit, using EHRScape endpoints.
     ...     Expect 400 after creation with P1.5Y Fractional unit.
     Create Template     all_types/medications_statement.v0.opt

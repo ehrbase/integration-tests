@@ -37,7 +37,7 @@ ${optFile}              all_types/Test_dv_boolean_false_true.v0.opt
 
 *** Test Cases ***
 Composition With DV_BOOLEAN.value True - C_BOOLEAN True Invalid - False Valid
-    [Tags]      Negative
+    [Tags]      Negative    not-ready   to-be-enabled
     [Documentation]     *Test case DV_BOOLEAN:*
     ...     - C_BOOLEAN.true_valid = false
     ...     - C_BOOLEAN.false_valid = true

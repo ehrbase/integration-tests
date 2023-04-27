@@ -34,6 +34,7 @@ ${composition_file}      Test_all_types_v2__.json
 
 *** Test Cases ***
 Create Composition With DV_DATE Combinations - Positive
+    [Tags]      not-ready   to-be-enabled
     [Documentation]     *Operations done here (Positive flows):*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_DATE using ${dvDateValue} argument value

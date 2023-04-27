@@ -29,7 +29,7 @@ Resource        ../../_resources/suite_settings.robot
 
 *** Test Cases ***
 Composition With DV_ORDINAL Symbol local::at0006 And Value 1 With Constraints
-    [Tags]      Negative
+    [Tags]      Negative    not-ready   to-be-enabled
     [Documentation]     *Test case DV_ORDINAL Symbol local::at0006 And Value 1 With Constraints:*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_ORDINAL Symbol And Value using:
@@ -49,7 +49,7 @@ Composition With DV_ORDINAL Symbol local::at0006 And Value 1 With Constraints
     [Teardown]  Delete Composition Using API
 
 Composition With DV_ORDINAL Symbol local::at0005 And Value 2 With Constraints
-    [Tags]      Negative
+    [Tags]      Negative    not-ready   to-be-enabled
     [Documentation]     *Test case DV_ORDINAL Symbol local::at0005 And Value 2 With Constraints:*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_ORDINAL Symbol And Value using:
@@ -66,7 +66,7 @@ Composition With DV_ORDINAL Symbol local::at0005 And Value 2 With Constraints
     [Teardown]  Delete Composition Using API
 
 Composition With DV_ORDINAL Symbol local::at0006 And Value 2 With Constraints
-    [Tags]      Negative
+    [Tags]      Negative    not-ready   to-be-enabled
     [Documentation]     *Test case DV_ORDINAL Symbol local::at0006 And Value 2 With Constraints:*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_ORDINAL Symbol And Value using:

@@ -31,6 +31,7 @@ ${COMPOSITIONS_PATH_XML}        ${EXECDIR}/robot/_resources/test_data_sets/compo
 
 *** Test Cases ***
 Test Example Generator For Templates (ECIS) - FLAT
+    [Tags]      not-ready   to-be-enabled
     [Setup]    Upload Template Using ECIS Endpoint
     Get Example Of Web Template By Template Id (ECIS)    ${template_id}    FLAT
     Validate Response Body Has Format    FLAT

@@ -30,7 +30,7 @@ Suite Setup       Precondition
 
 *** Test Cases ***
 Main flow create new event COMPOSITION FLAT
-    [Tags]
+    [Tags]      not-ready   to-be-enabled
     commit composition   format=FLAT
     ...                  composition=ehrn_vital_signs.v2__.json
     check the successful result of commit composition

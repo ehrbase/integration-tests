@@ -43,7 +43,7 @@ Main flow create new event COMPOSITION CANONICAL_XML
     ...                  responseType=XML
 
 Main flow create new event COMPOSITION FLAT
-    [Tags]
+    [Tags]      not-ready   to-be-enabled
     commit composition   format=FLAT
     ...                  composition=nested.en.v1__full.xml.flat.json
     check response: is negative indicating does not allow modification

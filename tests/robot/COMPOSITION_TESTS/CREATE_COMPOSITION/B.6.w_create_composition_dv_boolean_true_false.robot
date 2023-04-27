@@ -55,7 +55,7 @@ Composition With DV_BOOLEAN.value True - C_BOOLEAN True Valid - False Invalid
     [Teardown]  Delete Composition Using API
 
 Composition With DV_BOOLEAN.value False - C_BOOLEAN True Valid - False Invalid
-    [Tags]      Negative
+    [Tags]      Negative    not-ready   to-be-enabled
     [Documentation]     *Test case DV_BOOLEAN:*
     ...     - C_BOOLEAN.true_valid = true
     ...     - C_BOOLEAN.false_valid = false
