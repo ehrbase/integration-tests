@@ -17,3 +17,6 @@ user:
   domainexpert:
       username: "domain-expert@testvitagroup.ag"
       password: "domain-expert"
+  tenantadmin:
+    username: "tenant-admin@testvitagroup.ag"
+    password: "tenant-admin"
