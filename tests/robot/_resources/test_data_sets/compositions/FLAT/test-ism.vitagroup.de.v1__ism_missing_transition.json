@@ -56,6 +56,5 @@
     "test-ism.vitagroup.de.v1/language|code": "en",
     "test-ism.vitagroup.de.v1/territory|code": "DE",
     "test-ism.vitagroup.de.v1/territory|terminology": "ISO_3166-1",
-    "test-ism.vitagroup.de.v1/composer|name": "Max Mustermann",
-    "test-ism.vitagroup.de.v1/_uid": "60506a97-c96d-311d-8ac6-87882a186ac7"
+    "test-ism.vitagroup.de.v1/composer|name": "Max Mustermann"
 }

@@ -304,10 +304,6 @@
     "_type": "DV_TEXT",
     "value": "Persistent minimal"
   },
-  "uid": {
-    "_type": "HIER_OBJECT_ID",
-    "value": "f1a1a1b4-4851-4e8b-8e32-42968ef5537d::ehrdb::1"
-  },
   "links": [
     {
       "_type": "LINK",
