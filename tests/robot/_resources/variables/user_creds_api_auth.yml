@@ -1,22 +1,22 @@
 user:
   doctor:
       username: "doctor@vitagroup.ag"
-      password: "doctor"
+      password: "Doctor-password1"
   nurse:
       username: "nurse@vitagroup.ag"
-      password: "nurse"
+      password: "Nurse-password1"
   superadmin:
       username: "superadmin@vitagroup.ag"
-      password: "superadmin"
+      password: "Superadmin-password1"
   devadmin:
       username: "dev-admin@testvitagroup.ag"
-      password: "dev-admin"
+      password: "Dev-admin-password1"
   hcp:
       username: "hcp@testvitagroup.ag"
-      password: "hcp"
+      password: "Hcp-password1"
   domainexpert:
       username: "domain-expert@testvitagroup.ag"
-      password: "domain-expert"
+      password: "Domain-expert-password1"
   tenantadmin:
     username: "tenant-admin@testvitagroup.ag"
-    password: "tenant-admin"
+    password: "Tenant-admin-password1"
