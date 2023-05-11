@@ -47,7 +47,8 @@ get invalid OPT file
     [Arguments]         ${opt file}
     [Documentation]     Gets an OPT file from test_data_sets/invalid_templates folder
 
-    ${file}=            Get File             ${INVALID DATA SETS}/${opt file}
+    #${file}=            Get File             ${INVALID DATA SETS}/${opt file}
+    ${file}=             Get Binary File      ${INVALID DATA SETS}/${opt file}
 
                         # handle empty file and empty XML
                         Run Keyword And Return If    """${file}"""=='${EMPTY}'
