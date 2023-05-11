@@ -35,7 +35,8 @@ get valid OPT file
     [Arguments]         ${opt file}
     [Documentation]     Gets an OPT file from test_data_sets/valid_templates folder
 
-    ${file}=            Get File             ${VALID DATA SETS}/${opt file}
+    ${file}=            Get Binary File      ${VALID DATA SETS}/${opt file}
+    #${file}=            Get File             ${VALID DATA SETS}/${opt file}
     ${xml}=             Parse Xml            ${file}
                         Set Suite Variable    ${file}    ${file}
                         Set Suite Variable    ${expected}    ${xml}
