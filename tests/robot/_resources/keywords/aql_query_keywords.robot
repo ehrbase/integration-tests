@@ -698,8 +698,9 @@ Create EHR Record On The Server
 
     ${time_created_obj}  Object    response body time_created
     ${time_created}=    String    response body time_created value
-    ${formatted_time_created}   Format String   %Y-%m-%dT%H:%M:%S.%fZ   ${time_created}[0]
-                        Set Suite Variable    ${time_created}    ${formatted_time_created}
+    ${converted_date}   Convert Date    ${time_created}[0]     result_format=%Y-%m-%dT%H:%M:%S.%f
+    #${formatted_time_created}   Format String   %Y-%m-%dT%H:%M:%S.%fZ   ${time_created}[0]
+                        Set Suite Variable    ${time_created}    ${converted_date}
                         Set Suite Variable    ${time_created_obj}    ${time_created_obj}[0]
 
     ${system_id_obj}=   Object    response body system_id
