@@ -696,13 +696,14 @@ Create EHR Record On The Server
                         #          The value is at index 0 in that list
                         Set Suite Variable    ${ehr_id}    ${ehr_id_value}[0]
 
-    ${time_created_obj}  Object    response body time_created
-    ${time_created}=    String    response body time_created value
-	${date_time_parts}  Evaluate  datetime.datetime.strptime('''${time_created}[0]''', '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%dT%H:%M:%S.%fZ').split('.')
+    ${time_created_obj_list}    Object    response body time_created
+    ${time_created}         String    response body time_created value
+	${date_time_parts}      Evaluate  datetime.datetime.strptime('''${time_created}[0]''', '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%dT%H:%M:%S.%fZ').split('.')
     ${formatted_time_created}  Set Variable  ${date_time_parts[0]}.${date_time_parts[1][:3]}Z
-    #${formatted_time_created}   Format String   %Y-%m-%dT%H:%M:%S.%fZ   ${time_created}[0]
+    ${time_created_obj}     Set Variable    ${time_created_obj_list}[0]
+    Set To Dictionary   ${time_created_obj}      value       ${formatted_time_created}
                         Set Suite Variable    ${time_created}    ${formatted_time_created}
-                        Set Suite Variable    ${time_created_obj}    ${time_created_obj}[0]
+                        Set Suite Variable    ${time_created_obj}    ${time_created_obj}
 
     ${system_id_obj}=   Object    response body system_id
     ${system_id}=       String    response body system_id value
