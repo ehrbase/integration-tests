@@ -46,6 +46,51 @@ Get Logstash Content And Store In Json
                     Should Be True     ${json_resp['hits']['total']['value']} > 0   There are no records.
                     #Log     ${json_resp['hits']['hits'][0]}
 
+Get Logstash Sorted Result And Store In Json
+    [Documentation]     Get latest result sorted by AuditMessage.EventIdentification.EventDateTime.
+    ...             ${\n}Sort hits asc or desc and store first result.
+    [Arguments]     ${sort_type}=desc
+    ${json_string}      catenate
+    ...     {
+    ...     "query": {
+    ...         "match_all": {}
+    ...     },
+    ...     "size": 1,
+    ...     "sort": [
+    ...         {
+    ...         "AuditMessage.EventIdentification.EventDateTime": {
+    ...             "order": "${sort_type}"
+    ...         }
+    ...     }
+    ...   ]
+    ...  }
+    ${json}     Evaluate        json.loads('''${json_string}''')        json
+    Log     ${json}
+    ${resp}         Get On Session     elasticsearch_session
+                    ...     ${logstash_id}/_search
+                    ...     json=${json}
+                    ...     expected_status=anything
+                    Set Test Variable       ${response}         ${resp}
+                    Should Be Equal As Strings      ${resp.status_code}     ${200}
+                    Set Test Variable       ${json_resp}        ${resp.json()}
+
+Check That Json Path Has Expected Value
+    [Arguments]     ${json_path}    ${expected_value}
+    Should Be Equal As Strings      ${json_resp${json_path}}    ${expected_value}
+
+
+Get Logstash Last Result And Check Operation
+    [Documentation]     operation_type can be C or R or M.
+    ...                 C - Create, R - Read, M - Modify
+    [Arguments]     ${operation_type}=C
+    Get Logstash Sorted Result And Store In Json
+    Check That Json Path Has Expected Value
+    ...     ['hits']['hits'][0]['_source']['AuditMessage']['EventIdentification']['EventActionCode']
+    ...     ${operation_type}
+    Check That Json Path Has Expected Value
+    ...     ['hits']['hits'][0]['_source']['AuditMessage']['EventIdentification']['EventOutcomeDescription']
+    ...     Operation performed successfully
+
 Generate Logstash ID
     ${now}      Evaluate    datetime.datetime.now().strftime('%Y.%m.%d')
     Set Suite Variable      ${logstash_id}    logstash-${now}-000001
