@@ -1,0 +1,10 @@
+Add in fields_and_results folder, all .csv files with the following structure:
+-> HEADER: field,expected
+-> VALUES: field_1,expected_val1
+           field_2,expected_val2
+           field_3,expected_val3
+field values - will be used to replace dynamic part of AQL statement.
+expected values - will be used to compare expected value with actual value received after AQL statement execution.
+All files will be grouped in separate folders, depending on feature AQL statement .csv file refers to.
+Files will be saved in .csv format, with suggestive naming.
+
