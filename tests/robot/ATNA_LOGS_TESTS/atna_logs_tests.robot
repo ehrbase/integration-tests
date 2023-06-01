@@ -1,5 +1,4 @@
-# Copyright (c) 2019 Wladislaw Wagner (Vitasystems GmbH), Pablo Pazos (Hannover Medical School),
-# Nataliya Flusman (Solit Clouds), Nikita Danilin (Solit Clouds)
+# Copyright (c) 2023 Vladislav Ploaia (Vitagroup - CDR Core Team).
 #
 # This file is part of Project EHRbase
 #
