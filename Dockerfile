@@ -5,7 +5,7 @@ FROM python:3.11.3
 WORKDIR /app
 
 # Copy the requirements.txt file to the working directory
-COPY requirements.txt .
+COPY tests/requirements.txt .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r tests/requirements.txt
