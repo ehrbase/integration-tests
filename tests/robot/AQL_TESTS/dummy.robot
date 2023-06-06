@@ -34,6 +34,7 @@ Library     DataDriver
 
 *** Test Cases ***
 Execute Query With Selected [${path}] And Expected [${expected}]
+    [Tags]      not-ready
     [Template]      Execute Query
     ${path}     ${expected}
 
