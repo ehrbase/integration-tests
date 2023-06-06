@@ -1,0 +1,5 @@
+${path},${expected}
+_type,expected_type
+name,expected_name
+name/_type,expected_name_type
+name/value,expected_name_value
