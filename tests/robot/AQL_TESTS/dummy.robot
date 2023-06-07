@@ -28,10 +28,13 @@ Library     OperatingSystem
 Library     String
 Library     Collections
 Library     DataDriver
-...         file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/dummy_test_data.csv
+...         file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/dummy_test_data_temp.csv
 ...         dialect=excel
+#...         file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/dummy_test_data.csv
+#...         dialect=excel
 
 
+#robot -d .\results --noncritical not-ready robot\AQL_TESTS\dummy.robot
 *** Test Cases ***
 Execute Query With Selected [${path}] And Expected [${expected}]
     [Tags]      not-ready
