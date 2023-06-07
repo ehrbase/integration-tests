@@ -19,11 +19,15 @@
 *** Settings ***
 Documentation    AQL checks keywords
 
-Resource   ../suite_settings.robot
+Resource        ../suite_settings.robot
+Resource        ehr_keywords.robot
 
 
 *** Variables ***
-${AQL_EXPRESSIONS_DATA_SETS}     ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/statements
+${AQL_EXPRESSIONS_DATA_SETS}    ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/statements
+${TEMPLATES_DATA_SETS}          ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/data_load/opts
+${EHR_DATA_SETS}                ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/ehr/valid
+${COMPOSITIONS_DATA_SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/data_load/compositions
 
 
 *** Keywords ***
@@ -43,12 +47,11 @@ Execute Ad Hoc Query
         Fail
     END
 
-
 Send Ad Hoc Request
     [Documentation]     Prepare and send Ad Hoc request to {baseurl}/query/aql.
     ...                 - Method: *POST*, expects: *200*.
     ...                 - Takes 1 mandatory argument: aql_body, to be provided in format {"q":"${query}"}
-    ...                 - Stores response_body.json in 4 vars: resp_body, resp_body_query, resp_body_columns, resp_body_rows
+    ...                 - Stores response in 4 vars: resp_body, resp_body_query, resp_body_columns, resp_body_rows
     [Arguments]     ${aql_body}
     &{headers}          Create Dictionary   Content-Type=application/json
     Create Session      ${SUT}      ${BASEURL}
@@ -64,6 +67,55 @@ Send Ad Hoc Request
                         #Log     ${resp_body_query}
                         #Log     ${resp_body_columns}
                         #Log     ${resp_body_rows}
+
+Upload OPT For AQL
+    [Documentation]     Uploads OPT for AQL tests.
+    ...                 - Requires 1 mandatory argument template_file.
+    ...                 - template_file - to be specified with .opt extension.
+    ...                 - Checks if 200 or 201 was returned. If 409 is returned, keyword is passed (template already exists).
+    ...                 - If 400, 500 or any other code is returned, keyword must fail.
+    [Arguments]     ${template_file}
+    prepare new request session    XML      Prefer=return=representation
+    Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
+    ${file}             Get Binary File         ${TEMPLATES_DATA_SETS}/${template_file}
+    ${xml}              Parse Xml               ${file}
+                        ${template_id}    Get Element Text    ${xml}    xpath=./template_id/value
+                        Set Suite Variable      ${file}         ${file}
+                        Set Suite Variable      ${expected}     ${xml}
+                        Set Suite Variable      ${template_id}  ${template_id}
+    ${resp}             POST On Session      ${SUT}     /definition/template/adl1.4
+                        ...     expected_status=anything    data=${file}    headers=${headers}
+                        Set Suite Variable      ${response}     ${resp}
+                        Set Suite Variable      ${response_code}    ${response.status_code}
+    Return From Keyword If      '${response_code}' == '409'
+    ${expected_codes_list}      Create List     ${200}     ${201}
+    Should Contain      ${expected_codes_list}      ${response_code}    Upload OPT returned code=${response_code}.
+
+Create EHR For AQL
+    [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
+    prepare new request session    JSON      Prefer=return=representation
+    create new EHR with ehr_status  ${EHR_DATA_SETS}/000_ehr_status_with_other_details.json
+                        Integer     response status     201
+    ${ehr_id_obj}       Object      response body ehr_id
+    ${ehr_id_value}     String      response body ehr_id value
+                        Set Suite Variable      ${ehr_id_obj}     ${ehr_id_obj}
+                        Set Suite Variable      ${ehr_id}         ${ehr_id_value}[0]
+
+Admin Delete EHR For AQL
+    [Documentation]     Delete EHR using ADMIN endpoint.
+    ...                 - It must delete all objects linked to EHR as well as the EHR itself.
+    ...                 - Takes 1 optional argument {ehr_id}.
+    ...                 - Dependent of keyword 'Create EHR For AQL', due to {ehr_id} var.
+    ...                 - Expects *204*.
+    [Arguments]     ${ehr_id}=${ehr_id}
+    prepare new request session    JSON
+    Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2   headers=${headers}
+    ${resp}             DELETE On Session      ${SUT}     /ehr/${ehr_id}
+                        ...     expected_status=anything
+                        Should Be Equal As Strings      ${resp.status_code}     ${204}
+
+
+
 
 
 
