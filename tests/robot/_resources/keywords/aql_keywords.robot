@@ -28,6 +28,7 @@ ${AQL_EXPRESSIONS_DATA_SETS}    ${PROJECT_ROOT}/tests/robot/_resources/test_data
 ${TEMPLATES_DATA_SETS}          ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/data_load/opts
 ${EHR_DATA_SETS}                ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/ehr/valid
 ${COMPOSITIONS_DATA_SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/data_load/compositions
+${EXPECTED_JSON_DATA_SETS}      ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results
 
 
 *** Keywords ***
@@ -46,6 +47,19 @@ Execute Ad Hoc Query
     IF      '${expected}' != '${actual}'
         Fail
     END
+
+Set AQL And Execute Ad Hoc Query
+    [Documentation]     Setup AQL for POST request body and send Ad Hoc Query.
+    ...                 - Set resp_body_actual, actual_rows, columns_length, rows_length.
+    ...                 - Takes 1 mandatory arg query_expr, to be provided directly AQL statement without "q":
+    ...                 - Example: SELECT c FROM COMPOSITION c
+    [Arguments]     ${query_expr}
+    ${test_data}    Set Variable    {"q":"${query_expr}"}
+    Send Ad Hoc Request     aql_body=${test_data}
+    Set Test Variable       ${resp_body_actual}     ${resp_body}
+    ${actual_rows}      Set Variable    ${resp_body_rows[0]}
+    ${columns_length}   Get Length      ${resp_body_columns}
+    ${rows_length}      Get Length      ${resp_body_rows}
 
 Send Ad Hoc Request
     [Documentation]     Prepare and send Ad Hoc request to {baseurl}/query/aql.
@@ -100,6 +114,26 @@ Create EHR For AQL
     ${ehr_id_value}     String      response body ehr_id value
                         Set Suite Variable      ${ehr_id_obj}     ${ehr_id_obj}
                         Set Suite Variable      ${ehr_id}         ${ehr_id_value}[0]
+
+Commit Composition For AQL
+    [Documentation]     Create Composition for AQL checks.
+    ...                 - Depends on 'Upload OPT For AQL' keyword, due to template_id.
+    ...                 - Composition will be sent in CANONICAL JSON format.
+    ...                 - Takes 1 mandatory arg composition_file, to be provided as follows:
+    ...                 - composition_file_name.json
+    [Arguments]         ${composition_file}
+    prepare new request session    JSON      Prefer=return=representation
+    Set To Dictionary   ${headers}   openEHR-TEMPLATE_ID=${template_id}
+    Create Session      ${SUT}    ${BASEURL}    debug=2
+     ...                 auth=${CREDENTIALS}    verify=True
+    ${file}             Get Binary File     ${COMPOSITIONS_DATA_SETS}/${composition_file}
+    ${resp}             POST On Session     ${SUT}   /ehr/${ehr_id}/composition
+                        ...     expected_status=anything    data=${file}    headers=${headers}
+                        Should Be Equal As Strings      ${resp.status_code}    ${201}
+    Set Test Variable   ${response}     ${resp}
+    Set Test Variable   ${composition_uid}      ${resp.json()['uid']['value']}
+    ${short_uid}        Remove String       ${composition_uid}      ::${CREATING_SYSTEM_ID}::1
+    Set Test Variable   ${composition_short_uid}    ${short_uid}
 
 Admin Delete EHR For AQL
     [Documentation]     Delete EHR using ADMIN endpoint.
