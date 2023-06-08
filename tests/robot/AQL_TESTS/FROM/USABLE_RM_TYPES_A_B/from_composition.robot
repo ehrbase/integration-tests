@@ -1,0 +1,40 @@
+*** Settings ***
+Documentation   CHECK COMPLETE RETURN OF COMPOSITION C
+...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/FROM_TEST_SUIT.MD#test-from-composition
+Resource        ../../../_resources/keywords/aql_keywords.robot
+Library     DataDriver
+...         file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/from/from_composition.csv
+...         dialect=excel
+Suite Setup     Precondition
+Suite Teardown  Admin Delete EHR For AQL
+
+
+*** Test Cases ***
+Test From Composition: SELECT t FROM ${type} t
+    [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
+    ...         - Send AQL 'SELECT t FROM {type} t'
+    ...         - {type} can be:
+    ...         COMPOSITION, EVENT_CONTEXT, SECTION, ADMIN_ENTRY, OBSERVATION,
+    ...         INSTRUCTION, ACTION, EVALUATION, INSTRUCTION_DETAILS, ACTIVITY
+    ...         - Check if actual response == expected response
+    ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
+    [Template]      Execute Query
+    ${type}     ${expected_file}
+
+
+*** Keywords ***
+Precondition
+    Upload OPT For AQL      conformance_ehrbase.de.v0.opt
+    Create EHR For AQL
+    Commit Composition For AQL      conformance_ehrbase.de.v0_max.json
+
+Execute Query
+    [Arguments]     ${type}     ${expected_file}
+    ${query}    Set Variable    SELECT t FROM ${type} t
+    Set AQL And Execute Ad Hoc Query    ${query}
+    Log     ${expected_file}
+    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
+    ${exclude_paths}    Create List    root['rows'][0][0]['uid']
+    Length Should Be    ${resp_body['rows']}     1
+    ${diff}     compare json-string with json-file
+    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}

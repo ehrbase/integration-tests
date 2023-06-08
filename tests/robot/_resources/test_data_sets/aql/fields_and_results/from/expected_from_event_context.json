@@ -1,0 +1,10 @@
+{
+    "q": "SELECT t FROM EVENT_CONTEXT t",
+    "columns": [
+        {
+            "path": "t",
+            "name": "#0"
+        }
+    ],
+    "rows": []
+}

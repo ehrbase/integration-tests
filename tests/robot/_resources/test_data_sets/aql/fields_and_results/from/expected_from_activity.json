@@ -1,0 +1,10 @@
+{
+    "q": "SELECT t FROM ACTIVITY t",
+    "columns": [
+        {
+            "path": "t",
+            "name": "#0"
+        }
+    ],
+    "rows": []
+}

@@ -57,9 +57,8 @@ Set AQL And Execute Ad Hoc Query
     ${test_data}    Set Variable    {"q":"${query_expr}"}
     Send Ad Hoc Request     aql_body=${test_data}
     Set Test Variable       ${resp_body_actual}     ${resp_body}
-    ${actual_rows}      Set Variable    ${resp_body_rows[0]}
+    #${actual_rows}      Set Variable    ${resp_body_rows[0]}
     ${columns_length}   Get Length      ${resp_body_columns}
-    ${rows_length}      Get Length      ${resp_body_rows}
 
 Send Ad Hoc Request
     [Documentation]     Prepare and send Ad Hoc request to {baseurl}/query/aql.
@@ -77,7 +76,6 @@ Send Ad Hoc Request
                         Set Test Variable   ${resp_body}    ${resp.json()}
                         Set Test Variable   ${resp_body_query}    ${resp_body['q']}
                         Set Test Variable   ${resp_body_columns}    ${resp_body['columns']}
-                        Set Test Variable   ${resp_body_rows}    ${resp_body['rows'][0]}    #due to [[ ]]
                         #Log     ${resp_body_query}
                         #Log     ${resp_body_columns}
                         #Log     ${resp_body_rows}
@@ -130,10 +128,10 @@ Commit Composition For AQL
     ${resp}             POST On Session     ${SUT}   /ehr/${ehr_id}/composition
                         ...     expected_status=anything    data=${file}    headers=${headers}
                         Should Be Equal As Strings      ${resp.status_code}    ${201}
-    Set Test Variable   ${response}     ${resp}
-    Set Test Variable   ${composition_uid}      ${resp.json()['uid']['value']}
+    Set Suite Variable   ${response}     ${resp}
+    Set Suite Variable   ${composition_uid}      ${resp.json()['uid']['value']}
     ${short_uid}        Remove String       ${composition_uid}      ::${CREATING_SYSTEM_ID}::1
-    Set Test Variable   ${composition_short_uid}    ${short_uid}
+    Set Suite Variable   ${composition_short_uid}    ${short_uid}
 
 Admin Delete EHR For AQL
     [Documentation]     Delete EHR using ADMIN endpoint.

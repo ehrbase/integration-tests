@@ -16,11 +16,11 @@ Test From EHR
     ${query}    Set Variable    SELECT e/ehr_id/value FROM EHR e
     Set AQL And Execute Ad Hoc Query        ${query}
     Should Be Equal As Strings      ${resp_body_query}      ${query}
-    Should Be Equal As Strings      ${resp_body_rows[0]}    ${ehr_id}
+    Should Be Equal As Strings      ${resp_body['rows'][0][0]}      ${ehr_id}
     Should Be Equal As Strings      ${resp_body_columns[0]['path']}       /ehr_id/value
     Should Be Equal As Strings      ${resp_body_columns[0]['name']}       \#0
-    Length Should Be    ${resp_body_columns}    1
-    Length Should Be    ${resp_body_rows}       1
+    Length Should Be    ${resp_body_columns}        1
+    Length Should Be    ${resp_body['rows'][0]}     1
     [Teardown]      Admin Delete EHR For AQL
 
 
