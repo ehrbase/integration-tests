@@ -5,8 +5,11 @@ Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver
 ...         file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/from/combinations/from_composition.csv
 ...         dialect=excel
-Suite Setup     Precondition
-Suite Teardown  Admin Delete EHR For AQL
+
+Suite Setup  Skip    enable Setup 'Precondition' if AQL checks are passing !!!
+Suite Teardown  Skip    enable Teardown 'Admin Delete EHR For AQL' if AQL checks are passing !!!
+#Suite Setup     Precondition        #enable this keyword if AQL checks are passing !!!
+#Suite Teardown  Admin Delete EHR For AQL       #enable this keyword if AQL checks are passing !!!
 
 
 *** Test Cases ***
