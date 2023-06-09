@@ -1,0 +1,1 @@
+SELECT ${path} FROM EHR e CONTAINS COMPOSITION c [openEHR-EHR-COMPOSITION.conformance_composition_.v0]
