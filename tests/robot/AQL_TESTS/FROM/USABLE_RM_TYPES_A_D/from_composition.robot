@@ -21,7 +21,7 @@ Test From Composition: SELECT t FROM ${type} t
     ...         INSTRUCTION, ACTION, EVALUATION, INSTRUCTION_DETAILS, ACTIVITY
     ...         - Check if actual response == expected response
     ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
-    [Tags]      not-ready
+    #[Tags]      not-ready
     [Template]      Execute Query
     ${type}     ${expected_file}
 

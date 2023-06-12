@@ -20,7 +20,7 @@ Test From Common Types: SELECT t FROM ${type} t
     ...         FEEDER_AUDIT, HISTORY, POINT_EVENT, INTERVAL_EVENT, ITEM_TREE, CLUSTER
     ...         - Check if actual response == expected response
     ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
-    [Tags]      not-ready
+    #[Tags]      not-ready
     [Template]      Execute Query
     ${type}     ${expected_file}    ${nr_of_results}
 

@@ -12,7 +12,7 @@ Test From EHR
     ...         - Check response rows to have the same ehr_id value as it was created in Precondition
     ...         - Check length of response rows to be 1
     ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
-    [Tags]      not-ready
+    #[Tags]      not-ready
     [Setup]     Precondition
     ${query}    Set Variable    SELECT e/ehr_id/value FROM EHR e
     Set AQL And Execute Ad Hoc Query        ${query}
