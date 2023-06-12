@@ -1,0 +1,476 @@
+{
+  "q": "SELECT t FROM FEEDER_AUDIT t",
+  "columns": [
+    {
+      "path": "t",
+      "name": "#0"
+    }
+  ],
+  "rows": [
+    [
+      {
+        "_type": "FEEDER_AUDIT",
+        "originating_system_item_ids": [
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer1",
+            "assigner": "assigner1",
+            "id": "id1",
+            "type": "PERSON"
+          },
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer2",
+            "assigner": "assigner2",
+            "id": "id2",
+            "type": "PERSON"
+          }
+        ],
+        "feeder_system_item_ids": [
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer1",
+            "assigner": "assigner1",
+            "id": "id1",
+            "type": "PERSON"
+          },
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer2",
+            "assigner": "assigner2",
+            "id": "id2",
+            "type": "PERSON"
+          }
+        ],
+        "original_content": {
+          "_type": "DV_PARSABLE",
+          "value": "Hello world!",
+          "formalism": "text/plain"
+        },
+        "originating_system_audit": {
+          "_type": "FEEDER_AUDIT_DETAILS",
+          "system_id": "orig",
+          "location": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "12342341",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Org 1"
+          },
+          "provider": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "456",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Per 1"
+          },
+          "subject": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "456",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Per 1"
+          },
+          "time": {
+            "_type": "DV_DATE_TIME",
+            "value": "2021-12-21T16:02:58.0094262+01:00"
+          },
+          "version_id": "final"
+        }
+      }
+    ],
+    [
+      {
+        "_type": "FEEDER_AUDIT",
+        "originating_system_item_ids": [
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer1",
+            "assigner": "assigner1",
+            "id": "id1",
+            "type": "PERSON"
+          },
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer2",
+            "assigner": "assigner2",
+            "id": "id2",
+            "type": "PERSON"
+          }
+        ],
+        "feeder_system_item_ids": [
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer1",
+            "assigner": "assigner1",
+            "id": "id1",
+            "type": "PERSON"
+          },
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer2",
+            "assigner": "assigner2",
+            "id": "id2",
+            "type": "PERSON"
+          }
+        ],
+        "original_content": {
+          "_type": "DV_PARSABLE",
+          "value": "Hello world!",
+          "formalism": "text/plain"
+        },
+        "originating_system_audit": {
+          "_type": "FEEDER_AUDIT_DETAILS",
+          "system_id": "orig",
+          "location": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "12342341",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Org 1"
+          },
+          "provider": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "456",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Per 1"
+          },
+          "subject": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "456",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Per 1"
+          },
+          "time": {
+            "_type": "DV_DATE_TIME",
+            "value": "2021-12-21T16:02:58.0094262+01:00"
+          },
+          "version_id": "final"
+        }
+      }
+    ],
+    [
+      {
+        "_type": "FEEDER_AUDIT",
+        "originating_system_item_ids": [
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer1",
+            "assigner": "assigner1",
+            "id": "id1",
+            "type": "PERSON"
+          },
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer2",
+            "assigner": "assigner2",
+            "id": "id2",
+            "type": "PERSON"
+          }
+        ],
+        "feeder_system_item_ids": [
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer1",
+            "assigner": "assigner1",
+            "id": "id1",
+            "type": "PERSON"
+          },
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer2",
+            "assigner": "assigner2",
+            "id": "id2",
+            "type": "PERSON"
+          }
+        ],
+        "original_content": {
+          "_type": "DV_PARSABLE",
+          "value": "Hello world!",
+          "formalism": "text/plain"
+        },
+        "originating_system_audit": {
+          "_type": "FEEDER_AUDIT_DETAILS",
+          "system_id": "orig",
+          "location": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "12342341",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Org 1"
+          },
+          "provider": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "456",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Per 1"
+          },
+          "subject": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "456",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Per 1"
+          },
+          "time": {
+            "_type": "DV_DATE_TIME",
+            "value": "2021-12-21T16:02:58.0094262+01:00"
+          },
+          "version_id": "final"
+        }
+      }
+    ],
+    [
+      {
+        "_type": "FEEDER_AUDIT",
+        "originating_system_item_ids": [
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer1",
+            "assigner": "assigner1",
+            "id": "id1",
+            "type": "PERSON"
+          },
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer2",
+            "assigner": "assigner2",
+            "id": "id2",
+            "type": "PERSON"
+          }
+        ],
+        "feeder_system_item_ids": [
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer1",
+            "assigner": "assigner1",
+            "id": "id1",
+            "type": "PERSON"
+          },
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer2",
+            "assigner": "assigner2",
+            "id": "id2",
+            "type": "PERSON"
+          }
+        ],
+        "original_content": {
+          "_type": "DV_PARSABLE",
+          "value": "Hello world!",
+          "formalism": "text/plain"
+        },
+        "originating_system_audit": {
+          "_type": "FEEDER_AUDIT_DETAILS",
+          "system_id": "orig",
+          "location": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "12342341",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Org 1"
+          },
+          "provider": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "456",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Per 1"
+          },
+          "subject": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "456",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Per 1"
+          },
+          "time": {
+            "_type": "DV_DATE_TIME",
+            "value": "2021-12-21T16:02:58.0094262+01:00"
+          },
+          "version_id": "final"
+        }
+      }
+    ],
+    [
+      {
+        "_type": "FEEDER_AUDIT",
+        "originating_system_item_ids": [
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer1",
+            "assigner": "assigner1",
+            "id": "id1",
+            "type": "PERSON"
+          },
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer2",
+            "assigner": "assigner2",
+            "id": "id2",
+            "type": "PERSON"
+          }
+        ],
+        "feeder_system_item_ids": [
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer1",
+            "assigner": "assigner1",
+            "id": "id1",
+            "type": "PERSON"
+          },
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer2",
+            "assigner": "assigner2",
+            "id": "id2",
+            "type": "PERSON"
+          }
+        ],
+        "original_content": {
+          "_type": "DV_PARSABLE",
+          "value": "Hello world!",
+          "formalism": "text/plain"
+        },
+        "originating_system_audit": {
+          "_type": "FEEDER_AUDIT_DETAILS",
+          "system_id": "orig",
+          "location": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "12342341",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Org 1"
+          },
+          "provider": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "456",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Per 1"
+          },
+          "subject": {
+            "_type": "PARTY_IDENTIFIED",
+            "external_ref": {
+              "_type": "PARTY_REF",
+              "namespace": "uk.org.nmc",
+              "type": "PARTY",
+              "id": {
+                "_type": "GENERIC_ID",
+                "value": "456",
+                "scheme": "NMC"
+              }
+            },
+            "name": "Per 1"
+          },
+          "time": {
+            "_type": "DV_DATE_TIME",
+            "value": "2021-12-21T16:02:58.0094262+01:00"
+          },
+          "version_id": "final"
+        }
+      }
+    ]
+  ]
+}
