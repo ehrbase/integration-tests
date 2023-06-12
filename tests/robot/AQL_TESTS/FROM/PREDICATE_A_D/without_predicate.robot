@@ -7,7 +7,7 @@ Resource        ../../../_resources/keywords/aql_keywords.robot
 *** Test Cases ***
 Test From Without Predicate
     [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
-    ...         - Send AQL 'SELECT e/ehr_id/value FROM EHR e'
+    ...         - Send AQL 'SELECT o FROM OBSERVATION o'
     ...         - Check query from response == query from script
     ...         - Check response to have *5 items in rows*
     ...         - Check that all items from rows are of _type=OBSERVATION
