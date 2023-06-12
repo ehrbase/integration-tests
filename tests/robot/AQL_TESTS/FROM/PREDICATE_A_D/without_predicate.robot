@@ -20,7 +20,7 @@ Test From Without Predicate
     ${rows_length}      Get Length      ${resp_body['rows']}
     Length Should Be    ${resp_body['rows']}     5
     FOR     ${INDEX}   IN RANGE     0   ${rows_length}
-        Log     ${resp_body['rows'][${INDEX}]}
+        #Log     ${resp_body['rows'][${INDEX}]}      #enable to see the rows item at specific index
         IF  '''${resp_body['rows'][${INDEX}][0]}''' == '''${NONE}'''
            Fail     None is present within rows results.
         ELSE
