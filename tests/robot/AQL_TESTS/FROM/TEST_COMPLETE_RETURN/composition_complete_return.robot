@@ -10,7 +10,7 @@ Test Complete Return Of Composition
     ...         - Send AQL 'SELECT c FROM COMPOSITION c'
     ...         - Check if actual response == expected response
     ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
-    [Tags]      not-ready
+    #[Tags]      not-ready
     [Setup]     Precondition
     ${query}    Set Variable    SELECT c FROM COMPOSITION c
     Set AQL And Execute Ad Hoc Query        ${query}
