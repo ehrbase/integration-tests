@@ -1,0 +1,111 @@
+{
+    "q": "SELECT t FROM SECTION t[openEHR-EHR-SECTION.adhoc.v1,'Section 1']",
+    "columns": [
+        {
+            "path": "t",
+            "name": "#0"
+        }
+    ],
+    "rows": [
+        [
+            {
+                "name": {
+                    "value": "Section 1",
+                    "_type": "DV_TEXT"
+                },
+                "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1",
+                "_type": "SECTION",
+                "items": [
+                    {
+                        "uid": {
+                            "value": "55415141-17e4-4c71-9429-aa0fe6694c83",
+                            "_type": "HIER_OBJECT_ID"
+                        },
+                        "name": {
+                            "value": "Conformance Observation",
+                            "_type": "DV_TEXT"
+                        },
+                        "_type": "OBSERVATION",
+                        "subject": {
+                            "_type": "PARTY_SELF"
+                        },
+                        "encoding": {
+                            "_type": "CODE_PHRASE",
+                            "code_string": "UTF-8",
+                            "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "IANA_character-sets"
+                            }
+                        },
+                        "language": {
+                            "_type": "CODE_PHRASE",
+                            "code_string": "en",
+                            "terminology_id": {
+                                "_type": "TERMINOLOGY_ID",
+                                "value": "ISO_639-1"
+                            }
+                        },
+                        "data": {
+                            "name": {
+                                "value": "History",
+                                "_type": "DV_TEXT"
+                            },
+                            "origin": {
+                                "value": "2022-02-03T04:05:06",
+                                "_type": "DV_DATE_TIME"
+                            },
+                            "events": [
+                                {
+                                    "name": {
+                                        "value": "Any event",
+                                        "_type": "DV_TEXT"
+                                    },
+                                    "time": {
+                                        "value": "2022-02-03T04:05:06",
+                                        "_type": "DV_DATE_TIME"
+                                    },
+                                    "_type": "POINT_EVENT",
+                                    "data": {
+                                        "name": {
+                                            "value": "Tree",
+                                            "_type": "DV_TEXT"
+                                        },
+                                        "archetype_node_id": "at0003",
+                                        "_type": "ITEM_TREE",
+                                        "items": [
+                                            {
+                                                "name": {
+                                                    "value": "DV_TEXT",
+                                                    "_type": "DV_TEXT"
+                                                },
+                                                "value": {
+                                                    "_type": "DV_TEXT",
+                                                    "value": "Lorem ipsum"
+                                                },
+                                                "_type": "ELEMENT",
+                                                "archetype_node_id": "at0004"
+                                            }
+                                        ]
+                                    },
+                                    "archetype_node_id": "at0002"
+                                }
+                            ],
+                            "_type": "HISTORY",
+                            "archetype_node_id": "at0001"
+                        },
+                        "archetype_details": {
+                            "rm_version": "1.0.4",
+                            "template_id": {
+                                "value": "aql-conformance-ehrbase.org.v0"
+                            },
+                            "archetype_id": {
+                                "value": "openEHR-EHR-OBSERVATION.conformance_observation.v0"
+                            }
+                        },
+                        "archetype_node_id": "openEHR-EHR-OBSERVATION.conformance_observation.v0"
+                    }
+                ]
+            }
+        ]
+    ]
+}
