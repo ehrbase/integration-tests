@@ -73,10 +73,12 @@ Send Ad Hoc Request
                         ...                 data=${aql_body}
                         ##IF to be removed when all AQL features are implemented.
                         IF      '${resp.status_code}' == '${400}'
-                            ${notImplMsgStatus}     Run Keyword And Return Status
-                            ...     Should Contain      ${resp.json()["message"]}  Not implemented
-                            Skip If     '${resp.status_code}' == '${400}' and '${notImplMsgStatus}' == '${TRUE}'
-                            ...     Skipped due to 400 and Not implemented was returned.
+                            ${notImplMsgStatus}         Run Keyword And Return Status   Should Contain
+                            ...     ${resp.json()["message"]}   Not implemented
+                            ${notSupportedMsgStatus}    Run Keyword And Return Status   Should Contain
+                            ...     ${resp.json()["message"]}   is not supported
+                            Skip If     '${notImplMsgStatus}' == '${TRUE}' or '${notSupportedMsgStatus}' == '${TRUE}'
+                            ...     Skipped due to 400 and Not implemented/not supported was returned.
                         END
                         Should Be Equal As Strings      ${resp.status_code}     ${200}
                         Set Test Variable   ${resp_status_code}    ${resp}
