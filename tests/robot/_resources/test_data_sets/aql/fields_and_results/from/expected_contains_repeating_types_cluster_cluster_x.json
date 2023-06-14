@@ -1,0 +1,35 @@
+{
+	"q": "SELECT o FROM COMPOSITION CONTAINS CLUSTER CONTAINS CLUSTER o[at0005]",
+	"columns": [
+		{
+			"path": "o",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "CLUSTER",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "CLUSTER"
+				},
+				"items": [
+					{
+						"_type": "ELEMENT",
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "DV_TEXT"
+						},
+						"value": {
+							"_type": "DV_TEXT",
+							"value": "Lorem ipsum"
+						},
+						"archetype_node_id": "at0007"
+					}
+				],
+				"archetype_node_id": "at0005"
+			}
+		]
+	]
+}
