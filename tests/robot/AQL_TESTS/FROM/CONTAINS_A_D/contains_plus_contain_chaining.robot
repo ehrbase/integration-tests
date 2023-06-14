@@ -38,7 +38,7 @@ Precondition
 
 Execute Query
     [Arguments]     ${from}     ${expected_file}    ${nr_of_results}
-    ${query}    Set Variable    SELECT t FROM ${type} t ${predicate}
+    ${query}    Set Variable    SELECT o FROM ${from}
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
