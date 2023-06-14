@@ -12,14 +12,14 @@
 				"_type": "CLUSTER",
 				"name": {
 					"_type": "DV_TEXT",
-					"value": "conformance cluster"
+					"value": "cluster_with_cluster"
 				},
 				"archetype_details": {
 					"archetype_id": {
-						"value": "openEHR-EHR-CLUSTER.conformance_cluster.v0"
+						"value": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
 					},
 					"template_id": {
-						"value": "aql-conformance-ehrbase.org.v0"
+						"value": "type_repetition_conformance_ehrbase.org"
 					},
 					"rm_version": "1.0.4"
 				},
@@ -28,40 +28,60 @@
 						"_type": "ELEMENT",
 						"name": {
 							"_type": "DV_TEXT",
-							"value": "labresult"
+							"value": "DV_TEXT"
 						},
 						"value": {
 							"_type": "DV_TEXT",
 							"value": "Lorem ipsum"
 						},
+						"archetype_node_id": "at0001"
+					},
+					{
+						"_type": "CLUSTER",
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "CLUSTER"
+						},
+						"items": [
+							{
+								"_type": "ELEMENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "DV_TEXT"
+								},
+								"value": {
+									"_type": "DV_TEXT",
+									"value": "Lorem ipsum"
+								},
+								"archetype_node_id": "at0006"
+							}
+						],
 						"archetype_node_id": "at0003"
 					},
 					{
-						"_type": "ELEMENT",
+						"_type": "CLUSTER",
 						"name": {
 							"_type": "DV_TEXT",
-							"value": "comment"
+							"value": "CLUSTER"
 						},
-						"value": {
-							"_type": "DV_TEXT",
-							"value": "Lorem ipsum"
-						},
-						"archetype_node_id": "at0004"
-					},
-					{
-						"_type": "ELEMENT",
-						"name": {
-							"_type": "DV_TEXT",
-							"value": "ANY"
-						},
-						"value": {
-							"_type": "DV_TEXT",
-							"value": "Lorem ipsum"
-						},
+						"items": [
+							{
+								"_type": "ELEMENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "DV_TEXT"
+								},
+								"value": {
+									"_type": "DV_TEXT",
+									"value": "Lorem ipsum"
+								},
+								"archetype_node_id": "at0007"
+							}
+						],
 						"archetype_node_id": "at0005"
 					}
 				],
-				"archetype_node_id": "openEHR-EHR-CLUSTER.conformance_cluster.v0"
+				"archetype_node_id": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
 			}
 		],
 		[
@@ -69,56 +89,23 @@
 				"_type": "CLUSTER",
 				"name": {
 					"_type": "DV_TEXT",
-					"value": "conformance cluster"
-				},
-				"archetype_details": {
-					"archetype_id": {
-						"value": "openEHR-EHR-CLUSTER.conformance_cluster.v0"
-					},
-					"template_id": {
-						"value": "aql-conformance-ehrbase.org.v0"
-					},
-					"rm_version": "1.0.4"
+					"value": "CLUSTER"
 				},
 				"items": [
 					{
 						"_type": "ELEMENT",
 						"name": {
 							"_type": "DV_TEXT",
-							"value": "labresult"
+							"value": "DV_TEXT"
 						},
 						"value": {
 							"_type": "DV_TEXT",
 							"value": "Lorem ipsum"
 						},
-						"archetype_node_id": "at0003"
-					},
-					{
-						"_type": "ELEMENT",
-						"name": {
-							"_type": "DV_TEXT",
-							"value": "comment"
-						},
-						"value": {
-							"_type": "DV_TEXT",
-							"value": "Lorem ipsum"
-						},
-						"archetype_node_id": "at0004"
-					},
-					{
-						"_type": "ELEMENT",
-						"name": {
-							"_type": "DV_TEXT",
-							"value": "ANY"
-						},
-						"value": {
-							"_type": "DV_TEXT",
-							"value": "Lorem ipsum"
-						},
-						"archetype_node_id": "at0005"
+						"archetype_node_id": "at0006"
 					}
 				],
-				"archetype_node_id": "openEHR-EHR-CLUSTER.conformance_cluster.v0"
+				"archetype_node_id": "at0003"
 			}
 		],
 		[
@@ -126,56 +113,23 @@
 				"_type": "CLUSTER",
 				"name": {
 					"_type": "DV_TEXT",
-					"value": "conformance cluster"
-				},
-				"archetype_details": {
-					"archetype_id": {
-						"value": "openEHR-EHR-CLUSTER.conformance_cluster.v0"
-					},
-					"template_id": {
-						"value": "aql-conformance-ehrbase.org.v0"
-					},
-					"rm_version": "1.0.4"
+					"value": "CLUSTER"
 				},
 				"items": [
 					{
 						"_type": "ELEMENT",
 						"name": {
 							"_type": "DV_TEXT",
-							"value": "labresult"
+							"value": "DV_TEXT"
 						},
 						"value": {
 							"_type": "DV_TEXT",
 							"value": "Lorem ipsum"
 						},
-						"archetype_node_id": "at0003"
-					},
-					{
-						"_type": "ELEMENT",
-						"name": {
-							"_type": "DV_TEXT",
-							"value": "comment"
-						},
-						"value": {
-							"_type": "DV_TEXT",
-							"value": "Lorem ipsum"
-						},
-						"archetype_node_id": "at0004"
-					},
-					{
-						"_type": "ELEMENT",
-						"name": {
-							"_type": "DV_TEXT",
-							"value": "ANY"
-						},
-						"value": {
-							"_type": "DV_TEXT",
-							"value": "Lorem ipsum"
-						},
-						"archetype_node_id": "at0005"
+						"archetype_node_id": "at0007"
 					}
 				],
-				"archetype_node_id": "openEHR-EHR-CLUSTER.conformance_cluster.v0"
+				"archetype_node_id": "at0005"
 			}
 		]
 	]
