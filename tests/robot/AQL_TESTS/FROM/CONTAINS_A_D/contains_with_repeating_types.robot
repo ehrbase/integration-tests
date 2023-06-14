@@ -34,7 +34,6 @@ Precondition
 
 Execute Query
     [Arguments]     ${from}     ${expected_file}    ${nr_of_results}
-    Log     Add test data to file ${expected_file} - when 200 is returned.      console=yes
     ${query}    Set Variable    SELECT o FROM COMPOSITION contains ${from}
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${expected_file}
