@@ -30,7 +30,7 @@ Test Contains With Repeating Types: SELECT o FROM COMPOSITION contains ${from}
 Precondition
     Upload OPT For AQL      type_repetition_conformance_ehrbase.org.opt
     Create EHR For AQL
-    Commit Composition For AQL      aql-conformance-ehrbase.org.v0_contains.json
+    Commit Composition For AQL      type_repetition_conformance_ehrbase.org_one_reptation.json
 
 Execute Query
     [Arguments]     ${from}     ${expected_file}    ${nr_of_results}
