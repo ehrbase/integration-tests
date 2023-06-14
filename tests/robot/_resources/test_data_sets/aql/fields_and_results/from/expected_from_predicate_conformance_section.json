@@ -1,5 +1,5 @@
 {
-    "q": "SELECT t FROM SECTION t [openEHR-EHR-SECTION.conformance_section.v0]",
+    "q": "SELECT t FROM SECTION t[openEHR-EHR-SECTION.conformance_section.v0]",
     "columns": [
         {
             "path": "t",
