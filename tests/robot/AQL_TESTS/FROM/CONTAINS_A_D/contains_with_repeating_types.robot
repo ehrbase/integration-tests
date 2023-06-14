@@ -18,7 +18,7 @@ Test Contains With Repeating Types: SELECT o FROM COMPOSITION contains ${from}
     ...         - Send AQL 'SELECT o FROM COMPOSITION contains {from}'
     ...         - {from} can be:
     ...         SECTION o, SECTION contains SECTION o, CLUSTER o,
-    ...         CLUSTER contains CLUSTER o, CLUSTER contains CLUSTER o [at005]
+    ...         CLUSTER contains CLUSTER o, CLUSTER contains CLUSTER o [at0005]
     ...         - Check if actual response == expected response
     ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
     #[Tags]      not-ready
