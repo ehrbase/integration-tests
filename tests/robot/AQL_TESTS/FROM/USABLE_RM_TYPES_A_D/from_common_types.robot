@@ -41,3 +41,4 @@ Execute Query
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    Should Be Empty    ${diff}    msg=DIFF DETECTED!
