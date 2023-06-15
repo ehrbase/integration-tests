@@ -51,6 +51,8 @@ Test Path To Target Object: SELECT c/uid/value FROM COMPOSITION c
     ${query3}    Set Variable    SELECT c/uid/value FROM COMPOSITION c
     Set AQL And Execute Ad Hoc Query        ${query3}
     Length Should Be    ${resp_body['rows']}     1
+    Should Be Equal As Strings      ${resp_body_columns[0]['path']}       c/uid/value
+    Should Be Equal As Strings      ${resp_body_columns[0]['name']}       \#0
     Should Be Equal As Strings      ${composition_uid}      ${resp_body['rows'][0][0]}
     [Teardown]      Admin Delete EHR For AQL
 
