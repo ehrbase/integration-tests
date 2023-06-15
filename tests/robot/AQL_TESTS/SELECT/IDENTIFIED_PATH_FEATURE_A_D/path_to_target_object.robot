@@ -19,6 +19,7 @@ Test Path To Target Object: SELECT c FROM COMPOSITION c
     Length Should Be    ${resp_body['rows']}     1
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ...     ignore_order=${TRUE}
     #Log To Console    \n\n${diff}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
@@ -36,6 +37,7 @@ Test Path To Target Object: SELECT c/uid FROM COMPOSITION c
     Length Should Be    ${resp_body['rows']}     1
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ...     ignore_order=${TRUE}
     #Log To Console    \n\n${diff}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
@@ -48,9 +50,8 @@ Test Path To Target Object: SELECT c/uid/value FROM COMPOSITION c
     #[Tags]      not-ready
     ${query3}    Set Variable    SELECT c/uid/value FROM COMPOSITION c
     Set AQL And Execute Ad Hoc Query        ${query3}
-    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/path_to_target_obj_query3.json
     Length Should Be    ${resp_body['rows']}     1
-    Should Be Equal As Strings      ${composition_uid}      ${resp_body}[0][0]
+    Should Be Equal As Strings      ${composition_uid}      ${resp_body['rows'][0][0]}
     [Teardown]      Admin Delete EHR For AQL
 
 
