@@ -15,7 +15,6 @@ Test Path To Target Object: SELECT c FROM COMPOSITION c
     ${query1}    Set Variable    SELECT c FROM COMPOSITION c
     Set AQL And Execute Ad Hoc Query        ${query1}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/path_to_target_obj_query1.json
-    Log     Add test data once 200 is returned. File: ${expected_result}
     ${exclude_paths}    Create List    root['rows'][0][0]['uid']
     Length Should Be    ${resp_body['rows']}     1
     ${diff}     compare json-string with json-file
@@ -50,13 +49,8 @@ Test Path To Target Object: SELECT c/uid/value FROM COMPOSITION c
     ${query3}    Set Variable    SELECT c/uid/value FROM COMPOSITION c
     Set AQL And Execute Ad Hoc Query        ${query3}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/path_to_target_obj_query3.json
-    Log     Add test data once 200 is returned. File: ${expected_result}    console=yes
-    ${exclude_paths}    Create List    root['rows'][0][0]['uid']
     Length Should Be    ${resp_body['rows']}     1
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
-    #Log To Console    \n\n${diff}
-    Should Be Empty    ${diff}    msg=DIFF DETECTED!
+    Should Be Equal As Strings      ${composition_uid}      ${resp_body}[0][0]
     [Teardown]      Admin Delete EHR For AQL
 
 
