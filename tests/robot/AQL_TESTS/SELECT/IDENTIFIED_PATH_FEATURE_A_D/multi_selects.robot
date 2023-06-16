@@ -6,16 +6,16 @@ Resource        ../../../_resources/keywords/aql_keywords.robot
 
 *** Test Cases ***
 Test Multi Selects
-    #SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e COMPOSITION c CONTAINS OBSERVATION O CONTAINS POINT_EVENT p
+    #SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
     [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create 2x Compositions
-    ...         - Send AQL 'SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e COMPOSITION c CONTAINS OBSERVATION O CONTAINS POINT_EVENT p'
+    ...         - Send AQL 'SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p'
     ...         - Check that result contains 8 rows
     ...         - Check if actual response == expected response
     ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
     #[Tags]      not-ready
     [Setup]     Precondition
     ${query}    Set Variable
-    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e COMPOSITION c CONTAINS OBSERVATION O CONTAINS POINT_EVENT p
+    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
     Set AQL And Execute Ad Hoc Query        ${query}
     #${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/distinct_2_rows.json
     #${expected_result}      Replace Variables       ${tmp_expected_result}
