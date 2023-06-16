@@ -6,7 +6,6 @@ Resource        ../../../_resources/keywords/aql_keywords.robot
 
 *** Test Cases ***
 Test Multi Selects
-    #SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
     [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create 2x Compositions
     ...         - Send AQL 'SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p'
     ...         - Check that result contains 8 rows
@@ -38,6 +37,16 @@ Test Multi Selects
     #...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
     ##Log To Console    \n\n${diff}
     #Should Be Empty    ${diff}    msg=DIFF DETECTED!
+# Check rows to contain below data - once 200 status code is returned.
+#    e/ehr_id/value	c/uid/value	  o/uid/value	                            p/time/value
+#    {ehr_id}	   {c_uid1}	      d86702c2-15db-4d85-be51-af335cf43123	    2022-02-03T04:05:06
+#    {ehr_id}	   {c_uid1}	      d86702c2-15db-4d85-be51-af335cf43123	    2023-02-03T04:05:06
+#    {ehr_id}	   {c_uid1}	      38065052-af1f-4b0b-b03d-9bda140a6edf	    2024-02-03T04:05:06
+#    {ehr_id}	   {c_uid1}	      38065052-af1f-4b0b-b03d-9bda140a6edf	    2025-02-03T04:05:06
+#    {ehr_id}	   {c_uid2}	      d86702c2-15db-4d85-be51-af335cf43123	    2022-02-03T04:05:06
+#    {ehr_id}	   {c_uid2}	      d86702c2-15db-4d85-be51-af335cf43123	    2023-02-03T04:05:06
+#    {ehr_id}	   {c_uid2}	      38065052-af1f-4b0b-b03d-9bda140a6edf	    2024-02-03T04:05:06
+#    {ehr_id}	   {c_uid2}	      38065052-af1f-4b0b-b03d-9bda140a6edf	    2025-02-03T04:05:06
     [Teardown]      Admin Delete EHR For AQL
 
 
