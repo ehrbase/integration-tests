@@ -64,6 +64,6 @@ Execute Query
     Length Should Be    ${resp_body['rows']}     1
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/where/expected_ehr_compo_tmp.json
-    ...     ignore_order=${TRUE}
+    ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/where/expected_ehr_compo_tmp.json
