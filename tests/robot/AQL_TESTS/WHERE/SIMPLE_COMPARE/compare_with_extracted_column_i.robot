@@ -27,7 +27,7 @@ Test Compare With Extracted Column I: SELECT e/ehr_id/value, c/uid/value from EH
     ...         - c/uid/value = {c_uid2},
     ...         - c/uid/value != {c_uid1},
     ...         - c/uid/value != {c_uid2},
-    ...         - c/archetype_details/template_id/value = conformance_ehrbase.de.v0,
+    ...         - c/archetype_details/template_id/value = conformance-ehrbase.de.v0,
     ...         - c/name/value = type_repetition_conformance_ehrbase.org
     ...         Check if actual response == expected response
     ...         - *Postcondition:* Delete all EHRs using ADMIN endpoint. This is deleting compositions linked to EHRs.
