@@ -15,8 +15,8 @@ Suite Teardown  Admin Delete EHR For AQL    #enable this keyword if AQL checks a
 *** Test Cases ***
 SELECT c FROM COMPOSITION c LIMIT ${limit} OFFSET ${offset}
     [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create 4x Compositions
-    ...         - Send AQL 'SELECT c FROM COMPOSITION c LIMIT {limit} OFFSET {offset}'
-    ...         - *{limit} | {offset}* can be:
+    ...         - Send AQL 'SELECT c FROM COMPOSITION c LIMIT \{limit} OFFSET {offset}'
+    ...         - *\{limit} | {offset}* can be:
     ...         - 10 | 1
     ...         - 4  | 1
     ...         - 4  | 2
