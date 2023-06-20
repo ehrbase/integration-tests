@@ -15,7 +15,6 @@ Test Distinct: SELECT e/ehr_id/value AS full FROM EHR e CONTAINS COMPOSITION C
     ${query1}    Set Variable    SELECT e/ehr_id/value AS full FROM EHR e CONTAINS COMPOSITION C
     Set AQL And Execute Ad Hoc Query        ${query1}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/distinct_2_rows.json
-    Log     Add test data once 200 is returned. File: ${expected_result}
     ${exclude_paths}    Create List    root['rows'][0][0]['uid']
     Length Should Be    ${resp_body['rows']}     2
     ${diff}     compare json-string with json-file
