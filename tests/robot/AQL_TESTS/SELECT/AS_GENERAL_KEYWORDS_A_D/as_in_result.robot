@@ -5,14 +5,14 @@ Resource        ../../../_resources/keywords/aql_keywords.robot
 
 
 *** Test Cases ***
-Test As In Result: SELECT c AS full FROM COMPOSITIONS c
+Test As In Result: SELECT c AS full FROM COMPOSITION c
     [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
-    ...         - Send AQL 'SELECT c AS full FROM COMPOSITIONS c'
+    ...         - Send AQL 'SELECT c AS full FROM COMPOSITION c'
     ...         - Check if actual response == expected response
     ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
     #[Tags]      not-ready
     [Setup]     Precondition
-    ${query}    Set Variable    SELECT c AS full FROM COMPOSITIONS c
+    ${query}    Set Variable    SELECT c AS full FROM COMPOSITION c
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/composition_complete_return.json
     Log     Add test data once 200 is returned. File: ${expected_result}    console=yes
