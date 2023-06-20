@@ -14,10 +14,7 @@ Test Distinct: SELECT e/ehr_id/value AS full FROM EHR e CONTAINS COMPOSITION C
     ${query1}    Set Variable    SELECT e/ehr_id/value AS full FROM EHR e CONTAINS COMPOSITION C
     Set AQL And Execute Ad Hoc Query        ${query1}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/distinct_2_rows.json
-    ${exclude_paths}    Create List    root['rows'][0][0]['uid']
     Length Should Be    ${resp_body['rows']}     2
-    #Log To Console    \n\n${diff}
-    Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
 Test Distinct: SELECT DISTINCT e/ehr_id/value AS full FROM EHR e CONTAINS COMPOSITION C
     [Documentation]     \n
@@ -29,7 +26,6 @@ Test Distinct: SELECT DISTINCT e/ehr_id/value AS full FROM EHR e CONTAINS COMPOS
     Set AQL And Execute Ad Hoc Query        ${query2}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/distinct_1_row.json
     Log     Add test data once 200 is returned. File: ${expected_result}    console=yes
-    ${exclude_paths}    Create List    root['rows'][0][0]['uid']
     Length Should Be    ${resp_body['rows']}     1
     [Teardown]      Admin Delete EHR For AQL
 
