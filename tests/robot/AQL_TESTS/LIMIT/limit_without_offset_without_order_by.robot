@@ -26,7 +26,7 @@ SELECT c FROM COMPOSITION c LIMIT ${limit}
     ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
     #[Tags]      not-ready
     [Template]      Execute Query
-    ${limit}    ${offset}    ${nr_of_results}
+    ${limit}    ${nr_of_results}
 
 
 *** Keywords ***
