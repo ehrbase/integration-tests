@@ -3,7 +3,7 @@ Documentation   CHECK LIMIT WITHOUT OFFSET WITHOUT ORDER BY
 ...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/LIMIT_TEST_SUIT.md#without-order-by
 Resource        ../../_resources/keywords/aql_keywords.robot
 Library     DataDriver
-...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/LIMIT/combinations/without_offset_without_order_by.csv
+...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/limit/combinations/without_offset_without_order_by.csv
 ...     dialect=excel
 
 #Suite Setup  Skip    enable Setup 'Precondition' if AQL checks are passing !!!
