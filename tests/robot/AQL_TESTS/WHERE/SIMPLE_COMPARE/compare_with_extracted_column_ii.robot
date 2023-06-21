@@ -1,6 +1,14 @@
 *** Settings ***
 Documentation   WHERE - COMPARE WITH EXTRACTED COLUMN II
 ...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#compare-with-extracted-column-ii--httpsvitagroup-agatlassiannetwikispacespenpages38216361architecture-aqlfeaturelistwhere
+...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
+...         - Send AQL 'SELECT o/uid/value FROM COMPOSITION CONTAINS OBSERVATION o WHERE {where}'
+...         - {where} can be:
+...         - o/uid/value = '94c0e756-e892-4985-884b-46829605a236',
+...         - o/archetype_node_id = 'openEHR-EHR-OBSERVATION.conformance_observation.v0',
+...         - o/name/value = 'Blood pressure'
+...         Check if actual response == expected response
+...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver
 ...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/where/combinations/compare_extracted_column_ii.csv
@@ -14,14 +22,6 @@ Suite Teardown  Admin Delete EHR For AQL
 
 *** Test Cases ***
 Test Compare With Extracted Column II: SELECT o/uid/value FROM COMPOSITION CONTAINS OBSERVATION o WHERE ${where}
-    [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
-    ...         - Send AQL 'SELECT o/uid/value FROM COMPOSITION CONTAINS OBSERVATION o WHERE {where}'
-    ...         - {where} can be:
-    ...         - o/uid/value = '94c0e756-e892-4985-884b-46829605a236',
-    ...         - o/archetype_node_id = 'openEHR-EHR-OBSERVATION.conformance_observation.v0',
-    ...         - o/name/value = 'Blood pressure'
-    ...         Check if actual response == expected response
-    ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
     #[Tags]      not-ready
     [Template]      Execute Query
     ${where}    ${expected_file}    ${nr_of_results}

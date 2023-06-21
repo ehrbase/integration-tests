@@ -1,6 +1,16 @@
 *** Settings ***
 Documentation   CHECK LIMIT WITH OFFSET WITHOUT ORDER BY
 ...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/LIMIT_TEST_SUIT.md#without-order-by
+...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create 4x Compositions
+...         - Send AQL 'SELECT c FROM COMPOSITION c LIMIT \{limit} OFFSET {offset}'
+...         - *\{limit} | {offset}* can be:
+...         - 10 | 1
+...         - 4  | 1
+...         - 4  | 2
+...         - 4  | 3
+...         - 4  | 4
+...         - Check if result count corresponds to each case, based on documentation.
+...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
 Resource        ../../_resources/keywords/aql_keywords.robot
 Library     DataDriver
 ...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/limit/combinations/with_offset_without_order_by.csv
@@ -14,16 +24,6 @@ Suite Teardown  Admin Delete EHR For AQL    #enable this keyword if AQL checks a
 
 *** Test Cases ***
 SELECT c FROM COMPOSITION c LIMIT ${limit} OFFSET ${offset}
-    [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create 4x Compositions
-    ...         - Send AQL 'SELECT c FROM COMPOSITION c LIMIT \{limit} OFFSET {offset}'
-    ...         - *\{limit} | {offset}* can be:
-    ...         - 10 | 1
-    ...         - 4  | 1
-    ...         - 4  | 2
-    ...         - 4  | 3
-    ...         - 4  | 4
-    ...         - Check if result count corresponds to each case, based on documentation.
-    ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
     #[Tags]      not-ready
     [Template]      Execute Query
     ${limit}    ${offset}    ${nr_of_results}

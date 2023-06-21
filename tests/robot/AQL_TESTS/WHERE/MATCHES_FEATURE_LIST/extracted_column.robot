@@ -1,6 +1,13 @@
 *** Settings ***
 Documentation   WHERE - MATCHES EXTRACTED COLUMN
 ...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#matches-extracted-column
+...         - *Precondition:* 1. Create OPT; 2. Create EHRs; 3. Create Compositions
+...         - Send AQL 'SELECT e/ehr_id/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE {where}'
+...         - {where} can be:
+...         - e/ehr_id/value matches {{ehr_id1}, {ehr_id2}},
+...         - e/ehr_id/value matches {{ehr_id1}, {ehr_id3}}
+...         Check if actual response == expected response
+...         - *Postcondition:* Delete all EHRs using ADMIN endpoint. This is deleting compositions linked to EHRs.
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver
 ...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/where/combinations/matches_extracted_column.csv
@@ -18,13 +25,6 @@ Suite Teardown  Run Keywords
 
 *** Test Cases ***
 Test Matches Extracted Column: SELECT e/ehr_id/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE ${where}
-    [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHRs; 3. Create Compositions
-    ...         - Send AQL 'SELECT e/ehr_id/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE {where}'
-    ...         - {where} can be:
-    ...         - e/ehr_id/value matches {{ehr_id1}, {ehr_id2}},
-    ...         - e/ehr_id/value matches {{ehr_id1}, {ehr_id3}}
-    ...         Check if actual response == expected response
-    ...         - *Postcondition:* Delete all EHRs using ADMIN endpoint. This is deleting compositions linked to EHRs.
     #[Tags]      not-ready
     [Template]      Execute Query
     ${where}    ${expected_file}    ${nr_of_results}
