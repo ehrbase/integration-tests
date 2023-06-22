@@ -47,7 +47,7 @@ Execute Query
     IF      ${rows_length} > 1
         #Collect all o/ui/value results in {obs_list}
         FOR     ${INDEX}   IN RANGE     0   ${rows_length}
-            Append To List      ${obs_list}     ${resp_body['rows'][0][${INDEX}]['uid']['value']}
+            Append To List      ${obs_list}     ${resp_body['rows'][${INDEX}][0]['uid']['value']}
         END
         List Should Contain Value   ${obs_list}     94c0e756-e892-4985-884b-46829605a236
         List Should Contain Value   ${obs_list}     55415141-17e4-4c71-9429-aa0fe6694c83
