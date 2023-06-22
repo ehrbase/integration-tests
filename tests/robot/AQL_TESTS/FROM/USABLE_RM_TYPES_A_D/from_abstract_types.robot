@@ -33,6 +33,7 @@ Precondition
 
 Execute Query
     [Arguments]     ${type}     ${expected_file}    ${nr_of_results}
+    Set Test Variable   ${type}     ${type}
     ${query}    Set Variable    SELECT t FROM ${type} t
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${expected_file}
