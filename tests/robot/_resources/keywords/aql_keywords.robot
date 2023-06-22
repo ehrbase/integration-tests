@@ -82,7 +82,7 @@ Send Ad Hoc Request
                             ${expected_msg}     Set Variable
                             ...     It is unclear if ${type} targets a COMPOSITION or EHR_STATUS
                             IF      ${resp.json()["message"]} == ${expected_msg}
-                                Pass Execution      It is unclear if ${type} targets a COMPOSITION or EHR_STATUS - was returned.
+                                Pass Execution      ${expected_msg} - was returned.
                             END
                         END
                         Should Be Equal As Strings      ${resp.status_code}     ${200}
