@@ -2,9 +2,8 @@
 Documentation   WHERE - COMPARE WITH EXTRACTED COLUMN II
 ...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#compare-with-extracted-column-ii--httpsvitagroup-agatlassiannetwikispacespenpages38216361architecture-aqlfeaturelistwhere
 ...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
-...         - Send AQL 'SELECT o/uid/value FROM COMPOSITION CONTAINS OBSERVATION o WHERE {where}'
+...         - Send AQL 'SELECT o FROM COMPOSITION CONTAINS OBSERVATION o WHERE {where}'
 ...         - {where} can be:
-...         - o/uid/value = '94c0e756-e892-4985-884b-46829605a236',
 ...         - o/archetype_node_id = 'openEHR-EHR-OBSERVATION.conformance_observation.v0',
 ...         - o/name/value = 'Blood pressure'
 ...         Check if actual response == expected response
@@ -21,7 +20,7 @@ Suite Teardown  Admin Delete EHR For AQL
 
 
 *** Test Cases ***
-Test Compare With Extracted Column II: SELECT o/uid/value FROM COMPOSITION CONTAINS OBSERVATION o WHERE ${where}
+Test Compare With Extracted Column II: SELECT o FROM COMPOSITION CONTAINS OBSERVATION o WHERE ${where}
     #[Tags]      not-ready
     [Template]      Execute Query
     ${where}    ${expected_file}    ${nr_of_results}
@@ -36,7 +35,7 @@ Precondition
 Execute Query
     [Arguments]     ${where}    ${expected_file}    ${nr_of_results}
     Log     Add test data to file ${expected_file} - when 200 is returned.      console=yes
-    ${temp_query}    Set Variable       SELECT o/uid/value FROM COMPOSITION CONTAINS OBSERVATION o WHERE ${where}
+    ${temp_query}    Set Variable       SELECT o FROM COMPOSITION CONTAINS OBSERVATION o WHERE ${where}
     ${query}    Replace Variables       ${temp_query}
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
