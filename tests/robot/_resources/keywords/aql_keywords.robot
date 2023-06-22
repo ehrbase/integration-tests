@@ -79,6 +79,11 @@ Send Ad Hoc Request
                             ...     ${resp.json()["message"]}   is not supported
                             Skip If     '${notImplMsgStatus}' == '${TRUE}' or '${notSupportedMsgStatus}' == '${TRUE}'
                             ...     Skipped due to 400 and Not implemented/not supported was returned.
+                            ${expected_msg}     Set Variable
+                            ...     It is unclear if ${type} targets a COMPOSITION or EHR_STATUS
+                            IF      ${resp.json()["message"]} == ${expected_msg}
+                                Pass Execution      It is unclear if ${type} targets a COMPOSITION or EHR_STATUS - was returned.
+                            END
                         END
                         Should Be Equal As Strings      ${resp.status_code}     ${200}
                         Set Test Variable   ${resp_status_code}    ${resp}
