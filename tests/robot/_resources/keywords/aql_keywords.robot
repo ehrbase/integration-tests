@@ -79,11 +79,7 @@ Send Ad Hoc Request
                             ...     ${resp.json()["message"]}   is not supported
                             Skip If     '${notImplMsgStatus}' == '${TRUE}' or '${notSupportedMsgStatus}' == '${TRUE}'
                             ...     Skipped due to 400 and Not implemented/not supported was returned.
-                            ${expected_msg}     Set Variable
-                            ...     It is unclear if ${type} targets a COMPOSITION or EHR_STATUS
-                            IF      ${resp.json()["message"]} == ${expected_msg}
-                                Pass Execution      ${expected_msg} - was returned.
-                            END
+                            Pass On Expected Message
                         END
                         Should Be Equal As Strings      ${resp.status_code}     ${200}
                         Set Test Variable   ${resp_status_code}    ${resp}
@@ -93,6 +89,13 @@ Send Ad Hoc Request
                         #Log     ${resp_body_query}
                         #Log     ${resp_body_columns}
                         #Log     ${resp_body_rows}
+
+Pass On Expected Message
+    ${expected_msg}     Set Variable
+    ...     It is unclear if ${type} targets a COMPOSITION or EHR_STATUS
+    IF      '${resp.json()["message"]}' == '${expected_msg}'
+        Pass Execution      ${expected_msg} - was returned.
+    END
 
 Upload OPT For AQL
     [Documentation]     Uploads OPT for AQL tests.
