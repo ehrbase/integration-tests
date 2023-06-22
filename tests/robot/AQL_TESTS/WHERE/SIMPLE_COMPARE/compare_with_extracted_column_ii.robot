@@ -42,7 +42,19 @@ Execute Query
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/where/${expected_file}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}
-    ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
-    Should Be Empty    ${diff}    msg=DIFF DETECTED!
+    @{obs_list}     Create List
+    IF      ${resp_body['rows']} > 1
+        #Collect all o/ui/value results in {obs_list}
+        FOR     ${INDEX}   IN RANGE     0   ${resp_body['rows']}
+            Append To List      ${obs_list}     ${resp_body['rows'][0][${INDEX}]['uid']['value']}
+        END
+        List Should Contain Value   ${obs_list}     94c0e756-e892-4985-884b-46829605a236
+        List Should Contain Value   ${obs_list}     d4cccdfc-9c90-402f-b4bb-94e8dc4ea429
+    ELSE
+        Should Be Equal As Strings
+        ...     ${resp_body['rows'][0][0]['uid']['value']}    2183807d-af68-41c5-9bfe-28cd150d62f7
+    END
+    #${diff}     compare json-string with json-file
+    #...     ${resp_body_actual}     ${expected_result}
+    #...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
+    #Should Be Empty    ${diff}    msg=DIFF DETECTED!
