@@ -1,10 +1,10 @@
 ${from},${expected_file},${nr_of_results}
-COMPOSITION contains Observation o,expected_contains_contain_chaining_compo_obs.json,5
-SECTION contains Observation o,expected_contains_contain_chaining_section_obs.json,5
-SECTION [openEHR-EHR-SECTION.adhoc.v1] contains Observation o,expected_contains_contain_chaining_section_x_obs.json,2
-SECTION [openEHR-EHR-SECTION.conformance_section.v0] contains Observation o,expected_contains_contain_chaining_section_xy_obs.json,3
-SECTION [openEHR-EHR-SECTION.conformance_section.v0] contains Observation o contains Cluster,expected_contains_contain_chaining_section_xy_obs_cluster.json,1
-Observation o contains Cluster,expected_contains_contain_chaining_obs_cluster.json,1
-Observation o contains INTERVAL_EVENT,expected_contains_contain_chaining_obs_int_event.json,2
-Observation o contains INTERVAL_EVENT contains CLUSTER,expected_contains_contain_chaining_obs_int_event_cluster.json,1
-EVENT o contains CLUSTER,expected_contains_contain_chaining_event_cluster.json,2
+COMPOSITION CONTAINS OBSERVATION o,expected_contains_contain_chaining_compo_obs.json,5
+SECTION CONTAINS OBSERVATION o,expected_contains_contain_chaining_section_obs.json,5
+SECTION [openEHR-EHR-SECTION.adhoc.v1] CONTAINS OBSERVATION o,expected_contains_contain_chaining_section_x_obs.json,2
+SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o,expected_contains_contain_chaining_section_xy_obs.json,3
+SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o contains Cluster,expected_contains_contain_chaining_section_xy_obs_cluster.json,1
+OBSERVATION o CONTAINS CLUSTER,expected_contains_contain_chaining_obs_cluster.json,1
+OBSERVATION o CONTAINS INTERVAL_EVENT,expected_contains_contain_chaining_obs_int_event.json,2
+OBSERVATION o CONTAINS INTERVAL_EVENT CONTAINS CLUSTER,expected_contains_contain_chaining_obs_int_event_cluster.json,1
+EVENT o CONTAINS CLUSTER,expected_contains_contain_chaining_event_cluster.json,2
