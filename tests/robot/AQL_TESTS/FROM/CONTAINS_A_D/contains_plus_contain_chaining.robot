@@ -4,12 +4,15 @@ Documentation   CHECK AQL RESPONSE ON FROM CONTAINS PLUS CONTAIN CHAINING
 ...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
 ...         - Send AQL 'SELECT o FROM {from}'
 ...         - {from} can be:
-...         COMPOSITION contains Observation o, SECTION contains Observation o,
-...         SECTION [openEHR-EHR-SECTION.adhoc.v1] contains Observation o,
-...         SECTION [openEHR-EHR-SECTION.conformance_section.v0] contains Observation o,
-...         SECTION [openEHR-EHR-SECTION.conformance_section.v0] contains Observation o contains Cluster
-...         Observation o contains Cluster, Observation o contains INTERVAL_EVENT,
-...         Observation o contains INTERVAL_EVENT contains CLUSTER, EVENT o contains CLUSTER
+...         - COMPOSITION CONTAINS OBSERVATION o,
+...         - SECTION CONTAINS OBSERVATION o,
+...         - SECTION [openEHR-EHR-SECTION.adhoc.v1] CONTAINS OBSERVATION o,
+...         - SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o,
+...         - SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o CONTAINS CLUSTER,
+...         - OBSERVATION o CONTAINS CLUSTER,
+...         - OBSERVATION o CONTAINS INTERVAL_EVENT,
+...         - OBSERVATION o CONTAINS INTERVAL_EVENT CONTAINS CLUSTER,
+...         - EVENT o CONTAINS CLUSTER
 ...         - Check if actual response == expected response
 ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
 Resource        ../../../_resources/keywords/aql_keywords.robot
