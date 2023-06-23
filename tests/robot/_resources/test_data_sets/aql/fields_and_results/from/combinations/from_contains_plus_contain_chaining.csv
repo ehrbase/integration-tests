@@ -3,7 +3,7 @@ COMPOSITION CONTAINS OBSERVATION o,expected_contains_contain_chaining_compo_obs.
 SECTION CONTAINS OBSERVATION o,expected_contains_contain_chaining_section_obs.json,5
 SECTION [openEHR-EHR-SECTION.adhoc.v1] CONTAINS OBSERVATION o,expected_contains_contain_chaining_section_x_obs.json,2
 SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o,expected_contains_contain_chaining_section_xy_obs.json,3
-SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o contains Cluster,expected_contains_contain_chaining_section_xy_obs_cluster.json,1
+SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o CONTAINS CLUSTER,expected_contains_contain_chaining_section_xy_obs_cluster.json,1
 OBSERVATION o CONTAINS CLUSTER,expected_contains_contain_chaining_obs_cluster.json,1
 OBSERVATION o CONTAINS INTERVAL_EVENT,expected_contains_contain_chaining_obs_int_event.json,2
 OBSERVATION o CONTAINS INTERVAL_EVENT CONTAINS CLUSTER,expected_contains_contain_chaining_obs_int_event_cluster.json,1
