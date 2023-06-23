@@ -281,7 +281,7 @@ create new EHR with ehr_status
 
                         Set Suite Variable    ${response}    ${resp}
 
-                        Output Debug Info To Console  # NOTE: won't work with content-type=XML
+                        #Output Debug Info To Console  # NOTE: won't work with content-type=XML
 
 
 create new EHR by ID
