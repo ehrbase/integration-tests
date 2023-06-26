@@ -1,8 +1,0 @@
-Add in statements folder, all AQL statements to be checked as part of AQL_TESTS test package.
-All files will be grouped in separate folders, depending on feature AQL statement is covering.
-Files will be saved in .json format, with suggestive naming.
-AQL statement will have static and dynamic part, like in below example:
-SELECT FIELDS_TO_PROVIDE FROM EHR e CONTAINS COMPOSITION c [archetype_node_id_value]
---> Where FIELDS_TO_PROVIDE is dynamic part, where 1..* fields can be provided, separated by comma.
---> Where archetype_node_id_value is dynamic part.
---> All other keywords are static.
