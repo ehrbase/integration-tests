@@ -77,8 +77,9 @@ Send Ad Hoc Request
                             ...     ${resp.json()["message"]}   Not implemented
                             ${notSupportedMsgStatus}    Run Keyword And Return Status   Should Contain
                             ...     ${resp.json()["message"]}   is not supported
-                            Skip If     '${notImplMsgStatus}' == '${TRUE}' or '${notSupportedMsgStatus}' == '${TRUE}'
-                            ...     Skipped due to 400 and Not implemented/not supported was returned.
+                            Skip If     '${notImplMsgStatus}' == '${TRUE}'
+                            ...     Skipped due to 400 and Not implemented.
+                            Pass Execution If   '${notSupportedMsgStatus}' == '${TRUE}'     ${resp.json()["message"]}
                             Pass On Expected Message    ${resp.json()["message"]}
                         END
                         Should Be Equal As Strings      ${resp.status_code}     ${200}
