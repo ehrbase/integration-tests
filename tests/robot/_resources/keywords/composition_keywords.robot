@@ -163,8 +163,9 @@ commit composition (JSON)
                         Set Test Variable   ${version_uid}    ${resp.json()['uid']['value']}    # full/long compo uid
                         Set Test Variable   ${version_uid_v1}    ${version_uid}                  # different namesfor full uid
                         Set Test Variable   ${preceding_version_uid}    ${version_uid}          # for usage in other steps
-
-    ${short_uid}=       Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
+    @{splitted_ver_uid}     Split String    ${version_uid}      ::
+    #${short_uid}=       Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
+    ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
                         Set Test Variable   ${compo_uid_v1}    ${short_uid}                      # TODO: rmv
                         Set Test Variable   ${versioned_object_uid}    ${short_uid}
 
@@ -233,7 +234,9 @@ commit composition (XML)
                         Set Test Variable   ${version_uid_v1}    ${version_uid}                  # different namesfor full uid
                         Set Test Variable   ${preceding_version_uid}    ${version_uid}          # for usage in other steps
 
-    ${short_uid}=       Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
+    @{splitted_ver_uid}     Split String    ${version_uid}      ::
+    #${short_uid}=       Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
+    ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
                         Set Test Variable   ${compo_uid_v1}    ${short_uid}                 # TODO; rmv
                         Set Test Variable   ${versioned_object_uid}    ${short_uid}
 
@@ -500,7 +503,8 @@ update composition (JSON)
                             Set Test Variable   ${composition_uid_v2}    ${resp.json()['uid']['value']}    # TODO: remove
                             Set Test Variable   ${version_uid_v2}    ${resp.json()['uid']['value']}
 
-        ${short_uid}        Remove String       ${version_uid_v2}    ::${CREATING_SYSTEM_ID}::1
+        @{splitted_ver_uid}     Split String    ${version_uid_v2}      ::
+        ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
                             Set Test Variable   ${versioned_object_uid_v2}    ${short_uid}
 
                             Set Test Variable   ${response}    ${resp}
@@ -521,7 +525,8 @@ update composition (JSON)
                             Set Test Variable   ${composition_uid_v2}    ${resp.json()['uid']['value']}    # TODO: remove
                             Set Test Variable   ${version_uid_v2}    ${resp.json()['uid']['value']}
 
-        ${short_uid}        Remove String       ${version_uid_v2}    ::${CREATING_SYSTEM_ID}::1
+        @{splitted_ver_uid}     Split String    ${version_uid_v2}      ::
+        ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
                             Set Test Variable   ${versioned_object_uid_v2}    ${short_uid}
 
                             Set Test Variable   ${response}    ${resp}
@@ -550,7 +555,8 @@ update composition (JSON)
                             Set Test Variable   ${composition_uid_v2}    ${resp.json()['uid']['value']}    # TODO: remove
                             Set Test Variable   ${version_uid_v2}    ${resp.json()['uid']['value']}
 
-        ${short_uid}        Remove String       ${version_uid_v2}    ::${CREATING_SYSTEM_ID}::1
+        @{splitted_ver_uid}     Split String    ${version_uid_v2}      ::
+        ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
                             Set Test Variable   ${versioned_object_uid_v2}    ${short_uid}
 
                             Set Test Variable   ${response}    ${resp}
@@ -689,7 +695,8 @@ update composition (XML)
                         Set Test Variable   ${composition_uid_v2}     ${long_uid.text}    # TODO: remove
                         Set Test Variable   ${version_uid_v2}     ${long_uid.text}
 
-    ${short_uid}=       Remove String       ${version_uid_v2}    ::${CREATING_SYSTEM_ID}::1
+    @{splitted_ver_uid}     Split String    ${version_uid_v2}      ::
+    ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
                         Set Test Variable   ${versioned_object_uid_v2}    ${short_uid}
 
                         Set Test Variable   ${response}    ${resp}
