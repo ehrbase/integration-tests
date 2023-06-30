@@ -283,6 +283,20 @@ create new EHR with ehr_status
 
                         #Output Debug Info To Console  # NOTE: won't work with content-type=XML
 
+Create EHR With Subject External Ref
+    [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
+    prepare new request session     headers=JSON    Prefer=return=representation
+    create new EHR with ehr_status  ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
+                        Integer    response status    201
+    ${ehr_id_obj}=      Object    response body ehr_id
+    ${ehr_id_value}=    String    response body ehr_id value
+    ${ehr_status_subject_external_ref_value}=    String    response body ehr_status subject external_ref id value
+                        Set Suite Variable    ${ehr_id_obj}    ${ehr_id_obj}
+                        # comment: ATTENTION - RESTinstance lib returns a LIST!
+                        #          The value is at index 0 in that list
+                        Set Suite Variable    ${ehr_id}    ${ehr_id_value}[0]
+                        Set Suite Variable    ${subject_external_ref_value}    ${ehr_status_subject_external_ref_value}[0]
+
 
 create new EHR by ID
     [Arguments]         ${ehr_id}
