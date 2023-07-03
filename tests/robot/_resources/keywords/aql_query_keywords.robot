@@ -270,14 +270,14 @@ POST /query (REST) - ECIS
 POST /query/{qualified_query_name}/{version}
     No Operation
 
-POST /query/aql?q={query}
+GET /query/aql?q={query}
     [Arguments]         ${format}
     [Documentation]     Executes HTTP method POST on /query/aql?q={query} endpoint
     ...                 DEPENDENCY: following variables have to be in test-level scope:
     ...                 `${payload}`
                         prepare new request session    ${format}
                         ${dict_param}   Create Dictionary      q=${payload}
-    ${resp}             REST.POST   /query/aql    data=${dict_param}
+    ${resp}             REST.GET   /query/aql    data=${dict_param}
                         ...         headers=${headers}
 
                         Integer    response status    200
