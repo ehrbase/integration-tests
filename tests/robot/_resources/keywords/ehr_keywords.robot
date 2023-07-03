@@ -38,7 +38,7 @@ update EHR: set ehr_status is_queryable
     # from preceding request of `create new EHR ...`
     extract ehr_id from response (JSON)
     extract system_id from response (JSON)
-    extract subject_id from response (JSON)
+    #extract subject_id from response (JSON)
     extract ehrstatus_uid (JSON)
     extract ehr_status from response (JSON)
 
