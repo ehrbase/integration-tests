@@ -270,6 +270,25 @@ POST /query (REST) - ECIS
 POST /query/{qualified_query_name}/{version}
     No Operation
 
+POST /query/aql?q={query}
+    [Arguments]         ${format}
+    [Documentation]     Executes HTTP method POST on /query/aql?q={query} endpoint
+    ...                 DEPENDENCY: following variables have to be in test-level scope:
+    ...                 `${payload}`
+                        prepare new request session    ${format}
+    ${resp}             REST.POST   /query/aql    data=q=${payload}
+                        ...         headers=${headers}
+
+                        Integer    response status    200
+                        Set Test Variable   ${response}    ${resp}
+
+    # UNCOMMENT NEXT BLOCK FOR DEBUGGING (BETTER OUTPUT IN CONSOLE)
+    # TODO: rm/comment it out when test stable
+    #                    Log To Console  \n//////////// ACTUAL //////////////////////////////
+    ${resp_body}=       Output    response body
+                        Set Test Variable   ${response body}    ${resp_body}
+
+
 PUT AQL Query With Qualified Name And Version Multitenancy
     [Documentation]     Send PUT AQL to store query.
     ...                 Takes 1 mandatory arg {query_to_store}
