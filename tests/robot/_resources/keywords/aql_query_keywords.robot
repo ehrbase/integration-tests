@@ -272,7 +272,7 @@ POST /query/{qualified_query_name}/{version}
 
 GET /query/aql?q={query}
     [Arguments]         ${format}
-    [Documentation]     Executes HTTP method POST on /query/aql?q={query} endpoint
+    [Documentation]     Executes HTTP method GET on /query/aql?q={query} endpoint
     ...                 DEPENDENCY: following variables have to be in test-level scope:
     ...                 `${payload}`
                         prepare new request session    ${format}
