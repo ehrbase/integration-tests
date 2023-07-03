@@ -276,7 +276,8 @@ POST /query/aql?q={query}
     ...                 DEPENDENCY: following variables have to be in test-level scope:
     ...                 `${payload}`
                         prepare new request session    ${format}
-    ${resp}             REST.POST   /query/aql    data=q=${payload}
+                        ${dict_param}   Create Dictionary      q=${payload}
+    ${resp}             REST.POST   /query/aql    data=${dict_param}
                         ...         headers=${headers}
 
                         Integer    response status    200
