@@ -270,6 +270,19 @@ POST /query (REST) - ECIS
 POST /query/{qualified_query_name}/{version}
     No Operation
 
+GET /query/aql?q={query}
+    [Documentation]     Executes HTTP method GET on /query/aql?q={query} endpoint
+    ...                 DEPENDENCY: following variables have to be in test-level scope:
+    ...                 `${payload}`
+                        ${headers}      Create Dictionary
+                        ...     content=application/json
+                        ...     accept=application/json
+                        ${dict_param}   Create Dictionary      q=${payload}
+    ${resp}             Get On Session      ${SUT}      /query/aql      params=${dict_param}
+                        ...     headers=${headers}      expected_status=anything
+                        Should Be Equal As Strings      ${resp.status_code}    ${200}
+                        Set Test Variable   ${response}    ${resp}
+
 PUT AQL Query With Qualified Name And Version Multitenancy
     [Documentation]     Send PUT AQL to store query.
     ...                 Takes 1 mandatory arg {query_to_store}
@@ -696,10 +709,14 @@ Create EHR Record On The Server
                         #          The value is at index 0 in that list
                         Set Suite Variable    ${ehr_id}    ${ehr_id_value}[0]
 
-    ${time_created_obj}  Object    response body time_created
-    ${time_created}=    String    response body time_created value
-                        Set Suite Variable    ${time_created}    ${time_created}[0]
-                        Set Suite Variable    ${time_created_obj}    ${time_created_obj}[0]
+    ${time_created_obj_list}    Object    response body time_created
+    ${time_created}         String    response body time_created value
+	${date_time_parts}      Evaluate  datetime.datetime.strptime('''${time_created}[0]''', '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%dT%H:%M:%S.%fZ').split('.')
+    ${formatted_time_created}  Set Variable  ${date_time_parts[0]}.${date_time_parts[1][:3]}Z
+    ${time_created_obj}     Set Variable    ${time_created_obj_list}[0]
+    Set To Dictionary   ${time_created_obj}      value       ${formatted_time_created}
+                        Set Suite Variable    ${time_created}    ${formatted_time_created}
+                        Set Suite Variable    ${time_created_obj}    ${time_created_obj}
 
     ${system_id_obj}=   Object    response body system_id
     ${system_id}=       String    response body system_id value
