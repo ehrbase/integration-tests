@@ -271,24 +271,19 @@ POST /query/{qualified_query_name}/{version}
     No Operation
 
 GET /query/aql?q={query}
-    [Arguments]         ${format}
     [Documentation]     Executes HTTP method GET on /query/aql?q={query} endpoint
     ...                 DEPENDENCY: following variables have to be in test-level scope:
     ...                 `${payload}`
+                        ${headers}      Create Dictionary
+                        ...     content=application/json
+                        ...     accept=application/json
                         prepare new request session    ${format}
                         ${dict_param}   Create Dictionary      q=${payload}
-    ${resp}             REST.GET   /query/aql    data=${dict_param}
-                        ...         headers=${headers}
+    ${resp}             Get On Session      ${SUT}      /query/aql      params=${dict_param}
+                        ...     headers=${headers}      expected_status=anything
 
-                        Integer    response status    200
+                        Should Be Equal As Strings      ${resp.status_code}    ${200}
                         Set Test Variable   ${response}    ${resp}
-
-    # UNCOMMENT NEXT BLOCK FOR DEBUGGING (BETTER OUTPUT IN CONSOLE)
-    # TODO: rm/comment it out when test stable
-    #                    Log To Console  \n//////////// ACTUAL //////////////////////////////
-    ${resp_body}=       Output    response body
-                        Set Test Variable   ${response body}    ${resp_body}
-
 
 PUT AQL Query With Qualified Name And Version Multitenancy
     [Documentation]     Send PUT AQL to store query.
