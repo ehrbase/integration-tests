@@ -277,11 +277,9 @@ GET /query/aql?q={query}
                         ${headers}      Create Dictionary
                         ...     content=application/json
                         ...     accept=application/json
-                        prepare new request session    ${format}
                         ${dict_param}   Create Dictionary      q=${payload}
     ${resp}             Get On Session      ${SUT}      /query/aql      params=${dict_param}
                         ...     headers=${headers}      expected_status=anything
-
                         Should Be Equal As Strings      ${resp.status_code}    ${200}
                         Set Test Variable   ${response}    ${resp}
 
