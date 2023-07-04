@@ -267,21 +267,104 @@ POST /query (REST) - ECIS
                         Status Should Be    201
                         Set Test Variable   ${response}     ${resp}
 
-POST /query/{qualified_query_name}/{version}
-    No Operation
+PUT /definition/query/{qualified_query_name}
+    [Documentation]     Send PUT AQL to store query.
+    ...                 Takes 1 mandatory arg {query_to_store}
+    ...                 {query_to_store} can be in one of 2 formats JSON or Text.
+    ...                 Takes 1 optional arg {format}: json or text.
+    ...                 If format=json, headers will have Content-Type=application/json and Body in format {"q":"query"}.
+    ...                 If format=text, headers will have Content-Type=text/plain and Body in plain text format.
+    ...                 {qualified_query_name} and {version} are generated using Random function.
+    ...                 Expected status code 200.
+    ...                 Returns combination of qualified_query_name and version, in format
+    ...                 {random_query_qualified_name}/{random_query_version}
+    [Arguments]     ${query_to_store}    ${format}=json
+    IF      '${format}' == 'json'
+        &{headers}      Create Dictionary       Content-Type=application/json
+        ${query}    Set Variable    {"q":"${query_to_store}"}
+    ELSE IF     '${format}' == 'text'
+        &{headers}      Create Dictionary       Content-Type=text/plain
+        ${query}    Set Variable    ${query_to_store}
+    END
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${random_version}   Generate Version Number To Store Query Multitenancy
+    Set Test Variable   ${random_query_version}   ${random_version}
+    ${random_qualified_name}    Generate Qualified Query Name To Store Query Multitenancy
+    Set Test Variable   ${random_query_qualified_name}      ${random_qualified_name}
+    ${resp}     PUT On Session      ${SUT}
+    ...         /definition/query/${random_query_qualified_name}
+    ...         expected_status=anything
+    ...         data=${query}       headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                IF      '${format}' == 'json'
+                    Set Test Variable       ${resp}     ${resp.json()}
+                END
+    [Return]    ${random_query_qualified_name}
+
+PUT /definition/query/{qualified_query_name}/{version}
+    [Documentation]     Send PUT AQL to store query.
+    ...                 Takes 1 mandatory arg {query_to_store}
+    ...                 {query_to_store} can be in one of 2 formats JSON or Text.
+    ...                 Takes 1 optional arg {format}: json or text.
+    ...                 If format=json, headers will have Content-Type=application/json and Body in format {"q":"query"}.
+    ...                 If format=text, headers will have Content-Type=text/plain and Body in plain text format.
+    ...                 {qualified_query_name} and {version} are generated using Random function.
+    ...                 Expected status code 200.
+    ...                 Returns combination of qualified_query_name and version, in format
+    ...                 {random_query_qualified_name}/{random_query_version}
+    [Arguments]     ${query_to_store}    ${format}=json
+    IF      '${format}' == 'json'
+        &{headers}      Create Dictionary       Content-Type=application/json
+        ${query}    Set Variable    {"q":"${query_to_store}"}
+    ELSE IF     '${format}' == 'text'
+        &{headers}      Create Dictionary       Content-Type=text/plain
+        ${query}    Set Variable    ${query_to_store}
+    END
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${random_version}   Generate Version Number To Store Query Multitenancy
+    Set Test Variable   ${random_query_version}   ${random_version}
+    ${random_qualified_name}    Generate Qualified Query Name To Store Query Multitenancy
+    Set Test Variable   ${random_query_qualified_name}      ${random_qualified_name}
+    Set Test Variable   ${qualif_query_name_and_version}    ${random_query_qualified_name}/${random_query_version}
+    ${resp}     PUT On Session      ${SUT}
+    ...         /definition/query/${qualif_query_name_and_version}
+    ...         expected_status=anything
+    ...         data=${query}       headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                IF      '${format}' == 'json'
+                    Set Test Variable       ${resp}     ${resp.json()}
+                END
+    [Return]    ${qualif_query_name_and_version}
+
+GET /definition/query/{qualified_query_name} / including {version}
+    [Documentation]     Get stored AQL from EHRBase.
+    ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
+    ...                 Expected status code 200.
+    ...                 Returns {resp_query}, query from response.
+    [Arguments]     ${qualif_name}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${resp}     GET On Session      ${SUT}
+    ...         /definition/query/${qualif_name}
+    ...         expected_status=anything
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Set Test Variable       ${resp}         ${resp.json()}
+                Set Test Variable       ${resp_query}   ${resp['q']}
+    [Return]    ${resp_query}
 
 GET /query/aql?q={query}
     [Documentation]     Executes HTTP method GET on /query/aql?q={query} endpoint
     ...                 DEPENDENCY: following variables have to be in test-level scope:
     ...                 `${payload}`
-                        ${headers}      Create Dictionary
-                        ...     content=application/json
-                        ...     accept=application/json
-                        ${dict_param}   Create Dictionary      q=${payload}
-    ${resp}             Get On Session      ${SUT}      /query/aql      params=${dict_param}
-                        ...     headers=${headers}      expected_status=anything
-                        Should Be Equal As Strings      ${resp.status_code}    ${200}
-                        Set Test Variable   ${response}    ${resp}
+    ${headers}      Create Dictionary
+    ...     content=application/json
+    ...     accept=application/json
+    ${dict_param}   Create Dictionary      q=${payload}
+    ${resp}         Get On Session      ${SUT}      /query/aql      params=${dict_param}
+                    ...     headers=${headers}      expected_status=anything
+                    Should Be Equal As Strings      ${resp.status_code}    ${200}
+                    Set Test Variable   ${response}    ${resp}
 
 PUT AQL Query With Qualified Name And Version Multitenancy
     [Documentation]     Send PUT AQL to store query.
