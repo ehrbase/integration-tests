@@ -267,12 +267,6 @@ POST /query (REST) - ECIS
                         Status Should Be    201
                         Set Test Variable   ${response}     ${resp}
 
-POST /query/{qualified_query_name}/{version}
-    ${headers}      Create Dictionary
-    ...     content=application/json
-    ...     accept=application/json
-
-
 PUT /definition/query/{qualified_query_name}
     [Documentation]     Send PUT AQL to store query.
     ...                 Takes 1 mandatory arg {query_to_store}
@@ -305,7 +299,7 @@ PUT /definition/query/{qualified_query_name}
                 IF      '${format}' == 'json'
                     Set Test Variable       ${resp}     ${resp.json()}
                 END
-    [Return]    ${qualif_query_name_and_version}
+    [Return]    ${random_query_qualified_name}
 
 PUT /definition/query/{qualified_query_name}/{version}
     [Documentation]     Send PUT AQL to store query.
