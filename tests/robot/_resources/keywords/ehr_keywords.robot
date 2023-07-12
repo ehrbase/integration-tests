@@ -172,7 +172,7 @@ Create EHR With Subject External Ref With Multitenant Token
                         ...    ${{str(uuid.uuid4())}}
                         Update Value To Json    ${ehr_status_json}    $.subject.external_ref.namespace
                         ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
-    ${resp}             POST on session     ${SUT}    /ehr      ${ehr_status_json}
+    ${resp}             POST on session     ${SUT}    /ehr      json=${ehr_status_json}
     ...         expected_status=anything        headers=${headers}
     Should Be Equal As Strings      ${resp.status_code}     201
     ${ehrstatus_uid}    Set Variable        ${resp.json()['ehr_status']['uid']['value']}
