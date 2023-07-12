@@ -164,6 +164,28 @@ Create New EHR With Multitenant Token
     Log     ${ehr_status}
     Log     ${versioned_status_uid}
 
+Create EHR With Subject External Ref With Multitenant Token
+    [Arguments]     ${encodedToken}     ${ehr_status_obj}=${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
+    Create Session For EHR With Headers For Multitenancy With Bearer Token      ${encodedToken}
+    ${ehr_status_json}  Load JSON From File    ${ehr_status_obj}
+                        Update Value To Json    ${ehr_status_json}    $.subject.external_ref.id.value
+                        ...    ${{str(uuid.uuid4())}}
+                        Update Value To Json    ${ehr_status_json}    $.subject.external_ref.namespace
+                        ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
+    ${resp}             POST on session     ${SUT}    /ehr      ${ehr_status_json}
+    ...         expected_status=anything        headers=${headers}
+    Should Be Equal As Strings      ${resp.status_code}     201
+    ${ehrstatus_uid}    Set Variable        ${resp.json()['ehr_status']['uid']['value']}
+    ${short_uid}        Remove String       ${ehrstatus_uid}    ::${CREATING_SYSTEM_ID}::1
+    Set Suite Variable    ${ehr_id}         ${resp.json()['ehr_id']['value']}
+    Set Suite Variable    ${system_id}      ${resp.json()['system_id']['value']}
+    Set Suite Variable    ${ehr_status}     ${resp.json()['ehr_status']}
+    Set Suite Variable    ${versioned_status_uid}       ${short_uid}
+    Set Suite Variable    ${response}       ${resp}
+    Log     ${ehr_id}
+    Log     ${system_id}
+    Log     ${ehr_status}
+    Log     ${versioned_status_uid}
 
 #TODO: @WLAD  rename KW name when refactor this resource file
 create supernew ehr
