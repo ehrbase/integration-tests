@@ -272,13 +272,14 @@ PUT /definition/query/{qualified_query_name}
     ...                 Takes 1 mandatory arg {query_to_store}
     ...                 {query_to_store} can be in one of 2 formats JSON or Text.
     ...                 Takes 1 optional arg {format}: json or text.
+    ...                 Takes 1 optional arg {multitenancy_token}. If provided, stored query will be created inside non-default tenant.
     ...                 If format=json, headers will have Content-Type=application/json and Body in format {"q":"query"}.
     ...                 If format=text, headers will have Content-Type=text/plain and Body in plain text format.
     ...                 {qualified_query_name} and {version} are generated using Random function.
     ...                 Expected status code 200.
     ...                 Returns combination of qualified_query_name and version, in format
     ...                 {random_query_qualified_name}/{random_query_version}
-    [Arguments]     ${query_to_store}    ${format}=json
+    [Arguments]     ${query_to_store}    ${format}=json     ${multitenancy_token}=${None}
     IF      '${format}' == 'json'
         &{headers}      Create Dictionary       Content-Type=application/json
         ${query}    Set Variable    {"q":"${query_to_store}"}
@@ -286,7 +287,10 @@ PUT /definition/query/{qualified_query_name}
         &{headers}      Create Dictionary       Content-Type=text/plain
         ${query}    Set Variable    ${query_to_store}
     END
-    Create Session      ${SUT}      ${BASEURL}      debug=2
+    IF  '${multitenancy_token}' != '${None}
+        Set To Dictionary       ${headers}      Authorization=Bearer ${multitenancy_token}
+    END
+    Create Session      ${SUT}      ${BASEURL}      debug=2     headers=${headers}
     ${random_version}   Generate Version Number To Store Query Multitenancy
     Set Test Variable   ${random_query_version}   ${random_version}
     ${random_qualified_name}    Generate Qualified Query Name To Store Query Multitenancy
