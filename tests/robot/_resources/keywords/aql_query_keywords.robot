@@ -354,7 +354,10 @@ GET /definition/query/{qualified_query_name} / including {version}
     ...         headers=${headers}
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
-                Run Keyword And Return Status   Set Test Variable       ${resp_query}   ${resp['q']}
+                ${q_exists}    Run Keyword And Return Status    Dictionary Should Contain Key    ${resp.json()}    q
+                IF      '${q_exists}' == '${TRUE}'
+                    Set Test Variable       ${resp_query}   ${resp['q']}
+                END
     [Return]    ${resp_query}
 
 GET /query/aql?q={query}
