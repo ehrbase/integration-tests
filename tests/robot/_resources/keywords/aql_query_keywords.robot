@@ -357,8 +357,9 @@ GET /definition/query/{qualified_query_name} / including {version}
                 ${q_exists}    Run Keyword And Return Status    Dictionary Should Contain Key    ${resp}    q
                 IF      '${q_exists}' == '${TRUE}'
                     Set Test Variable       ${resp_query}   ${resp['q']}
+                ELSE IF     '${q_exists}' == '${FALSE}'
+                    Set Test Variable       ${resp_versions}   ${resp['versions'][0]}
                 END
-    [Return]    ${resp_query}
 
 GET /query/aql?q={query}
     [Documentation]     Executes HTTP method GET on /query/aql?q={query} endpoint
