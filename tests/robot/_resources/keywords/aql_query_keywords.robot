@@ -354,7 +354,7 @@ GET /definition/query/{qualified_query_name} / including {version}
     ...         headers=${headers}
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
-                Set Test Variable       ${resp_query}   ${resp['q']}
+                Run Keyword And Return Status   Set Test Variable       ${resp_query}   ${resp['q']}
     [Return]    ${resp_query}
 
 GET /query/aql?q={query}
