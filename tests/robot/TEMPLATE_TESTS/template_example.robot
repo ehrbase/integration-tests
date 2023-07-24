@@ -38,7 +38,8 @@ Test Example Generator For Templates (ECIS) - FLAT
 
 Test Example Generator For Templates (ECIS) - FLAT - Test Category And Coded Text Code And Value
     [Tags]      cdr-432
-    Upload OPT ECIS    all_types/test_event.opt
+    #Upload OPT ECIS    all_types/test_event.opt
+    Upload OPT      all_types/test_event.opt
     Extract Template Id From OPT File
     Get Example Of Web Template By Template Id (ECIS)    ${template_id}    FLAT
     Log     https://github.com/ehrbase/ehrbase/issues/897   console=yes
@@ -50,7 +51,8 @@ Test Example Generator For Templates (ECIS) - FLAT - Test Category And Coded Tex
 
 Test Example Generator For Templates (ECIS) - JSON And Commit Composition
     [Tags]      cdr-433
-    Upload OPT ECIS    all_types/test_quantity_without_text.opt
+    #Upload OPT ECIS    all_types/test_quantity_without_text.opt
+    Upload OPT      all_types/test_quantity_without_text.opt
     Extract Template Id From OPT File
     Get Example Of Web Template By Template Id (ECIS)       ${template_id}      JSON
     #Get Example Of Web Template By Template Id (OPENEHR)    ${template_id}    JSON
@@ -102,7 +104,8 @@ Test Example Generator For Templates (OPENEHR) - XML And Save It
 
 Test Example Generator For Template (ECIS) - Specific Template
     [Documentation]     Create template, get example and check if template is returned.
-    Upload OPT ECIS     all_types/tobacco_smoking_summary.v0.opt
+    #Upload OPT ECIS     all_types/tobacco_smoking_summary.v0.opt
+    Upload OPT      all_types/tobacco_smoking_summary.v0.opt
     Extract Template Id From OPT File
     Get Example Of Web Template By Template Id (ECIS)    ${template_id}    JSON
     Validate Response Body Has Format    JSON
@@ -116,7 +119,8 @@ Test Example Generator For Template (ECIS) - Specific Template
 *** Keywords ***
 Upload Template Using ECIS Endpoint
     [Documentation]    Keyword used to upload Template using ECIS endpoint
-    Upload OPT ECIS    all_types/ehrn_family_history.opt
+    #Upload OPT ECIS    all_types/ehrn_family_history.opt
+    Upload OPT      all_types/ehrn_family_history.opt
     Extract Template Id From OPT File
 
 Upload Template Using OPENEHR Endpoint
