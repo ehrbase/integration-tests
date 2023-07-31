@@ -7,4 +7,4 @@ SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o CONT
 OBSERVATION o CONTAINS CLUSTER,expected_contains_contain_chaining_obs_cluster.json,3
 OBSERVATION o CONTAINS INTERVAL_EVENT,expected_contains_contain_chaining_obs_int_event.json,2
 OBSERVATION o CONTAINS INTERVAL_EVENT CONTAINS CLUSTER,expected_contains_contain_chaining_obs_int_event_cluster.json,1
-EVENT o CONTAINS CLUSTER,expected_contains_contain_chaining_event_cluster.json,2
+EVENT o CONTAINS CLUSTER,expected_contains_contain_chaining_event_cluster.json,3
