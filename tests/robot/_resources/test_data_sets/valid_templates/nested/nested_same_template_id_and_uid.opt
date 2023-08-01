@@ -597,7 +597,7 @@
          </cardinality>
       </attributes>
       <archetype_id>
-         <value>openEHR-EHR-COMPOSITION.nesting.same_template_id.v1</value>
+         <value>openEHR-EHR-COMPOSITION.nesting.same.template.id.v1</value>
       </archetype_id>
       <template_id>
          <value>nested.en.v1</value>
