@@ -33,10 +33,10 @@
       </details>
    </description>
    <uid>
-      <value>3b6e9cd4-d338-463a-9eaf-9f78e6a9e40c</value>
+      <value>d30ce0be-a8b4-4f62-a559-a94bba649de7</value>
    </uid>
    <template_id>
-      <value>nested.en.v1.same_template_id_and_uid</value>
+      <value>nested.en.v1</value>
    </template_id>
    <concept>nested</concept>
    <definition>
@@ -597,10 +597,10 @@
          </cardinality>
       </attributes>
       <archetype_id>
-         <value>openEHR-EHR-COMPOSITION.nesting.v1</value>
+         <value>openEHR-EHR-COMPOSITION.nesting.same_template_id.v1</value>
       </archetype_id>
       <template_id>
-         <value>nested.en.v1.same_template_id_and_uid</value>
+         <value>nested.en.v1</value>
       </template_id>
       <term_definitions code="at0000">
          <items id="description">unknown</items>

@@ -6,14 +6,14 @@
     },
     "archetype_details": {
         "archetype_id": {
-            "value": "openEHR-EHR-COMPOSITION.nesting.v1"
+            "value": "openEHR-EHR-COMPOSITION.nesting.same_template_id.v1"
         },
         "template_id": {
-            "value": "nested.en.v1.same_template_id_and_uid"
+            "value": "nested.en.v1"
         },
         "rm_version": "1.0.2"
     },
-    "archetype_node_id": "openEHR-EHR-COMPOSITION.nesting.v1",
+    "archetype_node_id": "openEHR-EHR-COMPOSITION.nesting.same_template_id.v1",
     "language": {
         "terminology_id": {
             "value": "ISO_639-1"
@@ -52,7 +52,7 @@
             "value": "2021-09-21T21:06:43.428-03:00"
         },
         "setting": {
-            "value": "Emergency Care Setting",
+            "value": "emergency care",
             "defining_code": {
                 "terminology_id": {
                     "value": "openehr"
@@ -102,7 +102,7 @@
                     "value": "openEHR-EHR-SECTION.nested.v1"
                 },
                 "template_id": {
-                    "value": "nested.en.v1.same_template_id_and_uid"
+                    "value": "nested.en.v1"
                 },
                 "rm_version": "1.0.2"
             },
@@ -119,7 +119,7 @@
                             "value": "openEHR-EHR-INSTRUCTION.nested.v1"
                         },
                         "template_id": {
-                            "value": "nested.en.v1.same_template_id_and_uid"
+                            "value": "nested.en.v1"
                         },
                         "rm_version": "1.0.2"
                     },
@@ -161,7 +161,7 @@
                                         "value": "openEHR-EHR-ITEM_TREE.nested.v1"
                                     },
                                     "template_id": {
-                                        "value": "nested.en.v1.same_template_id_and_uid"
+                                        "value": "nested.en.v1"
                                     },
                                     "rm_version": "1.0.2"
                                 },
@@ -199,7 +199,7 @@
                                                 "value": "openEHR-EHR-CLUSTER.nested.v1"
                                             },
                                             "template_id": {
-                                                "value": "nested.en.v1.same_template_id_and_uid"
+                                                "value": "nested.en.v1"
                                             },
                                             "rm_version": "1.0.2"
                                         },
@@ -240,7 +240,7 @@
                                                         "value": "openEHR-EHR-CLUSTER.nested2.v1"
                                                     },
                                                     "template_id": {
-                                                        "value": "nested.en.v1.same_template_id_and_uid"
+                                                        "value": "nested.en.v1"
                                                     },
                                                     "rm_version": "1.0.2"
                                                 },
