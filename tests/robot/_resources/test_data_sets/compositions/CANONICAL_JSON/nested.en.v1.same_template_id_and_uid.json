@@ -2,7 +2,7 @@
     "_type": "COMPOSITION",
     "name": {
         "_type": "DV_TEXT",
-        "value": "Nesting"
+        "value": "NestingComposition"
     },
     "archetype_details": {
         "archetype_id": {
@@ -45,14 +45,14 @@
             "namespace": "DEMOGRAPHIC",
             "type": "PERSON"
         },
-        "name": "composer test value"
+        "name": "RobotAutomation ComposerName"
     },
     "context": {
         "start_time": {
             "value": "2021-09-21T21:06:43.428-03:00"
         },
         "setting": {
-            "value": "emergency care",
+            "value": "Emergency Care Setting",
             "defining_code": {
                 "terminology_id": {
                     "value": "openehr"
@@ -67,7 +67,7 @@
                 },
                 "performer": {
                     "_type": "PARTY_RELATED",
-                    "name": "Betty Bix",
+                    "name": "Roxanne Battrow",
                     "relationship": {
                         "value": "sister",
                         "defining_code": {
@@ -154,7 +154,7 @@
                                 "_type": "ITEM_TREE",
                                 "name": {
                                     "_type": "DV_TEXT",
-                                    "value": "Nested"
+                                    "value": "Nested activity description"
                                 },
                                 "archetype_details": {
                                     "archetype_id": {
