@@ -16,7 +16,7 @@ Suite Teardown  Run Keywords
 
 
 *** Test Cases ***
-SELECT c/name/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE c/name/value ${like}
+SELECT c/name/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE c/name/value LIKE ${like}
     #[Tags]      not-ready
     [Template]      Execute Query
     ${like}    ${expected_file}    ${nr_of_results}
@@ -38,7 +38,7 @@ Precondition
 
 Execute Query
     [Arguments]     ${like}    ${expected_file}    ${nr_of_results}
-    ${temp_query}    Set Variable       SELECT c/name/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE c/name/value ${like}
+    ${temp_query}    Set Variable       SELECT c/name/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE c/name/value LIKE ${like}
     ${query}    Replace Variables       ${temp_query}
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
