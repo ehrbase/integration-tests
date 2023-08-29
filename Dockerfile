@@ -2,7 +2,7 @@
 FROM python:3.11.3
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /integration-tests
 
 # Copy the requirements.txt file to the working directory
 COPY tests/requirements.txt .
