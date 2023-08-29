@@ -1,0 +1,1 @@
+{"q":"SELECT c/name/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE c/name/value ${like}","columns":[{"path":"c/name/value","name":"#0"},{"path":"c/uid/value","name":"#1"}],"rows":[["type_repetition_conformance_ehrbase.org","${c_uid2}"]]}
