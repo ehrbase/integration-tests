@@ -298,7 +298,6 @@ openehr server is online
     ...         ${EMPTY}
     ...         expected_status=anything
     Should Be Equal As Strings      ${resp.status_code}     ${200}
-    Set Variable    ${resp_body}        ${resp.json()}
     Log      ${resp.json()["ehrbase_version"]}
     Log      ${resp.json()["jvm_version"]}
     Log      ${resp.json()["openehr_sdk_version"]}
