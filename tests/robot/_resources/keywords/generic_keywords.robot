@@ -297,13 +297,13 @@ openehr server is online
     ...         heartbeatsession
     ...         ${EMPTY}
     ...         expected_status=anything
-    Status Should Be    200
+    Should Be Equal As Strings      ${resp.status_code}     ${200}
     Set Variable    ${resp_body}        ${resp.json()}
-    Log      ${resp_body["ehrbase_version"]}
-    Log      ${resp_body["jvm_version"]}
-    Log      ${resp_body["openehr_sdk_version"]}
-    Log      ${resp_body["os_version"]}
-    Log      ${resp_body["postgres_version"]}
+    Log      ${resp.json()["ehrbase_version"]}
+    Log      ${resp.json()["jvm_version"]}
+    Log      ${resp.json()["openehr_sdk_version"]}
+    Log      ${resp.json()["os_version"]}
+    Log      ${resp.json()["postgres_version"]}
     #REST.GET    ${HEARTBEAT_URL}
     #Output    response body
 
