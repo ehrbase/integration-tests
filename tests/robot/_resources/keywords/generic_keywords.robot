@@ -295,7 +295,7 @@ openehr server is online
     ...                 headers=${headers}    verify=True
     ${resp}     GET On Session
     ...         heartbeatsession
-    ...         ${EMTPY}
+    ...         ${EMPTY}
     ...         expected_status=anything
     Status Should Be    200
     Set Variable    ${resp_body}        ${resp.json()}
