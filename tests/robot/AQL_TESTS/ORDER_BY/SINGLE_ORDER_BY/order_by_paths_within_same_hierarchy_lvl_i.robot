@@ -36,15 +36,15 @@ Execute Query
     ${query}    Replace Variables       ${temp_query}
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
-    ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/where/${expected_file}
+    ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
     ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     Log     Expected data: ${data_replaced_vars}
-    Create File     ${EXPECTED_JSON_DATA_SETS}/order_by/order_by_paths_same_hierarchy_lvl_1_tmp.json
+    Create File     ${EXPECTED_JSON_DATA_SETS}/order_by/order_by_paths_same_hierarchy_lvl_i_tmp.json
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/order_by/order_by_paths_same_hierarchy_lvl_1_tmp.json
+    ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/order_by/order_by_paths_same_hierarchy_lvl_i_tmp.json
     ...     ignore_order=${FALSE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
-    [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/order_by/order_by_paths_same_hierarchy_lvl_1_tmp.json
+    [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/order_by/order_by_paths_same_hierarchy_lvl_i_tmp.json

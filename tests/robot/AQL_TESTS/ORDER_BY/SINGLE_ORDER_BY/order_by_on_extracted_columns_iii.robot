@@ -42,7 +42,7 @@ Execute Query
     ${query}    Replace Variables       ${temp_query}
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
-    ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/where/${expected_file}
+    ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
     ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     Log     Expected data: ${data_replaced_vars}
