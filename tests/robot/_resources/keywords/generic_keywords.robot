@@ -290,7 +290,11 @@ wait until openehr server is online
 
 
 openehr server is online
-    prepare new request session  JSON
+    #prepare new request session  JSON
+    &{headers}          Create Dictionary
+    ...     Content-Type=application/json
+    ...     Accept=application/json
+    ...     &{authorization}
     Create Session      heartbeatsession    ${HEARTBEAT_URL}    debug=2
     ...                 headers=${headers}    verify=True
     ${resp}     GET On Session
