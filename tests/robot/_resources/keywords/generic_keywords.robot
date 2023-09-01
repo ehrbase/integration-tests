@@ -291,15 +291,28 @@ wait until openehr server is online
 
 openehr server is online
     prepare new request session  JSON
-    REST.GET    ${HEARTBEAT_URL}
-    Output    response body
+    Create Session      heartbeatsession    ${HEARTBEAT_URL}    debug=2
+    ...                 headers=${headers}    verify=True
+    ${resp}     GET On Session
+    ...         heartbeatsession
+    ...         ${EMTPY}
+    ...         expected_status=anything
+    Status Should Be    200
+    Set Variable    ${resp_body}        ${resp.json()}
+    Log      ${resp_body["ehrbase_version"]}
+    Log      ${resp_body["jvm_version"]}
+    Log      ${resp_body["openehr_sdk_version"]}
+    Log      ${resp_body["os_version"]}
+    Log      ${resp_body["postgres_version"]}
+    #REST.GET    ${HEARTBEAT_URL}
+    #Output    response body
 
-    Integer   response status    200
-    String    response body ehrbase_version
-    String    response body jvm_version
-    String    response body openehr_sdk_version
-    String    response body os_version
-    String    response body postgres_version
+    #Integer   response status    200
+    #String    response body ehrbase_version
+    #String    response body jvm_version
+    #String    response body openehr_sdk_version
+    #String    response body os_version
+    #String    response body postgres_version
 
 
 abort test execution
