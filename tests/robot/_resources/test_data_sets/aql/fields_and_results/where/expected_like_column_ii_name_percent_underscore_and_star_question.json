@@ -1,0 +1,17 @@
+{
+	"q": "SELECT s/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s WHERE s/name/value LIKE ${like}",
+	"columns": [
+		{
+			"path": "s/name/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"Name%_"
+		],
+		[
+			"Name*?"
+		]
+	]
+}
