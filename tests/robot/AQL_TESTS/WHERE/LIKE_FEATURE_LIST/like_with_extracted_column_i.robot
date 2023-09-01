@@ -4,7 +4,7 @@ Documentation   WHERE - LIKE FEATURE LIST - LIKE WITH EXTRACTED COLUMN I
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver
-...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/where/combinations/like_with_extracted_column.csv
+...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/where/combinations/like_with_extracted_column_i.csv
 ...     dialect=excel
 
 #Suite Setup  Skip    enable Setup 'Precondition' if AQL checks are passing !!!
