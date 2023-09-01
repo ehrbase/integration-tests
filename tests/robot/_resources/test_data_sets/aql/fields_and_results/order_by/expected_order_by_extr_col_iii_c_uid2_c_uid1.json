@@ -1,0 +1,17 @@
+{
+	"q": "SELECT ${path} FROM EHR e CONTAINS COMPOSITION c ORDER BY ${path} ${order}",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"${c_uid2}::${CREATING_SYSTEM_ID}::1"
+		],
+		[
+			"${c_uid1}::${CREATING_SYSTEM_ID}::1"
+		]
+	]
+}
