@@ -1,0 +1,20 @@
+{
+	"q": "SELECT ${path}${spath} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0] ORDER BY ${path} ${order}",
+	"columns": [
+		{
+			"path": "${path}${spath}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"400"
+		],
+		[
+			"42"
+		],
+		[
+			"42"
+		]
+	]
+}
