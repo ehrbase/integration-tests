@@ -28,10 +28,15 @@ Precondition
 
 Execute Query
     [Arguments]     ${like}    ${expected_file}    ${nr_of_results}
-    ${temp_query}    Set Variable       SELECT s/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s WHERE s/name/value LIKE ${like}
-    ${query}    Replace Variables       ${temp_query}
+    ####
+    ${query_dict}   Create Dictionary   tmp_query=SELECT s/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s WHERE s/name/value LIKE ${like}
+    Log     ${query_dict["tmp_query"]}
+    ${query}    Set Variable    ${query_dict["tmp_query"]}
+    ####
+    ###${temp_query}    Set Variable       SELECT s/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s WHERE s/name/value LIKE ${like}
+    ###${query}    Replace Variables       ${temp_query}
     Log     ${query}
-    Set AQL And Execute Ad Hoc Query    ${query}
+    Set AQL And Execute Ad Hoc Query    ${query_dict["tmp_query"]}
     ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/where/${expected_file}
     ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
