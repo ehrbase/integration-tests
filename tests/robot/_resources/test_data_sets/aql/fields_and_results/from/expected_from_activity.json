@@ -1,0 +1,49 @@
+{
+	"q": "SELECT t FROM ACTIVITY t",
+	"columns": [
+		{
+			"path": "t",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "ACTIVITY",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "Current Activity"
+				},
+				"description": {
+					"_type": "ITEM_TREE",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "Tree"
+					},
+					"items": [
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "DV_TEXT"
+							},
+							"value": {
+								"_type": "DV_TEXT",
+								"value": "DV_TEXT 45"
+							},
+							"archetype_node_id": "at0005"
+						}
+					],
+					"archetype_node_id": "at0002"
+				},
+				"timing": {
+					"_type": "DV_PARSABLE",
+					"value": "R4/2022-01-31T10:00:00+01:00/P3M",
+					"formalism": "timing"
+				},
+				"action_archetype_id": "/openEHR-EHR-CLUSTER.conformance_action.v0/",
+				"archetype_node_id": "at0001"
+			}
+		]
+	]
+}

@@ -35,7 +35,8 @@ get valid OPT file
     [Arguments]         ${opt file}
     [Documentation]     Gets an OPT file from test_data_sets/valid_templates folder
 
-    ${file}=            Get File             ${VALID DATA SETS}/${opt file}
+    ${file}=            Get Binary File      ${VALID DATA SETS}/${opt file}
+    #${file}=            Get File             ${VALID DATA SETS}/${opt file}
     ${xml}=             Parse Xml            ${file}
                         Set Suite Variable    ${file}    ${file}
                         Set Suite Variable    ${expected}    ${xml}
@@ -46,7 +47,8 @@ get invalid OPT file
     [Arguments]         ${opt file}
     [Documentation]     Gets an OPT file from test_data_sets/invalid_templates folder
 
-    ${file}=            Get File             ${INVALID DATA SETS}/${opt file}
+    #${file}=            Get File             ${INVALID DATA SETS}/${opt file}
+    ${file}=            Get Binary File		 ${INVALID DATA SETS}/${opt file}
 
                         # handle empty file and empty XML
                         Run Keyword And Return If    """${file}"""=='${EMPTY}'

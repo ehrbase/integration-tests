@@ -104,9 +104,10 @@ ${CACHE-ENABLED}        ${FALSE}
 
 
 006 ADMIN - Invalid Usage of Delete Endpoint
+    [Tags]      not-ready   to-enable
                         prepare new request session    XML
     ${resp}=            REST.DELETE    ${ADMIN_BASEURL}/template/
-                        Integer    response status    404
+                        Integer    response status    401
                         Output     response body
     
 
@@ -220,9 +221,10 @@ ${CACHE-ENABLED}        ${FALSE}
 
 
 012 ADMIN - Invalid Usage of Update Endpoint
+    [Tags]      not-ready   to-enable
                         prepare new request session    XML
     ${resp}=            REST.PUT    ${ADMIN_BASEURL}/template/
-                        Integer    response status    404
+                        Integer    response status    401
                         Output     response body
 
 

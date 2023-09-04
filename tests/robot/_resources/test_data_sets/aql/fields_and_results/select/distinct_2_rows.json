@@ -1,0 +1,17 @@
+{
+	"q": "SELECT e/ehr_id/value AS full FROM EHR e CONTAINS COMPOSITION C",
+	"columns": [
+		{
+			"path": "e/ehr_id/value",
+			"name": "full"
+		}
+	],
+	"rows": [
+		[
+			"8c106c54-21c1-4e22-9013-170cdad6c42b"
+		],
+		[
+			"8c106c54-21c1-4e22-9013-170cdad6c42b"
+		]
+	]
+}

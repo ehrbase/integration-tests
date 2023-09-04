@@ -1,0 +1,10 @@
+{
+    "q": "SELECT t FROM INSTRUCTION_DETAILS t",
+    "columns": [
+        {
+            "path": "t",
+            "name": "#0"
+        }
+    ],
+    "rows": []
+}
