@@ -31,9 +31,12 @@ Precondition
 
 Execute Query
     [Arguments]     ${path}     ${order}    ${expected_file}    ${nr_of_results}
-    ${temp_query}    Set Variable
-    ...     SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec ORDER BY ${path} ${order}
-    ${query}    Replace Variables       ${temp_query}
+    #${temp_query}    Set Variable
+    #...     SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec ORDER BY ${path} ${order}
+    #${query}    Replace Variables       ${temp_query}
+    ${query_dict}   Create Dictionary   tmp_query=SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec ORDER BY ${path} ${order}
+    Log     ${query_dict["tmp_query"]}
+    ${query}    Set Variable    ${query_dict["tmp_query"]}
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
     ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
