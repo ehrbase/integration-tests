@@ -10,5 +10,30 @@
 			"name": "#1"
 		}
 	],
-	"rows": []
+	"rows": [
+		[
+            "aql-conformance-ehrbase.org.v0",
+            "Blood pressure"
+        ],
+        [
+            "aql-conformance-ehrbase.org.v0",
+            "Conformance Observation"
+        ],
+        [
+            "aql-conformance-ehrbase.org.v0",
+            "Conformance Observation"
+        ],
+        [
+            "aql-conformance-ehrbase.org.v0",
+            "Conformance Observation"
+        ],
+        [
+            "aql-conformance-ehrbase.org.v0",
+            "Conformance Observation"
+        ],
+        [
+            "type_repetition_conformance_ehrbase.org",
+            "Conformance Observation"
+        ]
+	]
 }
