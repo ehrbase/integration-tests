@@ -1401,7 +1401,33 @@
 												},
 												"value": {
 													"_type": "DV_TEXT",
-													"value": "Lorem ipsum"
+													"value": "Lorem ipsum",
+													"mappings": [
+														{
+															"_type": "TERM_MAPPING",
+															"match": "=",
+															"target": {
+																"_type": "CODE_PHRASE",
+																"terminology_id": {
+																	"_type": "TERMINOLOGY_ID",
+																	"value": "SNOMED-CT"
+																},
+																"code_string": "21794005"
+															}
+														},
+														{
+															"_type": "TERM_MAPPING",
+															"match": ">",
+															"target": {
+																"_type": "CODE_PHRASE",
+																"terminology_id": {
+																	"_type": "TERMINOLOGY_ID",
+																	"value": "SNOMED-CT"
+																},
+																"code_string": "21794000"
+															}
+														}
+													]
 												},
 												"archetype_node_id": "at0004"
 											},
