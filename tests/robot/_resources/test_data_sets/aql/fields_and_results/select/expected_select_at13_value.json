@@ -1,0 +1,20 @@
+{
+	"q": "SELECT ${path} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"2022-02-03"
+		],
+		[
+			"2023-02-03"
+		],
+		[
+			"2022-02-03"
+		]
+	]
+}

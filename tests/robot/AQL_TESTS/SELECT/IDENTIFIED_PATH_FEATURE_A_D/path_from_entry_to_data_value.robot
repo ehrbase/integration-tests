@@ -36,7 +36,6 @@ Execute Query
     Log     ${query_dict["tmp_query"]}
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Log     ${query}
-    #Log     Add expected result test data to files, to compare with actual response from EHRBase.   console=yes
     Set AQL And Execute Ad Hoc Query    ${query}
     ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/select/${expected_file}
     ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
