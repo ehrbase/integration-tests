@@ -14,7 +14,7 @@ Suite Teardown  Admin Delete EHR For AQL    ${ehr_id}
 
 
 *** Test Cases ***
-SELECT c/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o ORDER BY ${order}
+SELECT c/name/value FROM EHR e CONTAINS COMPOSITION c ORDER BY ${order}
     #[Tags]      not-ready
     [Template]      Execute Query
     ${order}    ${expected_file}    ${nr_of_results}
@@ -32,7 +32,7 @@ Precondition
 
 Execute Query
     [Arguments]     ${order}    ${expected_file}    ${nr_of_results}
-    ${temp_query}    Set Variable       SELECT c/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o ORDER BY ${order}
+    ${temp_query}    Set Variable       SELECT c/name/value FROM EHR e CONTAINS COMPOSITION c ORDER BY ${order}
     ${query}    Replace Variables       ${temp_query}
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}

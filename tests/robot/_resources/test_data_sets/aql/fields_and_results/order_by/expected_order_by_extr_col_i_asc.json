@@ -1,5 +1,5 @@
 {
-	"q": "SELECT c/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o ORDER BY ${order}",
+	"q": "SELECT c/name/value FROM EHR e CONTAINS COMPOSITION c ORDER BY ${order}",
 	"columns": [
 		{
 			"path": "c/name/value",
