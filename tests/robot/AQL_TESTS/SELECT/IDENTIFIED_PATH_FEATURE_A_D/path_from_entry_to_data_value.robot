@@ -11,8 +11,7 @@ Library     DataDriver
 #Suite Setup  Skip    enable Setup 'Precondition' if AQL checks are passing !!!
 #Suite Teardown  Skip    enable Teardown 'Admin Delete EHR For AQL' if AQL checks are passing !!!
 Suite Setup     Precondition        #enable this keyword if AQL checks are passing !!!
-Suite Teardown  Run Keywords
-...     Admin Delete EHR For AQL    ${ehr_id}
+Suite Teardown  Admin Delete EHR For AQL    ${ehr_id}
 
 
 *** Test Cases ***

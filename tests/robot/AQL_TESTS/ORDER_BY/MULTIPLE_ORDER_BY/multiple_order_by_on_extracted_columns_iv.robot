@@ -14,7 +14,7 @@ Suite Teardown  Admin Delete EHR For AQL    ${ehr_id}
 
 
 *** Test Cases ***
-SELECT c/name/value,o/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o ORDER BY c/name/value ${order1}, o/name/value ${order2}
+SELECT c/name/value, o/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o ORDER BY c/name/value ${order1}, o/name/value ${order2}
     #[Tags]      not-ready
     [Template]      Execute Query
     ${order1}     ${order2}     ${expected_file}    ${nr_of_results}
@@ -33,11 +33,10 @@ Precondition
 Execute Query
     [Arguments]     ${order1}     ${order2}    ${expected_file}    ${nr_of_results}
     ${query_dict}   Create Dictionary
-    ...     tmp_query=SELECT c/name/value,o/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o ORDER BY c/name/value ${order1}, o/name/value ${order2}
+    ...     tmp_query=SELECT c/name/value, o/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o ORDER BY c/name/value ${order1}, o/name/value ${order2}
     Log     ${query_dict["tmp_query"]}
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Log     ${query}
-    Log     Add expected result test data to files, to compare with actual response from EHRBase.   console=yes
     Set AQL And Execute Ad Hoc Query    ${query}
     ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
     ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
