@@ -59,7 +59,6 @@
     "lastName" : "Framework",
     "email" : "robot@ehrbase.org",
     "attributes" : {
-      "sub" : [ "my-id" ],
       "patient_id" : [ "58646121-fd71-4e8c-8157-7f7a5af03d97" ],
       "email" : [ "test@test.org" ],
       "organization_id" : [ "f47bfc11-ec8d-412e-aebf-c6953cc23e7d" ]
