@@ -1,0 +1,14 @@
+{
+	"q": "SELECT ${primitive} FROM EHR",
+	"columns": [
+		{
+			"path": "${primitive}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"3e102"
+		]
+	]
+}

@@ -1,0 +1,71 @@
+{
+	"q": "SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p",
+	"columns": [
+		{
+			"path": "e/ehr_id/value",
+			"name": "#0"
+		},
+		{
+			"path": "c/uid/value",
+			"name": "#1"
+		},
+		{
+			"path": "o/uid/value",
+			"name": "#2"
+		},
+		{
+			"path": "p/time/value",
+			"name": "#3"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_id}",
+			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
+			"d86702c2-15db-4d85-be51-af335cf43123",
+			"2022-02-03T04:05:06"
+		],
+		[
+			"${ehr_id}",
+			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
+			"d86702c2-15db-4d85-be51-af335cf43123",
+			"2023-02-03T04:05:06"
+		],
+		[
+			"${ehr_id}",
+			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
+			"38065052-af1f-4b0b-b03d-9bda140a6edf",
+			"2024-02-03T04:05:06"
+		],
+		[
+			"${ehr_id}",
+			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
+			"38065052-af1f-4b0b-b03d-9bda140a6edf",
+			"2025-02-03T04:05:06"
+		],
+		[
+			"${ehr_id}",
+			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
+			"d86702c2-15db-4d85-be51-af335cf43123",
+			"2022-02-03T04:05:06"
+		],
+		[
+			"${ehr_id}",
+			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
+			"d86702c2-15db-4d85-be51-af335cf43123",
+			"2023-02-03T04:05:06"
+		],
+		[
+			"${ehr_id}",
+			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
+			"38065052-af1f-4b0b-b03d-9bda140a6edf",
+			"2024-02-03T04:05:06"
+		],
+		[
+			"${ehr_id}",
+			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
+			"38065052-af1f-4b0b-b03d-9bda140a6edf",
+			"2025-02-03T04:05:06"
+		]
+	]
+}
