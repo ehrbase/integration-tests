@@ -1,0 +1,17 @@
+{
+	"q": "SELECT ${path} FROM EVENT_CONTEXT c",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "TERMINOLOGY_ID",
+				"value": "openehr"
+			}
+		]
+	]
+}

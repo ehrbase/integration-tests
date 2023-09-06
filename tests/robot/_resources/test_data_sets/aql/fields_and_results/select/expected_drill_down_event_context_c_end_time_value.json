@@ -1,0 +1,14 @@
+{
+	"q": "SELECT ${path} FROM EVENT_CONTEXT c",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"2021-12-21T15:19:31.649613+01:00"
+		]
+	]
+}
