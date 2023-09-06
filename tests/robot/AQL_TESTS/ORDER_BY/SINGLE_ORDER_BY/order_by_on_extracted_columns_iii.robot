@@ -28,12 +28,12 @@ Precondition
     Upload OPT For AQL      type_repetition_conformance_ehrbase.org.opt
     Create EHR For AQL
     Set Suite Variable      ${ehr_id1}     ${ehr_id}
-    Commit Composition For AQL      aql-conformance-ehrbase.org.v0_contains.json
+    Commit Composition For AQL      aql-conformance-ehrbase.org.v0_contains_with_compo_uid.json
     Set Suite Variable      ${c_uid1}      ${composition_short_uid}
     Create EHR For AQL
     Set Suite Variable      ${ehr_id2}     ${ehr_id}
     Set Suite Variable      ${ehr_id}      ${ehr_id2}
-    Commit Composition For AQL      type_repetition_conformance_ehrbase.org_one_reptation.json
+    Commit Composition For AQL      type_repetition_conformance_ehrbase.org_one_reptation_with_compo_uid.json
     Set Suite Variable      ${c_uid2}      ${composition_short_uid}
 
 Execute Query
