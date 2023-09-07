@@ -1,5 +1,4 @@
 ${path},${expected_file},${nr_of_results}
-o,expected_drill_down_observation_o.json,1
 o/other_participations,expected_drill_down_observation_participations.json,2
 o/other_participations/function,expected_drill_down_observation_participations_function.json,2
 o/other_participations/function/value,expected_drill_down_observation_participations_function_value.json,2
