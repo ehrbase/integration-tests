@@ -1,0 +1,26 @@
+{
+	"q": "SELECT ${path} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "DV_DURATION",
+				"value": "P30D"
+			}
+		],
+		[
+			{
+				"_type": "DV_DURATION",
+				"value": "PT42H"
+			}
+		],
+		[
+			null
+		]
+	]
+}

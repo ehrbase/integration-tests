@@ -1,0 +1,27 @@
+{
+	"q": "SELECT ${path} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"value": "to be provided correct expected mappings content"
+			}
+		],
+		[
+			{
+				"value": "to be provided correct expected mappings content"
+			}
+		],
+		[
+			null
+		],
+		[
+			null
+		]
+	]
+}

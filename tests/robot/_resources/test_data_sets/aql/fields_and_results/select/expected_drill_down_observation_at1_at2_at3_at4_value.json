@@ -1,0 +1,29 @@
+{
+	"q": "SELECT ${path} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "DV_TEXT",
+				"value": "Lorem ipsum"
+			}
+		],
+		[
+			{
+				"_type": "DV_TEXT",
+				"value": "Lorem ipsum"
+			}
+		],
+		[
+			{
+				"_type": "DV_TEXT",
+				"value": "Lorem ipsum"
+			}
+		]
+	]
+}
