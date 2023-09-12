@@ -1,5 +1,5 @@
 {
-	"q": "SELECT s1/name/value, o1/name/value, c/name/value, o2/name/value, o3/name/value FROM EHR e CONTAINS SECTION s1 CONTAINS (((OBSERVATION o1 CONTAINS CLUSTER c) AND OBSERVATION o2[openEHR-EHR-OBSERVATION.blood_pressure.v2]) OR OBSERVATION o3[openEHR-EHR-OBSERVATION.conformance_observation.v0])",
+	"q": "SELECT s1/name/value,o1/name/value, c/name/value ,o2/name/value,o3/name/value FROM (SECTION s1 CONTAINS ((OBSERVATION o1 CONTAINS CLUSTER c) AND OBSERVATION o2[openEHR-EHR-OBSERVATION.blood_pressure.v2]) OR OBSERVATION o3[openEHR-EHR-OBSERVATION.conformance_observation.v0])",
 	"columns": [
 		{
 			"path": "s1/name/value",
@@ -38,10 +38,10 @@
 			"Conformance Observation"
 		],
 		[
-			null,
-			null,
-			null,
-			null,
+			"conformance section",
+			"Conformance Observation",
+			"conformance cluster",
+			"Blood pressure",
 			"Conformance Observation"
 		],
 		[
@@ -49,17 +49,31 @@
 			"Conformance Observation",
 			"conformance cluster",
 			"Blood pressure",
-			null
+			"Conformance Observation"
 		],
 		[
-			null,
+			"conformance section",
+			"Blood pressure",
+			"conformance cluster",
+			"Blood pressure",
+			"Conformance Observation"
+		],
+		[
+			"conformance section",
+			"Blood pressure",
+			"conformance cluster",
+			"Blood pressure",
+			"Conformance Observation"
+		],
+		[
+			"Section 1",
 			null,
 			null,
 			null,
 			"Conformance Observation"
 		],
 		[
-			null,
+			"Section 2",
 			null,
 			null,
 			null,

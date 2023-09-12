@@ -22,18 +22,12 @@
 		[
 			"conformance section",
 			"Conformance Observation",
-			null,
-			null
+			"Section 1",
+			"Conformance Observation"
 		],
 		[
 			"conformance section",
 			"Conformance Observation",
-			null,
-			null
-		],
-		[
-			null,
-			null,
 			"Section 1",
 			"Conformance Observation"
 		]
