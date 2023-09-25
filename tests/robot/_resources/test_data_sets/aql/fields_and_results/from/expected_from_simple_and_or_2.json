@@ -1,5 +1,5 @@
 {
-	"q": "SELECT o1/name/value, o2/name/value FROM EHR e CONTAINS (OBSERVATION o1[openEHR-EHR-OBSERVATION.conformance_observation.v0] OR OBSERVATION o2[openEHR-EHR-OBSERVATION.blood_pressure.v2])",
+	"q": "SELECT o1/name/value, o2/name/value FROM EHR CONTAINS SECTION CONTAINS (OBSERVATION o1[openEHR-EHR-OBSERVATION.conformance_observation.v0] OR OBSERVATION o2[openEHR-EHR-OBSERVATION.blood_pressure.v2])",
 	"columns": [
 		{
 			"path": "o1/name/value",
@@ -21,11 +21,11 @@
 		],
 		[
 			"Conformance Observation",
-			"Blood pressure"
+			null
 		],
 		[
 			"Conformance Observation",
-			"Blood pressure"
+			null
 		]
 	]
 }
