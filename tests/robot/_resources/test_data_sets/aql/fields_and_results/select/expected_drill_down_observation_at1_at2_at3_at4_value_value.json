@@ -1,8 +1,8 @@
 {
-	"q": "SELECT ${path} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/item[at0004]/value/value FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
 	"columns": [
 		{
-			"path": "${path}",
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/item[at0004]/value/value",
 			"name": "#0"
 		}
 	],
