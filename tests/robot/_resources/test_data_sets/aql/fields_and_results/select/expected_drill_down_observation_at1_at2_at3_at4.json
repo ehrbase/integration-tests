@@ -1,5 +1,5 @@
 {
-	"q": "SELECT ${path} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"q": "SELECT ${path} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
 	"columns": [
 		{
 			"path": "${path}",
