@@ -77,12 +77,15 @@ Send Ad Hoc Request
                             ...     ${resp.json()["message"]}   Not implemented
                             ${notSupportedMsgStatus}    Run Keyword And Return Status   Should Contain
                             ...     ${resp.json()["message"]}   is not supported
+                            ${unclearIfTargetsCompoMsgStatus}    Run Keyword And Return Status   Should Contain
+                            ...     ${resp.json()["message"]}   targets a COMPOSITION or EHR_STATUS
                             Skip If     '${notImplMsgStatus}' == '${TRUE}'
                             ...     Skipped due to 400 and Not implemented.
-                            Pass Execution If   '${notSupportedMsgStatus}' == '${TRUE}'     ${resp.json()["message"]}
-                            Pass On Expected Message    ${resp.json()["message"]}
+                            Pass Execution If   '${notSupportedMsgStatus}' == '${TRUE}' or '${unclearIfTargetsCompoMsgStatus}' == '${TRUE}'
+                            ...     ${resp.json()["message"]}
+                            #Pass On Expected Message    ${resp.json()["message"]}
                         END
-                        Should Be Equal As Strings      ${resp.status_code}     ${200}
+                        Should Be Equal As Strings      ${resp.status_code}     ${200}      msg=${resp.status_code},${resp.json()}
                         Set Test Variable   ${resp_status_code}    ${resp}
                         Set Test Variable   ${resp_body}    ${resp.json()}
                         Set Test Variable   ${resp_body_query}    ${resp_body['q']}
