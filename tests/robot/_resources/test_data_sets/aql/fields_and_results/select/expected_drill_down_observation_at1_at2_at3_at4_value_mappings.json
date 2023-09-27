@@ -1,8 +1,8 @@
 {
-	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/item[at0004]/value/mappings FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/mappings FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
 	"columns": [
 		{
-			"path": "o/data[at0001]/events[at0002]/data[at0003]/item[at0004]/value/mappings",
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/mappings",
 			"name": "#0"
 		}
 	],

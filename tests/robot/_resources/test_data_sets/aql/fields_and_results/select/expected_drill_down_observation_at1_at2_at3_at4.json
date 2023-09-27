@@ -1,8 +1,8 @@
 {
-	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/item[at0004] FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004] FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
 	"columns": [
 		{
-			"path": "o/data[at0001]/events[at0002]/data[at0003]/item[at0004]",
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0004]",
 			"name": "#0"
 		}
 	],
@@ -12,7 +12,47 @@
 				"_type": "ELEMENT",
 				"name": {
 					"_type": "DV_TEXT",
-					"value": "comment"
+					"value": "DV_TEXT"
+				},
+				"value": {
+					"_type": "DV_TEXT",
+					"value": "Lorem ipsum",
+					"mappings": [
+						{
+							"_type": "TERM_MAPPING",
+							"match": "=",
+							"target": {
+								"_type": "CODE_PHRASE",
+								"terminology_id": {
+									"_type": "TERMINOLOGY_ID",
+									"value": "SNOMED-CT"
+								},
+								"code_string": "21794005"
+							}
+						},
+						{
+							"_type": "TERM_MAPPING",
+							"match": ">",
+							"target": {
+								"_type": "CODE_PHRASE",
+								"terminology_id": {
+									"_type": "TERMINOLOGY_ID",
+									"value": "SNOMED-CT"
+								},
+								"code_string": "21794000"
+							}
+						}
+					]
+				},
+				"archetype_node_id": "at0004"
+			}
+		],
+		[
+			{
+				"_type": "ELEMENT",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "DV_TEXT"
 				},
 				"value": {
 					"_type": "DV_TEXT",
@@ -26,21 +66,7 @@
 				"_type": "ELEMENT",
 				"name": {
 					"_type": "DV_TEXT",
-					"value": "comment"
-				},
-				"value": {
-					"_type": "DV_TEXT",
-					"value": "Lorem ipsum"
-				},
-				"archetype_node_id": "at0004"
-			}
-		],
-		[
-			{
-				"_type": "ELEMENT",
-				"name": {
-					"_type": "DV_TEXT",
-					"value": "comment"
+					"value": "DV_TEXT"
 				},
 				"value": {
 					"_type": "DV_TEXT",
