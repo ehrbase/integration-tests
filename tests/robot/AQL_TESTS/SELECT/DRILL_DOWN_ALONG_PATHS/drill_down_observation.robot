@@ -40,7 +40,7 @@ Execute Query
     ${file_without_replaced_vars}   Get Binary File    ${expected_res_tmp}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     Log     Expected data: ${data_replaced_vars}
-    Create File     ${EXPECTED_JSON_DATA_SETS}/select/drill_down_observation_tmp.json
+    Create Binary File     ${EXPECTED_JSON_DATA_SETS}/select/drill_down_observation_tmp.json
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${diff}     compare json-string with json-file
