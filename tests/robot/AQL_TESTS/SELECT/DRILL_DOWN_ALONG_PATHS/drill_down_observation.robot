@@ -37,7 +37,7 @@ Execute Query
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
     ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/select/${expected_file}
-    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
+    ${file_without_replaced_vars}   Get Binary File    ${expected_res_tmp}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     Log     Expected data: ${data_replaced_vars}
     Create File     ${EXPECTED_JSON_DATA_SETS}/select/drill_down_observation_tmp.json
