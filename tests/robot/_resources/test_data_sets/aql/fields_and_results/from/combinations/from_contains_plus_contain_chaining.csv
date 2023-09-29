@@ -8,5 +8,5 @@ OBSERVATION o CONTAINS CLUSTER,expected_contains_contain_chaining_obs_cluster.js
 OBSERVATION o CONTAINS INTERVAL_EVENT,expected_contains_contain_chaining_obs_int_event.json,2
 OBSERVATION o CONTAINS INTERVAL_EVENT CONTAINS CLUSTER,expected_contains_contain_chaining_obs_int_event_cluster.json,1
 EVENT o CONTAINS CLUSTER,expected_contains_contain_chaining_event_cluster.json,3
-OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS ELEMENT e[at0004],expected_contains_contain_chaining_obs_element.json,1
-CLUSTER o[openEHR-EHR-CLUSTER.conformance_cluster.v0] CONTAINS ELEMENT e[at0003],expected_contains_contain_chaining_cluster_element.json,3
+COMPOSITION CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS ELEMENT e[at0004],expected_contains_contain_chaining_obs_element.json,1
+COMPOSITION CONTAINS CLUSTER o[openEHR-EHR-CLUSTER.conformance_cluster.v0] CONTAINS ELEMENT e[at0003],expected_contains_contain_chaining_cluster_element.json,3
