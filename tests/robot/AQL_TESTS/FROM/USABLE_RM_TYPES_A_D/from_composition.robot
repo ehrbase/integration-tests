@@ -39,7 +39,11 @@ Execute Query
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
     ${exclude_paths}    Create List    root['rows'][0][0]['uid']
-    Length Should Be    ${resp_body['rows']}     1
+    IF      '${query}' != 'SELECT t FROM ELEMENT t'
+        Length Should Be    ${resp_body['rows']}     1
+    ELSE
+        Length Should Be    ${resp_body['rows']}     68
+    END
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}
