@@ -9,7 +9,7 @@ Documentation   CHECK AQL RESPONSE ON FROM ITEM_STRUCTURE IN COMPOSITION
 ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver
-...         file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/from/combinations/from_item_structure_composition.csv
+...         file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/from/combinations/from_item_structure_and_element_in_composition.csv
 ...         dialect=excel
 
 #Suite Setup  Skip    enable Setup 'Precondition' if AQL checks are passing !!!
