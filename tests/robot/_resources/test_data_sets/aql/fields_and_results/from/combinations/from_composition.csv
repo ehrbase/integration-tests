@@ -9,4 +9,3 @@ ACTION,expected_from_action.json
 EVALUATION,expected_from_evaluation.json
 INSTRUCTION_DETAILS,expected_from_instruction_details.json
 ACTIVITY,expected_from_activity.json
-ELEMENT,expected_from_element.json

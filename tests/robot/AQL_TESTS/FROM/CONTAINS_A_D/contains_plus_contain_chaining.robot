@@ -13,6 +13,7 @@ Documentation   CHECK AQL RESPONSE ON FROM CONTAINS PLUS CONTAIN CHAINING
 ...         - OBSERVATION o CONTAINS INTERVAL_EVENT,
 ...         - OBSERVATION o CONTAINS INTERVAL_EVENT CONTAINS CLUSTER,
 ...         - EVENT o CONTAINS CLUSTER
+...         - COMPOSITION CONTAINS ELEMENT o
 ...         - Check if actual response == expected response
 ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
 Resource        ../../../_resources/keywords/aql_keywords.robot
