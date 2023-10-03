@@ -350,8 +350,38 @@ GET /definition/query/{qualified_query_name} / including {version}
     ...         headers=${headers}
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
-                Set Test Variable       ${resp_query}   ${resp['q']}
-    [Return]    ${resp_query}
+                ${q_exists}    Run Keyword And Return Status    Dictionary Should Contain Key    ${resp}    q
+                IF      '${q_exists}' == '${TRUE}'
+                    Set Test Variable       ${resp_query}   ${resp['q']}
+                ELSE IF     '${q_exists}' == '${FALSE}'
+                    Set Test Variable       ${resp_versions}   ${resp['versions'][0]}
+                END
+
+GET /definition/query
+    [Documentation]     List all stored AQL from EHRBase.
+    ...                 Expected status code 200.
+    &{headers}      Create Dictionary       Content-Type=application/json
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${resp}     GET On Session      ${SUT}
+    ...         /definition/query
+    ...         expected_status=anything
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Set Test Variable       ${resp}         ${resp.json()}
+    [return]    ${resp}
+
+DELETE /definition/query/{qualified_query_name}/{version}
+    [Documentation]     Delete stored AQL from EHRBase using its qualified_query_name/version.
+    ...                 Expected status code 200.
+    [Arguments]     ${qualif_name}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${resp}     DELETE On Session       ${SUT}
+    ...         /definition/query/${qualif_name}
+    ...         expected_status=anything
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Set Test Variable       ${resp}         ${resp.json()}
 
 GET /query/aql?q={query}
     [Documentation]     Executes HTTP method GET on /query/aql?q={query} endpoint
@@ -458,8 +488,38 @@ Generate Qualified Query Name To Store Query Multitenancy
 
 
 GET /query/{qualified_query_name}
-    No Operation
+    [Documentation]     Execute through GET stored AQL from EHRBase, using below endpoint:
+    ...                 - GET /rest/openehr/v1/query/{qualified_query_name}
+    ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
+    ...                 Expected status code 200.
+    ...                 Returns {resp}, with query and rows from response.
+    [Arguments]     ${qualif_name}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${resp}     GET On Session      ${SUT}
+    ...         /query/${qualif_name}
+    ...         expected_status=anything
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Set Test Variable       ${resp}         ${resp.json()}
+    [Return]    ${resp}
 
+POST /query/{qualified_query_name}
+    [Documentation]     Execute through POST stored AQL from EHRBase, using below endpoint:
+    ...                 - POST /rest/openehr/v1/query/{qualified_query_name}
+    ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
+    ...                 Expected status code 200.
+    ...                 Returns {resp}, with query and rows from response.
+    [Arguments]     ${qualif_name}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${resp}     POST On Session      ${SUT}
+    ...         /query/${qualif_name}
+    ...         expected_status=anything
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Set Test Variable       ${resp}         ${resp.json()}
+    [Return]    ${resp}
 
 GET /query/{qualified_query_name}/?ehr_id
     No Operation
@@ -468,14 +528,44 @@ GET /query/{qualified_query_name}/?ehr_id
 GET /query/{qualified_query_name}/?query_parameter
     No Operation
 
-
 GET /query/{qualified_query_name}/?ehr_id?query_parameter
     No Operation
 
-
 GET /query/{qualified_query_name}/{version}
-    No Operation
+    [Documentation]     Execute through GET stored AQL from EHRBase, using below endpoint:
+    ...                 - GET /rest/openehr/v1/query/{qualified_query_name}/{version}
+    ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
+    ...                 {qualif_name} must have the following format: {qualified_query_name}/{version}
+    ...                 Expected status code 200.
+    ...                 Returns {resp}, with query and rows from response.
+    [Arguments]     ${qualif_name}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${resp}     GET On Session      ${SUT}
+    ...         /query/${qualif_name}
+    ...         expected_status=anything
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Set Test Variable       ${resp}         ${resp.json()}
+    [Return]    ${resp}
 
+POST /query/{qualified_query_name}/{version}
+    [Documentation]     Execute through POST stored AQL from EHRBase, using below endpoint:
+    ...                 - POST /rest/openehr/v1/query/{qualified_query_name}/{version}
+    ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
+    ...                 {qualif_name} must have the following format: {qualified_query_name}/{version}
+    ...                 Expected status code 200.
+    ...                 Returns {resp}, with query and rows from response.
+    [Arguments]     ${qualif_name}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${resp}     POST On Session      ${SUT}
+    ...         /query/${qualif_name}
+    ...         expected_status=anything
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Set Test Variable       ${resp}         ${resp.json()}
+    [Return]    ${resp}
 
 GET /query/{qualified_query_name}/{version}?ehr_id
     No Operation
