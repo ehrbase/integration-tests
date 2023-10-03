@@ -37,7 +37,7 @@ Definition API - PUT Stored Query Using Qualified Query Name
     ...     SELECT c/uid/value AS COMPOSITION_UID_VALUE
     ...     FROM EHR e
     ...     CONTAINS COMPOSITION c
-    ...     WHERE e/ehr_id/value='${ehr_id}'
+    ...     WHERE e/ehr_id/value = '${ehr_id}'
     Set Suite Variable     ${initial_query}     ${query}
     ${resp_qualified_query_name}     PUT /definition/query/{qualified_query_name}
     ...     query_to_store=${query}     format=text
@@ -53,7 +53,7 @@ Definition API - PUT Stored Query Using Qualified Query Name - Invalid AQL State
     ...     FROM EHR e
     ...     CONTAINS COMPOSITION c
     ...     FROM EHR e
-    ...     WHERE e/ehr_id/value='${ehr_id}' WHERE e/ehr_id/value='${ehr_id}'
+    ...     WHERE e/ehr_id/value = '${ehr_id}' WHERE e/ehr_id/value = '${ehr_id}'
     Run Keyword And Expect Error    	400 != 200
     ...     PUT /definition/query/{qualified_query_name}
     ...     query_to_store=${wrong_query}     format=text
