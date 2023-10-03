@@ -34,7 +34,7 @@ Definition API - PUT Stored Query Using Qualified Query Name
     ...                 Expected response status code = 200
     [Setup]     Precondition
     ${query}       Catenate
-    ...     SELECT c/uid/value as COMPOSITION_UID_VALUE
+    ...     SELECT c/uid/value AS COMPOSITION_UID_VALUE
     ...     FROM EHR e
     ...     CONTAINS COMPOSITION c
     ...     WHERE e/ehr_id/value='${ehr_id}'
@@ -49,7 +49,7 @@ Definition API - PUT Stored Query Using Qualified Query Name - Invalid AQL State
     ...                 - PUT /rest/openehr/v1/definition/query/{qualified_query_name} with invalid AQL statement
     ...                 Expected response status code = 400
     ${wrong_query}       Catenate
-    ...     SELECT c/uid/value as COMPOSITION_UID_VALUE
+    ...     SELECT c/uid/value AS COMPOSITION_UID_VALUE
     ...     FROM EHR e
     ...     CONTAINS COMPOSITION c
     ...     FROM EHR e
