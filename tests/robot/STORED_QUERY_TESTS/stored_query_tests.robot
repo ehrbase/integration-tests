@@ -36,7 +36,7 @@ Definition API - PUT Stored Query Using Qualified Query Name
     ${query}       Catenate
     ...     SELECT c/uid/value as COMPOSITION_UID_VALUE
     ...     FROM EHR e
-    ...     CONTAINS composition c
+    ...     CONTAINS COMPOSITION c
     ...     WHERE e/ehr_id/value='${ehr_id}'
     Set Suite Variable     ${initial_query}     ${query}
     ${resp_qualified_query_name}     PUT /definition/query/{qualified_query_name}
@@ -51,7 +51,7 @@ Definition API - PUT Stored Query Using Qualified Query Name - Invalid AQL State
     ${wrong_query}       Catenate
     ...     SELECT c/uid/value as COMPOSITION_UID_VALUE
     ...     FROM EHR e
-    ...     CONTAINS composition c
+    ...     CONTAINS COMPOSITION c
     ...     FROM EHR e
     ...     WHERE e/ehr_id/value='${ehr_id}' WHERE e/ehr_id/value='${ehr_id}'
     Run Keyword And Expect Error    	400 != 200
