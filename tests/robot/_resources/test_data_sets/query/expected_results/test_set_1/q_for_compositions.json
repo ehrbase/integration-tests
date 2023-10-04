@@ -1,5 +1,5 @@
 {
-    "q": "SELECT e/ehr_status/subject/external_ref/id/value as value, e/ehr_status/subject/external_ref/namespace as namespace, c/name/value as composition FROM EHR e Contains composition c",
+    "q": "SELECT e/ehr_status/subject/external_ref/id/value as value, e/ehr_status/subject/external_ref/namespace as namespace, c/name/value as composition FROM EHR e CONTAINS COMPOSITION c",
     "columns": [
         {
             "path": "/ehr_status/subject/external_ref/id/value",

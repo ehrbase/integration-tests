@@ -1,5 +1,5 @@
 {
-    "q": "select e/ehr_id/value, o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude as systolic from EHR e contains Observation o where o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude = 130.0",
+    "q": "select e/ehr_id/value, o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude as systolic from EHR e CONTAINS OBSERVATION o where o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude = 130.0",
     "columns": [
         {
             "path": "/ehr_id/value",
