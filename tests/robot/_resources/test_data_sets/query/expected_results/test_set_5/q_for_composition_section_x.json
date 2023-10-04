@@ -1,137 +1,137 @@
 {
-    "q": "SELECT s/name/value as name FROM EHR e CONTAINS COMPOSITION CONTAINS SECTION s[openEHR-EHR-SECTION.adhoc.v1]",
-    "columns": [
-        {
-            "path": "/name/value",
-            "name": "name"
-        }
+  "q": "SELECT s/name/value as name FROM EHR e CONTAINS COMPOSITION CONTAINS SECTION s [openEHR-EHR-SECTION.adhoc.v1]",
+  "columns": [
+    {
+      "path": "/name/value",
+      "name": "name"
+    }
+  ],
+  "rows": [
+    [
+      "Lab Tests"
     ],
-    "rows": [
-        [
-            "Lab Tests"
-        ],
-        [
-            "Pathology Test"
-        ],
-        [
-            "Vitals"
-        ],
-        [
-            "Procedure"
-        ],
-        [
-            "Service Request"
-        ],
-        [
-            "Medication Order"
-        ],
-        [
-            "Lab Tests"
-        ],
-        [
-            "Pathology Test"
-        ],
-        [
-            "Vitals"
-        ],
-        [
-            "Procedure"
-        ],
-        [
-            "Service Request"
-        ],
-        [
-            "Medication Order"
-        ],
-        [
-            "Lab Tests"
-        ],
-        [
-            "Pathology Test"
-        ],
-        [
-            "Vitals"
-        ],
-        [
-            "Procedure"
-        ],
-        [
-            "Service Request"
-        ],
-        [
-            "Medication Order"
-        ],
-        [
-            "Lab Tests"
-        ],
-        [
-            "Pathology Test"
-        ],
-        [
-            "Vitals"
-        ],
-        [
-            "Procedure"
-        ],
-        [
-            "Service Request"
-        ],
-        [
-            "Medication Order"
-        ],
-        [
-            "Lab Tests"
-        ],
-        [
-            "Pathology Test"
-        ],
-        [
-            "Vitals"
-        ],
-        [
-            "Procedure"
-        ],
-        [
-            "Service Request"
-        ],
-        [
-            "Medication Order"
-        ],
-        [
-            "Lab Tests"
-        ],
-        [
-            "Pathology Test"
-        ],
-        [
-            "Vitals"
-        ],
-        [
-            "Procedure"
-        ],
-        [
-            "Service Request"
-        ],
-        [
-            "Medication Order"
-        ],
-        [
-            "Lab Tests"
-        ],
-        [
-            "Pathology Test"
-        ],
-        [
-            "Vitals"
-        ],
-        [
-            "Procedure"
-        ],
-        [
-            "Service Request"
-        ],
-        [
-            "Medication Order"
-        ]
+    [
+      "Pathology Test"
+    ],
+    [
+      "Vitals"
+    ],
+    [
+      "Procedure"
+    ],
+    [
+      "Service Request"
+    ],
+    [
+      "Medication Order"
+    ],
+    [
+      "Lab Tests"
+    ],
+    [
+      "Pathology Test"
+    ],
+    [
+      "Vitals"
+    ],
+    [
+      "Procedure"
+    ],
+    [
+      "Service Request"
+    ],
+    [
+      "Medication Order"
+    ],
+    [
+      "Lab Tests"
+    ],
+    [
+      "Pathology Test"
+    ],
+    [
+      "Vitals"
+    ],
+    [
+      "Procedure"
+    ],
+    [
+      "Service Request"
+    ],
+    [
+      "Medication Order"
+    ],
+    [
+      "Lab Tests"
+    ],
+    [
+      "Pathology Test"
+    ],
+    [
+      "Vitals"
+    ],
+    [
+      "Procedure"
+    ],
+    [
+      "Service Request"
+    ],
+    [
+      "Medication Order"
+    ],
+    [
+      "Lab Tests"
+    ],
+    [
+      "Pathology Test"
+    ],
+    [
+      "Vitals"
+    ],
+    [
+      "Procedure"
+    ],
+    [
+      "Service Request"
+    ],
+    [
+      "Medication Order"
+    ],
+    [
+      "Lab Tests"
+    ],
+    [
+      "Pathology Test"
+    ],
+    [
+      "Vitals"
+    ],
+    [
+      "Procedure"
+    ],
+    [
+      "Service Request"
+    ],
+    [
+      "Medication Order"
+    ],
+    [
+      "Lab Tests"
+    ],
+    [
+      "Pathology Test"
+    ],
+    [
+      "Vitals"
+    ],
+    [
+      "Procedure"
+    ],
+    [
+      "Service Request"
+    ],
+    [
+      "Medication Order"
     ]
+  ]
 }
