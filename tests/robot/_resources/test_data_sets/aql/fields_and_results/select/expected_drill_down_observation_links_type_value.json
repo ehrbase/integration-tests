@@ -1,14 +1,14 @@
 {
-	"q": "SELECT o/links/type/value FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
-	"columns": [
-		{
-			"path": "o/links/type/value",
-			"name": "#0"
-		}
-	],
-	"rows": [
-		[
-			"problem"
-		]
-	]
+  "q": "SELECT o/links/type/value FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+  "columns": [
+    {
+      "path": "o/links/type/value",
+      "name": "#0"
+    }
+  ],
+  "rows": [
+    [
+      "problem"
+    ]
+  ]
 }

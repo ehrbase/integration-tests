@@ -94,7 +94,7 @@ Authorization: Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 # Authorization: Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
 # {
-#   "q": "SELECT c FROM EHR e [ehr_id/value='{{ehr_id}}'] CONTAINS COMPOSITION c"
+#   "q": "SELECT c FROM EHR e[ehr_id/value='{{ehr_id}}'] CONTAINS COMPOSITION c"
 # }
 
 ###

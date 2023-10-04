@@ -7,9 +7,9 @@ Resource        ../../../_resources/keywords/aql_keywords.robot
 
 
 *** Test Cases ***
-SELECT o FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]
+SELECT o FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]
     [Setup]     Precondition
-    ${query}    Set Variable    SELECT o FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]
+    ${query}    Set Variable    SELECT o FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]
     Set AQL And Execute Ad Hoc Query        ${query}
     Length Should Be    ${resp_body['rows']}     1
     Should Be Equal As Strings     ${resp_body['rows'][0][0]['_type']}      OBSERVATION

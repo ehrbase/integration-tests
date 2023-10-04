@@ -1,26 +1,26 @@
 {
-	"q": "SELECT o/links FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
-	"columns": [
-		{
-			"path": "o/links",
-			"name": "#0"
-		}
-	],
-	"rows": [
-		[
-			{
-				"type": {
-					"_type": "DV_TEXT",
-					"value": "problem"
-				},
-				"target": {
-					"value": "ehr://ehr.network/347a5490-55ee-4da9-b91a-9bba710f730e"
-				},
-				"meaning": {
-					"_type": "DV_TEXT",
-					"value": "problem related note"
-				}
-			}
-		]
-	]
+  "q": "SELECT o/links FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+  "columns": [
+    {
+      "path": "o/links",
+      "name": "#0"
+    }
+  ],
+  "rows": [
+    [
+      {
+        "type": {
+          "_type": "DV_TEXT",
+          "value": "problem"
+        },
+        "target": {
+          "value": "ehr://ehr.network/347a5490-55ee-4da9-b91a-9bba710f730e"
+        },
+        "meaning": {
+          "_type": "DV_TEXT",
+          "value": "problem related note"
+        }
+      }
+    ]
+  ]
 }

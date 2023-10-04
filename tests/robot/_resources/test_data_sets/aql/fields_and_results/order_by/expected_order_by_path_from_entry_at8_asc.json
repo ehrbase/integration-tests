@@ -1,20 +1,20 @@
 {
-	"q": "SELECT ${path}${spath} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0] ORDER BY ${path} ${order}",
-	"columns": [
-		{
-			"path": "${path}${spath}",
-			"name": "#0"
-		}
-	],
-	"rows": [
-		[
-			22.0
-		],
-		[
-			80.2
-		],
-		[
-			null
-		]
-	]
+  "q": "SELECT ${path}${spath} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] ORDER BY ${path} ${order}",
+  "columns": [
+    {
+      "path": "${path}${spath}",
+      "name": "#0"
+    }
+  ],
+  "rows": [
+    [
+      22.0
+    ],
+    [
+      80.2
+    ],
+    [
+      null
+    ]
+  ]
 }

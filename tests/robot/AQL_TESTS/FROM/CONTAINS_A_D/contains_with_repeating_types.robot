@@ -5,7 +5,7 @@ Documentation   CHECK AQL RESPONSE ON FROM CONTAINS WITH REPEATING TYPES
 ...         - Send AQL 'SELECT o FROM COMPOSITION contains {from}'
 ...         - {from} can be:
 ...         SECTION o, SECTION contains SECTION o, CLUSTER o,
-...         CLUSTER contains CLUSTER o, CLUSTER contains CLUSTER o [at0005]
+...         CLUSTER contains CLUSTER o, CLUSTER contains CLUSTER o[at0005]
 ...         - Check if actual response == expected response
 ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
 Resource        ../../../_resources/keywords/aql_keywords.robot

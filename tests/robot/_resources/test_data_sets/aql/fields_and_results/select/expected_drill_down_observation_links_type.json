@@ -1,17 +1,17 @@
 {
-	"q": "SELECT o/links/type FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
-	"columns": [
-		{
-			"path": "o/links/type",
-			"name": "#0"
-		}
-	],
-	"rows": [
-		[
-			{
-				"_type": "DV_TEXT",
-				"value": "problem"
-			}
-		]
-	]
+  "q": "SELECT o/links/type FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+  "columns": [
+    {
+      "path": "o/links/type",
+      "name": "#0"
+    }
+  ],
+  "rows": [
+    [
+      {
+        "_type": "DV_TEXT",
+        "value": "problem"
+      }
+    ]
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "q": "select  c/items[at0001]/value/value from EHR e contains OBSERVATION o [openEHR-EHR-OBSERVATION.blood_pressure.v2] contains CLUSTER c",
+  "q": "select  c/items[at0001]/value/value from EHR e contains OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] contains CLUSTER c",
   "columns": [
     {
       "path": "/items[at0001]/value/value",

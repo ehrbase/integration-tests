@@ -1,20 +1,20 @@
 {
-	"q": "SELECT c/${path} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0] CONTAINS CLUSTER c [openEHR-EHR-CLUSTER.conformance_cluster.v0]",
-	"columns": [
-		{
-			"path": "c/${path}",
-			"name": "#0"
-		}
-	],
-	"rows": [
-		[
-			"Lorem ipsum"
-		],
-		[
-			"Lorem ipsum2"
-		],
-		[
-			null
-		]
-	]
+  "q": "SELECT c/${path} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.conformance_cluster.v0]",
+  "columns": [
+    {
+      "path": "c/${path}",
+      "name": "#0"
+    }
+  ],
+  "rows": [
+    [
+      "Lorem ipsum"
+    ],
+    [
+      "Lorem ipsum2"
+    ],
+    [
+      null
+    ]
+  ]
 }

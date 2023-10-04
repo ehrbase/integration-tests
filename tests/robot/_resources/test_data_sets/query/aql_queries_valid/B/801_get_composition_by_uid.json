@@ -1,5 +1,5 @@
 {
-  "q": "SELECT c FROM COMPOSITION c [uid/value=$uid]",
+  "q": "SELECT c FROM COMPOSITION c[uid/value=$uid]",
   "query_parameters": {
     "uid": "__MODIFY_COMPOSITION_UID_1__"
   }
