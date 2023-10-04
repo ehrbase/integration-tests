@@ -170,9 +170,42 @@ Query API - GET Stored Query Using Qualified Query Name
     ...     qualif_name=${resp_qualified_query_name}
     Should Be Equal As Strings      ${resp_query['q']}        ${initial_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${resp_qualified_query_name}/1.0.0
-    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     /uid/value
+    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
     Should Be Equal As Strings      ${resp_query['rows'][0][0]}     ${composition_uid}
+
+Query API - GET Stored Query Using Qualified Query Name With Ehr Id Param
+    [Tags]      Positive
+    [Documentation]     Test to check below endpoint:
+    ...                 - GET /rest/openehr/v1/query/{qualified_query_name}?ehr_id={ehr_id}
+    ...                 \nFirst, add query using PUT /definition/query/{qualified_query_name}
+    ...                 Expected:
+    ...                 - response status code = 200
+    ...                 - q = {second_query} - stored in the same test
+    ...                 - name = {qualified_query_name}/1.0.0
+    ...                 - columns[0].path = /uid/value (value from AQL statement returned in q)
+    ...                 - columns[0].name = COMPOSITION_UID_VALUE (value from AQL statement returned in q)
+    ...                 - rows[0][0] = ${composition_uid}
+    &{params}   Create Dictionary     ehr_id=${ehr_id}
+    ${query2}       Catenate
+    ...     SELECT c/uid/value AS COMPOSITION_UID_VALUE
+    ...     FROM EHR e
+    ...     CONTAINS COMPOSITION c
+    Set Test Variable     ${second_query}     ${query2}
+    ${temp_qualified_query_name}     PUT /definition/query/{qualified_query_name}
+    ...     query_to_store=${second_query}     format=text
+    ${resp_query}       GET /query/{qualified_query_name}
+    ...     qualif_name=${temp_qualified_query_name}    params=${params}
+    Should Be Equal As Strings      ${resp_query['q']}        ${second_query}
+    Should Be Equal As Strings      ${resp_query['name']}     ${temp_qualified_query_name}/1.0.0
+    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
+    Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
+    ${rows_length}      Get Length  ${resp_query['rows']}
+    IF      ${rows_length} == ${1}
+        Should Be Equal As Strings      ${resp_query['rows'][0][0]}     ${composition_uid}
+    ELSE IF     ${rows_length} == ${0}
+        Fail    Composition with uid '${composition_uid}' is not present in rows.
+    END
 
 Query API - GET Stored Query Using Inexistent Qualified Query Name
     [Tags]      not-ready   Negative    CDR-1069
@@ -200,7 +233,7 @@ Query API - POST Stored Query Using Qualified Query Name
     ...     qualif_name=${resp_qualified_query_name}
     Should Be Equal As Strings      ${resp_query['q']}        ${initial_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${resp_qualified_query_name}/1.0.0
-    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     /uid/value
+    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
     Should Be Equal As Strings      ${resp_query['rows'][0][0]}     ${composition_uid}
 
@@ -223,9 +256,42 @@ Query API - GET Stored Query Using Qualified Query Name And Version
     ...     qualif_name=${second_resp_qualified_query_name_version}
     Should Be Equal As Strings      ${resp_query['q']}        ${initial_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${second_resp_qualified_query_name_version}
-    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     /uid/value
+    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
     Should Be Equal As Strings      ${resp_query['rows'][0][0]}     ${composition_uid}
+
+Query API - GET Stored Query Using Qualified Query Name And Version With Ehr Id Param
+    [Tags]      Positive
+    [Documentation]     Test to check below endpoint:
+    ...                 - GET /rest/openehr/v1/query/{qualified_query_name}/{version}?ehr_id={ehr_id}
+    ...                 \nFirst, add query using 'PUT /definition/query/{qualified_query_name}/{version}'
+    ...                 Expected:
+    ...                 - response status code = 200
+    ...                 - q = {third_query} - stored in current test
+    ...                 - name = {qualified_query_name}/{version}
+    ...                 - columns[0].path = /uid/value (value from AQL statement returned in q)
+    ...                 - columns[0].name = COMPOSITION_UID_VALUE (value from AQL statement returned in q)
+    ...                 - rows[0][0] = ${composition_uid}
+    &{params}   Create Dictionary     ehr_id=${ehr_id}
+    ${query3}       Catenate
+    ...     SELECT c/uid/value AS COMPOSITION_UID_VALUE
+    ...     FROM EHR e
+    ...     CONTAINS COMPOSITION c
+    Set Test Variable     ${third_query}     ${query3}
+    ${temp_qualified_query_name_version}     PUT /definition/query/{qualified_query_name}/{version}
+    ...     query_to_store=${third_query}     format=text
+    ${resp_query}       GET /query/{qualified_query_name}/{version}
+    ...     qualif_name=${temp_qualified_query_name_version}    params=${params}
+    Should Be Equal As Strings      ${resp_query['q']}        ${third_query}
+    Should Be Equal As Strings      ${resp_query['name']}     ${temp_qualified_query_name_version}
+    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
+    Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
+    ${rows_length}      Get Length  ${resp_query['rows']}
+    IF      ${rows_length} == ${1}
+        Should Be Equal As Strings      ${resp_query['rows'][0][0]}     ${composition_uid}
+    ELSE IF     ${rows_length} == ${0}
+        Fail    Composition with uid '${composition_uid}' is not present in rows.
+    END
 
 Query API - POST Stored Query Using Qualified Query Name And Version
     [Tags]      Positive
@@ -246,7 +312,7 @@ Query API - POST Stored Query Using Qualified Query Name And Version
     ...     qualif_name=${second_resp_qualified_query_name_version}
     Should Be Equal As Strings      ${resp_query['q']}        ${initial_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${second_resp_qualified_query_name_version}
-    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     /uid/value
+    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
     Should Be Equal As Strings      ${resp_query['rows'][0][0]}     ${composition_uid}
 

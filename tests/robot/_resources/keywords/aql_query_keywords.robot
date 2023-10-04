@@ -493,13 +493,21 @@ GET /query/{qualified_query_name}
     ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
     ...                 Expected status code 200.
     ...                 Returns {resp}, with query and rows from response.
-    [Arguments]     ${qualif_name}
+    [Arguments]     ${qualif_name}      &{params}=${FALSE}
     &{headers}      Create Dictionary       Content-Type=application/json
     Create Session      ${SUT}      ${BASEURL}      debug=2
-    ${resp}     GET On Session      ${SUT}
-    ...         /query/${qualif_name}
-    ...         expected_status=anything
-    ...         headers=${headers}
+    IF      """${params}""" == """${FALSE}"""
+        ${resp}     GET On Session      ${SUT}
+        ...         /query/${qualif_name}
+        ...         expected_status=anything
+        ...         headers=${headers}
+    ELSE
+        ${resp}     GET On Session      ${SUT}
+        ...         /query/${qualif_name}
+        ...         expected_status=anything
+        ...         params=&{params}
+        ...         headers=${headers}
+    END
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
     [Return]    ${resp}
@@ -538,13 +546,21 @@ GET /query/{qualified_query_name}/{version}
     ...                 {qualif_name} must have the following format: {qualified_query_name}/{version}
     ...                 Expected status code 200.
     ...                 Returns {resp}, with query and rows from response.
-    [Arguments]     ${qualif_name}
+    [Arguments]     ${qualif_name}      &{params}=${FALSE}
     &{headers}      Create Dictionary       Content-Type=application/json
     Create Session      ${SUT}      ${BASEURL}      debug=2
-    ${resp}     GET On Session      ${SUT}
-    ...         /query/${qualif_name}
-    ...         expected_status=anything
-    ...         headers=${headers}
+    IF      """${params}""" == """${FALSE}"""
+        ${resp}     GET On Session      ${SUT}
+        ...         /query/${qualif_name}
+        ...         expected_status=anything
+        ...         headers=${headers}
+    ELSE
+        ${resp}     GET On Session      ${SUT}
+        ...         /query/${qualif_name}
+        ...         expected_status=anything
+        ...         params=&{params}
+        ...         headers=${headers}
+    END
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
     [Return]    ${resp}
