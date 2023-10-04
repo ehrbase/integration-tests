@@ -1,5 +1,5 @@
 {
-  "q": "SELECT t FROM SECTION t [openEHR-EHR-SECTION.adhoc.v1, 'Section 1']",
+  "q": "SELECT t FROM SECTION t[openEHR-EHR-SECTION.adhoc.v1, 'Section 1']",
   "columns": [
     {
       "path": "t",

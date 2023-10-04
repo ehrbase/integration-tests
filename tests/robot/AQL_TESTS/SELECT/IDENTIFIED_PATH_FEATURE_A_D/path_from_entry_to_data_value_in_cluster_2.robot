@@ -15,7 +15,7 @@ Suite Teardown  Admin Delete EHR For AQL    ${ehr_id}
 
 
 *** Test Cases ***
-SELECT c/${path} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0] CONTAINS CLUSTER c [openEHR-EHR-CLUSTER.conformance_cluster.v0]
+SELECT c/${path} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.conformance_cluster.v0]
     #[Tags]      not-ready
     [Template]      Execute Query
     ${path}    ${expected_file}    ${nr_of_results}
@@ -31,7 +31,7 @@ Precondition
 Execute Query
     [Arguments]     ${path}     ${expected_file}    ${nr_of_results}
     ${query_dict}   Create Dictionary
-    ...     tmp_query=SELECT c/${path} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0] CONTAINS CLUSTER c [openEHR-EHR-CLUSTER.conformance_cluster.v0]
+    ...     tmp_query=SELECT c/${path} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.conformance_cluster.v0]
     Log     ${query_dict["tmp_query"]}
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Log     ${query}

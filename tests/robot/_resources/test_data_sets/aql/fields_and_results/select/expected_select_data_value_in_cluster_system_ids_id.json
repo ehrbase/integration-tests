@@ -1,23 +1,23 @@
 {
-	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/item[openEHR-EHR-CLUSTER.conformance_cluster.v0]/${path} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
-	"columns": [
-		{
-			"path": "${path}",
-			"name": "#0"
-		}
-	],
-	"rows": [
-		[
-			"id1"
-		],
-		[
-			"id2"
-		],
-		[
-			null
-		],
-		[
-			null
-		]
-	]
+  "q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/item[openEHR-EHR-CLUSTER.conformance_cluster.v0]/${path} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+  "columns": [
+    {
+      "path": "${path}",
+      "name": "#0"
+    }
+  ],
+  "rows": [
+    [
+      "id1"
+    ],
+    [
+      "id2"
+    ],
+    [
+      null
+    ],
+    [
+      null
+    ]
+  ]
 }

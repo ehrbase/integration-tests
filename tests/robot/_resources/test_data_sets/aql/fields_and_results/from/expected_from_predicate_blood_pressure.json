@@ -1,5 +1,5 @@
 {
-  "q": "SELECT t FROM OBSERVATION t [openEHR-EHR-OBSERVATION.blood_pressure.v2]",
+  "q": "SELECT t FROM OBSERVATION t[openEHR-EHR-OBSERVATION.blood_pressure.v2]",
   "columns": [
     {
       "path": "t",

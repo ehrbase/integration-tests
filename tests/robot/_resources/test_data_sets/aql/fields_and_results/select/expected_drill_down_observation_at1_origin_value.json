@@ -1,14 +1,14 @@
 {
-	"q": "SELECT o/data[at0001]/origin/value FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
-	"columns": [
-		{
-			"path": "o/data[at0001]/origin/value",
-			"name": "#0"
-		}
-	],
-	"rows": [
-		[
-			"2022-02-03T04:05:06"
-		]
-	]
+  "q": "SELECT o/data[at0001]/origin/value FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+  "columns": [
+    {
+      "path": "o/data[at0001]/origin/value",
+      "name": "#0"
+    }
+  ],
+  "rows": [
+    [
+      "2022-02-03T04:05:06"
+    ]
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "q": "SELECT o FROM COMPOSITION CONTAINS CLUSTER o [openEHR-EHR-CLUSTER.conformance_cluster.v0] CONTAINS ELEMENT e [at0003]",
+  "q": "SELECT o FROM COMPOSITION CONTAINS CLUSTER o[openEHR-EHR-CLUSTER.conformance_cluster.v0] CONTAINS ELEMENT e[at0003]",
   "columns": [
     {
       "path": "o",

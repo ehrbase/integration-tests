@@ -5,7 +5,7 @@
       "path": "t"
     }
   ],
-  "q": "SELECT t FROM OBSERVATION t [openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+  "q": "SELECT t FROM OBSERVATION t[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
   "rows": [
     [
       {
