@@ -20,7 +20,7 @@ Test Multi Selects
     #${expected_result}      Replace Variables       ${tmp_expected_result}
     #Log     Add test data once 200 is returned. File: ${expected_result}
     #${exclude_paths}    Create List    root['rows'][0][0]['uid']
-    Length Should Be    ${resp_body['rows']}     8
+    Length Should Be    ${resp_body['rows']}     10
     ${rows_length}      Get Length      ${resp_body['rows']}
     ####
     FOR     ${INDEX}   IN RANGE     0   ${rows_length}

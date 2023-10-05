@@ -1,8 +1,8 @@
 {
-  "q": "SELECT c/${path} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.conformance_cluster.v0]",
+  "q": "SELECT c/items[at0005]/value/value FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.conformance_cluster.v0]",
   "columns": [
     {
-      "path": "c/${path}",
+      "path": "c/items[at0005]/value/value",
       "name": "#0"
     }
   ],

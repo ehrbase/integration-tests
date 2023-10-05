@@ -15,7 +15,7 @@ Suite Teardown  Admin Delete EHR For AQL    ${ehr_id}
 
 
 *** Test Cases ***
-SELECT o/data[at0001]/events[at0002]/data[at0003]/item[openEHR-EHR-CLUSTER.conformance_cluster.v0]/${path} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]
+SELECT o/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.conformance_cluster.v0]/${path} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]
     #[Tags]      not-ready
     [Template]      Execute Query
     ${path}    ${expected_file}    ${nr_of_results}
