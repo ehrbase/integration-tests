@@ -37,10 +37,10 @@ Execute Query
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
     ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/select/${expected_file}
-    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
+    ${file_without_replaced_vars}   Get Binray File    ${expected_res_tmp}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     Log     Expected data: ${data_replaced_vars}
-    Create File     ${EXPECTED_JSON_DATA_SETS}/select/path_from_entry_to_data_value_tmp.json
+    Create Binary File     ${EXPECTED_JSON_DATA_SETS}/select/path_from_entry_to_data_value_tmp.json
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${diff}     compare json-string with json-file
