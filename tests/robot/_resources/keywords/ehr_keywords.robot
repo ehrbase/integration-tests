@@ -309,11 +309,7 @@ create new EHR by ID
     ELSE
             &{resp}     REST.PUT    ${baseurl}/ehr/${ehr_id}
     END
-    ${isPassed}     Run Keyword And Return Status
-    ...     Set Test Variable    ${response}    ${resp}
-    IF      '${isPassed}' != '${TRUE}'
-        Set Suite Variable    ${response}    ${resp}
-    END
+    Set Suite Variable    ${response}    ${resp}
     #Output Debug Info To Console  # NOTE: won't work with content-type=XML
 
 
