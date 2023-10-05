@@ -1,20 +1,20 @@
 {
-  "q": "SELECT c/items[at0003]/value/value FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.conformance_cluster.v0]",
-  "columns": [
-    {
-      "path": "c/items[at0003]/value/value",
-      "name": "#0"
-    }
-  ],
-  "rows": [
-    [
-      "Lorem ipsum"
-    ],
-    [
-      "Lorem ipsum2"
-    ],
-    [
-      null
-    ]
-  ]
+	"q": "SELECT c/items[at0003]/value/value FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.conformance_cluster.v0]",
+	"columns": [
+		{
+			"path": "c/items[at0003]/value/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"Lorem ipsum"
+		],
+		[
+			"Lorem ipsum"
+		],
+		[
+			"Lorem ipsum"
+		]
+	]
 }
