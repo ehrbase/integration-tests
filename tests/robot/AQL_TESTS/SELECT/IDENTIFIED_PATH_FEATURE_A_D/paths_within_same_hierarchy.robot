@@ -26,11 +26,9 @@ Lvl 1: SELECT p/time/value FROM POINT_EVENT p
     ${query}    Set Variable    SELECT p/time/value FROM POINT_EVENT p
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/paths_same_hierarchy_lvl1.json
-    Log     Add test data once 200 is returned. File: ${expected_result}    console=yes
-    ${exclude_paths}    Create List    root['rows'][0][0]['uid']
-    Length Should Be    ${resp_body['rows']}     4
+    Length Should Be    ${resp_body['rows']}     5
     ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ...     ${resp_body_actual}     ${expected_result}
     #Log To Console    \n\n${diff}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
@@ -45,8 +43,6 @@ Lvl 2: SELECT i/narrative/value FROM INSTRUCTION i
     [Setup]     Precondition2
     ${query}    Set Variable    SELECT i/narrative/value FROM INSTRUCTION i
     Set AQL And Execute Ad Hoc Query        ${query}
-    Log     Add test data once 200 is returned. File: ${expected_result}    console=yes
-    ${exclude_paths}    Create List    root['rows'][0][0]['uid']
     Length Should Be    ${resp_body['rows']}     1
     Should Be Equal As Strings      ${resp_body['rows'][0][0]}      Human readable instruction narrative
     [Teardown]      Admin Delete EHR For AQL
