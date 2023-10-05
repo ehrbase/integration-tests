@@ -18,13 +18,21 @@ SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAIN
     [Setup]     Precondition
     ${query}    Set Variable    SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
     Set AQL And Execute Ad Hoc Query        ${query}
-    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/primitives_multi_selects_expected.json
+    ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/select/primitives_multi_selects_expected.json
+    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
+    ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
+    Log     Expected data: ${data_replaced_vars}
+    Create File     ${EXPECTED_JSON_DATA_SETS}/select/primitives_multi_selects_expected_tmp.json
+    ...     ${data_replaced_vars}
+    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/primitives_multi_selects_expected_tmp.json
     Length Should Be    ${resp_body['rows']}    10
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      ignore_order=${TRUE}    ignore_string_case=${TRUE}
     #Log To Console    \n\n${diff}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
-    [Teardown]      Admin Delete EHR For AQL
+    [Teardown]      Run Keywords
+    ...     Remove File     ${EXPECTED_JSON_DATA_SETS}/select/primitives_multi_selects_expected_tmp.json
+    ...     AND     Admin Delete EHR For AQL
 
 
 *** Keywords ***
