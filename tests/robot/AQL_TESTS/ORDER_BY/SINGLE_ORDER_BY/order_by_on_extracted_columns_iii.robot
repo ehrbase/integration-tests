@@ -26,11 +26,13 @@ SELECT ${path} FROM EHR e CONTAINS COMPOSITION c ORDER BY ${path} ${order}
 Precondition
     Upload OPT For AQL      aql-conformance-ehrbase.org.v0.opt
     Upload OPT For AQL      type_repetition_conformance_ehrbase.org.opt
-    Create EHR For AQL
+    generate random ehr_id
+    Create EHR For AQL      ehr_id=${ehr_id}
     Set Suite Variable      ${ehr_id1}     ${ehr_id}
     Commit Composition For AQL      aql-conformance-ehrbase.org.v0_contains_with_compo_uid.json
     Set Suite Variable      ${c_uid1}      ${composition_short_uid}
-    Create EHR For AQL
+    generate random ehr_id
+    Create EHR For AQL      ehr_id=${ehr_id}
     Set Suite Variable      ${ehr_id2}     ${ehr_id}
     Set Suite Variable      ${ehr_id}      ${ehr_id2}
     Commit Composition For AQL      type_repetition_conformance_ehrbase.org_one_reptation_with_compo_uid.json

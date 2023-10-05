@@ -300,15 +300,17 @@ Create EHR With Subject External Ref
                         Set Suite Variable    ${subject_external_ref_value}    ${ehr_status_subject_external_ref_value}[0]
 
 create new EHR by ID
-    [Arguments]         ${ehr_id}
+    [Arguments]         ${ehr_id}   ${ehr_status_json}=${NONE}
     [Documentation]     Create a new EHR with the specified EHR identifier.
     ...                 DEPENDENCY: `prepare new request session`
 
-    &{resp}=            REST.PUT    ${baseurl}/ehr/${ehr_id}
-
-                        Set Test Variable    ${response}    ${resp}
-
-                        Output Debug Info To Console  # NOTE: won't work with content-type=XML
+    IF      '${ehr_status_json}' != '${NONE}'
+            &{resp}     REST.PUT    ${baseurl}/ehr/${ehr_id}    ${ehr_status_json}
+    ELSE
+            &{resp}     REST.PUT    ${baseurl}/ehr/${ehr_id}
+    END
+    Set Test Variable    ${response}    ${resp}
+    #Output Debug Info To Console  # NOTE: won't work with content-type=XML
 
 
 create new EHR for subject_id (JSON)

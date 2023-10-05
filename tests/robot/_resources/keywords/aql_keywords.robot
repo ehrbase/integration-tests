@@ -131,8 +131,20 @@ Upload OPT For AQL
 
 Create EHR For AQL
     [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
+    ...     Takes 1 optional arg {ehr_id}, with randomly generated id at Test/Keyword level.
+    ...     Keyword to generate ehr_id is 'generate random ehr_id', located inside ehr_keywords.robot
+    [Arguments]     ${ehr_id}=${NONE}
     prepare new request session    JSON      Prefer=return=representation
-    create new EHR with ehr_status  ${EHR_DATA_SETS}/000_ehr_status_with_other_details.json
+    IF      '${ehr_id}' != '${NONE}'
+        ${ehr_status_json}  Load JSON From File     ${EHR_DATA_SETS}/000_ehr_status_with_other_details.json
+        Update Value To Json    ${ehr_status_json}    $.subject.external_ref.id.value
+        ...    ${{str(uuid.uuid4())}}
+        Update Value To Json    ${ehr_status_json}    $.subject.external_ref.namespace
+        ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
+        create new EHR by ID    ehr_id=${ehr_id}   ehr_status_json=${ehr_status_json}
+    ELSE
+        create new EHR with ehr_status  ${EHR_DATA_SETS}/000_ehr_status_with_other_details.json
+    END
                         Integer     response status     201
     ${ehr_id_obj}       Object      response body ehr_id
     ${ehr_id_value}     String      response body ehr_id value
