@@ -304,7 +304,7 @@ create new EHR by ID
     [Documentation]     Create a new EHR with the specified EHR identifier.
     ...                 DEPENDENCY: `prepare new request session`
 
-    IF      '${ehr_status_json}' != '${NONE}'
+    IF      """${ehr_status_json}""" != """${NONE}"""
             &{resp}     REST.PUT    ${baseurl}/ehr/${ehr_id}    ${ehr_status_json}
     ELSE
             &{resp}     REST.PUT    ${baseurl}/ehr/${ehr_id}
