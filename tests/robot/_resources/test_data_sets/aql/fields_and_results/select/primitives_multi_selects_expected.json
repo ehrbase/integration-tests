@@ -20,52 +20,64 @@
 	],
 	"rows": [
 		[
-			"${ehr_id}",
-			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
-			"d86702c2-15db-4d85-be51-af335cf43123",
+			"eb1f8339-ba19-41b3-8769-f56b7a870fd5",
+			"36fb3e88-687f-4e36-8f69-3df1bc4875c1::local.ehrbase.org::1",
+			"36fb3e88-687f-4e36-8f69-3df1bc4875c1::local.ehrbase.org::1",
 			"2022-02-03T04:05:06"
 		],
 		[
-			"${ehr_id}",
-			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
-			"d86702c2-15db-4d85-be51-af335cf43123",
-			"2023-02-03T04:05:06"
-		],
-		[
-			"${ehr_id}",
-			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
-			"38065052-af1f-4b0b-b03d-9bda140a6edf",
-			"2024-02-03T04:05:06"
-		],
-		[
-			"${ehr_id}",
-			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
-			"38065052-af1f-4b0b-b03d-9bda140a6edf",
-			"2025-02-03T04:05:06"
-		],
-		[
-			"${ehr_id}",
-			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
-			"d86702c2-15db-4d85-be51-af335cf43123",
+			"eb1f8339-ba19-41b3-8769-f56b7a870fd5",
+			"36fb3e88-687f-4e36-8f69-3df1bc4875c1::local.ehrbase.org::1",
+			"36fb3e88-687f-4e36-8f69-3df1bc4875c1::local.ehrbase.org::1",
 			"2022-02-03T04:05:06"
 		],
 		[
-			"${ehr_id}",
-			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
-			"d86702c2-15db-4d85-be51-af335cf43123",
-			"2023-02-03T04:05:06"
+			"eb1f8339-ba19-41b3-8769-f56b7a870fd5",
+			"36fb3e88-687f-4e36-8f69-3df1bc4875c1::local.ehrbase.org::1",
+			"36fb3e88-687f-4e36-8f69-3df1bc4875c1::local.ehrbase.org::1",
+			"2022-02-03T04:05:06"
 		],
 		[
-			"${ehr_id}",
-			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
-			"38065052-af1f-4b0b-b03d-9bda140a6edf",
-			"2024-02-03T04:05:06"
+			"eb1f8339-ba19-41b3-8769-f56b7a870fd5",
+			"36fb3e88-687f-4e36-8f69-3df1bc4875c1::local.ehrbase.org::1",
+			"36fb3e88-687f-4e36-8f69-3df1bc4875c1::local.ehrbase.org::1",
+			"2022-02-03T04:05:06"
 		],
 		[
-			"${ehr_id}",
-			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
-			"38065052-af1f-4b0b-b03d-9bda140a6edf",
-			"2025-02-03T04:05:06"
+			"eb1f8339-ba19-41b3-8769-f56b7a870fd5",
+			"36fb3e88-687f-4e36-8f69-3df1bc4875c1::local.ehrbase.org::1",
+			"36fb3e88-687f-4e36-8f69-3df1bc4875c1::local.ehrbase.org::1",
+			"2022-02-03T04:05:06"
+		],
+		[
+			"eb1f8339-ba19-41b3-8769-f56b7a870fd5",
+			"be35f834-f408-407b-a7ad-8c4b57bb2db5::local.ehrbase.org::1",
+			"be35f834-f408-407b-a7ad-8c4b57bb2db5::local.ehrbase.org::1",
+			"2022-02-03T04:05:06"
+		],
+		[
+			"eb1f8339-ba19-41b3-8769-f56b7a870fd5",
+			"be35f834-f408-407b-a7ad-8c4b57bb2db5::local.ehrbase.org::1",
+			"be35f834-f408-407b-a7ad-8c4b57bb2db5::local.ehrbase.org::1",
+			"2022-02-03T04:05:06"
+		],
+		[
+			"eb1f8339-ba19-41b3-8769-f56b7a870fd5",
+			"be35f834-f408-407b-a7ad-8c4b57bb2db5::local.ehrbase.org::1",
+			"be35f834-f408-407b-a7ad-8c4b57bb2db5::local.ehrbase.org::1",
+			"2022-02-03T04:05:06"
+		],
+		[
+			"eb1f8339-ba19-41b3-8769-f56b7a870fd5",
+			"be35f834-f408-407b-a7ad-8c4b57bb2db5::local.ehrbase.org::1",
+			"be35f834-f408-407b-a7ad-8c4b57bb2db5::local.ehrbase.org::1",
+			"2022-02-03T04:05:06"
+		],
+		[
+			"eb1f8339-ba19-41b3-8769-f56b7a870fd5",
+			"be35f834-f408-407b-a7ad-8c4b57bb2db5::local.ehrbase.org::1",
+			"be35f834-f408-407b-a7ad-8c4b57bb2db5::local.ehrbase.org::1",
+			"2022-02-03T04:05:06"
 		]
 	]
 }

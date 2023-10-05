@@ -1,8 +1,8 @@
 {
-  "q": "SELECT ${path} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+  "q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0013]/value/value FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
   "columns": [
     {
-      "path": "${path}",
+      "path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0013]/value/value",
       "name": "#0"
     }
   ],
@@ -11,7 +11,7 @@
       "2022-02-03"
     ],
     [
-      "2023-02-03"
+      "2022-02-03"
     ],
     [
       "2022-02-03"
