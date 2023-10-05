@@ -31,7 +31,7 @@ Precondition
 Execute Query
     [Arguments]     ${path}     ${expected_file}    ${nr_of_results}
     ${query_dict}   Create Dictionary
-    ...     tmp_query=SELECT o/data[at0001]/events[at0002]/data[at0003]/item[openEHR-EHR-CLUSTER.conformance_cluster.v0]/${path} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]
+    ...     tmp_query=SELECT o/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.conformance_cluster.v0]/${path} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]
     Log     ${query_dict["tmp_query"]}
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Log     ${query}
