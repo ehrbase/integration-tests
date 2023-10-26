@@ -6,5 +6,30 @@
       "name": "#0"
     }
   ],
-  "rows": []
+  "rows": [
+        [
+			null
+		],
+		[
+			null
+		],
+		[
+			{
+				"_type": "DV_IDENTIFIER",
+				"issuer": "issuer1",
+				"assigner": "assigner1",
+				"id": "id1",
+				"type": "PERSON"
+			}
+		],
+		[
+			{
+				"_type": "DV_IDENTIFIER",
+				"issuer": "issuer2",
+				"assigner": "assigner2",
+				"id": "id2",
+				"type": "PERSON"
+			}
+		]
+  ]
 }
