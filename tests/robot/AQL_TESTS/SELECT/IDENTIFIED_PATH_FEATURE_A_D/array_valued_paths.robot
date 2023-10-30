@@ -25,7 +25,7 @@ SELECT ${path} FROM COMPOSITION c CONTAINS OBSERVATION o
 Precondition
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Create EHR For AQL
-    Commit Composition For AQL      conformance_ehrbase.de.v0_max.json
+    Commit Composition For AQL      conformance_ehrbase.de.v0_array_valued.json
     Set Suite Variable      ${c_uid1}      ${composition_short_uid}
 
 Execute Query

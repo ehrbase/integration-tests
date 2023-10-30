@@ -1,0 +1,17 @@
+{
+	"q": "SELECT o/subject/identifiers/id FROM COMPOSITION c CONTAINS OBSERVATION o",
+	"columns": [
+		{
+			"path": "o/subject/identifiers/id",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"200"
+		],
+		[
+			"123"
+		]
+	]
+}

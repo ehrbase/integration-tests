@@ -1,0 +1,31 @@
+{
+	"q": "SELECT c/context/participations/performer/name, c/context/participations/performer/identifiers/id FROM COMPOSITION c CONTAINS OBSERVATION o",
+	"columns": [
+		{
+			"path": "c/context/participations/performer/name",
+			"name": "#0"
+		},
+		{
+			"path": "c/context/participations/performer/identifiers/id",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"Dr. Marcus Johnson",
+			"200"
+		],
+		[
+			"Dr. Marcus Johnson",
+			"201"
+		],
+		[
+			"Dr. Stefan Mann",
+			"202"
+		],
+		[
+			"Dr. Stefan Mann",
+			"203"
+		]
+	]
+}

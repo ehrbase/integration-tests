@@ -1,0 +1,35 @@
+{
+	"q": "SELECT c/feeder_audit/original_content/value, c/feeder_audit/feeder_system_item_ids/id, c/feeder_audit/feeder_system_item_ids/type, c/feeder_audit/feeder_system_item_ids/issuer FROM COMPOSITION c CONTAINS OBSERVATION o",
+	"columns": [
+		{
+			"path": "c/feeder_audit/original_content/value",
+			"name": "#0"
+		},
+		{
+			"path": "c/feeder_audit/feeder_system_item_ids/id",
+			"name": "#1"
+		},
+		{
+			"path": "c/feeder_audit/feeder_system_item_ids/type",
+			"name": "#2"
+		},
+		{
+			"path": "c/feeder_audit/feeder_system_item_ids/issuer",
+			"name": "#3"
+		}
+	],
+	"rows": [
+		[
+			"Hello world!",
+			"id1",
+			"PERSON",
+			"issuer1"
+		],
+		[
+			"Hello world!",
+			"id2",
+			"PERSON",
+			"issuer2"
+		]
+	]
+}
