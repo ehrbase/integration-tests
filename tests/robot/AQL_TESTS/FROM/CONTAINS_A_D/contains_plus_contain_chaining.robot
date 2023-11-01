@@ -27,7 +27,7 @@ Suite Teardown  Admin Delete EHR For AQL       #enable this keyword if AQL check
 
 
 *** Test Cases ***
-Test Contains Plus Contain Chaining: SELECT o FROM ${from}
+Contains Plus Contain Chaining: SELECT o FROM ${from}
     #[Tags]      not-ready
     [Template]      Execute Query
     ${from}     ${expected_file}    ${nr_of_results}
