@@ -29,4 +29,3 @@ o/data[at0001]/events[at0002]/data[at0003]/items[at0014]/value/value,${EMPTY},"=
 o/data[at0001]/events[at0002]/data[at0003]/items[at0014]/value/value,${EMPTY},"> 1",expected_compare_dv_ordered_at14_value_greater.json,1
 o/data[at0001]/events[at0002]/data[at0003]/items[at0014]/value,/value,"= 1",expected_compare_dv_ordered_at14_value_eq1.json,2
 o/data[at0001]/events[at0002]/data[at0003]/items[at0014]/value,/value,"> 1",expected_compare_dv_ordered_at14_value_greater1.json,1
-
