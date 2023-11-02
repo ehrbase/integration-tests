@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation   WHERE - Exist - Compare with Null
+Documentation   WHERE - Exists - Compare with Null
 ...             - Covers the following:
 ...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#compare-with-null
 
