@@ -14,7 +14,7 @@ Suite Teardown  Admin Delete EHR For AQL    ${ehr_id}
 
 
 *** Test Cases ***
-SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec ORDER BY ${path} ${order}
+SELECT ${path}/value FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec ORDER BY ${path} ${order}
     #[Tags]      not-ready
     [Template]      Execute Query
     ${path}     ${order}    ${expected_file}    ${nr_of_results}
@@ -36,7 +36,7 @@ Precondition
 Execute Query
     [Arguments]     ${path}     ${order}    ${expected_file}    ${nr_of_results}
     ${query_dict}   Create Dictionary
-    ...     tmp_query=SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec ORDER BY ${path} ${order}
+    ...     tmp_query=SELECT ${path}/value FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec ORDER BY ${path} ${order}
     Log     ${query_dict["tmp_query"]}
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Log     ${query}
