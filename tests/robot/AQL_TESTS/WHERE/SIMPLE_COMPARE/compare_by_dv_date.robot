@@ -23,7 +23,7 @@ SELECT ${path}/value FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec
 
 *** Keywords ***
 Precondition
-    Upload OPT For AQL      conformance-ehrbase.de.v0.opt
+    Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Create EHR For AQL
     Commit Composition For AQL      conformance_ehrbase.de.v0_known_date_type_1.json
     Set Suite Variable       ${c_uid1}      ${composition_short_uid}
