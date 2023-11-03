@@ -1,10 +1,10 @@
 ${path},${spath},${condition},${expected_file},${nr_of_results}
-o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value,/magnitude,"= 80.2",expected_compare_dv_ordered_at8_mag_eq.json,1
-o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value,/magnitude,"> 80.2",expected_compare_dv_ordered_at8_mag_greater.json,0
-o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value,/magnitude,"< 80.2",expected_compare_dv_ordered_at8_mag_lower.json,1
-o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value/magnitude,${EMPTY},"= 80.2",expected_compare_dv_ordered_at8_mag_eq1.json,1
-o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value/magnitude,${EMPTY},"> 80.2",expected_compare_dv_ordered_at8_mag_greater1.json,0
-o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value/magnitude,${EMPTY},"< 80.2",expected_compare_dv_ordered_at8_mag_lower1.json,1
+o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value,/magnitude,"= 82.0",expected_compare_dv_ordered_at8_mag_eq.json,1
+o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value,/magnitude,"> 82.0",expected_compare_dv_ordered_at8_mag_greater.json,0
+o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value,/magnitude,"< 82.0",expected_compare_dv_ordered_at8_mag_lower.json,1
+o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value/magnitude,${EMPTY},"= 82.0",expected_compare_dv_ordered_at8_mag_eq1.json,1
+o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value/magnitude,${EMPTY},"> 82.0",expected_compare_dv_ordered_at8_mag_greater1.json,0
+o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value/magnitude,${EMPTY},"< 82.0",expected_compare_dv_ordered_at8_mag_lower1.json,1
 o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value,/numerator,"= 14",expected_compare_dv_ordered_at9_numerator_eq.json,1
 o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value,/numerator,"> 14",expected_compare_dv_ordered_at9_numerator_greater.json,1
 o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value/numerator,${EMPTY},"= 40",expected_compare_dv_ordered_at9_numerator_eq1.json,1

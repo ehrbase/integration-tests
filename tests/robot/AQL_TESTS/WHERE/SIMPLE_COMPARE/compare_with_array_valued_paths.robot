@@ -30,7 +30,6 @@ Precondition
 
 Execute Query
     [Arguments]     ${path}     ${where}     ${expected_file}   ${nr_of_results}
-    Log     Add test data once 200 is returned. File: ${expected_file}    console=yes
     ${query_dict}   Create Dictionary
     ...     tmp_query=SELECT ${path} FROM COMPOSITION c CONTAINS OBSERVATION o WHERE ${where}
     Log     ${query_dict["tmp_query"]}

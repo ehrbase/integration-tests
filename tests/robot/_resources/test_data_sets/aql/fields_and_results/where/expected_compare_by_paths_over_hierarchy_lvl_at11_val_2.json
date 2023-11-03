@@ -1,8 +1,8 @@
 {
-	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at00011]/value/value FROM COMPOSITION c CONTAINS OBSERVATION o WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at00011]/value/value = '2024-02-03T04:05:06'",
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value/value FROM COMPOSITION c CONTAINS OBSERVATION o WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at00011]/value/value = '2024-02-03T04:05:06'",
 	"columns": [
 		{
-			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at00011]/value/value",
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value/value",
 			"name": "#0"
 		}
 	],

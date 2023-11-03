@@ -32,7 +32,6 @@ Precondition
 
 Execute Query
     [Arguments]     ${path}     ${where}     ${expected_file}
-    Log     Add test data once 200 is returned. File: ${expected_file}    console=yes
     ${query_dict}   Create Dictionary
     ...     tmp_query=SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec WHERE ${where}
     Log     ${query_dict["tmp_query"]}
