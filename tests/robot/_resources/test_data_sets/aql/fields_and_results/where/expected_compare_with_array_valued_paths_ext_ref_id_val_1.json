@@ -1,0 +1,19 @@
+{
+	"q": "SELECT c/context/participations/performer/name, c/context/participations/performer/external_ref/id/value FROM COMPOSITION c CONTAINS OBSERVATION o WHERE c/context/participations/performer/name = 'Dr. Marcus Johnson'",
+	"columns": [
+		{
+			"path": "c/context/participations/performer/name",
+			"name": "#0"
+		},
+		{
+			"path": "c/context/participations/performer/external_ref/id/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"Dr. Marcus Johnson",
+			"199"
+		]
+	]
+}
