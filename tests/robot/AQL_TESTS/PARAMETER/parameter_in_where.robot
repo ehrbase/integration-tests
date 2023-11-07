@@ -30,11 +30,11 @@ Precondition
 Execute Query
     [Arguments]     ${path}     ${value}    ${expected_file}    ${nr_of_results}
     ${query_dict}   Create Dictionary
-    ...     tmp_query=SELECT ${path} FROM COMPOSITION c CONTAINS OBSERVATION o WHERE ${path} = \&param
+    ...     tmp_query=SELECT ${path} FROM COMPOSITION c CONTAINS OBSERVATION o WHERE ${path} = \$param
     Log     ${query_dict["tmp_query"]}
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Log     ${query}
-    ${parameter_obj}    Set Variable    {"param":"${value}"}
+    ${parameter_obj}    Set Variable    {"param":${value}}
     Set AQL And Execute Ad Hoc Query    ${query}    parameter=${parameter_obj}
     ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/parameter/${expected_file}
     ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
