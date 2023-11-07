@@ -679,7 +679,7 @@
                   },
                   "value": {
                     "_type": "DV_DATE_TIME",
-                    "value": "2022-03-03T04:05:06"
+                    "value": "2022-03-03T04:06:06"
                   },
                   "archetype_node_id": "at0004"
                 }
@@ -1435,7 +1435,7 @@
                   },
                   "value": {
                     "_type": "DV_COUNT",
-                    "magnitude": 2
+                    "magnitude": 3
                   },
                   "archetype_node_id": "at0004"
                 }
