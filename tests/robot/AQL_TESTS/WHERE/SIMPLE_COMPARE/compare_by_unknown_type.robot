@@ -29,7 +29,7 @@ Precondition
     Set Suite Variable      ${c_uid1}      ${composition_short_uid}
 
 Execute Query
-    [Arguments]     ${path}     ${expected_file}    ${nr_of_results}
+    [Arguments]     ${path}     ${condition}    ${expected_file}    ${nr_of_results}
     ${query_dict}   Create Dictionary
     ...     tmp_query=SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value, o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/magnitude FROM OBSERVATION o [openEHR-EHR-OBSERVATION.choice.v0] WHERE ${path} ${condition}
     Log     ${query_dict["tmp_query"]}
