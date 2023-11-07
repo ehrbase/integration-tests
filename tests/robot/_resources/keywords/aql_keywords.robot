@@ -52,9 +52,14 @@ Set AQL And Execute Ad Hoc Query
     [Documentation]     Setup AQL for POST request body and send Ad Hoc Query.
     ...                 - Set resp_body_actual, actual_rows, columns_length, rows_length.
     ...                 - Takes 1 mandatory arg query_expr, to be provided directly AQL statement without "q":
+    ...                 - Takes 1 optional arg parameter, to be provided in case query contains params
     ...                 - Example: SELECT c FROM COMPOSITION c
-    [Arguments]     ${query_expr}
-    ${test_data}    Set Variable    {"q":"${query_expr}"}
+    [Arguments]     ${query_expr}   ${parameter}=${EMPTY}
+    IF      '''${parameter}''' == '''${EMPTY}'''
+        ${test_data}    Set Variable    {"q":"${query_expr}"}
+    ELSE
+        ${test_data}    Set Variable    {"q":"${query_expr}","query_parameters":${parameter}}
+    END
     Send Ad Hoc Request     aql_body=${test_data}
     Set Test Variable       ${resp_body_actual}     ${resp_body}
     #${actual_rows}      Set Variable    ${resp_body_rows[0]}
