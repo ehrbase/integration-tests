@@ -4,7 +4,7 @@ Documentation   PARAMETER - PARAMETER in where
 
 Resource        ../../_resources/keywords/aql_keywords.robot
 Library     DataDriver
-...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/order_by/combinations/parameter_in_where.csv
+...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/parameter/combinations/parameter_in_where.csv
 ...     dialect=excel
 
 #Suite Setup  Skip    enable Setup 'Precondition' if AQL checks are passing !!!
