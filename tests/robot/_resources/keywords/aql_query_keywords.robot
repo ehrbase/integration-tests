@@ -909,9 +909,10 @@ Create EHR Record On The Server
     ${time_created}         String    response body time_created value
 #	 ${date_time_parts}      Evaluate  datetime.datetime.strptime('''${time_created}[0]''', '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%dT%H:%M:%S.%fZ').split('.')
 
-    ${date_time_parts}      Evaluate    datetime.datetime.strptime('''${time_created}[0]''', '%Y-%m-%dT%H:%M:%SZ').strftime('%Y-%m-%dT%H:%M:%SZ')
-    ${formatted_time_created}  Set Variable  ${date_time_parts[0]}.${date_time_parts[1][:3]}Z
+#   ${date_time_parts}      Evaluate    datetime.datetime.strptime('''${time_created}[0]''', '%Y-%m-%dT%H:%M:%SZ').strftime('%Y-%m-%dT%H:%M:%SZ')
+#   ${formatted_time_created}  Set Variable  ${date_time_parts[0]}.${date_time_parts[1][:3]}Z
     ${time_created_obj}     Set Variable    ${time_created_obj_list}[0]
+    ${formatted_time_created}   Set Variable    ${time_created_obj["value"]}
     Set To Dictionary   ${time_created_obj}      value       ${formatted_time_created}
                         Set Suite Variable    ${time_created}    ${formatted_time_created}
                         Set Suite Variable    ${time_created_obj}    ${time_created_obj}
