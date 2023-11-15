@@ -53,6 +53,20 @@
 		],
 		[
 			"conformance section",
+			"Conformance Observation",
+			null,
+			"Blood pressure",
+			"Conformance Observation"
+		],
+		[
+			"conformance section",
+			"Conformance Observation",
+			null,
+			"Blood pressure",
+			"Conformance Observation"
+		],
+		[
+			"conformance section",
 			"Blood pressure",
 			"conformance cluster",
 			"Blood pressure",
@@ -67,14 +81,14 @@
 		],
 		[
 			"Section 1",
-			null,
+			"Conformance Observation",
 			null,
 			null,
 			"Conformance Observation"
 		],
 		[
 			"Section 2",
-			null,
+			"Conformance Observation",
 			null,
 			null,
 			"Conformance Observation"

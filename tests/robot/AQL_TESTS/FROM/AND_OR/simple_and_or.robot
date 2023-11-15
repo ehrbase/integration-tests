@@ -16,7 +16,7 @@ Suite Teardown  Admin Delete EHR For AQL       #enable this keyword if AQL check
 
 *** Test Cases ***
 ${statement}
-    [Tags]      not-ready   last-case-is-failing    working-in-feature-branch
+    #[Tags]      not-ready
     [Template]      Execute Query
     ${statement}     ${expected_file}    ${nr_of_results}
 
