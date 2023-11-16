@@ -1,0 +1,20 @@
+{
+	"q": "SELECT ec/start_time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec WHERE ec/start_time <= '2021-12-21T15:19:31.649613+01:00'",
+	"columns": [
+		{
+			"path": "ec/start_time/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"2021-12-21T15:19:31.649613+01:00"
+		],
+		[
+			"2021-12-21T14:19:31.649613+01:00"
+		],
+		[
+			"2021-12-21T14:19:31.649613+03:00"
+		]
+	]
+}
