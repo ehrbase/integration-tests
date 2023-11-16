@@ -1,0 +1,17 @@
+{
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value FROM COMPOSITION c CONTAINS OBSERVATION o WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value = '2024-02-03T04:05:06'",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "DV_DATE_TIME",
+				"value": "2024-02-03T04:05:06"
+			}
+		]
+	]
+}
