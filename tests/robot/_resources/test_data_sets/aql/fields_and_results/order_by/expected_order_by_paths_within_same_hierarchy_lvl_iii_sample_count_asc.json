@@ -1,5 +1,5 @@
 {
-	"q": "SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec CONTAINS INTERVAL_EVENT i ORDER BY ${path} ${order}",
+	"q": "SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS INTERVAL_EVENT i ORDER BY ${path} ${order}",
 	"columns": [
 		{
 			"path": "${path}",

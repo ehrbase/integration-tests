@@ -1,17 +1,17 @@
 {
-	"q": "SELECT ${path}${spath} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] ORDER BY ${path} ${order}",
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value/numerator FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] ORDER BY o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value DESC",
 	"columns": [
 		{
-			"path": "${path}${spath}",
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value/numerator",
 			"name": "#0"
 		}
 	],
 	"rows": [
 		[
-			42.0
+			40.0
 		],
 		[
-			40.0
+			42.0
 		],
 		[
 			20.0
