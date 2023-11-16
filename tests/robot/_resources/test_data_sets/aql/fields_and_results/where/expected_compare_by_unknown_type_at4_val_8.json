@@ -1,0 +1,14 @@
+{
+  "q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value, o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/magnitude FROM OBSERVATION o[openEHR-EHR-OBSERVATION.choice.v0] WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value < false",
+  "columns": [
+    {
+      "path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value",
+      "name": "#0"
+    },
+    {
+      "path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/magnitude",
+      "name": "#1"
+    }
+  ],
+  "rows": []
+}

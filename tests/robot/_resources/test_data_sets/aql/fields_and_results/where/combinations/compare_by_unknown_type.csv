@@ -1,12 +1,12 @@
 ${path},${condition},${expected_file},${nr_of_results}
 o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value,"= '04:05:06'",expected_compare_by_unknown_type_at4_val_1.json,1
 o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value,"< '04:06:06'",expected_compare_by_unknown_type_at4_val_2.json,1
-o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value,"= '10.0'",expected_compare_by_unknown_type_at4_val_3.json,1
-o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value,"< '2'",expected_compare_by_unknown_type_at4_val_4.json,3
+o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value,"= '10.0'",expected_compare_by_unknown_type_at4_val_3.json,0
+o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value,"< '2'",expected_compare_by_unknown_type_at4_val_4.json,0
 o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value,"= 2",expected_compare_by_unknown_type_at4_val_5.json,2
 o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value,"< 10",expected_compare_by_unknown_type_at4_val_6.json,3
-o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value,"= false",expected_compare_by_unknown_type_at4_val_7.json,1
-o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value,"< false",expected_compare_by_unknown_type_at4_val_8.json,14
+o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value,"= false",expected_compare_by_unknown_type_at4_val_7.json,0
+o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value,"< false",expected_compare_by_unknown_type_at4_val_8.json,0
 o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value,"= '04:05:06'",expected_compare_by_unknown_type_at4_val_val_1.json,1
 o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value,"< '04:06:06'",expected_compare_by_unknown_type_at4_val_val_2.json,1
 o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value,"= '10.0'",expected_compare_by_unknown_type_at4_val_val_3.json,1
