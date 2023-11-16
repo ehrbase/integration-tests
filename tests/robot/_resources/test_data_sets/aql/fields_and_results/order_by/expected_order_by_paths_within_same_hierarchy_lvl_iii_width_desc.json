@@ -1,17 +1,23 @@
 {
-	"q": "SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS INTERVAL_EVENT i ORDER BY ${path} ${order}",
+	"q": "SELECT i/width FROM EHR e CONTAINS COMPOSITION c CONTAINS INTERVAL_EVENT i ORDER BY i/width DESC",
 	"columns": [
 		{
-			"path": "${path}",
+			"path": "i/width",
 			"name": "#0"
 		}
 	],
 	"rows": [
 		[
-			"P30M"
+			{
+				"_type": "DV_DURATION",
+				"value": "P30M"
+			}
 		],
 		[
-			"P40D"
+			{
+				"_type": "DV_DURATION",
+				"value": "P40D"
+			}
 		]
 	]
 }
