@@ -1,5 +1,5 @@
 {
-	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0014]/value/value FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at0014]/value = 1",
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0014]/value/value FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at0014]/value = 1",
 	"columns": [
 		{
 			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0014]/value/value",
