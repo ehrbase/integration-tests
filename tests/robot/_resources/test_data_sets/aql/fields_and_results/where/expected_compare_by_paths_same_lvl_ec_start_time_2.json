@@ -1,17 +1,14 @@
 {
-	"q": "SELECT ec/start_time FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec WHERE ec/start_time = '2022-12-21T14:19:31.649613+01:00'",
+	"q": "SELECT ec/start_time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec WHERE ec/start_time = '2022-12-21T14:19:31.649613+01:00'",
 	"columns": [
 		{
-			"path": "ec/start_time",
+			"path": "ec/start_time/value",
 			"name": "#0"
 		}
 	],
 	"rows": [
 		[
-			{
-				"_type": "DV_DATE_TIME",
-				"value": "2022-12-21T14:19:31.649613+01:00"
-			}
+			"2022-12-21T14:19:31.649613+01:00"
 		]
 	]
 }
