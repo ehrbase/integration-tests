@@ -1,0 +1,95 @@
+{
+	"q": "SELECT s1/feeder_audit/originating_system_item_ids/id, s2/feeder_audit/originating_system_item_ids/id, o/feeder_audit/originating_system_item_ids/id, v/time/value, c1/items[at0001]/value/value, l/value/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s1 CONTAINS SECTION s2 CONTAINS OBSERVATION o CONTAINS EVENT v CONTAINS CLUSTER c1 CONTAINS CLUSTER c2 CONTAINS ELEMENT l WHERE s1/feeder_audit/originating_system_item_ids/id = 'ad_hoc_heading 2'",
+	"columns": [
+		{
+			"path": "s1/feeder_audit/originating_system_item_ids/id",
+			"name": "#0"
+		},
+		{
+			"path": "s2/feeder_audit/originating_system_item_ids/id",
+			"name": "#1"
+		},
+		{
+			"path": "o/feeder_audit/originating_system_item_ids/id",
+			"name": "#2"
+		},
+		{
+			"path": "v/time/value",
+			"name": "#3"
+		},
+		{
+			"path": "c1/items[at0001]/value/value",
+			"name": "#4"
+		},
+		{
+			"path": "l/value/value",
+			"name": "#5"
+		}
+	],
+	"rows": [
+		[
+			"ad_hoc_heading 2",
+			"conformance_section 3",
+			"observation 3",
+			"2021-02-03T04:05:06",
+			"cluster inter text5",
+			"cluster outer text9"
+		],
+		[
+			"ad_hoc_heading 2",
+			"conformance_section 3",
+			"observation 3",
+			"2021-02-03T04:05:06",
+			"cluster inter text5",
+			"cluster outer text10"
+		],
+		[
+			"ad_hoc_heading 2",
+			"conformance_section 3",
+			"observation 3",
+			"2022-02-03T04:05:06",
+			"cluster inter text6",
+			"cluster outer text11"
+		],
+		[
+			"ad_hoc_heading 2",
+			"conformance_section 3",
+			"observation 3",
+			"2022-02-03T04:05:06",
+			"cluster inter text6",
+			"cluster outer text12"
+		],
+		[
+			"ad_hoc_heading 2",
+			"conformance_section 4",
+			"observation 4",
+			"2023-02-03T04:05:06",
+			"cluster inter text7",
+			"cluster outer text13"
+		],
+		[
+			"ad_hoc_heading 2",
+			"conformance_section 4",
+			"observation 4",
+			"2023-02-03T04:05:06",
+			"cluster inter text7",
+			"cluster outer text14"
+		],
+		[
+			"ad_hoc_heading 2",
+			"conformance_section 4",
+			"observation 4",
+			"2024-02-03T04:05:06",
+			"cluster inter text8",
+			"cluster outer text15"
+		],
+		[
+			"ad_hoc_heading 2",
+			"conformance_section 4",
+			"observation 4",
+			"2024-02-03T04:05:06",
+			"cluster inter text8",
+			"cluster outer text16"
+		]
+	]
+}
