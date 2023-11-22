@@ -1,0 +1,29 @@
+{
+	"q": "SELECT e/ehr_id/value, c/uid/value, o/name/value, l/value/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.symptom_sign_screening.v0, 'Husten'] CONTAINS ELEMENT l[at0005, 'Vorhanden?'] WHERE (c/archetype_details/template_id/value MATCHES {'Corona_Anamnese'} AND e/ehr_id/value MATCHES {'f13a5e18-a2db-473e-af61-784246ddd8a6'})",
+	"columns": [
+		{
+			"path": "e/ehr_id/value",
+			"name": "#0"
+		},
+		{
+			"path": "c/uid/value",
+			"name": "#1"
+		},
+		{
+			"path": "o/name/value",
+			"name": "#2"
+		},
+		{
+			"path": "l/value/value",
+			"name": "#3"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_id1}",
+			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
+			"Husten",
+			"Vorhanden"
+		]
+	]
+}
