@@ -131,8 +131,8 @@ Create Temp File With Expected JSON For AQL
     ${expected_file_tmp}    Set Variable    ${file_name}_tmp.json
     Set Test Variable       ${expected_file_tmp}    ${expected_file_tmp}
     ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file}
-    ${file_without_replaced_vars}   Get Binary File    ${expected_res_tmp}
+    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     #Log     Expected data: ${data_replaced_vars}
-    Create Binary File     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
+    Create File     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
     ...     ${data_replaced_vars}
