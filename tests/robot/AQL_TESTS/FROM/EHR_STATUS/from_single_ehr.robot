@@ -36,15 +36,12 @@ Execute Query
     ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/ehr_status_from_single_ehr_tmp.json
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${expected_file}
-    #${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
     ${expected_res_tmp}      Set Variable       ${expected_result_file}
     ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     #Log     Expected data: ${data_replaced_vars}
     Create File     ${expected_result_file}
     ...     ${data_replaced_vars}
-    #${exclude_paths}    Create List    root['rows'][0][0]['uid']
-    #exclude_paths=${exclude_paths}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result_file}
