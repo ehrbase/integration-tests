@@ -27,6 +27,7 @@ Resource        ehr_keywords.robot
 ${AQL_EXPRESSIONS_DATA_SETS}    ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/statements
 ${TEMPLATES_DATA_SETS}          ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/data_load/opts
 ${EHR_DATA_SETS}                ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/ehr/valid
+${EHR_STATUS_DATA_SETS_AQL}     ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/data_load/ehrs
 ${COMPOSITIONS_DATA_SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/data_load/compositions
 ${EXPECTED_JSON_DATA_SETS}      ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results
 
@@ -150,6 +151,17 @@ Create EHR For AQL
     ELSE
         create new EHR with ehr_status  ${EHR_DATA_SETS}/000_ehr_status_with_other_details.json
     END
+                        Integer     response status     201
+    ${ehr_id_obj}       Object      response body ehr_id
+    ${ehr_id_value}     String      response body ehr_id value
+                        Set Suite Variable      ${ehr_id_obj}     ${ehr_id_obj}
+                        Set Suite Variable      ${ehr_id}         ${ehr_id_value}[0]
+
+Create EHR For AQL With Custom EHR Status
+    [Documentation]     Create EHR with custom EHR_STATUS, filename provided in mandatory arg {file_name}.
+    [Arguments]     ${file_name}
+    prepare new request session    JSON      Prefer=return=representation
+    create new EHR with ehr_status      ${EHR_STATUS_DATA_SETS_AQL}/${file_name}
                         Integer     response status     201
     ${ehr_id_obj}       Object      response body ehr_id
     ${ehr_id_value}     String      response body ehr_id value
