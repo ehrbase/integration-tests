@@ -165,8 +165,14 @@ Create EHR For AQL With Custom EHR Status
                         Integer     response status     201
     ${ehr_id_obj}       Object      response body ehr_id
     ${ehr_id_value}     String      response body ehr_id value
+    ${ehr_status_subject_external_ref_value}    String    response body ehr_status subject external_ref id value
+    ${ehr_status_subject_external_ref_namespace}    String      response body ehr_status subject external_ref namespace
                         Set Suite Variable      ${ehr_id_obj}     ${ehr_id_obj}
                         Set Suite Variable      ${ehr_id}         ${ehr_id_value}[0]
+                        Set Suite Variable      ${subject_external_ref_value}
+                        ...     ${ehr_status_subject_external_ref_value}[0]
+                        Set Suite Variable      ${subject_external_ref_namespace}
+                        ...     ${ehr_status_subject_external_ref_namespace}[0]
 
 Commit Composition For AQL
     [Documentation]     Create Composition for AQL checks.

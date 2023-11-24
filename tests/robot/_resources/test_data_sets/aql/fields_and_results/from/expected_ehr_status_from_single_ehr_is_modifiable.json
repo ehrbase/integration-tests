@@ -1,0 +1,14 @@
+{
+	"q": "SELECT s/is_modifiable FROM EHR e CONTAINS EHR_STATUS s WHERE e/ehr_id/value = '${ehr_id}'",
+	"columns": [
+		{
+			"path": "s/is_modifiable",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			true
+		]
+	]
+}

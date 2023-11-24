@@ -1,0 +1,23 @@
+{
+	"q": "SELECT s/subject/external_ref/id/value, s/other_details/items[at0001]/value/id FROM EHR e CONTAINS EHR_STATUS s",
+	"columns": [
+		{
+			"path": "s/subject/external_ref/id/value",
+			"name": "#0"
+		},
+		{
+			"path": "s/other_details/items[at0001]/value/id",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"${subject_external_ref_value1}",
+			"${at1_value_id1}"
+		],
+		[
+			"${subject_external_ref_value2}",
+			"${at1_value_id2}"
+		]
+	]
+}

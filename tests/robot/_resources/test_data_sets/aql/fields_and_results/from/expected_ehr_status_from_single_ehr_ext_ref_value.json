@@ -1,0 +1,14 @@
+{
+	"q": "SELECT s/subject/external_ref/id/value FROM EHR e CONTAINS EHR_STATUS s WHERE e/ehr_id/value = '${ehr_id}'",
+	"columns": [
+		{
+			"path": "s/subject/external_ref/id/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"${subject_external_ref_value}"
+		]
+	]
+}

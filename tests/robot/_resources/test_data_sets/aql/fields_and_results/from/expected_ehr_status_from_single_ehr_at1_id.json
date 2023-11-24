@@ -1,0 +1,14 @@
+{
+	"q": "SELECT s/other_details/items[at0001]/value/id FROM EHR e CONTAINS EHR_STATUS s WHERE e/ehr_id/value = '${ehr_id}'",
+	"columns": [
+		{
+			"path": "s/other_details/items[at0001]/value/id",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"55175056"
+		]
+	]
+}

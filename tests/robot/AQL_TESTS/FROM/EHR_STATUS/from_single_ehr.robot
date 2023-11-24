@@ -33,18 +33,18 @@ Precondition
 Execute Query
     [Arguments]     ${path}     ${expected_file}    ${nr_of_results}
     ${query}    Set Variable    SELECT s/${path} FROM EHR e CONTAINS EHR_STATUS s WHERE e/ehr_id/value = '${ehr_id}'
-    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/ehr_status_from_single_ehr_tmp.json
+    ${expected_result_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
+    ${expected_result_file_tmp}     Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/ehr_status_from_single_ehr_tmp.json
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${expected_file}
-    ${expected_res_tmp}      Set Variable       ${expected_result_file}
-    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
+    ${file_without_replaced_vars}   Get File    ${expected_result_file}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     #Log     Expected data: ${data_replaced_vars}
-    Create File     ${expected_result_file}
+    Create File     ${expected_result_file_tmp}
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result_file}
+    ...     ${resp_body_actual}     ${expected_result_file_tmp}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
-    [Teardown]      Run Keyword And Return Status   Remove File     ${expected_result_file}
+    [Teardown]      Run Keyword And Return Status   Remove File     ${expected_result_file_tmp}
