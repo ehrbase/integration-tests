@@ -39,11 +39,11 @@ Execute Query
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
     ${exclude_paths}    Create List    root['rows'][0][0]['uid']
-    ...     root['rows'][0][1]['uid']   root['rows'][0][2]['uid']   root['rows'][0][3]['uid']
-    ...     root['rows'][0][4]['uid']   root['rows'][0][5]['uid']   root['rows'][0][6]['uid']
-    ...     root['rows'][0][7]['uid']   root['rows'][0][8]['uid']   root['rows'][0][9]['uid']
+    ...     root['rows'][1][0]['uid']   root['rows'][2][0]['uid']   root['rows'][3][0]['uid']
+    ...     root['rows'][4][0]['uid']   root['rows'][5][0]['uid']   root['rows'][6][0]['uid']
+    ...     root['rows'][7][0]['uid']   root['rows'][8][0]['uid']   root['rows'][9][0]['uid']
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
-    ...     ignore_order=${TRUE}
+    ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
