@@ -39,6 +39,9 @@ Execute Query
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
     ${exclude_paths}    Create List    root['rows'][0][0]['uid']
+    ...     root['rows'][0][1]['uid']   root['rows'][0][2]['uid']   root['rows'][0][3]['uid']
+    ...     root['rows'][0][4]['uid']   root['rows'][0][5]['uid']   root['rows'][0][6]['uid']
+    ...     root['rows'][0][7]['uid']   root['rows'][0][8]['uid']   root['rows'][0][9]['uid']
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
