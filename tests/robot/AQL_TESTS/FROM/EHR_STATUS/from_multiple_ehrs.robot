@@ -19,8 +19,8 @@ Suite Teardown  Run Keywords
 SELECT s/subject/external_ref/id/value, s/other_details/items[at0001]/value/id FROM EHR e CONTAINS EHR_STATUS s
     ${query}    Set Variable    SELECT s/subject/external_ref/id/value, s/other_details/items[at0001]/value/id FROM EHR e CONTAINS EHR_STATUS s
     Set AQL And Execute Ad Hoc Query        ${query}
-    ${expected_result_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/ehr_status_from_multiple_ehrs.json
-    ${expected_result_file_tmp}     Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/ehr_status_from_multiple_ehrs_tmp.json
+    ${expected_result_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/expected_ehr_status_from_multiple_ehrs.json
+    ${expected_result_file_tmp}     Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/expected_ehr_status_from_multiple_ehrs_tmp.json
     ${file_without_replaced_vars}   Get File    ${expected_result_file}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     #Log     Expected data: ${data_replaced_vars}

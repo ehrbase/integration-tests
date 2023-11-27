@@ -1,0 +1,14 @@
+{
+	"q": "SELECT l/name/value FROM EHR e CONTAINS EHR_STATUS CONTAINS ELEMENT l",
+	"columns": [
+		{
+			"path": "l/name/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"family group id"
+		]
+	]
+}

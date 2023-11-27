@@ -1,0 +1,35 @@
+{
+	"q": "SELECT l/name/value FROM EHR e CONTAINS ELEMENT l",
+	"columns": [
+		{
+			"path": "l/name/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"family group id"
+		],
+		[
+			"Cuff size"
+		],
+		[
+			"Location of measurement"
+		],
+		[
+			"Korotkoff sounds"
+		],
+		[
+			"Systolic"
+		],
+		[
+			"Diastolic"
+		],
+		[
+			"Mean Arterial Pressure"
+		],
+		[
+			"Mean Arterial Pressure"
+		]
+	]
+}

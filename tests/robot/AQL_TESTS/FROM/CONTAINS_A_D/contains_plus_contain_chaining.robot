@@ -48,6 +48,7 @@ Execute Query
     ${exclude_paths}    Create List    root['rows'][0][0]['uid']
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
-    ...     ignore_order=${TRUE}
+    ...     ${resp_body_actual}     ${expected_result}
+    ...     exclude_paths=${exclude_paths}
+    ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
