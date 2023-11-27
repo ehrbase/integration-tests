@@ -34,7 +34,6 @@ Precondition
 
 Execute Query
     [Arguments]     ${where}    ${expected_file}    ${nr_of_results}
-    Log     Add test data to file ${expected_file} - when 200 is returned.      console=yes
     ${temp_query}    Set Variable       SELECT o FROM COMPOSITION CONTAINS OBSERVATION o WHERE ${where}
     ${query}    Replace Variables       ${temp_query}
     Log     ${query}
