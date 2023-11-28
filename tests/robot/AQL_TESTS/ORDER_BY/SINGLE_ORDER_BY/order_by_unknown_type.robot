@@ -38,26 +38,24 @@ Execute Query
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     IF      ${query_nr} == ${2}
         Checks For Second Third Query
-        ...     original_file=expected_order_by_unknown_type_at4_1.json
+        ...     aql_resp=${resp_body_actual}
         ...     json_path=$..rows[?(@[0] != null)]
         ...     expected_file=expected_order_by_unknown_type_at4_1_part_expected.json
     END
 
     IF      ${query_nr} == ${3}
         Checks For Second Third Query
-        ...     original_file=expected_order_by_unknown_type_at4_2.json
+        ...     aql_resp=${resp_body_actual}
         ...     json_path=$..rows[?(@[1] != null)]
         ...     expected_file=expected_order_by_unknown_type_at4_2_part_expected.json
     END
 
 Checks For Second Third Query
-    [Arguments]     ${original_file}    ${json_path}    ${expected_file}
-    ${expected_res_tmp}     Set Variable
-    ...     ${EXPECTED_JSON_DATA_SETS}/order_by/${original_file}
-    ${json_obj}         Load Json From File        ${expected_res_tmp}
-    ${json_obj_tmp}     Get Value From Json	    ${json_obj}	    ${json_path}
+    [Arguments]     ${aql_resp}    ${json_path}    ${expected_file}
+    ${aql_resp_json}     Convert String To JSON      ${aql_resp}
+    ${json_obj_tmp}     Get Value From Json	    ${aql_resp_json}	    ${json_path}
     #Log     Without null at first column: ${json_obj_tmp}
-    ${json_obj_tmp2}      Update Value To Json      ${json_obj}	    $.rows	    ${json_obj_tmp}
+    ${json_obj_tmp2}      Update Value To Json      ${aql_resp_json}	    $.rows	    ${json_obj_tmp}
     #Log     Final JSON ${json_obj_tmp2}
     ${json_str}     Convert Json To String      ${json_obj_tmp2}
     ${diff}     compare json-string with json-file
