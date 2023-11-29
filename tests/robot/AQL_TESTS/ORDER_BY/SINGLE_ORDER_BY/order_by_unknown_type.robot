@@ -36,32 +36,51 @@ Execute Query
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
+    IF      ${query_nr} == ${1}
+        ${expected_res}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
+        Length Should Be    ${resp_body['rows']}     ${nr_of_results}
+        ${diff}     compare json-string with json-file
+        ...     ${resp_body_actual}     ${expected_res}
+        ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
+        Should Be Empty    ${diff}    msg=DIFF DETECTED!
+    END
     IF      ${query_nr} == ${2}
         Checks For Second Third Query
         ...     aql_resp=${resp_body_actual}
         ...     json_path=$..rows[?(@[0] != null)]
-        ...     expected_file=expected_order_by_unknown_type_at4_1_part_expected.json
+        ...     expected_file=expected_order_by_unknown_type_at4_1_part_ordered_asc.json
+        ...     ignore_order=${FALSE}
         #$..rows[?(@[0] != null)] - get all row items without null value in column at index 0
+        Checks For Second Third Query
+        ...     aql_resp=${resp_body_actual}
+        ...     json_path=$..rows[?(@[0] == null)]
+        ...     expected_file=expected_order_by_unknown_type_at4_1_part_not_ordered.json
+        ...     ignore_order=${TRUE}
+        #$..rows[?(@[0] == null)] - get all row items with null value in column at index 0
     END
 
     IF      ${query_nr} == ${3}
         Checks For Second Third Query
         ...     aql_resp=${resp_body_actual}
         ...     json_path=$..rows[?(@[1] != null)]
-        ...     expected_file=expected_order_by_unknown_type_at4_2_part_expected.json
+        ...     expected_file=expected_order_by_unknown_type_at4_2_part_ordered_asc.json
+        ...     ignore_order=${FALSE}
         #$..rows[?(@[1] != null)] - get all row items without null value in column at index 1
+        Checks For Second Third Query
+        ...     aql_resp=${resp_body_actual}
+        ...     json_path=$..rows[?(@[1] == null)]
+        ...     expected_file=expected_order_by_unknown_type_at4_2_part_not_ordered.json
+        ...     ignore_order=${TRUE}
+        #$..rows[?(@[1] == null)] - get all row items with null value in column at index 1
     END
 
 Checks For Second Third Query
-    [Arguments]     ${aql_resp}    ${json_path}    ${expected_file}
+    [Arguments]     ${aql_resp}    ${json_path}    ${expected_file}     ${ignore_order}=${FALSE}
     ${json_obj_tmp}     Get Value From Json	    ${aql_resp}	    ${json_path}
-    #Log     Without null at first column: ${json_obj_tmp}
     ${json_obj_tmp2}      Update Value To Json      ${aql_resp}	    $.rows	    ${json_obj_tmp}
-    #Log     Final JSON ${json_obj_tmp2}
-    #${json_str}     Convert Json To String      ${json_obj_tmp2}
     ${diff}     compare json-string with json-file
     ...     ${aql_resp}     ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
-    ...     ignore_order=${FALSE}    ignore_string_case=${TRUE}
+    ...     ignore_order=${ignore_order}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
 #Execute Query
