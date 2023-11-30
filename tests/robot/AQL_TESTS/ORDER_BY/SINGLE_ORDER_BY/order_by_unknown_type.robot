@@ -36,7 +36,6 @@ Execute Query
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
-    Set Test Variable   ${resp_body_actual2}     ${resp_body_actual}
     IF      ${query_nr} == ${1}
         ${expected_res}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
         Length Should Be    ${resp_body['rows']}     ${nr_of_results}
@@ -52,8 +51,9 @@ Execute Query
         ...     expected_file=expected_order_by_unknown_type_at4_1_part_ordered_asc.json
         ...     ignore_order=${FALSE}
         #$..rows[?(@[0] != null)] - get all row items without null value in column at index 0
+        Set AQL And Execute Ad Hoc Query    ${query}
         Checks For Second Third Query
-        ...     aql_resp=${resp_body_actual2}
+        ...     aql_resp=${resp_body_actual}
         ...     json_path=$..rows[?(@[0] == null)]
         ...     expected_file=expected_order_by_unknown_type_at4_1_part_not_ordered.json
         ...     ignore_order=${TRUE}
@@ -67,8 +67,9 @@ Execute Query
         ...     expected_file=expected_order_by_unknown_type_at4_2_part_ordered_asc.json
         ...     ignore_order=${FALSE}
         #$..rows[?(@[1] != null)] - get all row items without null value in column at index 1
+        Set AQL And Execute Ad Hoc Query    ${query}
         Checks For Second Third Query
-        ...     aql_resp=${resp_body_actual2}
+        ...     aql_resp=${resp_body_actual}
         ...     json_path=$..rows[?(@[1] == null)]
         ...     expected_file=expected_order_by_unknown_type_at4_2_part_not_ordered.json
         ...     ignore_order=${TRUE}
@@ -78,10 +79,11 @@ Execute Query
 Checks For Second Third Query
     [Arguments]     ${aql_resp}    ${json_path}    ${expected_file}     ${ignore_order}=${FALSE}
     ${json_obj_tmp}     Get Value From Json	    ${aql_resp}	    ${json_path}
-    ${json_obj_tmp2}      Update Value To Json      ${aql_resp}	    $.rows	    ${json_obj_tmp}
+    ${json_obj_tmp2}    Update Value To Json    ${aql_resp}	    $.rows	    ${json_obj_tmp}
     ${diff}     compare json-string with json-file
     ...     ${aql_resp}     ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
     ...     ignore_order=${ignore_order}    ignore_string_case=${TRUE}
+    ${aql_resp}     Set Variable    ${None}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
 #Execute Query
