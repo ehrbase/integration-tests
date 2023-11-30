@@ -36,6 +36,7 @@ Execute Query
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
+    Set Test Variable   ${resp_body_actual2}     ${resp_body_actual}
     IF      ${query_nr} == ${1}
         ${expected_res}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
         Length Should Be    ${resp_body['rows']}     ${nr_of_results}
@@ -52,7 +53,7 @@ Execute Query
         ...     ignore_order=${FALSE}
         #$..rows[?(@[0] != null)] - get all row items without null value in column at index 0
         Checks For Second Third Query
-        ...     aql_resp=${resp_body_actual}
+        ...     aql_resp=${resp_body_actual2}
         ...     json_path=$..rows[?(@[0] == null)]
         ...     expected_file=expected_order_by_unknown_type_at4_1_part_not_ordered.json
         ...     ignore_order=${TRUE}
@@ -67,7 +68,7 @@ Execute Query
         ...     ignore_order=${FALSE}
         #$..rows[?(@[1] != null)] - get all row items without null value in column at index 1
         Checks For Second Third Query
-        ...     aql_resp=${resp_body_actual}
+        ...     aql_resp=${resp_body_actual2}
         ...     json_path=$..rows[?(@[1] == null)]
         ...     expected_file=expected_order_by_unknown_type_at4_2_part_not_ordered.json
         ...     ignore_order=${TRUE}
