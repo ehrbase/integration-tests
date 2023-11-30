@@ -19,7 +19,6 @@ SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value, o/d
     [Template]      Execute Query
     ${query_nr}     ${path}     ${expected_file}    ${nr_of_results}
 
-
 *** Keywords ***
 Precondition
     Upload OPT For AQL      choice_ehrbase.de.v0.opt
@@ -45,14 +44,13 @@ Execute Query
         Should Be Empty    ${diff}    msg=DIFF DETECTED!
     END
     IF      ${query_nr} == ${2}
-        Checks For Second Third Query
+        Checks For First Part Query
         ...     aql_resp=${resp_body_actual}
         ...     json_path=$..rows[?(@[0] != null)]
         ...     expected_file=expected_order_by_unknown_type_at4_1_part_ordered_asc.json
         ...     ignore_order=${FALSE}
         #$..rows[?(@[0] != null)] - get all row items without null value in column at index 0
-        Set AQL And Execute Ad Hoc Query    ${query}
-        Checks For Second Third Query
+        Checks For Second Part Query
         ...     aql_resp=${resp_body_actual}
         ...     json_path=$..rows[?(@[0] == null)]
         ...     expected_file=expected_order_by_unknown_type_at4_1_part_not_ordered.json
@@ -61,14 +59,13 @@ Execute Query
     END
 
     IF      ${query_nr} == ${3}
-        Checks For Second Third Query
+        Checks For Second Query
         ...     aql_resp=${resp_body_actual}
         ...     json_path=$..rows[?(@[1] != null)]
         ...     expected_file=expected_order_by_unknown_type_at4_2_part_ordered_asc.json
         ...     ignore_order=${FALSE}
         #$..rows[?(@[1] != null)] - get all row items without null value in column at index 1
-        Set AQL And Execute Ad Hoc Query    ${query}
-        Checks For Second Third Query
+        Checks For Second Part Query
         ...     aql_resp=${resp_body_actual}
         ...     json_path=$..rows[?(@[1] == null)]
         ...     expected_file=expected_order_by_unknown_type_at4_2_part_not_ordered.json
@@ -76,8 +73,19 @@ Execute Query
         #$..rows[?(@[1] == null)] - get all row items with null value in column at index 1
     END
 
-Checks For Second Third Query
+Checks For First Part Query
     [Arguments]     ${aql_resp}    ${json_path}    ${expected_file}     ${ignore_order}=${FALSE}
+    ${temp_aql_resp}    Set Variable    ${aql_resp}
+    ${json_obj_tmp}     Get Value From Json	    ${temp_aql_resp}	    ${json_path}
+    ${json_obj_tmp2}    Update Value To Json    ${temp_aql_resp}	    $.rows	    ${json_obj_tmp}
+    ${diff}     compare json-string with json-file
+    ...     ${temp_aql_resp}     ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
+    ...     ignore_order=${ignore_order}    ignore_string_case=${TRUE}
+    ${temp_aql_resp}     Set Variable    ${None}
+    Should Be Empty    ${diff}    msg=DIFF DETECTED!
+
+Checks For Second Part Query
+    [Arguments]     ${aql_resp}    ${json_path}    ${expected_file}     ${ignore_order}=${TRUE}
     ${json_obj_tmp}     Get Value From Json	    ${aql_resp}	    ${json_path}
     ${json_obj_tmp2}    Update Value To Json    ${aql_resp}	    $.rows	    ${json_obj_tmp}
     ${diff}     compare json-string with json-file
