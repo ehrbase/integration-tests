@@ -44,56 +44,31 @@ Execute Query
         Should Be Empty    ${diff}    msg=DIFF DETECTED!
     END
     IF      ${query_nr} == ${2}
-        Checks For First Part Query
-        ...     aql_resp1=${resp_body_actual}
-        ...     json_path1=$..rows[?(@[0] != null)]
-        ...     expected_file1=expected_order_by_unknown_type_at4_1_part_ordered_asc.json
-        ...     ignore_order1=${FALSE}
+        Checks For Second And Third Query
+        ...     aql_resp=${resp_body_actual}
+        ...     json_path=$..rows[?(@[0] != null)]
+        ...     expected_file=expected_order_by_unknown_type_at4_1_part_ordered_asc.json
+        ...     ignore_order=${FALSE}
         #$..rows[?(@[0] != null)] - get all row items without null value in column at index 0
-        Set AQL And Execute Ad Hoc Query    ${query}
-        Checks For Second Part Query
-        ...     aql_resp2=${resp_body_actual}
-        ...     json_path2=$..rows[?(@[0] == null)]
-        ...     expected_file2=expected_order_by_unknown_type_at4_1_part_not_ordered.json
-        ...     ignore_order2=${TRUE}
-        #$..rows[?(@[0] == null)] - get all row items with null value in column at index 0
     END
     IF      ${query_nr} == ${3}
-        Checks For First Part Query
-        ...     aql_resp1=${resp_body_actual}
-        ...     json_path1=$..rows[?(@[1] != null)]
-        ...     expected_file1=expected_order_by_unknown_type_at4_2_part_ordered_asc.json
-        ...     ignore_order1=${FALSE}
+        Checks For Second And Third Query
+        ...     aql_resp=${resp_body_actual}
+        ...     json_path=$..rows[?(@[1] != null)]
+        ...     expected_file=expected_order_by_unknown_type_at4_2_part_ordered_asc.json
+        ...     ignore_order=${FALSE}
         #$..rows[?(@[1] != null)] - get all row items without null value in column at index 1
-        Set AQL And Execute Ad Hoc Query    ${query}
-        Checks For Second Part Query
-        ...     aql_resp2=${resp_body_actual}
-        ...     json_path2=$..rows[?(@[1] == null)]
-        ...     expected_file2=expected_order_by_unknown_type_at4_2_part_not_ordered.json
-        ...     ignore_order2=${TRUE}
-        #$..rows[?(@[1] == null)] - get all row items with null value in column at index 1
     END
 
-Checks For First Part Query
-    [Arguments]     ${aql_resp1}    ${json_path1}    ${expected_file1}     ${ignore_order1}=${FALSE}
-    ${temp_aql_resp1}    Set Variable    ${aql_resp1}
-    ${json_obj_tmp}     Get Value From Json	    ${temp_aql_resp1}	    ${json_path1}
-    ${json_obj_tmp2}    Update Value To Json    ${temp_aql_resp1}	    $.rows	    ${json_obj_tmp}
+Checks For Second And Third Query
+    [Arguments]     ${aql_resp}    ${json_path}    ${expected_file}     ${ignore_order}=${FALSE}
+    ${temp_aql_resp}    Set Variable    ${aql_resp}
+    ${json_obj_tmp}     Get Value From Json	    ${temp_aql_resp}	    ${json_path}
+    ${json_obj_tmp2}    Update Value To Json    ${temp_aql_resp}	    $.rows	    ${json_obj_tmp}
     ${diff}     compare json-string with json-file
-    ...     ${temp_aql_resp1}     ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file1}
-    ...     ignore_order=${ignore_order1}    ignore_string_case=${TRUE}
+    ...     ${temp_aql_resp}     ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
+    ...     ignore_order=${ignore_order}    ignore_string_case=${TRUE}
     ${temp_aql_resp1}     Set Variable    ${None}
-    Should Be Empty    ${diff}    msg=DIFF DETECTED!
-
-Checks For Second Part Query
-    [Arguments]     ${aql_resp2}    ${json_path2}    ${expected_file2}     ${ignore_order2}=${TRUE}
-    ${temp_aql_resp2}    Set Variable    ${aql_resp2}
-    ${json_obj_tmp}     Get Value From Json	    ${temp_aql_resp2}	    ${json_path2}
-    ${json_obj_tmp2}    Update Value To Json    ${temp_aql_resp2}	    $.rows	    ${json_obj_tmp}
-    ${diff}     compare json-string with json-file
-    ...     ${temp_aql_resp2}     ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
-    ...     ignore_order=${ignore_order2}    ignore_string_case=${TRUE}
-    ${temp_aql_resp2}     Set Variable    ${None}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
 #Execute Query
