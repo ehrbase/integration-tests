@@ -135,7 +135,7 @@
     "ehrbase.testcase6.v0/problem_diagnosis/_guideline_id|type": "ANY",
     "ehrbase.testcase6.v0/medication_order/order:0/medication_item": "Meftal spas",
     "ehrbase.testcase6.v0/medication_order/order:0/route:0": "Intravenous",
-     "ehrbase.testcase6.v0/medication_order/order:0/therapeutic_direction/direction_sequence": 25,
+    "ehrbase.testcase6.v0/medication_order/order:0/therapeutic_direction/direction_sequence": 25,
     "ehrbase.testcase6.v0/medication_order/order:0/therapeutic_direction/_uid": "31f6cde0-9d68-3580-89d8-672130fc3d39",
     "ehrbase.testcase6.v0/medication_order/order:0/dispense_directions/dispense_instruction:0": "Collect from pharmacy",
     "ehrbase.testcase6.v0/medication_order/order:0/dispense_directions/_uid": "4e35d8a7-a43e-32aa-98b5-6d75f5da486c",

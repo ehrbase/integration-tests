@@ -18,42 +18,70 @@ ${EXPECTED_JSON_RESULTS}    ${EXPECTED_JSON_DATA_SETS}/external/test_set_3
 SELECT c/items[at0001]/value/value, o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude FROM EHR e CONTAINS COMPOSITION C[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.device.v1]
     ${query}    Set Variable    SELECT c/items[at0001]/value/value, o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude FROM EHR e CONTAINS COMPOSITION C[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.device.v1]
     ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_x_observation_x_cluster_x.json
-    Execute Query   query=${query}    expected_rows_nr=10
+    Execute Query   query=${query}    expected_rows_nr=18
     ...     expected_file=${expected_result}
 
 SELECT C/items[at0001]/value/value, o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.device.v1]
     ${query}    Set Variable    SELECT C/items[at0001]/value/value, o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.device.v1]
     ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_observation_x_cluster_x_bp_device.json
-    Execute Query   query=${query}    expected_rows_nr=10
+    Execute Query   query=${query}    expected_rows_nr=18
     ...     expected_file=${expected_result}
 
+SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value, C/items[at0057]/value/magnitude FROM EHR e CONTAINS INSTRUCTION i[openEHR-EHR-INSTRUCTION.medication_order.v3] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.therapeutic_direction.v1]
+    ${query}    Set Variable    SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value, C/items[at0057]/value/magnitude FROM EHR e CONTAINS INSTRUCTION i[openEHR-EHR-INSTRUCTION.medication_order.v3] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.therapeutic_direction.v1]
+    ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_instruction_x_cluster_x.json
+    Execute Query   query=${query}    expected_rows_nr=6
+    ...     expected_file=${expected_result}
+
+SELECT C/items[at0001]/value/value, a/data[at0001]/items[at0004]/value/value FROM EHR e CONTAINS ADMIN_ENTRY a[openEHR-EHR-ADMIN_ENTRY.translation_requirements.v1] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.language.v1]
+    ${query}    Set Variable    SELECT C/items[at0001]/value/value, a/data[at0001]/items[at0004]/value/value FROM EHR e CONTAINS ADMIN_ENTRY a[openEHR-EHR-ADMIN_ENTRY.translation_requirements.v1] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.language.v1]
+    ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_admin_x_cluster_x.json
+    Execute Query   query=${query}    expected_rows_nr=7
+    ...     expected_file=${expected_result}
+
+SELECT C/items[at0001]/value/value, C2/items[at0001]/value/size, o/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.anatomical_location.v1] CONTAINS CLUSTER C2[openEHR-EHR-CLUSTER.media_file.v1]
+    ${query}    Set Variable    SELECT C/items[at0001]/value/value, C2/items[at0001]/value/size, o/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.anatomical_location.v1] CONTAINS CLUSTER C2[openEHR-EHR-CLUSTER.media_file.v1]
+    ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_observation_x_cluster_x_cluster_x.json
+    Execute Query   query=${query}    expected_rows_nr=4
+    ...     expected_file=${expected_result}
+
+SELECT alg/data[at0001]/items[at0002]/value/value, med/activities[at0001]/description[at0002]/items[at0070]/value/value FROM EHR e CONTAINS (COMPOSITION c1 CONTAINS EVALUATION alg[openEHR-EHR-EVALUATION.problem_diagnosis.v1] AND COMPOSITION c2 CONTAINS INSTRUCTION med[openEHR-EHR-INSTRUCTION.medication_order.v3])
+    ${query}    Set Variable    SELECT alg/data[at0001]/items[at0002]/value/value, med/activities[at0001]/description[at0002]/items[at0070]/value/value FROM EHR e CONTAINS (COMPOSITION c1 CONTAINS EVALUATION alg[openEHR-EHR-EVALUATION.problem_diagnosis.v1] AND COMPOSITION c2 CONTAINS INSTRUCTION med[openEHR-EHR-INSTRUCTION.medication_order.v3])
+    ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_evaluation_x_and_composition_instruction_x.json
+    Execute Query   query=${query}    expected_rows_nr=49
+    ...     expected_file=${expected_result}
+
+SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o2/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude FROM EHR e CONTAINS COMPOSITION c CONTAINS (OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2] AND OBSERVATION o2[openEHR-EHR-OBSERVATION.body_temperature.v2])
+    ${query}    Set Variable    SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o2/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude FROM EHR e CONTAINS COMPOSITION c CONTAINS (OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2] AND OBSERVATION o2[openEHR-EHR-OBSERVATION.body_temperature.v2])
+    ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_observation_x_and_observation_x.json
+    Execute Query   query=${query}    expected_rows_nr=19
+    ...     expected_file=${expected_result}
 
 
 *** Keywords ***
 Precondition
     Upload OPT For AQL      external/ehrbase.testcase06.v0.opt
     Create EHR For AQL
-    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo1_test_set_3_flat.json
+    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo1_test_set_3_flat.json     format=FLAT
     Set Suite Variable       ${c_uid1}      ${composition_short_uid}
-    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo2_test_set_3_flat.json
+    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo2_test_set_3_flat.json     format=FLAT
     Set Suite Variable       ${c_uid2}      ${composition_short_uid}
-    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo3_test_set_3_flat.json
+    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo3_test_set_3_flat.json     format=FLAT
     Set Suite Variable       ${c_uid3}      ${composition_short_uid}
-    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo4_no_obs_cluster_test_set_3_flat.json
+    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo4_no_obs_cluster_test_set_3_flat.json      format=FLAT
     Set Suite Variable       ${c_uid4}      ${composition_short_uid}
-    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo5_no_action_cluster_test_set_3_flat.json
+    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo5_no_action_cluster_test_set_3_flat.json       format=FLAT
     Set Suite Variable       ${c_uid5}      ${composition_short_uid}
-    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo6_no_evaluation_cluster_test_set_3_flat.json
+    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo6_no_evaluation_cluster_test_set_3_flat.json   format=FLAT
     Set Suite Variable       ${c_uid6}      ${composition_short_uid}
-    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo7_no_instruction_cluster_test_set_3_flat.json
+    Commit Composition For AQL      external/ehrbase.testcase06.v0__compo7_no_instruction_cluster_test_set_3_flat.json  format=FLAT
     Set Suite Variable       ${c_uid7}      ${composition_short_uid}
 
 Execute Query
     [Arguments]     ${query}    ${expected_rows_nr}    ${expected_file}
-    ...     ${ignore_orde}=${TRUE}    ${ignore_string_case}=${TRUE}
+    ...     ${ignore_order}=${TRUE}    ${ignore_string_case}=${TRUE}
     Set AQL And Execute Ad Hoc Query    ${query}
-    Log     ${resp_body['rows']}
-    #Length Should Be    ${resp_body['rows']}     ${expected_rows_nr}
+    Length Should Be    ${resp_body['rows']}     ${expected_rows_nr}
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_file}
     ...     ignore_order=${ignore_order}    ignore_string_case=${ignore_string_case}

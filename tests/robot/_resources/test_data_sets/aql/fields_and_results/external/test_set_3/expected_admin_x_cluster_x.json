@@ -1,0 +1,43 @@
+{
+	"q": "SELECT C/items[at0001]/value/value, a/data[at0001]/items[at0004]/value/value FROM EHR e CONTAINS ADMIN_ENTRY a[openEHR-EHR-ADMIN_ENTRY.translation_requirements.v1] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.language.v1]",
+	"columns": [
+		{
+			"path": "C/items[at0001]/value/value",
+			"name": "#0"
+		},
+		{
+			"path": "a/data[at0001]/items[at0004]/value/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"English",
+			"To be checked now"
+		],
+		[
+			"Spanish",
+			"Get it done by tomorrow"
+		],
+		[
+			"English",
+			"Get it done"
+		],
+		[
+			"English",
+			"Get it done"
+		],
+		[
+			"Spanish",
+			"Get it done by tomorrow"
+		],
+		[
+			"Spanish",
+			"Get it done by tomorrow"
+		],
+		[
+			"English",
+			"Get it done"
+		]
+	]
+}
