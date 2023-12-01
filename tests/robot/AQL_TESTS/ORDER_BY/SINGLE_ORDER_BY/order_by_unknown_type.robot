@@ -19,6 +19,7 @@ SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value, o/d
     [Template]      Execute Query
     ${query_nr}     ${path}     ${expected_file}    ${nr_of_results}
 
+
 *** Keywords ***
 Precondition
     Upload OPT For AQL      choice_ehrbase.de.v0.opt
@@ -35,7 +36,7 @@ Execute Query
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
-    IF      ${query_nr} == ${1}
+    IF      ${query_nr} == ${1} or ${query_nr} == ${2} or ${query_nr} == ${3}
         ${expected_res}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
         Length Should Be    ${resp_body['rows']}     ${nr_of_results}
         ${diff}     compare json-string with json-file
