@@ -180,18 +180,34 @@ Commit Composition For AQL
     ...                 - Composition will be sent in CANONICAL JSON format.
     ...                 - Takes 1 mandatory arg composition_file, to be provided as follows:
     ...                 - composition_file_name.json
-    [Arguments]         ${composition_file}
+    [Arguments]         ${composition_file}     ${format}=CANONICAL_JSON
     prepare new request session    JSON      Prefer=return=representation
     Set To Dictionary   ${headers}   openEHR-TEMPLATE_ID=${template_id}
-    Create Session      ${SUT}    ${BASEURL}    debug=2
-     ...                 auth=${CREDENTIALS}    verify=True
-    ${file}             Get Binary File     ${COMPOSITIONS_DATA_SETS}/${composition_file}
-    ${resp}             POST On Session     ${SUT}   /ehr/${ehr_id}/composition
-                        ...     expected_status=anything    data=${file}    headers=${headers}
-                        Should Be Equal As Strings      ${resp.status_code}    ${201}
+    IF      '${format}' == 'CANONICAL_JSON'
+        Create Session      ${SUT}      ${BASEURL}      debug=2
+        ...                 auth=${CREDENTIALS}     verify=True
+    ELSE IF     '${format}' == 'FLAT'
+        Create Session      ${SUT}      ${ECISURL}      debug=2
+        ...                 auth=${CREDENTIALS}     verify=True
+        &{params}       Create Dictionary
+        ...     format=FLAT     ehrId=${ehr_id}     templateId=${template_id}
+    END
+    ${file}     Get Binary File     ${COMPOSITIONS_DATA_SETS}/${composition_file}
+    IF          '${format}' == 'FLAT'
+        ${resp}     POST On Session     ${SUT}      composition
+        ...     params=${params}    expected_status=anything
+        ...     data=${file}        headers=${headers}
+        Should Be Equal As Strings      ${resp.status_code}    ${201}
+        Set Suite Variable   ${composition_uid}      ${resp.json()['compositionUid']}
+    ELSE
+        ${resp}     POST On Session     ${SUT}      /ehr/${ehr_id}/composition
+        ...     expected_status=anything    data=${file}    headers=${headers}
+        Should Be Equal As Strings      ${resp.status_code}    ${201}
+        Set Suite Variable   ${composition_uid}      ${resp.json()['uid']['value']}
+    END
     Set Suite Variable   ${response}     ${resp}
-    Set Suite Variable   ${composition_uid}      ${resp.json()['uid']['value']}
-    ${short_uid}        Remove String       ${composition_uid}      ::${CREATING_SYSTEM_ID}::1
+    ${short_uid}        Remove String       ${composition_uid}
+    ...     ::${CREATING_SYSTEM_ID}::1
     Set Suite Variable   ${composition_short_uid}    ${short_uid}
 
 Admin Delete EHR For AQL
