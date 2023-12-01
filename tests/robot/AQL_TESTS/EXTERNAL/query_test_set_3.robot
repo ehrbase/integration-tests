@@ -50,7 +50,7 @@ Precondition
 
 Execute Query
     [Arguments]     ${query}    ${expected_rows_nr}    ${expected_file}
-    ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
+    ...     ${ignore_orde}=${TRUE}    ${ignore_string_case}=${TRUE}
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${resp_body['rows']}
     #Length Should Be    ${resp_body['rows']}     ${expected_rows_nr}
