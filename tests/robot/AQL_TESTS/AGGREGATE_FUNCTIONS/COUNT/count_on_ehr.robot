@@ -20,7 +20,7 @@ Suite Teardown  Run Keywords
 ${statement}
     #[Tags]      not-ready
     [Template]      Execute Query
-    ${statement}    ${nr_of_results}
+    ${statement}    ${nr_of_results}    ${expected_value}
 
 
 *** Keywords ***
@@ -29,15 +29,17 @@ Precondition
     Create EHR For AQL
     Set Suite Variable      ${ehr_id1}     ${ehr_id}
     Commit Composition For AQL      aql-conformance-ehrbase.org.v0_contains.json
-    Set Test Variable       ${c_uid1}      ${composition_short_uid}
+    Set Suite Variable       ${c_uid1}      ${composition_short_uid}
     Commit Composition For AQL      aql-conformance-ehrbase.org.v0_contains.json
-    Set Test Variable       ${c_uid2}      ${composition_short_uid}
+    Set Suite Variable       ${c_uid2}      ${composition_short_uid}
     Create EHR For AQL
     Set Suite Variable      ${ehr_id2}     ${ehr_id}
     Commit Composition For AQL      aql-conformance-ehrbase.org.v0_contains.json
-    Set Test Variable       ${c_uid3}      ${composition_short_uid}
+    Set Suite Variable       ${c_uid3}      ${composition_short_uid}
 
 Execute Query
-    [Arguments]     ${statement}    ${nr_of_results}
+    [Arguments]     ${statement}    ${nr_of_results}    ${expected_value}
     Set AQL And Execute Ad Hoc Query    ${statement}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
+    Log     ${resp_body['rows'][0]}
+    #Should Be Equal As Strings    ${resp_body['rows'][0]}       ${expected_value}

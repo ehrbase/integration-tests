@@ -18,7 +18,7 @@ Suite Teardown  Admin Delete EHR For AQL    #enable this keyword if AQL checks a
 SELECT COUNT(${path}) FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]
     #[Tags]      not-ready
     [Template]      Execute Query
-    ${path}    ${nr_of_results}
+    ${path}    ${nr_of_results}     ${expected_value}
 
 
 *** Keywords ***
@@ -28,9 +28,11 @@ Precondition
     Commit Composition For AQL      conformance_ehrbase.de.v0_max.json
 
 Execute Query
-    [Arguments]     ${path}     ${nr_of_results}
+    [Arguments]     ${path}     ${nr_of_results}    ${expected_value}
     ${temp_query}    Set Variable       SELECT COUNT(${path}) FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]
     ${query}    Replace Variables       ${temp_query}
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
+    Log     ${resp_body['rows'][0]}
+    #Should Be Equal As Strings    ${resp_body['rows'][0]}       ${expected_value}
