@@ -41,5 +41,4 @@ Execute Query
     [Arguments]     ${statement}    ${nr_of_results}    ${expected_value}
     Set AQL And Execute Ad Hoc Query    ${statement}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
-    Log     ${resp_body['rows'][0]}
-    #Should Be Equal As Strings    ${resp_body['rows'][0]}       ${expected_value}
+    Should Be Equal As Strings    ${resp_body['rows'][0][0]}       ${expected_value}
