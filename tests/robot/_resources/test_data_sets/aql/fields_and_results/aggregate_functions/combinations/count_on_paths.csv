@@ -1,0 +1,8 @@
+${path},${nr_of_results}
+"*",3
+"o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value",3
+"o/data[at0001]/events[at0002]/data[at0003]/items[at0005]/value/value",3
+"o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value/units",2
+"o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value/magnitude",2
+"o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/null_flavour/value",1
+"o/data[at0001]/events[at0002]/data[at0003]/items[at0008]",3
