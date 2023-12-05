@@ -1,8 +1,7 @@
 {
-	"q": "SELECT ${primitive} FROM EHR",
+	"q": "SELECT 1.1 FROM EHR",
 	"columns": [
 		{
-			"path": "${primitive}",
 			"name": "#0"
 		}
 	],

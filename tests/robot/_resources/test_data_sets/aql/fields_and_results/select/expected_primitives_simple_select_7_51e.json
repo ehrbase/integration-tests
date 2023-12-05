@@ -1,14 +1,13 @@
 {
-	"q": "SELECT ${primitive} FROM EHR",
+	"q": "SELECT '7.51e10-9' FROM EHR",
 	"columns": [
 		{
-			"path": "${primitive}",
 			"name": "#0"
 		}
 	],
 	"rows": [
 		[
-			"7.51e10−9"
+			"7.51e10-9"
 		]
 	]
 }

@@ -15,7 +15,7 @@ Suite Teardown  Admin Delete EHR For AQL    #enable this keyword if AQL checks a
 
 
 *** Test Cases ***
-SELECT MAX(${path}) FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] AND WHERE ${path} != ${where}
+SELECT MAX(${path}) FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE ${path} != ${where}
     #[Tags]      not-ready
     [Template]      Execute Query
     ${path}     ${where}     ${expected_file}       ${nr_of_results}
@@ -29,7 +29,7 @@ Precondition
 
 Execute Query
     [Arguments]     ${path}     ${where}    ${expected_file}    ${nr_of_results}
-    ${query}    Set Variable    SELECT MAX(${path}) FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] AND WHERE ${path} != ${where}
+    ${query}    Set Variable    SELECT MAX(${path}) FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE ${path} != ${where}
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/aggregate_functions/${expected_file}

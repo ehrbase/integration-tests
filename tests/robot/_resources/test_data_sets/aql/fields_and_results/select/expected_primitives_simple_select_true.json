@@ -1,14 +1,13 @@
 {
-	"q": "SELECT ${primitive} FROM EHR",
+	"q": "SELECT 'True' FROM EHR",
 	"columns": [
 		{
-			"path": "${primitive}",
 			"name": "#0"
 		}
 	],
 	"rows": [
 		[
-			true
+			"True"
 		]
 	]
 }
