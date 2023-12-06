@@ -36,7 +36,7 @@ Execute Query
     ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/ehr_status_via_part_tmp.json
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${expected_file}
-    ${expected_res_tmp}      Set Variable       ${expected_result_file}
+    ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
     ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     #Log     Expected data: ${data_replaced_vars}
