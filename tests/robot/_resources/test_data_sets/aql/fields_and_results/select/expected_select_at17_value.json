@@ -1,20 +1,20 @@
 {
-  "q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0017]/value/value FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
-  "columns": [
-    {
-      "path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0017]/value/value",
-      "name": "#0"
-    }
-  ],
-  "rows": [
-    [
-      true
-    ],
-    [
-      true
-    ],
-    [
-      true
-    ]
-  ]
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0017]/value/value FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0017]/value/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			true
+		],
+		[
+			true
+		],
+		[
+			false
+		]
+	]
 }

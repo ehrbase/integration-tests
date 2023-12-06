@@ -2,7 +2,6 @@
 	"q": "SELECT MIN(o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value/units) FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
 	"columns": [
 		{
-			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value/units",
 			"name": "#0"
 		}
 	],

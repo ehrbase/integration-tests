@@ -1,0 +1,13 @@
+{
+	"q": "SELECT SUM(o/data[at0001]/events[at0002]/data[at0003]/items[at0010]/value/magnitude) FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			493
+		]
+	]
+}

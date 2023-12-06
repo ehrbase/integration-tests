@@ -25,7 +25,7 @@ SELECT o/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.conf
 Precondition
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Create EHR For AQL
-    Commit Composition For AQL      conformance_ehrbase.de.v0_max.json
+    Commit Composition For AQL      conformance_ehrbase.de.v0_max_v3.json
     Set Suite Variable      ${c_uid1}      ${composition_short_uid}
 
 Execute Query
