@@ -42,11 +42,11 @@ SELECT C/items[at0001]/value/value, a/data[at0001]/items[at0004]/value/value FRO
 SELECT C/items[at0001]/value/value, C2/items[at0001]/value/size, o/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.anatomical_location.v1] CONTAINS CLUSTER C2[openEHR-EHR-CLUSTER.media_file.v1]
     ${query}    Set Variable    SELECT C/items[at0001]/value/value, C2/items[at0001]/value/size, o/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.anatomical_location.v1] CONTAINS CLUSTER C2[openEHR-EHR-CLUSTER.media_file.v1]
     ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_observation_x_cluster_x_cluster_x.json
-    Execute Query   query=${query}    expected_rows_nr=4
+    Execute Query   query=${query}    expected_rows_nr=6
     ...     expected_file=${expected_result}
 
-SELECT alg/data[at0001]/items[at0002]/value/value, med/activities[at0001]/description[at0002]/items[at0070]/value/value FROM EHR e CONTAINS (COMPOSITION c1 CONTAINS EVALUATION alg[openEHR-EHR-EVALUATION.problem_diagnosis.v1] AND COMPOSITION c2 CONTAINS INSTRUCTION med[openEHR-EHR-INSTRUCTION.medication_order.v3])
-    ${query}    Set Variable    SELECT alg/data[at0001]/items[at0002]/value/value, med/activities[at0001]/description[at0002]/items[at0070]/value/value FROM EHR e CONTAINS (COMPOSITION c1 CONTAINS EVALUATION alg[openEHR-EHR-EVALUATION.problem_diagnosis.v1] AND COMPOSITION c2 CONTAINS INSTRUCTION med[openEHR-EHR-INSTRUCTION.medication_order.v3])
+SELECT alg/data[at0001]/items[at0002]/value/value, med/activities[at0001]/description[at0002]/items[at0070]/value/value FROM EHR e CONTAINS ((COMPOSITION c1 CONTAINS EVALUATION alg[openEHR-EHR-EVALUATION.problem_diagnosis.v1]) AND (COMPOSITION c2 CONTAINS INSTRUCTION med[openEHR-EHR-INSTRUCTION.medication_order.v3]))
+    ${query}    Set Variable    SELECT alg/data[at0001]/items[at0002]/value/value, med/activities[at0001]/description[at0002]/items[at0070]/value/value FROM EHR e CONTAINS ((COMPOSITION c1 CONTAINS EVALUATION alg[openEHR-EHR-EVALUATION.problem_diagnosis.v1]) AND (COMPOSITION c2 CONTAINS INSTRUCTION med[openEHR-EHR-INSTRUCTION.medication_order.v3]))
     ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_evaluation_x_and_composition_instruction_x.json
     Execute Query   query=${query}    expected_rows_nr=49
     ...     expected_file=${expected_result}
@@ -54,7 +54,7 @@ SELECT alg/data[at0001]/items[at0002]/value/value, med/activities[at0001]/descri
 SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o2/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude FROM EHR e CONTAINS COMPOSITION c CONTAINS (OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2] AND OBSERVATION o2[openEHR-EHR-OBSERVATION.body_temperature.v2])
     ${query}    Set Variable    SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o2/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude FROM EHR e CONTAINS COMPOSITION c CONTAINS (OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2] AND OBSERVATION o2[openEHR-EHR-OBSERVATION.body_temperature.v2])
     ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_observation_x_and_observation_x.json
-    Execute Query   query=${query}    expected_rows_nr=19
+    Execute Query   query=${query}    expected_rows_nr=36
     ...     expected_file=${expected_result}
 
 
