@@ -1,0 +1,31 @@
+{
+	"q": "SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o2/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude FROM EHR e CONTAINS ((COMPOSITION c[openEHR-EHR-COMPOSITION.health_summary.v1] CONTAINS OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2]) AND OBSERVATION o2[openEHR-EHR-OBSERVATION.body_temperature.v2])",
+	"columns": [
+		{
+			"path": "o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude",
+			"name": "#0"
+		},
+		{
+			"path": "o2/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			140.0,
+			40.0
+		],
+		[
+			110.0,
+			88.0
+		],
+		[
+			500.0,
+			50.0
+		],
+		[
+			120.0,
+			60.0
+		]
+	]
+}

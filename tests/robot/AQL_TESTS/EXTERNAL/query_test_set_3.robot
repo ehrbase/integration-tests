@@ -57,6 +57,30 @@ SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude
     Execute Query   query=${query}    expected_rows_nr=36
     ...     expected_file=${expected_result}
 
+SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2] OR ACTION a[openEHR-EHR-ACTION.procedure.v1])
+    ${query}    Set Variable    SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2] OR ACTION a[openEHR-EHR-ACTION.procedure.v1])
+    ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_observation_x_or_action_x.json
+    Execute Query   query=${query}    expected_rows_nr=16
+    ...     expected_file=${expected_result}
+
+SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (INSTRUCTION i[openEHR-EHR-INSTRUCTION.medication_order.v3] OR ACTION a[openEHR-EHR-ACTION.procedure.v1])
+    ${query}    Set Variable    SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (INSTRUCTION i[openEHR-EHR-INSTRUCTION.medication_order.v3] OR ACTION a[openEHR-EHR-ACTION.procedure.v1])
+    ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_action_x_or_instruction_x.json
+    Execute Query   query=${query}    expected_rows_nr=7
+    ...     expected_file=${expected_result}
+
+SELECT a/description[at0001]/items[at0002]/value/value, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (COMPOSITION c1[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o)
+    ${query}    Set Variable    SELECT a/description[at0001]/items[at0002]/value/value, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (COMPOSITION c1[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o)
+    ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_x_action_or_composition_x_observation.json
+    Execute Query   query=${query}    expected_rows_nr=77
+    ...     expected_file=${expected_result}
+
+SELECT C1/items[at0001]/value/value, C2/items[at0001]/value/value FROM EHR e CONTAINS OBSERVATION o CONTAINS (CLUSTER C1[openEHR-EHR-CLUSTER.device.v1] AND CLUSTER C2[openEHR-EHR-CLUSTER.anatomical_location.v1])
+    ${query}    Set Variable    SELECT C1/items[at0001]/value/value, C2/items[at0001]/value/value FROM EHR e CONTAINS OBSERVATION o CONTAINS (CLUSTER C1[openEHR-EHR-CLUSTER.device.v1] AND CLUSTER C2[openEHR-EHR-CLUSTER.anatomical_location.v1])
+    ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_observation_cluster_x_and_cluster_x.json
+    Execute Query   query=${query}    expected_rows_nr=6
+    ...     expected_file=${expected_result}
+
 
 *** Keywords ***
 Precondition
