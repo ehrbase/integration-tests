@@ -167,7 +167,9 @@ Create EHR For AQL With Custom EHR Status
     ${ehr_id_value}     String      response body ehr_id value
     ${ehr_status_subject_external_ref_value}    String    response body ehr_status subject external_ref id value
     ${ehr_status_subject_external_ref_namespace}    String      response body ehr_status subject external_ref namespace
+    ${ehr_status_uid}    String      response body ehr_status uid value
                         Set Suite Variable      ${ehr_id_obj}     ${ehr_id_obj}
+                        Set Suite Variable      ${ehr_status_uid}     ${ehr_status_uid}[0]
                         Set Suite Variable      ${ehr_id}         ${ehr_id_value}[0]
                         Set Suite Variable      ${subject_external_ref_value}
                         ...     ${ehr_status_subject_external_ref_value}[0]

@@ -1,13 +1,11 @@
 *** Settings ***
-Documentation   CHECK DRILL DOWN EHR AQL RESULT
+Documentation   CHECK GET ehr_status FROM EHR WITH WHERE AQL RESULT
 ...             \nCovers:
-...             - https://github.com/ehrbase/openEHR_SDK/blob/develop/client/src/test/java/org/ehrbase/openehr/sdk/client/openehrclient/defaultrestclient/systematic/ehrquery/CanonicalEhrQuery1IT.java
-...             - https://github.com/ehrbase/openEHR_SDK/blob/develop/client/src/test/java/org/ehrbase/openehr/sdk/client/openehrclient/defaultrestclient/systematic/ehrquery/CanonicalEhrQuery2IT.java
 ...             - https://github.com/ehrbase/openEHR_SDK/blob/develop/client/src/test/java/org/ehrbase/openehr/sdk/client/openehrclient/defaultrestclient/systematic/ehrquery/CanonicalEhrQuery3IT.java
-...             \nCase SELECT e/ehr_status/other_details/archetype_node_id FROM EHR e[ehr_id/value = '{ehr_id}'] - *fails with 500 Internal Server Error*.
+...             \n*Test testEhrAutoWhere()*
 Resource        ../../_resources/keywords/aql_keywords.robot
 Library     DataDriver
-...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/external/drill_down_ehr/combinations/ehr_paths.csv
+...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/external/drill_down_ehr/combinations/ehr_paths_where.csv
 ...     dialect=excel
 
 Suite Setup     Precondition
@@ -19,9 +17,9 @@ ${EXPECTED_JSON_RESULTS}    ${EXPECTED_JSON_DATA_SETS}/external/drill_down_ehr
 
 
 *** Test Cases ***
-SELECT e/ehr_status/${path} FROM EHR e[ehr_id/value = '${ehr_id}']
+SELECT e/ehr_status/${path} FROM EHR e WHERE e/ehr_status/${where}
     [Template]      Execute Query
-    ${path}    ${expected_file}    ${nr_of_results}
+    ${path}     ${where}     ${expected_file}    ${nr_of_results}
 
 
 *** Keywords ***
@@ -29,11 +27,11 @@ Precondition
     Create EHR For AQL With Custom EHR Status       file_name=status1.json
 
 Execute Query
-    [Arguments]     ${path}     ${expected_file}    ${nr_of_results}
+    [Arguments]     ${path}     ${where}    ${expected_file}    ${nr_of_results}
     ${actual_file}      Set Variable    ${EXPECTED_JSON_RESULTS}/${expected_file}
-    ${tmp_file}         Set Variable    ${EXPECTED_JSON_RESULTS}/expected_drill_down_ehr_tmp.json
+    ${tmp_file}         Set Variable    ${EXPECTED_JSON_RESULTS}/expected_get_ehr_status_from_ehr_with_where_tmp.json
     ${query_dict}   Create Dictionary
-    ...     tmp_query=SELECT e/ehr_status/${path} FROM EHR e[ehr_id/value = '${ehr_id}']
+    ...     tmp_query=SELECT e/ehr_status/${path} FROM EHR e WHERE e/ehr_status/${where}
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Set AQL And Execute Ad Hoc Query    ${query}
     ${expected_res_tmp}      Set Variable       ${actual_file}

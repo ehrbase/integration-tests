@@ -1,0 +1,14 @@
+{
+	"q": "SELECT s/${path} FROM EHR e CONTAINS EHR_STATUS s WHERE s/${where}",
+	"columns": [
+		{
+			"path": "s/${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_status_uid}"
+		]
+	]
+}
