@@ -8,6 +8,9 @@ other_details/name,expected_drill_down_ehr_status_other_details_name.json,1
 "other_details/items[at0001]/value",expected_drill_down_ehr_status_other_details_at1_value.json,1
 "other_details/items[at0002]/value",expected_drill_down_ehr_status_other_details_at2_value.json,1
 "other_details/items[at0001]/value/id",expected_drill_down_ehr_status_other_details_at1_value_id.json,1
+"other_details/items[at0001]/value/issuer",expected_drill_down_ehr_status_other_details_at1_value_issuer.json,1
+"other_details/items[at0001]/value/assigner",expected_drill_down_ehr_status_other_details_at1_value_assigner.json,1
+"other_details/items[at0001]/value/type",expected_drill_down_ehr_status_other_details_at1_value_type.json,1
 "subject",expected_drill_down_ehr_status_subject.json,1
 "subject/external_ref",expected_drill_down_ehr_status_subject_external_ref.json,1
 "subject/external_ref/namespace",expected_drill_down_ehr_status_subject_external_ref_namespace.json,1

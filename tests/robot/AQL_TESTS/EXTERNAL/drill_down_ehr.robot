@@ -1,8 +1,10 @@
 *** Settings ***
 Documentation   CHECK FROM EHR AQL RESULT
-...             - Covers: https://github.com/ehrbase/openEHR_SDK/blob/develop/client/src/test/java/org/ehrbase/openehr/sdk/client/openehrclient/defaultrestclient/systematic/ehrquery/CanonicalEhrQuery1IT.java
-...             \nTest testEhrAttributesDrillDown3()
-...             Case SELECT e/ehr_status/other_details/archetype_node_id FROM EHR e[ehr_id/value = '{ehr_id}'] - fails with 500 Internal Server Error.
+...             \nCovers:
+...             - https://github.com/ehrbase/openEHR_SDK/blob/develop/client/src/test/java/org/ehrbase/openehr/sdk/client/openehrclient/defaultrestclient/systematic/ehrquery/CanonicalEhrQuery1IT.java
+...             - https://github.com/ehrbase/openEHR_SDK/blob/develop/client/src/test/java/org/ehrbase/openehr/sdk/client/openehrclient/defaultrestclient/systematic/ehrquery/CanonicalEhrQuery2IT.java
+...             - https://github.com/ehrbase/openEHR_SDK/blob/develop/client/src/test/java/org/ehrbase/openehr/sdk/client/openehrclient/defaultrestclient/systematic/ehrquery/CanonicalEhrQuery3IT.java
+...             \nCase SELECT e/ehr_status/other_details/archetype_node_id FROM EHR e[ehr_id/value = '{ehr_id}'] - *fails with 500 Internal Server Error*.
 Resource        ../../_resources/keywords/aql_keywords.robot
 Library     DataDriver
 ...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/external/drill_down_ehr/combinations/ehr_paths.csv
