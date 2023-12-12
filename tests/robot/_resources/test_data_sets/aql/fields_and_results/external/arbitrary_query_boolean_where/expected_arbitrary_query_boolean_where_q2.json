@@ -1,0 +1,14 @@
+{
+	"q": "SELECT c/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS ACTION d[openEHR-EHR-ACTION.test_all_types.v1] WHERE NOT d/description[at0001]/items[openEHR-EHR-CLUSTER.test_all_types.v1]/items[at0001]/items[at0002]/items[at0003]/value/value = false",
+	"columns": [
+		{
+			"path": "c/name/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"Test all types"
+		]
+	]
+}
