@@ -1,0 +1,25 @@
+{
+	"q": "SELECT c/context/other_context[at0001]/items[at0002] FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.report-result.v1]",
+	"columns": [
+		{
+			"path": "c/context/other_context[at0001]/items[at0002]",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "ELEMENT",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "Bericht-ID"
+				},
+				"value": {
+					"_type": "DV_TEXT",
+					"value": "15a69a62-1ea7-4111-98a5-28aeae854bcd"
+				},
+				"archetype_node_id": "at0002"
+			}
+		]
+	]
+}
