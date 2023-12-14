@@ -18,7 +18,7 @@ ${EXPECTED_JSON_RESULTS}    ${EXPECTED_JSON_DATA_SETS}/external/arbitrary_query_
 *** Test Cases ***
 ${query_nr} SELECT ${path} FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.report-result.v1] ${where}
     [Template]      Execute Query
-    ${query_nr}     ${path}     ${where}    ${expected_file}
+    ${query_nr}     ${path}     ${where}    ${expected_file}    ${nr_of_results}
 
 
 *** Keywords ***
@@ -30,7 +30,7 @@ Precondition
     Set Suite Variable      ${c_uid}        ${composition_short_uid}
 
 Execute Query
-    [Arguments]     ${query_nr}     ${path}     ${where}    ${expected_file}
+    [Arguments]     ${query_nr}     ${path}     ${where}    ${expected_file}    ${nr_of_results}
     ${actual_file}      Set Variable    ${EXPECTED_JSON_RESULTS}/${expected_file}
     ${tmp_file}         Set Variable    ${EXPECTED_JSON_RESULTS}/expected_arbitrary_query_other_context_tmp.json
     ${query_dict}   Create Dictionary
@@ -41,7 +41,7 @@ Execute Query
     ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     Create File     ${tmp_file}     ${data_replaced_vars}
-    Length Should Be    ${resp_body['rows']}     1
+    Length Should Be    ${resp_body['rows']}    ${nr_of_results}
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${tmp_file}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
