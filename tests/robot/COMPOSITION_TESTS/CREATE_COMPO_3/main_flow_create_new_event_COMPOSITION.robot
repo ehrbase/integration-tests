@@ -47,14 +47,13 @@ Main flow create new event COMPOSITION FLAT
     check the successful result of commit composition   nesting
 
 Alternative flow create COMPOSITION After Delete And Upload Template
-    [Documentation]     If fails to create composition, bug is reported: https://vitagroup-ag.atlassian.net/browse/CDR-1174
+    [Documentation]     Bug CDR-1174 fixed and closed.
     ...     \n*Flow:*
     ...     - Upload OPT: nested/nested.en.tmp.v1.opt
     ...     - Create EHR
     ...     - Delete uploaded OPT using ADMIN endpoint and expect 200
     ...     - Upload the same OPT
     ...     - Commit Composition and expect 201
-    [Tags]      not-ready   CDR-1174
     ${template_file}    Set Variable        nested/nested.en.tmp.v1.opt
     Set Test Variable   ${template_id}      nested.en.tmp.v1
     Upload OPT      ${template_file}
@@ -64,7 +63,7 @@ Alternative flow create COMPOSITION After Delete And Upload Template
     Upload OPT      ${template_file}
     commit composition   format=CANONICAL_JSON
     ...                  composition=nested.en.tmp.v1__full_without_links.json
-    Should Be Equal As Strings      ${response.status_code}      ${201}      Failed due to bug CDR-1174
+    Should Be Equal As Strings      ${response.status_code}      ${201}
     [Teardown]      (admin) delete OPT
 
 # Main flow create new event COMPOSITION TDD
