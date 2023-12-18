@@ -18,19 +18,19 @@ ${EXPECTED_JSON_RESULTS}    ${EXPECTED_JSON_DATA_SETS}/external/test_set_4
 SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o2/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude FROM EHR e CONTAINS ((COMPOSITION c[openEHR-EHR-COMPOSITION.health_summary.v1] CONTAINS OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2]) OR OBSERVATION o2[openEHR-EHR-OBSERVATION.body_temperature.v2])
     ${query}    Set Variable    SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o2/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude FROM EHR e CONTAINS ((COMPOSITION c[openEHR-EHR-COMPOSITION.health_summary.v1] CONTAINS OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2]) OR OBSERVATION o2[openEHR-EHR-OBSERVATION.body_temperature.v2])
     ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_x_observation_x_or_observation_x.json
-    Execute Query   query=${query}    expected_rows_nr=6
+    Execute Query   query=${query}    expected_rows_nr=24
     ...     expected_file=${expected_result}
 
 SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o2/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude FROM EHR e CONTAINS ((COMPOSITION c[openEHR-EHR-COMPOSITION.health_summary.v1] CONTAINS OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2]) AND OBSERVATION o2[openEHR-EHR-OBSERVATION.body_temperature.v2])
     ${query}    Set Variable    SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, o2/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude FROM EHR e CONTAINS ((COMPOSITION c[openEHR-EHR-COMPOSITION.health_summary.v1] CONTAINS OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2]) AND OBSERVATION o2[openEHR-EHR-OBSERVATION.body_temperature.v2])
     ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_x_observation_x_and_observation_x.json
-    Execute Query   query=${query}    expected_rows_nr=4
+    Execute Query   query=${query}    expected_rows_nr=24
     ...     expected_file=${expected_result}
 
 SELECT o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (COMPOSITION c1[openEHR-EHR-COMPOSITION.health_summary.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o)
     ${query}    Set Variable    SELECT o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (COMPOSITION c1[openEHR-EHR-COMPOSITION.health_summary.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o)
     ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_x_action_or_composition_x_observation.json
-    Execute Query   query=${query}    expected_rows_nr=6
+    Execute Query   query=${query}    expected_rows_nr=16
     ...     expected_file=${expected_result}
 
 SELECT c/name/value, o/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.body_temperature.v2] WHERE c/archetype_node_id != 'openEHR-EHR-COMPOSITION.encounter.v1'
