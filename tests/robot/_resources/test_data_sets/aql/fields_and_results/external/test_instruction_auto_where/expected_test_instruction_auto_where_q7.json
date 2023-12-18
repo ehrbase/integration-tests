@@ -1,0 +1,14 @@
+{
+	"q": "SELECT i/${path} FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.test_all_types.v1] CONTAINS SECTION s[openEHR-EHR-SECTION.test_all_types.v1] CONTAINS INSTRUCTION i[openEHR-EHR-INSTRUCTION.test_all_types.v1] WHERE (c/uid/value = '${c_uid}' AND i/activities[at0001]/description[at0002]/items[at0003]/name/value = 'partial date')",
+	"columns": [
+		{
+			"path": "i/${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"partial date"
+		]
+	]
+}
