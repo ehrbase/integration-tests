@@ -1,0 +1,17 @@
+{
+	"q": "SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS EVALUATION eval[openEHR-EHR-EVALUATION.minimal.v1] WHERE ${where}",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			78.5
+		],
+		[
+			100.5
+		]
+	]
+}

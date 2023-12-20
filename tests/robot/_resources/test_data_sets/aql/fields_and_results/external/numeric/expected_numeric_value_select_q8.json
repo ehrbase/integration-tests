@@ -1,0 +1,14 @@
+{
+	"q": "SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS EVALUATION eval[openEHR-EHR-EVALUATION.minimal.v1] WHERE eval/data[at0001]/items[at0002]/value/magnitude >= 2 ORDER BY eval/data[at0001]/items[at0002]/value/magnitude ASC LIMIT 1",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			78.5
+		]
+	]
+}
