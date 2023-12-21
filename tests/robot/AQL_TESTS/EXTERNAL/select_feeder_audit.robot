@@ -3,7 +3,8 @@ Documentation   Covers:
 ...             - https://github.com/ehrbase/openEHR_SDK/blob/develop/client/src/test/java/org/ehrbase/openehr/sdk/client/openehrclient/defaultrestclient/systematic/compositionquery/SelectFeederAuditIT.java#L43
 ...             \n*Test testCompositionFeederAuditSelect()*
 ...             \nAll cases are skipped due to message containing *Not implemented* substring
-...             \n*Not implemented error message example:* _Not implemented: SELECT: path feeder_audit/feeder_system_audit/other_details[openEHR-EHR-ITEM_TREE.generic.v1]/name/value contains STRUCTURE_INTERMEDIATE attribute feeder_system_audit_
+...             \n*Not implemented error message example below:*
+...             \n _Not implemented: SELECT: path feeder_audit/feeder_system_audit/other_details[openEHR-EHR-ITEM_TREE.generic.v1]/name/value contains STRUCTURE_INTERMEDIATE attribute feeder_system_audit_
 Resource        ../../_resources/keywords/aql_keywords.robot
 Library     DataDriver
 ...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/external/select_feeder_audit/combinations/select_feeder_audit.csv
