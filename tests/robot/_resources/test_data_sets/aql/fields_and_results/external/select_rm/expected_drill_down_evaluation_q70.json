@@ -1,0 +1,340 @@
+{
+	"q": "SELECT ${path} FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.test_all_types.v1] CONTAINS EVALUATION eval[openEHR-EHR-EVALUATION.test_all_types.v1] WHERE c/uid/value = '${c_uid}'",
+	"columns": [
+		{
+			"path": "eval",
+			"name": "#0"
+		},
+		{
+			"path": "eval/archetype_node_id",
+			"name": "#1"
+		},
+		{
+			"path": "eval/language",
+			"name": "#2"
+		},
+		{
+			"path": "eval/language/terminology_id/value",
+			"name": "#3"
+		},
+		{
+			"path": "eval/subject",
+			"name": "#4"
+		},
+		{
+			"path": "eval/data[at0001]/name",
+			"name": "#5"
+		},
+		{
+			"path": "eval/data[at0001]/items[at0003]",
+			"name": "#6"
+		},
+		{
+			"path": "eval/data[at0001]/items[at0003]/archetype_node_id",
+			"name": "#7"
+		},
+		{
+			"path": "eval/data[at0001]/items[at0003]/value/lower/magnitude",
+			"name": "#8"
+		},
+		{
+			"path": "eval/data[at0001]/items[at0003]/value/upper_unbounded",
+			"name": "#9"
+		},
+		{
+			"path": "eval/data[at0001]/items[at0005]",
+			"name": "#10"
+		},
+		{
+			"path": "eval/data[at0001]/items[at0009]",
+			"name": "#11"
+		},
+		{
+			"path": "eval/data[at0001]/items[at0009]/value/magnitude",
+			"name": "#12"
+		},
+		{
+			"path": "eval/data[at0001]/items[at0006]/items[at0007]/items[at0008]/name/value",
+			"name": "#13"
+		},
+		{
+			"path": "eval/data[at0001]/items[at0006]/items[at0007]/items[at0008]/items[at0010]/value",
+			"name": "#14"
+		},
+		{
+			"path": "eval/data[at0001]/items[at0006]/items[at0007]/items[at0008]/items[at0010]/value/value",
+			"name": "#15"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "EVALUATION",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "Test all types"
+				},
+				"archetype_details": {
+					"archetype_id": {
+						"value": "openEHR-EHR-EVALUATION.test_all_types.v1"
+					},
+					"rm_version": "1.0.2"
+				},
+				"language": {
+					"_type": "CODE_PHRASE",
+					"terminology_id": {
+						"_type": "TERMINOLOGY_ID",
+						"value": "ISO_639-1"
+					},
+					"code_string": "en"
+				},
+				"encoding": {
+					"_type": "CODE_PHRASE",
+					"terminology_id": {
+						"_type": "TERMINOLOGY_ID",
+						"value": "IANA_character-sets"
+					},
+					"code_string": "UTF-8"
+				},
+				"subject": {
+					"_type": "PARTY_SELF"
+				},
+				"data": {
+					"_type": "ITEM_TREE",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "Arbol"
+					},
+					"items": [
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "uri"
+							},
+							"value": {
+								"_type": "DV_TEXT",
+								"value": "Lorem ipsum"
+							},
+							"archetype_node_id": "at0002"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "interval count"
+							},
+							"value": {
+								"_type": "DV_INTERVAL",
+								"lower": {
+									"_type": "DV_COUNT",
+									"magnitude": 123
+								},
+								"upper": {
+									"_type": "DV_COUNT",
+									"magnitude": 234
+								},
+								"lower_included": true,
+								"upper_included": true,
+								"lower_unbounded": false,
+								"upper_unbounded": false
+							},
+							"archetype_node_id": "at0003"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "interval quantity"
+							},
+							"value": {
+								"_type": "DV_INTERVAL",
+								"lower": {
+									"_type": "DV_QUANTITY",
+									"units": "mm[H20]",
+									"magnitude": 123.123
+								},
+								"upper": {
+									"_type": "DV_QUANTITY",
+									"units": "mm[H20]",
+									"magnitude": 234.234
+								},
+								"lower_included": true,
+								"upper_included": true,
+								"lower_unbounded": false,
+								"upper_unbounded": false
+							},
+							"archetype_node_id": "at0004"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "interval datetime"
+							},
+							"value": {
+								"_type": "DV_INTERVAL",
+								"lower": {
+									"_type": "DV_DATE_TIME",
+									"value": "2019-01-28T21:22:49.426Z"
+								},
+								"upper": {
+									"_type": "DV_DATE_TIME",
+									"value": "2019-01-28T21:22:49.426Z"
+								},
+								"lower_included": true,
+								"upper_included": true,
+								"lower_unbounded": false,
+								"upper_unbounded": false
+							},
+							"archetype_node_id": "at0005"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "choice"
+							},
+							"value": {
+								"_type": "DV_QUANTITY",
+								"units": "mm[H20]",
+								"magnitude": 148.01210165023805
+							},
+							"archetype_node_id": "at0009"
+						},
+						{
+							"_type": "CLUSTER",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "cluster 1"
+							},
+							"items": [
+								{
+									"_type": "CLUSTER",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "cluster 2"
+									},
+									"items": [
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "cluster 3"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "text 2"
+													},
+													"value": {
+														"_type": "DV_TEXT",
+														"value": "FViqRjKtFGXm ,iPOYGPuYNjqqVYifvxzvbOlMnuidJvvdYByUiDUgQIBkyOcJtgZcRKdFmyo .TrsPDcaXtFeqLlnZgqdTxb.,LGavIsdXKcBhTWd,PElsLCymSIGcfRrObkevpucVkThYTAZZxcikhpGVaQ.UbyrkwewgarEn gLmIWGLqFZBFYLcBje.GwiYMBoHEEVymGCkyXUyosuq,CNvWsuUnHdVEjEuxGSEwBDEVgwWrXWOYWUCIhos"
+													},
+													"archetype_node_id": "at0010"
+												}
+											],
+											"archetype_node_id": "at0008"
+										}
+									],
+									"archetype_node_id": "at0007"
+								}
+							],
+							"archetype_node_id": "at0006"
+						}
+					],
+					"archetype_node_id": "at0001"
+				},
+				"archetype_node_id": "openEHR-EHR-EVALUATION.test_all_types.v1"
+			},
+			"openEHR-EHR-EVALUATION.test_all_types.v1",
+			{
+				"_type": "CODE_PHRASE",
+				"terminology_id": {
+					"_type": "TERMINOLOGY_ID",
+					"value": "ISO_639-1"
+				},
+				"code_string": "en"
+			},
+			"ISO_639-1",
+			{
+				"_type": "PARTY_SELF"
+			},
+			{
+				"_type": "DV_TEXT",
+				"value": "Arbol"
+			},
+			{
+				"_type": "ELEMENT",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "interval count"
+				},
+				"value": {
+					"_type": "DV_INTERVAL",
+					"lower": {
+						"_type": "DV_COUNT",
+						"magnitude": 123
+					},
+					"upper": {
+						"_type": "DV_COUNT",
+						"magnitude": 234
+					},
+					"lower_included": true,
+					"upper_included": true,
+					"lower_unbounded": false,
+					"upper_unbounded": false
+				},
+				"archetype_node_id": "at0003"
+			},
+			"at0003",
+			123,
+			false,
+			{
+				"_type": "ELEMENT",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "interval datetime"
+				},
+				"value": {
+					"_type": "DV_INTERVAL",
+					"lower": {
+						"_type": "DV_DATE_TIME",
+						"value": "2019-01-28T21:22:49.426Z"
+					},
+					"upper": {
+						"_type": "DV_DATE_TIME",
+						"value": "2019-01-28T21:22:49.426Z"
+					},
+					"lower_included": true,
+					"upper_included": true,
+					"lower_unbounded": false,
+					"upper_unbounded": false
+				},
+				"archetype_node_id": "at0005"
+			},
+			{
+				"_type": "ELEMENT",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "choice"
+				},
+				"value": {
+					"_type": "DV_QUANTITY",
+					"units": "mm[H20]",
+					"magnitude": 148.01210165023805
+				},
+				"archetype_node_id": "at0009"
+			},
+			148.01210165023805,
+			"cluster 3",
+			{
+				"_type": "DV_TEXT",
+				"value": "FViqRjKtFGXm ,iPOYGPuYNjqqVYifvxzvbOlMnuidJvvdYByUiDUgQIBkyOcJtgZcRKdFmyo .TrsPDcaXtFeqLlnZgqdTxb.,LGavIsdXKcBhTWd,PElsLCymSIGcfRrObkevpucVkThYTAZZxcikhpGVaQ.UbyrkwewgarEn gLmIWGLqFZBFYLcBje.GwiYMBoHEEVymGCkyXUyosuq,CNvWsuUnHdVEjEuxGSEwBDEVgwWrXWOYWUCIhos"
+			},
+			"FViqRjKtFGXm ,iPOYGPuYNjqqVYifvxzvbOlMnuidJvvdYByUiDUgQIBkyOcJtgZcRKdFmyo .TrsPDcaXtFeqLlnZgqdTxb.,LGavIsdXKcBhTWd,PElsLCymSIGcfRrObkevpucVkThYTAZZxcikhpGVaQ.UbyrkwewgarEn gLmIWGLqFZBFYLcBje.GwiYMBoHEEVymGCkyXUyosuq,CNvWsuUnHdVEjEuxGSEwBDEVgwWrXWOYWUCIhos"
+		]
+	]
+}

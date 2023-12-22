@@ -1,0 +1,25 @@
+{
+	"q": "SELECT ${path} FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.test_all_types.v1] CONTAINS SECTION s[openEHR-EHR-SECTION.test_all_types.v1] CONTAINS INSTRUCTION i[openEHR-EHR-INSTRUCTION.test_all_types.v1] WHERE c/uid/value = '${c_uid}'",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "ELEMENT",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "partial datetime"
+				},
+				"value": {
+					"_type": "DV_DATE_TIME",
+					"value": "2019-01-28T21:22:49.426Z"
+				},
+				"archetype_node_id": "at0004"
+			}
+		]
+	]
+}
