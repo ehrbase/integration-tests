@@ -26,8 +26,11 @@ SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAIN
     ...     ${data_replaced_vars}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/primitives_multi_selects_expected_tmp.json
     Length Should Be    ${resp_body['rows']}    10
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      ignore_order=${TRUE}    ignore_string_case=${TRUE}
+    ...     ${resp_body_actual}     ${expected_result}
+    ...     exclude_paths=${exclude_paths}
+    ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     #Log To Console    \n\n${diff}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Run Keywords

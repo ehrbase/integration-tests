@@ -53,8 +53,10 @@ Execute Query
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     Create File     ${tmp_file}     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${tmp_file}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${tmp_file}

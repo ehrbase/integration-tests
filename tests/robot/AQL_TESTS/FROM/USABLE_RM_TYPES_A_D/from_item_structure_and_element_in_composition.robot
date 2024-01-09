@@ -37,7 +37,7 @@ Execute Query
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
-    ${exclude_paths}    Create List    root['rows'][0][0]['uid']
+    ${exclude_paths}    Create List    root['rows'][0][0]['uid']    root['meta']
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}

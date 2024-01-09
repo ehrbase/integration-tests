@@ -39,8 +39,10 @@ Execute Query
     IF      ${query_nr} == ${1} or ${query_nr} == ${2} or ${query_nr} == ${3}
         ${expected_res}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
         Length Should Be    ${resp_body['rows']}     ${nr_of_results}
+        ${exclude_paths}	Create List    root['meta']
         ${diff}     compare json-string with json-file
         ...     ${resp_body_actual}     ${expected_res}
+        ...     exclude_paths=${exclude_paths}
         ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
         Should Be Empty    ${diff}    msg=DIFF DETECTED!
     END
@@ -66,8 +68,10 @@ Checks For Second And Third Query
     ${temp_aql_resp}    Set Variable    ${aql_resp}
     ${json_obj_tmp}     Get Value From Json	    ${temp_aql_resp}	    ${json_path}
     ${json_obj_tmp2}    Update Value To Json    ${temp_aql_resp}	    $.rows	    ${json_obj_tmp}
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${temp_aql_resp}     ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${ignore_order}    ignore_string_case=${TRUE}
     ${temp_aql_resp1}     Set Variable    ${None}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!

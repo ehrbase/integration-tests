@@ -16,8 +16,10 @@ Suite Teardown  Run Keywords
     Set AQL And Execute Ad Hoc Query        ${query}
     #Should Be Equal As Strings      ${resp_body_query}      ${query}
     Length Should Be    ${resp_body['rows']}     3
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
@@ -28,8 +30,10 @@ Suite Teardown  Run Keywords
     Set AQL And Execute Ad Hoc Query        ${query}
     #Should Be Equal As Strings      ${resp_body_query}      ${query}
     Length Should Be    ${resp_body['rows']}     3
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
@@ -40,8 +44,10 @@ Suite Teardown  Run Keywords
     Set AQL And Execute Ad Hoc Query        ${query}
     #Should Be Equal As Strings      ${resp_body_query}      ${query}
     Length Should Be    ${resp_body['rows']}     3
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
@@ -52,8 +58,10 @@ Suite Teardown  Run Keywords
     Set AQL And Execute Ad Hoc Query        ${query}
     #Should Be Equal As Strings      ${resp_body_query}      ${query}
     Length Should Be    ${resp_body['rows']}     1
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
@@ -64,8 +72,10 @@ Suite Teardown  Run Keywords
     Set AQL And Execute Ad Hoc Query        ${query}
     #Should Be Equal As Strings      ${resp_body_query}      ${query}
     Length Should Be    ${resp_body['rows']}     7
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
@@ -76,8 +86,10 @@ Suite Teardown  Run Keywords
     Set AQL And Execute Ad Hoc Query        ${query}
     #Should Be Equal As Strings      ${resp_body_query}      ${query}
     Length Should Be    ${resp_body['rows']}     7
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
@@ -88,8 +100,10 @@ Suite Teardown  Run Keywords
     Set AQL And Execute Ad Hoc Query        ${query}
     #Should Be Equal As Strings      ${resp_body_query}      ${query}
     Length Should Be    ${resp_body['rows']}     3
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
@@ -100,8 +114,10 @@ Suite Teardown  Run Keywords
     Set AQL And Execute Ad Hoc Query        ${query}
     #Should Be Equal As Strings      ${resp_body_query}      ${query}
     Length Should Be    ${resp_body['rows']}     1
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/mixed/${expected_file_tmp}

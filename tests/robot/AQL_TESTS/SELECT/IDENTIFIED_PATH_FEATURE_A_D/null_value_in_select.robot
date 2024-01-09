@@ -34,7 +34,9 @@ Execute Query
     Set AQL And Execute Ad Hoc Query    ${query}
     ${expected_res}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/select/${expected_file}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_res}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!

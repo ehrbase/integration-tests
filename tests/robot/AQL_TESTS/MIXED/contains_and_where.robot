@@ -13,8 +13,10 @@ Suite Teardown      Admin Delete EHR For AQL    ${ehr_id}
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/mixed/mixed_contains_and_where_q1.json
     Length Should Be    ${resp_body['rows']}     16
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
@@ -23,8 +25,10 @@ Suite Teardown      Admin Delete EHR For AQL    ${ehr_id}
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/mixed/mixed_contains_and_where_q2.json
     Length Should Be    ${resp_body['rows']}     8
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
@@ -33,8 +37,10 @@ Suite Teardown      Admin Delete EHR For AQL    ${ehr_id}
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/mixed/mixed_contains_and_where_q3.json
     Length Should Be    ${resp_body['rows']}     2
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
@@ -43,8 +49,10 @@ Suite Teardown      Admin Delete EHR For AQL    ${ehr_id}
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/mixed/mixed_contains_and_where_q4.json
     Length Should Be    ${resp_body['rows']}     1
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 

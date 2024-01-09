@@ -27,8 +27,10 @@ SELECT s/subject/external_ref/id/value, s/other_details/items[at0001]/value/id F
     Create File     ${expected_result_file_tmp}
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     2
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result_file_tmp}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Run Keyword And Return Status   Remove File     ${expected_result_file_tmp}

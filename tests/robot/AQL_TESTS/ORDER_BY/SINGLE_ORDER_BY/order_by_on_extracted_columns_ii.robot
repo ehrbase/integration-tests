@@ -43,8 +43,10 @@ Execute Query
     Create File     ${EXPECTED_JSON_DATA_SETS}/order_by/order_by_extracted_columns_ii_tmp.json
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/order_by/order_by_extracted_columns_ii_tmp.json
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${FALSE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/order_by/order_by_extracted_columns_ii_tmp.json

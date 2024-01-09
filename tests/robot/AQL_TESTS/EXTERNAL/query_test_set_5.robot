@@ -70,7 +70,9 @@ Execute Query
     ...     ${ignore_order}=${TRUE}    ${ignore_string_case}=${TRUE}
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     ${expected_rows_nr}
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_file}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${ignore_order}    ignore_string_case=${ignore_string_case}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!

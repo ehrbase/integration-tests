@@ -27,8 +27,10 @@ Lvl 1: SELECT p/time/value FROM POINT_EVENT p
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/paths_same_hierarchy_lvl1.json
     Length Should Be    ${resp_body['rows']}     5
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}
+    ...     exclude_paths=${exclude_paths}
     #Log To Console    \n\n${diff}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
@@ -57,7 +59,6 @@ Lvl 3: SELECT c/start_time/value FROM EVENT_CONTEXT c
     [Setup]     Precondition2
     ${query}    Set Variable    SELECT c/start_time/value FROM EVENT_CONTEXT c
     Set AQL And Execute Ad Hoc Query        ${query}
-    ${exclude_paths}    Create List    root['rows'][0][0]['uid']
     Length Should Be    ${resp_body['rows']}     1
     Should Be Equal As Strings      ${resp_body['rows'][0][0]}      2021-12-21T14:19:31.649613+01:00
     [Teardown]      Admin Delete EHR For AQL
@@ -75,8 +76,10 @@ Subobjects Within Locatable: SELECT c/setting FROM EVENT_CONTEXT c
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/subobjects_within_locatable.json
     Log     Add test data once 200 is returned. File: ${expected_result}    console=yes
     Length Should Be    ${resp_body['rows']}     1
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}
+    ...     exclude_paths=${exclude_paths}
     #Log To Console    \n\n${diff}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL

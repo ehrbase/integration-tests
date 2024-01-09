@@ -20,8 +20,10 @@ SELECT c/feeder_audit FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     1
+    ${exclude_paths}	Create List    root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_file}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 

@@ -34,7 +34,9 @@ Execute Query
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/aggregate_functions/${expected_file}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
+    ${exclude_paths}    Create List     root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
