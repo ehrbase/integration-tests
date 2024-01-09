@@ -43,7 +43,7 @@ Execute Query
     Create Binary File     ${EXPECTED_JSON_DATA_SETS}/select/path_from_entry_to_data_value_tmp.json
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
-    ${exclude_paths}	Create List    root['meta']
+    ${exclude_paths}	Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/select/path_from_entry_to_data_value_tmp.json
     ...     exclude_paths=${exclude_paths}

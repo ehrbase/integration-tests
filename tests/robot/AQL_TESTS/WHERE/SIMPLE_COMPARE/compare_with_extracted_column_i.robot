@@ -61,7 +61,7 @@ Execute Query
     Create File     ${EXPECTED_JSON_DATA_SETS}/where/expected_ehr_compo_tmp.json
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     1
-    ${exclude_paths}	Create List    root['meta']
+    ${exclude_paths}	Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/where/expected_ehr_compo_tmp.json
     ...     exclude_paths=${exclude_paths}

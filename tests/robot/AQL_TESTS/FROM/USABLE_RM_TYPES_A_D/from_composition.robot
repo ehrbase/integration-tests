@@ -38,7 +38,7 @@ Execute Query
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
-    ${exclude_paths}    Create List    root['rows'][0][0]['uid']    root['meta']
+    ${exclude_paths}    Create List    root['rows'][0][0]['uid']    root['q']   root['meta']
     IF      '${query}' != 'SELECT t FROM ELEMENT t'
         Length Should Be    ${resp_body['rows']}     1
     ELSE

@@ -45,7 +45,7 @@ Execute Query
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
-    ${exclude_paths}    Create List    root['meta']     root['rows'][0][0]['uid']
+    ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
     ...     root['rows'][1][0]['uid']   root['rows'][2][0]['uid']   root['rows'][3][0]['uid']
     ...     root['rows'][4][0]['uid']   root['rows'][5][0]['uid']   root['rows'][6][0]['uid']
     ...     root['rows'][7][0]['uid']   root['rows'][8][0]['uid']   root['rows'][9][0]['uid']

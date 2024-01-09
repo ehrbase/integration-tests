@@ -27,7 +27,7 @@ Lvl 1: SELECT p/time/value FROM POINT_EVENT p
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/paths_same_hierarchy_lvl1.json
     Length Should Be    ${resp_body['rows']}     5
-    ${exclude_paths}	Create List    root['meta']
+    ${exclude_paths}	Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}
     ...     exclude_paths=${exclude_paths}

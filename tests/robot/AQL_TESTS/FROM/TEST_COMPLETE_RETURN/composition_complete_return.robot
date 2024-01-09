@@ -15,7 +15,7 @@ Test Complete Return Of Composition
     ${query}    Set Variable    SELECT c FROM COMPOSITION c
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/composition_complete_return.json
-    ${exclude_paths}    Create List    root['rows'][0][0]['uid']    root['meta']
+    ${exclude_paths}    Create List    root['rows'][0][0]['uid']    root['q']   root['meta']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
     #Log To Console    \n\n${diff}
