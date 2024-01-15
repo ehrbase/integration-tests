@@ -25,101 +25,79 @@ Suite Setup     Precondition        #enable this keyword if AQL checks are passi
 Suite Teardown  Admin Delete EHR For AQL       #enable this keyword if AQL checks are passing !!!
 
 
+*** Variables ***
+@{expected_meta_keys_post}      _created    _executed_aql   _schema_version     _type
+@{expected_meta_keys_get}       _created    _executed_aql   _href   _schema_version     _type
+${query1}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o CONTAINS CLUSTER
+${query2}   SELECT o FROM SECTION CONTAINS OBSERVATION o CONTAINS CLUSTER
+${query3}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o
+${query4}   SELECT o FROM SECTION CONTAINS OBSERVATION o CONTAINS CLUSTER c
+
+
 *** Test Cases ***
 1. Execute Ad Hoc Query With POST And Check Meta JSON Object
     #POST http://{base_url}/ehrbase/rest/openehr/v1/query/aql
-    ${query1}   Set Variable
-    ...     SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o CONTAINS CLUSTER
     Execute Query   ${query1}
-    @{expected_meta_keys}   Create List
-    ...     _created    _executed_aql   _schema_version     _type
-    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys}
+    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys_post}
     Meta JSON Object Checks
     Dictionary Should Not Contain Key   ${meta_obj}     _href
 
 2. Execute Stored Query With GET And Check Meta JSON Object
     #GET http://{base_url}/ehrbase/rest/openehr/v1/query/{qualified_query_name}
-    ${query2}   Set Variable
-    ...     SELECT o FROM SECTION CONTAINS OBSERVATION o CONTAINS CLUSTER
     ${resp_qualified_query_name}     PUT /definition/query/{qualified_query_name}
     ...     query_to_store=${query2}     format=text
     GET /query/{qualified_query_name}
     ...     qualif_name=${resp_qualified_query_name}
     Set Test Variable       ${resp_body_actual}     ${resp}
-    @{expected_meta_keys}   Create List
-    ...     _created    _executed_aql   _href   _schema_version     _type
-    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys}
+    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys_get}
     Meta JSON Object Checks
     Should Be Equal As Strings      ${meta_obj['_href']}
     ...     ${BASEURL}/query/${resp_qualified_query_name}
 
 3. Execute Ad Hoc Query With Get And Check Meta JSON Object
     #GET http://{base_url}/ehrbase/rest/openehr/v1/query/aql?q={query}
-    ${query3}   Set Variable
-    ...     SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o
     Set Test Variable       ${payload}      ${query3}
     GET /query/aql?q={query}
     Set Test Variable       ${resp_body_actual}     ${response.json()}
-    @{expected_meta_keys}   Create List
-    ...     _created    _executed_aql   _href   _schema_version     _type
-    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys}
+    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys_get}
     Meta JSON Object Checks
     Should Be Equal As Strings      ${meta_obj['_href']}
     ...     ${BASEURL}/query/aql
 
 4. Execute Ad Hoc Query With Get Limit 1 Offset 1 And Check Meta JSON Object
-    [Tags]      not-ready
     #GET http://{base_url}/ehrbase/rest/openehr/v1/query/aql?q={query}
-    ${query4}   Set Variable
-    ...     SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o
-    Set Test Variable       ${payload}      ${query4}
-    #&{query_param}     Create Dictionary   q=${query4}     limit=1     offset=1
-    GET /query/aql With Query Params    query=${query4}
+    GET /query/aql With Query Params    query=${query3}
     Set Test Variable       ${resp_body_actual}     ${response.json()}
-    @{expected_meta_keys}   Create List
-    ...     _created    _executed_aql   _href   _schema_version     _type
-    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys}
+    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys_get}
     Meta JSON Object Checks
 
 5. Execute Stored Query With POST And Check Meta JSON Object
     #POST http://{base_url}/ehrbase/rest/openehr/v1/query/{qualified_query_name}
-    ${query5}   Set Variable
-    ...     SELECT o FROM SECTION CONTAINS OBSERVATION o CONTAINS CLUSTER c
     ${resp_qualified_query_name}     PUT /definition/query/{qualified_query_name}
-    ...     query_to_store=${query5}     format=text
+    ...     query_to_store=${query4}     format=text
     POST /query/{qualified_query_name}      qualif_name=${resp_qualified_query_name}
     Set Test Variable       ${resp_body_actual}     ${resp}
-    @{expected_meta_keys}   Create List
-    ...     _created    _executed_aql   _schema_version     _type
-    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys}
+    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys_post}
     Meta JSON Object Checks
 
 6. Execute Stored Query With GET Qualified Name And Version And Check Meta JSON Object
     #GET http://{base_url}/ehrbase/rest/openehr/v1/query/{qualified_query_name}/{version}
-    ${query6}   Set Variable
-    ...     SELECT o FROM SECTION CONTAINS OBSERVATION o CONTAINS CLUSTER c
     ${resp_qualified_query_name_version}     PUT /definition/query/{qualified_query_name}/{version}
-    ...     query_to_store=${query6}     format=text
+    ...     query_to_store=${query4}     format=text
     GET /query/{qualified_query_name}/{version}     qualif_name=${resp_qualified_query_name_version}
     Set Test Variable       ${resp_body_actual}     ${resp}
-    @{expected_meta_keys}   Create List
-    ...     _created    _executed_aql   _href   _schema_version     _type
-    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys}
+    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys_get}
     Meta JSON Object Checks
     Should Be Equal As Strings      ${meta_obj['_href']}
     ...     ${BASEURL}/query/${resp_qualified_query_name_version}
 
 7. Execute Stored Query With POST Qualified Name And Version And Check Meta JSON Object
     #POST http://{base_url}/ehrbase/rest/openehr/v1/query/{qualified_query_name}/{version}
-    ${query7}   Set Variable
-    ...     SELECT o FROM SECTION CONTAINS OBSERVATION o CONTAINS CLUSTER c
     ${resp_qualified_query_name_version}     PUT /definition/query/{qualified_query_name}/{version}
-    ...     query_to_store=${query7}     format=text
+    ...     query_to_store=${query4}     format=text
     POST /query/{qualified_query_name}/{version}    qualif_name=${resp_qualified_query_name_version}
     Set Test Variable       ${resp_body_actual}     ${resp}
-    @{expected_meta_keys}   Create List
-    ...     _created    _executed_aql   _schema_version     _type
-    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys}
+    Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys_post}
     Meta JSON Object Checks
 
 
