@@ -5,9 +5,9 @@ Documentation   _Robot tests to check meta JSON object from AQL response._
 ...         - _2. GET {ehrbase_url}/ehrbase/rest/openehr/v1/query/{qualified_query_name}_
 ...         - _3. GET {ehrbase_url}/ehrbase/rest/openehr/v1/query/aql?q={query}_
 ...         - _4. GET {ehrbase_url}/ehrbase/rest/openehr/v1/query/aql?q={query} with limit and offset query params_
-...         - _5. POST http://{base_url}/ehrbase/rest/openehr/v1/query/{qualified_query_name}_
-...         - _6. GET http://{base_url}/ehrbase/rest/openehr/v1/query/{qualified_query_name}/{version}_
-...         - _7. POST http://{base_url}/ehrbase/rest/openehr/v1/query/{qualified_query_name}/{version}_
+...         - _5. POST {ehrbase_url}/ehrbase/rest/openehr/v1/query/{qualified_query_name}_
+...         - _6. GET {ehrbase_url}/ehrbase/rest/openehr/v1/query/{qualified_query_name}/{version}_
+...         - _7. POST {ehrbase_url}/ehrbase/rest/openehr/v1/query/{qualified_query_name}/{version}_
 ...         ${\n}*Checks done*:
 ...         - meta object has the following keys (POST): _created, _executed_aql, _schema_version, _type
 ...         - meta object has the following keys (GET): _created, _executed_aql, _href, _schema_version, _type
