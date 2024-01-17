@@ -24,6 +24,7 @@ Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/suite_settings.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 
 *** Variables ***
@@ -36,7 +37,7 @@ ${range_upper_patternPath}
 ...     .//attributes/children/attributes/children/attributes/children/attributes/children/item/range/upper
 ${opt_reference_file}   minimal/minimal_instruction.dv_duration_fields_allowed.range_constraints.opt
 ${positiveCode}     201
-${negativeCode}     400
+${negativeCode}     422
 
 
 *** Test Cases ***
@@ -46,7 +47,7 @@ Test Allowed Fields And Range Constraints Configured In C_DURATION
     [Template]      Test DV Duration Allowed Fields And Range Constraints
     #C_DURATION pattern value, DV_DURATION value in COMPOSITION, C_DURATION range lower, C_DURATION range upper, expected code
     PYMWDTHMS       P1Y         P0Y     P50Y    ${positiveCode}
-    PYMWDTHMS       P1Y3M       P2Y     P50Y    ${positiveCode}
+    PYMWDTHMS       P1Y3M       P1Y     P50Y    ${positiveCode}
     ##below are negative flows
     PYMWDTHMS       P1Y         P2Y     P50Y    ${negativeCode}
     PMWDTHMS        P1Y         P0Y     P50Y    ${negativeCode}
@@ -63,16 +64,21 @@ Test DV Duration Allowed Fields And Range Constraints
     ...             ${range_lower}      ${range_upper}    ${expectedCode}
     [Documentation]     C_DURATION=${c_duration_opt_value}, DV_DURATION=${dv_duration_composition_value}
     ...     ${\n}rangeLower=${range_lower}, rangeUpper=${range_upper}, expectedCode=${expectedCode}
+    Set Test Variable       ${template_id}      minimal_instruction.en.v2
     Load XML File With OPT      ${opt_reference_file}
     ${returnedOptFile}   Change XML Value And Save Back To New OPT
     ...     ${xmlFileContent}
     ...     ${c_duration_opt_value}     ${opt_c_duration_patternPath}
     ...     ${range_lower}      ${range_lower_patternPath}
     ...     ${range_upper}      ${range_upper_patternPath}
+    ${file}     Get File    ${VALID DATA SETS}/${returnedOptFile}
+    Set Test Variable   ${file}     ${file}
     Upload OPT      ${returnedOptFile}
     create EHR
     CommitCompositionTemplate     ${dv_duration_composition_value}    ${expectedCode}
-    [Teardown]      Remove File     ${newOPTFile}
+    [Teardown]      Run Keywords    Remove File     ${newOPTFile}   AND
+    ...     Admin Delete EHR    AND
+    ...     Delete Template Using API
 
 CommitCompositionTemplate
     [Arguments]     ${dvDurationValue}      ${expectedCode}
@@ -139,3 +145,16 @@ Change XML Value And Save Back To New OPT
     Should Be Equal As Strings    ${rangeUpperElementChanged.text}       ${range_upper_value}
     Save Xml    ${xmlContent}   ${newOPTFile}
     [return]    minimal/newly_generated_file_range_combinations.opt
+
+Admin Delete EHR
+    [Documentation]     Delete EHR using ADMIN endpoint.
+    ...                 - It must delete all objects linked to EHR as well as the EHR itself.
+    ...                 - Takes 1 optional argument {ehr_id}.
+    ...                 - Dependent of keyword 'Create EHR For AQL', due to {ehr_id} var.
+    ...                 - Expects *204*.
+    [Arguments]     ${ehr_id}=${ehr_id}
+    prepare new request session    JSON
+    Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2   headers=${headers}
+    ${resp}             DELETE On Session      ${SUT}     /ehr/${ehr_id}
+                        ...     expected_status=anything
+                        Should Be Equal As Strings      ${resp.status_code}     ${204}

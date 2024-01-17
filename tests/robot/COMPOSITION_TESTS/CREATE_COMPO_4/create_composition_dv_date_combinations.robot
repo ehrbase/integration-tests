@@ -34,7 +34,6 @@ ${composition_file}      Test_all_types_v2__.json
 
 *** Test Cases ***
 Create Composition With DV_DATE Combinations - Positive
-    [Tags]      not-ready   to-be-enabled
     [Documentation]     *Operations done here (Positive flows):*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_DATE using ${dvDateValue} argument value
@@ -53,17 +52,15 @@ Create Composition With DV_DATE Combinations - Negative
     ...     - commit composition
     ...     - check status code of the commited composition to be 400.
     ...     *Postcondition:* Add DV_DATE value 2021-10-24, to ${composition_file}.
-    [Tags]      not-ready   bug
     [Template]      NegativeCompositionTemplate
     NULL
     ${EMPTY}
-    2021-00     #fails, below bug
-    2021-13     #fails, below bug
+    2021-00
+    2021-13
     2021-10-00
     2021-10-32
     +001985-04
-    [Teardown]      Run Keywords    PositiveCompositionTemplate     2021-10-24      AND
-    ...     TRACE JIRA ISSUE    CDR-487
+    [Teardown]      PositiveCompositionTemplate     2021-10-24
 
 
 *** Keywords ***

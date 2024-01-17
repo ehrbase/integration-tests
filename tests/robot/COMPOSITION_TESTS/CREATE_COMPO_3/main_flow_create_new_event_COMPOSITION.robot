@@ -41,7 +41,6 @@ Main flow create new event COMPOSITION CANONICAL_XML
     check the successful result of commit composition
 
 Main flow create new event COMPOSITION FLAT
-    [Tags]      not-ready   to-be-enabled
     commit composition   format=FLAT
     ...                  composition=nested.en.v1__full.xml.flat.json
     check the successful result of commit composition   nesting

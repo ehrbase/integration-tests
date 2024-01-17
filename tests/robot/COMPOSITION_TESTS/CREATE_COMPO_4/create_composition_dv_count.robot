@@ -139,7 +139,7 @@ Composition With DV_COUNT Magnitude NULL Range Constraint
     [Teardown]  Delete Composition Using API
 
 Composition With DV_COUNT Magnitude 0 Range Constraint
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     *Test case DV_COUNT Magnitude 0 Range Constraint:*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_COUNT Magnitude using:
@@ -207,7 +207,7 @@ Composition With DV_COUNT Magnitude 20 Range Constraint
     [Teardown]  Delete Composition Using API
 
 Composition With DV_COUNT Magnitude 25 Range Constraint
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     *Test case DV_COUNT Magnitude 25 Range Constraint:*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_COUNT Magnitude using:

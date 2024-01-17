@@ -351,7 +351,7 @@ Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper 100 - Lower Unb 0 - Upper Unb 0 - Low
     [Teardown]     Delete Composition Using API
 
 Test DV_INTERVAL<DV_COUNT> Lower -10 - Upper 100 - Lower Unb 0 - Upper Unb 0 - Lower Incl 1 - Upper Incl 1 With Lower Upper Constraint
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     Negative case for DV_INTERVAL<DV_COUNT>
     ...     Lower -10, Upper 100, Lower Unb 0, Upper Unb 0, Lower Incl 1, Upper Incl 1 With Lower Upper Constraint
     ...     *See suite documentation to understand what are 1 and 0 values!*
@@ -371,7 +371,7 @@ Test DV_INTERVAL<DV_COUNT> Lower -10 - Upper 100 - Lower Unb 0 - Upper Unb 0 - L
     [Teardown]     Delete Composition Using API
 
 Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper 200 - Lower Unb 0 - Upper Unb 0 - Lower Incl 1 - Upper Incl 1 With Lower Upper Constraint
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     Negative case for DV_INTERVAL<DV_COUNT>
     ...     Lower 0, Upper 200, Lower Unb 0, Upper Unb 0, Lower Incl 1, Upper Incl 1 With Lower Upper Constraint
     ...     *See suite documentation to understand what are 1 and 0 values!*
@@ -391,7 +391,7 @@ Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper 200 - Lower Unb 0 - Upper Unb 0 - Low
     [Teardown]     Delete Composition Using API
 
 Test DV_INTERVAL<DV_COUNT> Lower -10 - Upper 200 - Lower Unb 0 - Upper Unb 0 - Lower Incl 1 - Upper Incl 1 With Lower Upper Constraint
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     Negative case for DV_INTERVAL<DV_COUNT>
     ...     Lower -10, Upper 200, Lower Unb 0, Upper Unb 0, Lower Incl 1, Upper Incl 1 With Lower Upper Constraint
     ...     *See suite documentation to understand what are 1 and 0 values!*

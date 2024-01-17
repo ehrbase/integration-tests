@@ -46,12 +46,10 @@ Alternative flow 3 create new invalid event COMPOSITION FLAT
     check status_code of commit composition    400
 
 Alternative flow 3 create new invalid event COMPOSITION FLAT - DV Duration Near To Max
-    [Tags]      not-ready   bug
     commit composition   format=FLAT
     ...                  composition=dv_duration_max__.json
     #Github issue: https://github.com/ehrbase/ehrbase/issues/926
     check status_code of commit composition    400
-    [Teardown]      TRACE JIRA ISSUE    CDR-447
 
 #Alternative flow 3 create new invalid event COMPOSITION TDD
 #    [Tags]    future

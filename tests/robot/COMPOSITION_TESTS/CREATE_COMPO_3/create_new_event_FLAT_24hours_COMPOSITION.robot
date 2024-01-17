@@ -28,12 +28,13 @@ Resource        ../../_resources/suite_settings.robot
 Suite Setup         Precondition
 #Suite Teardown      restart SUT
 
+
 *** Variables ***
 ${composition_file}      a1__24hour_average_value.json
 
+
 *** Test Cases ***
 Create new event COMPOSITION FLAT with 24 Hours Average - 24 value
-    [Tags]      not-ready   to-be-enabled
     ${24HoursAvg_Value}     Set Variable    PT24H
     Load Json File With Composition
     ${initalJson}           Load Json From File     ${compositionFilePath}
@@ -49,46 +50,41 @@ Create new event COMPOSITION FLAT with 24 Hours Average - 24 value
     ...     ['composition']['a1/blood_pressure/a24_hour_average/width']
     ...     ${24HoursAvg_Value}
 
-
 ## below test cases are testing negative flows, with value < 24H and > 24H
 Create new event COMPOSITION FLAT with 24 Hours Average - 15 value
-    [Tags]      negative    not-ready   to-be-enabled
+    [Tags]      Negative
     ${24HoursAvg_Value}     Set Variable    PT15H
     Create Composition With 24 Hours Average - Invalid Value    ${24HoursAvg_Value}
     Should Contain    ${errMsg}    The value ${24HoursAvg_Value} must be >= PT24H
     [Teardown]      Change Json 24 Hour Average Value and Save Back To File
     ...     ${initalJson}      PT24H
 
-
 Create new event COMPOSITION FLAT with 24 Hours Average - 0 value
-    [Tags]      negative    not-ready   to-be-enabled
+    [Tags]      Negative
     ${24HoursAvg_Value}     Set Variable    PT0S
     Create Composition With 24 Hours Average - Invalid Value    ${24HoursAvg_Value}
     Should Contain    ${errMsg}    The value ${24HoursAvg_Value} must be >= PT24H
     [Teardown]      Change Json 24 Hour Average Value and Save Back To File
     ...     ${initalJson}      PT24H
 
-
 Create new event COMPOSITION FLAT with 24 Hours Average - 27 value
-    [Tags]      negative    not-ready   to-be-enabled
+    [Tags]      Negative
     ${24HoursAvg_Value}     Set Variable    PT27H
     Create Composition With 24 Hours Average - Invalid Value    ${24HoursAvg_Value}
     Should Contain    ${errMsg}    The value ${24HoursAvg_Value} must be <= PT24H
     [Teardown]      Change Json 24 Hour Average Value and Save Back To File
     ...     ${initalJson}      PT24H
 
-
 Create new event COMPOSITION FLAT with 24 Hours Average - -1 value
-    [Tags]      negative    not-ready   to-be-enabled
+    [Tags]      Negative
     ${24HoursAvg_Value}     Set Variable    PT-1H
     Create Composition With 24 Hours Average - Invalid Value    ${24HoursAvg_Value}
     Should Contain    ${errMsg}    The value ${24HoursAvg_Value} must be >= PT24H
     [Teardown]      Change Json 24 Hour Average Value and Save Back To File
     ...     ${initalJson}      PT24H
 
-
 Create new event COMPOSITION FLAT with 24 Hours Average - -24 value
-    [Tags]      negative    not-ready   to-be-enabled
+    [Tags]      Negative
     ${24HoursAvg_Value}     Set Variable    PT-24H
     Create Composition With 24 Hours Average - Invalid Value    ${24HoursAvg_Value}
     Should Contain    ${errMsg}    The value ${24HoursAvg_Value} must be >= PT24H

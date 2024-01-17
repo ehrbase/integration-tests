@@ -90,7 +90,7 @@ Composition With DV_TEXT.value NULL And DV_TEXT Pattern Constraint XYZ
     [Teardown]  Delete Composition Using API
 
 Composition With DV_TEXT.value ABC And DV_TEXT Pattern Constraint XYZ
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     *Test case DV_TEXT.value ABC And DV_TEXT Pattern Constraint XYZ:*
     ...     - DV_TEXT.value ABC And DV_TEXT Pattern Constraint XYZ
     ...     - load json file from CANONICAL_JSON folder
@@ -144,7 +144,7 @@ Composition With DV_TEXT.value NULL And DV_TEXT List Constraint XYZ OPQ
     [Teardown]  Delete Composition Using API
 
 Composition With DV_TEXT.value ABC And DV_TEXT List Constraint XYZ OPQ
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     *Test case DV_TEXT.value ABC And DV_TEXT List Constraint:*
     ...     - DV_TEXT.value ABC And DV_TEXT List Constraint XYZ, OPQ
     ...     - load json file from CANONICAL_JSON folder
