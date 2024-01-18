@@ -381,7 +381,7 @@ DELETE /definition/query/{qualified_query_name}/{version}
     ...         expected_status=anything
     ...         headers=${headers}
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
-                Set Test Variable       ${resp}         ${resp.json()}
+                Set Test Variable       ${resp}         ${resp}
 
 GET /query/aql?q={query}
     [Documentation]     Executes HTTP method GET on /query/aql?q={query} endpoint

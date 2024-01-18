@@ -28,7 +28,6 @@ Suite Setup       Precondition
 
 *** Test Cases ***
 Main flow has existing COMPOSITION (FLAT)
-    [Tags]      not-ready   to-be-enabled
     create EHR
     commit composition   format=FLAT
     ...                  composition=ehrn_vital_signs.v2__.json
@@ -37,7 +36,6 @@ Main flow has existing COMPOSITION (FLAT)
     check composition exists
 
 Create Two Compositions With Health Care Facility Provided And Not Provided - AQL
-    [Tags]      not-ready   to-be-enabled
     [Documentation]     Create first composition with health_care_facility provided;
     ...     Create second composition with health_care_facility not provided;
     ...     Apply AQL query to get EHR a/uid/value and a/context/health_care_facility/name.

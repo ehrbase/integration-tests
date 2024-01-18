@@ -60,7 +60,6 @@ Get Template (ECIS) - Get Annotations
     #webTemplate.tree.children[?(@.id='tobacco_smoking_summary')].children[?(@.id='start_date')].annotations.validation
     #Example: $.['blocks'][?(@.block_id == 'image')]['image_url']
     #Save Response (JSON) To File And Compare Template Ids    ${template_id}
-    [Teardown]    TRACE JIRA ISSUE    CDR-406
 
 Get Template (ECIS) - Check Default Value Item
     [Documentation]     Create template, get it and check defaultValue key presence in JSON.

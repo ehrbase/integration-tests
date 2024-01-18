@@ -35,7 +35,6 @@ Force Tags      COMPOSITION_get_versioned
 
 *** Test Cases ***
 1. Get Revision History of Versioned Composition Of Existing EHR (JSON)
-    [Tags]      CDR-560
     [Documentation]    Simple test
 
     create EHR and commit a composition for versioned composition tests
@@ -47,12 +46,11 @@ Force Tags      COMPOSITION_get_versioned
 
     ${item1} =    Get From List    ${response.body}    0
     Should Be Equal As Strings    ${version_uid}    ${item1.version_id.value}
-    #below line covers bug CDR-560
     Should Contain Any     ${item1.audits[0].time_committed.value}      +   -   Z   timezone not present in timestamp
 
 
 2. Get Revision History Of Versioned Composition Of Existing EHR With Two Composition Versions (JSON)
-    [Tags]      not-ready
+    [Tags]      not-ready   bug
     [Documentation]    Testing with two versions, so the result should list two history entries.
     ...     Checks if versions are listed in desc order -> Latest modified first.
     ...     Doc: https://specifications.openehr.org/releases/RM/latest/common.html#_revision_history_class
@@ -75,7 +73,7 @@ Force Tags      COMPOSITION_get_versioned
 
 
 3. Get Correct Ordered Revision History of Versioned Composition Of Existing EHR With Two Composition Versions (JSON)
-    [Tags]      not-ready
+    [Tags]      not-ready   bug
     [Documentation]     Testing with two versions like above, but checking the response more thoroughly.
 
     create EHR and commit a composition for versioned composition tests
@@ -141,7 +139,6 @@ Force Tags      COMPOSITION_get_versioned
     ...         - 2022-11-21T16:01:25.952+02:00
     ...         - 2022-11-21T16:01:25.952-01:00
     ...         - 2022-11-21T16:01:25.952Z
-    [Tags]      CDR-560
     prepare new request session    JSON    Prefer=return=representation
     create new EHR
     Should Be Equal As Strings    ${response.status}    201

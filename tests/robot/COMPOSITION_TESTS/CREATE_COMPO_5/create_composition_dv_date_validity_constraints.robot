@@ -24,6 +24,7 @@ Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/suite_settings.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 
 *** Variables ***
@@ -35,7 +36,7 @@ ${opt_reference_file}
 ${opt_temp_file}
 ...     all_types/Test_all_types_v2__temp.opt
 ${positiveCode}     201
-${negativeCode}     400
+${negativeCode}     422
 
 
 *** Test Cases ***
@@ -66,14 +67,19 @@ Test DV_DATE With Constraints On Month And/Or Day
     [Arguments]     ${c_date_opt_value}     ${dv_date_composition_value}    ${expectedCode}
     [Documentation]     C_DATE=${c_date_opt_value}, DV_DATE=${dv_date_composition_value}
     ...     ${\n}expectedCode=${expectedCode}
+    Set Test Variable       ${template_id}      Test_all_types_v2
     Load XML File With OPT      ${opt_reference_file}
     ${returnedOptFile}   Change XML Value And Save Back To New OPT
     ...     ${xmlFileContent}
     ...     ${c_date_opt_value}     ${opt_c_date_patternPath}
+    ${file}     Get File    ${VALID DATA SETS}/${returnedOptFile}
+    Set Test Variable   ${file}     ${file}
     Upload OPT      ${returnedOptFile}
     create EHR
     CommitCompositionTemplate     ${dv_date_composition_value}    ${expectedCode}
-    [Teardown]      Remove File     ${newOPTFile}
+    [Teardown]      Run Keywords    Remove File     ${newOPTFile}   AND
+    ...     Admin Delete EHR    AND
+    ...     Delete Template Using API
 
 CommitCompositionTemplate
     [Arguments]     ${dvDateValue}      ${expectedCode}
@@ -125,3 +131,16 @@ Change XML Value And Save Back To New OPT
     Should Be Equal As Strings    ${patternElementChanged.text}       ${c_date_pattern_value}
     Save Xml    ${xmlContent}   ${newOPTFile}
     [return]    ${opt_temp_file}
+
+Admin Delete EHR
+    [Documentation]     Delete EHR using ADMIN endpoint.
+    ...                 - It must delete all objects linked to EHR as well as the EHR itself.
+    ...                 - Takes 1 optional argument {ehr_id}.
+    ...                 - Dependent of keyword 'Create EHR For AQL', due to {ehr_id} var.
+    ...                 - Expects *204*.
+    [Arguments]     ${ehr_id}=${ehr_id}
+    prepare new request session    JSON
+    Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2   headers=${headers}
+    ${resp}             DELETE On Session      ${SUT}     /ehr/${ehr_id}
+                        ...     expected_status=anything
+                        Should Be Equal As Strings      ${resp.status_code}     ${204}

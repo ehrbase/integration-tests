@@ -37,7 +37,6 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
 
 *** Test Cases ***
 Main flow Sanity Tests for FLAT Compositions
-    [Tags]      not-ready   to-be-enabled
     create EHR
     Get Web Template By Template Id (ECIS)  ${template_id}
     commit composition   format=FLAT
@@ -66,7 +65,6 @@ Main flow Sanity Tests for FLAT Compositions
 
 
 Main flow Sanity Tests for Canonical JSON Compositions
-    [Tags]
     #create EHR
     Create EHR For Sanity Flow
     Get Web Template By Template Id (ECIS)  ${template_id}
@@ -101,7 +99,6 @@ Main flow Sanity Tests for Canonical JSON Compositions
     #[Teardown]    restart SUT
 
 Main flow Sanity Tests for Canonical XML Compositions
-    [Tags]
     #create EHR
     Create EHR For Sanity Flow
     Get Web Template By Template Id (ECIS)  ${template_id}

@@ -33,7 +33,7 @@ Force Tags      COMPOSITION_ism_transitions
 Create Composition With Valid ISM Transition
     [Documentation]     Create Composition with valid ISM Transition.
     ...     Positive flow.
-    [Tags]  Positive    not-ready   to-be-enabled
+    [Tags]  Positive
     commit composition   format=FLAT
     ...                  composition=test-ism.vitagroup.de.v1__.json
     check the successful result of commit composition   nesting
@@ -42,7 +42,7 @@ Create Composition With Invalid Current State On ISM Transition
     [Documentation]     Create Composition with
     ...     invalid current state on ISM transition.
     ...     Negative flow.
-    [Tags]  Negative    InvalidCurrentState     not-ready   to-be-enabled
+    [Tags]  Negative    InvalidCurrentState
     commit composition   format=FLAT
     ...                  composition=test-ism.vitagroup.de.v1__ism_invalid_current_state.json
     check status_code of commit composition    400
@@ -57,7 +57,7 @@ Create Composition With ISM Missing Transition
     [Documentation]     Create Composition with
     ...     ISM missing transition.
     ...     Positive flow.
-    [Tags]  Positive    ISMMissingTransition    not-ready   to-be-enabled
+    [Tags]  Positive    ISMMissingTransition
     commit composition   format=FLAT
     ...                  composition=test-ism.vitagroup.de.v1__ism_missing_transition.json
     check the successful result of commit composition   nesting
@@ -66,7 +66,7 @@ Create Composition With ISM Wrong Current State
     [Documentation]     Create Composition with
     ...     ISM wrong current state.
     ...     Negative flow.
-    [Tags]  Negative    ISMMWrongCurrentState   not-ready   to-be-enabled
+    [Tags]  Negative    ISMMWrongCurrentState
     commit composition   format=FLAT
     ...                  composition=test-ism.vitagroup.de.v1__ism_wrong_current_state.json
     check status_code of commit composition    400

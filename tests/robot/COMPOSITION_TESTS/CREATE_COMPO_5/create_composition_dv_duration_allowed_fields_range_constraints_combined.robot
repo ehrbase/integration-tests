@@ -56,6 +56,7 @@ Test Allowed Fields And Range Constraints Configured In C_DURATION
     PYMWDTHMS       P1Y3M       P3Y     P50Y    ${negativeCode}
     PYWDTHMS        P1Y3M       P3Y     P50Y    ${negativeCode}
     PYMWDTHMS       PT2M43.5S   PT1M    PT60M   ${negativeCode}
+    [Teardown]      TRACE JIRA ISSUE    CDR-1248
 
 
 *** Keywords ***

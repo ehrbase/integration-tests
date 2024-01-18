@@ -42,7 +42,6 @@ Check Headers with (XML)
     #[Teardown]    restart SUT
 
 Check Headers with Commit Composition
-    [Tags]      not-ready   to-be-enabled
     create EHR wih x forwarded headers
     check that headers location response has    https   example.com    333
     Get Web Template By Template Id (ECIS)  ${template_id}

@@ -31,13 +31,12 @@ ${COMPOSITIONS_PATH_XML}        ${EXECDIR}/robot/_resources/test_data_sets/compo
 
 *** Test Cases ***
 Test Example Generator For Templates (ECIS) - FLAT
-    [Tags]      not-ready   to-be-enabled
     [Setup]    Upload Template Using ECIS Endpoint
     Get Example Of Web Template By Template Id (ECIS)    ${template_id}    FLAT
     Validate Response Body Has Format    FLAT
 
 Test Example Generator For Templates (ECIS) - FLAT - Test Category And Coded Text Code And Value
-    [Tags]      cdr-432
+    [Tags]      cdr-432     not-ready
     #Upload OPT ECIS    all_types/test_event.opt
     Upload OPT      all_types/test_event.opt
     Extract Template Id From OPT File
@@ -50,7 +49,7 @@ Test Example Generator For Templates (ECIS) - FLAT - Test Category And Coded Tex
     [Teardown]      TRACE JIRA ISSUE      CDR-432
 
 Test Example Generator For Templates (ECIS) - JSON And Commit Composition
-    [Tags]      cdr-433
+    [Tags]      cdr-433     not-ready
     #Upload OPT ECIS    all_types/test_quantity_without_text.opt
     Upload OPT      all_types/test_quantity_without_text.opt
     Extract Template Id From OPT File
@@ -73,7 +72,7 @@ Test Example Generator For Templates (ECIS) - JSON And Commit Composition
     Remove File    ${tempFilePath}
     ${eventsLength}     Get Length      ${response.json()}[content][0][data][events]
     Should Be True      ${eventsLength}==27     #27=3x9quantities
-    #https://github.com/ehrbase/ehrbase/issues/900
+    #https://github.com/ehrbase/ehrbase/issues/900 - ticket closed EHRbase v0.30.0-SNAPSHOT
     [Teardown]      TRACE JIRA ISSUE      CDR-433
 
 Test Example Generator For Templates (ECIS) - JSON And Save It

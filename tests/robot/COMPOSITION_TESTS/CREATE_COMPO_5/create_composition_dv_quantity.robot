@@ -212,7 +212,7 @@ Composition With DV_QUANTITY Units NULL And Magnitude 1.0 Property Constrained
     [Teardown]  Delete Composition Using API
 
 Composition With DV_QUANTITY Units mg And Magnitude 0.0 Property Constrained
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     *Test case DV_QUANTITY Units mg And Magnitude 0.0 Property Constrained:*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_QUANTITY Units And Magnitude using:
@@ -317,7 +317,7 @@ Composition With DV_QUANTITY Units NULL And Magnitude 1.0 Property And Units Con
     [Teardown]  Delete Composition Using API
 
 Composition With DV_QUANTITY Units mg And Magnitude 0.0 Property And Units Constrained
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     *Test case DV_QUANTITY Units mg And Magnitude 0.0 Property And Units Constrained:*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_QUANTITY Units And Magnitude using:
@@ -334,7 +334,7 @@ Composition With DV_QUANTITY Units mg And Magnitude 0.0 Property And Units Const
     [Teardown]  Delete Composition Using API
 
 Composition With DV_QUANTITY Units km And Magnitude 2 Property And Units Constrained
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     *Test case DV_QUANTITY Units km And Magnitude 2 Property And Units Constrained:*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_QUANTITY Units And Magnitude using:
@@ -407,7 +407,7 @@ Composition With DV_QUANTITY Units cm And Magnitude NULL Property And Units Cons
     [Teardown]  Delete Composition Using API
 
 Composition With DV_QUANTITY Units cm And Magnitude 0.0 Property And Units Constrained With Magnitude Range
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     *Test case DV_QUANTITY Units cm And Magnitude 0.0 Property And Units Constrained With Magnitude Range:*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_QUANTITY Units And Magnitude using:
@@ -424,7 +424,7 @@ Composition With DV_QUANTITY Units cm And Magnitude 0.0 Property And Units Const
     [Teardown]  Delete Composition Using API
 
 Composition With DV_QUANTITY Units km And Magnitude 0.0 Property And Units Constrained With Magnitude Range
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     *Test case DV_QUANTITY Units km And Magnitude 0.0 Property And Units Constrained With Magnitude Range:*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_QUANTITY Units And Magnitude using:
@@ -441,7 +441,7 @@ Composition With DV_QUANTITY Units km And Magnitude 0.0 Property And Units Const
     [Teardown]  Delete Composition Using API
 
 Composition With DV_QUANTITY Units cm And Magnitude 1.0 Property And Units Constrained With Magnitude Range
-    [Tags]      Negative    not-ready   to-be-enabled
+    [Tags]      Negative
     [Documentation]     *Test case DV_QUANTITY Units cm And Magnitude 1.0 Property And Units Constrained With Magnitude Range:*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_QUANTITY Units And Magnitude using:
@@ -462,7 +462,7 @@ Composition With DV_QUANTITY Units cm And Magnitude 5.0 Property And Units Const
     [Documentation]     *Test case DV_QUANTITY Units cm And Magnitude 5.0 Property And Units Constrained With Magnitude Range:*
     ...     - load json file from CANONICAL_JSON folder
     ...     - update DV_QUANTITY Units And Magnitude using:
-    ...     - ${dvQuantityUnits}, ${dvQuantityMagnitude} arguments value cm,5.0
+    ...     - ${dvQuantityUnits}, ${dvQuantityMagnitude} arguments value cm, 5.0
     ...     - commit composition
     ...     - check status code of the commited composition.
     ...     - Expected status code on commit composition = 201.
