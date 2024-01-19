@@ -86,7 +86,7 @@ ${query8}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] C
     Should Be Equal As Strings      ${meta_obj['offset']}   0
 
 2. Execute Stored Query With GET And Check Meta JSON Object
-    [Documentation]     *Query*: ${query7}
+    [Documentation]     *Query*: ${query2}
     ...     ${\n}*Method and endpoint:* GET http://{base_url}/ehrbase/rest/openehr/v1/query/{qualified_query_name}
     ...     \n*Expect:* \nmeta object content: ${expected_meta_keys_get}
     ...     \nRows items length = value from meta.resultsize
