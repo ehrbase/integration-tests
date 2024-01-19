@@ -273,7 +273,6 @@ Meta JSON Object Checks
     Should Be Equal As Strings      ${meta_obj["_type"]}    RESULTSET
     Should Be Equal As Strings      ${meta_obj["_executed_aql"]}    ${q_str}
     Should Be Equal As Strings      ${meta_obj["resultsize"]}    ${rows_length}
-    Log To Console      ${rows_length}
     Created Timestamp Checks        ${meta_obj["_created"]}
 
 GET /query/aql With Params
