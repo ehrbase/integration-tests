@@ -60,7 +60,7 @@ SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude
 SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2] OR ACTION a[openEHR-EHR-ACTION.procedure.v1])
     ${query}    Set Variable    SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (OBSERVATION o1[openEHR-EHR-OBSERVATION.blood_pressure.v2] OR ACTION a[openEHR-EHR-ACTION.procedure.v1])
     ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_observation_x_or_action_x.json
-    Execute Query   query=${query}    expected_rows_nr=16
+    Execute Query   query=${query}    expected_rows_nr=147
     ...     expected_file=${expected_result}
 
 SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (INSTRUCTION i[openEHR-EHR-INSTRUCTION.medication_order.v3] OR ACTION a[openEHR-EHR-ACTION.procedure.v1])
