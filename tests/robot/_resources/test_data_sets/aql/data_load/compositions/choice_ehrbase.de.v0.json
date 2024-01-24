@@ -342,7 +342,7 @@
                   "value": {
                     "_type": "DV_QUANTITY",
                     "units": "cm",
-                    "magnitude": 10.0
+                    "magnitude": 10.5
                   },
                   "archetype_node_id": "at0004"
                 }
@@ -427,7 +427,7 @@
                   "value": {
                     "_type": "DV_QUANTITY",
                     "units": "cm",
-                    "magnitude": 2.0
+                    "magnitude": 2.3
                   },
                   "archetype_node_id": "at0004"
                 }
