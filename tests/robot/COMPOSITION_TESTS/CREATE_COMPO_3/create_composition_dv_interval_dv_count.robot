@@ -33,105 +33,7 @@ Resource        ../../_resources/suite_settings.robot
 
 
 *** Test Cases ***
-3.7.1. Test DV_INTERVAL<DV_COUNT> Lower Null - Upper Null - Lower Unb 1 - Upper Unb 1 - Lower Incl 0 - Upper Incl 0
-    [Tags]      Positive    not-ready   bug
-    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
-    ...     Lower Null, Upper Null, Lower Unb 1, Upper Unb 1, Lower Incl 0, Upper Incl 0
-    ...     *See suite documentation to understand what are 1 and 0 values!*
-    ...     - load json file from CANONICAL_JSON folder
-    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
-    ...     - commit composition\n- check status code of the commited composition.
-    ...     - Expected status code on commit composition = 201.
-    Set Suite Variable      ${composition_file}    Test_dv_interval_dv_count_open_constraint.v0__.json
-    Set Suite Variable      ${optFile}             all_types/Test_dv_interval_dv_count_open_constraint.v0.opt
-    Precondition
-    ${expectedStatusCode}   Set Variable    201
-    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
-    ...     ${NULL}     ${NULL}
-    ...     ${TRUE}     ${TRUE}     ${FALSE}    ${FALSE}
-    ...     ${expectedStatusCode}
-    IF      ${statusCodeBoolean} == ${FALSE}
-        Fail    Commit composition expected status code ${expectedStatusCode} is different.
-    END
-    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
-
-Test DV_INTERVAL<DV_COUNT> Lower Null - Upper 100 - Lower Unb 1 - Upper Unb 0 - Lower Incl 0 - Upper Incl 0
-    [Tags]      Positive    not-ready   bug
-    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
-    ...     Lower Null, Upper 100, Lower Unb 1, Upper Unb 0, Lower Incl 0, Upper Incl 0
-    ...     *See suite documentation to understand what are 1 and 0 values!*
-    ...     - load json file from CANONICAL_JSON folder
-    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
-    ...     - commit composition\n- check status code of the commited composition.
-    ...     - Expected status code on commit composition = 201.
-    ${expectedStatusCode}   Set Variable    201
-    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
-    ...     ${NULL}     ${100}
-    ...     ${TRUE}     ${FALSE}     ${FALSE}    ${FALSE}
-    ...     ${expectedStatusCode}
-    IF      ${statusCodeBoolean} == ${FALSE}
-        Fail    Commit composition expected status code ${expectedStatusCode} is different.
-    END
-    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
-
-Test DV_INTERVAL<DV_COUNT> Lower Null - Upper 100 - Lower Unb 1 - Upper Unb 0 - Lower Incl 0 - Upper Incl 1
-    [Tags]      Positive    not-ready   bug
-    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
-    ...     Lower Null, Upper 100, Lower Unb 1, Upper Unb 0, Lower Incl 0, Upper Incl 1
-    ...     *See suite documentation to understand what are 1 and 0 values!*
-    ...     - load json file from CANONICAL_JSON folder
-    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
-    ...     - commit composition\n- check status code of the commited composition.
-    ...     - Expected status code on commit composition = 201.
-    ${expectedStatusCode}   Set Variable    201
-    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
-    ...     ${NULL}     ${100}
-    ...     ${TRUE}     ${FALSE}     ${FALSE}    ${TRUE}
-    ...     ${expectedStatusCode}
-    IF      ${statusCodeBoolean} == ${FALSE}
-        Fail    Commit composition expected status code ${expectedStatusCode} is different.
-    END
-    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
-
-Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper Null - Lower Unb 0 - Upper Unb 1 - Lower Incl 0 - Upper Incl 0
-    [Tags]      Positive    not-ready   bug
-    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
-    ...     Lower 0, Upper Null, Lower Unb 0, Upper Unb 1, Lower Incl 0, Upper Incl 0
-    ...     *See suite documentation to understand what are 1 and 0 values!*
-    ...     - load json file from CANONICAL_JSON folder
-    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
-    ...     - commit composition\n- check status code of the commited composition.
-    ...     - Expected status code on commit composition = 201.
-    ${expectedStatusCode}   Set Variable    201
-    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
-    ...     ${0}       ${NULL}
-    ...     ${FALSE}     ${TRUE}     ${FALSE}    ${FALSE}
-    ...     ${expectedStatusCode}
-    IF      ${statusCodeBoolean} == ${FALSE}
-        Fail    Commit composition expected status code ${expectedStatusCode} is different.
-    END
-    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
-
-Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper Null - Lower Unb 0 - Upper Unb 1 - Lower Incl 1 - Upper Incl 0
-    [Tags]      Positive    not-ready   bug
-    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
-    ...     Lower 0, Upper Null, Lower Unb 0, Upper Unb 1, Lower Incl 1, Upper Incl 0
-    ...     *See suite documentation to understand what are 1 and 0 values!*
-    ...     - load json file from CANONICAL_JSON folder
-    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
-    ...     - commit composition\n- check status code of the commited composition.
-    ...     - Expected status code on commit composition = 201.
-    ${expectedStatusCode}   Set Variable    201
-    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
-    ...     ${0}       ${NULL}
-    ...     ${FALSE}     ${TRUE}     ${TRUE}    ${FALSE}
-    ...     ${expectedStatusCode}
-    IF      ${statusCodeBoolean} == ${FALSE}
-        Fail    Commit composition expected status code ${expectedStatusCode} is different.
-    END
-    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
-
-Test DV_INTERVAL<DV_COUNT> Lower -20 - Upper -5 - Lower Unb 0 - Upper Unb 0 - Lower Incl 0 - Upper Incl 0
+3.7.1. Test DV_INTERVAL<DV_COUNT> Lower -20 - Upper -5 - Lower Unb 0 - Upper Unb 0 - Lower Incl 0 - Upper Incl 0
     [Tags]      Positive
     [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
     ...     Lower -20, Upper -5, Lower Unb 0, Upper Unb 0, Lower Incl 0, Upper Incl 0
@@ -140,6 +42,9 @@ Test DV_INTERVAL<DV_COUNT> Lower -20 - Upper -5 - Lower Unb 0 - Upper Unb 0 - Lo
     ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
     ...     - commit composition\n- check status code of the commited composition.
     ...     - Expected status code on commit composition = 201.
+    Set Suite Variable      ${composition_file}    Test_dv_interval_dv_count_open_constraint.v0__.json
+    Set Suite Variable      ${optFile}             all_types/Test_dv_interval_dv_count_open_constraint.v0.opt
+    Precondition
     ${expectedStatusCode}   Set Variable    201
     ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
     ...     ${-20}       ${-5}
@@ -271,67 +176,7 @@ Test DV_INTERVAL<DV_COUNT> Lower 200 - Upper 100 - Lower Unb 0 - Upper Unb 0 - L
     END
     [Teardown]      Run Keywords    Delete Composition Using API    AND     Delete Template Using API
 
-3.7.2. Test DV_INTERVAL<DV_COUNT> Lower Null - Upper Null - Lower Unb 1 - Upper Unb 1 - Lower Incl 0 - Upper Incl 0 With Lower Upper Constraint
-    [Tags]      Positive    not-ready   bug
-    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
-    ...     Lower Null, Upper Null, Lower Unb 1, Upper Unb 1, Lower Incl 0, Upper Incl 0 With Lower Upper Constraint
-    ...     *See suite documentation to understand what are 1 and 0 values!*
-    ...     - load json file from CANONICAL_JSON folder
-    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
-    ...     - commit composition\n- check status code of the commited composition.
-    ...     - Expected status code on commit composition = 201.
-    Set Suite Variable      ${composition_file}    Test_dv_interval_dv_count_lower_upper_constraint.v0__.json
-    Set Suite Variable      ${optFile}             all_types/Test_dv_interval_dv_count_lower_upper_constraint.v0.opt
-    Precondition
-    ${expectedStatusCode}   Set Variable    201
-    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
-    ...     ${NULL}     ${NULL}
-    ...     ${TRUE}     ${TRUE}     ${FALSE}    ${FALSE}
-    ...     ${expectedStatusCode}
-    IF      ${statusCodeBoolean} == ${FALSE}
-        Fail    Commit composition expected status code ${expectedStatusCode} is different.
-    END
-    [Teardown]     Run Keywords     Delete Composition Using API     AND     TRACE JIRA ISSUE    CDR-539
-
-Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper Null - Lower Unb 0 - Upper Unb 1 - Lower Incl 1 - Upper Incl 0 With Lower Upper Constraint
-    [Tags]      Positive    not-ready   bug
-    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
-    ...     Lower 0, Upper Null, Lower Unb 0, Upper Unb 1, Lower Incl 1, Upper Incl 0 With Lower Upper Constraint
-    ...     *See suite documentation to understand what are 1 and 0 values!*
-    ...     - load json file from CANONICAL_JSON folder
-    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
-    ...     - commit composition\n- check status code of the commited composition.
-    ...     - Expected status code on commit composition = 201.
-    ${expectedStatusCode}   Set Variable    201
-    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
-    ...     ${0}     ${NULL}
-    ...     ${FALSE}     ${TRUE}     ${TRUE}    ${FALSE}
-    ...     ${expectedStatusCode}
-    IF      ${statusCodeBoolean} == ${FALSE}
-        Fail    Commit composition expected status code ${expectedStatusCode} is different.
-    END
-    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
-
-Test DV_INTERVAL<DV_COUNT> Lower Null - Upper 100 - Lower Unb 1 - Upper Unb 0 - Lower Incl 0 - Upper Incl 1 With Lower Upper Constraint
-    [Tags]      Positive    not-ready   bug
-    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
-    ...     Lower Null, Upper 100, Lower Unb 1, Upper Unb 0, Lower Incl 0, Upper Incl 1 With Lower Upper Constraint
-    ...     *See suite documentation to understand what are 1 and 0 values!*
-    ...     - load json file from CANONICAL_JSON folder
-    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
-    ...     - commit composition\n- check status code of the commited composition.
-    ...     - Expected status code on commit composition = 201.
-    ${expectedStatusCode}   Set Variable    201
-    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
-    ...     ${NULL}     ${100}
-    ...     ${TRUE}     ${FALSE}     ${FALSE}    ${TRUE}
-    ...     ${expectedStatusCode}
-    IF      ${statusCodeBoolean} == ${FALSE}
-        Fail    Commit composition expected status code ${expectedStatusCode} is different.
-    END
-    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
-
-Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper 100 - Lower Unb 0 - Upper Unb 0 - Lower Incl 1 - Upper Incl 1 With Lower Upper Constraint
+3.7.2. Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper 100 - Lower Unb 0 - Upper Unb 0 - Lower Incl 1 - Upper Incl 1 With Lower Upper Constraint
     [Tags]      Positive
     [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
     ...     Lower 0, Upper 100, Lower Unb 0, Upper Unb 0, Lower Incl 1, Upper Incl 1 With Lower Upper Constraint
@@ -340,6 +185,9 @@ Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper 100 - Lower Unb 0 - Upper Unb 0 - Low
     ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
     ...     - commit composition\n- check status code of the commited composition.
     ...     - Expected status code on commit composition = 201.
+    Set Suite Variable      ${composition_file}    Test_dv_interval_dv_count_lower_upper_constraint.v0__.json
+    Set Suite Variable      ${optFile}             all_types/Test_dv_interval_dv_count_lower_upper_constraint.v0.opt
+    Precondition
     ${expectedStatusCode}   Set Variable    201
     ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
     ...     ${0}     ${100}
@@ -411,6 +259,166 @@ Test DV_INTERVAL<DV_COUNT> Lower -10 - Upper 200 - Lower Unb 0 - Upper Unb 0 - L
     END
     [Teardown]      Run Keywords    Delete Composition Using API    AND     Delete Template Using API
 
+### Below cases are not valid as NULL value is not possible on DV_COUNT.magnitude
+#CDR-539 - is not valid bug
+
+#3.7.1. Test DV_INTERVAL<DV_COUNT> Lower Null - Upper Null - Lower Unb 1 - Upper Unb 1 - Lower Incl 0 - Upper Incl 0
+#    [Tags]      Positive    bug
+#    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
+#    ...     Lower Null, Upper Null, Lower Unb 1, Upper Unb 1, Lower Incl 0, Upper Incl 0
+#    ...     *See suite documentation to understand what are 1 and 0 values!*
+#    ...     - load json file from CANONICAL_JSON folder
+#    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
+#    ...     - commit composition\n- check status code of the commited composition.
+#    ...     - Expected status code on commit composition = 201.
+#    Set Suite Variable      ${composition_file}    Test_dv_interval_dv_count_open_constraint.v0__.json
+#    Set Suite Variable      ${optFile}             all_types/Test_dv_interval_dv_count_open_constraint.v0.opt
+#    Precondition
+#    ${expectedStatusCode}   Set Variable    201
+#    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
+#    ...     ${NULL}     ${NULL}
+#    ...     ${TRUE}     ${TRUE}     ${FALSE}    ${FALSE}
+#    ...     ${expectedStatusCode}
+#    IF      ${statusCodeBoolean} == ${FALSE}
+#        Fail    Commit composition expected status code ${expectedStatusCode} is different.
+#    END
+#    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
+#
+#Test DV_INTERVAL<DV_COUNT> Lower Null - Upper 100 - Lower Unb 1 - Upper Unb 0 - Lower Incl 0 - Upper Incl 0
+#    [Tags]      Positive    bug
+#    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
+#    ...     Lower Null, Upper 100, Lower Unb 1, Upper Unb 0, Lower Incl 0, Upper Incl 0
+#    ...     *See suite documentation to understand what are 1 and 0 values!*
+#    ...     - load json file from CANONICAL_JSON folder
+#    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
+#    ...     - commit composition\n- check status code of the commited composition.
+#    ...     - Expected status code on commit composition = 201.
+#    ${expectedStatusCode}   Set Variable    201
+#    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
+#    ...     ${NULL}     ${100}
+#    ...     ${TRUE}     ${FALSE}     ${FALSE}    ${FALSE}
+#    ...     ${expectedStatusCode}
+#    IF      ${statusCodeBoolean} == ${FALSE}
+#        Fail    Commit composition expected status code ${expectedStatusCode} is different.
+#    END
+#    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
+#
+#Test DV_INTERVAL<DV_COUNT> Lower Null - Upper 100 - Lower Unb 1 - Upper Unb 0 - Lower Incl 0 - Upper Incl 1
+#    [Tags]      Positive    bug
+#    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
+#    ...     Lower Null, Upper 100, Lower Unb 1, Upper Unb 0, Lower Incl 0, Upper Incl 1
+#    ...     *See suite documentation to understand what are 1 and 0 values!*
+#    ...     - load json file from CANONICAL_JSON folder
+#    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
+#    ...     - commit composition\n- check status code of the commited composition.
+#    ...     - Expected status code on commit composition = 201.
+#    ${expectedStatusCode}   Set Variable    201
+#    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
+#    ...     ${NULL}     ${100}
+#    ...     ${TRUE}     ${FALSE}     ${FALSE}    ${TRUE}
+#    ...     ${expectedStatusCode}
+#    IF      ${statusCodeBoolean} == ${FALSE}
+#        Fail    Commit composition expected status code ${expectedStatusCode} is different.
+#    END
+#    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
+#
+#Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper Null - Lower Unb 0 - Upper Unb 1 - Lower Incl 0 - Upper Incl 0
+#    [Tags]      Positive    bug
+#    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
+#    ...     Lower 0, Upper Null, Lower Unb 0, Upper Unb 1, Lower Incl 0, Upper Incl 0
+#    ...     *See suite documentation to understand what are 1 and 0 values!*
+#    ...     - load json file from CANONICAL_JSON folder
+#    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
+#    ...     - commit composition\n- check status code of the commited composition.
+#    ...     - Expected status code on commit composition = 201.
+#    ${expectedStatusCode}   Set Variable    201
+#    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
+#    ...     ${0}       ${NULL}
+#    ...     ${FALSE}     ${TRUE}     ${FALSE}    ${FALSE}
+#    ...     ${expectedStatusCode}
+#    IF      ${statusCodeBoolean} == ${FALSE}
+#        Fail    Commit composition expected status code ${expectedStatusCode} is different.
+#    END
+#    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
+#
+#Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper Null - Lower Unb 0 - Upper Unb 1 - Lower Incl 1 - Upper Incl 0
+#    [Tags]      Positive    bug
+#    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
+#    ...     Lower 0, Upper Null, Lower Unb 0, Upper Unb 1, Lower Incl 1, Upper Incl 0
+#    ...     *See suite documentation to understand what are 1 and 0 values!*
+#    ...     - load json file from CANONICAL_JSON folder
+#    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
+#    ...     - commit composition\n- check status code of the commited composition.
+#    ...     - Expected status code on commit composition = 201.
+#    ${expectedStatusCode}   Set Variable    201
+#    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
+#    ...     ${0}       ${NULL}
+#    ...     ${FALSE}     ${TRUE}     ${TRUE}    ${FALSE}
+#    ...     ${expectedStatusCode}
+#    IF      ${statusCodeBoolean} == ${FALSE}
+#        Fail    Commit composition expected status code ${expectedStatusCode} is different.
+#    END
+#    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
+#
+#3.7.2. Test DV_INTERVAL<DV_COUNT> Lower Null - Upper Null - Lower Unb 1 - Upper Unb 1 - Lower Incl 0 - Upper Incl 0 With Lower Upper Constraint
+#    [Tags]      Positive    bug
+#    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
+#    ...     Lower Null, Upper Null, Lower Unb 1, Upper Unb 1, Lower Incl 0, Upper Incl 0 With Lower Upper Constraint
+#    ...     *See suite documentation to understand what are 1 and 0 values!*
+#    ...     - load json file from CANONICAL_JSON folder
+#    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
+#    ...     - commit composition\n- check status code of the commited composition.
+#    ...     - Expected status code on commit composition = 201.
+#    Set Suite Variable      ${composition_file}    Test_dv_interval_dv_count_lower_upper_constraint.v0__.json
+#    Set Suite Variable      ${optFile}             all_types/Test_dv_interval_dv_count_lower_upper_constraint.v0.opt
+#    Precondition
+#    ${expectedStatusCode}   Set Variable    201
+#    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
+#    ...     ${NULL}     ${NULL}
+#    ...     ${TRUE}     ${TRUE}     ${FALSE}    ${FALSE}
+#    ...     ${expectedStatusCode}
+#    IF      ${statusCodeBoolean} == ${FALSE}
+#        Fail    Commit composition expected status code ${expectedStatusCode} is different.
+#    END
+#    [Teardown]     Run Keywords     Delete Composition Using API     AND     TRACE JIRA ISSUE    CDR-539
+#
+#Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper Null - Lower Unb 0 - Upper Unb 1 - Lower Incl 1 - Upper Incl 0 With Lower Upper Constraint
+#    [Tags]      Positive    bug
+#    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
+#    ...     Lower 0, Upper Null, Lower Unb 0, Upper Unb 1, Lower Incl 1, Upper Incl 0 With Lower Upper Constraint
+#    ...     *See suite documentation to understand what are 1 and 0 values!*
+#    ...     - load json file from CANONICAL_JSON folder
+#    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
+#    ...     - commit composition\n- check status code of the commited composition.
+#    ...     - Expected status code on commit composition = 201.
+#    ${expectedStatusCode}   Set Variable    201
+#    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
+#    ...     ${0}     ${NULL}
+#    ...     ${FALSE}     ${TRUE}     ${TRUE}    ${FALSE}
+#    ...     ${expectedStatusCode}
+#    IF      ${statusCodeBoolean} == ${FALSE}
+#        Fail    Commit composition expected status code ${expectedStatusCode} is different.
+#    END
+#    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
+#
+#Test DV_INTERVAL<DV_COUNT> Lower Null - Upper 100 - Lower Unb 1 - Upper Unb 0 - Lower Incl 0 - Upper Incl 1 With Lower Upper Constraint
+#    [Tags]      Positive    bug
+#    [Documentation]     Positive case for DV_INTERVAL<DV_COUNT>
+#    ...     Lower Null, Upper 100, Lower Unb 1, Upper Unb 0, Lower Incl 0, Upper Incl 1 With Lower Upper Constraint
+#    ...     *See suite documentation to understand what are 1 and 0 values!*
+#    ...     - load json file from CANONICAL_JSON folder
+#    ...     - set ${dvLower}, ${dvUpper}, ${dvLowerUnb}, ${dvUpperUnb}, ${dvLowerIncl}, ${dvUpperIncl}
+#    ...     - commit composition\n- check status code of the commited composition.
+#    ...     - Expected status code on commit composition = 201.
+#    ${expectedStatusCode}   Set Variable    201
+#    ${statusCodeBoolean}    Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
+#    ...     ${NULL}     ${100}
+#    ...     ${TRUE}     ${FALSE}     ${FALSE}    ${TRUE}
+#    ...     ${expectedStatusCode}
+#    IF      ${statusCodeBoolean} == ${FALSE}
+#        Fail    Commit composition expected status code ${expectedStatusCode} is different.
+#    END
+#    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
 
 *** Keywords ***
 Precondition
