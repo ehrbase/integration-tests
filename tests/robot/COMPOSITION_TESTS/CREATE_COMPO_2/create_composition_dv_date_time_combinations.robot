@@ -40,10 +40,9 @@ Create Composition With DV_DATE_TIME Combinations - Positive
     ...     - commit composition
     ...     - check status code of the commited composition to be 201.
     ...     *Postcondition:* Add DV_DATE_TIME value 2021-10-24T10, to ${composition_file}.
-    [Tags]      not-ready   bug
     [Template]      PositiveCompositionTemplate
-    2021T00:00:00
-    2021-10T00:00:00
+    #2021T00:00:00
+    #2021-10T00:00:00
     2021-10-24T00:00:00
     2021-10-24T10
     2021-10-24T10:30
@@ -59,9 +58,7 @@ Create Composition With DV_DATE_TIME Combinations - Positive
     2021-10-24T10:30:47.5-03:00
     2021-10-24T10:30:47.333-03:00
     2021-10-24T10:30:47.333333-03:00
-    [Teardown]      Run Keywords
-    ...     PositiveCompositionTemplate     2021-10-24T10       AND
-    ...     TRACE JIRA ISSUE    CDR-513
+    [Teardown]      PositiveCompositionTemplate     2021-10-24T10
 
 Create Composition With DV_DATE_TIME Combinations - Negative
     [Documentation]     *Operations done here (Negative flows):*
