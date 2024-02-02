@@ -1,0 +1,92 @@
+{
+    "family_history": {
+        "category": [
+            {
+                "|terminology": "openehr",
+                "|code": "433",
+                "|value": "event"
+            }
+        ],
+        "context": [
+            {
+                "start_time": [
+                    "2021-12-10T15:03:00"
+                ],
+                "setting": [
+                    {
+                        "|code": "225",
+                        "|terminology": "openehr",
+                        "|value": "home"
+                    }
+                ]
+            }
+        ],
+        "family_history": [
+            {
+                "per_family_member": [
+                    {
+                        "biological_sex": [
+                            {
+                                "|code": "248152002",
+                                "|terminology": "SNOMED-CT",
+                                "|value": "Female"
+                            }
+                        ],
+                        "relationship": [
+                            {
+                                "|terminology": "SNOMED-CT",
+                                "|code": "444301002",
+                                "|value": "Mother"
+                            }
+                        ],
+                        "clinical_history": [
+                            {
+                                "problem_diagnosis_name": [
+                                    {
+                                        "|value": "\"Section\" examination - social worker (procedure)",
+                                        "|terminology": "SNOMED-CT",
+                                        "|code": "148648004"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "language": [
+                    {
+                        "|terminology": "ISO_639-1",
+                        "|code": "en"
+                    }
+                ],
+                "encoding": [
+                    {
+                        "|code": "UTF-8",
+                        "|terminology": "IANA_character-sets"
+                    }
+                ],
+                "subject": [
+                    {
+                        "|name": "Patient"
+                    }
+                ]
+            }
+        ],
+        "language": [
+            {
+                "|code": "en",
+                "|terminology": "ISO_639-1"
+            }
+        ],
+        "territory": [
+            {
+                "|terminology": "ISO_3166-1",
+                "|code": "AU"
+            }
+        ],
+        "composer": [
+            {
+                "|name": "Doctor"
+            }
+        ]
+    }
+}

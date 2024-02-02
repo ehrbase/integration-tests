@@ -16,11 +16,9 @@
 # limitations under the License.
 
 
-
 *** Settings ***
-Documentation   Composition Integration Tests
+Documentation   Sanity Integration Tests
 ...             https://github.com/ehrbase/ehrbase/blob/develop/doc/conformance_testing/EHR_COMPOSITION.md#b6a-main-flow-create-new-event-composition
-Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../_resources/keywords/composition_keywords.robot
 Resource        ../_resources/keywords/aql_query_keywords.robot
