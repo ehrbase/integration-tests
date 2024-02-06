@@ -19,8 +19,6 @@ Documentation   Migrated EHRSCAPE TESTS
 ...             Covers endpoints migrated from EHRSCAPE to OpenEHR (template example, webtemplate, flat and structured)
 
 Resource        ../_resources/keywords/composition_keywords.robot
-#Resource        ../_resources/keywords/aql_query_keywords.robot
-#Resource        ../_resources/keywords/directory_keywords.robot
 Resource        ../_resources/keywords/admin_keywords.robot
 Resource        ../_resources/keywords/ehr_keywords.robot
 
