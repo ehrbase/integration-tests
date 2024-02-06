@@ -1,0 +1,9 @@
+${type},${path}
+DV_QUANTITY,"o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value"
+DV_PROPORTION,"o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value"
+DV_COUNT,"o/data[at0001]/events[at0002]/data[at0003]/items[at0010]/value"
+DV_DATE_TIME,"o/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value"
+DV_TIME,"o/data[at0001]/events[at0002]/data[at0003]/items[at0012]/value"
+DV_DATE,"o/data[at0001]/events[at0002]/data[at0003]/items[at0013]/value"
+DV_ORDINAL,"o/data[at0001]/events[at0002]/data[at0003]/items[at0014]/value"
+DV_DURATION,"o/data[at0001]/events[at0002]/data[at0003]/items[at0018]/value"

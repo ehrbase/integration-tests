@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation	CHECK AGGREGATE FUNCTIONS MIN ON DV_ORDERED IN AQL
-...		- Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/AGGREGATE_FUNCTIONS.md#min_on_dv_ordered
+...		- Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/AGGREGATE_FUNCTIONS.md#min-on-dv_ordered
 ...     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition.
 ...     - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
 
