@@ -52,17 +52,17 @@ Composition With DV_URI.value NULL
     END
     [Teardown]  Delete Composition Using API
 
-Composition With DV_URI.value xyz
-    [Tags]      Positive
+Composition With DV_URI.value x yz
+    [Tags]      Negative
     [Documentation]     *Test case DV_URI open constraint:*
     ...     - load json file from CANONICAL_JSON folder
-    ...     - update DV_URI.value using ${dvUriValue} argument value xyz
+    ...     - update DV_URI.value using ${dvUriValue} argument value x yz
     ...     - commit composition
     ...     - check status code of the commited composition.
-    ...     - Expected status code on commit composition = 201.
-    ${expectedStatusCode}   Set Variable    201
+    ...     - Expected status code on commit composition = 400.
+    ${expectedStatusCode}   Set Variable    400
     ${statusCodeBoolean}    Commit Composition With Modified DV_URI Value
-    ...     xyz    ${expectedStatusCode}
+    ...     x yz    ${expectedStatusCode}
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
