@@ -16,7 +16,7 @@
 						"_type": "CODE_PHRASE",
 						"terminology_id": {
 							"_type": "TERMINOLOGY_ID",
-							"value": "external"
+							"value": "local"
 						},
 						"code_string": "at0015"
 					}
