@@ -1,0 +1,28 @@
+{
+	"q": "SELECT MAX(o/data[at0001]/events[at0002]/data[at0003]/items[at0014]/value) FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "DV_ORDINAL",
+				"symbol": {
+					"_type": "DV_CODED_TEXT",
+					"value": "value2",
+					"defining_code": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "local"
+						},
+						"code_string": "at0016"
+					}
+				},
+				"value": 2
+			}
+		]
+	]
+}

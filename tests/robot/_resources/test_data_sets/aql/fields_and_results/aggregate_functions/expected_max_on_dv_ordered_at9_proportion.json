@@ -1,0 +1,18 @@
+{
+	"q": "SELECT MAX(o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value) FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "DV_PROPORTION",
+				"numerator": 40.0,
+				"denominator": 2.0,
+				"type": 3
+			}
+		]
+	]
+}
