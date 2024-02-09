@@ -1,0 +1,60 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-02-09T11:51:21.0358283+02:00",
+		"_executed_aql": "SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '1c6f07f6-a0fe-42ab-89aa-3182a5ed8de6::local.ehrbase.org::1'",
+		"resultsize": 5
+	},
+	"q": "SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '1c6f07f6-a0fe-42ab-89aa-3182a5ed8de6::local.ehrbase.org::1'",
+	"columns": [
+		{
+			"path": "e/ehr_id/value",
+			"name": "#0"
+		},
+		{
+			"path": "c/uid/value",
+			"name": "#1"
+		},
+		{
+			"path": "o/uid/value",
+			"name": "#2"
+		},
+		{
+			"path": "p/time/value",
+			"name": "#3"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_id}",
+			"${compo_id}::${CREATING_SYSTEM_ID}::1",
+			"2183807d-af68-41c5-9bfe-28cd150d62f7",
+			"2022-02-03T04:05:06"
+		],
+		[
+			"${ehr_id}",
+			"${compo_id}::${CREATING_SYSTEM_ID}::1",
+			"893506a7-462b-40b8-9638-0aa3990642d9",
+			"2022-02-03T04:05:06"
+		],
+		[
+			"${ehr_id}",
+			"${compo_id}::${CREATING_SYSTEM_ID}::1",
+			"d4cccdfc-9c90-402f-b4bb-94e8dc4ea429",
+			"2022-02-03T04:05:06"
+		],
+		[
+			"${ehr_id}",
+			"${compo_id}::${CREATING_SYSTEM_ID}::1",
+			"55415141-17e4-4c71-9429-aa0fe6694c83",
+			"2022-02-03T04:05:06"
+		],
+		[
+			"${ehr_id}",
+			"${compo_id}::${CREATING_SYSTEM_ID}::1",
+			"94c0e756-e892-4985-884b-46829605a236",
+			"2022-02-03T04:05:06"
+		]
+	]
+}
