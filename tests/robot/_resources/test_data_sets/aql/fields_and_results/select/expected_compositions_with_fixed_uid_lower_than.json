@@ -1,0 +1,24 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-02-13T13:31:09.4833011+02:00",
+		"_executed_aql": "SELECT c/uid/value AS full FROM COMPOSITION c WHERE c/uid/value < 'd037bf7c-0ecb-40fb-aada-fc7d559815ea::::1'",
+		"resultsize": 2
+	},
+	"q": "SELECT c/uid/value AS full FROM COMPOSITION c WHERE c/uid/value < 'd037bf7c-0ecb-40fb-aada-fc7d559815ea::::1'",
+	"columns": [
+		{
+			"path": "c/uid/value",
+			"name": "full"
+		}
+	],
+	"rows": [
+		[
+			"c037bf7c-0ecb-40fb-aada-fc7d559815ea::local.ehrbase.org::1"
+		],
+		[
+			"b037bf7c-0ecb-40fb-aada-fc7d559815ea::local.ehrbase.org::1"
+		]
+	]
+}
