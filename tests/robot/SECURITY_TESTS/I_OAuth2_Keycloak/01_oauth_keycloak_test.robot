@@ -34,6 +34,8 @@ ${expired_token}               eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6I
 
 # Client ID and secret come from the 'ehrbase-custom-user' client defined in Keycloak
 ${client_credentials_grant}    grant_type=client_credentials&client_id=ehrbase-custom-user&client_secret=5d49493b-8bfb-47f9-aa0f-43653370bf6f
+#enable below commented var, when KEYCLOAK_URL from sut_config.py will send using KEYCLOAK_URL_FROM_YAML
+#${KEYCLOAK_URL}                 http://localhost:8081/auth
 
 
 *** Test Cases ***
