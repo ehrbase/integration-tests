@@ -91,10 +91,10 @@ check content of committed CONTRIBUTION
 #                       `commit next CONTRIBUTION`    ???
 #                       `commit (valid) modification to CONTRIBUTION`
 commit CONTRIBUTION - with preceding_version_uid (JSON)
-    [Arguments]         ${test_data_set}
+    [Arguments]         ${test_data_set}    ${multitenancy_token}=${None}
                         Set Test Variable  ${KEYWORD NAME}  COMMIT CONTRIBUTION 2 (JSON)
                         inject preceding_version_uid into valid test-data-set    ${test_data_set}
-                        POST /ehr/ehr_id/contribution    JSON
+                        POST /ehr/ehr_id/contribution    JSON   ${multitenancy_token}
 
 
 commit invalid CONTRIBUTION - with preceding_version_uid (JSON)
