@@ -767,7 +767,7 @@ get composition by composition_uid
         ...     Authorization=Bearer ${multitenancy_token}
         Set Test Variable      &{headers}  &{headers}
         Delete All Sessions
-        Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headersMultitenancy}
+        Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
     END
 
     ${resp}=            GET On Session         ${SUT}    /ehr/${ehr_id}/composition/${uid}    expected_status=anything   headers=${headers}
