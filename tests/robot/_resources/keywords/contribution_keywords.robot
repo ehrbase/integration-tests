@@ -184,8 +184,9 @@ commit COMTRIBUTION(S) (JSON)
 
 retrieve CONTRIBUTION by contribution_uid (JSON)
     [Documentation]     DEPENDENCY ${ehr_id} & ${contribution_uid} in test scope
+    [Arguments]         ${multitenancy_token}=${None}
                         Set Test Variable  ${KEYWORD NAME}  GET CONTRI BY CONTRI_UID
-                        GET /ehr/ehr_id/contribution/contribution_uid    JSON
+                        GET /ehr/ehr_id/contribution/contribution_uid    JSON   ${multitenancy_token}
 
 
 check response: is positive - contribution_uid exists
@@ -368,7 +369,7 @@ Create Contribution With Multitenant Token
 # GET
 
 GET /ehr/ehr_id/contribution/contribution_uid
-    [Arguments]         ${format}
+    [Arguments]         ${format}       ${multitenancy_token}=${None}
     [Documentation]     DEPENDENCY ${ehr_id} & ${contribution_uid} in test scope
 
                         Run Keyword If      $format=='JSON'    prepare new request session
@@ -377,11 +378,15 @@ GET /ehr/ehr_id/contribution/contribution_uid
                         Run Keyword If      $format=='XML'    prepare new request session
                         ...                 XML    Prefer=return=representation
 
+                        IF  '${multitenancy_token}' != '${None}'
+                            Set To Dictionary    ${headers}    Authorization=Bearer ${multitenancy_token}
+                        END
+
     ${resp}=            GET On Session         ${SUT}   /ehr/${ehr_id}/contribution/${contribution_uid}   expected_status=anything
                         ...                 headers=${headers}
 
                         Set Test Variable   ${response}    ${resp}
-                        Output Debug Info:    GET /ehr/ehr_id/contribution/contribution_uid
+                        #Output Debug Info:    GET /ehr/ehr_id/contribution/contribution_uid
 
 
 Retrieve Contribution With Multitenant Token
