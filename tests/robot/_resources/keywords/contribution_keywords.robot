@@ -48,10 +48,10 @@ TOC | Table Of Contents
 *** Keywords ***
 # 1) High Level Keywords
 commit CONTRIBUTION (JSON)
-    [Arguments]         ${valid_test_data_set}
+    [Arguments]         ${valid_test_data_set}      ${multitenancy_token}=${None}
                         Set Test Variable  ${KEYWORD NAME}  COMMIT CONTRIBUTION 1 (JSON)
                         load valid test-data-set    ${valid_test_data_set}
-                        POST /ehr/ehr_id/contribution    JSON
+                        POST /ehr/ehr_id/contribution    JSON   ${multitenancy_token}
                         Set Test Variable    ${body}    ${response.json()}
                         Set Test Variable    ${contribution_uid}    ${body['uid']['value']}
                         Set Test Variable    ${versions}    ${body['versions']}
@@ -262,7 +262,7 @@ check response: is positive with list of ${x} contribution(s)
 # POST
 
 POST /ehr/ehr_id/contribution
-    [Arguments]         ${format}
+    [Arguments]         ${format}   ${multitenancy_token}=${None}
     [Documentation]     DEPENDENCY any keyword that exposes a `${test_data}` variable
     ...                 to test level scope e.g. `load valid test-data-set`
 
@@ -273,6 +273,10 @@ POST /ehr/ehr_id/contribution
                         # XML format: overriding defaults
                         Run Keyword If      $format=='XML'    prepare new request session
                         ...                 XML    Prefer=return=representation
+
+                        IF  '${multitenancy_token}' != '${None}'
+                            Set To Dictionary       ${headers}      Authorization=Bearer ${multitenancy_token}
+                        END
 
     ${resp}=            POST On Session     ${SUT}   /ehr/${ehr_id}/contribution   expected_status=anything
                         ...                 json=${test_data}
