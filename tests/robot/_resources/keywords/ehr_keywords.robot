@@ -500,9 +500,13 @@ get ehr_status of EHR
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
-
+    [Arguments]     ${multitenancy_token}=${None}
+    &{headers}      Create Dictionary   Accept=application/json
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
     &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/ehr_status
-                        ...         headers={"Content-Type": "application/json"}
+                        ...         headers=${headers}
                         # ...         headers={"If-Match": null}
                         Set Test Variable    ${response}    ${resp}
 

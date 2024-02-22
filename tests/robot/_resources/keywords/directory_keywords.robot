@@ -256,10 +256,10 @@ get DIRECTORY (JSON)
     ...                 **without** URI parameter (which are optional)!
     ...                 check the API here:
     ...     https://specifications.openehr.org/releases/ITS-REST/latest/ehr.html#directory-directory-get-1
-
+    [Arguments]     ${multitenancy_token}=${None}
                         Set Test Variable  ${KEYWORD NAME}  GET DIRECTORY (JSON)
 
-                        GET /ehr/ehr_id/directory    JSON
+                        GET /ehr/ehr_id/directory    JSON   multitenancy_token=${multitenancy_token}
 
 
 get DIRECTORY at time (JSON)
