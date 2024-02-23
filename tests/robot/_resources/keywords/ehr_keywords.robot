@@ -159,6 +159,7 @@ Create New EHR With Multitenant Token
     Set Suite Variable    ${ehr_status}     ${resp.json()['ehr_status']}
     Set Suite Variable    ${versioned_status_uid}       ${short_uid}
     Set Suite Variable    ${response}       ${resp}
+    Set Test Variable     ${ehrstatus_uid}  ${ehrstatus_uid}
     Log     ${ehr_id}
     Log     ${system_id}
     Log     ${ehr_status}
