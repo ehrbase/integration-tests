@@ -301,10 +301,10 @@ get DIRECTORY at version (JSON)
     [Documentation]     Retrieves a particular version of the directory FOLDER
     ...                 identified by `version_uid` and associated with the EHR
     ...                 identified by `ehr_id`.
-
+    [Arguments]         ${multitenancy_token}=${None}
                         Set Test Variable  ${KEYWORD NAME}  GET DIRECTORY AT VERSION (JSON)
 
-                        GET /ehr/ehr_id/directory/version_uid    JSON
+                        GET /ehr/ehr_id/directory/version_uid    JSON   ${multitenancy_token}
 
 
 get FOLDER in DIRECTORY at version (JSON)
