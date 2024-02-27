@@ -84,6 +84,11 @@ Resource        template_opt1.4_keywords.robot
 (admin) delete composition
     [Documentation]     Admin delete of Composition.
     ...                 Needs `${versioned_object_uid}` var from e.g. `commit composition (JSON)` KW.
+    [Arguments]         ${multitenancy_token}=${None}
+
+    IF     '${multitenancy_token}' != '${None}'
+            Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
+    END
 
     &{resp}=            REST.DELETE    ${admin_baseurl}/ehr/${ehr_id}/composition/${versioned_object_uid}
                         # Should Be Equal As Strings   ${resp.status}   204

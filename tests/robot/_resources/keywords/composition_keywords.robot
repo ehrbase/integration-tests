@@ -674,7 +674,7 @@ check content of updated composition generic (JSON)
                         Should Be Equal     ${text}    ${expectedVal}
 
 update composition (XML)
-    [Arguments]         ${new_version_of_composition}
+    [Arguments]         ${new_version_of_composition}   ${multitenancy_token}=${None}
     [Documentation]     Commit a new version for the COMPOSITION
     ...                 DEPENDENCY: `commit composition (JSON/XML)` keyword
     ...                 PUT /ehr/${ehr_id}/composition/${versioned_object_uid}
@@ -684,6 +684,9 @@ update composition (XML)
                         ...                 Accept=application/xml
                         ...                 Prefer=return=representation
                         ...                 If-Match=${preceding_version_uid}   # TODO: must be ${preceding_version_uid} - has same format as `version_uid`
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
     ${resp}=            PUT On Session         ${SUT}   /ehr/${ehr_id}/composition/${compo_uid_v1}   data=${file}   expected_status=anything   headers=${headers}
                         log to console      ${resp.content}
 
@@ -1205,15 +1208,19 @@ delete composition
     [Arguments]         ${uid}      ${ehrScape}=false       ${multitenancy_token}=${None}
     [Documentation]     :uid: preceding_version_uid (format of version_uid)
 
+    IF     '${multitenancy_token}' != '${None}'
+            Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
+    END
+
     IF      '${ehrScape}' == 'false'
-        ${resp}     Delete On Session   ${SUT}   /ehr/${ehr_id}/composition/${uid}   expected_status=anything
+        ${resp}     Delete On Session   ${SUT}   /ehr/${ehr_id}/composition/${uid}   expected_status=anything   headers=${headers}
         Status Should Be    204
                             # the ETag comes with quotes, this removes them
         ${del_version_uid}      Get Substring           ${resp.headers['ETag']}    1    -1
         log to console          \ndeleted version uid:  ${del_version_uid}
         Set Test Variable       ${del_version_uid}      ${del_version_uid}
     ELSE
-        ${resp}     Delete On Session   ${SUT}   /composition/${uid}   expected_status=anything
+        ${resp}     Delete On Session   ${SUT}   /composition/${uid}   expected_status=anything     headers=${headers}
         Status Should Be    200
 
     END
