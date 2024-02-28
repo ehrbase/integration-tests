@@ -354,9 +354,11 @@ commit composition
         ${resp}     POST On Session     ${SUT}   composition   params=${params}
         ...     expected_status=anything   data=${file}   headers=${headers}
     ELSE IF     '${multitenancy_token}' != '${None}'
-        Create Session For Commit Composition With Multitenant Token    ${template}    ${multitenancy_token}
+        #Create Session For Commit Composition With Multitenant Token    ${template}    ${multitenancy_token}
+        Set To Dictionary       ${headers}      Authorization=Bearer ${multitenancy_token}
+        Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
         ${resp}     POST On Session     ${SUT}   /ehr/${ehr_id}/composition
-        ...     expected_status=anything   data=${file}   headers=${headersMultitenancy}
+        ...     expected_status=anything   data=${file}   headers=${headers}
     ELSE
         ${resp}     POST On Session     ${SUT}   /ehr/${ehr_id}/composition
         ...     expected_status=anything   data=${file}   headers=${headers}
