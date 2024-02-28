@@ -584,7 +584,8 @@ get versioned ehr_status of EHR
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
     [Arguments]         ${multitenancy_token}=${None}
-    Set To Dictionary     ${headers}       Content-Type=application/json
+    &{headers}       Create Dictionary
+    Set To Dictionary       ${headers}     Content-Type=application/json
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
@@ -680,6 +681,7 @@ set ehr_status of EHR
     ...                             create and expose an `ehr_status` as JSON
     ...                             object e.g. `extract ehr_status from response (JSON)`
     [Arguments]      ${multitenancy_token}=${None}
+    &{headers}      Create Dictionary
     Set To Dictionary     ${headers}
     ...         Content-Type=application/json
     ...         Prefer=return=representation
