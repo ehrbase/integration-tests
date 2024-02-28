@@ -27,12 +27,16 @@ Resource        template_opt1.4_keywords.robot
 (admin) delete ehr
     [Documentation]     Admin delete of EHR record with a given ehr_id.
     ...                 DEPENDENCY: `prepare new request session`
-
-    &{resp}=            REST.DELETE    ${admin_baseurl}/ehr/${ehr_id}
-                        # Should Be Equal As Strings   ${resp.status}   204
-                        Integer    response status    204
-                        Set Test Variable    ${response}    ${resp}
-                        Output Debug Info To Console
+    [Arguments]         ${multitenancy_token}=${None}
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
+    Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
+                        ...     verify=False    #auth=${CREDENTIALS}
+    ${resp}     DELETE on session     ${SUT}    /ehr/${ehr_id}
+    ...         expected_status=anything    headers=${headers}
+                Set Test Variable   ${response}     ${resp}
+                Should Be Equal     ${resp.status_code}      ${204}
 
 
 (admin) update OPT
