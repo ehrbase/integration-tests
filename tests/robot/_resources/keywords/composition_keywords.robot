@@ -208,9 +208,8 @@ check content of composition (JSON)
     ${text}=            Set Variable        ${response.json()['content'][0]['data']['events'][0]['data']['items'][0]['value']['value']}
                         Should Be Equal     ${text}    original value
 
-
 commit composition (XML)
-    [Arguments]         ${xml_composition}
+    [Arguments]         ${xml_composition}      ${multitenancy_token}=${None}
     [Documentation]     POST /ehr/${ehr_id}/composition
 
                         # TODO: FIX ME! replace KW
@@ -219,6 +218,10 @@ commit composition (XML)
     &{headers}=         Create Dictionary   Content-Type=application/xml
                         ...                 Accept=application/xml
                         ...                 Prefer=return=representation
+
+    IF     '${multitenancy_token}' != '${None}'
+            Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
+    END
 
     ${resp}=            POST On Session     ${SUT}   /ehr/${ehr_id}/composition   expected_status=anything   data=${file}   headers=${headers}
                         log to console      ${resp.content}
@@ -234,9 +237,7 @@ commit composition (XML)
                         Set Test Variable   ${version_uid_v1}    ${version_uid}                  # different namesfor full uid
                         Set Test Variable   ${preceding_version_uid}    ${version_uid}          # for usage in other steps
 
-    @{splitted_ver_uid}     Split String    ${version_uid}      ::
-    #${short_uid}=       Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
-    ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
+    ${short_uid}=       Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
                         Set Test Variable   ${compo_uid_v1}    ${short_uid}                 # TODO; rmv
                         Set Test Variable   ${versioned_object_uid}    ${short_uid}
 
