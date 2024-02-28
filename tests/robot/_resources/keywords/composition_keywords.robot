@@ -801,7 +801,7 @@ get composition by composition_uid
 Get Web Template By Template Id (ECIS)
     [Arguments]         ${template_id}      ${responseFormat}=default   ${multitenancy_token}=${None}
     Create Session      ${SUT}    ${ECISURL}    debug=2
-    ...                 auth=${CREDENTIALS}    verify=False
+    ...                 verify=False    #auth=${CREDENTIALS}
     &{headers}      Create Dictionary
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
