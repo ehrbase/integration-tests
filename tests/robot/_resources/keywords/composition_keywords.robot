@@ -796,29 +796,32 @@ get composition by composition_uid
 
 
 Get Web Template By Template Id (ECIS)
-    [Arguments]         ${template_id}      ${responseFormat}=default
-
+    [Arguments]         ${template_id}      ${responseFormat}=default   ${multitenancy_token}=${None}
     Create Session      ${SUT}    ${ECISURL}    debug=2
-    ...                 auth=${CREDENTIALS}    verify=True
-    IF          '${responseFormat}' == 'JSON'
-        &{params}           Create Dictionary       format=JSON
-        &{headers}          Create Dictionary       Content-Type=application/json
-        ...     Prefer=return=representation        Accept=application/json
-        ${resp}             GET On Session         ${SUT}  template/${template_id}
-        ...     expected_status=anything   headers=${headers}   params=${params}
-    ELSE IF     '${responseFormat}' == 'XML'
-        &{params}           Create Dictionary       format=XML
-        &{headers}          Create Dictionary       Content-Type=application/xml
-        ...     Prefer=return=representation        Accept=application/xml
-        ${resp}             GET On Session          ${SUT}  template/${template_id}
-        ...     expected_status=anything   headers=${headers}   params=${params}
-    ELSE
-        ${resp}             GET On Session         ${SUT}  template/${template_id}
-        ...     expected_status=anything   headers=${headers}
+    ...                 auth=${CREDENTIALS}    verify=False
+    &{headers}      Create Dictionary
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
-                        log to console      ${resp.content}
-                        Set Test Variable   ${response}    ${resp}
-                        Should Be Equal As Strings   ${resp.status_code}   200
+    IF          '${responseFormat}' == 'JSON'
+        &{params}       Create Dictionary   format=JSON
+        Set To Dictionary       ${headers}
+        ...     Content-Type=application/json   Prefer=return=representation    Accept=application/json
+        ${resp}     GET On Session      ${SUT}      template/${template_id}
+        ...     expected_status=anything    headers=${headers}  params=${params}
+    ELSE IF     '${responseFormat}' == 'XML'
+        &{params}       Create Dictionary   format=XML
+        Set To Dictionary       ${headers}
+        ...     Content-Type=application/xml    Prefer=return=representation    Accept=application/xml
+        ${resp}     GET On Session      ${SUT}      template/${template_id}
+        ...     expected_status=anything    headers=${headers}  params=${params}
+    ELSE
+        ${resp}     GET On Session      ${SUT}      template/${template_id}
+        ...     expected_status=anything    headers=${headers}
+    END
+        log to console      ${resp.content}
+        Set Test Variable   ${response}    ${resp}
+        Should Be Equal     ${resp.status_code}   ${200}
 
 Get Example Of Web Template By Template Id (ECIS)
     [Arguments]         ${template_id}      ${responseFormat}
@@ -983,16 +986,19 @@ get version of versioned composition of EHR by UID and time
 
 
 get version of versioned composition of EHR by UID
-    [Arguments]         ${versioned_object_uid}    ${version_uid}
+    [Arguments]         ${versioned_object_uid}    ${version_uid}   ${multitenancy_token}=${None}
     [Documentation]     Gets composition with given version UID
     ...                 DEPENDENCY: `prepare new request session` and keywords that
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
     ...                             and creation of composition, giving its ID as argument
-
+    &{headers}      Create Dictionary   Accept=application/json
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
     &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_composition/${versioned_object_uid}/version/${version_uid}
-                        ...         headers={"Accept": "application/json"}
+                        ...         headers=${headers}
                         Set Test Variable    ${response}    ${resp}
 
 
