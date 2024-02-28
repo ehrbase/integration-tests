@@ -89,8 +89,11 @@ check response of 'update EHR' (JSON)
 create new EHR
     [Documentation]     Creates new EHR record with a server-generated ehr_id.
     ...                 DEPENDENCY: `prepare new request session`
-    [Arguments]         ${ehrScape}=False
+    [Arguments]         ${ehrScape}=False   ${multitenancy_token}=${None}
 
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
     IF      '${ehrScape}' == 'False'
         &{resp}=            REST.POST    ${baseurl}/ehr
                             Integer      response status    201
@@ -423,6 +426,7 @@ retrieve EHR by ehr_id
 
 Retrieve EHR By Ehr_id With Multitenant Token
     [Arguments]     ${expected_code}=200    ${multitenancy_token}=${None}
+    &{headers}      Create Dictionary
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
@@ -596,6 +600,7 @@ get revision history of versioned ehr_status of EHR
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
     [Arguments]         ${multitenancy_token}=${None}
+    &{headers}      Create Dictionary
     Set To Dictionary     ${headers}    Content-Type=application/json
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
@@ -623,6 +628,7 @@ get versioned ehr_status of EHR by time
 # internal only, do not call from outside. use "get versioned ehr_status of EHR by time" instead
 internal get versioned ehr_status of EHR by time with query
     [Arguments]     ${multitenancy_token}=${None}
+    &{headers}      Create Dictionary
     Set To Dictionary     ${headers}    Content-Type=application/json
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
@@ -635,6 +641,7 @@ internal get versioned ehr_status of EHR by time with query
 # internal only, do not call from outside. use "get versioned ehr_status of EHR by time" instead
 internal get versioned ehr_status of EHR by time without query
     [Arguments]     ${multitenancy_token}=${None}
+    &{headers}      Create Dictionary
     Set To Dictionary     ${headers}    Content-Type=application/json
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}

@@ -278,13 +278,16 @@ PUT /definition/query/{qualified_query_name}
     ...                 Expected status code 200.
     ...                 Returns combination of qualified_query_name and version, in format
     ...                 {random_query_qualified_name}/{random_query_version}
-    [Arguments]     ${query_to_store}    ${format}=json
+    [Arguments]     ${query_to_store}    ${format}=json     ${multitenancy_token}=${None}
     IF      '${format}' == 'json'
         &{headers}      Create Dictionary       Content-Type=application/json
         ${query}    Set Variable    {"q":"${query_to_store}"}
     ELSE IF     '${format}' == 'text'
         &{headers}      Create Dictionary       Content-Type=text/plain
         ${query}    Set Variable    ${query_to_store}
+    END
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary    ${headers}    Authorization=Bearer ${multitenancy_token}
     END
     Create Session      ${SUT}      ${BASEURL}      debug=2
     ${random_version}   Generate Version Number To Store Query Multitenancy
@@ -312,13 +315,16 @@ PUT /definition/query/{qualified_query_name}/{version}
     ...                 Expected status code 200.
     ...                 Returns combination of qualified_query_name and version, in format
     ...                 {random_query_qualified_name}/{random_query_version}
-    [Arguments]     ${query_to_store}    ${format}=json
+    [Arguments]     ${query_to_store}    ${format}=json     ${multitenancy_token}=${None}
     IF      '${format}' == 'json'
         &{headers}      Create Dictionary       Content-Type=application/json
         ${query}    Set Variable    {"q":"${query_to_store}"}
     ELSE IF     '${format}' == 'text'
         &{headers}      Create Dictionary       Content-Type=text/plain
         ${query}    Set Variable    ${query_to_store}
+    END
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary    ${headers}    Authorization=Bearer ${multitenancy_token}
     END
     Create Session      ${SUT}      ${BASEURL}      debug=2
     ${random_version}   Generate Version Number To Store Query Multitenancy
@@ -341,9 +347,12 @@ GET /definition/query/{qualified_query_name} / including {version}
     ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
     ...                 Expected status code 200.
     ...                 Returns {resp_query}, query from response.
-    [Arguments]     ${qualif_name}
+    [Arguments]     ${qualif_name}      ${multitenancy_token}=${None}
     &{headers}      Create Dictionary       Content-Type=application/json
     Create Session      ${SUT}      ${BASEURL}      debug=2
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
     ${resp}     GET On Session      ${SUT}
     ...         /definition/query/${qualif_name}
     ...         expected_status=anything
@@ -387,9 +396,13 @@ GET /query/aql?q={query}
     [Documentation]     Executes HTTP method GET on /query/aql?q={query} endpoint
     ...                 DEPENDENCY: following variables have to be in test-level scope:
     ...                 `${payload}`
+    [Arguments]         ${multitenancy_token}=${None}
     ${headers}      Create Dictionary
     ...     content=application/json
     ...     accept=application/json
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary    ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
     ${dict_param}   Create Dictionary      q=${payload}
     ${resp}         Get On Session      ${SUT}      /query/aql      params=${dict_param}
                     ...     headers=${headers}      expected_status=anything
