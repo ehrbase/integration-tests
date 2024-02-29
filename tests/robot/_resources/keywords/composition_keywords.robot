@@ -279,15 +279,14 @@ Create Session For Commit Composition With Multitenant Token
     ...     - Takes 2 arguments: {template} and {multitenancy_token}
     ...     - `Dependent of keyword:` commit composition.
     [Arguments]      ${template}     ${multitenancy_token}
-    &{headers}      Create Dictionary
+    Set To Dictionary   ${headers}
     ...     Prefer=return=representation    openEHR-VERSION.lifecycle_state=complete
-    ...     openEHR-TEMPLATE_ID=${template}
-    ...     Content-Type=application/json
-    ...     Accept=application/json
-    ...     Authorization=Bearer ${multitenancy_token}
+    ...     openEHR-TEMPLATE_ID=${template}     Authorization=Bearer ${multitenancy_token}
+    #...     Content-Type=application/json
+    #...     Accept=application/json
     Set Suite Variable      &{headers}  &{headers}
-    Delete All Sessions
-    Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
+    #Delete All Sessions
+    #Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
 
 
 commit composition
@@ -351,11 +350,12 @@ commit composition
         Set To Dictionary   ${headers}   Accept=application/openehr.wt.structured+json
     END
 
-    IF          '${format}'=='FLAT'
+    IF      '${format}'=='FLAT'
         ${resp}     POST On Session     ${SUT}   composition   params=${params}
         ...     expected_status=anything   data=${file}   headers=${headers}
     ELSE IF     '${multitenancy_token}' != '${None}'
-        Create Session For Commit Composition With Multitenant Token    ${template}    ${multitenancy_token}
+        Set To Dictionary   ${headers}
+        ...     openEHR-TEMPLATE_ID=${template}     Authorization=Bearer ${multitenancy_token}
         ${resp}     POST On Session     ${SUT}   /ehr/${ehr_id}/composition
         ...     expected_status=anything   data=${file}   headers=${headers}
     ELSE
