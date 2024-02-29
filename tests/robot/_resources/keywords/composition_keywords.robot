@@ -275,7 +275,7 @@ Create Session For Commit Composition With Multitenant Token
     ...     - Creates new headers with Authorization=Bearer {token}.
     ...     - Clean up all the sessions.
     ...     - Recreate the session with alias {SUT}, with new headers.
-    ...     - Set headers as suite variable called {headersMultitenancy}.
+    ...     - Set headers as suite variable called {headers}.
     ...     - Takes 2 arguments: {template} and {multitenancy_token}
     ...     - `Dependent of keyword:` commit composition.
     [Arguments]      ${template}     ${multitenancy_token}
@@ -285,9 +285,9 @@ Create Session For Commit Composition With Multitenant Token
     ...     Content-Type=application/json
     ...     Accept=application/json
     ...     Authorization=Bearer ${multitenancy_token}
-    Set Suite Variable      &{headersMultitenancy}  &{headers}
+    Set Suite Variable      &{headers}  &{headers}
     Delete All Sessions
-    Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headersMultitenancy}
+    Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
 
 
 commit composition
@@ -357,7 +357,7 @@ commit composition
     ELSE IF     '${multitenancy_token}' != '${None}'
         Create Session For Commit Composition With Multitenant Token    ${template}    ${multitenancy_token}
         ${resp}     POST On Session     ${SUT}   /ehr/${ehr_id}/composition
-        ...     expected_status=anything   data=${file}   headers=${headersMultitenancy}
+        ...     expected_status=anything   data=${file}   headers=${headers}
     ELSE
         ${resp}     POST On Session     ${SUT}   /ehr/${ehr_id}/composition
         ...     expected_status=anything   data=${file}   headers=${headers}

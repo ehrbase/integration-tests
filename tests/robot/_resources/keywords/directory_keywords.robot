@@ -436,7 +436,7 @@ Create Directory With Multitenant Token
                         ...     Accept=application/json
                         ...     Prefer=return=representation
                         ...     Authorization=Bearer ${multitenancy_token}
-    Set Suite Variable      &{headersMultitenancy}  &{headers}
+    Set Suite Variable      &{headers}  &{headers}
     ${resp}             POST On Session     ${SUT}   /ehr/${ehr_id}/directory   expected_status=anything
                         ...                 json=${test_data}
                         ...                 headers=${headers}

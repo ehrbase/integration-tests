@@ -348,10 +348,10 @@ Create Contribution With Multitenant Token
                     ...     Content-Type=application/json
                     ...     Accept=application/json
                     ...     Authorization=Bearer ${multitenancy_token}
-    Set Suite Variable      &{headersMultitenancy}  &{headers}
+    Set Suite Variable      &{headers}  &{headers}
     ${resp}             POST On Session     ${SUT}   /ehr/${ehr_id}/contribution   expected_status=anything
                         ...                 json=${test_data}
-                        ...                 headers=${headersMultitenancy}
+                        ...                 headers=${headers}
     Set Test Variable   ${response}     ${resp}
     Set Test Variable   ${body}         ${response.json()}
     Set Test Variable   ${contribution_uid}     ${body['uid']['value']}
@@ -395,7 +395,7 @@ Retrieve Contribution With Multitenant Token
                         ...     Content-Type=application/json
                         ...     Accept=application/json
                         ...     Authorization=Bearer ${multitenancy_token}
-    Set Suite Variable      &{headersMultitenancy}          &{headers}
+    Set Suite Variable      &{headers}          &{headers}
     ${resp}             GET On Session      ${SUT}
                         ...     /ehr/${ehr_id}/contribution/${contribution_uid}   expected_status=anything
                         ...     headers=${headers}
