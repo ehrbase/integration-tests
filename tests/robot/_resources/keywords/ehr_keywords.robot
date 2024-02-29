@@ -694,20 +694,16 @@ set ehr_status of EHR
     ...                             create and expose an `ehr_status` as JSON
     ...                             object e.g. `extract ehr_status from response (JSON)`
     [Arguments]     ${multitenancy_token}=${None}
+    &{headers}      Create Dictionary
+    ...     Accept=application/json     Content-Type=application/json
+    ...     Prefer=return=representation    If-Match=${ehrstatus_uid}
     IF  '${multitenancy_token}' != '${None}'
-        &{resp}         REST.PUT    ${baseurl}/ehr/${ehr_id}/ehr_status    ${ehr_status}
-                        ...         headers={"Content-Type": "application/json"}
-                        ...         headers={"Prefer": "return=representation"}
-                        ...         headers={"If-Match": "${ehrstatus_uid}"}
-                        ...         headers={"Authorization": "Bearer ${multitenancy_token}"}
-    ELSE
-        &{resp}         REST.PUT    ${baseurl}/ehr/${ehr_id}/ehr_status    ${ehr_status}
-                        ...         headers={"Content-Type": "application/json"}
-                        ...         headers={"Prefer": "return=representation"}
-                        ...         headers={"If-Match": "${ehrstatus_uid}"}
+        Set To Dictionary      ${headers}       Authorization=Bearer ${multitenancy_token}
     END
-                        Set Test Variable    ${response}    ${resp}
-                        Integer    response status    200
+    &{resp}         REST.PUT    ${baseurl}/ehr/${ehr_id}/ehr_status    ${ehr_status}
+                    ...         headers=${headers}
+                    Set Test Variable    ${response}    ${resp}
+                    Integer    response status    200
 
 update ehr_status of fake EHR (w/o body)
 
