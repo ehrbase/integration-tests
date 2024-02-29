@@ -31,7 +31,7 @@ ${INVALID EHR DATA SETS}     ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
 # 1) High Level Keywords
 
 update EHR: set ehr_status is_queryable
-    [Arguments]         ${value}    ${multitenancy_token}=${None}
+    [Arguments]         ${value}
     [Documentation]     valid values: ${TRUE}, ${FALSE}
     ...                 default: ${TRUE}
 
@@ -44,7 +44,7 @@ update EHR: set ehr_status is_queryable
 
     set is_queryable / is_modifiable    is_queryable=${value}
 
-    set ehr_status of EHR   multitenancy_token=${multitenancy_token}
+    set ehr_status of EHR
 
 
 update EHR: set ehr-status modifiable
@@ -583,15 +583,11 @@ get versioned ehr_status of EHR
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
-    [Arguments]         ${multitenancy_token}=${None}
-    &{headers}       Create Dictionary
-    Set To Dictionary       ${headers}     Content-Type=application/json
-    IF  '${multitenancy_token}' != '${None}'
-        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
-    END
-    ${resp}     GET on session     ${SUT}    /ehr/${ehr_id}/versioned_ehr_status
-    ...         expected_status=anything        headers=${headers}
-                Set Test Variable    ${response}    ${resp}
+
+    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status
+                        ...         headers={"Content-Type": "application/json"}
+                        # ...         headers={"If-Match": null}
+                        Set Test Variable    ${response}    ${resp}
 
 
 get revision history of versioned ehr_status of EHR
@@ -600,15 +596,11 @@ get revision history of versioned ehr_status of EHR
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
-    [Arguments]         ${multitenancy_token}=${None}
-    &{headers}      Create Dictionary
-    Set To Dictionary     ${headers}    Content-Type=application/json
-    IF  '${multitenancy_token}' != '${None}'
-        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
-    END
-    ${resp}     GET on session     ${SUT}    /ehr/${ehr_id}/versioned_ehr_status/revision_history
-    ...         expected_status=anything        headers=${headers}
-                Set Test Variable    ${response}    ${resp}
+
+    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status/revision_history
+                        ...         headers={"Content-Type": "application/json"}
+                        # ...         headers={"If-Match": null}
+                        Set Test Variable    ${response}    ${resp}
 
 
 get versioned ehr_status of EHR by time
@@ -618,38 +610,27 @@ get versioned ehr_status of EHR by time
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
     ...                 Input: `query` variable containing query parameters as object or directory (e.g. _limit=2 for [$URL]?_limit=2)
-    [Arguments]     ${multitenancy_token}=${None}
     # Trick to see if ${query} was set. (if not, "Get Variable Value" will set the value to None)
     ${query} = 	Get Variable Value 	${query}
     # Only run the GET with query if $query was set
-    Run Keyword Unless 	$query is None 	internal get versioned ehr_status of EHR by time with query     ${multitenancy_token}
-    Run Keyword If 	$query is None 	internal get versioned ehr_status of EHR by time without query      ${multitenancy_token}
+    Run Keyword Unless 	$query is None 	internal get versioned ehr_status of EHR by time with query
+    Run Keyword If 	$query is None 	internal get versioned ehr_status of EHR by time without query
 
 
 # internal only, do not call from outside. use "get versioned ehr_status of EHR by time" instead
 internal get versioned ehr_status of EHR by time with query
-    [Arguments]     ${multitenancy_token}=${None}
-    &{headers}      Create Dictionary
-    Set To Dictionary     ${headers}    Content-Type=application/json
-    IF  '${multitenancy_token}' != '${None}'
-        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
-    END
-    ${resp}     GET on session     ${SUT}    /ehr/${ehr_id}/versioned_ehr_status/version    ${query}
-    ...         expected_status=anything        headers=${headers}
-                Set Test Variable    ${response}    ${resp}
+    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status/version    ${query}
+                        ...         headers={"Content-Type": "application/json"}
+                        # ...         headers={"If-Match": null}
+                        Set Test Variable    ${response}    ${resp}
 
 
 # internal only, do not call from outside. use "get versioned ehr_status of EHR by time" instead
 internal get versioned ehr_status of EHR by time without query
-    [Arguments]     ${multitenancy_token}=${None}
-    &{headers}      Create Dictionary
-    Set To Dictionary     ${headers}    Content-Type=application/json
-    IF  '${multitenancy_token}' != '${None}'
-        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
-    END
-    ${resp}     GET on session     ${SUT}    /ehr/${ehr_id}/versioned_ehr_status/version
-    ...         expected_status=anything        headers=${headers}
-                Set Test Variable    ${response}    ${resp}
+    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status/version
+                        ...         headers={"Content-Type": "application/json"}
+                        # ...         headers={"If-Match": null}
+                        Set Test Variable    ${response}    ${resp}
 
 
 get versioned ehr_status of EHR by version uid
@@ -680,19 +661,13 @@ set ehr_status of EHR
     ...                 DEPENDENCY: `prepare new request session` and keywords that
     ...                             create and expose an `ehr_status` as JSON
     ...                             object e.g. `extract ehr_status from response (JSON)`
-    [Arguments]      ${multitenancy_token}=${None}
-    &{headers}      Create Dictionary
-    Set To Dictionary     ${headers}
-    ...         Content-Type=application/json
-    ...         Prefer=return=representation
-    ...         If-Match=${ehrstatus_uid}
-    IF  '${multitenancy_token}' != '${None}'
-        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
-    END
-    ${resp}     PUT on session     ${SUT}    /ehr/${ehr_id}/ehr_status    ${ehr_status}
-    ...         expected_status=anything    headers=${headers}
-                Set Test Variable   ${response}    ${resp}
-                Should Be Equal     ${resp.status_code}    ${200}
+    &{resp}=            REST.PUT    ${baseurl}/ehr/${ehr_id}/ehr_status    ${ehr_status}
+                        ...         headers={"Content-Type": "application/json"}
+                        ...         headers={"Prefer": "return=representation"}
+                        ...         headers={"If-Match": "${ehrstatus_uid}"}
+
+                        Set Test Variable    ${response}    ${resp}
+                        Integer    response status    200
 
 update ehr_status of fake EHR (w/o body)
 
