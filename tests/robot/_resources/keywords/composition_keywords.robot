@@ -309,6 +309,7 @@ commit composition
 
     &{headers}=        Create Dictionary   Prefer=return=${prefer}
     ...                openEHR-VERSION.lifecycle_state=${lifecycle}
+    Set Test Variable   ${headers}      ${headers}
 
     IF    '${need_template_id}' == 'true'
         Set To Dictionary   ${headers}   openEHR-TEMPLATE_ID=${template}
@@ -316,12 +317,12 @@ commit composition
 
     IF   '${format}'=='CANONICAL_JSON'
         Create Session      ${SUT}    ${BASEURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=True
+        ...                 auth=${CREDENTIALS}    verify=False
         Set To Dictionary   ${headers}   Content-Type=application/json
         Set To Dictionary   ${headers}   Accept=application/json
     ELSE IF   '${format}'=='CANONICAL_XML'
         Create Session      ${SUT}    ${BASEURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=True
+        ...                 auth=${CREDENTIALS}    verify=False
         Set To Dictionary   ${headers}   Content-Type=application/xml
         Set To Dictionary   ${headers}   Accept=application/xml
     ELSE IF   '${format}'=='FLAT'
@@ -337,15 +338,15 @@ commit composition
         END
         &{params}       Create Dictionary     format=FLAT   ehrId=${ehr_id}     templateId=${template_id}
         Create Session      ${SUT}    ${ECISURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=True
+        ...                 auth=${CREDENTIALS}    verify=False
     ELSE IF   '${format}'=='TDD'
         Create Session      ${SUT}    ${BASEURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=True
+        ...                 auth=${CREDENTIALS}    verify=False
         Set To Dictionary   ${headers}   Content-Type=application/openehr.tds2+xml
         Set To Dictionary   ${headers}   Accept=application/openehr.tds2+xml
     ELSE IF   '${format}'=='STRUCTURED'
         Create Session      ${SUT}    ${BASEURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=True
+        ...                 auth=${CREDENTIALS}    verify=False
         Set To Dictionary   ${headers}   Content-Type=application/openehr.wt.structured+json
         Set To Dictionary   ${headers}   Accept=application/openehr.wt.structured+json
     END
@@ -356,6 +357,9 @@ commit composition
     ELSE IF     '${multitenancy_token}' != '${None}'
         Set To Dictionary   ${headers}
         ...     openEHR-TEMPLATE_ID=${template}     Authorization=Bearer ${multitenancy_token}
+        Delete All Sessions
+        Create Session      ${SUT}    ${BASEURL}    debug=2
+        ...                 headers=${headers}      verify=False
         ${resp}     POST On Session     ${SUT}   /ehr/${ehr_id}/composition
         ...     expected_status=anything   data=${file}   headers=${headers}
     ELSE
