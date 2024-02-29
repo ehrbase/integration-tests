@@ -31,7 +31,7 @@ ${INVALID EHR DATA SETS}     ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
 # 1) High Level Keywords
 
 update EHR: set ehr_status is_queryable
-    [Arguments]         ${value}
+    [Arguments]         ${value}    ${multitenancy_token}=${None}
     [Documentation]     valid values: ${TRUE}, ${FALSE}
     ...                 default: ${TRUE}
 
@@ -44,7 +44,7 @@ update EHR: set ehr_status is_queryable
 
     set is_queryable / is_modifiable    is_queryable=${value}
 
-    set ehr_status of EHR
+    set ehr_status of EHR       multitenancy_token=${multitenancy_token}
 
 
 update EHR: set ehr-status modifiable
@@ -694,11 +694,19 @@ set ehr_status of EHR
     ...                 DEPENDENCY: `prepare new request session` and keywords that
     ...                             create and expose an `ehr_status` as JSON
     ...                             object e.g. `extract ehr_status from response (JSON)`
-    &{resp}=            REST.PUT    ${baseurl}/ehr/${ehr_id}/ehr_status    ${ehr_status}
+    [Arguments]     ${multitenancy_token}=${None}
+    IF  '${multitenancy_token}' != '${None}'
+        &{resp}         REST.PUT    ${baseurl}/ehr/${ehr_id}/ehr_status    ${ehr_status}
                         ...         headers={"Content-Type": "application/json"}
                         ...         headers={"Prefer": "return=representation"}
                         ...         headers={"If-Match": "${ehrstatus_uid}"}
-
+                        ...         headers={"Authorization": "Bearer ${multitenancy_token}"}
+    ELSE
+        &{resp}         REST.PUT    ${baseurl}/ehr/${ehr_id}/ehr_status    ${ehr_status}
+                        ...         headers={"Content-Type": "application/json"}
+                        ...         headers={"Prefer": "return=representation"}
+                        ...         headers={"If-Match": "${ehrstatus_uid}"}
+    END
                         Set Test Variable    ${response}    ${resp}
                         Integer    response status    200
 
