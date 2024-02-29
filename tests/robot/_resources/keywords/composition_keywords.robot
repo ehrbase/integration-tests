@@ -959,16 +959,19 @@ get versioned composition of EHR by UID
 
 
 get revision history of versioned composition of EHR by UID
-    [Arguments]         ${uid}
+    [Arguments]         ${uid}      ${multitenancy_token}=${None}
     [Documentation]     Gets revision history of versioned composition with given uid.
     ...                 DEPENDENCY: `prepare new request session` and keywords that
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
     ...                             and creation of composition, giving its ID as argument
-
+    &{headers}      Create Dictionary   Accept=application/json
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
     &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_composition/${uid}/revision_history
-                        ...         headers={"Accept": "application/json"}
+                        ...         headers=${headers}
                         Set Test Variable    ${response}    ${resp}
                         Log     ${response}
 
