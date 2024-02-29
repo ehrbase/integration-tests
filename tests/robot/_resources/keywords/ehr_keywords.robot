@@ -95,7 +95,7 @@ create new EHR
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
     IF      '${ehrScape}' == 'False'
-        &{resp}=            REST.POST    ${baseurl}/ehr
+        &{resp}=            REST.POST    ${baseurl}/ehr     headers=${headers}
                             Integer      response status    201
 
                             extract ehr_id from response (JSON)
@@ -117,7 +117,7 @@ create new EHR
                             #...                 queryable=true
                             #...                 otherDetails=not provided
 
-        ${resp}=            POST On Session     ${SUT}   ${ECISURL}/ehr   params=&{prms}
+        ${resp}=            POST On Session     ${SUT}   ${ECISURL}/ehr   params=&{prms}    headers=${headers}
                             Status Should Be    201
 
                             extract ehr_id from response (JSON)
