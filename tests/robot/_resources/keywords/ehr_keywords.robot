@@ -583,11 +583,22 @@ get versioned ehr_status of EHR
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
+    [Arguments]     ${default_headers}=default      ${multitenancy_token}=${None}
+    ${headers_variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${headers}
+    IF     ${headers_variable_exists} == ${FALSE}
+        &{headers}      Create Dictionary
+    END
+    IF      '${default_headers}' == 'default'
+        &{headers}      Create Dictionary       Content-Type=application/json
+    END
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
+    END
 
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status
-                        ...         headers={"Content-Type": "application/json"}
-                        # ...         headers={"If-Match": null}
-                        Set Test Variable    ${response}    ${resp}
+    &{resp}         REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status
+                    ...         headers=${headers}
+                    Set Test Variable    ${response}    ${resp}
 
 
 get revision history of versioned ehr_status of EHR
@@ -596,11 +607,22 @@ get revision history of versioned ehr_status of EHR
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
+    [Arguments]     ${default_headers}=default      ${multitenancy_token}=${None}
+    ${headers_variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${headers}
+    IF     ${headers_variable_exists} == ${FALSE}
+        &{headers}      Create Dictionary
+    END
+    IF      '${default_headers}' == 'default'
+        &{headers}      Create Dictionary       Content-Type=application/json
+    END
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
+    END
 
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status/revision_history
-                        ...         headers={"Content-Type": "application/json"}
-                        # ...         headers={"If-Match": null}
-                        Set Test Variable    ${response}    ${resp}
+    &{resp}         REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status/revision_history
+                    ...         headers=${headers}
+                    Set Test Variable    ${response}    ${resp}
 
 
 get versioned ehr_status of EHR by time
@@ -627,10 +649,21 @@ internal get versioned ehr_status of EHR by time with query
 
 # internal only, do not call from outside. use "get versioned ehr_status of EHR by time" instead
 internal get versioned ehr_status of EHR by time without query
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status/version
-                        ...         headers={"Content-Type": "application/json"}
-                        # ...         headers={"If-Match": null}
-                        Set Test Variable    ${response}    ${resp}
+    [Arguments]     ${default_headers}=default      ${multitenancy_token}=${None}
+    ${headers_variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${headers}
+    IF     ${headers_variable_exists} == ${FALSE}
+        &{headers}      Create Dictionary
+    END
+    IF      '${default_headers}' == 'default'
+        &{headers}      Create Dictionary       Content-Type=application/json
+    END
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
+    END
+    &{resp}         REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status/version
+                    ...         headers=${headers}
+                    Set Test Variable    ${response}    ${resp}
 
 
 get versioned ehr_status of EHR by version uid
