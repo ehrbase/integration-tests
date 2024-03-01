@@ -508,9 +508,8 @@ update composition (JSON)
                             Set Test Variable   ${composition_uid_v2}    ${resp.json()['uid']['value']}    # TODO: remove
                             Set Test Variable   ${version_uid_v2}    ${resp.json()['uid']['value']}
 
-        @{splitted_ver_uid}     Split String    ${version_uid_v2}      ::
-        ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
-                            Set Test Variable   ${versioned_object_uid_v2}    ${short_uid}
+        @{split_compo_id}   Split String        ${version_uid_v2}       ::
+                            Set Test Variable   ${versioned_object_uid_v2}    ${split_compo_id}[0]
 
                             Set Test Variable   ${response}    ${resp}
                             capture point in time    2
@@ -525,14 +524,13 @@ update composition (JSON)
         ${composition_id}        Remove String       ${composition_uid}    ::${CREATING_SYSTEM_ID}::1
         &{params}          Create Dictionary     ehr_id=${ehr_id}   composition_id=${composition_id}
         ${resp}             PUT On Session         ${SUT}   /ehr/${ehr_id}/composition/${composition_id}
-        ...                 data=${file}   headers=${headers}     params=${params}      expected_status=anything
-                            Set Test Variable   ${response}    ${resp}
+        ...                 data=${file}   headers=${headers}     params=${params}
+                            log to console      ${resp.content}
                             Set Test Variable   ${composition_uid_v2}    ${resp.json()['uid']['value']}    # TODO: remove
                             Set Test Variable   ${version_uid_v2}    ${resp.json()['uid']['value']}
 
-        @{splitted_ver_uid}     Split String    ${version_uid_v2}      ::
-        ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
-                            Set Test Variable   ${versioned_object_uid_v2}    ${short_uid}
+        @{split_compo_id}   Split String        ${version_uid_v2}       ::
+                            Set Test Variable   ${versioned_object_uid_v2}    ${split_compo_id}[0]
 
                             Set Test Variable   ${response}    ${resp}
                             capture point in time    2
@@ -560,9 +558,8 @@ update composition (JSON)
                             Set Test Variable   ${composition_uid_v2}    ${resp.json()['uid']['value']}    # TODO: remove
                             Set Test Variable   ${version_uid_v2}    ${resp.json()['uid']['value']}
 
-        @{splitted_ver_uid}     Split String    ${version_uid_v2}      ::
-        ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
-                            Set Test Variable   ${versioned_object_uid_v2}    ${short_uid}
+        @{split_compo_id}   Split String        ${version_uid_v2}       ::
+                            Set Test Variable   ${versioned_object_uid_v2}    ${split_compo_id}[0]
 
                             Set Test Variable   ${response}    ${resp}
                             capture point in time    2
