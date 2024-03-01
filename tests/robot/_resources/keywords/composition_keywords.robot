@@ -164,8 +164,7 @@ commit composition (JSON)
                         Set Test Variable   ${version_uid_v1}    ${version_uid}                  # different namesfor full uid
                         Set Test Variable   ${preceding_version_uid}    ${version_uid}          # for usage in other steps
     @{splitted_ver_uid}     Split String    ${version_uid}      ::
-    #${short_uid}=       Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
-    ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
+    ${short_uid}        Set Variable        ${splitted_ver_uid}[0]
                         Set Test Variable   ${compo_uid_v1}    ${short_uid}                      # TODO: rmv
                         Set Test Variable   ${versioned_object_uid}    ${short_uid}
 
@@ -195,7 +194,8 @@ commit composition without accept header
                         Set Test Variable   ${version_uid_v1}    ${version_uid}                  # different namesfor full uid
                         Set Test Variable   ${preceding_version_uid}    ${version_uid}          # for usage in other steps
 
-    ${short_uid}=       Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
+    @{split_compo_id}   Split String    ${version_uid}      ::
+    ${short_uid}        Set Variable    ${split_compo_id}[0]
                         Set Test Variable   ${compo_uid_v1}    ${short_uid}                      # TODO: rmv
                         Set Test Variable   ${versioned_object_uid}    ${short_uid}
 
@@ -237,7 +237,8 @@ commit composition (XML)
                         Set Test Variable   ${version_uid_v1}    ${version_uid}                  # different namesfor full uid
                         Set Test Variable   ${preceding_version_uid}    ${version_uid}          # for usage in other steps
 
-    ${short_uid}=       Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
+    @{split_compo_id}   Split String        ${version_uid}       ::
+    ${short_uid}        Set Variable        ${split_compo_id}[0]
                         Set Test Variable   ${compo_uid_v1}    ${short_uid}                 # TODO; rmv
                         Set Test Variable   ${versioned_object_uid}    ${short_uid}
 
@@ -483,7 +484,8 @@ Update Composition With Multitenant Token
                         ...                 Authorization=Bearer ${multitenancy_token}
     Create Session      ${SUT}      ${BASEURL}      debug=2
     ...                 verify=True         headers=${headers}
-    ${composition_id}   Remove String       ${composition_uid}    ::${CREATING_SYSTEM_ID}::1
+    @{split_compo_id}   Split String        ${composition_uid}      ::
+    ${composition_id}   Set Variable        ${split_compo_id}[0]
     &{params}           Create Dictionary   ehr_id=${ehr_id}    composition_id=${composition_id}
     ${resp}             PUT On Session      ${SUT}          /ehr/${ehr_id}/composition/${composition_id}
     ...                 data=${file}    headers=${headers}      params=${params}    expected_status=anything
@@ -521,7 +523,8 @@ update composition (JSON)
                             ...                 Accept=application/json
                             ...                 Prefer=return=representation
                             ...                 If-Match=${composition_uid}
-        ${composition_id}        Remove String       ${composition_uid}    ::${CREATING_SYSTEM_ID}::1
+        @{split_compo_id}   Split String    ${composition_uid}      ::
+        ${composition_id}   Set Variable    ${split_compo_id}[0]
         &{params}          Create Dictionary     ehr_id=${ehr_id}   composition_id=${composition_id}
         ${resp}             PUT On Session         ${SUT}   /ehr/${ehr_id}/composition/${composition_id}
         ...                 data=${file}   headers=${headers}     params=${params}
@@ -550,7 +553,8 @@ update composition (JSON)
         Create Session      ${SUT}    ${BASEURL}    debug=2
         ...                 headers=${headersUpdateCompoMultitenancy}    verify=True
         Set Test Variable   ${headers}      &{headersUpdateCompoMultitenancy}
-        ${composition_id}   Remove String           ${composition_uid}    ::${CREATING_SYSTEM_ID}::1
+        @{split_compo_id}   Split String    ${composition_uid}      ::
+        ${composition_id}   Set Variable    ${split_compo_id}[0]
         &{params}           Create Dictionary       ehr_id=${ehr_id}   composition_id=${composition_id}
         ${resp}             PUT On Session          ${SUT}          /ehr/${ehr_id}/composition/${composition_id}
         ...                 data=${file}    headers=${headers}      params=${params}
