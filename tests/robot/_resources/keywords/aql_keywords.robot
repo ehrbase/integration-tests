@@ -238,6 +238,16 @@ Update EHR Status For EHR
                     Set Suite Variable    ${response}    ${resp}
                     Should Be Equal     ${response.status_code}     ${200}
 
+Get EHR Status Time Committed
+    [Arguments]     ${ehr_status_uid}
+    ${query_to_get_time_committed}      Catenate
+    ...     SELECT cv/commit_audit/time_committed/value
+    ...     FROM VERSION cv[LATEST_VERSION]
+    ...     CONTAINS EHR_STATUS s
+    ...     WHERE cv/uid/value = '${ehr_status_uid}'
+    Set AQL And Execute Ad Hoc Query    ${query_to_get_time_committed}
+    [Return]    ${resp_body['rows'][0][0]}
+
 
 
 
