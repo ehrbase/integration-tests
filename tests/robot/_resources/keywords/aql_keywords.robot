@@ -225,6 +225,18 @@ Admin Delete EHR For AQL
                         ...     expected_status=anything
                         Should Be Equal As Strings      ${resp.status_code}     ${204}
 
+Update EHR Status For EHR
+    [Documentation]     Update EHR Status of EHR with given `ehr_id`.
+    [Arguments]     ${ehr_id}   ${ehrstatus_uid}    ${ehr_status_file}
+    &{headers}      Create Dictionary
+    ...     Accept=application/json     Content-Type=application/json
+    ...     Prefer=return=representation    If-Match=${ehrstatus_uid}
+    ${ehr_status_json}      Load JSON From File    ${EHR_STATUS_DATA_SETS_AQL}/${ehr_status_file}
+    Log     ${ehr_status_json}
+    ${resp}         PUT On Session    ${SUT}    /ehr/${ehr_id}/ehr_status    json=${ehr_status_json}
+                    ...         headers=${headers}      expected_status=anything
+                    Set Suite Variable    ${response}    ${resp}
+                    Should Be Equal     ${response.status_code}     ${200}
 
 
 
