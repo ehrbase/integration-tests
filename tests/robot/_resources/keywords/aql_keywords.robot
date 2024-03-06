@@ -30,7 +30,7 @@ ${EHR_DATA_SETS}                ${PROJECT_ROOT}/tests/robot/_resources/test_data
 ${EHR_STATUS_DATA_SETS_AQL}     ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/data_load/ehrs
 ${COMPOSITIONS_DATA_SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/data_load/compositions
 ${EXPECTED_JSON_DATA_SETS}      ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results
-
+${VALID CONTRI DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/contributions/valid
 
 *** Keywords ***
 Execute Ad Hoc Query
@@ -248,7 +248,55 @@ Get EHR Status Time Committed
     Set AQL And Execute Ad Hoc Query    ${query_to_get_time_committed}
     [Return]    ${resp_body['rows'][0][0]}
 
+Get Composition Time Committed
+    [Arguments]     ${composition_uid}
+    ${query_to_get_time_committed}      Catenate
+    ...     SELECT cv/commit_audit/time_committed/value
+    ...     FROM VERSION cv[LATEST_VERSION]
+    ...     CONTAINS COMPOSITION s
+    ...     WHERE cv/uid/value = '${composition_uid}'
+    Set AQL And Execute Ad Hoc Query    ${query_to_get_time_committed}
+    [Return]    ${resp_body['rows'][0][0]}
+
+Commit Contribution For AQL
+    [Arguments]     ${valid_test_data_set}
+                    ${file}     Load JSON from File     ${VALID CONTRI DATA SETS}/${valid_test_data_set}
+                    Set Suite Variable    ${test_data}    ${file}
+                    prepare new request session     Prefer=return=representation
+                    ${resp}     POST On Session     ${SUT}  /ehr/${ehr_id}/contribution   expected_status=anything
+                                ...     json=${test_data}   headers=${headers}
+                    Set Suite Variable      ${response}     ${resp}
+                    Set Suite Variable      ${body}     ${response.json()}
+                    Set Suite Variable      ${contribution_uid}     ${body['uid']['value']}
+                    Set Suite Variable      ${versions}     ${body['versions']}
+                    Should Be Equal     ${response.status_code}     ${201}
+
+Update Composition For AQL
+    [Arguments]         ${new_composition}
+    ${file}     Get Binary File     ${COMPOSITIONS_DATA_SETS}/${new_composition}
+    Delete All Sessions
+    &{headers}          Create Dictionary   Content-Type=application/json
+                        ...                 Accept=application/json
+                        ...                 Prefer=return=representation
+                        ...                 If-Match=${composition_uid}
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ...                 verify=True         headers=${headers}
+    @{split_compo_id}   Split String        ${composition_uid}      ::
+    ${composition_id}   Set Variable        ${split_compo_id}[0]
+    &{params}           Create Dictionary   ehr_id=${ehr_id}    composition_id=${composition_id}
+    ${resp}             PUT On Session      ${SUT}          /ehr/${ehr_id}/composition/${composition_id}
+    ...                 data=${file}    headers=${headers}      params=${params}    expected_status=anything
+    Set Suite Variable       ${response}             ${resp}
+    Set Suite Variable       ${updated_version_composition_uid}      ${resp.json()['uid']['value']}
+    Should Be Equal As Strings      ${resp.status_code}     ${200}
 
 
-
+Delete Composition For AQL
+    [Arguments]         ${composition_uid}
+    ${resp}     Delete On Session   ${SUT}  /ehr/${ehr_id}/composition/${composition_uid}
+    ...         expected_status=anything    headers=${headers}
+    Set Suite Variable      ${response}     ${resp}
+    Status Should Be    204
+    ${del_version_uid}      Get Substring           ${resp.headers['ETag']}    1    -1
+    Set Suite Variable      ${del_version_uid}      ${del_version_uid}
 

@@ -1,0 +1,36 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-06T14:14:02.5319925+02:00",
+		"_executed_aql": "SELECT cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_committed/value FROM VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.conformance_composition_.v0] ORDER BY cv/commit_audit/time_committed ASC",
+		"resultsize": 2
+	},
+	"q": "SELECT cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_committed/value FROM VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.conformance_composition_.v0] ORDER BY cv/commit_audit/time_committed ASC",
+	"columns": [
+		{
+			"path": "cv/uid/value",
+			"name": "#0"
+		},
+		{
+			"path": "cv/contribution/id/value",
+			"name": "#1"
+		},
+		{
+			"path": "cv/commit_audit/time_committed/value",
+			"name": "#2"
+		}
+	],
+	"rows": [
+		[
+			"${compo_uid_5}",
+			"${contribution_id1}",
+			"${time_committed_composition5}"
+		],
+		[
+			"${compo_uid_8}",
+			"${contribution_id2}",
+			"${time_committed_composition8}"
+		]
+	]
+}

@@ -54,7 +54,7 @@ ${query2}   SELECT cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_
                 Should Be Empty     ${diff}    msg=DIFF DETECTED!
     [Teardown]  Remove File     ${tmp_file}
 
-3. Check Contributions Exists And Valid
+3. Check Contributions Exists And Valid - Latest Version EHR Status
     Set Test Variable   ${contribution_uid}    ${contribution_id1}
     Set Test Variable   ${ehr_id}    ${ehr_id1}
     GET /ehr/ehr_id/contribution/contribution_uid   format=JSON

@@ -1,0 +1,66 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-06T13:08:16.2160203+02:00",
+		"_executed_aql": "SELECT e/ehr_id/value, c/archetype_details/template_id/value, cv/uid/value, cv/commit_audit/time_committed/value FROM EHR e CONTAINS VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c ORDER BY cv/commit_audit/time_committed ASC",
+		"resultsize": 6
+	},
+	"q": "SELECT e/ehr_id/value, c/archetype_details/template_id/value, cv/uid/value, cv/commit_audit/time_committed/value FROM EHR e CONTAINS VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c ORDER BY cv/commit_audit/time_committed ASC",
+	"columns": [
+		{
+			"path": "e/ehr_id/value",
+			"name": "#0"
+		},
+		{
+			"path": "c/archetype_details/template_id/value",
+			"name": "#1"
+		},
+		{
+			"path": "cv/uid/value",
+			"name": "#2"
+		},
+		{
+			"path": "cv/commit_audit/time_committed/value",
+			"name": "#3"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_id1}",
+			"persistent_minimal.en.v1",
+			"${compo_uid_1}",
+			"${time_committed_composition1}"
+		],
+		[
+			"${ehr_id1}",
+			"persistent_minimal.en.v1",
+			"${compo_uid_2_v3}",
+			"${time_committed_composition2}"
+		],
+		[
+			"${ehr_id1}",
+			"persistent_minimal.en.v1",
+			"${compo_uid_3_v2}",
+			"${time_committed_composition3}"
+		],
+		[
+			"${ehr_id1}",
+			"conformance-ehrbase.de.v0",
+			"${compo_uid_5}",
+			"${time_committed_composition4}"
+		],
+		[
+			"${ehr_id3}",
+			"persistent_minimal.en.v1",
+			"${compo_uid_7_v2}",
+			"${time_committed_composition5}"
+		],
+		[
+			"${ehr_id3}",
+			"conformance-ehrbase.de.v0",
+			"${compo_uid_8}",
+			"${time_committed_composition6}"
+		]
+	]
+}
