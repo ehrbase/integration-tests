@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-06T10:32:47.7041774+02:00",
+		"_executed_aql": "SELECT cv/uid/value FROM VERSION cv[LATEST_VERSION] CONTAINS EHR_STATUS s WHERE cv/uid/value = '60a14a85-7493-4369-8b97-c9f8a3e0c654::local.ehrbase.org::2' ORDER BY cv/uid/value DESC",
+		"resultsize": 1
+	},
+	"q": "SELECT cv/uid/value FROM VERSION cv[LATEST_VERSION] CONTAINS EHR_STATUS s WHERE cv/uid/value = '60a14a85-7493-4369-8b97-c9f8a3e0c654::local.ehrbase.org::2' ORDER BY cv/uid/value DESC",
+	"columns": [
+		{
+			"path": "cv/uid/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_status_id3_version2}"
+		]
+	]
+}

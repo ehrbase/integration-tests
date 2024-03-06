@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-06T10:36:27.5078157+02:00",
+		"_executed_aql": "SELECT cv/commit_audit/change_type/value FROM VERSION cv[LATEST_VERSION] CONTAINS EHR_STATUS s WHERE cv/commit_audit/change_type/value = 'modification' ORDER BY cv/commit_audit/change_type/value ASC",
+		"resultsize": 1
+	},
+	"q": "SELECT cv/commit_audit/change_type/value FROM VERSION cv[LATEST_VERSION] CONTAINS EHR_STATUS s WHERE cv/commit_audit/change_type/value = 'modification' ORDER BY cv/commit_audit/change_type/value ASC",
+	"columns": [
+		{
+			"path": "cv/commit_audit/change_type/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"modification"
+		]
+	]
+}
