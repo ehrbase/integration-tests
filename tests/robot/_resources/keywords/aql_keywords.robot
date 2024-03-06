@@ -258,6 +258,16 @@ Get Composition Time Committed
     Set AQL And Execute Ad Hoc Query    ${query_to_get_time_committed}
     [Return]    ${resp_body['rows'][0][0]}
 
+Get Observation Time Committed
+    [Arguments]     ${composition_uid}
+    ${query_to_get_time_committed}      Catenate
+    ...     SELECT cv/commit_audit/time_committed/value
+    ...     FROM VERSION cv[LATEST_VERSION]
+    ...     CONTAINS OBSERVATION s
+    ...     WHERE cv/uid/value = '${composition_uid}'
+    Set AQL And Execute Ad Hoc Query    ${query_to_get_time_committed}
+    [Return]    ${resp_body['rows'][0][0]}
+
 Commit Contribution For AQL
     [Arguments]     ${valid_test_data_set}
                     ${file}     Load JSON from File     ${VALID CONTRI DATA SETS}/${valid_test_data_set}

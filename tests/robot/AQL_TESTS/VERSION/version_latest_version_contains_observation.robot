@@ -1,11 +1,9 @@
 *** Settings ***
-Documentation   VERSION[LATEST_VERSION] CONTAINS COMPOSITION
+Documentation   VERSION[LATEST_VERSION] CONTAINS OBSERVATION
 ...             - Covers the following:
-...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/VERSION_TEST_SUIT.md#versionlatest_version-contains-composition
+...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/VERSION_TEST_SUIT.md#versionlatest_version-contains-observation
 
 Resource        ../../_resources/keywords/aql_keywords.robot
-Resource        ../../_resources/keywords/contribution_keywords.robot
-Resource        ../../_resources/keywords/composition_keywords.robot
 
 Suite Setup     Precondition
 Suite Teardown  Run Keywords    Admin Delete EHR For AQL    ${ehr_id1}  AND
@@ -13,41 +11,18 @@ Suite Teardown  Run Keywords    Admin Delete EHR For AQL    ${ehr_id1}  AND
 
 
 *** Variables ***
-${query1}   SELECT e/ehr_id/value, c/archetype_details/template_id/value, cv/uid/value, cv/commit_audit/time_committed/value FROM EHR e CONTAINS VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c ORDER BY cv/commit_audit/time_committed
-${query2}   SELECT cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_committed/value FROM VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.conformance_composition_.v0] ORDER BY cv/commit_audit/time_committed ASC
+${query1}   SELECT e/ehr_id/value, o/archetype_details/template_id/value, o/archetype_details/archetype_id/value, cv/uid/value, cv/commit_audit/time_committed/value, o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value FROM EHR e CONTAINS VERSION cv[LATEST_VERSION] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.minimal.v1] ORDER BY cv/commit_audit/time_committed LIMIT 2 OFFSET 1
+${query2}   SELECT e/ehr_id/value, cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_committed/value FROM EHR e CONTAINS VERSION cv[LATEST_VERSION] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.minimal.v1] ORDER BY cv/commit_audit/time_committed ASC
 
 
 *** Test Cases ***
 1. ${query1}
-    ${expected_file}    Set Variable    latest_version_contains_composition_sanity_check.json
+    ${expected_file}    Set Variable    latest_version_contains_observation_sanity_check.json
     ${actual_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/${expected_file}
-    ${tmp_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_composition_sanity_check_tmp.json
-    ${time_committed_composition1}   Get Composition Time Committed     ${compo_uid_1}
-    ${time_committed_composition2}   Get Composition Time Committed     ${compo_uid_2_v3}
-    ${time_committed_composition3}   Get Composition Time Committed     ${compo_uid_3_v2}
-    ${time_committed_composition4}   Get Composition Time Committed     ${compo_uid_5}
-    ${time_committed_composition5}   Get Composition Time Committed     ${compo_uid_7_v2}
-    ${time_committed_composition6}   Get Composition Time Committed     ${compo_uid_8}
+    ${tmp_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_observation_sanity_check_tmp.json
+    ${time_committed_observation1}   Get Composition Time Committed     ${compo_uid_2_v3}
+    ${time_committed_observation2}   Get Composition Time Committed     ${compo_uid_3_v2}
     Set AQL And Execute Ad Hoc Query    ${query1}
-    ${file_without_replaced_vars}       Get File    ${actual_file}
-    ${data_replaced_vars}    Replace Variables      ${file_without_replaced_vars}
-                        Create File     ${tmp_file}     ${data_replaced_vars}
-                        Length Should Be    ${resp_body['rows']}     6
-    ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${tmp_file}     exclude_paths=${exclude_paths}
-                Should Be Empty     ${diff}    msg=DIFF DETECTED!
-    [Teardown]  Remove File     ${tmp_file}
-
-2. ${query2}
-    ${expected_file}    Set Variable    latest_version_contains_composition_contribution_check.json
-    ${actual_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/${expected_file}
-    ${tmp_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_composition_contribution_check_tmp.json
-    ${time_committed_composition5}   Get Composition Time Committed     ${compo_uid_5}
-    ${time_committed_composition8}   Get Composition Time Committed     ${compo_uid_8}
-    Set AQL And Execute Ad Hoc Query    ${query2}
-    Set Suite Variable   ${contribution_id1}     ${resp_body['rows'][0][1]}
-    Set Suite Variable   ${contribution_id2}     ${resp_body['rows'][1][1]}
     ${file_without_replaced_vars}       Get File    ${actual_file}
     ${data_replaced_vars}    Replace Variables      ${file_without_replaced_vars}
                         Create File     ${tmp_file}     ${data_replaced_vars}
@@ -58,17 +33,28 @@ ${query2}   SELECT cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_
                 Should Be Empty     ${diff}    msg=DIFF DETECTED!
     [Teardown]  Remove File     ${tmp_file}
 
-3. Check Contributions Exists And Valid - Latest Version Composition
-    Set Test Variable   ${contribution_uid}    ${contribution_id1}
-    Set Test Variable   ${ehr_id}    ${ehr_id1}
-    GET /ehr/ehr_id/contribution/contribution_uid   format=JSON
-    Should Be Equal     ${response.status_code}     ${200}
-    Should Be Equal     ${response.json()['versions'][0]['id']['value']}    ${compo_uid_5}
-    Set Test Variable   ${contribution_uid}    ${contribution_id2}
-    Set Test Variable   ${ehr_id}    ${ehr_id3}
-    GET /ehr/ehr_id/contribution/contribution_uid   format=JSON
-    Should Be Equal     ${response.status_code}     ${200}
-    Should Be Equal     ${response.json()['versions'][0]['id']['value']}    ${compo_uid_8}
+2. ${query2}
+    ${expected_file}    Set Variable    latest_version_contains_observation_contribution_check.json
+    ${actual_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/${expected_file}
+    ${tmp_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_observation_contribution_check_tmp.json
+    ${time_committed_observation1}   Get Composition Time Committed     ${compo_uid_1}
+    ${time_committed_observation2}   Get Composition Time Committed     ${compo_uid_2_v3}
+    ${time_committed_observation3}   Get Composition Time Committed     ${compo_uid_3_v2}
+    ${time_committed_observation4}   Get Composition Time Committed     ${compo_uid_7_v2}
+    Set AQL And Execute Ad Hoc Query    ${query2}
+    Set Suite Variable   ${contribution_id1}     ${resp_body['rows'][0][2]}
+    Set Suite Variable   ${contribution_id2}     ${resp_body['rows'][1][2]}
+    Set Suite Variable   ${contribution_id3}     ${resp_body['rows'][2][2]}
+    Set Suite Variable   ${contribution_id4}     ${resp_body['rows'][3][2]}
+    ${file_without_replaced_vars}       Get File    ${actual_file}
+    ${data_replaced_vars}    Replace Variables      ${file_without_replaced_vars}
+                        Create File     ${tmp_file}     ${data_replaced_vars}
+                        Length Should Be    ${resp_body['rows']}     4
+    ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
+    ${diff}     compare json-string with json-file
+    ...     ${resp_body_actual}     ${tmp_file}     exclude_paths=${exclude_paths}
+                Should Be Empty     ${diff}    msg=DIFF DETECTED!
+    [Teardown]  Remove File     ${tmp_file}
 
 
 *** Keywords ***
@@ -123,6 +109,3 @@ Precondition
     ###
     Commit Composition For AQL      composition_file=conformance_ehrbase.de.v0_max.json
     Set Suite Variable      ${compo_uid_8}      ${composition_uid}
-
-
-
