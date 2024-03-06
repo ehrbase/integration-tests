@@ -1,0 +1,27 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-06T15:23:59.8218842+02:00",
+		"_executed_aql": "SELECT cv/commit_audit/change_type/defining_code/code_string FROM VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.persistent_minimal.v1] WHERE cv/commit_audit/change_type/defining_code/code_string = '251' ORDER BY cv/commit_audit/change_type/defining_code/code_string DESC",
+		"resultsize": 3
+	},
+	"q": "SELECT cv/commit_audit/change_type/defining_code/code_string FROM VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.persistent_minimal.v1] WHERE cv/commit_audit/change_type/defining_code/code_string = '251' ORDER BY cv/commit_audit/change_type/defining_code/code_string DESC",
+	"columns": [
+		{
+			"path": "cv/commit_audit/change_type/defining_code/code_string",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"251"
+		],
+		[
+			"251"
+		],
+		[
+			"251"
+		]
+	]
+}

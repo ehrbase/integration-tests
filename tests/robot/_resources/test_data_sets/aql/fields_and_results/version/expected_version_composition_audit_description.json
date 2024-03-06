@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-06T15:38:28.008744+02:00",
+		"_executed_aql": "SELECT cv/commit_audit/description/value FROM VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.persistent_minimal.v1] WHERE cv/commit_audit/description/value = '<optional audit description>' ORDER BY cv/commit_audit/description/value ASC",
+		"resultsize": 1
+	},
+	"q": "SELECT cv/commit_audit/description/value FROM VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.persistent_minimal.v1] WHERE cv/commit_audit/description/value = '<optional audit description>' ORDER BY cv/commit_audit/description/value ASC",
+	"columns": [
+		{
+			"path": "cv/commit_audit/description/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"<optional audit description>"
+		]
+	]
+}
