@@ -4,6 +4,7 @@ Documentation   VERSION[LATEST_VERSION] CONTAINS OBSERVATION
 ...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/VERSION_TEST_SUIT.md#versionlatest_version-contains-observation
 
 Resource        ../../_resources/keywords/aql_keywords.robot
+Resource        ../../_resources/keywords/contribution_keywords.robot
 
 Suite Setup     Precondition
 Suite Teardown  Run Keywords    Admin Delete EHR For AQL    ${ehr_id1}  AND
@@ -55,6 +56,29 @@ ${query2}   SELECT e/ehr_id/value, cv/uid/value, cv/contribution/id/value, cv/co
     ...     ${resp_body_actual}     ${tmp_file}     exclude_paths=${exclude_paths}
                 Should Be Empty     ${diff}    msg=DIFF DETECTED!
     [Teardown]  Remove File     ${tmp_file}
+
+3. Check Contributions Exists And Valid - Latest Version Observation
+    Set Test Variable   ${contribution_uid}    ${contribution_id1}
+    Set Test Variable   ${ehr_id}    ${ehr_id1}
+    GET /ehr/ehr_id/contribution/contribution_uid   format=JSON
+    Should Be Equal     ${response.status_code}     ${200}
+    Should Be Equal     ${response.json()['versions'][0]['id']['value']}    ${compo_uid_1}
+    ##
+    Set Test Variable   ${contribution_uid}    ${contribution_id2}
+    GET /ehr/ehr_id/contribution/contribution_uid   format=JSON
+    Should Be Equal     ${response.status_code}     ${200}
+    Should Be Equal     ${response.json()['versions'][0]['id']['value']}    ${compo_uid_2_v3}
+    ##
+    Set Test Variable   ${contribution_uid}    ${contribution_id3}
+    GET /ehr/ehr_id/contribution/contribution_uid   format=JSON
+    Should Be Equal     ${response.status_code}     ${200}
+    Should Be Equal     ${response.json()['versions'][0]['id']['value']}    ${compo_uid_3_v2}
+    ##
+    Set Test Variable   ${contribution_uid}    ${contribution_id4}
+    Set Test Variable   ${ehr_id}    ${ehr_id3}
+    GET /ehr/ehr_id/contribution/contribution_uid   format=JSON
+    Should Be Equal     ${response.status_code}     ${200}
+    Should Be Equal     ${response.json()['versions'][0]['id']['value']}    ${compo_uid_7_v2}
 
 
 *** Keywords ***
