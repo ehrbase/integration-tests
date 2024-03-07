@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-07T17:18:59.1717651+02:00",
+		"_executed_aql": "SELECT s/other_details/item[at0001]/value/type FROM EHR e CONTAINS EHR_STATUS s",
+		"resultsize": 1
+	},
+	"q": "SELECT s/other_details/item[at0001]/value/type FROM EHR e CONTAINS EHR_STATUS s",
+	"columns": [
+		{
+			"path": "s/other_details/item[at0001]/value/type",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"FAMILY_GROUP_ID"
+		]
+	]
+}

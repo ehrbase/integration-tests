@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-07T16:45:29.592266+02:00",
+		"_executed_aql": "SELECT e/ehr_id/value FROM EHR e",
+		"resultsize": 1
+	},
+	"q": "SELECT e/ehr_id/value FROM EHR e",
+	"columns": [
+		{
+			"path": "e/ehr_id/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_id}"
+		]
+	]
+}
