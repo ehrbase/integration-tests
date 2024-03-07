@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-07T12:36:24.8417538+02:00",
+		"_executed_aql": "SELECT cv/commit_audit/change_type/value FROM VERSION cv[LATEST_VERSION] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.minimal.v1] WHERE cv/commit_audit/change_type/value = 'creation' ORDER BY cv/commit_audit/change_type/value DESC",
+		"resultsize": 1
+	},
+	"q": "SELECT cv/commit_audit/change_type/value FROM VERSION cv[LATEST_VERSION] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.minimal.v1] WHERE cv/commit_audit/change_type/value = 'creation' ORDER BY cv/commit_audit/change_type/value DESC",
+	"columns": [
+		{
+			"path": "cv/commit_audit/change_type/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"creation"
+		]
+	]
+}
