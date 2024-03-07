@@ -7,4 +7,4 @@ ${query_nr},${path},${where},${order_by},${expected_file},${nr_of_results}
 6.,cv/commit_audit/change_type/defining_code/preferred_term,"WHERE cv/commit_audit/change_type/defining_code/preferred_term = 'creation'",ORDER BY cv/commit_audit/change_type/defining_code/preferred_term,expected_version_observation_preferred_term.json,1
 7.,cv/commit_audit/change_type/defining_code/terminology_id/value,"WHERE cv/commit_audit/change_type/defining_code/terminology_id/value > 'open'",${EMPTY},expected_version_observation_terminology_id_value.json,4
 8.,"cv/uid/value, cv/commit_audit/description","WHERE cv/uid/value = '${compo_uid_1}'",${EMPTY},expected_version_observation_uid_value_description.json,1
-9.,"cv/commit_audit/description","WHERE cv/commit_audit/description = '<optional audit description>'",ORDER BY cv/commit_audit/description DESC,expected_version_observation_description.json,1
+9.,"cv/commit_audit/description/value","WHERE cv/commit_audit/description/value = '<optional audit description>'",ORDER BY cv/commit_audit/description/value DESC,expected_version_observation_description.json,1
