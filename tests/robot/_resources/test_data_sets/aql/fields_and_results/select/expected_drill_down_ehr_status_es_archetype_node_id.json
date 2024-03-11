@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-11T11:29:22.382612+02:00",
+		"_executed_aql": "SELECT es/archetype_node_id FROM EHR_STATUS es",
+		"resultsize": 1
+	},
+	"q": "SELECT es/archetype_node_id FROM EHR_STATUS es",
+	"columns": [
+		{
+			"path": "es/archetype_node_id",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"openEHR-EHR-EHR_STATUS.generic.v1"
+		]
+	]
+}

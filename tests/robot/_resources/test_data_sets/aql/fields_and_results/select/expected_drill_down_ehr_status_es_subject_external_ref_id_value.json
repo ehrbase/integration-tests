@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-11T14:29:07.9835465+02:00",
+		"_executed_aql": "SELECT es/subject/external_ref/id/value FROM EHR_STATUS es",
+		"resultsize": 1
+	},
+	"q": "SELECT es/subject/external_ref/id/value FROM EHR_STATUS es",
+	"columns": [
+		{
+			"path": "es/subject/external_ref/id/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_status_subject_id}"
+		]
+	]
+}

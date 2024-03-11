@@ -1,0 +1,70 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-11T11:20:58.8947494+02:00",
+		"_executed_aql": "SELECT es FROM EHR_STATUS es",
+		"resultsize": 1
+	},
+	"q": "SELECT es FROM EHR_STATUS es",
+	"columns": [
+		{
+			"path": "es",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "EHR_STATUS",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "EHR Status"
+				},
+				"subject": {
+					"_type": "PARTY_SELF",
+					"external_ref": {
+						"_type": "PARTY_REF",
+						"namespace": "${ehr_status_subject_namespace}",
+						"type": "PERSON",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "${ehr_status_subject_id}",
+							"scheme": "id_scheme"
+						}
+					}
+				},
+				"other_details": {
+					"_type": "ITEM_SINGLE",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "family group"
+					},
+					"item": {
+						"_type": "ELEMENT",
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "family group id"
+						},
+						"value": {
+							"_type": "DV_IDENTIFIER",
+							"issuer": "MoH",
+							"assigner": "MoH",
+							"id": "55175056",
+							"type": "FAMILY_GROUP_ID"
+						},
+						"archetype_node_id": "at0001"
+					},
+					"archetype_node_id": "openEHR-EHR-ITEM_TREE.fake.v1"
+				},
+				"archetype_node_id": "openEHR-EHR-EHR_STATUS.generic.v1",
+				"uid": {
+					"_type": "OBJECT_VERSION_ID",
+					"value": "${ehr_status_uid}"
+				},
+				"is_queryable": true,
+				"is_modifiable": true
+			}
+		]
+	]
+}
