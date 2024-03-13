@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-13T16:32:09.04189873Z",
+		"_executed_aql": "SELECT e/system_id/value FROM EHR e",
+		"resultsize": 1
+	},
+	"q": "SELECT e/system_id/value FROM EHR e",
+	"columns": [
+		{
+			"path": "e/system_id/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"${CREATING_SYSTEM_ID}"
+		]
+	]
+}
