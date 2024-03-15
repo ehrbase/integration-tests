@@ -26,7 +26,8 @@ Resource        ../_resources/keywords/directory_keywords.robot
 Resource        ../_resources/keywords/admin_keywords.robot
 Resource        ../_resources/keywords/ehr_keywords.robot
 
-Suite Setup       Precondition
+Suite Setup       Run Keywords      Precondition    AND
+                ...     Set Library Search Order    RCustom  R
 #Suite Teardown  restart SUT
 
 *** Variables ***
