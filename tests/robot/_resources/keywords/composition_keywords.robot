@@ -314,6 +314,11 @@ commit composition
         Set To Dictionary   ${headers}   openEHR-TEMPLATE_ID=${template}
     END
 
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary   ${headers}
+        ...     Authorization=Bearer ${multitenancy_token}
+    END
+
     IF   '${format}'=='CANONICAL_JSON'
         Create Session      ${SUT}    ${BASEURL}    debug=2
         ...                 auth=${CREDENTIALS}    verify=True
