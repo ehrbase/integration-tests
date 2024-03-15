@@ -3,7 +3,7 @@ name: Build and push mvp
 on:
   push:
     branches:
-      - 'feature/new'
+      - 'feature/CDR-1332'
 
 jobs:
   build-docker-image:
@@ -44,5 +44,5 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-mvp
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-mvp-1332
           labels: ${{ steps.meta.outputs.labels }}
