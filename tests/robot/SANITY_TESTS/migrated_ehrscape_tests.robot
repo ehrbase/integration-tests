@@ -20,6 +20,7 @@ Documentation   Migrated EHRSCAPE TESTS
 
 Resource        ../_resources/keywords/composition_keywords.robot
 Resource        ../_resources/keywords/admin_keywords.robot
+Resource        ../_resources/keywords/multitenancy_keywords.robot
 Resource        ../_resources/keywords/ehr_keywords.robot
 
 Suite Setup       Precondition
@@ -235,7 +236,12 @@ Suite Setup       Precondition
 
 *** Keywords ***
 Precondition
-	Set Library Search Order    RCustom  R
+	${variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
+    IF      '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'true'
+		Set Library Search Order    RCustom  R
+		Create Tenants Generic
+	END
     Upload OPT    all_types/family_history.opt
     Extract Template Id From OPT File
     create EHR

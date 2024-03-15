@@ -23,6 +23,7 @@ Documentation   Sanity Integration Tests
 Resource        ../_resources/keywords/composition_keywords.robot
 Resource        ../_resources/keywords/aql_query_keywords.robot
 Resource        ../_resources/keywords/directory_keywords.robot
+Resource        ../_resources/keywords/multitenancy_keywords.robot
 Resource        ../_resources/keywords/admin_keywords.robot
 Resource        ../_resources/keywords/ehr_keywords.robot
 
@@ -133,7 +134,13 @@ Main flow Sanity Tests for Canonical XML Compositions
 
 *** Keywords ***
 Precondition
-	Set Library Search Order    RCustom  R
+	${variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
+    IF      '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'true'
+		Set Library Search Order    RCustom  R
+		Create Tenants Generic
+	END
+	
     Upload OPT    all_types/family_history.opt
     Upload OPT    nested/nested.opt
     Upload OPT    minimal/minimal_observation.opt
