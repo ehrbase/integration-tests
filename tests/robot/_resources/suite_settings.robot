@@ -38,6 +38,7 @@ Library     libraries/dockerlib.py
 Library     libraries/jsonlib.py
 Library     libraries/token_decoder.py
 Library     libraries/composition_validation_lib.py
+#Library     libraries/custom_requests_lib.py    WITH NAME  RCustom
 Library     variables/get_global_configs.py
 Variables   variables/additional_configs.yml
 
