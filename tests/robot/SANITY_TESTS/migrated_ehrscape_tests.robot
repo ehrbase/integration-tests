@@ -235,6 +235,7 @@ Suite Setup       Precondition
 
 *** Keywords ***
 Precondition
+	Set Library Search Order    RCustom  R
     Upload OPT    all_types/family_history.opt
     Extract Template Id From OPT File
     create EHR

@@ -133,6 +133,7 @@ Main flow Sanity Tests for Canonical XML Compositions
 
 *** Keywords ***
 Precondition
+	Set Library Search Order    RCustom  R
     Upload OPT    all_types/family_history.opt
     Upload OPT    nested/nested.opt
     Upload OPT    minimal/minimal_observation.opt
