@@ -238,7 +238,7 @@ Suite Setup       Precondition
 Precondition
 	${variable_exists}      Run Keyword And Return Status
     ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
-    IF      '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'true'
+    IF      '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'True'
 		Set Library Search Order    RCustom  R
 		Create Tenants Generic
 	END
