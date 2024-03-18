@@ -241,6 +241,8 @@ Precondition
     IF      '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'True'
 		Set Library Search Order    RCustom  R
 		#Create Tenants Generic
+	ELSE
+		Set Library Search Order    R	RCustom
 	END
     Upload OPT    all_types/family_history.opt
     Extract Template Id From OPT File
