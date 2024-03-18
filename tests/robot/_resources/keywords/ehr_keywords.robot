@@ -94,21 +94,19 @@ create new EHR
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
     IF      '${ehrScape}' == 'False'
-        &{resp}=            REST.POST    ${baseurl}/ehr     headers=${headers}
-                            Integer      response status    201
+        ${resp}     POST On Session     ${SUT}    /ehr
+                    ...     expected_status=anything        headers=${headers}
+                    Status Should Be    201    ${resp}
+                    Set Suite Variable  ${resp}     ${resp}
 
-                            extract ehr_id from response (JSON)
-                            extract system_id from response (JSON)
+                    extract ehr_id from response (JSON)
+                    extract system_id from response (JSON)
+                    # TODO: @WLAD check Github Issue #272
+                    # extract subject_id from response (JSON)
+                    extract ehr_status from response (JSON)
+                    extract ehrstatus_uid (JSON)
 
-                            # TODO: @WLAD check Github Issue #272
-                            # extract subject_id from response (JSON)
-
-                            extract ehr_status from response (JSON)
-                            extract ehrstatus_uid (JSON)
-
-                            Set Suite Variable    ${response}    ${resp}
-
-                            Output Debug Info To Console  # NOTE: won't work with content-type=XML
+                    Set Suite Variable    ${response}    ${resp}
     ELSE
         &{prms}=            Create Dictionary   subjectId=74777-1259
                             ...                 subjectNamespace=testIssuer
@@ -118,6 +116,7 @@ create new EHR
 
         ${resp}=            POST On Session     ${SUT}   ${ECISURL}/ehr   params=&{prms}    headers=${headers}
                             Status Should Be    201
+                            Set Suite Variable  ${resp}     ${resp}
 
                             extract ehr_id from response (JSON)
                             extract system_id from response (JSON)
@@ -127,7 +126,7 @@ create new EHR
 
                             Set Suite Variable    ${response}    ${resp}
 
-                            Output Debug Info To Console  # NOTE: won't work with content-type=XML
+                            #Output Debug Info To Console  # NOTE: won't work with content-type=XML
     END
 
 Create Session For EHR With Headers For Multitenancy With Bearer Token
@@ -302,29 +301,27 @@ create new EHR with ehr_status
                         Update Value To Json    ${ehr_status_json}    $.subject.external_ref.namespace
                         ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
 
+    Create Session      ${SUT}    ${BASEURL}    debug=2
+                        ...     auth=${CREDENTIALS}    verify=False
 
-    &{resp}=            REST.POST    ${baseurl}/ehr    ${ehr_status_json}
-                        # Integer      response status    201  200
-
+    ${resp}             POST On Session     ${SUT}      /ehr    json=${ehr_status_json}
+                        ...     expected_status=anything    headers=${headers}
                         Set Suite Variable    ${response}    ${resp}
-
-                        #Output Debug Info To Console  # NOTE: won't work with content-type=XML
+                        Status Should Be    201
+                        Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
+                        Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
+                        Set Suite Variable      ${ehrstatus_uid_value}      ${resp.json()['ehr_status']['uid']['value']}
+                        Set Suite Variable      ${ehrstatus_uid}    ${ehrstatus_uid_value}
+                        Set Suite Variable      ${ehr_status_subject_external_ref_value}
+                        ...     ${resp.json()['ehr_status']['subject']['external_ref']['id']['value']}
+                        Set Suite Variable      ${subject_external_ref_value}
+                        ...     ${ehr_status_subject_external_ref_value}
+                        Set Suite Variable      ${ehr_id}       ${ehr_id_value}
 
 Create EHR With Subject External Ref
     [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
     prepare new request session     headers=JSON    Prefer=return=representation
     create new EHR with ehr_status  ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
-                        Integer     response status     201
-    ${ehr_id_obj}       Object      response body ehr_id
-    ${ehr_id_value}     String      response body ehr_id value
-    ${ehrstatus_uid_value}    String      response body ehr_status uid value
-    ${ehr_status_subject_external_ref_value}=    String    response body ehr_status subject external_ref id value
-                        Set Suite Variable    ${ehr_id_obj}    ${ehr_id_obj}
-                        # comment: ATTENTION - RESTinstance lib returns a LIST!
-                        #          The value is at index 0 in that list
-                        Set Suite Variable    ${ehr_id}    ${ehr_id_value}[0]
-                        Set Suite Variable    ${ehrstatus_uid}    ${ehrstatus_uid_value}[0]
-                        Set Suite Variable    ${subject_external_ref_value}    ${ehr_status_subject_external_ref_value}[0]
 
 create new EHR by ID
     [Arguments]         ${ehr_id}   ${ehr_status_json}=${NONE}
@@ -743,12 +740,8 @@ extract ehr_id from response (JSON)
                         Log To Console    \n\tDEBUG OUTPUT - EHR_ID: \n\t${ehr_id}
                         Return From Keyword
     ELSE
-        ${ehr_id}       String       response body ehr_id value
+        Set Suite Variable      ${ehr_id}       ${resp.json()['ehr_id']['value']}
     END
-                        Log To Console    \n\tDEBUG OUTPUT - EHR_ID: \n\t${ehr_id}[0]
-
-                        Set Suite Variable    ${ehr_id}     ${ehr_id}[0]
-                        # Set Test Variable    ${ehr_id}     ${response.body.ehr_id.value}    # same as above
 
 
 extract system_id from response (JSON)
@@ -756,16 +749,13 @@ extract system_id from response (JSON)
     ...                 DEPENDENCY: `create new EHR`
     [Arguments]     ${ehrScape}=false
     IF      '${ehrScape}' != 'false'
-        ${system_id}        Collections.Get From Dictionary     ${response.json()}      ehrId
+        ${system_id}    Collections.Get From Dictionary     ${response.json()}      ehrId
                         Set Suite Variable    ${ehr_id}     ${ehrId}
-                        Log To Console    \n\tDEBUG OUTPUT - EHR_ID: \n\t${ehr_id}
+                        #Log To Console    \n\tDEBUG OUTPUT - EHR_ID: \n\t${ehr_id}
                         Return From Keyword
     ELSE
-        ${system_id}=       String       response body system_id value
-
-                        Log To Console    \n\tDEBUG OUTPUT - SYSTEM_ID: \n\t${system_id}[0]
-
-                        Set Suite Variable    ${system_id}   ${system_id}[0]
+        Set Suite Variable      ${system_id}       ${resp.json()['system_id']['value']}
+        #Log To Console    \n\tDEBUG OUTPUT - SYSTEM_ID: \n\t${system_id}[0]
     END
 
 check that headers location response has
@@ -872,26 +862,18 @@ extract subject_id from response (JSON)
 extract ehr_status from response (JSON)
     [Documentation]     Extracts ehr_status-object from response of preceding request.
     ...                 DEPENDENCY: `create new EHR`
-
-    ${ehr_status}=      Object       response body ehr_status
-
-                        Log To Console    \n\tDEBUG OUTPUT - EHR_STATUS:
-                        Output       response body ehr_status
-
-                        Set Suite Variable    ${ehr_status}     ${ehr_status}[0]
+    Set Suite Variable      ${ehr_status}       ${resp.json()['ehr_status']}
+    #Log To Console      \n\tDEBUG OUTPUT - EHR_STATUS: \n${ehr_status}
 
 
 extract ehrstatus_uid (JSON)
     [Documentation]     Extracts uuid of ehr_status from response of preceding request.
     ...                 DEPENDENCY: `create new EHR`
 
-    ${ehrstatus_uid}=   String       response body ehr_status uid value
-
-                        Log To Console    \n\tDEBUG OUTPUT - EHR_STATUS UUID: \n\t${ehrstatus_uid}[0]
-                        Set Suite Variable    ${ehrstatus_uid}   ${ehrstatus_uid}[0]
-
-    ${short_uid}=       Remove String       ${ehrstatus_uid}    ::${CREATING_SYSTEM_ID}::1
-                        Set Suite Variable   ${versioned_status_uid}    ${short_uid}
+    Set Suite Variable      ${ehrstatus_uid}       ${resp.json()['ehr_status']['uid']['value']}
+    #Log To Console      \n\tDEBUG OUTPUT - EHR_STATUS UUID: \n${ehrstatus_uid}
+    @{ehr_status_uid}       Split String        ${ehrstatus_uid}      ::
+                            Set Suite Variable  ${versioned_status_uid}   ${ehr_status_uid}[0]
 
 
 extract ehr_id from response (XML)

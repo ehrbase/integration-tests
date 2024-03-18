@@ -23,7 +23,6 @@ Documentation   Sanity Integration Tests
 Resource        ../_resources/keywords/composition_keywords.robot
 Resource        ../_resources/keywords/aql_query_keywords.robot
 Resource        ../_resources/keywords/directory_keywords.robot
-Resource        ../_resources/keywords/multitenancy_keywords.robot
 Resource        ../_resources/keywords/admin_keywords.robot
 Resource        ../_resources/keywords/ehr_keywords.robot
 
@@ -59,12 +58,12 @@ Main flow Sanity Tests for FLAT Compositions
     #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${composition_uid_short}
     delete DIRECTORY (JSON)
-
+	Status Should Be    204
+    (admin) delete ehr
     #[Teardown]    restart SUT
 
 
 Main flow Sanity Tests for Canonical JSON Compositions
-    #create EHR
     Create EHR For Sanity Flow
     Get Web Template By Template Id (ECIS)  ${template_id}
     commit composition   format=CANONICAL_JSON
@@ -95,10 +94,10 @@ Main flow Sanity Tests for Canonical JSON Compositions
     #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
     delete DIRECTORY (JSON)
+	(admin) delete ehr
     #[Teardown]    restart SUT
 
 Main flow Sanity Tests for Canonical XML Compositions
-    #create EHR
     Create EHR For Sanity Flow
     Get Web Template By Template Id (ECIS)  ${template_id}
     commit composition   format=CANONICAL_XML
@@ -129,6 +128,7 @@ Main flow Sanity Tests for Canonical XML Compositions
     #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
     delete DIRECTORY (JSON)
+	(admin) delete ehr
     #[Teardown]    restart SUT
 
 
@@ -138,7 +138,7 @@ Precondition
     ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
     IF      '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'True'
 		Set Library Search Order    RCustom  R
-		Create Tenants Generic
+		#Create Tenants Generic
 	END
 	
     Upload OPT    all_types/family_history.opt
@@ -155,10 +155,3 @@ Set Variable With Short Compo Id And Delete Composition
 Create EHR For Sanity Flow
     [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
     create new EHR with ehr_status  ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
-                        Integer    response status    201
-    ${ehr_id_obj}=      Object    response body ehr_id
-    ${ehr_id_value}=    String    response body ehr_id value
-                        Set Suite Variable    ${ehr_id_obj}    ${ehr_id_obj}
-                        # comment: ATTENTION - RESTinstance lib returns a LIST!
-                        #          The value is at index 0 in that list
-                        Set Suite Variable    ${ehr_id}    ${ehr_id_value}[0]

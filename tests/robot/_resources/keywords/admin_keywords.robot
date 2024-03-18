@@ -93,24 +93,27 @@ Resource        template_opt1.4_keywords.robot
     IF     '${multitenancy_token}' != '${None}'
             Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
     END
-
-    &{resp}=            REST.DELETE    ${admin_baseurl}/ehr/${ehr_id}/composition/${versioned_object_uid}
-                        # Should Be Equal As Strings   ${resp.status}   204
-                        Integer    response status    204
-                        Set Test Variable    ${response}    ${resp}
-                        Output Debug Info To Console
+    Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
+                            ...     verify=False
+    ${resp}         DELETE On Session   ${SUT}  /ehr/${ehr_id}/composition/${versioned_object_uid}
+                    # Should Be Equal As Strings   ${resp.status}   204
+                    Status Should Be    204
+                    Set Test Variable    ${response}    ${resp}
 
 
 Delete Composition Using API
     IF      '${versioned_object_uid}' != '${None}'
-        &{resp}         REST.DELETE    ${admin_baseurl}/ehr/${ehr_id}/composition/${versioned_object_uid}
+        Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
+                            ...     verify=False
+        ${resp}         DELETE On Session   ${SUT}  /ehr/${ehr_id}/composition/${versioned_object_uid}
                         ${isDeleteCompositionFailed}     Run Keyword And Return Status
-                        ...     Integer    response status    204
+                        ...     Status Should Be    204
                         Set Suite Variable    ${deleteCompositionResponse}    ${resp}
-                        IF      ${isDeleteCompositionFailed} == ${FALSE} and '${deleteCompositionResponse.status}' == '404'
+                        Log     ${resp.status_code}
+                        IF      ${isDeleteCompositionFailed} == ${FALSE} and '${resp.status_code}' == '404'
                             Log     Delete Composition returned ${deleteCompositionResponse.status} code.   console=yes
                         END
-                        Output Debug Info To Console
+                        #Output Debug Info To Console
     END
 
 
