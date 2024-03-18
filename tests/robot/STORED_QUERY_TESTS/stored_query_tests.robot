@@ -20,6 +20,7 @@ Documentation       STORED QUERY TEST SUITE
 Resource            ../_resources/keywords/composition_keywords.robot
 Resource            ../_resources/keywords/ehr_keywords.robot
 Resource            ../_resources/keywords/aql_query_keywords.robot
+Suite Setup 		SuitePrecondition
 
 
 *** Variables ***
@@ -332,8 +333,13 @@ Precondition
 Create EHR With EHR Status
     [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
     create new EHR with ehr_status  ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
-                        Integer    response status    201
-    ${ehr_id_obj}=      Object    response body ehr_id
-    ${ehr_id_value}=    String    response body ehr_id value
-                        Set Suite Variable    ${ehr_id_obj}    ${ehr_id_obj}
-                        Set Suite Variable    ${ehr_id}    ${ehr_id_value}[0]
+	
+SuitePrecondition
+    ${variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
+    IF      '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'True'
+		Set Library Search Order    RCustom  R
+		#Create Tenants Generic
+	ELSE
+		Set Library Search Order    R	RCustom
+	END
