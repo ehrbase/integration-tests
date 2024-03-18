@@ -207,5 +207,5 @@ SuitePrecondition
     ELSE IF    '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'True'
         Set Library Search Order    RCustom  R
     ELSE
-        Set Library Search Order    RCustom  R
+        Set Library Search Order    R	RCustom
 	END
