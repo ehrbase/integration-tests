@@ -40,7 +40,7 @@ class custom_requests_lib(RequestsLibrary):
 
         # Check if 'Authorization' header is already present
         headers = kwargs['headers']
-        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer '):
+        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer ') or headers['Authorization'].startswith('Basic '):
             kwargs['headers']['Authorization'] = 'Bearer ' + authorization_token
         #print(kwargs['headers'])
 
@@ -55,7 +55,7 @@ class custom_requests_lib(RequestsLibrary):
 
         # Check if 'Authorization' header is already present
         headers = kwargs['headers']
-        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer '):
+        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer ') or headers['Authorization'].startswith('Basic '):
             kwargs['headers']['Authorization'] = 'Bearer ' + authorization_token
 
         return super().get_on_session(alias, url, params, expected_status, msg, **kwargs)
@@ -68,7 +68,7 @@ class custom_requests_lib(RequestsLibrary):
 
         # Check if 'Authorization' header is already present
         headers = kwargs['headers']
-        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer '):
+        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer ') or headers['Authorization'].startswith('Basic '):
             kwargs['headers']['Authorization'] = 'Bearer ' + authorization_token
 
         return super().put_on_session(alias, url, data, json, expected_status, msg, **kwargs)
@@ -81,7 +81,7 @@ class custom_requests_lib(RequestsLibrary):
 
         # Check if 'Authorization' header is already present
         headers = kwargs['headers']
-        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer '):
+        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer ') or headers['Authorization'].startswith('Basic '):
             kwargs['headers']['Authorization'] = 'Bearer ' + authorization_token
 
         return super().delete_on_session(alias, url, expected_status, msg, **kwargs)
@@ -94,7 +94,7 @@ class custom_requests_lib(RequestsLibrary):
 
         # Check if 'Authorization' header is already present
         headers = kwargs['headers']
-        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer '):
+        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer ') or headers['Authorization'].startswith('Basic '):
             kwargs['headers']['Authorization'] = 'Bearer ' + authorization_token
 
         return super().patch_on_session(alias, url, data, json, expected_status, msg, **kwargs)
@@ -107,7 +107,7 @@ class custom_requests_lib(RequestsLibrary):
 
         # Check if 'Authorization' header is already present
         headers = kwargs['headers']
-        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer '):
+        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer ') or headers['Authorization'].startswith('Basic '):
             kwargs['headers']['Authorization'] = 'Bearer ' + authorization_token
 
         return super().head_on_session(alias, url, expected_status, msg, **kwargs)
@@ -120,7 +120,7 @@ class custom_requests_lib(RequestsLibrary):
 
         # Check if 'Authorization' header is already present
         headers = kwargs['headers']
-        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer '):
+        if 'Authorization' not in headers or not headers['Authorization'].startswith('Bearer ') or headers['Authorization'].startswith('Basic '):
             kwargs['headers']['Authorization'] = 'Bearer ' + authorization_token
 
         return super().options_on_session(alias, url, expected_status, msg, **kwargs)
