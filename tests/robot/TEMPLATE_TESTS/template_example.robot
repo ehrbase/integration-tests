@@ -22,6 +22,7 @@ Documentation       Examples generator for Templates
 ...                 Documentation: To be defined
 
 Resource            ../_resources/keywords/composition_keywords.robot
+Suite Setup     	SuitePrecondition
 
 
 *** Variables ***
@@ -197,3 +198,14 @@ PerformChecksOnAnnotation
     Log     ${quitDateAnnotationValidation}         console=yes
     Log     ${overallUseAnnotationValidation}       console=yes
     Log     ${packDefinitionAnnotationValidation}   console=yes
+	
+SuitePrecondition
+    ${variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
+    IF     '${variable_exists}' == '${FALSE}'
+        Set Library Search Order    R	RCustom
+    ELSE IF    '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'True'
+        Set Library Search Order    RCustom  R
+    ELSE
+        Set Library Search Order    RCustom  R
+	END
