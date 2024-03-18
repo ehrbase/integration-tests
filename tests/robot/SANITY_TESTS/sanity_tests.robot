@@ -140,11 +140,12 @@ Precondition
 		Set Library Search Order    RCustom  R
 		#Create Tenants Generic
 	END
-	
     Upload OPT    all_types/family_history.opt
     Upload OPT    nested/nested.opt
     Upload OPT    minimal/minimal_observation.opt
     Extract Template Id From OPT File
+	Create Session      ${SUT}    ${BASEURL}    debug=2
+    ...     verify=True     #auth=${CREDENTIALS}
 
 Set Variable With Short Compo Id And Delete Composition
     [Arguments]     ${short_compo_id}
