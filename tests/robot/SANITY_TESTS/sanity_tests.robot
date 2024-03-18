@@ -58,12 +58,13 @@ Main flow Sanity Tests for FLAT Compositions
     #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${composition_uid_short}
     delete DIRECTORY (JSON)
-	Status Should Be    204
+    Status Should Be    204
     (admin) delete ehr
     #[Teardown]    restart SUT
 
 
 Main flow Sanity Tests for Canonical JSON Compositions
+    #create EHR
     Create EHR For Sanity Flow
     Get Web Template By Template Id (ECIS)  ${template_id}
     commit composition   format=CANONICAL_JSON
@@ -73,10 +74,11 @@ Main flow Sanity Tests for Canonical JSON Compositions
     check composition exists
     ${version_uid_short}    Fetch From Left     ${composition_uid}      :
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
-
+    prepare new request session    JSON    Prefer=return=representation
     commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.xml
     check content of composition (JSON)
 
+    prepare new request session    JSON    Prefer=return=representation
     update composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.v2.xml
     check content of updated composition (JSON)
 
@@ -94,10 +96,11 @@ Main flow Sanity Tests for Canonical JSON Compositions
     #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
     delete DIRECTORY (JSON)
-	(admin) delete ehr
+    (admin) delete ehr
     #[Teardown]    restart SUT
 
 Main flow Sanity Tests for Canonical XML Compositions
+    #create EHR
     Create EHR For Sanity Flow
     Get Web Template By Template Id (ECIS)  ${template_id}
     commit composition   format=CANONICAL_XML
@@ -108,10 +111,10 @@ Main flow Sanity Tests for Canonical XML Compositions
 
     ${version_uid_short}    Fetch From Left     ${composition_uid}      :
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
-
+    prepare new request session    XML    Prefer=return=representation
     commit composition (XML)    minimal/minimal_observation.composition.participations.extdatetimes.xml
     check content of composition (XML)
-
+    prepare new request session    XML    Prefer=return=representation
     update composition (XML)    minimal/minimal_observation.composition.participations.extdatetimes.v2.xml
     check content of updated composition (XML)
 
@@ -128,13 +131,13 @@ Main flow Sanity Tests for Canonical XML Compositions
     #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
     delete DIRECTORY (JSON)
-	(admin) delete ehr
+    (admin) delete ehr
     #[Teardown]    restart SUT
 
 
 *** Keywords ***
 Precondition
-	${variable_exists}      Run Keyword And Return Status
+    ${variable_exists}      Run Keyword And Return Status
     ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
     IF      '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'True'
 		Set Library Search Order    RCustom  R
@@ -144,7 +147,7 @@ Precondition
     Upload OPT    nested/nested.opt
     Upload OPT    minimal/minimal_observation.opt
     Extract Template Id From OPT File
-	Create Session      ${SUT}    ${BASEURL}    debug=2
+    Create Session      ${SUT}    ${BASEURL}    debug=2
     ...     verify=True     #auth=${CREDENTIALS}
 
 Set Variable With Short Compo Id And Delete Composition
