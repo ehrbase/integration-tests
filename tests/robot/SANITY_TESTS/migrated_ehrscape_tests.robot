@@ -245,7 +245,7 @@ Precondition
     Extract Template Id From OPT File
     create EHR
     Create Session      ${SUT}    ${BASEURL}    debug=2
-    ...     auth=${CREDENTIALS}    verify=True
+    ...     verify=True     #auth=${CREDENTIALS}
 
 Headers Checks Composition
     [Arguments]     ${compo_uid_version}=1

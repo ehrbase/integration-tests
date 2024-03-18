@@ -324,12 +324,12 @@ commit composition
 
     IF   '${format}'=='CANONICAL_JSON'
         Create Session      ${SUT}    ${BASEURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=False
+                            ...     verify=False    #auth=${CREDENTIALS}
         Set To Dictionary   ${headers}   Content-Type=application/json
         Set To Dictionary   ${headers}   Accept=application/json
     ELSE IF   '${format}'=='CANONICAL_XML'
         Create Session      ${SUT}    ${BASEURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=False
+                            ...     verify=False    #auth=${CREDENTIALS}
         Set To Dictionary   ${headers}   Content-Type=application/xml
         Set To Dictionary   ${headers}   Accept=application/xml
     ELSE IF   '${format}'=='FLAT'
@@ -348,12 +348,12 @@ commit composition
         ...     verify=False    headers=${headers}      #auth=${CREDENTIALS}
     ELSE IF   '${format}'=='TDD'
         Create Session      ${SUT}    ${BASEURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=False
+                            ...     verify=False    #auth=${CREDENTIALS}
         Set To Dictionary   ${headers}   Content-Type=application/openehr.tds2+xml
         Set To Dictionary   ${headers}   Accept=application/openehr.tds2+xml
     ELSE IF   '${format}'=='STRUCTURED'
         Create Session      ${SUT}    ${BASEURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=False
+                            ...     verify=False    #auth=${CREDENTIALS}
         Set To Dictionary   ${headers}   Content-Type=application/openehr.wt.structured+json
         Set To Dictionary   ${headers}   Accept=application/openehr.wt.structured+json
     END
@@ -801,7 +801,7 @@ get composition by composition_uid
     # because the response from the create compo has this endpoint in the Location header
     &{params}=          Create Dictionary     format=FLAT
     Create Session      ${SUT}    ${ECISURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=True
+                        ...     verify=True     #auth=${CREDENTIALS}
     ${resp}=            GET On Session         ${SUT}  composition/${uid}  params=${params}  expected_status=anything   headers=${headers}
                         log to console      ${resp.content}
                         Set Test Variable   ${response}    ${resp}
