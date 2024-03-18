@@ -839,7 +839,7 @@ Get Example Of Web Template By Template Id (ECIS)
     [Arguments]         ${template_id}      ${responseFormat}
 
     Create Session      ${SUT}    ${ECISURL}    debug=2
-    ...                 auth=${CREDENTIALS}    verify=True
+						...		verify=True		#auth=${CREDENTIALS}
     &{params}          Create Dictionary      format=${responseFormat}
     ${headers}         Create Dictionary      Accept=application/json
     ...                                       Content-Type=application/xml
@@ -860,7 +860,7 @@ Get Example Of Web Template By Template Id (OPENEHR)
     [Arguments]         ${template_id}      ${responseFormat}
 
     Create Session      ${SUT}    ${baseurl}    debug=2
-    ...                 auth=${CREDENTIALS}    verify=True
+						...		verify=True		#auth=${CREDENTIALS}
     &{params}          Create Dictionary     format=${responseFormat}
     ${headers}         Create Dictionary     Accept=application/json
     ...                                      Content-Type=application/xml
