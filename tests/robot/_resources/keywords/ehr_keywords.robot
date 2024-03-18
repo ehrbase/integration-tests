@@ -302,7 +302,7 @@ create new EHR with ehr_status
                         ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
 
     Create Session      ${SUT}    ${BASEURL}    debug=2
-                        ...     auth=${CREDENTIALS}    verify=False
+                        ...     verify=False    #auth=${CREDENTIALS}
 
     ${resp}             POST On Session     ${SUT}      /ehr    json=${ehr_status_json}
                         ...     expected_status=anything    headers=${headers}

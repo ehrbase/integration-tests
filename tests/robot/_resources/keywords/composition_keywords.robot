@@ -345,7 +345,7 @@ commit composition
         END
         &{params}       Create Dictionary     format=FLAT   ehrId=${ehr_id}     templateId=${template_id}
         Create Session      ${SUT}    ${ECISURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=False
+        ...     verify=False    headers=${headers}      #auth=${CREDENTIALS}
     ELSE IF   '${format}'=='TDD'
         Create Session      ${SUT}    ${BASEURL}    debug=2
         ...                 auth=${CREDENTIALS}    verify=False
