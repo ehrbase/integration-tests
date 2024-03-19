@@ -731,7 +731,8 @@ TRACE JIRA ISSUE
 Set Library Search Order For Tests
     [Arguments]     ${libs_order_list}=${None}
     ${default_order_list}   Create List     R   RCustom
-    ${libs_order_list}=     Set Variable If     "${libs_order_list}" is "${None}"   ${default_order_list}   ${libs_order_list}
+    ${custom_order_list}    Create List     RCustom     R
+    ${libs_order_list}=     Set Variable If     "${libs_order_list}" is "${None}"   ${default_order_list}   ${custom_order_list}
     ${variable_exists}      Run Keyword And Return Status
     ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
     IF     '${variable_exists}' == '${FALSE}'
