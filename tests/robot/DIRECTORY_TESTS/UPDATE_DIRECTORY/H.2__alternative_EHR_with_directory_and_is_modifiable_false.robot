@@ -63,7 +63,7 @@ Alternative flow: update directory from EHR with directory, second update with i
 
 *** Keywords ***
 Preconditions
-	Set Library Search Order For Tests
+    Set Library Search Order For Tests
     create EHR
     create DIRECTORY (JSON)    update/1_create_empty_directory.json
 

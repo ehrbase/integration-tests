@@ -243,9 +243,9 @@ MF-005 - Create new EHR (XML, Prefer header: representation)
     prepare new request session    XML    Prefer=return=representation
     create new EHR (XML)
     # comment: check steps
-    String    response body    pattern=<?xml version
-    String    response body    pattern=<ehr_id><value>
-    # String    response body    pattern=<ehr_status><name><value>EHR Status</value></name><uid
+    Should Contain      ${response.text}     <?xml version
+    Should Contain      ${response.text}     <ehr_id><value>
+    #Should Contain     ${response.text}    <ehr_status><name><value>EHR Status</value></name><uid
 
 
 MF-033 - Create new EHR providing an ehr_id (without Prefer header)
@@ -289,8 +289,10 @@ MF-037 - Create new EHR providing an ehr_id (XML, Prefer header: representation)
     prepare new request session    XML    Prefer=return=representation
     PUT /ehr/ehr_id
     # comment: check steps
-    String    response body    pattern=<?xml version
-    String    response body    pattern=<ehr_id><value>
+    Should Contain      ${response.text}    <?xml version
+    Should Contain      ${response.text}    <ehr_id><value>
+    #String    response body    pattern=<?xml version
+    #String    response body    pattern=<ehr_id><value>
     # String    response body    pattern=<ehr_status><name><value>EHR Status</value></name><uid
 
 

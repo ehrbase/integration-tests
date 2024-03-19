@@ -25,6 +25,7 @@ Documentation   B.1.c) Alternative flow 2: Create two EHRs for the same patient
 Metadata        TOP_TEST_SUITE    EHR_SERVICE
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
@@ -40,7 +41,7 @@ Create Same EHR Twice For The Same Patient (JSON)
 
     generate random subject_id
     create new EHR for subject_id (JSON)    ${subject_id}
-
+    Status Should Be    204
     create new EHR for subject_id (JSON)    ${subject_id}
 
     verify response
@@ -49,6 +50,6 @@ Create Same EHR Twice For The Same Patient (JSON)
 
 *** Keywords ***
 verify response
-    Integer    response status    409
+    Status Should Be    409
 
     # TODO: response should indicate a conflict with an already existing EHR with the same subject id, namespace pair.

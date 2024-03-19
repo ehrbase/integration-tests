@@ -205,16 +205,16 @@ create new EHR (XML)
     [Documentation]     Creates new EHR record with a server-generated ehr_id.
     ...                 DEPENDENCY: `prepare new request session`
 
-    &{resp}=            REST.POST    ${baseurl}/ehr
-                        Should Be Equal As Strings    ${resp.status}    201
+    ${resp}     POST On Session     ${SUT}    /ehr
+                ...     expected_status=anything        headers=${headers}
 
-                        Set Test Variable    ${response}    ${resp}
+                Status Should Be    201
 
-                        extract ehr_id from response (XML)
-                        extract system_id from response (XML)
-                        extract ehrstatus_uid (XML)
+                Set Test Variable    ${response}    ${resp}
 
-                        Output Debug Info To Console
+                extract ehr_id from response (XML)
+                extract system_id from response (XML)
+                extract ehrstatus_uid (XML)
 
 
 
@@ -330,12 +330,13 @@ create new EHR by ID
     ...                 DEPENDENCY: `prepare new request session`
 
     IF      """${ehr_status_json}""" != """${NONE}"""
-            &{resp}     REST.PUT    ${baseurl}/ehr/${ehr_id}    ${ehr_status_json}
+        ${resp}     PUT On Session      ${SUT}      /ehr/${ehr_id}      json=${ehr_status_json}
+                    ...     headers=${headers}      expected_status=anything
     ELSE
-            &{resp}     REST.PUT    ${baseurl}/ehr/${ehr_id}
+        ${resp}     PUT On Session      ${SUT}      /ehr/${ehr_id}
+                    ...     headers=${headers}      expected_status=anything
     END
     Set Suite Variable    ${response}    ${resp}
-    #Output Debug Info To Console  # NOTE: won't work with content-type=XML
 
 
 create new EHR for subject_id (JSON)
@@ -344,9 +345,9 @@ create new EHR for subject_id (JSON)
                         Update Value To Json  ${ehr_status_json}   $.subject.external_ref.id.value
                         ...                   ${subject_id}
 
-    &{resp}=            REST.POST    ${baseurl}/ehr    ${ehr_status_json}
+    ${resp}             POST On Session     ${SUT}      /ehr    json=${ehr_status_json}
+                        ...     expected_status=anything    headers=${headers}
                         Set Suite Variable    ${response}    ${resp}
-                        Output Debug Info To Console
 
 
 create new EHR with subject_id (JSON)
@@ -356,9 +357,10 @@ create new EHR with subject_id (JSON)
                         Update Value To Json  ${ehr_status_json}   $.subject.external_ref.id.value
                         ...                   ${subject_id}
 
-    &{resp}=            REST.POST    ${baseurl}/ehr    ${ehr_status_json}
-                        Set Suite Variable    ${response}    ${resp}
-                        Output Debug Info To Console
+    ${resp}             POST On Session     ${SUT}      /ehr    json=${ehr_status_json}
+                        ...     expected_status=anything    headers=${headers}
+                        Set Suite Variable    ${resp}    	${resp}
+						Set Suite Variable    ${response}	${resp}
 
                         extract ehr_id from response (JSON)
                         extract system_id from response (JSON)
@@ -385,28 +387,26 @@ create new EHR can't be modified
                         Update Value To Json  ${ehr_status_json}   $.subject.external_ref.id.value
                         ...                   ${subject_id}
 
-    &{resp}=            REST.POST    ${baseurl}/ehr    ${ehr_status_json}
-                        Set Suite Variable    ${response}    ${resp}
-                        Output Debug Info To Console
-
-                        extract ehr_id from response (JSON)
+    ${resp}     POST On Session     ${SUT}    /ehr      json=${ehr_status_json}
+                ...     expected_status=anything        headers=${headers}
+                Set Suite Variable    ${response}    ${resp}
+                extract ehr_id from response (JSON)
 
 
 check content of created EHR (JSON)
-                        Integer      response status    201
+                Status Should Be    201
+                Should Be Equal As Strings      ${response.json()['ehr_id']['value']}       ${ehr_id}
+                Should Be Equal As Strings      ${response.json()['system_id']['value']}    ${system_id}
 
-                        String    response body ehr_id value                    ${ehr_id}
-                        String    response body system_id value                 ${system_id}
+                # TODO: @WLAD check Github issue #272
+                # String    response body ehr_status subject external_ref id value    ${subject_Id}
 
-                        # TODO: @WLAD check Github issue #272
-                        # String    response body ehr_status subject external_ref id value    ${subject_Id}
+                Should Be Equal     ${response.json()['ehr_status']}      ${ehr_status}
 
-                        Object    response body ehr_status                      ${ehr_status}
-
-                        # extract ehr_id from response (JSON)
-                        # extract system_id from response (JSON)
-                        # extract subject_id from response (JSON)    # is in ehr_status
-                        # extract ehr_status from response (JSON)
+                # extract ehr_id from response (JSON)
+                # extract system_id from response (JSON)
+                # extract subject_id from response (JSON)    # is in ehr_status
+                # extract ehr_status from response (JSON)
 
 
 retrieve EHR by ehr_id
@@ -415,11 +415,9 @@ retrieve EHR by ehr_id
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
 
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}
-
-                        Output Debug Info To Console
-
-                        Integer     response status         200
+    ${resp}=            GET On Session      ${SUT}      /ehr/${ehr_id}
+                        ...         expected_status=anything        headers=${headers}
+                        Status Should Be    200
 
 Retrieve EHR By Ehr_id With Multitenant Token
     [Arguments]     ${expected_code}=200    ${multitenancy_token}=${None}
@@ -439,11 +437,9 @@ Retrieve EHR By Ehr Id (ECIS)
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
     &{headers}      Create Dictionary       Accept=application/json
-    &{resp}=            REST.GET    ${ECISURL}/ehr/${ehr_id}    headers=&{headers}
-
-                        Output Debug Info To Console
-
-                        Integer     response status         200
+    ${resp}     GET on session     ${SUT}    /ehr/${ehr_id}
+                ...     expected_status=anything        headers=${headers}
+                Status Should Be    200
 
 retrieve EHR by subject_id
     [Documentation]     Retrieves EHR with specified subject_id and namespace.
@@ -452,9 +448,12 @@ retrieve EHR by subject_id
     ...                             - `create new EHR`
     ...                             - `generate random subject_id`
 
-    &{resp}=            REST.GET    ${baseurl}/ehr?subject_id=${subject_id}&subject_namespace=patients
-                        Output     response
-                        Integer    response status    200
+    &{prms}=            Create Dictionary   subject_id=${subject_id}
+                        ...     subject_namespace=patients
+
+    ${resp}=            GET On Session      ${SUT}      /ehr    params=&{prms}
+                        ...     expected_status=anything        headers=${headers}
+                        Status Should Be    200
 
 Retrieve EHR By Subject Id And Subject Namespace (ECIS)
     [Documentation]     Retrieves EHR with specified subject_id and namespace.
@@ -471,26 +470,27 @@ Retrieve EHR By Subject Id And Subject Namespace (ECIS)
 
 check content of retrieved EHR (JSON)
 
-    Integer     response status         200
+    Status Should Be    200
 
     # NOTE: RESTInstace provides a nice way to verify results
 
     #         |<---    actual data                 --->|<--- expected data --->|
-    String    response body ehr_id value                    ${ehr_id}
-    String    response body system_id value                 ${system_id}
+    Should Be Equal As Strings      ${response.json()['ehr_id']['value']}       ${ehr_id}
+    Should Be Equal As Strings      ${response.json()['system_id']['value']}    ${system_id}
 
     # TODO: @Wlad check Github Issue #272
     # String    response body ehr_status subject external_ref id value    ${subject_Id}
 
-    Object    response body ehr_status                      ${ehr_status}
+    Should Be Equal      ${response.json()['ehr_status']}    ${ehr_status}
+    #Object    response body ehr_status                      ${ehr_status}
     # Boolean   response body ehr_status is_queryable         ${TRUE}           # is already checked
     # Boolean   response body ehr_status is_modifiable        ${TRUE}           # in ehr_status
 
 
     # It's not required to put actuals into variables and apply verification keywords
     # --- actual data ---|                                     # --- expected data ---|
-    ${actual_ehrid}=      String  response body ehr_id value   ${ehr_id}
-    ${actual_ehrstatus}=  Object  response body ehr_status     ${ehr_status}
+    ${actual_ehrid}=        Set Variable      ${response.json()['ehr_id']['value']}
+    ${actual_ehrstatus}=    Set Variable      ${response.json()['ehr_status']}
 
                         # Output    ${actual_ehrid}[0]
                         # Output    ${ehr_id}
@@ -510,17 +510,18 @@ check content of retrieved EHR (JSON)
 
 
 retrieve non-existing EHR by ehr_id
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}
-                        Output
-
-                        Integer     response status    404
+    ${resp}=            GET On Session      ${SUT}      /ehr/${ehr_id}
+                        ...         expected_status=anything        headers=${headers}
+                        Status Should Be    404
 
 
 retrieve non-existing EHR by subject_id
-    &{resp}=            REST.GET    ${baseurl}/ehr?subject_id=${subject_id}&subject_namespace=patients
-                        Output     response
+    &{prms}=            Create Dictionary   subject_id=${subject_id}
+                        ...     subject_namespace=patients
 
-                        Integer    response status    404
+    ${resp}=            GET On Session      ${SUT}      /ehr    params=&{prms}
+                        ...     expected_status=anything        headers=${headers}
+                        Status Should Be    404
 
 
 get ehr_status of EHR
@@ -534,12 +535,9 @@ get ehr_status of EHR
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/ehr_status
-                        ...         headers=${headers}
-                        # ...         headers={"If-Match": null}
+    ${resp}=            GET On Session      ${SUT}      /ehr/${ehr_id}/ehr_status
+                        ...     expected_status=anything        headers=${headers}
                         Set Test Variable    ${response}    ${resp}
-
-                        # Output Debug Info To Console
 
 
 # get ehr_status of EHR with version at time
@@ -562,16 +560,12 @@ get ehr_status of fake EHR
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
-
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/ehr_status
-                        ...         headers={"Content-Type": "application/json"}
-                        # ...         headers={"If-Match": null}
+    Set To Dictionary       ${headers}      Content-Type=application/json
+    ${resp}=            GET On Session      ${SUT}      /ehr/${ehr_id}/ehr_status
+                        ...     expected_status=anything        headers=${headers}
                         Set Test Variable    ${response}    ${resp}
 
-                        Output Debug Info To Console
-
-                        Integer    response status    404
-                        # String    response body error    EHR with this ID not found
+                        Status Should Be    404
 
 
 get versioned ehr_status of EHR
@@ -593,8 +587,8 @@ get versioned ehr_status of EHR
         Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
     END
 
-    &{resp}         REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status
-                    ...         headers=${headers}
+    ${resp}=        GET On Session      ${SUT}      /ehr/${ehr_id}/versioned_ehr_status
+                    ...     expected_status=anything        headers=${headers}
                     Set Test Variable    ${response}    ${resp}
 
 
@@ -617,8 +611,8 @@ get revision history of versioned ehr_status of EHR
         Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
     END
 
-    &{resp}         REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status/revision_history
-                    ...         headers=${headers}
+    ${resp}=        GET On Session      ${SUT}      /ehr/${ehr_id}/versioned_ehr_status/revision_history
+                    ...     expected_status=anything        headers=${headers}
                     Set Test Variable    ${response}    ${resp}
 
 
@@ -638,10 +632,10 @@ get versioned ehr_status of EHR by time
 
 # internal only, do not call from outside. use "get versioned ehr_status of EHR by time" instead
 internal get versioned ehr_status of EHR by time with query
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status/version    ${query}
-                        ...         headers={"Content-Type": "application/json"}
-                        # ...         headers={"If-Match": null}
-                        Set Test Variable    ${response}    ${resp}
+    Set To Dictionary       ${headers}      Content-Type=application/json
+    ${resp}=        GET On Session      ${SUT}      /ehr/${ehr_id}/versioned_ehr_status/version     json=${query}
+                    ...     expected_status=anything        headers=${headers}
+                    Set Test Variable    ${response}    ${resp}
 
 
 # internal only, do not call from outside. use "get versioned ehr_status of EHR by time" instead
@@ -658,8 +652,8 @@ internal get versioned ehr_status of EHR by time without query
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
     END
-    &{resp}         REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status/version
-                    ...         headers=${headers}
+    ${resp}=        GET On Session      ${SUT}      /ehr/${ehr_id}/versioned_ehr_status/version
+                    ...     expected_status=anything        headers=${headers}
                     Set Test Variable    ${response}    ${resp}
 
 
@@ -670,21 +664,22 @@ get versioned ehr_status of EHR by version uid
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
     ...                 Input: `version_uid` variable needs to be set
-
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_ehr_status/version/${version_uid}
-                        ...         headers={"Content-Type": "application/json"}
-                        # ...         headers={"If-Match": null}
-                        Set Test Variable    ${response}    ${resp}
+    Set To Dictionary   ${headers}      Content-Type=application/json
+    ${resp}=        GET On Session      ${SUT}      /ehr/${ehr_id}/versioned_ehr_status/version/${version_uid}
+                    ...     expected_status=anything        headers=${headers}
+                    Set Test Variable    ${response}    ${resp}
 
 Update EHR Status (ECIS)
     [Documentation]     Sets status of EHR with given `ehr_id` (ECIS endpoint).
     [Arguments]     ${ehr_id}       ${ehr_status_body}
-    &{resp}         REST.PUT        ${ECISURL}/ehr/${ehr_id}/status    body=${ehr_status_body}
-                    ...     headers={"Content-Type": "application/json"}
-                    ...     headers={"Accept": "application/json"}
-                    Should Be Equal As Strings     ${resp.status}   200
+    Set To Dictionary   ${headers}      Content-Type=application/json   Accept=application/json
+    ${resp}=        PUT On Session      ${SUT}      /ehr/${ehr_id}/status       json=${ehr_status_body}
+                    ...     expected_status=anything        headers=${headers}
+#    &{resp}         REST.PUT        ${ECISURL}/ehr/${ehr_id}/status    body=${ehr_status_body}
+#                    ...     headers={"Content-Type": "application/json"}
+#                    ...     headers={"Accept": "application/json"}
+                    Status Should Be    200
                     Set Test Variable       ${response}     ${resp}
-                    Output Debug Info To Console
 
 set ehr_status of EHR
     [Documentation]     Sets status of EHR with given `ehr_id`.
@@ -704,31 +699,29 @@ set ehr_status of EHR
                     Status Should Be    200
 
 update ehr_status of fake EHR (w/o body)
-
-    &{resp}=            REST.PUT    ${baseurl}/ehr/${ehr_id}/ehr_status
-                    ...         headers={"Content-Type": "application/json"}
-                    ...         headers={"Prefer": "return=representation"}
-                    ...         headers={"If-Match": "${ehr_id}"}               # TODO: spec --> "If-Match: {preceding_version_uid}"
+    Set To Dictionary       ${headers}       Content-Type=application/json   Prefer=return=representation
+                            ...        If-Match=${ehr_id}
+    ${resp}         PUT On Session     ${SUT}    /ehr/${ehr_id}/ehr_status
+                    ...     headers=${headers}      expected_status=anything
+                    # TODO: spec --> "If-Match: {preceding_version_uid}"
                     Set Test Variable    ${response}    ${resp}                 #       update If-Match value asap
 
-                    Output Debug Info To Console
-                    Integer    response status    404
-                    String    response body error    EHR with this ID not found
+                    Status Should Be    404
+                    Should Be Equal As Strings      ${response.json()["error"]}     EHR with this ID not found
 
 
 update ehr_status of fake EHR (with body)
 
-                        generate fake ehr_status
+    generate fake ehr_status
+    Set To Dictionary       ${headers}       Content-Type=application/json   Prefer=return=representation
+                            ...        If-Match=${ehr_id}
+    ${resp}         PUT On Session     ${SUT}    /ehr/${ehr_id}/ehr_status      json=${ehr_status}
+                    ...     headers=${headers}      expected_status=anything
+                    # NOTE: spec --> "If-Match: {preceding_version_uid}"
+                    Set Test Variable    ${response}    ${resp}
 
-    &{resp}=            REST.PUT    ${baseurl}/ehr/${ehr_id}/ehr_status    ${ehr_status}
-                        ...         headers={"Content-Type": "application/json"}
-                        ...         headers={"Prefer": "return=representation"}
-                        ...         headers={"If-Match": "${ehr_id}"}           # NOTE: spec --> "If-Match: {preceding_version_uid}"
-                        Set Test Variable    ${response}    ${resp}             #       update If-Match value asap
-
-                        Output Debug Info To Console
-                        Integer    response status    404
-                        # String    response body error    EHR with this ID not found
+                    Status Should Be    404
+                    # String    response body error    EHR with this ID not found
 
 
 extract ehr_id from response (JSON)
@@ -881,7 +874,7 @@ extract ehr_id from response (XML)
     [Documentation]     Extracts `ehr_id` from response of preceding request with content-type=xml
     ...                 DEPENDENCY: `create new EHR`
 
-    ${xml}=             Parse Xml    ${response.body}
+    ${xml}=             Parse Xml    ${response.content}
     ${ehr_id}=          Get Element Text    ${xml}    xpath=ehr_id/value
                         Set Test Variable   ${ehr_id}       ${ehr_id}
 
@@ -890,7 +883,7 @@ extract ehrstatus_uid (XML)
     [Documentation]     Extracts uuid of ehr_status from response of preceding request with content-type=xml
     ...                 DEPENDENCY: `create new EHR`
 
-    ${xml}=             Parse Xml    ${response.body}
+    ${xml}=             Parse Xml    ${response.content}
     ${ehrstatus_uid}=   Get Element Text    ${xml}    xpath=ehr_status/uid/value
                         Set Test Variable   ${ehrstatus_uid}    ${ehrstatus_uid}
 
@@ -898,7 +891,7 @@ extract system_id from response (XML)
     [Documentation]     Extracts `system_id` from response of preceding request with content-type=xml
     ...                 DEPENDENCY: `create new EHR`
 
-    ${xml}=             Parse Xml    ${response.body}
+    ${xml}=             Parse Xml    ${response.content}
     ${system_id}=       Get Element Text    ${xml}    xpath=system_id/value
                         Set Test Variable   ${system_id}    ${system_id}
 
@@ -1029,13 +1022,13 @@ create new EHR with subject_id and default subject id value (JSON)
 
     ${ehr_status_json}  Load JSON From File   ${VALID EHR DATA SETS}/0000_ehr_status_hardcoded_subject_id_value.json
 
-    &{resp}             REST.POST    ${baseurl}/ehr    ${ehr_status_json}
-                        Set Suite Variable    ${response}    ${resp}
-                        Output Debug Info To Console
+    ${resp}     POST On Session     ${SUT}    /ehr      json=${ehr_status_json}
+                ...     expected_status=anything        headers=${headers}
+                Set Suite Variable    ${response}    ${resp}
 
-                        extract ehr_id from response (JSON)
-                        extract system_id from response (JSON)
-                        extract ehr_status from response (JSON)
+                extract ehr_id from response (JSON)
+                extract system_id from response (JSON)
+                extract ehr_status from response (JSON)
 
 
 # Output Debug Info To Console

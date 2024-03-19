@@ -117,10 +117,8 @@ DS-10 - has path with special characters
     validate GET-@version response - 200 retrieved    foldername-w-special-chars
 
 
-
-
-*** Keywords ****
+*** keywords ***
 Establish Preconditions
-	Set Library Search Order For Tests
+    Set Library Search Order For Tests
     create EHR
     create DIRECTORY (JSON)    subfolders_in_directory.json
