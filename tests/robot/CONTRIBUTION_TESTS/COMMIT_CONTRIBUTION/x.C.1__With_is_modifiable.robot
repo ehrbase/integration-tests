@@ -40,6 +40,7 @@ Metadata        TOP_TEST_SUITE    CONTRIBUTION
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/contribution_keywords.robot
 Resource        ../../_resources/keywords/generic_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
