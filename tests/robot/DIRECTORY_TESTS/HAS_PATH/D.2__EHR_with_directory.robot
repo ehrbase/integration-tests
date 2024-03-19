@@ -67,5 +67,6 @@ Alternative flow 1: has path on EHR with just root directory (DS 2)
 
 *** Keywords ***
 Establish Preconditions
+	Set Library Search Order For Tests
     create EHR
     create DIRECTORY (JSON)    empty_directory.json

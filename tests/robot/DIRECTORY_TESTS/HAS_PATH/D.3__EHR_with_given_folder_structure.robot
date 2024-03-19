@@ -121,5 +121,6 @@ DS-10 - has path with special characters
 
 *** Keywords ****
 Establish Preconditions
+	Set Library Search Order For Tests
     create EHR
     create DIRECTORY (JSON)    subfolders_in_directory.json

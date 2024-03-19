@@ -32,6 +32,7 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
