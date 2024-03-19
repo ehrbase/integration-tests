@@ -25,7 +25,7 @@ Resource            ../_resources/keywords/composition_keywords.robot
 Resource            ../_resources/keywords/ehr_keywords.robot
 Resource            ../_resources/keywords/aql_query_keywords.robot
 
-#Suite Setup         restart SUT
+Suite Setup         SuitePrecondition
 #Suite Teardown      restart SUT
 
 
@@ -73,3 +73,16 @@ Get EHR And Update EHR Status
     Should Be Equal             ${response["body"]["ehrStatus"]["queryable"]}           ${True}
     Should Be Equal As Strings  ${response["body"]["ehrStatus"]["subjectId"]}           74777-1258
     Should Be Equal As Strings  ${response["body"]["ehrStatus"]["subjectNamespace"]}    testIssuerModified
+	
+	
+*** Keywords ***
+SuitePrecondition
+    ${variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
+    IF     '${variable_exists}' == '${FALSE}'
+        Set Library Search Order    R	RCustom
+    ELSE IF    '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'True'
+        Set Library Search Order    RCustom  R
+    ELSE
+        Set Library Search Order    R   RCustom
+	END

@@ -23,6 +23,7 @@ Documentation       EHRScape Tests
 Resource            ../_resources/keywords/composition_keywords.robot
 Resource            ../_resources/keywords/aql_query_keywords.robot
 
+Suite Setup         SuitePrecondition
 #Suite Teardown      restart SUT
 
 
@@ -130,3 +131,14 @@ Create Composition With Period Having Fractional Unit
 Create Template
     [Arguments]    ${fileLocation}
     Upload OPT ECIS    ${fileLocation}
+	
+SuitePrecondition
+    ${variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
+    IF     '${variable_exists}' == '${FALSE}'
+        Set Library Search Order    R	RCustom
+    ELSE IF    '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'True'
+        Set Library Search Order    RCustom  R
+    ELSE
+        Set Library Search Order    R   RCustom
+	END
