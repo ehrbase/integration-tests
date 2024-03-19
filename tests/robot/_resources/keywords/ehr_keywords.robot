@@ -697,10 +697,10 @@ set ehr_status of EHR
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary      ${headers}       Authorization=Bearer ${multitenancy_token}
     END
-    &{resp}         REST.PUT    ${baseurl}/ehr/${ehr_id}/ehr_status    ${ehr_status}
-                    ...         headers=${headers}
+    ${resp}         PUT On Session     ${SUT}    /ehr/${ehr_id}/ehr_status    json=${ehr_status}
+                    ...     headers=${headers}      expected_status=anything
                     Set Test Variable    ${response}    ${resp}
-                    Integer    response status    200
+                    Status Should Be    200
 
 update ehr_status of fake EHR (w/o body)
 
