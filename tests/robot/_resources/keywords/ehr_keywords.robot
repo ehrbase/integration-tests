@@ -196,9 +196,10 @@ create supernew ehr
     [Documentation]     Creates new EHR record with a server-generated ehr_id.
     ...                 DEPENDENCY: `prepare new request session`
 
-    &{resp}=            REST.POST    ${baseurl}/ehr
+    ${resp}             POST On Session     ${SUT}      /ehr
+                        ...     expected_status=anything    headers=${headers}
                         Set Test Variable    ${response}    ${resp}
-                        Output Debug Info To Console
+                        #Output Debug Info To Console
 
 
 create new EHR (XML)
