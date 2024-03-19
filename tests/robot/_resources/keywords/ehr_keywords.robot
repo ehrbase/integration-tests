@@ -239,8 +239,9 @@ validate POST response - 201 created ehr
     [Documentation]     CASE: new ehr was created.
     ...                 Request was send with `Prefer=return=representation`.
 
-    Integer             response status    201
-    Object              response body
+    Status Should Be    201
+    Log     ${response.json()}
+    #Object              response body
 
 
 validate POST response - 204 no content
@@ -248,8 +249,8 @@ validate POST response - 204 no content
     ...                 Request was send w/o `Prefer=return` header or with
     ...                 `Prefer=return=minimal`. Body has to be empty.
 
-    Integer             response status    204
-    String              response body    ${EMPTY}
+    Status Should Be    204
+    Should Be Equal As Strings     ${response.content}     ${EMPTY}
 
 
 # PUT PUT PUT PUT PUT
@@ -260,8 +261,8 @@ validate PUT response - 204 no content
     ...                 Request was send w/o `Prefer=return` header or with
     ...                 `Prefer=return=minimal`. Body has to be empty.
 
-    Integer             response status    204
-    String              response body    ${EMPTY}
+    Status Should Be    204
+    Should Be Equal As Strings     ${response.content}     ${EMPTY}
 
 
 
