@@ -137,15 +137,7 @@ Main flow Sanity Tests for Canonical XML Compositions
 
 *** Keywords ***
 Precondition
-    ${variable_exists}      Run Keyword And Return Status
-    ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
-    IF     '${variable_exists}' == '${FALSE}'
-        Set Library Search Order    R	RCustom
-    ELSE IF    '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'True'
-        Set Library Search Order    RCustom  R
-    ELSE
-        Set Library Search Order    R   RCustom
-	END
+    Set Library Search Order For Tests
     Upload OPT    all_types/family_history.opt
     Upload OPT    nested/nested.opt
     Upload OPT    minimal/minimal_observation.opt
