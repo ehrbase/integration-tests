@@ -21,6 +21,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 Force Tags
 
@@ -37,8 +38,9 @@ Main flow delete event COMPOSITION
     check content of composition (XML)
 
     delete composition    ${preceding_version_uid}
-
-    ${short_compo_id}       Remove String       ${del_version_uid}      ::${CREATING_SYSTEM_ID}::1
+    @{split_compo_uid}      Split String        ${del_version_uid}      ::
+    Set Suite Variable      ${system_id_with_tenant}    ${split_compo_uid}[1]
+    ${short_compo_id}       Remove String       ${del_version_uid}      ::${system_id_with_tenant}::1
     Set Test Variable       ${del_version_uid}      ${short_compo_id}
 
     get deleted composition

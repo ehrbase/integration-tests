@@ -25,6 +25,7 @@ Metadata    Created    2021.01.26
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
@@ -40,13 +41,13 @@ Force Tags      COMPOSITION_get_versioned
     create EHR and commit a composition for versioned composition tests
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
-    ${length} =    Get Length    ${response.body} 	
+    Status Should Be    200
+    ${length} =    Get Length    ${response.json()}
     Should Be Equal As Integers 	${length} 	1
 
-    ${item1} =    Get From List    ${response.body}    0
-    Should Be Equal As Strings    ${version_uid}    ${item1.version_id.value}
-    Should Contain Any     ${item1.audits[0].time_committed.value}      +   -   Z   timezone not present in timestamp
+    ${item1} =    Get From List    ${response.json()}    0
+    Should Be Equal As Strings    ${version_uid}    ${item1['version_id']['value']}
+    Should Contain Any     ${item1['audits'][0]['time_committed']['value']}      +   -   Z   timezone not present in timestamp
 
 
 2. Get Revision History Of Versioned Composition Of Existing EHR With Two Composition Versions (JSON)
@@ -60,15 +61,15 @@ Force Tags      COMPOSITION_get_versioned
     update a composition for versioned composition tests
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
-    ${length} =    Get Length    ${response.body} 	
+    Status Should Be    200
+    ${length} =    Get Length    ${response.json()}
     Should Be Equal As Integers 	${length} 	2
 
-    ${item1} =    Get From List    ${response.body}    0
-    Should Be Equal As Strings    ${version_uid[0:-1]}2    ${item1.version_id.value}
+    ${item1} =    Get From List    ${response.json()}    0
+    Should Be Equal As Strings    ${version_uid[0:-1]}2    ${item1['version_id']['value']}
 
-    ${item2} =    Get From List    ${response.body}    1
-    Should Be Equal As Strings    ${version_uid[0:-1]}1    ${item2.version_id.value}
+    ${item2} =    Get From List    ${response.json()}    1
+    Should Be Equal As Strings    ${version_uid[0:-1]}1    ${item2['version_id']['value']}
     [Teardown]      TRACE JIRA ISSUE    CDR-413
 
 
@@ -82,25 +83,25 @@ Force Tags      COMPOSITION_get_versioned
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
     Status Should Be    200
-    ${length} =    Get Length    ${response.body} 	
+    ${length} =    Get Length    ${response.json()}
     Should Be Equal As Integers 	${length} 	2
 
     # comment: Attention: the following code is depending on the order of the array!
-    ${item1} =    Get From List    ${response.body}    0
-    Should Be Equal As Strings    ${version_uid[0:-1]}2    ${item1.version_id.value}
+    ${item1} =    Get From List    ${response.json()}    0
+    Should Be Equal As Strings    ${version_uid[0:-1]}2    ${item1['version_id']['value']}
     # comment: check if change type is "creation"
-    ${audit1} =    Get From List    ${item1.audits}    0
-    Should Be Equal As Strings    creation    ${audit1.change_type.value}
+    ${audit1} =    Get From List    ${item1['audits']}    0
+    Should Be Equal As Strings    creation    ${audit1['change_type']['value']}
     # comment: save timestamp to compare later
-    ${timestamp1} = 	Convert Date    ${audit1.time_committed.value}    result_format=%Y-%m-%dT%H:%M:%S.%f
+    ${timestamp1} = 	Convert Date    ${audit1['time_committed']['value']}    result_format=%Y-%m-%dT%H:%M:%S.%f
 
-    ${item2} =    Get From List    ${response.body}    1
-    Should Be Equal As Strings    ${version_uid[0:-1]}1    ${item2.version_id.value}
+    ${item2} =    Get From List    ${response.json()}    1
+    Should Be Equal As Strings    ${version_uid[0:-1]}1    ${item2['version_id']['value']}
     # comment: check if change type is "modification"
-    ${audit2} =    Get From List    ${item2.audits}    0
-    Should Be Equal As Strings    modification    ${audit2.change_type.value}
+    ${audit2} =    Get From List    ${item2['audits']}    0
+    Should Be Equal As Strings    modification    ${audit2['change_type']['value']}
     # comment: save timestamp2, too.
-    ${timestamp2} = 	Convert Date    ${audit2.time_committed.value}    result_format=%Y-%m-%dT%H:%M:%S.%f
+    ${timestamp2} = 	Convert Date    ${audit2['time_committed']['value']}    result_format=%Y-%m-%dT%H:%M:%S.%f
 
 
     # comment: check if this one is newer/bigger/higher than the creation timestamp.
@@ -118,7 +119,7 @@ Force Tags      COMPOSITION_get_versioned
     create fake EHR
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
 
 
 5. Get Revision History of Versioned Composition Of Non-Existing Composition (JSON)
@@ -128,7 +129,7 @@ Force Tags      COMPOSITION_get_versioned
     create fake composition
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
 
 6. Get Revision History Time Committed Value With Timezone Indicator
     [Documentation]     Test timezone indicator to be present in timestamp.
@@ -141,12 +142,12 @@ Force Tags      COMPOSITION_get_versioned
     ...         - 2022-11-21T16:01:25.952Z
     prepare new request session    JSON    Prefer=return=representation
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     Upload OPT    minimal/minimal_observation.opt
     commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes_no_time_zone.xml
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
-    Should Be Equal As Strings      ${response.status}      200
-    ${item1}    Get From List       ${response.body}        0
-    Should Contain Any     ${item1.audits[0].time_committed.value}      +   -   Z   timezone not present in timestamp
+    Status Should Be    200
+    ${item1}    Get From List       ${response.json()}        0
+    Should Contain Any     ${item1['audits'][0]['time_committed']['value']}      +   -   Z   timezone not present in timestamp

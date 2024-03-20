@@ -91,6 +91,7 @@ Create and compare content of flat compositions
     Compare content of compositions with the Original (FLAT)  ${COMPO DATA SETS}/FLAT/${flat_composition_file_name}
 
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    nested/nested.opt
     Upload OPT    all_types/ehrn_vital_signs.v2.opt
     Upload OPT    minimal/minimal_action.opt

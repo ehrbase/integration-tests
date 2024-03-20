@@ -58,11 +58,11 @@ Alternative flow create COMPOSITION After Delete And Upload Template
     Upload OPT      ${template_file}
     create EHR
     (admin) delete OPT
-    Should Be Equal As Strings      ${response.status}      ${200}
+    Status Should Be    200
     Upload OPT      ${template_file}
     commit composition   format=CANONICAL_JSON
     ...                  composition=nested.en.tmp.v1__full_without_links.json
-    Should Be Equal As Strings      ${response.status_code}      ${201}
+    Status Should Be    201
     [Teardown]      (admin) delete OPT
 
 # Main flow create new event COMPOSITION TDD

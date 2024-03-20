@@ -65,6 +65,7 @@ Alternative flow 3 create new invalid event COMPOSITION FLAT - DV Duration Near 
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT      nested/nested.opt
     Upload OPT      all_types/dv_duration_max.opt
     create EHR

@@ -37,5 +37,6 @@ Main flow create new event COMPOSITION FLAT
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    all_types/ehrn_vital_signs.v2.opt
     create EHR

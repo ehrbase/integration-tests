@@ -65,6 +65,7 @@ Create Composition With DV_DATE Combinations - Negative
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    all_types/Test_all_types_v2.opt
     create EHR
 

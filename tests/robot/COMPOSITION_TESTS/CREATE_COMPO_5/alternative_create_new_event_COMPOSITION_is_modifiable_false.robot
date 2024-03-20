@@ -49,5 +49,6 @@ Main flow create new event COMPOSITION FLAT
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    nested/nested.opt
     create EHR

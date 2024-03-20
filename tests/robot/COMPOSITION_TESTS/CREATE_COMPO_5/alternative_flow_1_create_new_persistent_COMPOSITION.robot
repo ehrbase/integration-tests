@@ -58,5 +58,6 @@ Alternative flow 1 create new persistent COMPOSITION FLAT
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    minimal_persistent/persistent_minimal.opt
     create EHR
