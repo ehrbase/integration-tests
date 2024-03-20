@@ -164,7 +164,9 @@ CommitCompositionTemplate
     ...     Should Be Equal As Strings      ${response.status_code}     ${expectedCode}
     ${isUidPresent}     Run Keyword And Return Status   Set Test Variable   ${version_uid}    ${response.json()['uid']['value']}
     IF      ${isUidPresent} == ${TRUE}
-        ${short_uid}        Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
+        @{split_compo_uid}      Split String        ${version_uid}      ::
+        Set Suite Variable      ${system_id_with_tenant}    ${split_compo_uid}[1]
+        ${short_uid}        Remove String       ${version_uid}    ::${system_id_with_tenant}::1
                             Set Suite Variable   ${versioned_object_uid}    ${short_uid}
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}

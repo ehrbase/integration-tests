@@ -85,6 +85,7 @@ Alternative flow 6 create new persistent COMPOSITION EHR doesnt exist FLAT
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    nested/nested.opt
     Upload OPT    minimal_persistent/persistent_minimal.opt
     create fake EHR

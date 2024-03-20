@@ -94,6 +94,7 @@ Create new event COMPOSITION FLAT with 24 Hours Average - -24 value
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    all_types/opt_24h_average.opt
     create EHR
 
