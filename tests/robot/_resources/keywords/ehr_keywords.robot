@@ -64,13 +64,14 @@ update EHR: set ehr-status modifiable
 
 
 check response of 'update EHR' (JSON)
-                        Integer     response status    200
-                        String    response body uid value    ${ehrstatus_uid[0:-1]}2
+    Status Should Be    200
+    ${ehrstatus_uid}    Set Variable    ${response.json()['uid']['value']}
+    @{split_ehrstatus_uid}      Split String    ${ehrstatus_uid}    ::
+    Should Be Equal     ${split_ehrstatus_uid}[2]   2
 
-                        # TODO: @WLAD check Github Issue #272
-                        # String    response body subject external_ref id value    ${subject_Id}
-
-                        String    response body _type    EHR_STATUS
+    # TODO: @WLAD check Github Issue #272
+    # String    response body subject external_ref id value    ${subject_Id}
+    Should Be Equal As Strings      ${response.json()['_type']}     EHR_STATUS
 
 
 # 2) HTTP Methods
@@ -633,8 +634,9 @@ get versioned ehr_status of EHR by time
 
 # internal only, do not call from outside. use "get versioned ehr_status of EHR by time" instead
 internal get versioned ehr_status of EHR by time with query
+    #&{prms}       Create Dictionary   version_at_time=${query}
     Set To Dictionary       ${headers}      Content-Type=application/json
-    ${resp}=        GET On Session      ${SUT}      /ehr/${ehr_id}/versioned_ehr_status/version     json=${query}
+    ${resp}=        GET On Session      ${SUT}      /ehr/${ehr_id}/versioned_ehr_status/version     params=${query}
                     ...     expected_status=anything        headers=${headers}
                     Set Test Variable    ${response}    ${resp}
 

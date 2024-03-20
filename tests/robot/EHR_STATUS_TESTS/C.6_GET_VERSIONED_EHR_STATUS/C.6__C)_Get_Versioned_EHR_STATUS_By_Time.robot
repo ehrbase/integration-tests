@@ -26,6 +26,7 @@ Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
 Resource        ../../_resources/keywords/aql_query_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
@@ -41,11 +42,11 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201	
+    Status Should Be    201
 
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${ehrstatus_uid}    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${ehrstatus_uid}    ${response.json()['uid']['value']}
 
 
 2. Get Versioned Status Of Existing EHR by Time With Query (JSON)
@@ -54,15 +55,15 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     # comment: set the query parameter to current data and format as openEHR REST spec conformant timestamp
     ${date} = 	Get Current Date    result_format=%Y-%m-%dT%H:%M:%S.%f
     Set Test Variable 	&{query} 	version_at_time=${date}     # set query as dictionary
 
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${ehrstatus_uid}    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${ehrstatus_uid}    ${response.json()['uid']['value']}
 
 
 3. Get Versioned Status Of Existing EHR by Time With Query (JSON)
@@ -71,7 +72,7 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
     # comment: save orginal version uid
     ${original_id} =  Set Variable  ${ehrstatus_uid}
 
@@ -84,8 +85,8 @@ Force Tags
     # comment: 1. check if latest version gets returned without parameter
     Log    GET VERSIONED EHR_STATUS (LATEST)
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${ehrstatus_uid[0:-1]}2    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${ehrstatus_uid[0:-1]}2    ${response.json()['uid']['value']}
 
     # comment: 2. check if current time returns latest version too
     Log    GET VERSIONED EHR_STATUS (LATEST - BY CURRENT TIME)
@@ -93,15 +94,15 @@ Force Tags
     ${current_time} =    Get Current Date    result_format=%Y-%m-%dT%H:%M:%S.%f
     Set Test Variable 	&{query} 	version_at_time=${current_time}     # set query as dictionary
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${ehrstatus_uid[0:-1]}2    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${ehrstatus_uid[0:-1]}2    ${response.json()['uid']['value']}
 
     # comment: 3. check if original timestamp returns original version
     Log    GET VERSIONED EHR_STATUS (ORIGINAL - BY CREATION TIME)
     Set Test Variable 	&{query} 	version_at_time=${time_after_ehr_creation}     # set query as dictionary
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${ehrstatus_uid[0:-1]}1    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${ehrstatus_uid[0:-1]}1    ${response.json()['uid']['value']}
 
 
 4. Get Versioned Status Of Existing EHR by Time Check Lifecycle State (JSON)
@@ -110,12 +111,12 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${ehrstatus_uid}    ${response.body.uid.value}
-    Should Be Equal As Strings    complete   ${response.body.lifecycle_state.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${ehrstatus_uid}    ${response.json()['uid']['value']}
+    Should Be Equal As Strings    complete   ${response.json()['lifecycle_state']['value']}
 
 
 5a. Get Versioned Status Of Existing EHR by Time Check Preceding Version (JSON)
@@ -124,14 +125,14 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
     
     get versioned ehr_status of EHR by time
     log     ${response}
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${ehrstatus_uid}    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${ehrstatus_uid}    ${response.json()['uid']['value']}
     Run Keyword And Return Status   Should Not Contain
-    ...     ${response.body}    ${response.body.preceding_version_uid}
+    ...     ${response.body}    ${response.json()['preceding_version_uid']}
 
 
 5b. Get Versioned Status Of Existing EHR by Time Check Preceding Version (JSON)
@@ -140,7 +141,7 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
     # comment: save orginal version uid
     Set Test Variable  ${original_id}  ${ehrstatus_uid}
 
@@ -148,8 +149,8 @@ Force Tags
     check response of 'update EHR' (JSON)
 
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${original_id}    ${response.body.preceding_version_uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${original_id}    ${response.json()['preceding_version_uid']['value']}
 
 
 6. Get Versioned Status Of Existing EHR by Time Check Data (JSON)
@@ -158,14 +159,14 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     update EHR: set ehr_status is_queryable    ${FALSE}
     check response of 'update EHR' (JSON)
 
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    false    ${response.body.data.is_queryable}  ignore_case=True
+    Status Should Be    200
+    Should Be Equal As Strings    false    ${response.json()['data']['is_queryable']}   ignore_case=True
 
 
 7a. Get Versioned Status Of Existing EHR by Time With Parameter Check (JSON)
@@ -174,14 +175,14 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     # comment: set the query parameter to current data in openEHR REST spec conformant timestamp
     ${date} = 	Get Current Date    result_format=%Y-%m-%dT%H:%M:%S.%f
     Set Test Variable 	&{query} 	version_at_time=${date}     # set query as dictionary
 
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    200
+    Status Should Be    200
 
 
 7b. Get Versioned Status Of Existing EHR With Invalid Timestamp As Parameter (JSON)
@@ -190,14 +191,14 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     # comment: generate a timestamp which is considered invalid by openEHR REST Spec
     ${date} = 	Get Current Date
     Set Test Variable 	&{query} 	version_at_time=${date}     # set query as dictionary
 
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    400
+    Status Should Be    400
 
 
 7c. Get Versioned Status Of Non-Existent EHR by Time With Parameter Check (JSON)
@@ -206,10 +207,10 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create fake EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    400
 
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
 
 
 7d. Get Versioned Status Of Existing EHR by Timestamp From The Past As Parameter (JSON)
@@ -218,14 +219,14 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     # comment: valid timestamp format, but points to time in the past
     ${date} = 	Get Current Date    increment=-7 days    result_format=%Y-%m-%dT%H:%M:%S.%f
     Set Test Variable 	&{query} 	version_at_time=${date}     # set query as dictionary
 
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
 
 
 7e. Get Versioned Status Of Existing EHR by Timestamp From The Future As Parameter (JSON)
@@ -234,11 +235,11 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     # comment: valid timestamp format, but points to time in the past
     ${date} = 	Get Current Date    increment=7 days    result_format=%Y-%m-%dT%H:%M:%S.%f
     Set Test Variable 	&{query} 	version_at_time=${date}     # set query as dictionary
 
     get versioned ehr_status of EHR by time
-    Should Be Equal As Strings    ${response.status}    200
+    Status Should Be    200

@@ -35,6 +35,7 @@ Documentation   C.3.a) Main flow: Set EHR modifiable of an existing EHR
 Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT

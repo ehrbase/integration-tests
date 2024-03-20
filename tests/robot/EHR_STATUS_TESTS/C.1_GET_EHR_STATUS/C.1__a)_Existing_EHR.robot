@@ -40,6 +40,7 @@ Documentation   C.1.a) Main flow: Get status of an existing EHR
 Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
@@ -76,14 +77,11 @@ Get Status Of Existing EHR (XML)
 
 *** Keywords ***
 verify response (JSON)
-                        Integer     response status         200
-
-                        String    response body uid value    ${ehrstatus_uid}
-                        # String    response body subject external_ref id value    ${subject_Id}
-                        
+        Status Should Be    200
+        Should Be Equal As Strings      ${response.json()['uid']['value']}      ${ehrstatus_uid}
 
 verify response (XML)
-                        Should Be Equal As Strings   ${response.status}  200
-                        # has or not a subject_id
-                        # has correct value for is_modifiable
-                        # has correct value for is_queryable
+        Should Be Equal As Strings      ${response.status_code}    200
+        # has or not a subject_id
+        # has correct value for is_modifiable
+        # has correct value for is_queryable

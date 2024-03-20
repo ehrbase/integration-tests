@@ -25,6 +25,7 @@ Metadata    Created    2021.01.26
 Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
@@ -40,15 +41,15 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     get revision history of versioned ehr_status of EHR
-    Should Be Equal As Strings    ${response.status}    200
-    ${length} =    Get Length    ${response.body} 	
+    Status Should Be    200
+    ${length} =    Get Length    ${response.json()}
     Should Be Equal As Integers 	${length} 	1
 
-    ${item1} =    Get From List    ${response.body}    0
-    Should Be Equal As Strings    ${ehrstatus_uid}    ${item1.version_id.value}
+    ${item1} =    Get From List    ${response.json()}    0
+    Should Be Equal As Strings    ${ehrstatus_uid}    ${item1['version_id']['value']}
 
 
 2. Get Revision History of Versioned Status Of Existing EHR With Two Status Versions (JSON)
@@ -57,21 +58,21 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
 
     get revision history of versioned ehr_status of EHR
-    Should Be Equal As Strings    ${response.status}    200
-    ${length} =    Get Length    ${response.body} 	
+    Status Should Be    200
+    ${length} =    Get Length    ${response.json()}
     Should Be Equal As Integers 	${length} 	2
 
-    ${item1} =    Get From List    ${response.body}    0
-    Should Be Equal As Strings    ${ehrstatus_uid}    ${item1.version_id.value}
+    ${item1} =    Get From List    ${response.json()}    0
+    Should Be Equal As Strings    ${ehrstatus_uid}    ${item1['version_id']['value']}
 
-    ${item2} =    Get From List    ${response.body}    1
-    Should Be Equal As Strings    ${ehrstatus_uid[0:-1]}2    ${item2.version_id.value}
+    ${item2} =    Get From List    ${response.json()}    1
+    Should Be Equal As Strings    ${ehrstatus_uid[0:-1]}2    ${item2['version_id']['value']}
 
 
 3. Get Correct Ordered Revision History of Versioned Status Of Existing EHR With Two Status Versions (JSON)
@@ -80,34 +81,32 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
 
     get revision history of versioned ehr_status of EHR
-    Should Be Equal As Strings    ${response.status}    200
-    ${length} =    Get Length    ${response.body} 	
+    Status Should Be    200
+    ${length} =    Get Length    ${response.json()}
     Should Be Equal As Integers 	${length} 	2
 
     # comment: Attention: the following code is depending on the order of the array!
-    ${item1} =    Get From List    ${response.body}    0
-    Should Be Equal As Strings    ${ehrstatus_uid}    ${item1.version_id.value}
+    ${item1} =    Get From List    ${response.json()}    0
+    Should Be Equal As Strings    ${ehrstatus_uid}    ${item1['version_id']['value']}
     # comment: check if change type is "creation"
-    ${audit1} =    Get From List    ${item1.audits}    0
-    Should Be Equal As Strings    creation    ${audit1.change_type.value}
+    ${audit1} =    Get From List    ${item1['audits']}    0
+    Should Be Equal As Strings    creation    ${audit1['change_type']['value']}
     # comment: save timestamp to compare later
-    ${timestamp1} = 	Convert Date    ${audit1.time_committed.value}    result_format=%Y-%m-%dT%H:%M:%S.%f
+    ${timestamp1} = 	Convert Date    ${audit1['time_committed']['value']}[:-6]    result_format=%Y-%m-%dT%H:%M:%S.%f
 
-    ${item2} =    Get From List    ${response.body}    1
-    Should Be Equal As Strings    ${ehrstatus_uid[0:-1]}2    ${item2.version_id.value}
+    ${item2} =    Get From List    ${response.json()}    1
+    Should Be Equal As Strings    ${ehrstatus_uid[0:-1]}2    ${item2['version_id']['value']}
     # comment: check if change type is "modification"
-    ${audit2} =    Get From List    ${item2.audits}    0
-    Should Be Equal As Strings    modification    ${audit2.change_type.value}
+    ${audit2} =    Get From List    ${item2['audits']}    0
+    Should Be Equal As Strings    modification    ${audit2['change_type']['value']}
     # comment: save timestamp2, too.
-    ${timestamp2} = 	Convert Date    ${audit2.time_committed.value}    result_format=%Y-%m-%dT%H:%M:%S.%f
-
-
+    ${timestamp2} = 	Convert Date    ${audit2['time_committed']['value']}[:-6]   result_format=%Y-%m-%dT%H:%M:%S.%f
 
     # comment: check if this one is newer/bigger/higher than the creation timestamp.
     ${timediff} = 	Subtract Date From Date 	${timestamp2} 	${timestamp1}
@@ -124,4 +123,4 @@ Force Tags
     create fake EHR
 
     get revision history of versioned ehr_status of EHR
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
