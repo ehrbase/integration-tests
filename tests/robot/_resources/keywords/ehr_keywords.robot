@@ -763,7 +763,7 @@ check that headers location response has
    ...                  Example of arguments: https  example.com  333
    ...                  Takes a list of 3 arguments, to compare expected with actual location protocol, host, port values.
    [Arguments]          @{expectedLocationInfo}
-   @{tokenized_uri}         Split String    ${response.headers.Location}   /
+   @{tokenized_uri}         Split String    ${response.headers['Location']}   /
    ${tmpProtocol}          Remove String   ${tokenized_uri}[0]     :
    ${locationProtocol}      Set Variable     ${tmpProtocol}
    ${tmpHost}              Set Variable     ${tokenized_uri}[2]
