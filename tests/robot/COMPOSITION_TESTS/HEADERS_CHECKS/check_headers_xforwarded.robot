@@ -54,6 +54,7 @@ Check Headers with Commit Composition
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    all_types/family_history.opt
     Upload OPT    nested/nested.opt
     Upload OPT    minimal/minimal_observation.opt
