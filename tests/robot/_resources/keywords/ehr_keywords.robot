@@ -309,7 +309,8 @@ create new EHR with ehr_status
 
     ${resp}             POST On Session     ${SUT}      /ehr    json=${ehr_status_json}
                         ...     expected_status=anything    headers=${headers}
-                        Set Suite Variable    ${response}    ${resp}
+						Set Suite Variable    ${resp}    	${resp}
+                        Set Suite Variable    ${response}	${resp}
                         Status Should Be    201
                         Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
                         Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
@@ -338,7 +339,8 @@ create new EHR by ID
         ${resp}     PUT On Session      ${SUT}      /ehr/${ehr_id}
                     ...     headers=${headers}      expected_status=anything
     END
-    Set Suite Variable    ${response}    ${resp}
+    Set Suite Variable    ${resp}    	${resp}
+    Set Suite Variable    ${response}	${resp}
 
 
 create new EHR for subject_id (JSON)

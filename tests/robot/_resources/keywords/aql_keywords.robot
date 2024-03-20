@@ -151,11 +151,9 @@ Create EHR For AQL
     ELSE
         create new EHR with ehr_status  ${EHR_DATA_SETS}/000_ehr_status_with_other_details.json
     END
-                        Integer     response status     201
-    ${ehr_id_obj}       Object      response body ehr_id
-    ${ehr_id_value}     String      response body ehr_id value
-                        Set Suite Variable      ${ehr_id_obj}     ${ehr_id_obj}
-                        Set Suite Variable      ${ehr_id}         ${ehr_id_value}[0]
+    Status Should Be    201
+    Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
+    Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
 
 Create EHR For AQL With Custom EHR Status
     [Documentation]     Create EHR with custom EHR_STATUS, filename provided in mandatory arg {file_name}.
