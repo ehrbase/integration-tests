@@ -75,6 +75,7 @@ Cardinality of ENTRY class inside the SECTION with parameters
     check status_code of commit composition    ${status_code}
 
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    validation/composition_evaluation_test.opt
     create EHR
 

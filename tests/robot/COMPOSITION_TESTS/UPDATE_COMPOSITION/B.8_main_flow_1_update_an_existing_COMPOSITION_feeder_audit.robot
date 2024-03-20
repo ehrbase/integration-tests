@@ -20,6 +20,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 Force Tags
 

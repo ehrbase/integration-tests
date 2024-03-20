@@ -80,5 +80,6 @@ Create Composition With ISM Wrong Current State
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    all_types/test-ism.vitagroup.de.v1.opt
     create EHR

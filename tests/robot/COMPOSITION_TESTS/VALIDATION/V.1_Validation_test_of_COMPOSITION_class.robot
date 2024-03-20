@@ -68,6 +68,7 @@ Validate of compositions
     check status_code of commit composition    ${status_code}
 
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    validation/clinical_content_validation.opt
     create EHR
 
