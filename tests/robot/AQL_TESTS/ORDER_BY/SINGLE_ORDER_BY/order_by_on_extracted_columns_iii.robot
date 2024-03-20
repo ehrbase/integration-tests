@@ -24,6 +24,7 @@ SELECT ${path} FROM EHR e CONTAINS COMPOSITION c ORDER BY ${path} ${order}
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      aql-conformance-ehrbase.org.v0.opt
     Upload OPT For AQL      type_repetition_conformance_ehrbase.org.opt
     Create EHR For AQL      ehr_id=4a7ee122-7579-4bb1-9dbb-6703e7590a54

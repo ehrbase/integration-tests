@@ -22,6 +22,7 @@ ${query_nr} SELECT ${path} FROM EHR e
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     generate random ehr_id
     Create EHR For AQL      ehr_id=${ehr_id}
     Set Suite Variable      ${ehr_status_uid}       ${response['body']['ehr_status']['uid']['value']}

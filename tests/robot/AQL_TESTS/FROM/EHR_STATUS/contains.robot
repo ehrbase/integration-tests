@@ -29,6 +29,7 @@ SELECT l/name/value FROM EHR e CONTAINS ${path}
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      ehrbase_blood_pressure_simple.de.v0.opt
     Create EHR For AQL With Custom EHR Status       file_name=status1.json
     Commit Composition For AQL      ehrbase_blood_pressure_simple.de.v0.json

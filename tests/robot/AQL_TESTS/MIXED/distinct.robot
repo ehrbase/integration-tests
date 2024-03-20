@@ -49,6 +49,7 @@ Suite Teardown  Run Keywords
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      corona_anamnese1.opt
     Upload OPT For AQL      corona_anamnese2.opt
     Create EHR For AQL

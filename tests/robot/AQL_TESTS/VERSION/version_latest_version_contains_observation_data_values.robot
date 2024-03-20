@@ -21,6 +21,7 @@ ${query_nr} SELECT ${path} FROM VERSION cv[LATEST_VERSION] CONTAINS OBSERVATION 
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      persistent_minimal.opt
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     ###

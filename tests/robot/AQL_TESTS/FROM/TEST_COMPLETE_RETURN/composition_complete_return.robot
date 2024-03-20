@@ -2,6 +2,7 @@
 Documentation   CHECK COMPLETE RETURN OF COMPOSITION C
 ...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/FROM_TEST_SUIT.MD#test-complete-return
 Resource        ../../../_resources/keywords/aql_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 
 *** Test Cases ***

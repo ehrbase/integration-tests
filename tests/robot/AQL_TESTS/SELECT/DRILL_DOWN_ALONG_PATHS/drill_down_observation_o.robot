@@ -4,6 +4,7 @@ Documentation   Drill down along paths: Drill down OBSERVATION
 ...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#drill-down-observation
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 
 *** Test Cases ***

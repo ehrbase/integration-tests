@@ -22,6 +22,7 @@ SELECT ${path}/value FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Create EHR For AQL
     Commit Composition For AQL      conformance_ehrbase.de.v0_known_date_type_1.json

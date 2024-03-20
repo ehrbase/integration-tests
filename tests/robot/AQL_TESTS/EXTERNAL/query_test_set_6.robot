@@ -56,6 +56,7 @@ Medication Without Instruction: SELECT c/content[openEHR-EHR-INSTRUCTION.medicat
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      external/vitagroup-medication-list.v0.opt
     Create EHR For AQL
     Commit Composition For AQL      external/vitagroup-medication-list.v0__composition_with_medication_item_flat.json     format=FLAT

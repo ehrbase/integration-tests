@@ -21,6 +21,7 @@ ${query_nr} SELECT ${path} FROM VERSION cv[LATEST_VERSION] CONTAINS EHR_STATUS s
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Create EHR For AQL
     Set Suite Variable      ${ehr_id1}  ${ehr_id}
     Set Suite Variable      ${ehr_status_id1}   ${response['body']['ehr_status']['uid']['value']}

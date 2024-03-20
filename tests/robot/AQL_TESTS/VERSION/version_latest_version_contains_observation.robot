@@ -83,6 +83,7 @@ ${query2}   SELECT e/ehr_id/value, cv/uid/value, cv/contribution/id/value, cv/co
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      persistent_minimal.opt
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     ###

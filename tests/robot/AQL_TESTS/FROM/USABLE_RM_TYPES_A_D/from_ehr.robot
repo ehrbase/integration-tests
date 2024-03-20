@@ -4,7 +4,8 @@ Documentation   CHECK FROM EHR AQL RESULT
 ...             - Covers: https://github.com/ehrbase/openEHR_SDK/blob/develop/client/src/test/java/org/ehrbase/openehr/sdk/client/openehrclient/defaultrestclient/systematic/ehrquery/CanonicalEhrQuery1IT.java
 Resource        ../../../_resources/keywords/aql_keywords.robot
 
-Suite Setup     Create EHR For AQL With Custom EHR Status       file_name=status1.json
+Suite Setup     Run Keywords    Set Library Search Order For Tests      AND
+                ...     Create EHR For AQL With Custom EHR Status       file_name=status1.json
 Suite Teardown  Admin Delete EHR For AQL
 
 
