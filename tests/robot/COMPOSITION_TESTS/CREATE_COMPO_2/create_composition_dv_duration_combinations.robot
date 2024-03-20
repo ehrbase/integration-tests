@@ -72,6 +72,7 @@ Create Composition With DV_DURATION Combinations - Negative
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    all_types/Test_all_types_v2.opt
     create EHR
 
