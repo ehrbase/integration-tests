@@ -33,7 +33,7 @@ Resource        template_opt1.4_keywords.robot
     END
     Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
                         ...     verify=False    #auth=${CREDENTIALS}
-    ${resp}     DELETE on session     ${SUT}    /ehr/${ehr_id}
+    ${resp}     DELETE On session     ${SUT}    /ehr/${ehr_id}
     ...         expected_status=anything    headers=${headers}
                 Set Test Variable   ${response}     ${resp}
                 Should Be Equal     ${resp.status_code}      ${204}
@@ -54,7 +54,7 @@ Resource        template_opt1.4_keywords.robot
                         Create Session       ${SUT}    ${ADMIN_BASEURL}    debug=2
                         ...                  auth=${CREDENTIALS}    verify=True
 
-    ${resp}=            Put On Session    ${SUT}    /template/${template_id}   expected_status=anything
+    ${resp}=            PUT On Session    ${SUT}    /template/${template_id}   expected_status=anything
                         ...    data=${file}    headers=${headers}
                         Set Test Variable    ${response}    ${resp}
                         Set Test Variable    ${prefer_return}    ${prefer_return}
@@ -71,18 +71,18 @@ Resource        template_opt1.4_keywords.robot
                         prepare new request session
                         ...    Prefer=return=${prefer_return}
                         Set Test Variable    ${prefer_return}    ${prefer_return}
-    &{resp}=            REST.DELETE    ${admin_baseurl}/template/${template_id}
+    ${resp}             DELETE On Session   ${SUT}  /template/${template_id}
+                        ...     expected_status=anything    headers=${headers}
                         Set Test Variable    ${response}    ${resp}
-                        Output Debug Info To Console
 
 (admin) delete all OPTs
     [Documentation]     Admin delete OPT on server.
     ...                 Depends on any KW that exposes an variable named 'template_id'
     ...                 to test or suite level scope.
                         prepare new request session
-    &{resp}=            REST.DELETE    ${admin_baseurl}/template/all
+   ${resp}              DELETE On Session   ${SUT}  /template/all
+                        ...     expected_status=anything    headers=${headers}
                         Set Test Variable    ${response}    ${resp}
-                        Output Debug Info To Console
 
 
 (admin) delete composition
@@ -96,7 +96,7 @@ Resource        template_opt1.4_keywords.robot
     Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
                             ...     verify=False
     ${resp}         DELETE On Session   ${SUT}  /ehr/${ehr_id}/composition/${versioned_object_uid}
-                    # Should Be Equal As Strings   ${resp.status}   204
+                    ...     expected_status=anything    headers=${headers}
                     Status Should Be    204
                     Set Test Variable    ${response}    ${resp}
 
@@ -106,25 +106,26 @@ Delete Composition Using API
         Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
                             ...     verify=False
         ${resp}         DELETE On Session   ${SUT}  /ehr/${ehr_id}/composition/${versioned_object_uid}
+                        ...     expected_status=anything    headers=${headers}
                         ${isDeleteCompositionFailed}     Run Keyword And Return Status
                         ...     Status Should Be    204
                         Set Suite Variable    ${deleteCompositionResponse}    ${resp}
-                        Log     ${resp.status_code}
                         IF      ${isDeleteCompositionFailed} == ${FALSE} and '${resp.status_code}' == '404'
-                            Log     Delete Composition returned ${deleteCompositionResponse.status} code.   console=yes
+                            Log     Delete Composition returned ${deleteCompositionResponse.status_code} code.   console=yes
                         END
-                        #Output Debug Info To Console
     END
 
 
 Delete Template Using API
-    &{resp}=            REST.DELETE   ${admin_baseurl}/template/${template_id}
+    Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
+                        ...     verify=False
+    ${resp}=            DELETE On Session   ${SUT}  /template/${template_id}
+                        ...     expected_status=anything    headers=${headers}
                         Set Suite Variable    ${deleteTemplateResponse}    ${resp}
-                        Output Debug Info To Console
                         ${isDeleteTemplateFailed}     Run Keyword And Return Status
-                        ...     Should Be Equal As Strings      ${resp.status}      200
-                        IF      ${isDeleteTemplateFailed} == ${FALSE} and '${resp.status}' == '404'
-                            Log     Delete Template returned ${resp.status} code.   console=yes
+                        ...     Status Should Be    200
+                        IF      ${isDeleteTemplateFailed} == ${FALSE} and '${resp.status_code}' == '404'
+                            Log     Delete Template returned ${resp.status_code} code.   console=yes
                         END
                         #Delete All Sessions
 
@@ -153,21 +154,19 @@ check composition admin delete table counts
 (admin) delete contribution
     [Documentation]     Admin delete of Contribution.
     ...                 Needs `${contribution_uid}` var from e.g. `commit CONTRIBUTION (JSON)` KW.
-
-    &{resp}=            REST.DELETE    ${admin_baseurl}/ehr/${ehr_id}/contribution/${contribution_uid}
-                        # Should Be Equal As Strings   ${resp.status}   204
-                        Integer    response status    204
+    Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
+                        ...     verify=False
+    ${resp}=            DELETE On Session   ${SUT}  /ehr/${ehr_id}/contribution/${contribution_uid}
+                        ...     expected_status=anything    headers=${headers}
+                        Status Should Be    204
                         Set Test Variable    ${response}    ${resp}
-                        Output Debug Info To Console
 
 
 (admin) delete directory
     [Documentation]     Admin delete of Directory.
-    ...                 Needs manualle created `${folder_versioned_uid}`.
+    ...                 Needs manually created `${folder_versioned_uid}`.
 
-
-    &{resp}=            REST.DELETE    ${admin_baseurl}/ehr/${ehr_id}/directory/${folder_versioned_uid}
-                        # Should Be Equal As Strings   ${resp.status}   204
-                        Integer    response status   204
+    ${resp}=            DELETE On Session   ${SUT}  /ehr/${ehr_id}/directory/${folder_versioned_uid}
+                        ...     expected_status=anything    headers=${headers}
+                        Status Should Be    204
                         Set Test Variable    ${response}    ${resp}
-                        Output Debug Info To Console
