@@ -35,6 +35,7 @@ Metadata        TOP_TEST_SUITE    CONTRIBUTION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/contribution_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
@@ -54,3 +55,5 @@ Alternative flow 9. commit CONTRIBUTION with COMPOSITION referencing a non exist
       commit invalid CONTRIBUTION (JSON)    ref_to_non_existent_OPT.json
 
       check response: is negative indicating errors in committed data
+
+      [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs

@@ -80,6 +80,8 @@ Resource        template_opt1.4_keywords.robot
     ...                 Depends on any KW that exposes an variable named 'template_id'
     ...                 to test or suite level scope.
                         prepare new request session
+   Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
+    ...     verify=False    #auth=${CREDENTIALS}
    ${resp}              DELETE On Session   ${SUT}  /template/all
                         ...     expected_status=anything    headers=${headers}
                         Set Test Variable    ${response}    ${resp}

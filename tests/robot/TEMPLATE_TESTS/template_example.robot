@@ -22,8 +22,8 @@ Documentation       Examples generator for Templates
 ...                 Documentation: To be defined
 
 Resource            ../_resources/keywords/composition_keywords.robot
-Suite Setup     	Set Library Search Order For Tests
-
+Resource            ../_resources/keywords/admin_keywords.robot
+Suite Setup     	SuitePrecondition
 
 *** Variables ***
 ${COMPOSITIONS_PATH_JSON}       ${EXECDIR}/robot/_resources/test_data_sets/compositions/CANONICAL_JSON
@@ -38,7 +38,6 @@ Test Example Generator For Templates (ECIS) - FLAT
 
 Test Example Generator For Templates (ECIS) - FLAT - Test Category And Coded Text Code And Value
     [Tags]      cdr-432     not-ready
-    #Upload OPT ECIS    all_types/test_event.opt
     Upload OPT      all_types/test_event.opt
     Extract Template Id From OPT File
     Get Example Of Web Template By Template Id (ECIS)    ${template_id}    FLAT
@@ -51,7 +50,6 @@ Test Example Generator For Templates (ECIS) - FLAT - Test Category And Coded Tex
 
 Test Example Generator For Templates (ECIS) - JSON And Commit Composition
     [Tags]      cdr-433     not-ready
-    #Upload OPT ECIS    all_types/test_quantity_without_text.opt
     Upload OPT      all_types/test_quantity_without_text.opt
     Extract Template Id From OPT File
     Get Example Of Web Template By Template Id (ECIS)       ${template_id}      JSON
@@ -74,7 +72,8 @@ Test Example Generator For Templates (ECIS) - JSON And Commit Composition
     ${eventsLength}     Get Length      ${response.json()}[content][0][data][events]
     Should Be True      ${eventsLength}==27     #27=3x9quantities
     #https://github.com/ehrbase/ehrbase/issues/900 - ticket closed EHRbase v0.30.0-SNAPSHOT
-    [Teardown]      TRACE JIRA ISSUE      CDR-433
+    [Teardown]      Run Keywords    (admin) delete ehr      AND
+                    ...     TRACE JIRA ISSUE      CDR-433
 
 Test Example Generator For Templates (ECIS) - JSON And Save It
     Get Example Of Web Template By Template Id (ECIS)    ${template_id}    JSON
@@ -115,11 +114,12 @@ Test Example Generator For Template (ECIS) - Specific Template
     #...     $.content[0].data.items.[1][*].value
     #${returnValue2}  Get Value From Json     ${response}
     #...     $.content[0].data.items.[2][*].value
+    [Teardown]      (admin) delete all OPTs
+
 
 *** Keywords ***
 Upload Template Using ECIS Endpoint
     [Documentation]    Keyword used to upload Template using ECIS endpoint
-    #Upload OPT ECIS    all_types/ehrn_family_history.opt
     Upload OPT      all_types/ehrn_family_history.opt
     Extract Template Id From OPT File
 
@@ -198,3 +198,14 @@ PerformChecksOnAnnotation
     Log     ${quitDateAnnotationValidation}         console=yes
     Log     ${overallUseAnnotationValidation}       console=yes
     Log     ${packDefinitionAnnotationValidation}   console=yes
+
+SuitePrecondition
+    ${variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
+    IF     '${variable_exists}' == '${FALSE}'
+        Set Library Search Order    R	RCustom
+    ELSE IF    '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'True'
+        Set Library Search Order    RCustom  R
+    ELSE
+        Set Library Search Order    R   RCustom
+	END

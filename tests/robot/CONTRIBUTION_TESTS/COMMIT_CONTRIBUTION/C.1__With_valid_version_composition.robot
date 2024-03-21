@@ -37,6 +37,7 @@ Metadata        TOP_TEST_SUITE    CONTRIBUTION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/contribution_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
@@ -57,7 +58,7 @@ Main flow: successfully commit CONTRIBUTION with single valid VERSION<COMPOSITIO
     check response: is positive - returns version id
     check content of committed CONTRIBUTION
 
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 Main flow: successfully commit CONTRIBUTION with single valid VERSION<COMPOSITION> withtout accept header
@@ -68,4 +69,4 @@ Main flow: successfully commit CONTRIBUTION with single valid VERSION<COMPOSITIO
     check response: is positive - returns version id
     check content of committed CONTRIBUTION
 
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs

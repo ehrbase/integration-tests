@@ -20,6 +20,7 @@ Documentation       STORED QUERY TEST SUITE
 Resource            ../_resources/keywords/composition_keywords.robot
 Resource            ../_resources/keywords/ehr_keywords.robot
 Resource            ../_resources/keywords/aql_query_keywords.robot
+Resource            ../_resources/keywords/admin_keywords.robot
 Suite Setup 		Set Library Search Order For Tests
 
 
@@ -316,6 +317,7 @@ Query API - POST Stored Query Using Qualified Query Name And Version
     Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
     Should Be Equal As Strings      ${resp_query['rows'][0][0]}     ${composition_uid}
+	[Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***

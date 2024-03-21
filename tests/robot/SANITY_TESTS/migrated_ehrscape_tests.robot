@@ -231,7 +231,7 @@ Suite Setup       Precondition
     Get Template Example OpenEHR    format=STRUCTURED
     Should Be Equal     ${resp.status_code}     ${200}
     Should Be Equal     ${resp.json()['family_history']['composer'][0]['|name']}      Max Mustermann
-    [Teardown]      (admin) delete ehr
+    [Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***

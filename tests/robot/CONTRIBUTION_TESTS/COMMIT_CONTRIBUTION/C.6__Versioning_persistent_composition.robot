@@ -41,6 +41,7 @@ Metadata        TOP_TEST_SUITE    CONTRIBUTION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/contribution_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
@@ -63,3 +64,4 @@ Alternative flow 5: commit CONTRIBUTIONS versioning persistent COMPOSITION
 
     check response: is positive - contribution has new version
     check response: is positive with list of 1 contribution(s)
+    [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs

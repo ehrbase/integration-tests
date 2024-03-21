@@ -36,6 +36,7 @@ Metadata        TOP_TEST_SUITE    CONTRIBUTION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/contribution_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
@@ -61,4 +62,4 @@ Alternative flow 7: commit CONTRIBUTIONS for versioning, but second commit conta
 
     check response: is negative indicating errors in committed data
 
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs

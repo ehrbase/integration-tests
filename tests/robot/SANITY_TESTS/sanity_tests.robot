@@ -131,8 +131,7 @@ Main flow Sanity Tests for Canonical XML Compositions
     #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
     delete DIRECTORY (JSON)
-    (admin) delete ehr
-    #[Teardown]    restart SUT
+    [Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***

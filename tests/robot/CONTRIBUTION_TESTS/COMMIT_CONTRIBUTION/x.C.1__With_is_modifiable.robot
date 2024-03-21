@@ -40,6 +40,7 @@ Metadata        TOP_TEST_SUITE    CONTRIBUTION
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/contribution_keywords.robot
 Resource        ../../_resources/keywords/generic_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
@@ -59,7 +60,7 @@ Main flow: successfully commit CONTRIBUTION with EHR status Modifiable True
     check response: is positive - returns version id
     check content of committed CONTRIBUTION
 
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 Main flow: does not allow to commit CONTRIBUTION with EHR status Modifiable False
 
@@ -69,4 +70,4 @@ Main flow: does not allow to commit CONTRIBUTION with EHR status Modifiable Fals
     commit CONTRIBUTION (JSON) is modifiable false  minimal/minimal_evaluation.contribution.json
     check response: is negative indicating does not allow modification
 
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
