@@ -979,7 +979,6 @@ get revision history of versioned composition of EHR by UID
     END
     ${resp}=            GET On Session           ${SUT}   /ehr/${ehr_id}/versioned_composition/${uid}/revision_history
                         ...     expected_status=anything   headers=${headers}
-                        ...         headers=${headers}
                         Set Test Variable    ${response}    ${resp}
                         Log     ${response}
 
