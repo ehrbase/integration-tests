@@ -25,6 +25,7 @@ Metadata    Created    2021.01.26
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
@@ -48,6 +49,7 @@ Force Tags      COMPOSITION_get_versioned
     Status Should Be    200
     Should Be Equal As Strings    ${versioned_object_uid}    ${response.json()['uid']['value']}
     Should Be Equal As Strings    ${ehr_id}    ${response.json()['owner_id']['id']['value']}
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 2. Get Versioned Composition Of Existing EHR With Two Status Versions (JSON)
@@ -62,37 +64,42 @@ Force Tags      COMPOSITION_get_versioned
     Status Should Be    200
     Should Be Equal As Strings    ${versioned_object_uid}    ${response.json()['uid']['value']}
     Should Be Equal As Strings    ${ehr_id}    ${response.json()['owner_id']['id']['value']}
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 3. Get Versioned Composition Of Non-Existing EHR (JSON)
 
     create EHR and commit a composition for versioned composition tests
 
+    (admin) delete ehr
     create fake EHR
 
     get versioned composition of EHR by UID    ${versioned_object_uid}
     Status Should Be    404
+    [Teardown]    (admin) delete all OPTs
 
 
 4. Get Versioned Composition Of Invalid EHR_ID (JSON)
 
     create EHR and commit a composition for versioned composition tests
-
+    (admin) delete ehr
     Set Test Variable    ${ehr_id}    foobar
 
     get versioned composition of EHR by UID    ${versioned_object_uid}
     Status Should Be    404
+    [Teardown]    (admin) delete all OPTs
 
 
 
 5. Get Versioned Composition Of Non-Existing Composition (JSON)
 
     create EHR and commit a composition for versioned composition tests
-
+    (admin) delete ehr
     create fake composition
 
     get versioned composition of EHR by UID    ${versioned_object_uid}
     Status Should Be    404
+    [Teardown]    (admin) delete all OPTs
 
 
 6. Get Versioned Composition Of Invalid Composition ID (JSON)
@@ -103,3 +110,5 @@ Force Tags      COMPOSITION_get_versioned
 
     get versioned composition of EHR by UID    ${versioned_object_uid}
     Status Should Be    404
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
+

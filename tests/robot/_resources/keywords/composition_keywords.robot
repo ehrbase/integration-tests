@@ -959,7 +959,7 @@ get versioned composition of EHR by UID
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
-
+    Create Session      ${SUT}    ${BASEURL}    debug=2
     ${resp}=            GET On Session           ${SUT}   /ehr/${ehr_id}/versioned_composition/${uid}
                         ...     expected_status=anything   headers=${headers}
                         Set Test Variable    ${response}    ${resp}
@@ -977,6 +977,7 @@ get revision history of versioned composition of EHR by UID
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
+	Create Session      ${SUT}    ${BASEURL}    debug=2
     ${resp}=            GET On Session           ${SUT}   /ehr/${ehr_id}/versioned_composition/${uid}/revision_history
                         ...     expected_status=anything   headers=${headers}
                         Set Test Variable    ${response}    ${resp}
