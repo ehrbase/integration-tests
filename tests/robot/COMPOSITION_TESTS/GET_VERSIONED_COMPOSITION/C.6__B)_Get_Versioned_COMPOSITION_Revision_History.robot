@@ -41,7 +41,7 @@ Force Tags      COMPOSITION_get_versioned
     create EHR and commit a composition for versioned composition tests
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
-    Status Should Be    200
+    Should Be Equal As Strings    ${response.status_code}   200
     ${length} =    Get Length    ${response.json()}
     Should Be Equal As Integers 	${length} 	1
 
@@ -61,7 +61,7 @@ Force Tags      COMPOSITION_get_versioned
     update a composition for versioned composition tests
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
-    Status Should Be    200
+    Should Be Equal As Strings    ${response.status_code}   200
     ${length} =    Get Length    ${response.json()}
     Should Be Equal As Integers 	${length} 	2
 
@@ -82,7 +82,7 @@ Force Tags      COMPOSITION_get_versioned
     update a composition for versioned composition tests
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
-    Status Should Be    200
+    Should Be Equal As Strings    ${response.status_code}   200
     ${length} =    Get Length    ${response.json()}
     Should Be Equal As Integers 	${length} 	2
 
@@ -119,7 +119,7 @@ Force Tags      COMPOSITION_get_versioned
     create fake EHR
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
-    Status Should Be    404
+    Should Be Equal As Strings    ${response.status_code}   404
 
 
 5. Get Revision History of Versioned Composition Of Non-Existing Composition (JSON)
@@ -129,7 +129,7 @@ Force Tags      COMPOSITION_get_versioned
     create fake composition
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
-    Status Should Be    404
+    Should Be Equal As Strings    ${response.status_code}   404
 
 6. Get Revision History Time Committed Value With Timezone Indicator
     [Documentation]     Test timezone indicator to be present in timestamp.
@@ -148,6 +148,6 @@ Force Tags      COMPOSITION_get_versioned
     commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes_no_time_zone.xml
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
-    Status Should Be    200
+    Should Be Equal As Strings      ${response.status_code}   200
     ${item1}    Get From List       ${response.json()}        0
     Should Contain Any     ${item1['audits'][0]['time_committed']['value']}      +   -   Z   timezone not present in timestamp

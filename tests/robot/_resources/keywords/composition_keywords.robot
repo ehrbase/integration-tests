@@ -960,8 +960,8 @@ get versioned composition of EHR by UID
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
 
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_composition/${uid}
-                        ...         headers=${headers}
+    ${resp}=            GET On Session           ${SUT}   /ehr/${ehr_id}/versioned_composition/${uid}
+                        ...     expected_status=anything   headers=${headers}
                         Set Test Variable    ${response}    ${resp}
 
 
@@ -977,7 +977,8 @@ get revision history of versioned composition of EHR by UID
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_composition/${uid}/revision_history
+    ${resp}=            GET On Session           ${SUT}   /ehr/${ehr_id}/versioned_composition/${uid}/revision_history
+                        ...     expected_status=anything   headers=${headers}
                         ...         headers=${headers}
                         Set Test Variable    ${response}    ${resp}
                         Log     ${response}
@@ -1012,24 +1013,29 @@ get version of versioned composition of EHR by UID
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_composition/${versioned_object_uid}/version/${version_uid}
-                        ...         headers=${headers}
+    ${resp}=            GET On Session           ${SUT}
+                        ...     /ehr/${ehr_id}/versioned_composition/${versioned_object_uid}/version/${version_uid}
+                        ...     expected_status=anything   headers=${headers}
                         Set Test Variable    ${response}    ${resp}
 
 
 # internal only, do not call from outside. use "get version of versioned composition of EHR by UID and time" instead
 internal get version of versioned composition of EHR by UID and time with query
     [Arguments]         ${uid}
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_composition/${uid}/version    ${query}
-                        ...         headers={"Accept": "application/json"}
+    &{headers}          Create Dictionary       Accept=application/json
+    ${resp}=            GET On Session           ${SUT}
+                        ...     /ehr/${ehr_id}/versioned_composition/${uid}/version     param=${query}
+                        ...     expected_status=anything   headers=${headers}
                         Set Test Variable    ${response}    ${resp}
 
 
 # internal only, do not call from outside. use "get version of versioned composition of EHR by UID and time" instead
 internal get version of versioned composition of EHR by UID and time without query
     [Arguments]         ${uid}
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_composition/${uid}/version
-                        ...         headers={"Accept": "application/json"}
+    &{headers}          Create Dictionary       Accept=application/json
+    ${resp}=            GET On Session           ${SUT}
+                        ...     /ehr/${ehr_id}/versioned_composition/${uid}/version
+                        ...     expected_status=anything   headers=${headers}
                         Set Test Variable    ${response}    ${resp}
 
 # get versioned composition by version_uid
@@ -1059,7 +1065,9 @@ get composition - latest version
     ...                 format: JSON or XML for accept/content headers
 
                         prepare new request session    ${format}    Prefer=return=representation
-    ${resp}=            GET On Session           ${SUT}   /ehr/${ehr_id}/versioned_composition/${versioned_object_uid}/version    expected_status=anything   headers=${headers}
+    ${resp}=            GET On Session           ${SUT}
+                        ...     /ehr/${ehr_id}/versioned_composition/${versioned_object_uid}/version
+                        ...     expected_status=anything   headers=${headers}
                         log to console        ${resp.text}
                         Set Test Variable     ${response}    ${resp}
 
@@ -1413,7 +1421,7 @@ create EHR and commit a composition for versioned composition tests
 
     prepare new request session    JSON    Prefer=return=representation
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     Upload OPT    minimal/minimal_observation.opt
     commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.xml
