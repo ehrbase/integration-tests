@@ -21,6 +21,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 Force Tags
@@ -42,4 +43,4 @@ Alternative flow update existing event COMPOSITION when EHR status is_modifiable
     Status Should Be        409
     ${finalString}       Decode Bytes To String      ${response}     UTF-8
     Should Contain      ${finalString}        does not allow modification
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs

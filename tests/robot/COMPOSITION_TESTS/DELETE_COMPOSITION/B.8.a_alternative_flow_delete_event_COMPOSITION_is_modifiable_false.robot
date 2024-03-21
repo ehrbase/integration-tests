@@ -21,6 +21,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 Force Tags
@@ -35,4 +36,4 @@ Alternative flow delete event COMPOSITION when EHR status is_modifiable is False
     check content of composition (JSON)
     update EHR: set ehr-status modifiable    ${FALSE}
     delete composition - invalid - is modifiable false    ${preceding_version_uid}
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs

@@ -20,6 +20,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 Force Tags
@@ -85,4 +86,4 @@ Update an existing event COMPOSITION Feeder Audit and Links values
     check content of updated composition generic (JSON)
     ...    ['links'][1]['target']['value']
     ...     ehr:/target2_b
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs

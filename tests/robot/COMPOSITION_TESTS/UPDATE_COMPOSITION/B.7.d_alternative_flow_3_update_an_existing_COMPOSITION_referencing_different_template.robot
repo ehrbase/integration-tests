@@ -21,6 +21,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 Force Tags
@@ -44,4 +45,4 @@ Alternative flow 3 update an existing persistent COMPOSITION referencing differe
     update composition - invalid opt reference (JSON)    minimal_persistent/persistent_minimal.composition.extdatetime.v2_2.xml
     Status Should Be    400
 
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
