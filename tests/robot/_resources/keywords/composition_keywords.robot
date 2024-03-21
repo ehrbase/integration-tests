@@ -1024,7 +1024,7 @@ internal get version of versioned composition of EHR by UID and time with query
     [Arguments]         ${uid}
     &{headers}          Create Dictionary       Accept=application/json
     ${resp}=            GET On Session           ${SUT}
-                        ...     /ehr/${ehr_id}/versioned_composition/${uid}/version     param=${query}
+                        ...     /ehr/${ehr_id}/versioned_composition/${uid}/version     json=${query}
                         ...     expected_status=anything   headers=${headers}
                         Set Test Variable    ${response}    ${resp}
 
