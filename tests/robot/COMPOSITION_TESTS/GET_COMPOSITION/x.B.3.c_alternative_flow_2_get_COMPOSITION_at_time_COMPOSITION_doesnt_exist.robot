@@ -21,6 +21,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 Force Tags
@@ -42,4 +43,4 @@ Alternative flow 2 get COMPOSITION at time, COMPOSITION doesnt exist
     get composition - version at time (XML)    ${time_1}
     check composition does not exist (version at time)
 
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs

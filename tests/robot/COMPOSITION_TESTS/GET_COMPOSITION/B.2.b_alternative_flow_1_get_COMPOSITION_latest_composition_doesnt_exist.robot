@@ -21,6 +21,7 @@ Documentation       Composition Integration Tests
 Metadata            TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 Force Tags
@@ -35,3 +36,4 @@ Alternative flow 1 get COMPOSITION latest, COMPOSITION doesn't exist
     create fake composition
     get composition - latest version    JSON
     check composition does not exist (latest version)
+    [Teardown]    (admin) delete ehr

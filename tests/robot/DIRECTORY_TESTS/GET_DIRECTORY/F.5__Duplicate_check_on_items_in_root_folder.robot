@@ -36,6 +36,7 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
@@ -62,3 +63,4 @@ Get Folder After Update And Validate That One Item Is Present In Root Folder
     Should Be True      ${nrOfItemsInRootFolder} == 1   Folder contains more than 1 item in root
     ${secondDict}   Set Variable       ${response.json()["items"][0]}
     Should Be Equal As Strings      ${firstDict}    ${secondDict}
+    [Teardown]    (admin) delete ehr

@@ -33,6 +33,7 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
@@ -51,4 +52,5 @@ Alternative flow: create directory on empty EHR, with is_modifiable set to False
     create DIRECTORY (JSON)    empty_directory.json     isModifiable=${FALSE}
     Status Should Be        409
     Should Contain    ${response.text}    does not allow modification
+    [Teardown]    (admin) delete ehr
 

@@ -33,6 +33,7 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
@@ -52,3 +53,4 @@ Main flow: create directory on empty EHR
     create DIRECTORY (JSON)    empty_directory.json
 
     validate POST response - 201 created directory
+    [Teardown]    (admin) delete ehr

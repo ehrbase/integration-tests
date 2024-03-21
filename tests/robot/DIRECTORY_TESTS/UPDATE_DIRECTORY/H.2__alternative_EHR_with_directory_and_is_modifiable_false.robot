@@ -35,6 +35,7 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Test Setup              Preconditions
 Test Teardown           Postconditions
@@ -71,3 +72,4 @@ Preconditions
 Postconditions
     get DIRECTORY (JSON)
     validate GET response - 200 retrieved
+    [Teardown]    (admin) delete ehr

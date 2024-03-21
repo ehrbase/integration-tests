@@ -32,6 +32,7 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
@@ -50,3 +51,4 @@ Alternative flow 1: update directory on empty EHR
     create EHR
     update DIRECTORY - ehr w/o directory (JSON)    update/2_add_subfolders.json
     validate PUT response - 412 precondition failed
+    [Teardown]    (admin) delete ehr

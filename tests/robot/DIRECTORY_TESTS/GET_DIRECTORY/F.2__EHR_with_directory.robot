@@ -32,6 +32,7 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
@@ -50,3 +51,4 @@ Alternative flow 1: get directory on EHR with just a root directory
     create DIRECTORY (JSON)    empty_directory.json
     get DIRECTORY at version (JSON)
     validate GET-@version response - 200 retrieved    root
+    [Teardown]    (admin) delete ehr

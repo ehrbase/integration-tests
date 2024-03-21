@@ -36,6 +36,7 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
@@ -64,3 +65,4 @@ Alternative flow 1: get directory at version from existent EHR that has two vers
     get DIRECTORY at version (JSON)
     # TODO: check that it is the SECOND version
     validate GET-@version response - 200 retrieved    root
+    [Teardown]    (admin) delete ehr
