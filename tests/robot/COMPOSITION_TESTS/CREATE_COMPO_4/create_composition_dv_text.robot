@@ -68,7 +68,8 @@ Composition With DV_TEXT.value ABC And DV_TEXT List Constraint NULL
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 Composition With DV_TEXT.value NULL And DV_TEXT Pattern Constraint XYZ
     [Tags]      Negative
@@ -88,7 +89,7 @@ Composition With DV_TEXT.value NULL And DV_TEXT Pattern Constraint XYZ
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Delete Composition Using API
+    [Teardown]      Delete Composition Using API
 
 Composition With DV_TEXT.value ABC And DV_TEXT Pattern Constraint XYZ
     [Tags]      Negative
@@ -122,7 +123,8 @@ Composition With DV_TEXT.value XYZ And DV_TEXT Pattern Constraint XYZ
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 Composition With DV_TEXT.value NULL And DV_TEXT List Constraint XYZ OPQ
     [Tags]      Negative
@@ -176,7 +178,8 @@ Composition With DV_TEXT.value OPQ And DV_TEXT List Constraint XYZ OPQ
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***

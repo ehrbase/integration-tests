@@ -23,6 +23,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Suite Setup     Precondition
 #Suite Teardown  restart SUT
@@ -50,6 +51,7 @@ Alternative flow 3 create new invalid event COMPOSITION FLAT - DV Duration Near 
     ...                  composition=dv_duration_max__.json
     #Github issue: https://github.com/ehrbase/ehrbase/issues/926
     check status_code of commit composition    400
+    [Teardown]  Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 #Alternative flow 3 create new invalid event COMPOSITION TDD
 #    [Tags]    future

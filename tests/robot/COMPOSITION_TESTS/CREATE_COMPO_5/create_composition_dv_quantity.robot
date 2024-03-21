@@ -173,7 +173,8 @@ Composition With DV_QUANTITY Units mmHg And Magnitude 130 Open Constraint High B
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 Composition With DV_QUANTITY Units cm And Magnitude NULL Property Constrained
     [Tags]      Negative
@@ -261,7 +262,8 @@ Composition With DV_QUANTITY Units cm And Magnitude 8.7 Property Constrained
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 Composition With DV_QUANTITY Units And Magnitude NULL Property And Units Constrained
     [Tags]      Negative
@@ -366,7 +368,8 @@ Composition With DV_QUANTITY Units m And Magnitude 2.5 Property And Units Constr
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 Composition With DV_QUANTITY Units And Magnitude NULL Property And Units Constrained With Magnitude Range
     [Tags]      Negative
@@ -490,7 +493,8 @@ Composition With DV_QUANTITY Units cm And Magnitude 6.3 Property And Units Const
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***

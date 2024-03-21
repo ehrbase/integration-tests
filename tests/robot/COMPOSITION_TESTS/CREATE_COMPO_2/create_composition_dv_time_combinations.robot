@@ -23,6 +23,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Resource        ../../_resources/suite_settings.robot
 
 Suite Setup       Precondition
@@ -74,7 +75,8 @@ Create Composition With DV_TIME Combinations - Negative
     10:30:78-03:00
     10.5
     10:05.5
-    [Teardown]      PositiveCompositionTemplate     10:30:34
+    [Teardown]      Run Keywords    PositiveCompositionTemplate     10:30:34    AND
+                    ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***

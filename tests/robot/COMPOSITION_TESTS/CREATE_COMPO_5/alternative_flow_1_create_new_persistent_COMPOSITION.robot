@@ -23,6 +23,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Suite Setup     Precondition
 #Suite Teardown  restart SUT
@@ -43,6 +44,7 @@ Alternative flow 1 create new persistent COMPOSITION FLAT
     commit composition   format=FLAT
     ...                  composition=persistent_minimal.en.v1__full.xml.flat.json
     check the successful result of commit composition   persistent_minimal
+    [Teardown]  Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 #Alternative flow 1 create new persistent COMPOSITION TDD
 #    [Tags]    future

@@ -100,7 +100,8 @@ Composition With DV_CODED_TEXT Code_String 42 And Terminology_id Local
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     (admin) delete ehr      AND
+                ...     Delete Template Using API       AND     (admin) delete all OPTs
 
 Composition With DV_CODED_TEXT Code_String And Terminology_id NULL With Configured Local Codes
     [Tags]      Negative
@@ -171,7 +172,8 @@ Composition With DV_CODED_TEXT Code_String at0035 And Terminology_id Local With 
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     (admin) delete ehr      AND
+                ...     Delete Template Using API       AND     (admin) delete all OPTs
 
 
 *** Keywords ***

@@ -244,7 +244,8 @@ Composition With DV_PROPORTION Precision 0 Type Invalid - Numerator 10 - Denomin
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 Composition With DV_PROPORTION Precision 1 Type Fraction - Numerator 10 - Denominator 500
     [Tags]      Negative    not-ready   bug
@@ -360,6 +361,8 @@ Composition With DV_PROPORTION Precision 1 Type Integer Fraction - Numerator 10 
     [Teardown]  Run Keywords
     ...     Delete Composition Using API    AND
     ...     Delete Template Using API       AND
+    ...     (admin) delete ehr      AND
+    ...     (admin) delete all OPTs     AND
     ...     TRACE JIRA ISSUE    CDR-537
 
 

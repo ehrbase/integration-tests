@@ -179,7 +179,8 @@ Composition With DV_EHR_URI.value ehr://CLOUD_EHRSERVER/89c0752e-0815-47d7-8b3c-
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Delete Composition Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND
+                ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***

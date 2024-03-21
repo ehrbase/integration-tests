@@ -103,7 +103,8 @@ Composition With DV_MULTIMEDIA.code_string application/dicom, DV_MULTIMEDIA.size
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Delete Composition Using API
+    [Teardown]      Run Keywords    Delete Composition Using API    AND
+                    ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 *** Keywords ***
 Precondition

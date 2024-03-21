@@ -269,7 +269,8 @@ Composition With DV_IDENTIFIER.type XYZ
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
     [Teardown]  Run Keywords    Delete Composition Using API    AND
-    ...         Restore Initial Version Of Composition DV_IDENTIFIER Values     ${idenfitierKeyToBeChanged}
+    ...         Restore Initial Version Of Composition DV_IDENTIFIER Values     ${idenfitierKeyToBeChanged}     AND
+    ...         (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***

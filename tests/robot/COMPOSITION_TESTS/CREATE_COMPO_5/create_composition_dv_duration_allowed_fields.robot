@@ -81,7 +81,7 @@ Test DV Duration Allowed Field Constraints
     CommitCompositionTemplate     ${dv_duration_composition_value}    ${expectedCode}
     [Teardown]      Run Keywords    Remove File     ${newOPTFile}   AND
     ...     Admin Delete EHR    AND
-    ...     Delete Template Using API
+    ...     Delete Template Using API   AND     (admin) delete all OPTs
 
 CommitCompositionTemplate
     [Arguments]     ${dvDurationValue}      ${expectedCode}

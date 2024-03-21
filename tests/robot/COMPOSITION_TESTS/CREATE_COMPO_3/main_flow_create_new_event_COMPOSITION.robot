@@ -44,6 +44,7 @@ Main flow create new event COMPOSITION FLAT
     commit composition   format=FLAT
     ...                  composition=nested.en.v1__full.xml.flat.json
     check the successful result of commit composition   nesting
+    [Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 Alternative flow create COMPOSITION After Delete And Upload Template
     [Documentation]     Bug CDR-1174 fixed and closed.
@@ -63,7 +64,8 @@ Alternative flow create COMPOSITION After Delete And Upload Template
     commit composition   format=CANONICAL_JSON
     ...                  composition=nested.en.tmp.v1__full_without_links.json
     Status Should Be    201
-    [Teardown]      (admin) delete OPT
+    [Teardown]      Run Keywords    (admin) delete OPT      AND
+                    ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 # Main flow create new event COMPOSITION TDD
 #     [Tags]    future

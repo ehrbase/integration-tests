@@ -142,7 +142,8 @@ Configure And Commit DV Date Time Validity Kind Constraints - C_DATE_TIME With C
     [Teardown]      Run Keywords
     ...     Delete Composition Using API    AND
     ...     Delete Template Using API   AND
-    ...     Remove File     ${newOPTFile}
+    ...     Remove File     ${newOPTFile}   AND
+    ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 Load XML File With OPT
     [Documentation]     Loads XML content from OPT file.

@@ -484,7 +484,8 @@ Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021-10-24T05:30:47Z - Upper 2022-
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
     #[Teardown]     Delete Composition Using API
-    [Teardown]     Run Keywords     Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]     Run Keywords     Delete Composition Using API    AND     Delete Template Using API   AND
+                   ...      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***

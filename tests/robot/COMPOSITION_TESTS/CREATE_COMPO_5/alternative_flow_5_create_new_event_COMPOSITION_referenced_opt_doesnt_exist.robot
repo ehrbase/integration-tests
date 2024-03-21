@@ -23,6 +23,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Suite Setup     Precondition
 #Suite Teardown  restart SUT
@@ -38,6 +39,7 @@ Alternative flow 5 create new event COMPOSITION referenced opt doesnt exist CANO
     commit composition   format=CANONICAL_XML
     ...                  composition=nested.en.v1__invalid_opt_doesnt_exist.xml
     check status_code of commit composition    422
+    [Teardown]  Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 #Alternative flow 5 create new event COMPOSITION referenced opt doesnt exist TDD
 #    [Tags]    future

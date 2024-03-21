@@ -98,7 +98,8 @@ Composition With DV_ORDINAL Symbol local::at0005 And Value 1 With Constraints
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***

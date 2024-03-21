@@ -117,7 +117,8 @@ Composition With DV_COUNT Magnitude 30 Open Constraint
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 Composition With DV_COUNT Magnitude NULL Range Constraint
     [Tags]      Negative
@@ -222,7 +223,8 @@ Composition With DV_COUNT Magnitude 25 Range Constraint
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 *** Keywords ***
 Precondition

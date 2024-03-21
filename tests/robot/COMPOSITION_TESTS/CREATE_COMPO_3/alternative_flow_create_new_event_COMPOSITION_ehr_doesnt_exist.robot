@@ -23,6 +23,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Suite Setup     Precondition
 
@@ -69,6 +70,7 @@ Alternative flow 6 create new persistent COMPOSITION EHR doesnt exist FLAT
     commit composition   format=FLAT
     ...                  composition=persistent_minimal.en.v1__full.xml.flat.json
     check status_code of commit composition    404
+    [Teardown]      (admin) delete all OPTs
 
 #Alternative flow 6 create new persistent COMPOSITION EHR doesnt exist TDD
 #    [Tags]    future

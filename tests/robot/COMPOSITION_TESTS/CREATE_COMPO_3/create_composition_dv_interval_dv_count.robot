@@ -175,7 +175,8 @@ Test DV_INTERVAL<DV_COUNT> Lower 200 - Upper 100 - Lower Unb 0 - Upper Unb 0 - L
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]      Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]      Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                    ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 3.7.2. Test DV_INTERVAL<DV_COUNT> Lower 0 - Upper 100 - Lower Unb 0 - Upper Unb 0 - Lower Incl 1 - Upper Incl 1 With Lower Upper Constraint
     [Tags]      Positive
@@ -258,7 +259,8 @@ Test DV_INTERVAL<DV_COUNT> Lower -10 - Upper 200 - Lower Unb 0 - Upper Unb 0 - L
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]      Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]      Run Keywords    Delete Composition Using API    AND     Delete Template Using API   AND
+                    ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 ### Below cases are not valid as NULL value is not possible on DV_COUNT.magnitude
 #CDR-539 - is not valid bug

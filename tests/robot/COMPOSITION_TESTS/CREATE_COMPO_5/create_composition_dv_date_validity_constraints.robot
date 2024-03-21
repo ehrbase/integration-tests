@@ -61,7 +61,8 @@ Test DV_DATE With Constraints On Month And/Or Day Configured In C_DATE
     yyyy-mm-dd      2022-10-24      ${positiveCode}
     yyyy-mm-??      2022-10-24      ${positiveCode}
     yyyy-??-??      2022-10-24      ${positiveCode}
-    [Teardown]      TRACE JIRA ISSUE    CDR-498
+    [Teardown]      Run Keywords    TRACE JIRA ISSUE    CDR-498     AND     (admin) delete all OPTs
+
 
 *** Keywords ***
 Test DV_DATE With Constraints On Month And/Or Day

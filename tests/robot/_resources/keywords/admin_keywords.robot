@@ -71,6 +71,8 @@ Resource        template_opt1.4_keywords.robot
                         prepare new request session
                         ...    Prefer=return=${prefer_return}
                         Set Test Variable    ${prefer_return}    ${prefer_return}
+						Create Session       ${SUT}    ${ADMIN_BASEURL}    debug=2
+                        ...                  verify=True	#auth=${CREDENTIALS}
     ${resp}             DELETE On Session   ${SUT}  /template/${template_id}
                         ...     expected_status=anything    headers=${headers}
                         Set Test Variable    ${response}    ${resp}
