@@ -22,8 +22,9 @@ Documentation       EHRScape Tests
 
 Resource            ../_resources/keywords/composition_keywords.robot
 Resource            ../_resources/keywords/aql_query_keywords.robot
+Resource            ../_resources/keywords/admin_keywords.robot
 
-Suite Setup         SuitePrecondition
+Suite Setup         Set Library Search Order For Tests
 #Suite Teardown      restart SUT
 
 
@@ -57,6 +58,7 @@ Main flow create and update Composition
     check composition exists
     Set Test Variable   ${response}    ${response.json()}
     Should Contain      ${response["compositionUid"]}   ${compoUidURL}
+    [Teardown]      (admin) delete ehr
     ## Check query endpoint for COMPOSITION
     #${query}=           Catenate
     #...                 SELECT
@@ -91,6 +93,7 @@ Main flow create and delete Composition
     ## Delete action
     delete composition  ${composition_uid}      ehrScape=true
     get deleted composition (EHRScape)
+    [Teardown]      (admin) delete ehr
 
 Create Composition With Period Having Fractional Unit
     [Tags]      not-ready   to-be-enabled
@@ -119,6 +122,7 @@ Create Composition With Period Having Fractional Unit
     Remove File     ${compo_file_path}/${composition_file_tmp}
     Should Be Equal As Strings      ${response.status_code}         400
     Should Be Equal As Strings      ${response.json()["message"]}   Text cannot be parsed to a Period:P1.5Y
+    [Teardown]      (admin) delete ehr
     #check the successful result of commit composition
     #(FLAT) get composition by composition_uid       ${composition_uid}
     #Should Be Equal As Strings
@@ -131,7 +135,7 @@ Create Composition With Period Having Fractional Unit
 Create Template
     [Arguments]    ${fileLocation}
     Upload OPT ECIS    ${fileLocation}
-	
+
 SuitePrecondition
     ${variable_exists}      Run Keyword And Return Status
     ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
