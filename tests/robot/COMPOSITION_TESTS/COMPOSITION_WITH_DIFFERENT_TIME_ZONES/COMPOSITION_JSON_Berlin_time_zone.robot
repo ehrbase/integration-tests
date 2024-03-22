@@ -22,6 +22,7 @@ Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/aql_query_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 
 Force Tags
@@ -38,8 +39,7 @@ COMPOSITION JSON with Berlin time zone using Get
     get versioned composition - version at time    ${time_1}
     check content of compositions version at time (JSON)    time_1    original value
 
-
-    #[Teardown]    restart SUT
+    [Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 #COMPOSITION JSON with Berlin time zone using AQL
