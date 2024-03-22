@@ -23,11 +23,13 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Suite Setup       Precondition
 #Suite Teardown  restart SUT
 
 Force Tags      COMPOSITION_ism_transitions
+
 
 *** Test Cases ***
 Create Composition With Valid ISM Transition
@@ -76,6 +78,7 @@ Create Composition With ISM Wrong Current State
     ...     /content[openEHR-EHR-ACTION.medication.v1]/ism_transition:
     Should Contain      ${response.json()["message"]}
     ...     IsmTransition contains invalid current_state
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***

@@ -25,6 +25,7 @@ Metadata        TOP_TEST_SUITE    COMPOSITION
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/aql_query_keywords.robot
 Resource        ../../_resources/keywords/directory_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Suite Setup     Precondition
 #Suite Teardown  restart SUT
@@ -34,12 +35,12 @@ Suite Setup     Precondition
 Check Headers with (JSON)
     create EHR wih x forwarded headers
     check that headers location response has    https   example.com    333
-    #[Teardown]    restart SUT
+    [Teardown]      (admin) delete ehr
 
 Check Headers with (XML)
     create EHR wih x forwarded headers   XML
     check that headers location response has    https   example.com    333
-    #[Teardown]    restart SUT
+    [Teardown]      (admin) delete ehr
 
 Check Headers with Commit Composition
     create EHR wih x forwarded headers
@@ -50,7 +51,8 @@ Check Headers with Commit Composition
     check the successful result of commit composition
     check that composition headers location response has    https   example.com    333
     check that composition body location response has    https   example.com    333
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
+
 
 *** Keywords ***
 Precondition
