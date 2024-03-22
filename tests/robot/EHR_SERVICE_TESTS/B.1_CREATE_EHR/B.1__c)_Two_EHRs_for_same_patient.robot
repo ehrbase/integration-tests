@@ -25,6 +25,7 @@ Documentation   B.1.c) Alternative flow 2: Create two EHRs for the same patient
 Metadata        TOP_TEST_SUITE    EHR_SERVICE
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
@@ -42,10 +43,11 @@ Create Same EHR Twice For The Same Patient (JSON)
     generate random subject_id
     create new EHR for subject_id (JSON)    ${subject_id}
     Status Should Be    204
+    Get EHR ID From Location Headers
     create new EHR for subject_id (JSON)    ${subject_id}
 
     verify response
-
+    [Teardown]      (admin) delete ehr
 
 
 *** Keywords ***
@@ -53,3 +55,9 @@ verify response
     Status Should Be    409
 
     # TODO: response should indicate a conflict with an already existing EHR with the same subject id, namespace pair.
+
+Get EHR ID From Location Headers
+    [Documentation]     {response} is the variable set after POST or PUT EHR calls
+    ...                 Set as test var ${ehr_id} from Location key located in response.headers
+    @{location_split}     Split String      ${response.headers['Location']}     /
+    Set Test Variable     ${ehr_id}         ${location_split}[-1]
