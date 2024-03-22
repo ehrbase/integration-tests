@@ -109,9 +109,9 @@ Create Composition With 24 Hours Average - Invalid Value
     commit composition      format=FLAT
     ...                     composition=${composition_file}
     Log     ${response.content}
-    Status Should Be        400
+    Status Should Be        422
     ${errType}      Set Variable     ${response.json()['error']}
-    Should Be Equal As Strings     ${errType}      Bad Request
+    Should Be Equal As Strings     ${errType}      Unprocessable Entity
     ${errMsg}      Set Variable     ${response.json()['message']}
     Set Test Variable       ${errType}
     Set Test Variable       ${errMsg}

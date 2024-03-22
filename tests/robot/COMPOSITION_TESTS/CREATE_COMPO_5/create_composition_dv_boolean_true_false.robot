@@ -70,7 +70,7 @@ Composition With DV_BOOLEAN.value False - C_BOOLEAN True Valid - False Invalid
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Delete Composition Using API    AND
+    [Teardown]  Run Keywords    Delete Composition Using API    AND
                 ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 
