@@ -440,10 +440,14 @@ Retrieve EHR By Ehr Id (ECIS)
     ...                 DEPENDENCY: `prepare new request session` and keywords that
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
+    Create Session      ${SUT}    ${ECISURL}    debug=2
+                        ...     verify=True
     &{headers}      Create Dictionary       Accept=application/json
     ${resp}     GET on session     ${SUT}    /ehr/${ehr_id}
                 ...     expected_status=anything        headers=${headers}
                 Status Should Be    200
+                Set Test Variable       ${resp}         ${resp}
+                Set Test Variable       ${response}     ${resp}
 
 retrieve EHR by subject_id
     [Documentation]     Retrieves EHR with specified subject_id and namespace.
@@ -466,11 +470,15 @@ Retrieve EHR By Subject Id And Subject Namespace (ECIS)
     ...                             - `create new EHR`
     ...                             - `generate random subject_id`
     [Arguments]         ${subject_id}=74777-1259      ${subject_namespace}=testIssuer
+    Create Session      ${SUT}    ${ECISURL}    debug=2
+                        ...     verify=True
     &{headers}      Create Dictionary       Accept=application/json
-    &{resp}=            REST.GET    ${ECISURL}/ehr?subjectId=${subject_id}&subjectNamespace=${subject_namespace}
-    ...     headers=&{headers}
-                        Output     response
-                        Integer    response status    200
+    &{prms}         Create Dictionary       subjectId=${subject_id}     subjectNamespace=${subject_namespace}
+    ${resp}         GET on session      ${SUT}      /ehr/${ehr_id}     params=${prms}
+                    ...     expected_status=anything        headers=${headers}
+                    Status Should Be    200
+                    Set Test Variable       ${resp}         ${resp}
+                    Set Test Variable       ${response}     ${resp}
 
 check content of retrieved EHR (JSON)
 
@@ -677,13 +685,13 @@ get versioned ehr_status of EHR by version uid
 Update EHR Status (ECIS)
     [Documentation]     Sets status of EHR with given `ehr_id` (ECIS endpoint).
     [Arguments]     ${ehr_id}       ${ehr_status_body}
-    Set To Dictionary   ${headers}      Content-Type=application/json   Accept=application/json
-    ${resp}=        PUT On Session      ${SUT}      /ehr/${ehr_id}/status       json=${ehr_status_body}
+    &{headers}      Create Dictionary   Content-Type=application/json   Accept=application/json
+    Create Session      ${SUT}    ${ECISURL}    debug=2
+                        ...     verify=True
+    ${resp}         PUT On Session      ${SUT}      /ehr/${ehr_id}/status      json=${ehr_status_body}
                     ...     expected_status=anything        headers=${headers}
-#    &{resp}         REST.PUT        ${ECISURL}/ehr/${ehr_id}/status    body=${ehr_status_body}
-#                    ...     headers={"Content-Type": "application/json"}
-#                    ...     headers={"Accept": "application/json"}
                     Status Should Be    200
+                    Set Test Variable       ${resp}         ${resp}
                     Set Test Variable       ${response}     ${resp}
 
 set ehr_status of EHR
