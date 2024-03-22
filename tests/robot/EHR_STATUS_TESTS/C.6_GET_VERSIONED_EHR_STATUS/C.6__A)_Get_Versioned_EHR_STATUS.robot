@@ -25,6 +25,7 @@ Metadata    Created    2021.01.26
 Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
@@ -46,6 +47,7 @@ Force Tags
     Status Should Be    200
     Should Be Equal As Strings    ${versioned_status_uid}    ${response.json()['uid']['value']}
     Should Be Equal As Strings    ${ehr_id}    ${response.json()['owner_id']['id']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 2. Get Versioned Status Of Existing EHR With Two Status Versions (JSON)
@@ -62,6 +64,7 @@ Force Tags
     Status Should Be    200
     Should Be Equal As Strings    ${versioned_status_uid}    ${response.json()['uid']['value']}
     Should Be Equal As Strings    ${ehr_id}    ${response.json()['owner_id']['id']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 3. Get Versioned Status Of Non-Existing EHR (JSON)

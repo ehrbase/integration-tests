@@ -25,6 +25,7 @@ Metadata    Created    2021.01.26
 Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
@@ -50,6 +51,7 @@ Force Tags
 
     ${item1} =    Get From List    ${response.json()}    0
     Should Be Equal As Strings    ${ehrstatus_uid}    ${item1['version_id']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 2. Get Revision History of Versioned Status Of Existing EHR With Two Status Versions (JSON)
@@ -73,6 +75,7 @@ Force Tags
 
     ${item2} =    Get From List    ${response.json()}    1
     Should Be Equal As Strings    ${ehrstatus_uid[0:-1]}2    ${item2['version_id']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 3. Get Correct Ordered Revision History of Versioned Status Of Existing EHR With Two Status Versions (JSON)
@@ -113,6 +116,7 @@ Force Tags
 
     # comment: Idea - newer/higher timestamp - older/lesser timestamp = number larger than 0 IF correct
     Should Be True 	${timediff} > 0
+    [Teardown]      (admin) delete ehr
 
 
 4. Get Revision History of Versioned Status Of Non-Existing EHR (JSON)

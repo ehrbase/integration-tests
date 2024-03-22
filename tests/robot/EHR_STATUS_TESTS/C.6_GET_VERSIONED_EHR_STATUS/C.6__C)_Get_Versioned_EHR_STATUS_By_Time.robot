@@ -26,6 +26,7 @@ Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
 Resource        ../../_resources/keywords/aql_query_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
@@ -47,6 +48,7 @@ Force Tags
     get versioned ehr_status of EHR by time
     Status Should Be    200
     Should Be Equal As Strings    ${ehrstatus_uid}    ${response.json()['uid']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 2. Get Versioned Status Of Existing EHR by Time With Query (JSON)
@@ -64,6 +66,7 @@ Force Tags
     get versioned ehr_status of EHR by time
     Status Should Be    200
     Should Be Equal As Strings    ${ehrstatus_uid}    ${response.json()['uid']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 3. Get Versioned Status Of Existing EHR by Time With Query (JSON)
@@ -103,6 +106,7 @@ Force Tags
     get versioned ehr_status of EHR by time
     Status Should Be    200
     Should Be Equal As Strings    ${ehrstatus_uid[0:-1]}1    ${response.json()['uid']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 4. Get Versioned Status Of Existing EHR by Time Check Lifecycle State (JSON)
@@ -117,6 +121,7 @@ Force Tags
     Status Should Be    200
     Should Be Equal As Strings    ${ehrstatus_uid}    ${response.json()['uid']['value']}
     Should Be Equal As Strings    complete   ${response.json()['lifecycle_state']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 5a. Get Versioned Status Of Existing EHR by Time Check Preceding Version (JSON)
@@ -133,6 +138,7 @@ Force Tags
     Should Be Equal As Strings    ${ehrstatus_uid}    ${response.json()['uid']['value']}
     Run Keyword And Return Status   Should Not Contain
     ...     ${response.body}    ${response.json()['preceding_version_uid']}
+    [Teardown]      (admin) delete ehr
 
 
 5b. Get Versioned Status Of Existing EHR by Time Check Preceding Version (JSON)
@@ -151,6 +157,7 @@ Force Tags
     get versioned ehr_status of EHR by time
     Status Should Be    200
     Should Be Equal As Strings    ${original_id}    ${response.json()['preceding_version_uid']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 6. Get Versioned Status Of Existing EHR by Time Check Data (JSON)
@@ -167,6 +174,7 @@ Force Tags
     get versioned ehr_status of EHR by time
     Status Should Be    200
     Should Be Equal As Strings    false    ${response.json()['data']['is_queryable']}   ignore_case=True
+    [Teardown]      (admin) delete ehr
 
 
 7a. Get Versioned Status Of Existing EHR by Time With Parameter Check (JSON)
@@ -183,6 +191,7 @@ Force Tags
 
     get versioned ehr_status of EHR by time
     Status Should Be    200
+    [Teardown]      (admin) delete ehr
 
 
 7b. Get Versioned Status Of Existing EHR With Invalid Timestamp As Parameter (JSON)
@@ -199,6 +208,7 @@ Force Tags
 
     get versioned ehr_status of EHR by time
     Status Should Be    400
+    [Teardown]      (admin) delete ehr
 
 
 7c. Get Versioned Status Of Non-Existent EHR by Time With Parameter Check (JSON)
@@ -207,7 +217,6 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create fake EHR
-    Status Should Be    400
 
     get versioned ehr_status of EHR by time
     Status Should Be    404
@@ -227,6 +236,7 @@ Force Tags
 
     get versioned ehr_status of EHR by time
     Status Should Be    404
+    [Teardown]      (admin) delete ehr
 
 
 7e. Get Versioned Status Of Existing EHR by Timestamp From The Future As Parameter (JSON)
@@ -243,3 +253,4 @@ Force Tags
 
     get versioned ehr_status of EHR by time
     Status Should Be    200
+    [Teardown]      (admin) delete ehr

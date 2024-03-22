@@ -40,6 +40,7 @@ Documentation   C.1.a) Main flow: Get status of an existing EHR
 Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
@@ -59,6 +60,7 @@ Get Status Of Existing EHR (JSON)
     get ehr_status of EHR
 
     Verify Response (JSON)
+    [Teardown]      (admin) delete ehr
 
 
 Get Status Of Existing EHR (XML)
@@ -70,6 +72,7 @@ Get Status Of Existing EHR (XML)
     get ehr_status of EHR
 
     verify response (XML)
+    [Teardown]      (admin) delete ehr
 
 
 
