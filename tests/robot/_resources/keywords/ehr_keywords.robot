@@ -455,9 +455,9 @@ retrieve EHR by subject_id
     ...                             create and expose an `subject_id` e.g.
     ...                             - `create new EHR`
     ...                             - `generate random subject_id`
-
+    [Arguments]         ${subject_namespace}=patients
     &{prms}=            Create Dictionary   subject_id=${subject_id}
-                        ...     subject_namespace=patients
+                        ...     subject_namespace=${subject_namespace}
 
     ${resp}=            GET On Session      ${SUT}      /ehr    params=&{prms}
                         ...     expected_status=anything        headers=${headers}

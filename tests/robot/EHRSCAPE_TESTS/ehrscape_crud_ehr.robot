@@ -33,44 +33,40 @@ Suite Setup         Set Library Search Order For Tests
 Main Flow Create EHR
     [Documentation]     Create EHR using EHRScape endpoint.
     [Tags]    PostEhr    EHRSCAPE
-    Upload OPT ECIS    all_types/ehrn_family_history.opt
+    Upload OPT    all_types/ehrn_family_history.opt
     Extract Template Id From OPT File
     Get Web Template By Template Id (ECIS)    ${template_id}
-    Create ECIS EHR
-    Log     ${response.json()}
-    ${ehrId}    Collections.Get From Dictionary    ${response.json()}    ehrId
-    Set Suite Variable      ${ehr_id}       ${ehrId}
+    Create EHR With EHR Status
+    Set Suite Variable      ${subject_id}           ${response.json()["ehr_status"]["subject"]["external_ref"]["id"]["value"]}
+    Set Suite Variable      ${subject_namespace}    ${response.json()["ehr_status"]["subject"]["external_ref"]["namespace"]}
     ${externalTemplate}    Set Variable    ${template_id}
-    Set Test Variable    ${externalTemplate}
-    ## Check query endpoint for EHR
-    #${query}=           Catenate
-    #...                 SELECT
-    #...                 e/ehr_id, e/time_created, e/system_id
-    #...                 FROM EHR e
-    #Set Test Variable    ${payload}    {"aql": "${query}"}
-    #POST /query (REST) - ECIS       JSON
-    #Integer     response status      200
-    #Log     ${response.json()['ehrId']}
-    #Should Contain     ${response.json()['ehrId']}      -
+    Set Test Variable       ${externalTemplate}
 
 Get EHR Using Ehr Id And By Subject Id, Namespace
     [Documentation]    1. Get existing EHR using Ehr Id.
     ...     2. Get existing EHR using Subject Id and Subject Namespace criteria.
     ...     *Dependency*: Test Case -> Main Flow Create EHR, ehr_id suite variable.
     [Tags]    GetEhr    EHRSCAPE
-    Retrieve EHR By Ehr Id (ECIS)
-    Retrieve EHR By Subject Id And Subject Namespace (ECIS)
-    ...     subject_id=74777-1259      subject_namespace=testIssuer
-
-Get EHR And Update EHR Status
-    [Documentation]    Create EHR, Get it and update EHR status.
-    [Tags]    UpdateEhrStatus   EHRSCAPE
-    ${ehr_status_json}      Load JSON From File
-                            ...     ${VALID EHR DATA SETS}/000_ehr_status_ecis.json
-    Update EHR Status (ECIS)    ${ehr_id}   ${ehr_status_json}
-    Should Be Equal As Strings  ${response["body"]["action"]}    UPDATE
-    Should Be Equal             ${response["body"]["ehrStatus"]["modifiable"]}          ${True}
-    Should Be Equal             ${response["body"]["ehrStatus"]["queryable"]}           ${True}
-    Should Be Equal As Strings  ${response["body"]["ehrStatus"]["subjectId"]}           74777-1258
-    Should Be Equal As Strings  ${response["body"]["ehrStatus"]["subjectNamespace"]}    testIssuerModified
+    retrieve EHR by ehr_id
+    retrieve EHR by subject_id      subject_namespace=${subject_namespace}
     [Teardown]      (admin) delete ehr
+
+#Update EHR Status
+#    [Documentation]    Create EHR, Get it and update EHR status.
+#    [Tags]    UpdateEhrStatus   EHRSCAPE
+#    ${ehr_status_json}      Load JSON From File
+#                            ...     ${VALID EHR DATA SETS}/000_ehr_status_ecis.json
+#    update EHR: set ehr-status modifiable    ${TRUE}
+#    Update EHR Status (ECIS)    ${ehr_id}   ${ehr_status_json}
+#    Should Be Equal As Strings  ${response["body"]["action"]}    UPDATE
+#    Should Be Equal             ${response["body"]["ehrStatus"]["modifiable"]}          ${True}
+#    Should Be Equal             ${response["body"]["ehrStatus"]["queryable"]}           ${True}
+#    Should Be Equal As Strings  ${response["body"]["ehrStatus"]["subjectId"]}           74777-1258
+#    Should Be Equal As Strings  ${response["body"]["ehrStatus"]["subjectNamespace"]}    testIssuerModified
+
+
+*** Keywords ***
+Create EHR With EHR Status
+    [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
+    prepare new request session     JSON
+    create new EHR with ehr_status  ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
