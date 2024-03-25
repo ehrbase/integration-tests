@@ -27,4 +27,4 @@ Documentation    COMPOSITION TEST SUITE
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
 
-Force Tags    COMPOSITION_create
+Force Tags    COMPOSITION_create_3
