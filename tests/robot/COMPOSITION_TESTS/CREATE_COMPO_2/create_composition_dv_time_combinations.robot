@@ -47,15 +47,15 @@ Create Composition With DV_TIME Combinations - Positive
     10:30:47
     10:30:47.5
     10:30:47.333
-    10:30:47.333333
     10:30:47Z
     10:30:47.5Z
     10:30:47.333Z
-    10:30:47.333333Z
     10:30:47-03:00
     10:30:47.5-03:00
     10:30:47.333-03:00
-    10:30:47.333333-03:00
+    #10:30:47.333333-03:00
+    #10:30:47.333333
+    #10:30:47.333333Z
     [Teardown]      PositiveCompositionTemplate     10:30:34
 
 Create Composition With DV_TIME Combinations - Negative

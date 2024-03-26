@@ -220,6 +220,108 @@ Test DV_INTERVAL<DV_QUANTITY> Lower -10 - Upper 200 - Lower Unb 0 - Upper Unb 0 
     [Teardown]     Run Keywords     Delete Composition Using API    AND     Delete Template Using API   AND
                    ...      (admin) delete ehr      AND     (admin) delete all OPTs
 
+
+*** Keywords ***
+Precondition
+    Upload OPT    ${optFile}
+    create EHR
+
+Commit Composition With Modified DV_INTERVAL<DV_QUANTITY> Values
+    [Arguments]     ${dvLower}=1
+    ...             ${dvUpper}=10
+    ...             ${dvLowerUnb}=${FALSE}
+    ...             ${dvUpperUnb}=${FALSE}
+    ...             ${dvLowerIncl}=${TRUE}
+    ...             ${dvUpperIncl}=${TRUE}
+    ...             ${dvIntervalQuantityUnits}=mm
+    ...             ${expectedCode}=201
+    Load Json File With Composition
+    ${initalJson}           Load Json From File     ${compositionFilePath}
+    ${returnedJsonFile}     Change Json KeyValue and Save Back To File
+    ...     ${initalJson}   ${dvLower}  ${dvUpper}
+    ...     ${dvLowerUnb}   ${dvUpperUnb}   ${dvLowerIncl}  ${dvUpperIncl}  ${dvIntervalQuantityUnits}
+    commit composition      format=CANONICAL_JSON
+    ...                     composition=${composition_file}
+    ${isStatusCodeEqual}    Run Keyword And Return Status
+    ...     Should Be Equal As Strings      ${response.status_code}     ${expectedCode}
+    ${isUidPresent}     Run Keyword And Return Status
+    ...     Set Test Variable   ${version_uid}    ${response.json()['uid']['value']}
+    IF      ${isUidPresent} == ${TRUE}
+        @{split_compo_uid}      Split String        ${version_uid}      ::
+        Set Suite Variable      ${system_id_with_tenant}    ${split_compo_uid}[1]
+        ${short_uid}        Remove String       ${version_uid}    ::${system_id_with_tenant}::1
+                            Set Suite Variable   ${versioned_object_uid}    ${short_uid}
+    ELSE
+        Set Suite Variable   ${versioned_object_uid}    ${None}
+    END
+    [Return]    ${isStatusCodeEqual}
+
+Change Json KeyValue and Save Back To File
+    [Documentation]     Updates DV_INTERVAL<DV_COUNT> lower, upper, lower_unb, upper_unb, lower_incl, upper_incl
+    ...     in Composition json, using arguments values.
+    ...     Takes 8 arguments:
+    ...     1 - jsonContent = Loaded Json content
+    ...     2 - value to be on dv_interval.lower.magnitude
+    ...     3 - value to be on dv_interval.upper.magnitude
+    ...     4 - value to be on dv_interval.lower_unbounded
+    ...     5 - value to be on dv_interval.upper_unbounded
+    ...     6 - value to be on dv_interval.lower_included
+    ...     7 - value to be on dv_interval.upper_included
+    ...     8 - value to be on dv_interval.lower.units and dv_interval.upper.units
+    [Arguments]     ${jsonContent}      ${dvLowerToUpdate}      ${dvUpperToUpdate}
+    ...     ${dvLowerUnbToUpdate}    ${dvUpperUnbToUpdate}      ${dvLowerInclToUpdate}
+    ...     ${dvUpperInclToUpdate}   ${dvIntervalQuantityUnitsToUpdate}=mm
+    ${dvLowerJsonPath}     Set Variable
+    ...     content[0].data.events[0].data.items[0].value.lower.magnitude
+    ${dvLowerUnitsJsonPath}     Set Variable
+    ...     content[0].data.events[0].data.items[0].value.lower.units
+    ${dvUpperJsonPath}     Set Variable
+    ...     content[0].data.events[0].data.items[0].value.upper.magnitude
+    ${dvUpperUnitsJsonPath}     Set Variable
+    ...     content[0].data.events[0].data.items[0].value.upper.units
+    ${dvLowerUnbJsonPath}     Set Variable
+    ...     content[0].data.events[0].data.items[0].value.lower_unbounded
+    ${dvUpperUnbJsonPath}     Set Variable
+    ...     content[0].data.events[0].data.items[0].value.upper_unbounded
+    ${dvLowerInclJsonPath}     Set Variable
+    ...     content[0].data.events[0].data.items[0].value.lower_included
+    ${dvUpperInclJsonPath}     Set Variable
+    ...     content[0].data.events[0].data.items[0].value.upper_included
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${dvLowerJsonPath}
+    ...             new_value=${dvLowerToUpdate}
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${dvLowerUnitsJsonPath}
+    ...             new_value=${dvIntervalQuantityUnitsToUpdate}
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${dvUpperJsonPath}
+    ...             new_value=${dvUpperToUpdate}
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${dvUpperUnitsJsonPath}
+    ...             new_value=${dvIntervalQuantityUnitsToUpdate}
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${dvLowerUnbJsonPath}
+    ...             new_value=${dvLowerUnbToUpdate}
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${dvUpperUnbJsonPath}
+    ...             new_value=${dvUpperUnbToUpdate}
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${dvLowerInclJsonPath}
+    ...             new_value=${dvLowerInclToUpdate}
+    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${dvUpperInclJsonPath}
+    ...             new_value=${dvUpperInclToUpdate}
+    ${changedDvLower}   Get Value From Json     ${jsonContent}      ${dvLowerJsonPath}
+    ${changedDvUpper}   Get Value From Json     ${jsonContent}      ${dvUpperJsonPath}
+    ${changedDvLowerUnb}   Get Value From Json      ${jsonContent}      ${dvLowerUnbJsonPath}
+    ${changedDvUpperUnb}   Get Value From Json      ${jsonContent}      ${dvUpperUnbJsonPath}
+    ${changedDvLowerIncl}   Get Value From Json     ${jsonContent}      ${dvLowerInclJsonPath}
+    ${changedDvUpperIncl}   Get Value From Json     ${jsonContent}      ${dvUpperInclJsonPath}
+    ${json_str}     Convert JSON To String    ${json_object}
+    Create File     ${compositionFilePath}    ${json_str}
+    [return]    ${compositionFilePath}
+
+
 ### Below cases are not valid as NULL value is not possible on DV_QUANTITY.magnitude
 #CDR-539 - is not valid bug
 
@@ -380,104 +482,3 @@ Test DV_INTERVAL<DV_QUANTITY> Lower -10 - Upper 200 - Lower Unb 0 - Upper Unb 0 
 #        Fail    Commit composition expected status code ${expectedStatusCode} is different.
 #    END
 #    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-539
-
-
-*** Keywords ***
-Precondition
-    Upload OPT    ${optFile}
-    create EHR
-
-Commit Composition With Modified DV_INTERVAL<DV_QUANTITY> Values
-    [Arguments]     ${dvLower}=1
-    ...             ${dvUpper}=10
-    ...             ${dvLowerUnb}=${FALSE}
-    ...             ${dvUpperUnb}=${FALSE}
-    ...             ${dvLowerIncl}=${TRUE}
-    ...             ${dvUpperIncl}=${TRUE}
-    ...             ${dvIntervalQuantityUnits}=mm
-    ...             ${expectedCode}=201
-    Load Json File With Composition
-    ${initalJson}           Load Json From File     ${compositionFilePath}
-    ${returnedJsonFile}     Change Json KeyValue and Save Back To File
-    ...     ${initalJson}   ${dvLower}  ${dvUpper}
-    ...     ${dvLowerUnb}   ${dvUpperUnb}   ${dvLowerIncl}  ${dvUpperIncl}  ${dvIntervalQuantityUnits}
-    commit composition      format=CANONICAL_JSON
-    ...                     composition=${composition_file}
-    ${isStatusCodeEqual}    Run Keyword And Return Status
-    ...     Should Be Equal As Strings      ${response.status_code}     ${expectedCode}
-    ${isUidPresent}     Run Keyword And Return Status
-    ...     Set Test Variable   ${version_uid}    ${response.json()['uid']['value']}
-    IF      ${isUidPresent} == ${TRUE}
-        @{split_compo_uid}      Split String        ${version_uid}      ::
-        Set Suite Variable      ${system_id_with_tenant}    ${split_compo_uid}[1]
-        ${short_uid}        Remove String       ${version_uid}    ::${system_id_with_tenant}::1
-                            Set Suite Variable   ${versioned_object_uid}    ${short_uid}
-    ELSE
-        Set Suite Variable   ${versioned_object_uid}    ${None}
-    END
-    [Return]    ${isStatusCodeEqual}
-
-Change Json KeyValue and Save Back To File
-    [Documentation]     Updates DV_INTERVAL<DV_COUNT> lower, upper, lower_unb, upper_unb, lower_incl, upper_incl
-    ...     in Composition json, using arguments values.
-    ...     Takes 8 arguments:
-    ...     1 - jsonContent = Loaded Json content
-    ...     2 - value to be on dv_interval.lower.magnitude
-    ...     3 - value to be on dv_interval.upper.magnitude
-    ...     4 - value to be on dv_interval.lower_unbounded
-    ...     5 - value to be on dv_interval.upper_unbounded
-    ...     6 - value to be on dv_interval.lower_included
-    ...     7 - value to be on dv_interval.upper_included
-    ...     8 - value to be on dv_interval.lower.units and dv_interval.upper.units
-    [Arguments]     ${jsonContent}      ${dvLowerToUpdate}      ${dvUpperToUpdate}
-    ...     ${dvLowerUnbToUpdate}    ${dvUpperUnbToUpdate}      ${dvLowerInclToUpdate}
-    ...     ${dvUpperInclToUpdate}   ${dvIntervalQuantityUnitsToUpdate}=mm
-    ${dvLowerJsonPath}     Set Variable
-    ...     content[0].data.events[0].data.items[0].value.lower.magnitude
-    ${dvLowerUnitsJsonPath}     Set Variable
-    ...     content[0].data.events[0].data.items[0].value.lower.units
-    ${dvUpperJsonPath}     Set Variable
-    ...     content[0].data.events[0].data.items[0].value.upper.magnitude
-    ${dvUpperUnitsJsonPath}     Set Variable
-    ...     content[0].data.events[0].data.items[0].value.upper.units
-    ${dvLowerUnbJsonPath}     Set Variable
-    ...     content[0].data.events[0].data.items[0].value.lower_unbounded
-    ${dvUpperUnbJsonPath}     Set Variable
-    ...     content[0].data.events[0].data.items[0].value.upper_unbounded
-    ${dvLowerInclJsonPath}     Set Variable
-    ...     content[0].data.events[0].data.items[0].value.lower_included
-    ${dvUpperInclJsonPath}     Set Variable
-    ...     content[0].data.events[0].data.items[0].value.upper_included
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${dvLowerJsonPath}
-    ...             new_value=${dvLowerToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${dvLowerUnitsJsonPath}
-    ...             new_value=${dvIntervalQuantityUnitsToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${dvUpperJsonPath}
-    ...             new_value=${dvUpperToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${dvUpperUnitsJsonPath}
-    ...             new_value=${dvIntervalQuantityUnitsToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${dvLowerUnbJsonPath}
-    ...             new_value=${dvLowerUnbToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${dvUpperUnbJsonPath}
-    ...             new_value=${dvUpperUnbToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${dvLowerInclJsonPath}
-    ...             new_value=${dvLowerInclToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${dvUpperInclJsonPath}
-    ...             new_value=${dvUpperInclToUpdate}
-    ${changedDvLower}   Get Value From Json     ${jsonContent}      ${dvLowerJsonPath}
-    ${changedDvUpper}   Get Value From Json     ${jsonContent}      ${dvUpperJsonPath}
-    ${changedDvLowerUnb}   Get Value From Json      ${jsonContent}      ${dvLowerUnbJsonPath}
-    ${changedDvUpperUnb}   Get Value From Json      ${jsonContent}      ${dvUpperUnbJsonPath}
-    ${changedDvLowerIncl}   Get Value From Json     ${jsonContent}      ${dvLowerInclJsonPath}
-    ${changedDvUpperIncl}   Get Value From Json     ${jsonContent}      ${dvUpperInclJsonPath}
-    ${json_str}     Convert JSON To String    ${json_object}
-    Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
