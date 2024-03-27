@@ -137,7 +137,7 @@ Definition API - GET All Stored Queries
         Log     ${resp_versions_arr}[${INDEX}]
     END
 
-Definition API - DELETE Stored Query Using Qualified Query Name And Version
+Definition API - Non Existing Endpoint - DELETE Stored Query Using Qualified Query Name And Version
     [Tags]      not-ready   Negative    CDR-1069
     [Documentation]     Test to check below endpoint:
     ...                 - DELETE /rest/openehr/v1/definition/query/{qualified_query_name}/{version}
@@ -317,7 +317,21 @@ Query API - POST Stored Query Using Qualified Query Name And Version
     Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
     Should Be Equal As Strings      ${resp_query['rows'][0][0]}     ${composition_uid}
-	[Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
+    [Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
+
+Query API - DELETE Stored Query Using Qualified Query Name And Version
+    [Tags]      Positive
+    [Documentation]     Test to check below endpoint:
+    ...                 - DELETE ${ADMIN_BASEURL}/query/{qualified_query_name}/{version}
+    ...                 \n Check that 200 is returned
+    ...                 - GET ${BASEURL}/query/{qualified_query_name}/{version}
+    ...                 \n Check that 404 is returned
+    ${resp_query}       DELETE /query/{qualified_query_name}/{version} ADMIN
+    ...     qualif_name=${second_resp_qualified_query_name_version}
+    ###get deleted stored query - bug CDR-1069
+#    Run Keyword And Expect Error    	404 != 200
+#    ...     GET /query/{qualified_query_name}/{version}
+#    ...     qualif_name=${second_resp_qualified_query_name_version}
 
 
 *** Keywords ***
