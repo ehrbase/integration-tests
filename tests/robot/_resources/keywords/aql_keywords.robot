@@ -165,7 +165,7 @@ Create EHR For AQL With Custom EHR Status
     Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
     Set Suite Variable      ${ehr_id_obj}     ${ehr_id_obj}
     Set Suite Variable      ${ehr_status_uid}     ${response.json()['ehr_status']['uid']['value']}
-    Set Suite Variable      ${ehr_id}         ${ehr_id_value}[0]
+    Set Suite Variable      ${ehr_id}         ${ehr_id_value}
     Set Suite Variable      ${subject_external_ref_value}
     ...     ${response.json()['ehr_status']['subject']['external_ref']['id']['value']}
     Set Suite Variable      ${subject_external_ref_namespace}
