@@ -24,6 +24,7 @@ SELECT c/name/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE c/name/
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Upload OPT For AQL      type_repetition_conformance_ehrbase.org.opt
     Create EHR For AQL

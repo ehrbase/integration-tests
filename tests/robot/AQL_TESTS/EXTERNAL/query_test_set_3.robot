@@ -84,6 +84,7 @@ SELECT C1/items[at0001]/value/value, C2/items[at0001]/value/value FROM EHR e CON
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      external/ehrbase.testcase06.v0.opt
     Create EHR For AQL
     Commit Composition For AQL      external/ehrbase.testcase06.v0__compo1_test_set_3_flat.json     format=FLAT

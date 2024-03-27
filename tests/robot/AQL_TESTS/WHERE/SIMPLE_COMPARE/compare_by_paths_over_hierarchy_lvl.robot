@@ -23,6 +23,7 @@ SELECT ${path} FROM COMPOSITION c CONTAINS OBSERVATION o WHERE ${path} = ${value
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Create EHR For AQL
     Commit Composition For AQL      conformance_ehrbase.de.v0_where.json

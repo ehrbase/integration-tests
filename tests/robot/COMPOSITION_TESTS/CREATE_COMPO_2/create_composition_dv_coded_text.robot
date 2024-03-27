@@ -27,6 +27,7 @@ Metadata        TOP_TEST_SUITE    COMPOSITION
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/admin_keywords.robot
 Resource        ../../_resources/suite_settings.robot
+Suite Setup     Set Library Search Order For Tests
 
 
 *** Test Cases ***
@@ -99,7 +100,8 @@ Composition With DV_CODED_TEXT Code_String 42 And Terminology_id Local
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     (admin) delete ehr      AND
+                ...     Delete Template Using API       AND     (admin) delete all OPTs
 
 Composition With DV_CODED_TEXT Code_String And Terminology_id NULL With Configured Local Codes
     [Tags]      Negative
@@ -170,7 +172,8 @@ Composition With DV_CODED_TEXT Code_String at0035 And Terminology_id Local With 
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]  Run Keywords    Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]  Run Keywords    Delete Composition Using API    AND     (admin) delete ehr      AND
+                ...     Delete Template Using API       AND     (admin) delete all OPTs
 
 
 *** Keywords ***
@@ -193,7 +196,9 @@ Commit Composition With Modified Code_String And Terminology_Id Value
     ${isUidPresent}     Run Keyword And Return Status
     ...     Set Test Variable   ${version_uid}    ${response.json()['uid']['value']}
     IF      ${isUidPresent} == ${TRUE}
-        ${short_uid}        Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
+        @{split_compo_uid}      Split String        ${version_uid}      ::
+        Set Suite Variable      ${system_id_with_tenant}    ${split_compo_uid}[1]
+        ${short_uid}        Remove String       ${version_uid}    ::${system_id_with_tenant}::1
                             Set Suite Variable   ${versioned_object_uid}    ${short_uid}
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}

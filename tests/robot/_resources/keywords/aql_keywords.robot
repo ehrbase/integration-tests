@@ -151,30 +151,25 @@ Create EHR For AQL
     ELSE
         create new EHR with ehr_status  ${EHR_DATA_SETS}/000_ehr_status_with_other_details.json
     END
-                        Integer     response status     201
-    ${ehr_id_obj}       Object      response body ehr_id
-    ${ehr_id_value}     String      response body ehr_id value
-                        Set Suite Variable      ${ehr_id_obj}     ${ehr_id_obj}
-                        Set Suite Variable      ${ehr_id}         ${ehr_id_value}[0]
+    Status Should Be    201
+    Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
+    Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
 
 Create EHR For AQL With Custom EHR Status
     [Documentation]     Create EHR with custom EHR_STATUS, filename provided in mandatory arg {file_name}.
     [Arguments]     ${file_name}
     prepare new request session    JSON      Prefer=return=representation
     create new EHR with ehr_status      ${EHR_STATUS_DATA_SETS_AQL}/${file_name}
-                        Integer     response status     201
-    ${ehr_id_obj}       Object      response body ehr_id
-    ${ehr_id_value}     String      response body ehr_id value
-    ${ehr_status_subject_external_ref_value}    String    response body ehr_status subject external_ref id value
-    ${ehr_status_subject_external_ref_namespace}    String      response body ehr_status subject external_ref namespace
-    ${ehr_status_uid}    String      response body ehr_status uid value
-                        Set Suite Variable      ${ehr_id_obj}     ${ehr_id_obj}
-                        Set Suite Variable      ${ehr_status_uid}     ${ehr_status_uid}[0]
-                        Set Suite Variable      ${ehr_id}         ${ehr_id_value}[0]
-                        Set Suite Variable      ${subject_external_ref_value}
-                        ...     ${ehr_status_subject_external_ref_value}[0]
-                        Set Suite Variable      ${subject_external_ref_namespace}
-                        ...     ${ehr_status_subject_external_ref_namespace}[0]
+    Status Should Be    201
+    Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
+    Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
+    Set Suite Variable      ${ehr_id_obj}     ${ehr_id_obj}
+    Set Suite Variable      ${ehr_status_uid}     ${response.json()['ehr_status']['uid']['value']}
+    Set Suite Variable      ${ehr_id}         ${ehr_id_value}[0]
+    Set Suite Variable      ${subject_external_ref_value}
+    ...     ${response.json()['ehr_status']['subject']['external_ref']['id']['value']}
+    Set Suite Variable      ${subject_external_ref_namespace}
+    ...     ${response.json()['ehr_status']['subject']['external_ref']['namespace']}
 
 Commit Composition For AQL
     [Documentation]     Create Composition for AQL checks.
@@ -187,10 +182,10 @@ Commit Composition For AQL
     Set To Dictionary   ${headers}   openEHR-TEMPLATE_ID=${template_id}
     IF      '${format}' == 'CANONICAL_JSON'
         Create Session      ${SUT}      ${BASEURL}      debug=2
-        ...                 auth=${CREDENTIALS}     verify=True
+                            ...     verify=True     #auth=${CREDENTIALS}
     ELSE IF     '${format}' == 'FLAT'
         Create Session      ${SUT}      ${ECISURL}      debug=2
-        ...                 auth=${CREDENTIALS}     verify=True
+                            ...     verify=True     #auth=${CREDENTIALS}
         &{params}       Create Dictionary
         ...     format=FLAT     ehrId=${ehr_id}     templateId=${template_id}
     END
@@ -208,9 +203,9 @@ Commit Composition For AQL
         Set Suite Variable   ${composition_uid}      ${resp.json()['uid']['value']}
     END
     Set Suite Variable   ${response}     ${resp}
-    ${short_uid}        Remove String       ${composition_uid}
-    ...     ::${CREATING_SYSTEM_ID}::1
-    Set Suite Variable   ${composition_short_uid}    ${short_uid}
+    @{split_compo_uid}      Split String        ${composition_uid}      ::
+    Set Suite Variable      ${system_id_with_tenant}    ${split_compo_uid}[1]
+    Set Suite Variable      ${composition_short_uid}    ${split_compo_uid}[0]
 
 Admin Delete EHR For AQL
     [Documentation]     Delete EHR using ADMIN endpoint.

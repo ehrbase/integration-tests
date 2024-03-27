@@ -21,6 +21,8 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 Force Tags      COMPOSITION_get_versioned
 
@@ -35,4 +37,4 @@ Main flow get existing VERSIONED COMPOSITION XML
     get versioned composition by uid    XML    ${versioned_object_uid}
     check content of versioned composition (XML)
 
-    # [Teardown]    restart SUT
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs

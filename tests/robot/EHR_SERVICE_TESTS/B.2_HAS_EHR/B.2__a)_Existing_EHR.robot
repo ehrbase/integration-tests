@@ -25,6 +25,8 @@ Documentation   B.2.a) Main flow: Check has EHR with existing EHR
 Metadata        TOP_TEST_SUITE    EHR_SERVICE
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
@@ -40,6 +42,7 @@ Check has EHR with existing EHR
     create new EHR
     retrieve EHR by ehr_id
     Verification: Response Should Contain Correct Values
+    [Teardown]      (admin) delete ehr
 
 
 

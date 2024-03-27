@@ -33,6 +33,8 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
@@ -53,3 +55,4 @@ Alternative flow 1: get versioned directory from existent EHR that has two versi
     validate GET-@version response - 200 retrieved    root
 
     Should Contain    ${version_uid}    ${CREATING_SYSTEM_ID}::2
+    [Teardown]    (admin) delete ehr

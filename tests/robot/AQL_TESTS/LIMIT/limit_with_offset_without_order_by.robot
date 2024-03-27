@@ -31,6 +31,7 @@ SELECT c FROM COMPOSITION c LIMIT ${limit} OFFSET ${offset}
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Create EHR For AQL
     Set Suite Variable       ${ehr_id1}    ${ehr_id}

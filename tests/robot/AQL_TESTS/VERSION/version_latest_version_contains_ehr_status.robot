@@ -69,6 +69,7 @@ ${query2}   SELECT cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Create EHR For AQL
     Set Suite Variable      ${ehr_id1}  ${ehr_id}
     Set Suite Variable      ${ehr_status_id1}   ${response['body']['ehr_status']['uid']['value']}

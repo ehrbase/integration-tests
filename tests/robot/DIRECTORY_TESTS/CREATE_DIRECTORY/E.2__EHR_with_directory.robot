@@ -34,6 +34,8 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
@@ -54,3 +56,4 @@ Alternative flow 1: create directory on EHR with directory
 
     create the same DIRECTORY again (JSON)    subfolders_in_directory.json
     validate POST response - 409 folder already exists
+    [Teardown]    (admin) delete ehr

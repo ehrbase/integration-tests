@@ -39,6 +39,7 @@ Suite Setup       Precondition
     Set Suite Variable  ${compo_uid}        ${resp.json()['family_history/_uid']}
     @{compo_uid_splitted}   Split String    ${compo_uid}    ::
     Set Suite Variable  ${compo_id}         ${compo_uid_splitted}[0]
+    Set Suite Variable  ${system_id_with_tenant}    ${compo_uid_splitted}[1]
     Headers Checks Composition
 
 2. Create Compo JSON EHRSCAPE Migrated
@@ -47,7 +48,7 @@ Suite Setup       Precondition
     Set Test Variable       ${compo_uid}    ${resp.json()['uid']['value']}
     @{compo_uid_splitted}   Split String    ${compo_uid}    ::
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
-    Should Be Equal     ${compo_uid_splitted}[1]    ${CREATING_SYSTEM_ID}
+    Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    1
     Headers Checks Composition
 
@@ -66,7 +67,7 @@ Suite Setup       Precondition
     Set Test Variable       ${compo_uid}    ${resp.json()['family_history']['_uid']}
     @{compo_uid_splitted}   Split String    ${compo_uid}[0]    ::
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
-    Should Be Equal     ${compo_uid_splitted}[1]    ${CREATING_SYSTEM_ID}
+    Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    1
     Headers Checks Composition
 
@@ -78,107 +79,107 @@ Suite Setup       Precondition
     Headers Checks Composition      compo_uid_version=2
 
 6. Update Compo JSON EHRSCAPE Migrated
-    Set Test Variable       ${compo_uid}    ${compo_id}::${CREATING_SYSTEM_ID}::2
+    Set Test Variable       ${compo_uid}    ${compo_id}::${system_id_with_tenant}::2
     Update Composition OpenEHR       composition=family_history.v2__.json   format=JSON
     Should Be Equal     ${resp.status_code}     ${200}
     ${compo_uid}    Set Variable        ${resp.json()['uid']['value']}
     @{compo_uid_splitted}   Split String    ${compo_uid}    ::
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
-    Should Be Equal     ${compo_uid_splitted}[1]    ${CREATING_SYSTEM_ID}
+    Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    3
     Headers Checks Composition      compo_uid_version=3
 
 7. Update Compo XML EHRSCAPE Migrated
-    Set Test Variable       ${compo_uid}    ${compo_id}::${CREATING_SYSTEM_ID}::3
+    Set Test Variable       ${compo_uid}    ${compo_id}::${system_id_with_tenant}::3
     Update Composition OpenEHR       composition=family_history.v2__.xml   format=XML
     Should Be Equal     ${resp.status_code}     ${200}
     ${xresp}        Parse Xml       ${resp.text}
     ${compo_uid}    Get Element Text        ${xresp}    uid/value
     @{compo_uid_splitted}   Split String    ${compo_uid}    ::
-    Should Be Equal     ${compo_uid_splitted}[1]    ${CREATING_SYSTEM_ID}
+    Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    4
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
     Headers Checks Composition      compo_uid_version=4
 
 8. Update Compo STRUCTURED EHRSCAPE Migrated
-    Set Test Variable       ${compo_uid}    ${compo_id}::${CREATING_SYSTEM_ID}::4
+    Set Test Variable       ${compo_uid}    ${compo_id}::${system_id_with_tenant}::4
     Update Composition OpenEHR       composition=family_history.v2__.json   format=STRUCTURED
     Should Be Equal     ${resp.status_code}     ${200}
     Set Test Variable   ${compo_uid}    ${resp.json()['family_history']['_uid']}
     @{compo_uid_splitted}   Split String    ${compo_uid}[0]    ::
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
-    Should Be Equal     ${compo_uid_splitted}[1]    ${CREATING_SYSTEM_ID}
+    Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    5
     Headers Checks Composition      compo_uid_version=5
 
 9. Update Compo STRUCTURED Content Type EHRSCAPE Migrated
-    Set Test Variable       ${compo_uid}    ${compo_id}::${CREATING_SYSTEM_ID}::5
+    Set Test Variable       ${compo_uid}    ${compo_id}::${system_id_with_tenant}::5
     Update Composition OpenEHR       composition=family_history.v2__.json   format=STRUCTURED_CONTENT_TYPE
     Should Be Equal     ${resp.status_code}     ${200}
     ${compo_uid}    Set Variable        ${resp.json()['uid']['value']}
     @{compo_uid_splitted}   Split String    ${compo_uid}    ::
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
-    Should Be Equal     ${compo_uid_splitted}[1]    ${CREATING_SYSTEM_ID}
+    Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    6
     Headers Checks Composition      compo_uid_version=6
 
 10. Update Compo FLAT Content Type EHRSCAPE Migrated
-    Set Test Variable       ${compo_uid}    ${compo_id}::${CREATING_SYSTEM_ID}::6
+    Set Test Variable       ${compo_uid}    ${compo_id}::${system_id_with_tenant}::6
     Update Composition OpenEHR       composition=family_history.v2__.json   format=FLAT_CONTENT_TYPE
     Should Be Equal     ${resp.status_code}     ${200}
     ${compo_uid}    Set Variable        ${resp.json()['uid']['value']}
     @{compo_uid_splitted}   Split String    ${compo_uid}    ::
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
-    Should Be Equal     ${compo_uid_splitted}[1]    ${CREATING_SYSTEM_ID}
+    Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    7
     Headers Checks Composition      compo_uid_version=7
 
 11. Get Compo FLAT EHRSCAPE Migrated
-    Set Test Variable       ${compo_uid}    ${compo_id}::${CREATING_SYSTEM_ID}::7
+    Set Test Variable       ${compo_uid}    ${compo_id}::${system_id_with_tenant}::7
     Get Versioned Composition OpenEHR
     Should Be Equal     ${resp.status_code}     ${200}
     Set Test Variable   ${compo_uid}    ${resp.json()['family_history/_uid']}
     @{compo_uid_splitted}   Split String    ${compo_uid}    ::
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
-    Should Be Equal     ${compo_uid_splitted}[1]    ${CREATING_SYSTEM_ID}
+    Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    7
     Log     ${resp.headers}
     Dictionary Should Contain Item      ${resp.headers}     ETag    "${compo_uid}"
     Dictionary Should Contain Item      ${resp.headers}     EHRBase-Template-ID     ${template_id}
 
 12. Get Compo JSON EHRSCAPE Migrated
-    Set Test Variable       ${compo_uid}    ${compo_id}::${CREATING_SYSTEM_ID}::6
+    Set Test Variable       ${compo_uid}    ${compo_id}::${system_id_with_tenant}::6
     Get Versioned Composition OpenEHR   format=JSON
     Should Be Equal     ${resp.status_code}     ${200}
     ${compo_uid}    Set Variable        ${resp.json()['uid']['value']}
     @{compo_uid_splitted}   Split String    ${compo_uid}    ::
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
-    Should Be Equal     ${compo_uid_splitted}[1]    ${CREATING_SYSTEM_ID}
+    Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    6
     Dictionary Should Contain Item      ${resp.headers}     ETag    "${compo_uid}"
     Dictionary Should Contain Item      ${resp.headers}     EHRBase-Template-ID     ${template_id}
 
 13. Get Compo XML EHRSCAPE Migrated
-    Set Test Variable       ${compo_uid}    ${compo_id}::${CREATING_SYSTEM_ID}::5
+    Set Test Variable       ${compo_uid}    ${compo_id}::${system_id_with_tenant}::5
     Get Versioned Composition OpenEHR   format=XML
     Should Be Equal     ${resp.status_code}     ${200}
     ${xresp}        Parse Xml       ${resp.text}
     ${compo_uid}    Get Element Text        ${xresp}    uid/value
     @{compo_uid_splitted}   Split String    ${compo_uid}    ::
-    Should Be Equal     ${compo_uid_splitted}[1]    ${CREATING_SYSTEM_ID}
+    Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    5
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
     Dictionary Should Contain Item      ${resp.headers}     ETag    "${compo_uid}"
     Dictionary Should Contain Item      ${resp.headers}     EHRBase-Template-ID     ${template_id}
 
 14. Get Compo STRUCTURED EHRSCAPE Migrated
-    Set Test Variable       ${compo_uid}    ${compo_id}::${CREATING_SYSTEM_ID}::4
+    Set Test Variable       ${compo_uid}    ${compo_id}::${system_id_with_tenant}::4
     Get Versioned Composition OpenEHR   format=STRUCTURED
     Should Be Equal     ${resp.status_code}     ${200}
     Set Test Variable   ${compo_uid}    ${resp.json()['family_history']['_uid']}
     @{compo_uid_splitted}   Split String    ${compo_uid}[0]    ::
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
-    Should Be Equal     ${compo_uid_splitted}[1]    ${CREATING_SYSTEM_ID}
+    Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    4
     Dictionary Should Contain Item      ${resp.headers}     ETag    "${compo_uid}[0]"
     Dictionary Should Contain Item      ${resp.headers}     EHRBase-Template-ID     ${template_id}
@@ -230,21 +231,22 @@ Suite Setup       Precondition
     Get Template Example OpenEHR    format=STRUCTURED
     Should Be Equal     ${resp.status_code}     ${200}
     Should Be Equal     ${resp.json()['family_history']['composer'][0]['|name']}      Max Mustermann
-    [Teardown]      (admin) delete ehr
+    [Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***
 Precondition
+	Set Library Search Order For Tests
     Upload OPT    all_types/family_history.opt
     Extract Template Id From OPT File
     create EHR
     Create Session      ${SUT}    ${BASEURL}    debug=2
-    ...     auth=${CREDENTIALS}    verify=True
+    ...     verify=True     #auth=${CREDENTIALS}
 
 Headers Checks Composition
     [Arguments]     ${compo_uid_version}=1
     Dictionary Should Contain Item      ${resp.headers}     Location   ${BASEURL}/ehr/${ehr_id}/composition/${compo_id}
-    Dictionary Should Contain Item      ${resp.headers}     ETag    "${compo_id}::${CREATING_SYSTEM_ID}::${compo_uid_version}"
+    Dictionary Should Contain Item      ${resp.headers}     ETag    "${compo_id}::${system_id_with_tenant}::${compo_uid_version}"
     Dictionary Should Contain Item      ${resp.headers}     EHRBase-Template-ID     ${template_id}
 
 Commit Composition OpenEHR

@@ -21,6 +21,8 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 Force Tags
 
@@ -36,10 +38,11 @@ Alternative flow 1 delete persistent COMPOSITION
     commit composition (XML)    minimal_persistent/persistent_minimal.composition.extdatetime.xml
 
     delete composition    ${preceding_version_uid}
-
-    ${short_compo_id}       Remove String       ${del_version_uid}      ::${CREATING_SYSTEM_ID}::1
+    @{split_compo_uid}      Split String        ${del_version_uid}      ::
+    Set Suite Variable      ${system_id_with_tenant}    ${split_compo_uid}[1]
+    ${short_compo_id}       Remove String       ${del_version_uid}      ::${system_id_with_tenant}::1
     Set Test Variable       ${del_version_uid}      ${short_compo_id}
 
     get deleted composition
 
-    # [Teardown]    restart SUT
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs

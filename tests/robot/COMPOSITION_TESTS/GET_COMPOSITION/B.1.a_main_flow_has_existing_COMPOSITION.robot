@@ -21,6 +21,8 @@ Documentation       Composition Integration Tests
 Metadata            TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 Force Tags
 
@@ -35,7 +37,7 @@ Main flow has existing COMPOSITION (JSON)
     get composition by composition_uid    ${version_uid}
     check composition exists
 
-    #[Teardown]    restart SUT
+    [Teardown]    (admin) delete ehr
 
 
 Main flow has existing COMPOSITION and works without accept header
@@ -46,7 +48,7 @@ Main flow has existing COMPOSITION and works without accept header
     get composition by composition_uid    ${version_uid}
     check composition exists
 
-    #[Teardown]    restart SUT
+    [Teardown]    (admin) delete ehr
 
 
 Get Composition After Update And Check Number Of Participations
@@ -65,4 +67,5 @@ Get Composition After Update And Check Number Of Participations
     Should Be Equal As Strings    ${response.status_code}    ${200}
     Set Test Variable  ${version_uid}  ${version_uid[0:-1]}2
     get version of versioned composition of EHR by UID    ${versioned_object_uid}    ${version_uid}
-    Length Should Be    ${response.body.data.context.participations}    1
+    Length Should Be    ${response.json()['data']['context']['participations']}    1
+    [Teardown]    (admin) delete ehr

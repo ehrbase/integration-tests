@@ -23,6 +23,7 @@ SELECT ${primitive} FROM EHR
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Create EHR For AQL
 
 Execute Query

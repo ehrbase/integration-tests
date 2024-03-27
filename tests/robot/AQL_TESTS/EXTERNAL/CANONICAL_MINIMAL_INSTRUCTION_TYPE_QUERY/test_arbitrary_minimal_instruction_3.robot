@@ -24,6 +24,7 @@ ${query_nr} SELECT i/${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCT
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      external/minimal_instruction.opt
     Set Suite Variable      ${template_id}      minimal_instruction.en.v1
     Create EHR For AQL With Custom EHR Status       file_name=status1.json

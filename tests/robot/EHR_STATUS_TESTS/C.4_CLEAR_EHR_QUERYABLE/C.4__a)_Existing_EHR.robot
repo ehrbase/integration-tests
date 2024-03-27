@@ -24,6 +24,8 @@ Documentation   C.4.a) Clear EHR queryable of existing EHR
 Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
@@ -42,3 +44,4 @@ Clear EHR queryable of existing EHR
     update EHR: set ehr_status is_queryable    ${FALSE}
 
     check response of 'update EHR' (JSON)
+    [Teardown]      (admin) delete ehr

@@ -46,6 +46,7 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Suite Setup    Establish Preconditions
 # Test Setup  start openehr server
@@ -115,11 +116,11 @@ DS-10 - has path with special characters
     [Tags]
     get FOLDER in DIRECTORY at version (JSON)    /foldername-w-special-chars
     validate GET-@version response - 200 retrieved    foldername-w-special-chars
+    [Teardown]    (admin) delete ehr
 
 
-
-
-*** Keywords ****
+*** keywords ***
 Establish Preconditions
+    Set Library Search Order For Tests
     create EHR
     create DIRECTORY (JSON)    subfolders_in_directory.json

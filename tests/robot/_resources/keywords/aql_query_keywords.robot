@@ -176,7 +176,7 @@ Replace Uid With Actual
     ${template} = 	Get File 	${input file}
     ${replaced_template}=  Replace String  ${template}  replaceme  ${uid}
     Create File     ${output file}    ${replaced_template}
-    Output Debug Info To Console
+    #Output Debug Info To Console
 
 
 
@@ -595,6 +595,22 @@ POST /query/{qualified_query_name}/{version}
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
     [Return]    ${resp}
+
+DELETE /query/{qualified_query_name}/{version} ADMIN
+    [Documentation]     Execute through POST stored AQL from EHRBase, using below endpoint:
+    ...                 - DELETE ${ADMIN_BASEURL}/query/{qualified_query_name}/{version}
+    ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
+    ...                 Expected status code .
+    [Arguments]     ${qualif_name}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    Create Session      ${SUT}      ${ADMIN_BASEURL}      debug=2
+    ${resp}     DELETE On Session      ${SUT}
+    ...         /query/${qualif_name}
+    ...         expected_status=anything
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Should Be Equal As Strings      ${resp.content}     ${EMPTY}
+                Set Test Variable   ${resp}     ${resp}
 
 GET /query/{qualified_query_name}/{version}?ehr_id
     No Operation

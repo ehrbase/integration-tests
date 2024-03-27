@@ -28,6 +28,7 @@ Metadata        TOP_TEST_SUITE    COMPOSITION
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/admin_keywords.robot
 Resource        ../../_resources/suite_settings.robot
+Suite Setup     Set Library Search Order For Tests
 
 
 *** Test Cases ***
@@ -483,7 +484,8 @@ Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021-10-24T05:30:47Z - Upper 2022-
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
     #[Teardown]     Delete Composition Using API
-    [Teardown]     Run Keywords     Delete Composition Using API    AND     Delete Template Using API
+    [Teardown]     Run Keywords     Delete Composition Using API    AND     Delete Template Using API   AND
+                   ...      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***
@@ -511,7 +513,9 @@ Commit Composition With Modified QUANTITY DV_INTERVAL<DV_DATE_TIME> Values
     ${isUidPresent}     Run Keyword And Return Status
     ...     Set Test Variable   ${version_uid}    ${response.json()['uid']['value']}
     IF      ${isUidPresent} == ${TRUE}
-        ${short_uid}        Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
+        @{split_compo_uid}      Split String        ${version_uid}      ::
+        Set Suite Variable      ${system_id_with_tenant}    ${split_compo_uid}[1]
+        ${short_uid}        Remove String       ${version_uid}    ::${system_id_with_tenant}::1
                             Set Suite Variable   ${versioned_object_uid}    ${short_uid}
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}

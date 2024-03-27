@@ -188,7 +188,7 @@ retrieve OPT by template_id
         ...     Authorization=Bearer ${multitenancy_token}
         Set Test Variable      &{headers}   &{headers}
     END
-
+	Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
     ${resp}=            GET On Session          ${SUT}    /definition/template/adl1.4/${template_id}   expected_status=anything
                         ...                  headers=${headers}
                         Log    ${resp.text}

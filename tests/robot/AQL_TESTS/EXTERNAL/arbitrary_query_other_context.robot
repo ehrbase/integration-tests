@@ -23,6 +23,7 @@ ${query_nr} SELECT ${path} FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSI
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      external/virologischer_befund.opt
     Set Suite Variable      ${template_id}      Virologischer Befund
     Create EHR For AQL With Custom EHR Status       file_name=status1.json

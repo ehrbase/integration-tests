@@ -25,6 +25,8 @@ Documentation   B.3.a) Main flow: Get existing EHR
 Metadata        TOP_TEST_SUITE    EHR_SERVICE
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
@@ -40,3 +42,4 @@ Get existing EHR
     create new EHR
     retrieve EHR by ehr_id
     check content of retrieved EHR (JSON)
+    [Teardown]      (admin) delete ehr

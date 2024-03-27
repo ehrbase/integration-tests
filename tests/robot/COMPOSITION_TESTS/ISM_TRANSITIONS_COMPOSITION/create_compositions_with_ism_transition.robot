@@ -23,11 +23,13 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Suite Setup       Precondition
 #Suite Teardown  restart SUT
 
 Force Tags      COMPOSITION_ism_transitions
+
 
 *** Test Cases ***
 Create Composition With Valid ISM Transition
@@ -45,7 +47,7 @@ Create Composition With Invalid Current State On ISM Transition
     [Tags]  Negative    InvalidCurrentState
     commit composition   format=FLAT
     ...                  composition=test-ism.vitagroup.de.v1__ism_invalid_current_state.json
-    check status_code of commit composition    400
+    check status_code of commit composition    422
     Should Contain      ${response.json()["message"]}
     ...     No valid transition found for ism transition[cancel/openehr/166]
     Should Contain      ${response.json()["message"]}
@@ -69,16 +71,18 @@ Create Composition With ISM Wrong Current State
     [Tags]  Negative    ISMMWrongCurrentState
     commit composition   format=FLAT
     ...                  composition=test-ism.vitagroup.de.v1__ism_wrong_current_state.json
-    check status_code of commit composition    400
+    check status_code of commit composition    422
     Should Contain      ${response.json()["message"]}
     ...     No valid transition found for ism transition[cancel/openehr/166]
     Should Contain      ${response.json()["message"]}
     ...     /content[openEHR-EHR-ACTION.medication.v1]/ism_transition:
     Should Contain      ${response.json()["message"]}
     ...     IsmTransition contains invalid current_state
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    all_types/test-ism.vitagroup.de.v1.opt
     create EHR

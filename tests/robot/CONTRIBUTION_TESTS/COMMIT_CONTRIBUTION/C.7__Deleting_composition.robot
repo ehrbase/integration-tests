@@ -42,6 +42,8 @@ Metadata        TOP_TEST_SUITE    CONTRIBUTION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/contribution_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
@@ -64,4 +66,4 @@ Alternative flow 6: commit CONTRIBUTIONS deleting a COMPOSITION
     check response: is positive - contribution has new version
     check change_type of new version is    deleted
 
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs

@@ -21,6 +21,8 @@ Documentation       Composition Integration Tests
 Metadata            TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 Force Tags
 
@@ -42,7 +44,7 @@ Main flow get existing COMPOSITION latest
     get composition - latest version    JSON
     check content of compositions latest version (JSON)
 
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 

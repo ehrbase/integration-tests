@@ -25,6 +25,7 @@ ${query_nr} SELECT c/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSER
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      external/test_all_types.opt
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Upload OPT For AQL      aql-conformance-ehrbase.org.v0.opt

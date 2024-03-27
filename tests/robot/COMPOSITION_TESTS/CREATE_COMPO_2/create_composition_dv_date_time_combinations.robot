@@ -23,6 +23,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Resource        ../../_resources/suite_settings.robot
 
 Suite Setup       Precondition
@@ -79,11 +80,13 @@ Create Composition With DV_DATE_TIME Combinations - Negative
     2021-10-24T10:30:78
     2021-10-24T10:30:78Z
     2021-10-24T10:30:78-03:00
-    [Teardown]      PositiveCompositionTemplate     2021-10-24T10
+    [Teardown]      Run Keywords    PositiveCompositionTemplate     2021-10-24T10   AND
+                    ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    all_types/Test_all_types_v2.opt
     create EHR
 

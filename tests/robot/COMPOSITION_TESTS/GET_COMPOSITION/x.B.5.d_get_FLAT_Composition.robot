@@ -22,6 +22,7 @@ Metadata            TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/aql_query_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Suite Setup       Precondition
 #Suite Teardown    restart SUT
@@ -34,6 +35,7 @@ Main flow has existing COMPOSITION (FLAT)
     check the successful result of commit composition
     (FLAT) get composition by composition_uid    ${composition_uid}
     check composition exists
+    [Teardown]    (admin) delete ehr
 
 Create Two Compositions With Health Care Facility Provided And Not Provided - AQL
     [Documentation]     Create first composition with health_care_facility provided;
@@ -70,6 +72,7 @@ Create Two Compositions With Health Care Facility Provided And Not Provided - AQ
 #    Should Be Equal As Strings     ${response body["columns"][0]["path"]}   c
 #    Should Be Equal As Strings     ${response body["columns"][0]["name"]}   COMPOSITION
 
+
 Data driven tests for Compare content of compositions with the Original (FLAT)
     [Tags]  CDR-415     not-ready   bug
 
@@ -77,7 +80,7 @@ Data driven tests for Compare content of compositions with the Original (FLAT)
     Create and compare content of flat compositions     ehrn_vital_signs.v2__.json
     Create and compare content of flat compositions     nested.en.v1__full.xml.flat.json
 
-    #[Teardown]      TRACE JIRA ISSUE    CDR-415
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***
@@ -91,7 +94,7 @@ Create and compare content of flat compositions
     Compare content of compositions with the Original (FLAT)  ${COMPO DATA SETS}/FLAT/${flat_composition_file_name}
 
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    nested/nested.opt
     Upload OPT    all_types/ehrn_vital_signs.v2.opt
     Upload OPT    minimal/minimal_action.opt
-    create EHR

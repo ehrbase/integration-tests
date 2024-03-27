@@ -25,6 +25,8 @@ Metadata    Created    2021.01.26
 Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
@@ -40,8 +42,9 @@ Force Tags      COMPOSITION_get_versioned
     create EHR and commit a composition for versioned composition tests
 
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${version_uid}    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${version_uid}    ${response.json()['uid']['value']}
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 2. Get Composition via Versioned Composition Of Existing EHR by Time With Query (JSON)
@@ -54,8 +57,9 @@ Force Tags      COMPOSITION_get_versioned
     Set Test Variable 	&{query} 	version_at_time=${date}     # set query as dictionary
 
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${version_uid}    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${version_uid}    ${response.json()['uid']['value']}
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 3. Get Composition via Versioned Composition Of Existing EHR by Time With Query (JSON)
@@ -73,8 +77,8 @@ Force Tags      COMPOSITION_get_versioned
     # comment: 1. check if latest version gets returned without parameter
     Log    GET VERSIONED COMPOSITION (LATEST)
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${version_uid[0:-1]}2    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${version_uid[0:-1]}2    ${response.json()['uid']['value']}
 
     # comment: 2. check if current time returns latest version too
     Log    GET VERSIONED COMPOSITION (LATEST - BY CURRENT TIME)
@@ -82,15 +86,16 @@ Force Tags      COMPOSITION_get_versioned
     ${current_time} =    Get Current Date    result_format=%Y-%m-%dT%H:%M:%S.%f
     Set Test Variable 	&{query} 	version_at_time=${current_time}     # set query as dictionary
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${version_uid[0:-1]}2    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${version_uid[0:-1]}2    ${response.json()['uid']['value']}
 
     # comment: 3. check if original timestamp returns original version
     Log    GET VERSIONED COMPOSITION (ORIGINAL - BY CREATION TIME)
     Set Test Variable 	&{query} 	version_at_time=${time_after_compo_creation}     # set query as dictionary
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${original_id}    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${original_id}    ${response.json()['uid']['value']}
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 4. Get Composition via Versioned Composition Of Existing EHR by Time Check Lifecycle State (JSON)
@@ -99,9 +104,10 @@ Force Tags      COMPOSITION_get_versioned
     create EHR and commit a composition for versioned composition tests
 
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${version_uid}    ${response.body.uid.value}
-    Should Be Equal As Strings    complete   ${response.body.lifecycle_state.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${version_uid}    ${response.json()['uid']['value']}
+    Should Be Equal As Strings    complete   ${response.json()['lifecycle_state']['value']}
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 5a. Get Composition via Versioned Composition Of Existing EHR by Time Check Preceding Version (JSON)
@@ -110,9 +116,10 @@ Force Tags      COMPOSITION_get_versioned
     create EHR and commit a composition for versioned composition tests
     
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${version_uid}    ${response.body.uid.value}
-    Should Not Contain  ${response.body}  ${preceding_version_uid}
+    Status Should Be    200
+    Should Be Equal As Strings    ${version_uid}    ${response.json()['uid']['value']}
+    Should Not Contain  ${response.json()}  ${preceding_version_uid}
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 5b. Get Composition via Versioned Composition Of Existing EHR by Time Check Preceding Version (JSON)
@@ -125,8 +132,9 @@ Force Tags      COMPOSITION_get_versioned
     update a composition for versioned composition tests
 
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${original_id}    ${response.body.preceding_version_uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${original_id}    ${response.json()['preceding_version_uid']['value']}
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 # TODO: figure out how to address the variable
@@ -139,12 +147,13 @@ Force Tags      COMPOSITION_get_versioned
     update a composition for versioned composition tests
 
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
+    Status Should Be    200
     # comment: the target string is (in basic style): response.body.data.content[0].data.events[0].data.items[0].value.value
-    ${items} =    Set Variable    ${response.body.data.content[0].data.events[0].data["items"]}
-    ${target_string} =   Set Variable    ${items[0].value.value}
+    ${items} =    Set Variable    ${response.json()['data']['content'][0]['data']['events'][0]['data']['items']}
+    ${target_string} =   Set Variable    ${items[0]['value']['value']}
 
     Should Be Equal As Strings    ${target_string}    modified value
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 7a. Get Composition via Versioned Composition Of Existing EHR by Time With Parameter Check (JSON)
@@ -157,7 +166,8 @@ Force Tags      COMPOSITION_get_versioned
     Set Test Variable 	&{query} 	version_at_time=${date}     # set query as dictionary
 
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
+    Status Should Be    200
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 7b. Get Composition via Versioned Composition Of Existing EHR With Invalid Timestamp As Parameter (JSON)
@@ -170,18 +180,21 @@ Force Tags      COMPOSITION_get_versioned
     Set Test Variable 	&{query} 	version_at_time=${date}     # set query as dictionary
 
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    400
+    Status Should Be    400
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 7c. Get Composition via Versioned Composition Of Non-Existent EHR by Time With Parameter Check (JSON)
     [Documentation]    Checking for expected responses with and without valid parameters
 
     create EHR and commit a composition for versioned composition tests
-
+    Set Test Variable   ${ehr_id_valid}     ${ehr_id}
     create fake EHR
 
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
+    Set Test Variable   ${ehr_id}     ${ehr_id_valid}
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 7d. Get Composition via Versioned Composition Of Non-Existent Composition by Time With Parameter Check (JSON)
@@ -191,7 +204,8 @@ Force Tags      COMPOSITION_get_versioned
     create fake composition
 
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 7e. Get Composition via Versioned Composition Of Existing EHR by Timestamp From The Past As Parameter (JSON)
@@ -204,7 +218,8 @@ Force Tags      COMPOSITION_get_versioned
     Set Test Variable 	&{query} 	version_at_time=${date}     # set query as dictionary
 
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 7f. Get Composition via Versioned Composition Of Existing EHR by Timestamp From The Future As Parameter (JSON)
@@ -217,4 +232,5 @@ Force Tags      COMPOSITION_get_versioned
     Set Test Variable 	&{query} 	version_at_time=${date}     # set query as dictionary
 
     get version of versioned composition of EHR by UID and time    ${versioned_object_uid}
-    Should Be Equal As Strings    ${response.status}    200
+    Status Should Be    200
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs

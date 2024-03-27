@@ -22,6 +22,7 @@ SELECT s/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s WHERE s
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      type_repetition_conformance_ehrbase.org.opt
     Create EHR For AQL
     Commit Composition For AQL      type_repetition_conformance_ehrbase.org_like.json
