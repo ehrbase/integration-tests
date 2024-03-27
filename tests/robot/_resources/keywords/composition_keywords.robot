@@ -310,12 +310,12 @@ commit composition
 
     &{headers}=        Create Dictionary   Prefer=return=${prefer}
     ...                openEHR-VERSION.lifecycle_state=${lifecycle}
-	
-	IF  '${multitenancy_token}' != '${None}'
+
+    IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary   ${headers}
         ...     Authorization=Bearer ${multitenancy_token}
     END
-	
+
     Set Test Variable   ${headers}      ${headers}
 
     IF    '${need_template_id}' == 'true'
