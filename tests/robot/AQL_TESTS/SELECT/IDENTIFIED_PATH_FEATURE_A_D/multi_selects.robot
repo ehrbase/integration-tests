@@ -2,6 +2,7 @@
 Documentation   CHECK SELECT WITH MULTI SELECTS
 ...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#multi-selects
 Resource        ../../../_resources/keywords/aql_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 
 *** Test Cases ***

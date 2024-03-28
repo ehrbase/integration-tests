@@ -28,6 +28,7 @@ SELECT s/${path} FROM EHR e CONTAINS EHR_STATUS s WHERE e/ehr_id/value = '${ehr_
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Create EHR For AQL With Custom EHR Status       file_name=status1.json
 
 Execute Query

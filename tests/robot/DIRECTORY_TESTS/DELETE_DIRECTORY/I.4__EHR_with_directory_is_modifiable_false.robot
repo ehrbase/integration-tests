@@ -30,6 +30,8 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
@@ -50,3 +52,4 @@ Alternative flow : delete directory from EHR with directory and is_modifiable Fa
     delete DIRECTORY (JSON)
 
     check response: is negative indicating does not allow modification
+     [Teardown]    (admin) delete ehr

@@ -101,6 +101,7 @@ ${non_existing_err_msg}     The value non-existing-code-string does not match an
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    all_types/teminology_test.ehrbase.org.v1.opt
     create EHR
 

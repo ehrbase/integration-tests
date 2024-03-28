@@ -23,6 +23,7 @@ ${query_nr} SELECT ${path} FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSI
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      external/test_all_types.opt
     Set Suite Variable      ${template_id}      test_all_types.en.v1
     Create EHR For AQL With Custom EHR Status       file_name=status1.json

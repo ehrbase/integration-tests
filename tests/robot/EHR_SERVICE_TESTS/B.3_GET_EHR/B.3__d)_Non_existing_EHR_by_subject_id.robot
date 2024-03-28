@@ -25,6 +25,7 @@ Documentation   B.3.d) Alternative flow 3: Get non existing EHR by subject_id
 Metadata        TOP_TEST_SUITE    EHR_SERVICE
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT

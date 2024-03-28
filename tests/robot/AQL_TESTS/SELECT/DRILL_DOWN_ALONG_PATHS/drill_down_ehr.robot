@@ -22,14 +22,16 @@ ${query_nr} SELECT ${path} FROM EHR e
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     generate random ehr_id
     Create EHR For AQL      ehr_id=${ehr_id}
-    Set Suite Variable      ${ehr_status_uid}       ${response['body']['ehr_status']['uid']['value']}
+	Set Suite Variable 		${resp_json}		${response.json()}
+    Set Suite Variable      ${ehr_status_uid}	${resp_json['ehr_status']['uid']['value']}
     Set Suite Variable      ${ehr_status_subject_id}
-    ...     ${response['body']['ehr_status']['subject']['external_ref']['id']['value']}
+    ...     ${resp_json['ehr_status']['subject']['external_ref']['id']['value']}
     Set Suite Variable      ${ehr_status_subject_namespace}
-    ...     ${response['body']['ehr_status']['subject']['external_ref']['namespace']}
-    Set Suite Variable      ${ehr_time_created}     ${response['body']['time_created']['value']}
+    ...     ${resp_json['ehr_status']['subject']['external_ref']['namespace']}
+    Set Suite Variable      ${ehr_time_created}		${resp_json['time_created']['value']}
 
 Execute Query
     [Arguments]     ${path}     ${expected_file}    ${nr_of_results}

@@ -2,6 +2,7 @@
 Documentation   CHECK SELECT DISTINCT
 ...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#distinct--general-keywords-a-d
 Resource        ../../../_resources/keywords/aql_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 
 *** Test Cases ***

@@ -284,7 +284,7 @@ POST /ehr/ehr_id/contribution
                         ...                 headers=${headers}
 
                         Set Test Variable   ${response}    ${resp}
-                        Output Debug Info:    POST /ehr/ehr_id/contribution
+                        #Output Debug Info:    POST /ehr/ehr_id/contribution
 
 
 POST transaction-management/ehr/ehr_id/contribution/contribution_id/rollback
@@ -335,7 +335,7 @@ POST /ehr/ehr_id/contribution without accept header
                         ...                 headers=${headers}
 
                         Set Test Variable   ${response}    ${resp}
-                        Output Debug Info:    POST /ehr/ehr_id/contribution
+                        #Output Debug Info:    POST /ehr/ehr_id/contribution
 
 
 Create Contribution With Multitenant Token

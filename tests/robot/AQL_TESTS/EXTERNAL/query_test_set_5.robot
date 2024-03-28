@@ -48,6 +48,7 @@ SELECT obs/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s1 CONT
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      external/ehrbase.testcase09.v0.opt
     Create EHR For AQL
     Commit Composition For AQL      external/ehrbase.testcase09.v0__compo1_test_set_5_flat.json     format=FLAT

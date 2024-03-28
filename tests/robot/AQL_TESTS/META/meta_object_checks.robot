@@ -245,6 +245,7 @@ ${query8}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] C
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      aql-conformance-ehrbase.org.v0.opt
     Create EHR For AQL
     Commit Composition For AQL      aql-conformance-ehrbase.org.v0_contains.json

@@ -34,6 +34,8 @@ Metadata        TOP_TEST_SUITE    CONTRIBUTION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/contribution_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
@@ -54,3 +56,4 @@ Alternative flow 1: get CONTRIBUTION on an empty EHR
     retrieve CONTRIBUTION by fake contri_uid (JSON)
 
     check response: is negative indicating non-existent contribution_uid on ehr_id
+    [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs

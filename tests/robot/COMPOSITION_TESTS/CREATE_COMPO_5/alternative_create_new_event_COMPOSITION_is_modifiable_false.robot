@@ -23,6 +23,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Resource        ../../_resources/keywords/generic_keywords.robot
 
 Suite Setup       Precondition
@@ -46,8 +47,10 @@ Main flow create new event COMPOSITION FLAT
     commit composition   format=FLAT
     ...                  composition=nested.en.v1__full.xml.flat.json
     check response: is negative indicating does not allow modification
+    [Teardown]  Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    nested/nested.opt
     create EHR

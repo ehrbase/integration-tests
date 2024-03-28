@@ -19,6 +19,7 @@
 Documentation     Composition Integration Tests
 Metadata          TOP_TEST_SUITE    COMPOSITION
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Suite Setup       Precondition
 Suite Teardown    Postcondition
@@ -56,6 +57,7 @@ Cardinality of SECTION class
     Validation section test #5    0          422        #'[3...5]'
     Validation section test #5    1          422
     Validation section test #5    3          201
+    [Teardown]    Run Keywords  (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 
@@ -76,6 +78,7 @@ Cardinality of SECTION class with parameters
     check status_code of commit composition    ${status_code}
 
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    validation/cardinality_of_section.opt
     create EHR
 

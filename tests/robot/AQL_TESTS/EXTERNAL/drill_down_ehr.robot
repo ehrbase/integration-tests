@@ -26,6 +26,7 @@ SELECT e/ehr_status/${path} FROM EHR e[ehr_id/value = '${ehr_id}']
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Create EHR For AQL With Custom EHR Status       file_name=status1.json
 
 Execute Query

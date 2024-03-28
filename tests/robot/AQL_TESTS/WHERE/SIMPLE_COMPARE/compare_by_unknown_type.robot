@@ -23,6 +23,7 @@ SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value, o/d
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      choice_ehrbase.de.v0.opt
     Create EHR For AQL
     Commit Composition For AQL      choice_ehrbase.de.v0.json

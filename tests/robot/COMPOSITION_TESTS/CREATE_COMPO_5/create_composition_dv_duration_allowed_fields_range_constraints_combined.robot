@@ -25,6 +25,7 @@ Metadata        TOP_TEST_SUITE    COMPOSITION
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/suite_settings.robot
 Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 
 *** Variables ***
@@ -79,7 +80,7 @@ Test DV Duration Allowed Fields And Range Constraints
     CommitCompositionTemplate     ${dv_duration_composition_value}    ${expectedCode}
     [Teardown]      Run Keywords    Remove File     ${newOPTFile}   AND
     ...     Admin Delete EHR    AND
-    ...     Delete Template Using API
+    ...     Delete Template Using API   AND     (admin) delete all OPTs
 
 CommitCompositionTemplate
     [Arguments]     ${dvDurationValue}      ${expectedCode}

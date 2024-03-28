@@ -38,6 +38,7 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Suite Setup    Establish Preconditions
 # Test Setup  start openehr server
@@ -61,11 +62,13 @@ Alternative flow 1: has path on EHR with just root directory (DS 2)
     generate random path
     get FOLDER in DIRECTORY at version (JSON)    ${path}
     validate GET-@version response - 404 unknown path
+    [Teardown]    (admin) delete ehr
 
 
 
 
 *** Keywords ***
 Establish Preconditions
+    Set Library Search Order For Tests
     create EHR
     create DIRECTORY (JSON)    empty_directory.json

@@ -28,6 +28,7 @@ ${query_nr} SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS EVALUATION
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      external/minimal_evaluation.opt
     Set Suite Variable      ${template_id}      minimal_evaluation.en.v1
     Create EHR For AQL With Custom EHR Status       file_name=status1.json

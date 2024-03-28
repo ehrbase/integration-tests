@@ -23,6 +23,7 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 Resource        ../../_resources/suite_settings.robot
 
 Suite Setup         Precondition
@@ -88,12 +89,13 @@ Create new event COMPOSITION FLAT with 24 Hours Average - -24 value
     ${24HoursAvg_Value}     Set Variable    PT-24H
     Create Composition With 24 Hours Average - Invalid Value    ${24HoursAvg_Value}
     Should Contain    ${errMsg}    The value ${24HoursAvg_Value} must be >= PT24H
-    [Teardown]      Change Json 24 Hour Average Value and Save Back To File
-    ...     ${initalJson}      PT24H
+    [Teardown]      Run Keywords    Change Json 24 Hour Average Value and Save Back To File     ${initalJson}      PT24H    AND
+    ...     (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    all_types/opt_24h_average.opt
     create EHR
 

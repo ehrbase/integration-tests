@@ -69,18 +69,19 @@ ${query2}   SELECT cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Create EHR For AQL
     Set Suite Variable      ${ehr_id1}  ${ehr_id}
-    Set Suite Variable      ${ehr_status_id1}   ${response['body']['ehr_status']['uid']['value']}
+    Set Suite Variable      ${ehr_status_id1}   ${response.json()['ehr_status']['uid']['value']}
     Set Suite Variable      ${ehr_status_id1_subject_external_ref_id}
-    ...     ${response['body']['ehr_status']['subject']['external_ref']['id']['value']}
+    ...     ${response.json()['ehr_status']['subject']['external_ref']['id']['value']}
     Create EHR For AQL
     Set Suite Variable      ${ehr_id2}  ${ehr_id}
-    Set Suite Variable      ${ehr_status_id2}   ${response['body']['ehr_status']['uid']['value']}
+    Set Suite Variable      ${ehr_status_id2}   ${response.json()['ehr_status']['uid']['value']}
     Admin Delete EHR For AQL    ${ehr_id2}
     Create EHR For AQL
     Set Suite Variable      ${ehr_id3}  ${ehr_id}
-    Set Suite Variable      ${ehr_status_id3}   ${response['body']['ehr_status']['uid']['value']}
+    Set Suite Variable      ${ehr_status_id3}   ${response.json()['ehr_status']['uid']['value']}
     Update EHR Status For EHR
     ...     ehr_id=${ehr_id3}   ehrstatus_uid=${ehr_status_id3}     ehr_status_file=status3.json
     Set Suite Variable      ${ehr_status_id3_version2}  ${response.json()['uid']['value']}

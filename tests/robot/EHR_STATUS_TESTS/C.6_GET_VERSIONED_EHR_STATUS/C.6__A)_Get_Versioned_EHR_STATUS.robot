@@ -25,6 +25,8 @@ Metadata    Created    2021.01.26
 Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
@@ -39,12 +41,13 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     get versioned ehr_status of EHR
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${versioned_status_uid}    ${response.body.uid.value}
-    Should Be Equal As Strings    ${ehr_id}    ${response.body.owner_id.id.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${versioned_status_uid}    ${response.json()['uid']['value']}
+    Should Be Equal As Strings    ${ehr_id}    ${response.json()['owner_id']['id']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 2. Get Versioned Status Of Existing EHR With Two Status Versions (JSON)
@@ -52,15 +55,16 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
 
     get versioned ehr_status of EHR
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${versioned_status_uid}    ${response.body.uid.value}
-    Should Be Equal As Strings    ${ehr_id}    ${response.body.owner_id.id.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${versioned_status_uid}    ${response.json()['uid']['value']}
+    Should Be Equal As Strings    ${ehr_id}    ${response.json()['owner_id']['id']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 3. Get Versioned Status Of Non-Existing EHR (JSON)
@@ -70,7 +74,7 @@ Force Tags
     create fake EHR
 
     get versioned ehr_status of EHR
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
 
 
 4. Get Versioned Status Of Invalid EHR_ID (JSON)
@@ -80,4 +84,4 @@ Force Tags
     Set Test Variable    ${ehr_id}    foobar
 
     get versioned ehr_status of EHR
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404

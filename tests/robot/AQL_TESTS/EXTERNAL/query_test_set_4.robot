@@ -51,6 +51,7 @@ SELECT c2/name/value, o/data[at0002]/events[at0003]/data[at0001]/items[at0004]/v
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      external/ehrbase.testcase06.v0.opt
     Upload OPT For AQL      external/ehrbase.testcase008.v0.opt
     Create EHR For AQL

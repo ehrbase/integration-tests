@@ -37,6 +37,8 @@ Metadata        TOP_TEST_SUITE    CONTRIBUTION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/contribution_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
@@ -55,7 +57,7 @@ Main flow: successfully commit CONTRIBUTION with single valid VERSION<FOLDER> to
     check response: is positive - returns version id
     check content of committed CONTRIBUTION
 
-    #[Teardown]    restart SUT
+    [Teardown]    (admin) delete ehr
 
 
 Main flow: successfully commit CONTRIBUTION with single valid VERSION<FOLDER> to modify
@@ -68,5 +70,5 @@ Main flow: successfully commit CONTRIBUTION with single valid VERSION<FOLDER> to
     commit CONTRIBUTION - with preceding_version_uid (JSON)    minimal/folder.contribution.modification.json
     check response: is positive - contribution has new version
 
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 

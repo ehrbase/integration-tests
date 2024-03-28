@@ -38,6 +38,7 @@ SELECT s/subject/external_ref/id/value, s/other_details/items[at0001]/value/id F
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Create EHR For AQL With Custom EHR Status       file_name=status1.json
     Set Suite Variable      ${ehr_id1}      ${ehr_id}
     Set Suite Variable      ${subject_external_ref_value1}      ${subject_external_ref_value}

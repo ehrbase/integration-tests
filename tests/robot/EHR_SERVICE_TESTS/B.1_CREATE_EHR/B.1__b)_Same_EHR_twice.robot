@@ -37,6 +37,8 @@ Documentation   B.1.b) Alternative flow 1: Create same EHR twice
 Metadata        TOP_TEST_SUITE    EHR_SERVICE
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup    startup SUT
 # Suite Teardown    shutdown SUT
@@ -53,9 +55,11 @@ Create Same EHR Twice (JSON)
     prepare new request session    JSON
     generate random ehr_id
     create new EHR by ID        ${ehr_id}
-    create new EHR by ID        ${ehr_id}
+    Status Should Be    204
 
-    verify server response
+    create new EHR by ID        ${ehr_id}
+    server complains about already existing ehr_id
+    [Teardown]      (admin) delete ehr
 
 
 Create Same EHR Twice (XML)
@@ -65,21 +69,19 @@ Create Same EHR Twice (XML)
     prepare new request session    XML
     generate random ehr_id
     create new EHR by ID        ${ehr_id}
-    create new EHR by ID        ${ehr_id}
+    Status Should Be    204
 
-    verify server response
+    create new EHR by ID        ${ehr_id}
+    server complains about already existing ehr_id
+    [Teardown]      (admin) delete ehr
 
 
 
 *** Keywords ***
-verify server response
-    server complains about already existing ehr_id
-
-
 server complains about already existing ehr_id
     # Log To Console      ${response}
     # Log To Console      ${response.status}
-    Should Be Equal As Strings    ${response.status}    409
+    Status Should Be    409
     
     # String    response body error    EHR with this ID already exists
     # TODO: create separate checks for JSON/XML responses

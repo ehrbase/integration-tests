@@ -23,7 +23,7 @@ Documentation       EHRScape Tests
 
 Resource            ../_resources/keywords/composition_keywords.robot
 
-#Suite Setup    Precondition
+Suite Setup         Set Library Search Order For Tests
 #Suite Teardown      restart SUT
 
 
@@ -75,6 +75,7 @@ Get Template (ECIS) - Check Default Value Item
     ...     ${response['webTemplate']['tree']['children'][2]['children'][0]['inputs'][0]['defaultValue']}
     ...     at0006
     [Teardown]    TRACE JIRA ISSUE    CDR-417
+
 
 *** Keywords ***
 ApplyJSONLocatorAndReturnResult

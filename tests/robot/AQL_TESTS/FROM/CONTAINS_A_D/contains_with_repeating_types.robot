@@ -28,6 +28,7 @@ Test Contains With Repeating Types: SELECT o FROM COMPOSITION contains ${from}
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      type_repetition_conformance_ehrbase.org.opt
     Create EHR For AQL
     Commit Composition For AQL      type_repetition_conformance_ehrbase.org_one_reptation.json

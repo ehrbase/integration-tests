@@ -38,6 +38,8 @@ Metadata        TOP_TEST_SUITE    CONTRIBUTION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/contribution_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
@@ -55,3 +57,4 @@ Alternative flow 3: commit CONTRIBUTION with multiple valid and invalid VERSION<
     create EHR
     commit invalid CONTRIBUTION (JSON)    multiple_valid_and_invalid_compos.json
     check response: is negative indicating errors in committed data
+    [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
