@@ -29,10 +29,10 @@ Suite Teardown  Admin Delete EHR For AQL       #enable this keyword if AQL check
 
 
 *** Variables ***
-@{expected_meta_keys_post}      _created    _executed_aql   _schema_version     _type   resultsize
-@{expected_meta_keys_get}       _created    _executed_aql   _href   _schema_version     _type   resultsize
-@{expected_meta_keys_get_fetch_offset}       _created    _executed_aql   _href   _schema_version     _type   fetch  offset   resultsize
-@{expected_meta_keys_post_fetch_offset}      _created    _executed_aql   _schema_version     _type   fetch  offset  resultsize
+@{expected_meta_keys_post}      _created    _executed_aql   _generator  _schema_version     _type   resultsize
+@{expected_meta_keys_get}       _created    _executed_aql   _generator   _href   _schema_version     _type   resultsize
+@{expected_meta_keys_get_fetch_offset}       _created    _executed_aql  _generator  _href   _schema_version     _type   fetch  offset   resultsize
+@{expected_meta_keys_post_fetch_offset}      _created    _executed_aql  _generator  _schema_version     _type   fetch  offset  resultsize
 ${query1}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o CONTAINS CLUSTER
 ${query2}   SELECT o FROM SECTION CONTAINS OBSERVATION o CONTAINS CLUSTER
 ${query3}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o
@@ -273,6 +273,9 @@ Meta JSON Object Checks
     Should Be Equal As Strings      ${meta_obj["_type"]}    RESULTSET
     Should Be Equal As Strings      ${meta_obj["_executed_aql"]}    ${q_str}
     Should Be Equal As Strings      ${meta_obj["resultsize"]}    ${rows_length}
+    Should Contain                  ${meta_obj["_generator"]}    EHRBase/
+    @{splitted_generator}       Split String     ${meta_obj["_generator"]}      /
+    Log     EHRBase version: ${splitted_generator}[1]
     Created Timestamp Checks        ${meta_obj["_created"]}
 
 GET /query/aql With Params
