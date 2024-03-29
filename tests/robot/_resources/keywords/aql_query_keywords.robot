@@ -381,7 +381,7 @@ GET /definition/query
 
 DELETE /definition/query/{qualified_query_name}/{version}
     [Documentation]     Delete stored AQL from EHRBase using its qualified_query_name/version.
-    ...                 Expected status code 200.
+    ...                 Expected status code 405 - endpoint available operations PUT, GET only.
     [Arguments]     ${qualif_name}
     &{headers}      Create Dictionary       Content-Type=application/json
     Create Session      ${SUT}      ${BASEURL}      debug=2
@@ -389,7 +389,8 @@ DELETE /definition/query/{qualified_query_name}/{version}
     ...         /definition/query/${qualif_name}
     ...         expected_status=anything
     ...         headers=${headers}
-                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Should Be Equal As Strings      ${resp.status_code}     ${405}
+                Should Be Equal As Strings      ${resp.json()['error']}     Method Not Allowed
                 Set Test Variable       ${resp}         ${resp}
 
 GET /query/aql?q={query}

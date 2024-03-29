@@ -138,21 +138,12 @@ Definition API - GET All Stored Queries
     END
 
 Definition API - Non Existing Endpoint - DELETE Stored Query Using Qualified Query Name And Version
-    [Tags]      not-ready   Negative    CDR-1069
+    [Tags]      Negative
     [Documentation]     Test to check below endpoint:
     ...                 - DELETE /rest/openehr/v1/definition/query/{qualified_query_name}/{version}
     ...                 Expected:
-    ...                 - response status code = 200
-    ...                 Check that on GET deleted stored query by {qualified_query_name}/{version}, status code is *400*
-    ...                 \n Check that 404 is returned on GET /rest/openehr/v1/definition/query/{qualified_query_name}/{version} for deleted query.
-    ${isPassed}     Run Keyword And Return Status
-    ...     DELETE /definition/query/{qualified_query_name}/{version}
-    ...     qualif_name=${resp_qualified_query_name_version}
-    IF     '${isPassed}' != '${TRUE}'
-        FAIL    DELETE /rest/openehr/v1/definition/query/${resp_qualified_query_name_version} failed!
-    END
-    Run Keyword And Expect Error    	404 != 200
-    ...     GET /definition/query/{qualified_query_name} / including {version}
+    ...                 - response status code = 405
+    DELETE /definition/query/{qualified_query_name}/{version}
     ...     qualif_name=${resp_qualified_query_name_version}
 
 Query API - GET Stored Query Using Qualified Query Name
