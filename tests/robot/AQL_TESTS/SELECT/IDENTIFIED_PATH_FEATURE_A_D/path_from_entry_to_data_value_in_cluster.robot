@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   CHECK Identified Path: Path from Entry to Data value in Cluster
 ...             - Covers the following:
-...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#path-from-entry-to-data-value-in-cluster
+...             - https://github.com/ehrbase/conformance-testing-documentation/blob/main/SELECT_TEST_SUIT.md#path-from-entry-to-data-value-in-cluster
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

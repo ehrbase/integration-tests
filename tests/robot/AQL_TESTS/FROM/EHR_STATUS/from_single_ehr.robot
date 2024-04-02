@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK AQL RESPONSE ON FROM EHR_STATUS, test from single ehr
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/FROM_TEST_SUIT.MD#test-from-single-ehr
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FROM_TEST_SUIT.MD#test-from-single-ehr
 ...         - *Precondition:* 1. Create EHR with Status from status1.json; 2. Save {ehr_id};
 ...         - Send AQL 'SELECT s/{path} FROM EHR e CONTAINS EHR_STATUS s WHERE e/ehr_id/value = '{ehr_id}''
 ...         - {path} can be:

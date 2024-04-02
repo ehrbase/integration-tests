@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   ORDER BY - SINGLE ORDER BY - ORDER by DV_DATE
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/ORDER_BY_SUIT.md#order-by--dv_date
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/ORDER_BY_SUIT.md#order-by--dv_date
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   WHERE - COMPARE WITH EXTRACTED COLUMN I
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#compare-with-extracted-column-i--httpsvitagroup-agatlassiannetwikispacespenpages38216361architecture-aqlfeaturelistwhere
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/WHERE_TEST_SUIT.md#compare-with-extracted-column-i--httpsvitagroup-agatlassiannetwikispacespenpages38216361architecture-aqlfeaturelistwhere
 ...         - *Precondition:* 1. Create OPTs; 2. Create EHRs; 3. Create Compositions
 ...         - Send AQL 'SELECT e/ehr_id/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE {where}'
 ...         - {where} can be:

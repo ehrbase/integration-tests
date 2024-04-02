@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   CHECK Identified Path: Array valued paths
 ...             - Covers the following:
-...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#array-valued-paths
+...             - https://github.com/ehrbase/conformance-testing-documentation/blob/main/SELECT_TEST_SUIT.md#array-valued-paths
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

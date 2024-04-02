@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   CHECK Identified Path: Path from Entry to Data value in Cluster (using Second AQL)
 ...             - Covers the following:
-...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#multi-selects:~:text=SELECT%20c/%7Bpath%7D%20FROM%20OBSERVATION%20o%20%5BopenEHR%2DEHR%2DOBSERVATION.conformance_observation.v0%5D%20contains%20Cluster%20c%20%5BopenEHR%2DEHR%2DCLUSTER.conformance_cluster.v0%5D
+...             - https://github.com/ehrbase/conformance-testing-documentation/blob/main/SELECT_TEST_SUIT.md#multi-selects:~:text=SELECT%20c/%7Bpath%7D%20FROM%20OBSERVATION%20o%20%5BopenEHR%2DEHR%2DOBSERVATION.conformance_observation.v0%5D%20contains%20Cluster%20c%20%5BopenEHR%2DEHR%2DCLUSTER.conformance_cluster.v0%5D
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

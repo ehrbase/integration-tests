@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   PARAMETER - PARAMETER in where
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/PARAMETER_TEST_SUIT.md#parameter-in-where
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/PARAMETER_TEST_SUIT.md#parameter-in-where
 
 Resource        ../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

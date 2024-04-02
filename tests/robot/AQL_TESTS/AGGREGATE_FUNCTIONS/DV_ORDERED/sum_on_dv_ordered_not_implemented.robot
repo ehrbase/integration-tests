@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation	CHECK AGGREGATE FUNCTIONS AVG NOT IMPLEMENTED ON DV_ORDERED IN AQL
-...		- Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/AGGREGATE_FUNCTIONS.md#sum-on-dv-ordered
+...		- Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/AGGREGATE_FUNCTIONS.md#sum-on-dv-ordered
 
 Resource	../../../_resources/keywords/aql_keywords.robot
 

@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   ORDER BY - SINGLE ORDER BY - ORDER BY PATHS WITHIN SAME HIERARCHY LEVEL I
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/ORDER_BY_SUIT.md#order-by-paths-within-same-hierarchy-level-i
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/ORDER_BY_SUIT.md#order-by-paths-within-same-hierarchy-level-i
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK SELECT AS IN RESULT
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#as-in-result
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/SELECT_TEST_SUIT.md#as-in-result
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 

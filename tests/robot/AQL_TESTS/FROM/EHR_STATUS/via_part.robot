@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK AQL RESPONSE ON FROM EHR_STATUS, test via part
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/FROM_TEST_SUIT.MD#test-via-part
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FROM_TEST_SUIT.MD#test-via-part
 ...         - *Precondition:* 1. Create EHR with Status from status1.json; 2. Save {ehr_id};
 ...         - Send AQL 'SELECT e/ehr_status/{path} FROM EHR e WHERE e/ehr_id/value = '{ehr_id}''
 ...         - {path} can be:

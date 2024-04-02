@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK AQL RESPONSE ON QUERIES WITH SIMPLE 'AND' and 'OR'
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/feature/CDR-998_CONTAINS_and/or/FROM_TEST_SUIT.MD#simple-and-and-or
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/feature/CDR-998_CONTAINS_and/or/FROM_TEST_SUIT.MD#simple-and-and-or
 ...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
 ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
 Resource        ../../../_resources/keywords/aql_keywords.robot

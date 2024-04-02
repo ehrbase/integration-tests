@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK AQL RESPONSE ON FROM EHR_STATUS, test from multiple ehrs
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/FROM_TEST_SUIT.MD#test-from-multiple-ehrs
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FROM_TEST_SUIT.MD#test-from-multiple-ehrs
 ...         - *Precondition:* 1. Create EHRs with Status from status1.json and status2.json; 2. Save {ehr_id1}, {ehr_id2};
 ...         - Send AQL 'SELECT s/subject/external_ref/id/value, s/other_details/items[at0001]/value/id FROM EHR e CONTAINS EHR_STATUS s'
 ...         - Check AQL result to be {ins1920,55175056}, {ins1921,55175057}

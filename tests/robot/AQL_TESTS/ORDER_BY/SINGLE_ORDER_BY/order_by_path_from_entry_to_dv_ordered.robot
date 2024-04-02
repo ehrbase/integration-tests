@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   ORDER BY - SINGLE ORDER BY - ORDER BY PATH FROM ENTRY TO DV_ORDERED
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/ORDER_BY_SUIT.md#order-by-path-from-entry-to-dvordered
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/ORDER_BY_SUIT.md#order-by-path-from-entry-to-dvordered
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

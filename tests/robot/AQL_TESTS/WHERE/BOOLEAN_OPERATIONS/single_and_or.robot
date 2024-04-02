@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   WHERE - BOOLEAN OPERATIONS - SINGLE AND / OR
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#single--and--or-feature-list
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/WHERE_TEST_SUIT.md#single--and--or-feature-list
 ...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition; 4. Create Composition; 5. Create EHR
 ...         - Send AQL 'SELECT e/ehr_id/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE {where}'
 ...         - {where} can be:

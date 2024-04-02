@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   ORDER BY - SINGLE ORDER BY - ORDER BY ON EXTRACTED COLUMNS III
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/ORDER_BY_SUIT.md#order-by-on-extracted-columns-iii
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/ORDER_BY_SUIT.md#order-by-on-extracted-columns-iii
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   WHERE - SIMPLE COMPARE - Compare by unknown type
 ...             - Covers the following:
-...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#compare-by-unknown-type
+...             - https://github.com/ehrbase/conformance-testing-documentation/blob/main/WHERE_TEST_SUIT.md#compare-by-unknown-type
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

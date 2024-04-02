@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   ORDER BY - MULTIPLE ORDER BY - ORDER BY EXTRACTED COLUMNS IV
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/ORDER_BY_SUIT.md#order-by-on-extracted-columns-iv-1
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/ORDER_BY_SUIT.md#order-by-on-extracted-columns-iv-1
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

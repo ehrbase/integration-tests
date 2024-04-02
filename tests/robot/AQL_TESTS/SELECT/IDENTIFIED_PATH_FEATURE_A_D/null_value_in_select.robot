@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK SELECT WITH NULL VALUE IN SELECT
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#null-value-in--select
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/SELECT_TEST_SUIT.md#null-value-in--select
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver
 ...     file=${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results/select/combinations/null_value_in_select.csv

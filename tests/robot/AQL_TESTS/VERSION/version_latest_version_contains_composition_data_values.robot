@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   VERSION[LATEST_VERSION] CONTAINS COMPOSITION - DATA VALUES
 ...             - Covers the following:
-...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/VERSION_TEST_SUIT.md#data-values-1
+...             - https://github.com/ehrbase/conformance-testing-documentation/blob/main/VERSION_TEST_SUIT.md#data-values-1
 
 Resource        ../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

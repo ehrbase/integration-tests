@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   Drill down along paths: Drill down EHR_STATUS
 ...             - Covers the following:
-...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#drill-down-ehr_status
+...             - https://github.com/ehrbase/conformance-testing-documentation/blob/main/SELECT_TEST_SUIT.md#drill-down-ehr_status
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Resource        ../../../_resources/keywords/ehr_keywords.robot

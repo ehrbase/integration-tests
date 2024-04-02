@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK AQL RESPONSE ON FROM EHR_STATUS, contains
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/FROM_TEST_SUIT.MD#contains
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FROM_TEST_SUIT.MD#contains
 ...         - *Precondition:* 1. Upload OPT; 2. Create EHR with Status from status1.json; 3. Save {ehr_id};
 ...         4. Commit Composition.
 ...         - Send AQL 'SELECT l/name/value FROM EHR e CONTAINS {path}'

@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   MIXED - Contains and where cases
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/MIXED_TEST_SUIT.md#contains-and-where
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/MIXED_TEST_SUIT.md#contains-and-where
 Resource        ../../_resources/keywords/aql_keywords.robot
 
 Suite Setup     Precondition

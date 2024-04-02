@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK AQL RESPONSE ON FROM ABSTRACT TYPES
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/FROM_TEST_SUIT.MD#test-from-abstract-types
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FROM_TEST_SUIT.MD#test-from-abstract-types
 ...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
 ...         - Send AQL 'SELECT t FROM {type} t'
 ...         - {type} can be:

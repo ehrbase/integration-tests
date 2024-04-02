@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   VERSION[LATEST_VERSION] CONTAINS EHR_STATUS
 ...             - Covers the following:
-...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/VERSION_TEST_SUIT.md#versionlatest_version-contains-ehr_status
+...             - https://github.com/ehrbase/conformance-testing-documentation/blob/main/VERSION_TEST_SUIT.md#versionlatest_version-contains-ehr_status
 
 Resource        ../../_resources/keywords/aql_keywords.robot
 Resource        ../../_resources/keywords/contribution_keywords.robot

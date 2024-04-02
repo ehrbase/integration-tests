@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK FROM EHR AQL RESULT
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/FROM_TEST_SUIT.MD#test-from-ehr
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FROM_TEST_SUIT.MD#test-from-ehr
 ...             - Covers: https://github.com/ehrbase/openEHR_SDK/blob/develop/client/src/test/java/org/ehrbase/openehr/sdk/client/openehrclient/defaultrestclient/systematic/ehrquery/CanonicalEhrQuery1IT.java
 Resource        ../../../_resources/keywords/aql_keywords.robot
 

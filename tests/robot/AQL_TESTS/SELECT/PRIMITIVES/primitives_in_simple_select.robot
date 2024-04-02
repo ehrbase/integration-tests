@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   CHECK Primitives: Primitives in simple select
 ...             - Covers the following:
-...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#primitives-in-simple-select
+...             - https://github.com/ehrbase/conformance-testing-documentation/blob/main/SELECT_TEST_SUIT.md#primitives-in-simple-select
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

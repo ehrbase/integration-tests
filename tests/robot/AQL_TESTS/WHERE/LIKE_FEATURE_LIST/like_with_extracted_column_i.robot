@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   WHERE - LIKE FEATURE LIST - LIKE WITH EXTRACTED COLUMN I
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#like-with-extracted-column-1
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/WHERE_TEST_SUIT.md#like-with-extracted-column-1
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

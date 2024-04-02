@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK SELECT PATH TO TARGET OBJECT
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#path-to-target-object
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/SELECT_TEST_SUIT.md#path-to-target-object
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 

@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   WHERE - Exists - Compare with Null
 ...             - Covers the following:
-...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#compare-with-null
+...             - https://github.com/ehrbase/conformance-testing-documentation/blob/main/WHERE_TEST_SUIT.md#compare-with-null
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

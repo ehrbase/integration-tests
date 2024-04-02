@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK LIMIT WITHOUT OFFSET WITHOUT ORDER BY
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/LIMIT_TEST_SUIT.md#without-order-by
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/LIMIT_TEST_SUIT.md#without-order-by
 ...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create 4x Compositions
 ...         - Send AQL 'SELECT c FROM COMPOSITION c LIMIT \{limit}'
 ...         - *\{limit}* can be:

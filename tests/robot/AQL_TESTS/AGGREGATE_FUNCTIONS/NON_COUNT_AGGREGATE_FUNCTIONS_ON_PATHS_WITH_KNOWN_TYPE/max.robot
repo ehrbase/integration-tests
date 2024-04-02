@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK AGGREGATE FUNCTIONS IN AQL
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/AGGREGATE_FUNCTIONS.md#max
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/AGGREGATE_FUNCTIONS.md#max
 ...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition.
 ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
 Resource        ../../../_resources/keywords/aql_keywords.robot

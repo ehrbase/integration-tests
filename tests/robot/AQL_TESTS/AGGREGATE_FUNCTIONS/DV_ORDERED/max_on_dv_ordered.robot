@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation	CHECK AGGREGATE FUNCTIONS MAX ON DV_ORDERED IN AQL
-...		- Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/AGGREGATE_FUNCTIONS.md#max-on-dv-ordered
+...		- Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/AGGREGATE_FUNCTIONS.md#max-on-dv-ordered
 ...     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition.
 ...     - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
 

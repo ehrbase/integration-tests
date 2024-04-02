@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   WHERE - MATCHES EXTRACTED COLUMN
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#matches-extracted-column
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/WHERE_TEST_SUIT.md#matches-extracted-column
 ...         - *Precondition:* 1. Create OPT; 2. Create EHRs; 3. Create Compositions
 ...         - Send AQL 'SELECT e/ehr_id/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE {where}'
 ...         - {where} can be:

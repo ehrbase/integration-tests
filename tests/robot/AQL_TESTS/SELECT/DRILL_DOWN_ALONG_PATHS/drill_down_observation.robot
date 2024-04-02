@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation   Drill down along paths: Drill down OBSERVATION
 ...             - Covers the following:
-...             - https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#drill-down-observation
+...             - https://github.com/ehrbase/conformance-testing-documentation/blob/main/SELECT_TEST_SUIT.md#drill-down-observation
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Library     DataDriver

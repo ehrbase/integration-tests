@@ -24,7 +24,7 @@ Documentation   AQL TESTS TEST SUITE
 ...             \nTest pack based on:
 ...             https://vitagroup-ag.atlassian.net/wiki/spaces/PEN/pages/37720514/Existing+tests+for+AQL+engine#Proposed-structure-for-AQL-Robot-tests
 ...             \nGithub repository with the majority of tests:
-...             https://github.com/ehrbase/AQL_Test_CASES
+...             https://github.com/ehrbase/conformance-testing-documentation
 
 Resource        ${EXECDIR}/robot/_resources/suite_settings.robot
 

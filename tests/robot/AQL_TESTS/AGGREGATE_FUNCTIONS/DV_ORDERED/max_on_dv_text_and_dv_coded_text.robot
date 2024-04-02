@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation	CHECK AGGREGATE FUNCTIONS MAX ON DV_TEXT AND DV_CODED_TEXT ON DV_ORDERED IN AQL
-...		- Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/AGGREGATE_FUNCTIONS.md
+...		- Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/AGGREGATE_FUNCTIONS.md
 
 Resource	../../../_resources/keywords/aql_keywords.robot
 

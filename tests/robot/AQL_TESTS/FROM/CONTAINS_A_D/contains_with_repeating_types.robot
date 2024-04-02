@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK AQL RESPONSE ON FROM CONTAINS WITH REPEATING TYPES
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/FROM_TEST_SUIT.MD#contains-with-repeating-types
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FROM_TEST_SUIT.MD#contains-with-repeating-types
 ...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
 ...         - Send AQL 'SELECT o FROM COMPOSITION contains {from}'
 ...         - {from} can be:

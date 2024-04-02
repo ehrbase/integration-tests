@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK FROM WITHOUT PREDICATE
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/FROM_TEST_SUIT.MD#without-predicate
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FROM_TEST_SUIT.MD#without-predicate
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
