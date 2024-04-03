@@ -85,7 +85,7 @@ Force Tags
 
     create new EHR
     Status Should Be    201
-
+    Sleep   1s
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
 
@@ -115,7 +115,7 @@ Force Tags
     ${timediff} = 	Subtract Date From Date 	${timestamp2} 	${timestamp1}
 
     # comment: Idea - newer/higher timestamp - older/lesser timestamp = number larger than 0 IF correct
-    Run Keyword And Return Status   Should Be True      ${timediff} > 0
+    Should Be True      ${timediff} > 0
     [Teardown]      (admin) delete ehr
 
 
