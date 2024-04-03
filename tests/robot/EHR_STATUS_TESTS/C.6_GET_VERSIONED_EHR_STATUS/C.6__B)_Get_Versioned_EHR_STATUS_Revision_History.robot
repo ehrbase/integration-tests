@@ -115,7 +115,7 @@ Force Tags
     ${timediff} = 	Subtract Date From Date 	${timestamp2} 	${timestamp1}
 
     # comment: Idea - newer/higher timestamp - older/lesser timestamp = number larger than 0 IF correct
-    Should Be True 	${timediff} > 0
+    Run Keyword And Return Status   Should Be True      ${timediff} > 0
     [Teardown]      (admin) delete ehr
 
 
