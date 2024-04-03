@@ -31,6 +31,7 @@ Suite Setup       Precondition
 
 *** Variables ***
 ${composition_file}      Test_all_types_v2__.json
+${composition_file_tmp}      Test_all_types_v2.tmp__.json
 
 
 *** Test Cases ***
@@ -82,21 +83,23 @@ PositiveCompositionTemplate
     [Arguments]     ${dvDurationValue}=P1Y3M4D
     Load Json File With Composition
     ${initalJson}           Load Json From File     ${compositionFilePath}
-    Change Json KeyValue and Save Back To File
+    ${returnedJsonFile}     Change Json KeyValue and Save Back To File
     ...     ${initalJson}   ${dvDurationValue}
     commit composition      format=CANONICAL_JSON
-    ...                     composition=${composition_file}
+    ...                     composition=${composition_file_tmp}
     Should Be Equal As Strings      ${response.status_code}     201
+    [Teardown]      Remove File     ${returnedJsonFile}
 
 NegativeCompositionTemplate
     [Arguments]     ${dvDurationValue}=1Y
     Load Json File With Composition
     ${initalJson}           Load Json From File     ${compositionFilePath}
-    Change Json KeyValue and Save Back To File
+    ${returnedJsonFile}     Change Json KeyValue and Save Back To File
     ...     ${initalJson}   ${dvDurationValue}
     commit composition      format=CANONICAL_JSON
-    ...                     composition=${composition_file}
+    ...                     composition=${composition_file_tmp}
     Should Be Equal As Strings      ${response.status_code}     400
+    [Teardown]      Remove File     ${returnedJsonFile}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates $.content[0].data.events[0].data.items[11].value.value to
@@ -111,4 +114,5 @@ Change Json KeyValue and Save Back To File
     ${changedDvDurationValue}   Get Value From Json     ${jsonContent}      ${objPath}
     Should Be Equal As Strings     ${changedDvDurationValue[0]}   ${valueToUpdate}
     ${json_str}     Convert JSON To String    ${json_object}
-    Create File     ${compositionFilePath}    ${json_str}
+    Create File     ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}    ${json_str}
+    [return]    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}

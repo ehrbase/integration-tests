@@ -44,6 +44,7 @@ Suite Setup     Set Library Search Order For Tests
     ...     - commit composition\n- check status code of the commited composition.
     ...     - Expected status code on commit composition = 201.
     Set Suite Variable      ${composition_file}    Test_dv_interval_dv_quantity_open_constraint.v0__.json
+    Set Suite Variable      ${composition_file_tmp}    Test_dv_interval_dv_quantity_open_constraint.v0.tmp__.json
     Set Suite Variable      ${optFile}             all_types/Test_dv_interval_dv_quantity_open_constraint.v0.opt
     Precondition
     ${expectedStatusCode}   Set Variable    201
@@ -146,6 +147,7 @@ Test DV_INTERVAL<DV_QUANTITY> Lower 200 - Upper 100 - Lower Unb 0 - Upper Unb 0 
     ...     - commit composition\n- check status code of the commited composition.
     ...     - Expected status code on commit composition = 201.
     Set Suite Variable      ${composition_file}    Test_dv_interval_dv_quantity_lower_upper_constraint.v0__.json
+    Set Suite Variable      ${composition_file_tmp}    Test_dv_interval_dv_quantity_lower_upper_constraint.v0.tmp__.json
     Set Suite Variable      ${optFile}             all_types/Test_dv_interval_dv_quantity_lower_upper_constraint.v0.opt
     Precondition
     ${expectedStatusCode}   Set Variable    201
@@ -241,7 +243,7 @@ Commit Composition With Modified DV_INTERVAL<DV_QUANTITY> Values
     ...     ${initalJson}   ${dvLower}  ${dvUpper}
     ...     ${dvLowerUnb}   ${dvUpperUnb}   ${dvLowerIncl}  ${dvUpperIncl}  ${dvIntervalQuantityUnits}
     commit composition      format=CANONICAL_JSON
-    ...                     composition=${composition_file}
+    ...                     composition=${composition_file_tmp}
     ${isStatusCodeEqual}    Run Keyword And Return Status
     ...     Should Be Equal As Strings      ${response.status_code}     ${expectedCode}
     ${isUidPresent}     Run Keyword And Return Status
@@ -254,7 +256,8 @@ Commit Composition With Modified DV_INTERVAL<DV_QUANTITY> Values
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    [Return]        ${isStatusCodeEqual}
+    [Teardown]      Remove File     ${returnedJsonFile}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_INTERVAL<DV_COUNT> lower, upper, lower_unb, upper_unb, lower_incl, upper_incl
@@ -318,8 +321,8 @@ Change Json KeyValue and Save Back To File
     ${changedDvLowerIncl}   Get Value From Json     ${jsonContent}      ${dvLowerInclJsonPath}
     ${changedDvUpperIncl}   Get Value From Json     ${jsonContent}      ${dvUpperInclJsonPath}
     ${json_str}     Convert JSON To String    ${json_object}
-    Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    Create File     ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}    ${json_str}
+    [return]    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}
 
 
 ### Below cases are not valid as NULL value is not possible on DV_QUANTITY.magnitude

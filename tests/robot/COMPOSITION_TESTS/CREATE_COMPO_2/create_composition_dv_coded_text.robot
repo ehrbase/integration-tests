@@ -41,6 +41,7 @@ Composition With DV_CODED_TEXT Code_String And Terminology_id NULL
     ...     - check status code of the commited composition.
     ...     - Expected status code on commit composition = 422.
     Set Suite Variable      ${composition_file}    Test_dv_coded_text_open_constraint.v0__.json
+    Set Suite Variable      ${composition_file_tmp}    Test_dv_coded_text_open_constraint.v0.tmp__.json
     Set Suite Variable      ${optFile}             all_types/Test_dv_coded_text_open_constraint.v0.opt
     Precondition
     ${expectedStatusCode}   Set Variable    422
@@ -113,6 +114,7 @@ Composition With DV_CODED_TEXT Code_String And Terminology_id NULL With Configur
     ...     - check status code of the commited composition.
     ...     - Expected status code on commit composition = 422.
     Set Suite Variable      ${composition_file}    Test_dv_coded_text_with_local_codes.v0__.json
+    Set Suite Variable      ${composition_file_tmp}    Test_dv_coded_text_with_local_codes.v0.tmp__.json
     Set Suite Variable      ${optFile}             all_types/Test_dv_coded_text_with_local_codes.v0.opt
     Precondition
     ${expectedStatusCode}   Set Variable    422
@@ -190,7 +192,7 @@ Commit Composition With Modified Code_String And Terminology_Id Value
     ${returnedJsonFile}     Change Json KeyValue and Save Back To File
     ...     ${initalJson}   ${codeStringValue}      ${terminologyIdValue}
     commit composition      format=CANONICAL_JSON
-    ...                     composition=${composition_file}
+    ...                     composition=${composition_file_tmp}
     ${isStatusCodeEqual}    Run Keyword And Return Status
     ...     Should Be Equal As Strings      ${response.status_code}     ${expectedCode}
     ${isUidPresent}     Run Keyword And Return Status
@@ -203,7 +205,8 @@ Commit Composition With Modified Code_String And Terminology_Id Value
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    [Return]        ${isStatusCodeEqual}
+    [Teardown]     Remove File      ${returnedJsonFile}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_CODED_TEXT Code_String And Terminology_id
@@ -250,5 +253,5 @@ Change Json KeyValue and Save Back To File
     ${changedTerminologyIdValue2}   Get Value From Json     ${jsonContent}      ${terminologyIdValueJsonPath2}
     ${changedTerminologyIdValue3}   Get Value From Json     ${jsonContent}      ${terminologyIdValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
-    Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    Create File     ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}    ${json_str}
+    [return]    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}
