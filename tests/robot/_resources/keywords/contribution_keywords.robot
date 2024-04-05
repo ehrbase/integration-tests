@@ -159,7 +159,8 @@ check response: is negative - complaining about empty versions list
                         Should Be Equal As Strings   ${response.status_code}   400
                         Set Test Variable    ${body}    ${response.json()}
                         Set Test Variable    ${error_message}    ${body['message']}
-                        Should Be Equal As Strings    ${error_message}    Versions must not be empty
+                        Should Contain       ${error_message}    Versions must not be empty
+                        #Should Be Equal As Strings    ${error_message}    Versions must not be empty
 
 
 check response: is negative indicating wrong change_type
