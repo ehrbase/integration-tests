@@ -850,7 +850,7 @@ extract subject_id from response (JSON)
 
             # comment:  Determine which test suite we are executing the KW in (based on SUITE METADATA).
             #           If test suite is one of COMPOSITION, CONTRIBUTION, DIRECTORY, EHR_STATUS, KNOWLEDGE or AQL
-            #           skipp this KW completely. 
+            #           skipp this KW completely.
                         Log    ${SUITE METADATA['TOP_TEST_SUITE']}
     ${actualsuite}      Get From Dictionary    ${SUITE METADATA}    TOP_TEST_SUITE
                         Return From Keyword If    "${actualsuite}" not in "EHR_SERVICE"

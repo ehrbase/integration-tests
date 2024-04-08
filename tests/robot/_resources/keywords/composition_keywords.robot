@@ -1429,7 +1429,7 @@ create EHR and commit a composition for versioned composition tests
 
 update a composition for versioned composition tests
     [Documentation]     Updates a pre-set composition to alter a versioned test environment.
-    ...                 Requires `${compo_uid_v1}` or to be run after the `create EHR and commit a composition 
+    ...                 Requires `${compo_uid_v1}` or to be run after the `create EHR and commit a composition
     ...                 for versioned composition tests` keyword.
 
     update composition (JSON)   minimal/minimal_observation.composition.participations.extdatetimes.v2.xml

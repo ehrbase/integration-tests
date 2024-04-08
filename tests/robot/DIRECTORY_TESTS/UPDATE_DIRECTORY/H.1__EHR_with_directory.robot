@@ -40,9 +40,6 @@ Resource        ../../_resources/keywords/admin_keywords.robot
 Test Setup              Preconditions
 Test Teardown           Postconditions
 
-Force Tags              refactor
-
-
 
 *** Test Cases ***
 Main flow: update directory from EHR with directory
@@ -51,13 +48,22 @@ Main flow: update directory from EHR with directory
     ...                     2. Add subfolders
     ...                     3. Add items to folder/subfolder
     ...                     4. validate result
+    ...                     \nCovers as well: https://vitagroup-ag.atlassian.net/browse/CDR-828
     [Tags]              
 
     update DIRECTORY (JSON)    update/2_add_subfolders.json
     validate PUT response - 200 updated
+    Should Contain      ${response.json()['uid']['value']}      ${CREATING_SYSTEM_ID}::2
+    ${rootFolderCount}      Get Length      ${response.json()['folders']}
+    ${subRootFolderCount}      Get Length      ${response.json()['folders'][0]['folders']}
+    Should Be Equal As Strings    ${rootFolderCount}    ${1}
+    Should Be Equal As Strings    ${subRootFolderCount}    ${1}
+    Should Be Equal As Strings     ${response.json()['folders'][0]['name']['value']}      history
+    Should Be Equal As Strings     ${response.json()['folders'][0]['folders'][0]['name']['value']}      family
 
     update DIRECTORY (JSON)    update/3_add_items.json
     validate PUT response - 200 updated
+    Should Contain      ${response.json()['uid']['value']}      ${CREATING_SYSTEM_ID}::3
 
 
 

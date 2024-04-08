@@ -673,7 +673,7 @@ check response (EMPTY DB): returns correct content for
     [Arguments]         ${aql_payload}
 
                         load expected results-data-set (EMPTY DB)    ${aql_payload}
-                        
+
                         Log To Console  \n/////////// EXPECTED //////////////////////////////
                         Output    ${expected result}
 
@@ -719,14 +719,14 @@ Available keywords:
 
 
 
-# ooooooooooooo oooooooooooo  .oooooo..o ooooooooooooo      oooooooooo.         .o.       ooooooooooooo       .o.       
-# 8'   888   `8 `888'     `8 d8P'    `Y8 8'   888   `8      `888'   `Y8b       .888.      8'   888   `8      .888.      
-#      888       888         Y88bo.           888            888      888     .8"888.          888          .8"888.     
-#      888       888oooo8     `"Y8888o.       888            888      888    .8' `888.         888         .8' `888.    
-#      888       888    "         `"Y88b      888            888      888   .88ooo8888.        888        .88ooo8888.   
-#      888       888       o oo     .d8P      888            888     d88'  .8'     `888.       888       .8'     `888.  
-#     o888o     o888ooooood8 8""88888P'      o888o          o888bood8P'   o88o     o8888o     o888o     o88o     o8888o 
-#                                                                                                                       
+# ooooooooooooo oooooooooooo  .oooooo..o ooooooooooooo      oooooooooo.         .o.       ooooooooooooo       .o.
+# 8'   888   `8 `888'     `8 d8P'    `Y8 8'   888   `8      `888'   `Y8b       .888.      8'   888   `8      .888.
+#      888       888         Y88bo.           888            888      888     .8"888.          888          .8"888.
+#      888       888oooo8     `"Y8888o.       888            888      888    .8' `888.         888         .8' `888.
+#      888       888    "         `"Y88b      888            888      888   .88ooo8888.        888        .88ooo8888.
+#      888       888       o oo     .d8P      888            888     d88'  .8'     `888.       888       .8'     `888.
+#     o888o     o888ooooood8 8""88888P'      o888o          o888bood8P'   o88o     o8888o     o888o     o88o     o8888o
+#
 # [ TEST DATA & EXPECTED RESULTS GENERATION ]
 
 Preconditions (PART 1) - Load Blueprints of Queries and Expected-Results
@@ -797,7 +797,7 @@ Preconditions (PART 1) - Load Blueprints of Queries and Expected-Results
                         ...            D/310_select_data_values_from_all_ehrs_contains_composition_with_archetype.json
                         ...            D/311_select_data_values_from_all_ehrs_contains_composition_with_archetype.json
                         ...            D/312_select_data_values_from_all_ehrs_contains_composition_with_archetype_top_5.json
-                    
+
                     FOR     ${blueprint}    IN    @{blueprints}
 
                             Set Suite Variable    ${blueprint}    ${blueprint}
@@ -1002,15 +1002,15 @@ Commit Compo
     # comment: here we expose things from response to test suite scope for later use
                         Set Suite Variable    ${compo_in_list}    ${body}
                         Set Suite Variable    ${compo_uid_value}    ${response.body.uid.value}
-                        Set Suite Variable    ${compo_uid}    ${response.body.uid}    
+                        Set Suite Variable    ${compo_uid}    ${response.body.uid}
                         Set Suite Variable    ${compo_name_value}    ${response.body.name.value}
                         Set Suite Variable    ${compo_name}    ${response.body.name}
-                        # comment: makes response body accessible by a variable name like ${A_Minimal_1}        
+                        # comment: makes response body accessible by a variable name like ${A_Minimal_1}
                         Set Suite Variable    ${${compo_name_value}_${ehr_index}}    ${body}
                         Set Suite Variable    ${compo_archetype_id_value}     ${response.body.archetype_details.archetype_id.value}
                         Set Suite Variable    ${compo_archetype_id}     ${response.body.archetype_details.archetype_id}
                         Set Suite Variable    ${compo_archetype_node_id}    ${response.body.archetype_node_id}
-                        Set Suite Variable    ${compo_archetype_details}    ${response.body.archetype_details} 
+                        Set Suite Variable    ${compo_archetype_details}    ${response.body.archetype_details}
                         Set Suite Variable    ${compo_content_archetype_node_id}    ${response.body.content[0].archetype_node_id}
                         Set Suite Variable    ${compo_content_type}    ${response.body.content[0]._type}
                         Set Suite Variable    ${compo_language}    ${response.body.language}
@@ -1064,7 +1064,7 @@ Commit Compo
     B/700 701 702    B/700
     B/700 701 702    B/701
     B/700 701 702    B/702
-    
+
     # B/800     # comment: future feature
     # B/801     # NOTE: for details check --> https://github.com/ehrbase/project_management/issues/109#issuecomment-605975468
                 # TODO: @WLAD reactive when becomes available
@@ -1209,11 +1209,11 @@ Load Temp Result-Data-Set
 
 Update 'rows' in Temp Result-Data-Set
     [Arguments]         ${dataset}
-                        Load Temp Result-Data-Set    ${dataset}    
+                        Load Temp Result-Data-Set    ${dataset}
                         Add Object To Json     ${expected}    $.rows    ${rows_content}
                         Output    ${expected}     ${QUERY RESULTS LOADED DB}/${dataset}.tmp.json
 
-                    
+
 Update 'q' and 'meta' in Temp Result-Data-Set
     [Documentation]     Updates and exposes {expected} to test-suite level scope.
     ...                 Condition ensures the update is not repeated unnecessary.
@@ -1246,8 +1246,8 @@ Update 'rows', 'q' and 'meta' in Temp Result-Data-Set
 
 Create Temp List
     [Documentation]     Exposes {rows_content} to test-suite level scope.
-    [Arguments]         @{list_items}   
-                        Log Many  ${list_items} 
+    [Arguments]         @{list_items}
+                        Log Many  ${list_items}
 
     @{rows_content}=    Set Variable    ${list_items}
                         Set Suite Variable    ${rows_content}    ${rows_content}
@@ -1258,14 +1258,14 @@ Create Temp List
 
 
 
-#       .o.            88                                              oooo      .            
-#      .888.          .8'                                              `888    .o8            
-#     .8"888.        .8'       oooo d8b  .ooooo.   .oooo.o oooo  oooo   888  .o888oo  .oooo.o 
-#    .8' `888.      .8'        `888""8P d88' `88b d88(  "8 `888  `888   888    888   d88(  "8 
-#   .88ooo8888.    .8'          888     888ooo888 `"Y88b.   888   888   888    888   `"Y88b.  
-#  .8'     `888.  .8'           888     888    .o o.  )88b  888   888   888    888 . o.  )88b 
-# o88o     o8888o 88           d888b    `Y8bod8P' 8""888P'  `V88V"V8P' o888o   "888" 8""888P' 
-#                                                                     
+#       .o.            88                                              oooo      .
+#      .888.          .8'                                              `888    .o8
+#     .8"888.        .8'       oooo d8b  .ooooo.   .oooo.o oooo  oooo   888  .o888oo  .oooo.o
+#    .8' `888.      .8'        `888""8P d88' `88b d88(  "8 `888  `888   888    888   d88(  "8
+#   .88ooo8888.    .8'          888     888ooo888 `"Y88b.   888   888   888    888   `"Y88b.
+#  .8'     `888.  .8'           888     888    .o o.  )88b  888   888   888    888 . o.  )88b
+# o88o     o8888o 88           d888b    `Y8bod8P' 8""888P'  `V88V"V8P' o888o   "888" 8""888P'
+#
 # [ Expected Result Generation Flows ]
 
 A/100
@@ -1448,12 +1448,12 @@ A/603
 
 
 
-# oooooooooo.       88                                              oooo      .            
-# `888'   `Y8b     .8'                                              `888    .o8            
-#  888     888    .8'       oooo d8b  .ooooo.   .oooo.o oooo  oooo   888  .o888oo  .oooo.o 
-#  888oooo888'   .8'        `888""8P d88' `88b d88(  "8 `888  `888   888    888   d88(  "8 
-#  888    `88b  .8'          888     888ooo888 `"Y88b.   888   888   888    888   `"Y88b.  
-#  888    .88P .8'           888     888    .o o.  )88b  888   888   888    888 . o.  )88b 
+# oooooooooo.       88                                              oooo      .
+# `888'   `Y8b     .8'                                              `888    .o8
+#  888     888    .8'       oooo d8b  .ooooo.   .oooo.o oooo  oooo   888  .o888oo  .oooo.o
+#  888oooo888'   .8'        `888""8P d88' `88b d88(  "8 `888  `888   888    888   d88(  "8
+#  888    `88b  .8'          888     888ooo888 `"Y88b.   888   888   888    888   `"Y88b.
+#  888    .88P .8'           888     888    .o o.  )88b  888   888   888    888 . o.  )88b
 # o888bood8P'  88           d888b    `Y8bod8P' 8""888P'  `V88V"V8P' o888o   "888" 8""888P'
 #
 # [ Expected Result Generation Flows ]
@@ -1685,16 +1685,16 @@ B/803
 
 
 
-#   .oooooo.        88                                              oooo      .            
-#  d8P'  `Y8b      .8'                                              `888    .o8            
-# 888             .8'       oooo d8b  .ooooo.   .oooo.o oooo  oooo   888  .o888oo  .oooo.o 
-# 888            .8'        `888""8P d88' `88b d88(  "8 `888  `888   888    888   d88(  "8 
-# 888           .8'          888     888ooo888 `"Y88b.   888   888   888    888   `"Y88b.  
-# `88b    ooo  .8'           888     888    .o o.  )88b  888   888   888    888 . o.  )88b 
+#   .oooooo.        88                                              oooo      .
+#  d8P'  `Y8b      .8'                                              `888    .o8
+# 888             .8'       oooo d8b  .ooooo.   .oooo.o oooo  oooo   888  .o888oo  .oooo.o
+# 888            .8'        `888""8P d88' `88b d88(  "8 `888  `888   888    888   d88(  "8
+# 888           .8'          888     888ooo888 `"Y88b.   888   888   888    888   `"Y88b.
+# `88b    ooo  .8'           888     888    .o o.  )88b  888   888   888    888 . o.  )88b
 #  `Y8bood8P'  88           d888b    `Y8bod8P' 8""888P'  `V88V"V8P' o888o   "888" 8""888P'
 #
-# [ Expected Result Generation Flows ]                                                                                            
-                                                              
+# [ Expected Result Generation Flows ]
+
 C/100
     Return From Keyword If    not (${compo_index}==1)    NOTHING TO DO HERE!
     ${query}=           Load JSON From File    ${VALID QUERY DATA SETS}/C/100_query.tmp.json
@@ -1836,19 +1836,19 @@ C/500
 
 
 
-# oooooooooo.        88                                              oooo      .            
-# `888'   `Y8b      .8'                                              `888    .o8            
-#  888      888    .8'       oooo d8b  .ooooo.   .oooo.o oooo  oooo   888  .o888oo  .oooo.o 
-#  888      888   .8'        `888""8P d88' `88b d88(  "8 `888  `888   888    888   d88(  "8 
-#  888      888  .8'          888     888ooo888 `"Y88b.   888   888   888    888   `"Y88b.  
-#  888     d88' .8'           888     888    .o o.  )88b  888   888   888    888 . o.  )88b 
+# oooooooooo.        88                                              oooo      .
+# `888'   `Y8b      .8'                                              `888    .o8
+#  888      888    .8'       oooo d8b  .ooooo.   .oooo.o oooo  oooo   888  .o888oo  .oooo.o
+#  888      888   .8'        `888""8P d88' `88b d88(  "8 `888  `888   888    888   d88(  "8
+#  888      888  .8'          888     888ooo888 `"Y88b.   888   888   888    888   `"Y88b.
+#  888     d88' .8'           888     888    .o o.  )88b  888   888   888    888 . o.  )88b
 # o888bood8P'   88           d888b    `Y8bod8P' 8""888P'  `V88V"V8P' o888o   "888" 8""888P'
-# 
-# [ Expected Result Generation Flows ] 
+#
+# [ Expected Result Generation Flows ]
 
 D/200
     [Documentation]     Condition here makes sure that content in 'rows' of expected result-data-set
-    ...                 is not filled with dublicates on every interation which takes place for each Composition. 
+    ...                 is not filled with dublicates on every interation which takes place for each Composition.
     ...                 Same flow as A/101
                         Return From Keyword If    ${compo_index}!=1    NOTHING TO DO HERE!
                         Create Temp List    ${ehr_id_value}[0]    ${time_created}    ${system_id}[0]
@@ -1928,7 +1928,7 @@ D/311
                         Update 'rows' in Temp Result-Data-Set    D/311
 
 D/312
-    [Documentation]     Same flow as D/200 but have to limit result to TOP 5 (ordered by time created ASC) \n\n 
+    [Documentation]     Same flow as D/200 but have to limit result to TOP 5 (ordered by time created ASC) \n\n
     ...                 q: select TOP 5 e/ehr_id/value, e/time_created/value, e/system_id/value from EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.minimal.v1] ORDER BY e/time_created ASC
     IF    ${ehr_index} <= 5 and ${compo_index} == 1
                         Create Temp List    ${ehr_id_value}[0]
@@ -2024,7 +2024,7 @@ D/500
                         ...                 ${compo_events_time_value}
                         ...                 ${compo_events_items_value_value}
                         Update 'rows', 'q' and 'meta' in Temp Result-Data-Set    D/500
-                    
+
 D/501
     [Documentation]     Same flow as D/500, different content in 'rows'
     ${is_observation}=  Set Variable if  ("${compo_content_archetype_node_id}"=="openEHR-EHR-OBSERVATION.minimal.v1")  ${TRUE}

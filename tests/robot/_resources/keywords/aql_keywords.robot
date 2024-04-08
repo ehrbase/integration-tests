@@ -305,4 +305,3 @@ Delete Composition For AQL
     Status Should Be    204
     ${del_version_uid}      Get Substring           ${resp.headers['ETag']}    1    -1
     Set Suite Variable      ${del_version_uid}      ${del_version_uid}
-
