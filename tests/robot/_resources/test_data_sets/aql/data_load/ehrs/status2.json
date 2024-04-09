@@ -1,0 +1,43 @@
+{
+  "_type": "EHR_STATUS",
+  "archetype_node_id": "openEHR-EHR-EHR_STATUS.generic.v1",
+  "name": {
+    "value": "EHR Status"
+  },
+  "subject": {
+    "external_ref": {
+      "id": {
+        "_type": "GENERIC_ID",
+        "value": "ins1921",
+        "scheme": "id_scheme"
+      },
+      "namespace": "examples",
+      "type": "PERSON"
+    }
+  },
+  "is_modifiable": true,
+  "is_queryable": true,
+  "other_details": {
+    "_type": "ITEM_LIST",
+    "name": {
+      "_type": "DV_TEXT",
+      "value": "family group"
+    },
+    "archetype_node_id": "openEHR-EHR-ITEM_TREE.fake.v1",
+    "items": [{
+      "_type": "ELEMENT",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "family group id"
+      },
+      "archetype_node_id": "at0001",
+      "value": {
+        "_type": "DV_IDENTIFIER",
+        "issuer": "MoH",
+        "assigner": "MoH",
+        "id": "55175057",
+        "type": "FAMILY_GROUP_ID"
+      }
+    }]
+  }
+}

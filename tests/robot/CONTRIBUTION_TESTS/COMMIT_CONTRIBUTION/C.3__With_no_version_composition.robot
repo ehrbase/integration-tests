@@ -34,6 +34,8 @@ Metadata        TOP_TEST_SUITE    CONTRIBUTION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/contribution_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
@@ -46,9 +48,10 @@ Force Tags    refactor
 
 *** Test Cases ***
 Alternative flow 2: commit invalid CONTRIBUTION (no VERSION<COMPOSITION>)
-
+    Upload OPT    minimal/minimal_instruction.opt
     create EHR
 
     commit invalid CONTRIBUTION (JSON)    no_versions.json
 
     check response: is negative - complaining about empty versions list
+    [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs

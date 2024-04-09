@@ -1,0 +1,14 @@
+{
+	"q": "SELECT ec/health_care_facility/external_ref/id/value FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec WHERE ec/health_care_facility/external_ref/id/value = '9091'",
+	"columns": [
+		{
+			"path": "ec/health_care_facility/external_ref/id/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"9091"
+		]
+	]
+}

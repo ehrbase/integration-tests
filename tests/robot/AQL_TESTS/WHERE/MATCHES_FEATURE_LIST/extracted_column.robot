@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   WHERE - MATCHES EXTRACTED COLUMN
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#matches-extracted-column
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/WHERE_TEST_SUIT.md#matches-extracted-column
 ...         - *Precondition:* 1. Create OPT; 2. Create EHRs; 3. Create Compositions
 ...         - Send AQL 'SELECT e/ehr_id/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE {where}'
 ...         - {where} can be:
@@ -32,6 +32,7 @@ Test Matches Extracted Column: SELECT e/ehr_id/value, c/uid/value FROM EHR e CON
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Create EHR For AQL
     Set Suite Variable       ${ehr_id1}    ${ehr_id}
@@ -59,8 +60,10 @@ Execute Query
     Create File     ${EXPECTED_JSON_DATA_SETS}/where/expected_extracted_column_tmp.json
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
+    ${exclude_paths}	Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/where/expected_extracted_column_tmp.json
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/where/expected_extracted_column_tmp.json

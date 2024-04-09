@@ -1532,7 +1532,33 @@
 														},
 														"value": {
 															"_type": "DV_TEXT",
-															"value": "Lorem ipsum"
+															"value": "Lorem ipsum",
+															"mappings": [
+																{
+																	"_type": "TERM_MAPPING",
+																	"match": "=",
+																	"target": {
+																		"_type": "CODE_PHRASE",
+																		"terminology_id": {
+																			"_type": "TERMINOLOGY_ID",
+																			"value": "SNOMED-CT"
+																		},
+																		"code_string": "21794005"
+																	}
+																},
+																{
+																	"_type": "TERM_MAPPING",
+																	"match": ">",
+																	"target": {
+																		"_type": "CODE_PHRASE",
+																		"terminology_id": {
+																			"_type": "TERMINOLOGY_ID",
+																			"value": "SNOMED-CT"
+																		},
+																		"code_string": "21794000"
+																	}
+																}
+															]
 														},
 														"archetype_node_id": "at0004"
 													},
@@ -2673,7 +2699,7 @@
 				"archetype_node_id": "openEHR-EHR-COMPOSITION.conformance_composition_.v0",
 				"uid": {
 					"_type": "OBJECT_VERSION_ID",
-					"value": "91a5cb6c-c1f7-43cb-919d-8efd32b480ee::local.ehrbase.org::1"
+					"value": "8d7caca5-9cdb-4da4-beba-d82544f66680::local.ehrbase.org::1"
 				},
 				"links": [
 					{

@@ -1,0 +1,14 @@
+{
+	"q": "SELECT DISTINCT o/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0004]/value/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.symptom_sign_screening.v0] WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005]/value/value = 'Vorhanden' ORDER BY o/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0004]/value/value ASC LIMIT 1 OFFSET 1",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0004]/value/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"Husten"
+		]
+	]
+}

@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   WHERE - COMPARE WITH EXTRACTED COLUMN II
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#compare-with-extracted-column-ii--httpsvitagroup-agatlassiannetwikispacespenpages38216361architecture-aqlfeaturelistwhere
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/WHERE_TEST_SUIT.md#compare-with-extracted-column-ii--httpsvitagroup-agatlassiannetwikispacespenpages38216361architecture-aqlfeaturelistwhere
 ...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
 ...         - Send AQL 'SELECT o FROM COMPOSITION CONTAINS OBSERVATION o WHERE {where}'
 ...         - {where} can be:
@@ -28,13 +28,13 @@ Test Compare With Extracted Column II: SELECT o FROM COMPOSITION CONTAINS OBSERV
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      aql-conformance-ehrbase.org.v0.opt
     Create EHR For AQL
     Commit Composition For AQL      aql-conformance-ehrbase.org.v0_contains.json
 
 Execute Query
     [Arguments]     ${where}    ${expected_file}    ${nr_of_results}
-    Log     Add test data to file ${expected_file} - when 200 is returned.      console=yes
     ${temp_query}    Set Variable       SELECT o FROM COMPOSITION CONTAINS OBSERVATION o WHERE ${where}
     ${query}    Replace Variables       ${temp_query}
     Log     ${query}

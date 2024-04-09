@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-07T17:05:45.1978201+02:00",
+		"_executed_aql": "SELECT s/is_modifiable FROM EHR e CONTAINS EHR_STATUS s",
+		"resultsize": 1
+	},
+	"q": "SELECT s/is_modifiable FROM EHR e CONTAINS EHR_STATUS s",
+	"columns": [
+		{
+			"path": "s/is_modifiable",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			true
+		]
+	]
+}

@@ -18,9 +18,9 @@
 
 *** Settings ***
 Metadata    Version    0.1.0
-Metadata    Authors    *Wladislaw Wagner, Pablo Pazos, Adil Mushtaque*
+Metadata    Authors    *Wladislaw Wagner, Pablo Pazos, Adil Mushtaque, Vladislav Ploaia*
 
-Documentation    COMPOSITION TEST SUITE
+Documentation    SANITY TEST SUITE
 ...
 ...              test documentation: https://github.com/ehrbase/ehrbase/blob/develop/doc/conformance_testing/EHR_COMPOSITION.md
 

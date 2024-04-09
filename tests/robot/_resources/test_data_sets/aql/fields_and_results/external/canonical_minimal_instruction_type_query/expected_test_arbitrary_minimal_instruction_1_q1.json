@@ -1,0 +1,14 @@
+{
+	"q": "SELECT i/${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i[openEHR-EHR-INSTRUCTION.minimal.v1] WHERE (c/uid/value = '${c_uid}' AND i/activities[at0001]/description[at0002]/items[at0003]/value/value = 'PT1800S')",
+	"columns": [
+		{
+			"path": "i/${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"PT30M"
+		]
+	]
+}

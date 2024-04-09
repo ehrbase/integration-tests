@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-11T14:26:19.4623406+02:00",
+		"_executed_aql": "SELECT es/subject/external_ref/type FROM EHR_STATUS es",
+		"resultsize": 1
+	},
+	"q": "SELECT es/subject/external_ref/type FROM EHR_STATUS es",
+	"columns": [
+		{
+			"path": "es/subject/external_ref/type",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"PERSON"
+		]
+	]
+}

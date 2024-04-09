@@ -1,7 +1,8 @@
 *** Settings ***
 Documentation   CHECK SELECT WITH MULTI SELECTS
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#multi-selects
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/SELECT_TEST_SUIT.md#multi-selects
 Resource        ../../../_resources/keywords/aql_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 
 *** Test Cases ***
@@ -20,7 +21,7 @@ Test Multi Selects
     #${expected_result}      Replace Variables       ${tmp_expected_result}
     #Log     Add test data once 200 is returned. File: ${expected_result}
     #${exclude_paths}    Create List    root['rows'][0][0]['uid']
-    Length Should Be    ${resp_body['rows']}     8
+    Length Should Be    ${resp_body['rows']}     10
     ${rows_length}      Get Length      ${resp_body['rows']}
     ####
     FOR     ${INDEX}   IN RANGE     0   ${rows_length}

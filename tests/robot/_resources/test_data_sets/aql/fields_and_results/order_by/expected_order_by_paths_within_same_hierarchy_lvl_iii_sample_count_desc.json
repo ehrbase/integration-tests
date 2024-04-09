@@ -1,0 +1,17 @@
+{
+	"q": "SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS INTERVAL_EVENT i ORDER BY ${path} ${order}",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			10
+		],
+		[
+			5
+		]
+	]
+}

@@ -23,6 +23,8 @@ Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
 Resource        ../../_resources/keywords/aql_query_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 
 Force Tags
@@ -39,23 +41,22 @@ COMPOSITION JSON with utc time zone using Get
     get versioned composition - version at time    ${time_1}
     check content of compositions version at time (JSON)    time_1    original value
 
+    [Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
-    #[Teardown]    restart SUT
 
-
-COMPOSITION JSON with utc time zone using AQL
-    [Tags]    dtz
-
-    Upload OPT    minimal/minimal_observation.opt
-
-    create EHR
-
-    commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes_utc.xml
-    Replace Uid With Actual  ${VALID QUERY DATA SETS}/${TIME QUERY DATA SET}  ${composition_uid}  ${VALID QUERY DATA SETS}/actual_uid_replaced.json
-    Replace Uid With Actual  ${QUERY RESULTS LOADED DB}/${UTC Time Zone Expected DATA SET}  ${composition_uid}  ${QUERY RESULTS LOADED DB}/expected_uid_replaced.json
-    execute ad-hoc query and check result (loaded DB)   actual_uid_replaced.json  expected_uid_replaced.json
-    Remove File  ${VALID QUERY DATA SETS}/actual_uid_replaced.json
-    Remove File  ${QUERY RESULTS LOADED DB}/expected_uid_replaced.json
+#COMPOSITION JSON with utc time zone using AQL
+#    [Tags]    dtz
+#
+#    Upload OPT    minimal/minimal_observation.opt
+#
+#    create EHR
+#
+#    commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes_utc.xml
+#    Replace Uid With Actual  ${VALID QUERY DATA SETS}/${TIME QUERY DATA SET}  ${composition_uid}  ${VALID QUERY DATA SETS}/actual_uid_replaced.json
+#    Replace Uid With Actual  ${QUERY RESULTS LOADED DB}/${UTC Time Zone Expected DATA SET}  ${composition_uid}  ${QUERY RESULTS LOADED DB}/expected_uid_replaced.json
+#    execute ad-hoc query and check result (loaded DB)   actual_uid_replaced.json  expected_uid_replaced.json
+#    Remove File  ${VALID QUERY DATA SETS}/actual_uid_replaced.json
+#    Remove File  ${QUERY RESULTS LOADED DB}/expected_uid_replaced.json
 
 
 

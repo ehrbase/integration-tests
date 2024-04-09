@@ -26,6 +26,8 @@ Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
 Resource        ../../_resources/keywords/aql_query_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
@@ -41,13 +43,14 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201	
+    Status Should Be    201
 
     Set Test Variable  ${version_uid}  ${ehrstatus_uid}
 
     get versioned ehr_status of EHR by version uid
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${ehrstatus_uid}    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${ehrstatus_uid}    ${response.json()['uid']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 1b. Get Versioned Status Of Existing EHR With 2 Versions by Version UID (JSON)
@@ -56,7 +59,7 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201	
+    Status Should Be    201
 
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
@@ -64,8 +67,9 @@ Force Tags
     Set Test Variable  ${version_uid}  ${ehrstatus_uid[0:-1]}2
 
     get versioned ehr_status of EHR by version uid
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${version_uid}    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${version_uid}    ${response.json()['uid']['value']}
+    [Teardown]      (admin) delete ehr
 
 
 1c. Get Versioned Status Of Existing EHR With 2 Versions by Invalid Version UID (JSON)
@@ -74,7 +78,7 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201	
+    Status Should Be    201
 
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
@@ -82,7 +86,8 @@ Force Tags
     Set Test Variable  ${version_uid}  ${ehrstatus_uid[0:-1]}3
 
     get versioned ehr_status of EHR by version uid
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
+    [Teardown]      (admin) delete ehr
 
 
 1d. Get Versioned Status Of Existing EHR by Invalid Version UID (JSON)
@@ -91,7 +96,7 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201	
+    Status Should Be    201
 
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
@@ -99,7 +104,8 @@ Force Tags
     Set Test Variable  ${version_uid}  ${ehrstatus_uid[0:-1]}-2
 
     get versioned ehr_status of EHR by version uid
-    Should Be Equal As Strings    ${response.status}    400
+    Status Should Be    400
+    [Teardown]      (admin) delete ehr
 
 
 1e. Get Versioned Status Of Existing EHR by Invalid Version UID (JSON)
@@ -108,7 +114,7 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201	
+    Status Should Be    201
 
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
@@ -116,7 +122,8 @@ Force Tags
     Set Test Variable  ${version_uid}  ${ehrstatus_uid[0:-1]}2.0
 
     get versioned ehr_status of EHR by version uid
-    Should Be Equal As Strings    ${response.status}    400
+    Status Should Be    400
+    [Teardown]      (admin) delete ehr
 
 
 1f. Get Versioned Status Of Existing EHR by Invalid Version UID (JSON)
@@ -126,11 +133,12 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
     
     generate random version_uid
     get versioned ehr_status of EHR by version uid
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
+    [Teardown]      (admin) delete ehr
 
 
 2. Get Versioned Status Of EHR by Version UID Invalid EHR (JSON)
@@ -142,7 +150,7 @@ Force Tags
     generate random version_uid
 
     get versioned ehr_status of EHR by version uid
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
 
 
 3. Get Versioned Status Of Existing EHR by Version UID Invalid Version UID (JSON)
@@ -151,13 +159,14 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     # comment: alter version uid to invalid one
     Set Test Variable  ${version_uid}  ${ehrstatus_uid[0:-1]}2
 
     get versioned ehr_status of EHR by version uid
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
+    [Teardown]      (admin) delete ehr
 
 
 4. Get Versioned Status Of Existing EHR With 2 Versions by Version UID Invalid Version UID (JSON)
@@ -166,7 +175,7 @@ Force Tags
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
@@ -177,4 +186,5 @@ Force Tags
     Set Test Variable  ${version_uid}  ${version_uid[0:-1]}2
 
     get versioned ehr_status of EHR by version uid
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
+    [Teardown]      (admin) delete ehr

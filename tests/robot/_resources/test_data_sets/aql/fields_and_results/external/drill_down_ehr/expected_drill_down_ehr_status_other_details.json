@@ -1,0 +1,38 @@
+{
+	"q": "SELECT s/${path} FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS EHR_STATUS s",
+	"columns": [
+		{
+			"path": "s/${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "ITEM_LIST",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "family group"
+				},
+				"items": [
+					{
+						"_type": "ELEMENT",
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "family group id"
+						},
+						"value": {
+							"_type": "DV_IDENTIFIER",
+							"issuer": "MoH",
+							"assigner": "MoH",
+							"id": "55175056",
+							"type": "FAMILY_GROUP_ID"
+						},
+						"archetype_node_id": "at0001"
+					}
+				],
+				"archetype_node_id": "openEHR-EHR-ITEM_TREE.fake.v1"
+			}
+		]
+	]
+}

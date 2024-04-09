@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   WHERE - COMPARE WITH EXTRACTED COLUMN I
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#compare-with-extracted-column-i--httpsvitagroup-agatlassiannetwikispacespenpages38216361architecture-aqlfeaturelistwhere
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/WHERE_TEST_SUIT.md#compare-with-extracted-column-i--httpsvitagroup-agatlassiannetwikispacespenpages38216361architecture-aqlfeaturelistwhere
 ...         - *Precondition:* 1. Create OPTs; 2. Create EHRs; 3. Create Compositions
 ...         - Send AQL 'SELECT e/ehr_id/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE {where}'
 ...         - {where} can be:
@@ -37,6 +37,7 @@ Test Compare With Extracted Column I: SELECT e/ehr_id/value, c/uid/value FROM EH
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Upload OPT For AQL      type_repetition_conformance_ehrbase.org.opt
     Create EHR For AQL
@@ -61,8 +62,10 @@ Execute Query
     Create File     ${EXPECTED_JSON_DATA_SETS}/where/expected_ehr_compo_tmp.json
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     1
+    ${exclude_paths}	Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/where/expected_ehr_compo_tmp.json
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/where/expected_ehr_compo_tmp.json

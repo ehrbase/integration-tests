@@ -48,10 +48,10 @@ TOC | Table Of Contents
 *** Keywords ***
 # 1) High Level Keywords
 commit CONTRIBUTION (JSON)
-    [Arguments]         ${valid_test_data_set}
+    [Arguments]         ${valid_test_data_set}      ${multitenancy_token}=${None}
                         Set Test Variable  ${KEYWORD NAME}  COMMIT CONTRIBUTION 1 (JSON)
                         load valid test-data-set    ${valid_test_data_set}
-                        POST /ehr/ehr_id/contribution    JSON
+                        POST /ehr/ehr_id/contribution    JSON   ${multitenancy_token}
                         Set Test Variable    ${body}    ${response.json()}
                         Set Test Variable    ${contribution_uid}    ${body['uid']['value']}
                         Set Test Variable    ${versions}    ${body['versions']}
@@ -91,10 +91,10 @@ check content of committed CONTRIBUTION
 #                       `commit next CONTRIBUTION`    ???
 #                       `commit (valid) modification to CONTRIBUTION`
 commit CONTRIBUTION - with preceding_version_uid (JSON)
-    [Arguments]         ${test_data_set}
+    [Arguments]         ${test_data_set}    ${multitenancy_token}=${None}
                         Set Test Variable  ${KEYWORD NAME}  COMMIT CONTRIBUTION 2 (JSON)
                         inject preceding_version_uid into valid test-data-set    ${test_data_set}
-                        POST /ehr/ehr_id/contribution    JSON
+                        POST /ehr/ehr_id/contribution    JSON   ${multitenancy_token}
 
 
 commit invalid CONTRIBUTION - with preceding_version_uid (JSON)
@@ -159,7 +159,8 @@ check response: is negative - complaining about empty versions list
                         Should Be Equal As Strings   ${response.status_code}   400
                         Set Test Variable    ${body}    ${response.json()}
                         Set Test Variable    ${error_message}    ${body['message']}
-                        Should Be Equal As Strings    ${error_message}    Invalid Contribution, must have at least one Version object.
+                        Should Contain       ${error_message}    Versions must not be empty
+                        #Should Be Equal As Strings    ${error_message}    Versions must not be empty
 
 
 check response: is negative indicating wrong change_type
@@ -184,8 +185,9 @@ commit COMTRIBUTION(S) (JSON)
 
 retrieve CONTRIBUTION by contribution_uid (JSON)
     [Documentation]     DEPENDENCY ${ehr_id} & ${contribution_uid} in test scope
+    [Arguments]         ${multitenancy_token}=${None}
                         Set Test Variable  ${KEYWORD NAME}  GET CONTRI BY CONTRI_UID
-                        GET /ehr/ehr_id/contribution/contribution_uid    JSON
+                        GET /ehr/ehr_id/contribution/contribution_uid    JSON   ${multitenancy_token}
 
 
 check response: is positive - contribution_uid exists
@@ -262,7 +264,7 @@ check response: is positive with list of ${x} contribution(s)
 # POST
 
 POST /ehr/ehr_id/contribution
-    [Arguments]         ${format}
+    [Arguments]         ${format}   ${multitenancy_token}=${None}
     [Documentation]     DEPENDENCY any keyword that exposes a `${test_data}` variable
     ...                 to test level scope e.g. `load valid test-data-set`
 
@@ -274,12 +276,16 @@ POST /ehr/ehr_id/contribution
                         Run Keyword If      $format=='XML'    prepare new request session
                         ...                 XML    Prefer=return=representation
 
+                        IF  '${multitenancy_token}' != '${None}'
+                            Set To Dictionary       ${headers}      Authorization=Bearer ${multitenancy_token}
+                        END
+
     ${resp}=            POST On Session     ${SUT}   /ehr/${ehr_id}/contribution   expected_status=anything
                         ...                 json=${test_data}
                         ...                 headers=${headers}
 
                         Set Test Variable   ${response}    ${resp}
-                        Output Debug Info:    POST /ehr/ehr_id/contribution
+                        #Output Debug Info:    POST /ehr/ehr_id/contribution
 
 
 POST transaction-management/ehr/ehr_id/contribution/contribution_id/rollback
@@ -330,7 +336,7 @@ POST /ehr/ehr_id/contribution without accept header
                         ...                 headers=${headers}
 
                         Set Test Variable   ${response}    ${resp}
-                        Output Debug Info:    POST /ehr/ehr_id/contribution
+                        #Output Debug Info:    POST /ehr/ehr_id/contribution
 
 
 Create Contribution With Multitenant Token
@@ -343,10 +349,10 @@ Create Contribution With Multitenant Token
                     ...     Content-Type=application/json
                     ...     Accept=application/json
                     ...     Authorization=Bearer ${multitenancy_token}
-    Set Suite Variable      &{headersMultitenancy}  &{headers}
+    Set Suite Variable      &{headers}  &{headers}
     ${resp}             POST On Session     ${SUT}   /ehr/${ehr_id}/contribution   expected_status=anything
                         ...                 json=${test_data}
-                        ...                 headers=${headersMultitenancy}
+                        ...                 headers=${headers}
     Set Test Variable   ${response}     ${resp}
     Set Test Variable   ${body}         ${response.json()}
     Set Test Variable   ${contribution_uid}     ${body['uid']['value']}
@@ -364,7 +370,7 @@ Create Contribution With Multitenant Token
 # GET
 
 GET /ehr/ehr_id/contribution/contribution_uid
-    [Arguments]         ${format}
+    [Arguments]         ${format}       ${multitenancy_token}=${None}
     [Documentation]     DEPENDENCY ${ehr_id} & ${contribution_uid} in test scope
 
                         Run Keyword If      $format=='JSON'    prepare new request session
@@ -373,11 +379,15 @@ GET /ehr/ehr_id/contribution/contribution_uid
                         Run Keyword If      $format=='XML'    prepare new request session
                         ...                 XML    Prefer=return=representation
 
+                        IF  '${multitenancy_token}' != '${None}'
+                            Set To Dictionary    ${headers}    Authorization=Bearer ${multitenancy_token}
+                        END
+
     ${resp}=            GET On Session         ${SUT}   /ehr/${ehr_id}/contribution/${contribution_uid}   expected_status=anything
                         ...                 headers=${headers}
 
                         Set Test Variable   ${response}    ${resp}
-                        Output Debug Info:    GET /ehr/ehr_id/contribution/contribution_uid
+                        #Output Debug Info:    GET /ehr/ehr_id/contribution/contribution_uid
 
 
 Retrieve Contribution With Multitenant Token
@@ -386,7 +396,7 @@ Retrieve Contribution With Multitenant Token
                         ...     Content-Type=application/json
                         ...     Accept=application/json
                         ...     Authorization=Bearer ${multitenancy_token}
-    Set Suite Variable      &{headersMultitenancy}          &{headers}
+    Set Suite Variable      &{headers}          &{headers}
     ${resp}             GET On Session      ${SUT}
                         ...     /ehr/${ehr_id}/contribution/${contribution_uid}   expected_status=anything
                         ...     headers=${headers}

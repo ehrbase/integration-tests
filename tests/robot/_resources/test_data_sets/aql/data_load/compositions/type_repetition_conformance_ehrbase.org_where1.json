@@ -1,0 +1,1532 @@
+{
+  "_type": "COMPOSITION",
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "type_repetition_conformance_ehrbase.org"
+  },
+  "archetype_details": {
+    "archetype_id": {
+      "value": "openEHR-EHR-COMPOSITION.conformance_composition_.v0"
+    },
+    "template_id": {
+      "value": "type_repetition_conformance_ehrbase.org"
+    },
+    "rm_version": "1.0.4"
+  },
+  "language": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_639-1"
+    },
+    "code_string": "en"
+  },
+  "territory": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_3166-1"
+    },
+    "code_string": "DE"
+  },
+  "category": {
+    "_type": "DV_CODED_TEXT",
+    "value": "event",
+    "defining_code": {
+      "_type": "CODE_PHRASE",
+      "terminology_id": {
+        "_type": "TERMINOLOGY_ID",
+        "value": "openehr"
+      },
+      "code_string": "433"
+    }
+  },
+  "composer": {
+    "_type": "PARTY_IDENTIFIED",
+    "name": "Max Mustermann"
+  },
+  "context": {
+    "_type": "EVENT_CONTEXT",
+    "start_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "end_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2022-02-03T04:05:06"
+    },
+    "setting": {
+      "_type": "DV_CODED_TEXT",
+      "value": "home",
+      "defining_code": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "openehr"
+        },
+        "code_string": "225"
+      }
+    },
+    "health_care_facility": {
+      "_type": "PARTY_IDENTIFIED",
+      "name": "DOE, John"
+    }
+  },
+  "content": [
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Ad hoc heading"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "feeder_audit": {
+        "_type": "FEEDER_AUDIT",
+        "originating_system_item_ids": [
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer1",
+            "assigner": "assigner1",
+            "id": "ad_hoc_heading 1"
+          }
+        ],
+        "originating_system_audit": {
+          "_type": "FEEDER_AUDIT_DETAILS",
+          "system_id": "ad_hoc_heading 1"
+        }
+      },
+      "items": [
+        {
+          "_type": "SECTION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "conformance section"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-SECTION.conformance_section.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "feeder_audit": {
+            "_type": "FEEDER_AUDIT",
+            "originating_system_item_ids": [
+              {
+                "_type": "DV_IDENTIFIER",
+                "issuer": "issuer1",
+                "assigner": "assigner1",
+                "id": "conformance_section 1"
+              }
+            ],
+            "originating_system_audit": {
+              "_type": "FEEDER_AUDIT_DETAILS",
+              "system_id": "conformance_section 1"
+            }
+          },
+          "items": [
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Conformance Observation"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.conformance_observation.v0"
+                },
+                "rm_version": "1.0.4"
+              },
+              "feeder_audit": {
+                "_type": "FEEDER_AUDIT",
+                "originating_system_item_ids": [
+                  {
+                    "_type": "DV_IDENTIFIER",
+                    "issuer": "issuer1 ",
+                    "assigner": "assigner1",
+                    "id": "observation 1"
+                  }
+                ],
+                "originating_system_audit": {
+                  "_type": "FEEDER_AUDIT_DETAILS",
+                  "system_id": "observation 1"
+                }
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "UTF-8"
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "History"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2021-02-03T04:05:06"
+                },
+                "events": [
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2021-02-03T04:05:06"
+                    },
+                    "state": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Item tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT_State"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "state text 1"
+                          },
+                          "archetype_node_id": "at0031"
+                        }
+                      ],
+                      "archetype_node_id": "at0029"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "event text1"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "cluster_with_cluster"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "DV_TEXT"
+                              },
+                              "value": {
+                                "_type": "DV_TEXT",
+                                "value": "cluster inter text1"
+                              },
+                              "archetype_node_id": "at0001"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text1"
+                                  },
+                                  "archetype_node_id": "at0006"
+                                }
+                              ],
+                              "archetype_node_id": "at0003"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text2"
+                                  },
+                                  "archetype_node_id": "at0007"
+                                }
+                              ],
+                              "archetype_node_id": "at0005"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  },
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "state": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Item tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT_State"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "state text 2"
+                          },
+                          "archetype_node_id": "at0031"
+                        }
+                      ],
+                      "archetype_node_id": "at0029"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "event text2"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "cluster_with_cluster"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "DV_TEXT"
+                              },
+                              "value": {
+                                "_type": "DV_TEXT",
+                                "value": "cluster inter text2"
+                              },
+                              "archetype_node_id": "at0001"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text3"
+                                  },
+                                  "archetype_node_id": "at0006"
+                                }
+                              ],
+                              "archetype_node_id": "at0003"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text4"
+                                  },
+                                  "archetype_node_id": "at0007"
+                                }
+                              ],
+                              "archetype_node_id": "at0005"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.conformance_observation.v0"
+            }
+          ],
+          "archetype_node_id": "openEHR-EHR-SECTION.conformance_section.v0"
+        },
+        {
+          "_type": "SECTION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "conformance section"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-SECTION.conformance_section.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "feeder_audit": {
+            "_type": "FEEDER_AUDIT",
+            "originating_system_item_ids": [
+              {
+                "_type": "DV_IDENTIFIER",
+                "issuer": "issuer1",
+                "assigner": "assigner1",
+                "id": "conformance_section 2"
+              }
+            ],
+            "originating_system_audit": {
+              "_type": "FEEDER_AUDIT_DETAILS",
+              "system_id": "conformance_section 2"
+            }
+          },
+          "items": [
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Conformance Observation"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.conformance_observation.v0"
+                },
+                "rm_version": "1.0.4"
+              },
+              "feeder_audit": {
+                "_type": "FEEDER_AUDIT",
+                "originating_system_item_ids": [
+                  {
+                    "_type": "DV_IDENTIFIER",
+                    "issuer": "issuer1 ",
+                    "assigner": "assigner1",
+                    "id": "observation 2"
+                  }
+                ],
+                "originating_system_audit": {
+                  "_type": "FEEDER_AUDIT_DETAILS",
+                  "system_id": "observation 2"
+                }
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "UTF-8"
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "History"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2023-02-03T04:05:06"
+                },
+                "events": [
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2023-02-03T04:05:06"
+                    },
+                    "state": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Item tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT_State"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "state text 3"
+                          },
+                          "archetype_node_id": "at0031"
+                        }
+                      ],
+                      "archetype_node_id": "at0029"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "event text3"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "cluster_with_cluster"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "DV_TEXT"
+                              },
+                              "value": {
+                                "_type": "DV_TEXT",
+                                "value": "cluster inter text3"
+                              },
+                              "archetype_node_id": "at0001"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text5"
+                                  },
+                                  "archetype_node_id": "at0006"
+                                }
+                              ],
+                              "archetype_node_id": "at0003"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text6"
+                                  },
+                                  "archetype_node_id": "at0007"
+                                }
+                              ],
+                              "archetype_node_id": "at0005"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  },
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2024-02-03T04:05:06"
+                    },
+                    "state": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Item tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT_State"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "state text 4"
+                          },
+                          "archetype_node_id": "at0031"
+                        }
+                      ],
+                      "archetype_node_id": "at0029"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "event text4"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "cluster_with_cluster"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "DV_TEXT"
+                              },
+                              "value": {
+                                "_type": "DV_TEXT",
+                                "value": "cluster inter text4"
+                              },
+                              "archetype_node_id": "at0001"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text7"
+                                  },
+                                  "archetype_node_id": "at0006"
+                                }
+                              ],
+                              "archetype_node_id": "at0003"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text8"
+                                  },
+                                  "archetype_node_id": "at0007"
+                                }
+                              ],
+                              "archetype_node_id": "at0005"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.conformance_observation.v0"
+            }
+          ],
+          "archetype_node_id": "openEHR-EHR-SECTION.conformance_section.v0"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    },
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Ad hoc heading"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        "rm_version": "1.0.4"
+      },
+      "feeder_audit": {
+        "_type": "FEEDER_AUDIT",
+        "originating_system_item_ids": [
+          {
+            "_type": "DV_IDENTIFIER",
+            "issuer": "issuer1",
+            "assigner": "assigner1",
+            "id": "ad_hoc_heading 2"
+          }
+        ],
+        "originating_system_audit": {
+          "_type": "FEEDER_AUDIT_DETAILS",
+          "system_id": "ad_hoc_heading 2"
+        }
+      },
+      "items": [
+        {
+          "_type": "SECTION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "conformance section"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-SECTION.conformance_section.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "feeder_audit": {
+            "_type": "FEEDER_AUDIT",
+            "originating_system_item_ids": [
+              {
+                "_type": "DV_IDENTIFIER",
+                "issuer": "issuer1",
+                "assigner": "assigner1",
+                "id": "conformance_section 3"
+              }
+            ],
+            "originating_system_audit": {
+              "_type": "FEEDER_AUDIT_DETAILS",
+              "system_id": "conformance_section 3"
+            }
+          },
+          "items": [
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Conformance Observation"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.conformance_observation.v0"
+                },
+                "rm_version": "1.0.4"
+              },
+              "feeder_audit": {
+                "_type": "FEEDER_AUDIT",
+                "originating_system_item_ids": [
+                  {
+                    "_type": "DV_IDENTIFIER",
+                    "issuer": "issuer1 ",
+                    "assigner": "assigner1",
+                    "id": "observation 3"
+                  }
+                ],
+                "originating_system_audit": {
+                  "_type": "FEEDER_AUDIT_DETAILS",
+                  "system_id": "observation 3"
+                }
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "UTF-8"
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "History"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2021-02-03T04:05:06"
+                },
+                "events": [
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2021-02-03T04:05:06"
+                    },
+                    "state": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Item tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT_State"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "state text 5"
+                          },
+                          "archetype_node_id": "at0031"
+                        }
+                      ],
+                      "archetype_node_id": "at0029"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "event text5"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "cluster_with_cluster"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "DV_TEXT"
+                              },
+                              "value": {
+                                "_type": "DV_TEXT",
+                                "value": "cluster inter text5"
+                              },
+                              "archetype_node_id": "at0001"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text9"
+                                  },
+                                  "archetype_node_id": "at0006"
+                                }
+                              ],
+                              "archetype_node_id": "at0003"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text10"
+                                  },
+                                  "archetype_node_id": "at0007"
+                                }
+                              ],
+                              "archetype_node_id": "at0005"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  },
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2022-02-03T04:05:06"
+                    },
+                    "state": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Item tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT_State"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "state text 6"
+                          },
+                          "archetype_node_id": "at0031"
+                        }
+                      ],
+                      "archetype_node_id": "at0029"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "event text6"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "cluster_with_cluster"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "DV_TEXT"
+                              },
+                              "value": {
+                                "_type": "DV_TEXT",
+                                "value": "cluster inter text6"
+                              },
+                              "archetype_node_id": "at0001"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text11"
+                                  },
+                                  "archetype_node_id": "at0006"
+                                }
+                              ],
+                              "archetype_node_id": "at0003"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text12"
+                                  },
+                                  "archetype_node_id": "at0007"
+                                }
+                              ],
+                              "archetype_node_id": "at0005"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.conformance_observation.v0"
+            }
+          ],
+          "archetype_node_id": "openEHR-EHR-SECTION.conformance_section.v0"
+        },
+        {
+          "_type": "SECTION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "conformance section"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-SECTION.conformance_section.v0"
+            },
+            "rm_version": "1.0.4"
+          },
+          "feeder_audit": {
+            "_type": "FEEDER_AUDIT",
+            "originating_system_item_ids": [
+              {
+                "_type": "DV_IDENTIFIER",
+                "issuer": "issuer1",
+                "assigner": "assigner1",
+                "id": "conformance_section 4"
+              }
+            ],
+            "originating_system_audit": {
+              "_type": "FEEDER_AUDIT_DETAILS",
+              "system_id": "conformance_section 4"
+            }
+          },
+          "items": [
+            {
+              "_type": "OBSERVATION",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Conformance Observation"
+              },
+              "archetype_details": {
+                "archetype_id": {
+                  "value": "openEHR-EHR-OBSERVATION.conformance_observation.v0"
+                },
+                "rm_version": "1.0.4"
+              },
+              "feeder_audit": {
+                "_type": "FEEDER_AUDIT",
+                "originating_system_item_ids": [
+                  {
+                    "_type": "DV_IDENTIFIER",
+                    "issuer": "issuer1",
+                    "assigner": "assigner1",
+                    "id": "observation 4"
+                  }
+                ],
+                "originating_system_audit": {
+                  "_type": "FEEDER_AUDIT_DETAILS",
+                  "system_id": "observation 4"
+                }
+              },
+              "language": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "ISO_639-1"
+                },
+                "code_string": "en"
+              },
+              "encoding": {
+                "_type": "CODE_PHRASE",
+                "terminology_id": {
+                  "_type": "TERMINOLOGY_ID",
+                  "value": "IANA_character-sets"
+                },
+                "code_string": "UTF-8"
+              },
+              "subject": {
+                "_type": "PARTY_SELF"
+              },
+              "data": {
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "History"
+                },
+                "origin": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2023-02-03T04:05:06"
+                },
+                "events": [
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2023-02-03T04:05:06"
+                    },
+                    "state": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Item tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT_State"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "state text 7"
+                          },
+                          "archetype_node_id": "at0031"
+                        }
+                      ],
+                      "archetype_node_id": "at0029"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "event tex7"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "cluster_with_cluster"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "DV_TEXT"
+                              },
+                              "value": {
+                                "_type": "DV_TEXT",
+                                "value": "cluster inter text7"
+                              },
+                              "archetype_node_id": "at0001"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text13"
+                                  },
+                                  "archetype_node_id": "at0006"
+                                }
+                              ],
+                              "archetype_node_id": "at0003"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text14"
+                                  },
+                                  "archetype_node_id": "at0007"
+                                }
+                              ],
+                              "archetype_node_id": "at0005"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  },
+                  {
+                    "_type": "POINT_EVENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Any event"
+                    },
+                    "time": {
+                      "_type": "DV_DATE_TIME",
+                      "value": "2024-02-03T04:05:06"
+                    },
+                    "state": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Item tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT_State"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "state text 8"
+                          },
+                          "archetype_node_id": "at0031"
+                        }
+                      ],
+                      "archetype_node_id": "at0029"
+                    },
+                    "data": {
+                      "_type": "ITEM_TREE",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Tree"
+                      },
+                      "items": [
+                        {
+                          "_type": "ELEMENT",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "DV_TEXT"
+                          },
+                          "value": {
+                            "_type": "DV_TEXT",
+                            "value": "event text8"
+                          },
+                          "archetype_node_id": "at0004"
+                        },
+                        {
+                          "_type": "CLUSTER",
+                          "name": {
+                            "_type": "DV_TEXT",
+                            "value": "cluster_with_cluster"
+                          },
+                          "archetype_details": {
+                            "archetype_id": {
+                              "value": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                            },
+                            "rm_version": "1.0.4"
+                          },
+                          "items": [
+                            {
+                              "_type": "ELEMENT",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "DV_TEXT"
+                              },
+                              "value": {
+                                "_type": "DV_TEXT",
+                                "value": "cluster inter text8"
+                              },
+                              "archetype_node_id": "at0001"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text15"
+                                  },
+                                  "archetype_node_id": "at0006"
+                                }
+                              ],
+                              "archetype_node_id": "at0003"
+                            },
+                            {
+                              "_type": "CLUSTER",
+                              "name": {
+                                "_type": "DV_TEXT",
+                                "value": "CLUSTER"
+                              },
+                              "items": [
+                                {
+                                  "_type": "ELEMENT",
+                                  "name": {
+                                    "_type": "DV_TEXT",
+                                    "value": "DV_TEXT"
+                                  },
+                                  "value": {
+                                    "_type": "DV_TEXT",
+                                    "value": "cluster outer text16"
+                                  },
+                                  "archetype_node_id": "at0007"
+                                }
+                              ],
+                              "archetype_node_id": "at0005"
+                            }
+                          ],
+                          "archetype_node_id": "openEHR-EHR-CLUSTER.cluster_with_cluster.v0"
+                        }
+                      ],
+                      "archetype_node_id": "at0003"
+                    },
+                    "archetype_node_id": "at0002"
+                  }
+                ],
+                "archetype_node_id": "at0001"
+              },
+              "archetype_node_id": "openEHR-EHR-OBSERVATION.conformance_observation.v0"
+            }
+          ],
+          "archetype_node_id": "openEHR-EHR-SECTION.conformance_section.v0"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    }
+  ],
+  "archetype_node_id": "openEHR-EHR-COMPOSITION.conformance_composition_.v0"
+}

@@ -19,10 +19,12 @@
 Metadata    Author    *Vladislav Ploaia*
 
 Documentation   AQL TESTS TEST SUITE
-...             Based on:
+...             \nBased on:
 ...             https://vitagroup-ag.atlassian.net/wiki/spaces/PEN/pages/38216361/Architecture+-+AQL+Feature+List
-...             Test pack based on:
+...             \nTest pack based on:
 ...             https://vitagroup-ag.atlassian.net/wiki/spaces/PEN/pages/37720514/Existing+tests+for+AQL+engine#Proposed-structure-for-AQL-Robot-tests
+...             \nGithub repository with the majority of tests:
+...             https://github.com/ehrbase/conformance-testing-documentation
 
 Resource        ${EXECDIR}/robot/_resources/suite_settings.robot
 

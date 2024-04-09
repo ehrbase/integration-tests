@@ -1,0 +1,54 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-06T16:13:11.4599397+02:00",
+		"_executed_aql": "SELECT e/ehr_id/value, cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_committed/value FROM EHR e CONTAINS VERSION cv[LATEST_VERSION] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.minimal.v1] ORDER BY cv/commit_audit/time_committed ASC",
+		"resultsize": 4
+	},
+	"q": "SELECT e/ehr_id/value, cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_committed/value FROM EHR e CONTAINS VERSION cv[LATEST_VERSION] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.minimal.v1] ORDER BY cv/commit_audit/time_committed ASC",
+	"columns": [
+		{
+			"path": "e/ehr_id/value",
+			"name": "#0"
+		},
+		{
+			"path": "cv/uid/value",
+			"name": "#1"
+		},
+		{
+			"path": "cv/contribution/id/value",
+			"name": "#2"
+		},
+		{
+			"path": "cv/commit_audit/time_committed/value",
+			"name": "#3"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_id1}",
+			"${compo_uid_1}",
+			"${contribution_id1}",
+			"${time_committed_observation1}"
+		],
+		[
+			"${ehr_id1}",
+			"${compo_uid_2_v3}",
+			"${contribution_id2}",
+			"${time_committed_observation2}"
+		],
+		[
+			"${ehr_id1}",
+			"${compo_uid_3_v2}",
+			"${contribution_id3}",
+			"${time_committed_observation3}"
+		],
+		[
+			"${ehr_id3}",
+			"${compo_uid_7_v2}",
+			"${contribution_id4}",
+			"${time_committed_observation4}"
+		]
+	]
+}

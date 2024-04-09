@@ -1,0 +1,45 @@
+{
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/mappings FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/mappings",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			null
+		],
+		[
+			null
+		],
+		[
+			{
+				"_type": "TERM_MAPPING",
+				"match": ">",
+				"target": {
+					"_type": "CODE_PHRASE",
+					"terminology_id": {
+						"_type": "TERMINOLOGY_ID",
+						"value": "SNOMED-CT"
+					},
+					"code_string": "21794000"
+				}
+			}
+		],
+		[
+			{
+				"_type": "TERM_MAPPING",
+				"match": "=",
+				"target": {
+					"_type": "CODE_PHRASE",
+					"terminology_id": {
+						"_type": "TERMINOLOGY_ID",
+						"value": "SNOMED-CT"
+					},
+					"code_string": "21794005"
+				}
+			}
+		]
+	]
+}

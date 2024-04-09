@@ -1,0 +1,25 @@
+{
+	"q": "SELECT c/setting FROM EVENT_CONTEXT c",
+	"columns": [
+		{
+			"path": "c/setting",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "DV_CODED_TEXT",
+				"value": "other care",
+				"defining_code": {
+					"_type": "CODE_PHRASE",
+					"terminology_id": {
+						"_type": "TERMINOLOGY_ID",
+						"value": "openehr"
+					},
+					"code_string": "238"
+				}
+			}
+		]
+	]
+}

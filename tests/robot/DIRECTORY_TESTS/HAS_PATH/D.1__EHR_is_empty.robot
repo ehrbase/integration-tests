@@ -32,6 +32,8 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
@@ -50,3 +52,4 @@ Main flow: has path on empty EHR
     get FOLDER in DIRECTORY at version - fake version_uid/path (JSON)
 
     validate GET-@version response - 404 unknown version_uid
+    [Teardown]    (admin) delete ehr

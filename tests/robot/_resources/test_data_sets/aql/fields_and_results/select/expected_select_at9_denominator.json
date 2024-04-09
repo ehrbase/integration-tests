@@ -1,0 +1,20 @@
+{
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value/denominator FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value/denominator",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			3.0
+		],
+		[
+			2.0
+		],
+		[
+			2.0
+		]
+	]
+}

@@ -1,0 +1,26 @@
+{
+	"q": "SELECT s/subject FROM EHR e CONTAINS EHR_STATUS s WHERE e/ehr_id/value = '${ehr_id}'",
+	"columns": [
+		{
+			"path": "s/subject",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "PARTY_SELF",
+				"external_ref": {
+					"_type": "PARTY_REF",
+					"namespace": "${subject_external_ref_namespace}",
+					"type": "PERSON",
+					"id": {
+						"_type": "GENERIC_ID",
+						"value": "${subject_external_ref_value}",
+						"scheme": "id_scheme"
+					}
+				}
+			}
+		]
+	]
+}

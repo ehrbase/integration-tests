@@ -1,0 +1,14 @@
+{
+	"q": "SELECT l/name/value FROM EHR e CONTAINS ELEMENT l[at0013]",
+	"columns": [
+		{
+			"path": "l/name/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"Cuff size"
+		]
+	]
+}

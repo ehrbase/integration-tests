@@ -1,0 +1,23 @@
+{
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/mappings/match, o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/mappings/target/code_string FROM COMPOSITION c CONTAINS OBSERVATION o",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/mappings/match",
+			"name": "#0"
+		},
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/mappings/target/code_string",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"=",
+			"21794005"
+		],
+		[
+			">",
+			"21794007"
+		]
+	]
+}

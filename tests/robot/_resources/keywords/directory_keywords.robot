@@ -39,18 +39,18 @@ ${INVALID DIR DATA SETS}   ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets
 # [ SUCEED CREATING ]
 
 create DIRECTORY (JSON)
-    [Arguments]         ${valid_test_data_set}      ${isModifiable}=${TRUE}
+    [Arguments]         ${valid_test_data_set}      ${isModifiable}=${TRUE}     ${multitenancy_token}=${None}
                         Set Suite Variable  ${KEYWORD NAME}  CREATE DIRECTORY (JSON)
 
                         load valid dir test-data-set    ${valid_test_data_set}
                         IF      '${isModifiable}' == '${TRUE}'
-                            POST /ehr/ehr_id/directory    JSON
+                            POST /ehr/ehr_id/directory    JSON      ${multitenancy_token}
                             Set Suite Variable  ${folder_uid}  ${response.json()['uid']['value']}
                             Set Suite Variable  ${version_uid}  ${response.json()['uid']['value']}
                             Set Suite Variable  ${preceding_version_uid}  ${version_uid}
                             capture point in time    of_first_version
                         ELSE
-                            POST /ehr/ehr_id/directory    JSON
+                            POST /ehr/ehr_id/directory    JSON      ${multitenancy_token}
                         END
 
 
@@ -121,12 +121,12 @@ create the same DIRECTORY again (JSON)
 # [ SUCCEED UPDATING ]
 
 update DIRECTORY (JSON)
-    [Arguments]         ${valid_test_data_set}      ${isModifiable}=${TRUE}
+    [Arguments]         ${valid_test_data_set}      ${isModifiable}=${TRUE}     ${multitenancy_token}=${None}
                         Set Test Variable  ${KEYWORD NAME}  UPDATE DIRECTORY (JSON)
 
                         load valid dir test-data-set    ${valid_test_data_set}
 
-                        PUT /ehr/ehr_id/directory    JSON
+                        PUT /ehr/ehr_id/directory    JSON   ${multitenancy_token}
                         IF      '${isModifiable}' == '${TRUE}'
                             Set Suite Variable  ${folder_uid}  ${response.json()['uid']['value']}
                             Set Suite Variable  ${version_uid}  ${response.json()['uid']['value']}
@@ -256,10 +256,10 @@ get DIRECTORY (JSON)
     ...                 **without** URI parameter (which are optional)!
     ...                 check the API here:
     ...     https://specifications.openehr.org/releases/ITS-REST/latest/ehr.html#directory-directory-get-1
-
+    [Arguments]     ${multitenancy_token}=${None}
                         Set Test Variable  ${KEYWORD NAME}  GET DIRECTORY (JSON)
 
-                        GET /ehr/ehr_id/directory    JSON
+                        GET /ehr/ehr_id/directory    JSON   multitenancy_token=${multitenancy_token}
 
 
 get DIRECTORY at time (JSON)
@@ -301,10 +301,10 @@ get DIRECTORY at version (JSON)
     [Documentation]     Retrieves a particular version of the directory FOLDER
     ...                 identified by `version_uid` and associated with the EHR
     ...                 identified by `ehr_id`.
-
+    [Arguments]         ${multitenancy_token}=${None}
                         Set Test Variable  ${KEYWORD NAME}  GET DIRECTORY AT VERSION (JSON)
 
-                        GET /ehr/ehr_id/directory/version_uid    JSON
+                        GET /ehr/ehr_id/directory/version_uid    JSON   ${multitenancy_token}
 
 
 get FOLDER in DIRECTORY at version (JSON)
@@ -436,21 +436,23 @@ Create Directory With Multitenant Token
                         ...     Accept=application/json
                         ...     Prefer=return=representation
                         ...     Authorization=Bearer ${multitenancy_token}
-    Set Suite Variable      &{headersMultitenancy}  &{headers}
+    Set Suite Variable      &{headers}  &{headers}
     ${resp}             POST On Session     ${SUT}   /ehr/${ehr_id}/directory   expected_status=anything
                         ...                 json=${test_data}
                         ...                 headers=${headers}
                         Set Suite Variable   ${response}    ${resp}
 
 POST /ehr/ehr_id/directory
-    [Arguments]         ${headers}
+    [Arguments]         ${headers}      ${multitenancy_token}=${None}
     [Documentation]     Executes HTTP method POST on /ehr/ehr_id/directory endpoint
     ...                 DEPENDENCY: the following variables in test level scope:
     ...                 `\${ehr_id}`, `\${test_data}`
 
                         prepare new request session    ${headers}
                         ...                 Prefer=return=representation
-
+                        IF  '${multitenancy_token}' != '${None}'
+                            Set To Dictionary    ${headers}    Authorization=Bearer ${multitenancy_token}
+                        END
     ${resp}=            POST On Session     ${SUT}   /ehr/${ehr_id}/directory   expected_status=anything
                         ...                 json=${test_data}
                         ...                 headers=${headers}

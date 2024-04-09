@@ -1,0 +1,49 @@
+{
+	"q": "SELECT C/items[at0001]/value/value, C2/items[at0001]/value/size, o/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.anatomical_location.v1] CONTAINS CLUSTER C2[openEHR-EHR-CLUSTER.media_file.v1]",
+	"columns": [
+		{
+			"path": "C/items[at0001]/value/value",
+			"name": "#0"
+		},
+		{
+			"path": "C2/items[at0001]/value/size",
+			"name": "#1"
+		},
+		{
+			"path": "o/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude",
+			"name": "#2"
+		}
+	],
+	"rows": [
+		[
+			"Left Arm",
+			504903212,
+			500.0
+		],
+		[
+			"Left Arm",
+			504903212,
+			500.0
+		],
+		[
+			"Left Arm",
+			504903212,
+			500.0
+		],
+		[
+			" Left Arm",
+			504903212,
+			60.0
+		],
+		[
+			" Left Arm",
+			504903212,
+			90.0
+		],
+		[
+			" Left Arm",
+			504903212,
+			70.0
+		]
+	]
+}

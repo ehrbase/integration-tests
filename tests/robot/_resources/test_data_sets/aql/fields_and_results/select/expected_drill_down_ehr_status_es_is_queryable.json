@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-11T11:30:58.1689449+02:00",
+		"_executed_aql": "SELECT es/is_queryable FROM EHR_STATUS es",
+		"resultsize": 1
+	},
+	"q": "SELECT es/is_queryable FROM EHR_STATUS es",
+	"columns": [
+		{
+			"path": "es/is_queryable",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			true
+		]
+	]
+}

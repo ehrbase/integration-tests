@@ -1,0 +1,36 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-05T16:22:45.1219295+02:00",
+		"_executed_aql": "SELECT cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_committed/value FROM VERSION cv[LATEST_VERSION] CONTAINS EHR_STATUS s ORDER BY cv/commit_audit/time_committed ASC",
+		"resultsize": 2
+	},
+	"q": "SELECT cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_committed/value FROM VERSION cv[LATEST_VERSION] CONTAINS EHR_STATUS s ORDER BY cv/commit_audit/time_committed ASC",
+	"columns": [
+		{
+			"path": "cv/uid/value",
+			"name": "#0"
+		},
+		{
+			"path": "cv/contribution/id/value",
+			"name": "#1"
+		},
+		{
+			"path": "cv/commit_audit/time_committed/value",
+			"name": "#2"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_status_id1}",
+			"${contribution_id1}",
+			"${time_committed_ehr_status1}"
+		],
+		[
+			"${ehr_status_id3_version2}",
+			"${contribution_id2}",
+			"${time_committed_ehr_status2}"
+		]
+	]
+}

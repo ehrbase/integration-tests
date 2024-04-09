@@ -1,0 +1,19 @@
+{
+	"q": "SELECT n/value/value, l/value/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.symptom_sign_screening.v0] CONTAINS (ELEMENT l[at0005] AND ELEMENT n[at0004]) WHERE (c/archetype_details/template_id/value MATCHES {'Corona_Anamnese'} AND l/value/value = 'Vorhanden' AND n/value/value = 'Husten' AND e/ehr_id/value MATCHES {'${ehr_id1}'})",
+	"columns": [
+		{
+			"path": "n/value/value",
+			"name": "#0"
+		},
+		{
+			"path": "l/value/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"Husten",
+			"Vorhanden"
+		]
+	]
+}

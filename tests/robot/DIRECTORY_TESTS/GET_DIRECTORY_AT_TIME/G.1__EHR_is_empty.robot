@@ -32,6 +32,8 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
@@ -48,3 +50,4 @@ Main flow: get directory at time on empty EHR
     create EHR
     get DIRECTORY at current time (JSON)
     validate GET-version@time response - 404 unknown folder-version@time
+    [Teardown]    (admin) delete ehr

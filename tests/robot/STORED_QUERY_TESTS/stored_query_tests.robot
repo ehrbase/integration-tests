@@ -20,6 +20,8 @@ Documentation       STORED QUERY TEST SUITE
 Resource            ../_resources/keywords/composition_keywords.robot
 Resource            ../_resources/keywords/ehr_keywords.robot
 Resource            ../_resources/keywords/aql_query_keywords.robot
+Resource            ../_resources/keywords/admin_keywords.robot
+Suite Setup 		Set Library Search Order For Tests
 
 
 *** Variables ***
@@ -135,22 +137,13 @@ Definition API - GET All Stored Queries
         Log     ${resp_versions_arr}[${INDEX}]
     END
 
-Definition API - DELETE Stored Query Using Qualified Query Name And Version
-    [Tags]      not-ready   Negative    CDR-1069
+Definition API - Non Existing Endpoint - DELETE Stored Query Using Qualified Query Name And Version
+    [Tags]      Negative
     [Documentation]     Test to check below endpoint:
     ...                 - DELETE /rest/openehr/v1/definition/query/{qualified_query_name}/{version}
     ...                 Expected:
-    ...                 - response status code = 200
-    ...                 Check that on GET deleted stored query by {qualified_query_name}/{version}, status code is *400*
-    ...                 \n Check that 404 is returned on GET /rest/openehr/v1/definition/query/{qualified_query_name}/{version} for deleted query.
-    ${isPassed}     Run Keyword And Return Status
-    ...     DELETE /definition/query/{qualified_query_name}/{version}
-    ...     qualif_name=${resp_qualified_query_name_version}
-    IF     '${isPassed}' != '${TRUE}'
-        FAIL    DELETE /rest/openehr/v1/definition/query/${resp_qualified_query_name_version} failed!
-    END
-    Run Keyword And Expect Error    	404 != 200
-    ...     GET /definition/query/{qualified_query_name} / including {version}
+    ...                 - response status code = 405
+    DELETE /definition/query/{qualified_query_name}/{version}
     ...     qualif_name=${resp_qualified_query_name_version}
 
 Query API - GET Stored Query Using Qualified Query Name
@@ -170,7 +163,7 @@ Query API - GET Stored Query Using Qualified Query Name
     ...     qualif_name=${resp_qualified_query_name}
     Should Be Equal As Strings      ${resp_query['q']}        ${initial_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${resp_qualified_query_name}/1.0.0
-    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     /uid/value
+    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
     Should Be Equal As Strings      ${resp_query['rows'][0][0]}     ${composition_uid}
 
@@ -198,7 +191,7 @@ Query API - GET Stored Query Using Qualified Query Name With Ehr Id Param
     ...     qualif_name=${temp_qualified_query_name}    params=${params}
     Should Be Equal As Strings      ${resp_query['q']}        ${second_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${temp_qualified_query_name}/1.0.0
-    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     /uid/value
+    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
     ${rows_length}      Get Length  ${resp_query['rows']}
     IF      ${rows_length} == ${1}
@@ -233,7 +226,7 @@ Query API - POST Stored Query Using Qualified Query Name
     ...     qualif_name=${resp_qualified_query_name}
     Should Be Equal As Strings      ${resp_query['q']}        ${initial_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${resp_qualified_query_name}/1.0.0
-    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     /uid/value
+    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
     Should Be Equal As Strings      ${resp_query['rows'][0][0]}     ${composition_uid}
 
@@ -256,7 +249,7 @@ Query API - GET Stored Query Using Qualified Query Name And Version
     ...     qualif_name=${second_resp_qualified_query_name_version}
     Should Be Equal As Strings      ${resp_query['q']}        ${initial_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${second_resp_qualified_query_name_version}
-    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     /uid/value
+    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
     Should Be Equal As Strings      ${resp_query['rows'][0][0]}     ${composition_uid}
 
@@ -284,7 +277,7 @@ Query API - GET Stored Query Using Qualified Query Name And Version With Ehr Id 
     ...     qualif_name=${temp_qualified_query_name_version}    params=${params}
     Should Be Equal As Strings      ${resp_query['q']}        ${third_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${temp_qualified_query_name_version}
-    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     /uid/value
+    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
     ${rows_length}      Get Length  ${resp_query['rows']}
     IF      ${rows_length} == ${1}
@@ -312,9 +305,24 @@ Query API - POST Stored Query Using Qualified Query Name And Version
     ...     qualif_name=${second_resp_qualified_query_name_version}
     Should Be Equal As Strings      ${resp_query['q']}        ${initial_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${second_resp_qualified_query_name_version}
-    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     /uid/value
+    Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
     Should Be Equal As Strings      ${resp_query['rows'][0][0]}     ${composition_uid}
+    [Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
+
+Query API - DELETE Stored Query Using Qualified Query Name And Version
+    [Tags]      Positive
+    [Documentation]     Test to check below endpoint:
+    ...                 - DELETE ${ADMIN_BASEURL}/query/{qualified_query_name}/{version}
+    ...                 \n Check that 200 is returned
+    ...                 - GET ${BASEURL}/query/{qualified_query_name}/{version}
+    ...                 \n Check that 404 is returned
+    ${resp_query}       DELETE /query/{qualified_query_name}/{version} ADMIN
+    ...     qualif_name=${second_resp_qualified_query_name_version}
+    ###get deleted stored query - bug CDR-1069
+#    Run Keyword And Expect Error    	404 != 200
+#    ...     GET /query/{qualified_query_name}/{version}
+#    ...     qualif_name=${second_resp_qualified_query_name_version}
 
 
 *** Keywords ***
@@ -332,8 +340,3 @@ Precondition
 Create EHR With EHR Status
     [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
     create new EHR with ehr_status  ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
-                        Integer    response status    201
-    ${ehr_id_obj}=      Object    response body ehr_id
-    ${ehr_id_value}=    String    response body ehr_id value
-                        Set Suite Variable    ${ehr_id_obj}    ${ehr_id_obj}
-                        Set Suite Variable    ${ehr_id}    ${ehr_id_value}[0]

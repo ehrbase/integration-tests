@@ -25,6 +25,7 @@ Documentation   B.2.c) Alternative flow 2: Check has EHR with non existing EHR b
 Metadata        TOP_TEST_SUITE    EHR_SERVICE
 
 Resource        ../../_resources/keywords/ehr_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT

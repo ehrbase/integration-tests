@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-11T14:30:29.8801063+02:00",
+		"_executed_aql": "SELECT es/subject/external_ref/id/scheme FROM EHR_STATUS es",
+		"resultsize": 1
+	},
+	"q": "SELECT es/subject/external_ref/id/scheme FROM EHR_STATUS es",
+	"columns": [
+		{
+			"path": "es/subject/external_ref/id/scheme",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"id_scheme"
+		]
+	]
+}

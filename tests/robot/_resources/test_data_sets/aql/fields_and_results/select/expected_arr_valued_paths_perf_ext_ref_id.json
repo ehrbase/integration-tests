@@ -1,0 +1,23 @@
+{
+	"q": "SELECT o/other_participations/performer/name, o/other_participations/performer/external_ref/id/value FROM COMPOSITION c CONTAINS OBSERVATION o",
+	"columns": [
+		{
+			"path": "o/other_participations/performer/name",
+			"name": "#0"
+		},
+		{
+			"path": "o/other_participations/performer/external_ref/id/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"Dr. Marcus Johnson",
+			"199"
+		],
+		[
+			"Lara Markham",
+			"198"
+		]
+	]
+}

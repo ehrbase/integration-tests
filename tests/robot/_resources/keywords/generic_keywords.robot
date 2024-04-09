@@ -290,7 +290,6 @@ wait until openehr server is online
 
 
 openehr server is online
-    #prepare new request session  JSON
     &{headers}          Create Dictionary
     ...     Content-Type=application/json
     ...     Accept=application/json
@@ -307,15 +306,6 @@ openehr server is online
     Log      ${resp.json()["openehr_sdk_version"]}
     Log      ${resp.json()["os_version"]}
     Log      ${resp.json()["postgres_version"]}
-    #REST.GET    ${HEARTBEAT_URL}
-    #Output    response body
-
-    #Integer   response status    200
-    #String    response body ehrbase_version
-    #String    response body jvm_version
-    #String    response body openehr_sdk_version
-    #String    response body os_version
-    #String    response body postgres_version
 
 
 abort test execution
@@ -744,6 +734,20 @@ TRACE JIRA ISSUE
 
                     Set Tags    not-ready   ${JIRA_ISSUE}
 
+Set Library Search Order For Tests
+    [Arguments]     ${libs_order_list}=${None}
+    ${default_order_list}   Create List     R   RCustom
+    ${custom_order_list}    Create List     RCustom     R
+    ${libs_order_list}=     Set Variable If     "${libs_order_list}" == "${None}"   ${default_order_list}   ${custom_order_list}
+    ${variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
+    IF     '${variable_exists}' == '${FALSE}'
+        Set Library Search Order    ${libs_order_list}[0]	${libs_order_list}[1]
+    ELSE IF    '${MULTITENANCY_ENV_ENABLED}' == 'true' and '${variable_exists}' == 'True'
+        Set Library Search Order    ${libs_order_list}[1]	${libs_order_list}[0]
+    ELSE
+        Set Library Search Order    ${libs_order_list}[0]	${libs_order_list}[1]
+	END
 
 
 # oooooooooo.        .o.         .oooooo.   oooo    oooo ooooo     ooo ooooooooo.

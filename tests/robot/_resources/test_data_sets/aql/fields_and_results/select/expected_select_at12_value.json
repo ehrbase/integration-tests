@@ -1,0 +1,20 @@
+{
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0012]/value/value FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0012]/value/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"04:06:06"
+		],
+		[
+			"05:05:06"
+		],
+		[
+			"04:05:06"
+		]
+	]
+}

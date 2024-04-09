@@ -1,0 +1,13 @@
+{
+	"q": "SELECT NULL FROM EHR",
+	"columns": [
+		{
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			null
+		]
+	]
+}

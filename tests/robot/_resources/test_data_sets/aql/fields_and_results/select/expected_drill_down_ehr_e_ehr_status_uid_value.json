@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-07T17:46:45.1141716+02:00",
+		"_executed_aql": "SELECT s/uid/value FROM EHR e CONTAINS EHR_STATUS s",
+		"resultsize": 1
+	},
+	"q": "SELECT s/uid/value FROM EHR e CONTAINS EHR_STATUS s",
+	"columns": [
+		{
+			"path": "s/uid/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_status_uid}"
+		]
+	]
+}

@@ -1,0 +1,24 @@
+{
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0010]/value/other_reference_ranges/range/lower/magnitude, o/data[at0001]/events[at0002]/data[at0003]/items[at0010]/value/other_reference_ranges/range/upper/magnitude, o/data[at0001]/events[at0002]/data[at0003]/items[at0010]/value/other_reference_ranges/meaning/value FROM COMPOSITION c CONTAINS OBSERVATION o WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at0010]/value/other_reference_ranges/range/upper/magnitude = 12",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0010]/value/other_reference_ranges/range/lower/magnitude",
+			"name": "#0"
+		},
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0010]/value/other_reference_ranges/range/upper/magnitude",
+			"name": "#1"
+		},
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0010]/value/other_reference_ranges/meaning/value",
+			"name": "#2"
+		}
+	],
+	"rows": [
+		[
+			11,
+			12,
+			"very high"
+		]
+	]
+}

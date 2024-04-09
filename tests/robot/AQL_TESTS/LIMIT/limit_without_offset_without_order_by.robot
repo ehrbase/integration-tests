@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK LIMIT WITHOUT OFFSET WITHOUT ORDER BY
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/LIMIT_TEST_SUIT.md#without-order-by
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/LIMIT_TEST_SUIT.md#without-order-by
 ...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create 4x Compositions
 ...         - Send AQL 'SELECT c FROM COMPOSITION c LIMIT \{limit}'
 ...         - *\{limit}* can be:
@@ -19,7 +19,7 @@ Library     DataDriver
 #Suite Setup  Skip    enable Setup 'Precondition' if AQL checks are passing !!!
 #Suite Teardown  Skip    enable Teardown 'Admin Delete EHR For AQL' if AQL checks are passing !!!
 Suite Setup     Precondition        #enable this keyword if AQL checks are passing !!!
-Suite Teardown  Admin Delete EHR For AQL    #enable this keyword if AQL checks are passing !!!
+Suite Teardown  Admin Delete EHR For AQL    ${ehr_id1}    #enable this keyword if AQL checks are passing !!!
 
 
 *** Test Cases ***
@@ -31,6 +31,7 @@ SELECT c FROM COMPOSITION c LIMIT ${limit}
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Create EHR For AQL
     Set Suite Variable       ${ehr_id1}    ${ehr_id}

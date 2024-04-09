@@ -164,8 +164,7 @@ commit composition (JSON)
                         Set Test Variable   ${version_uid_v1}    ${version_uid}                  # different namesfor full uid
                         Set Test Variable   ${preceding_version_uid}    ${version_uid}          # for usage in other steps
     @{splitted_ver_uid}     Split String    ${version_uid}      ::
-    #${short_uid}=       Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
-    ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
+    ${short_uid}        Set Variable        ${splitted_ver_uid}[0]
                         Set Test Variable   ${compo_uid_v1}    ${short_uid}                      # TODO: rmv
                         Set Test Variable   ${versioned_object_uid}    ${short_uid}
 
@@ -195,7 +194,8 @@ commit composition without accept header
                         Set Test Variable   ${version_uid_v1}    ${version_uid}                  # different namesfor full uid
                         Set Test Variable   ${preceding_version_uid}    ${version_uid}          # for usage in other steps
 
-    ${short_uid}=       Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
+    @{split_compo_id}   Split String    ${version_uid}      ::
+    ${short_uid}        Set Variable    ${split_compo_id}[0]
                         Set Test Variable   ${compo_uid_v1}    ${short_uid}                      # TODO: rmv
                         Set Test Variable   ${versioned_object_uid}    ${short_uid}
 
@@ -208,9 +208,8 @@ check content of composition (JSON)
     ${text}=            Set Variable        ${response.json()['content'][0]['data']['events'][0]['data']['items'][0]['value']['value']}
                         Should Be Equal     ${text}    original value
 
-
 commit composition (XML)
-    [Arguments]         ${xml_composition}
+    [Arguments]         ${xml_composition}      ${multitenancy_token}=${None}
     [Documentation]     POST /ehr/${ehr_id}/composition
 
                         # TODO: FIX ME! replace KW
@@ -219,6 +218,10 @@ commit composition (XML)
     &{headers}=         Create Dictionary   Content-Type=application/xml
                         ...                 Accept=application/xml
                         ...                 Prefer=return=representation
+
+    IF     '${multitenancy_token}' != '${None}'
+            Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
+    END
 
     ${resp}=            POST On Session     ${SUT}   /ehr/${ehr_id}/composition   expected_status=anything   data=${file}   headers=${headers}
                         log to console      ${resp.content}
@@ -234,9 +237,8 @@ commit composition (XML)
                         Set Test Variable   ${version_uid_v1}    ${version_uid}                  # different namesfor full uid
                         Set Test Variable   ${preceding_version_uid}    ${version_uid}          # for usage in other steps
 
-    @{splitted_ver_uid}     Split String    ${version_uid}      ::
-    #${short_uid}=       Remove String       ${version_uid}    ::${CREATING_SYSTEM_ID}::1
-    ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
+    @{split_compo_id}   Split String        ${version_uid}       ::
+    ${short_uid}        Set Variable        ${split_compo_id}[0]
                         Set Test Variable   ${compo_uid_v1}    ${short_uid}                 # TODO; rmv
                         Set Test Variable   ${versioned_object_uid}    ${short_uid}
 
@@ -274,19 +276,18 @@ Create Session For Commit Composition With Multitenant Token
     ...     - Creates new headers with Authorization=Bearer {token}.
     ...     - Clean up all the sessions.
     ...     - Recreate the session with alias {SUT}, with new headers.
-    ...     - Set headers as suite variable called {headersMultitenancy}.
+    ...     - Set headers as suite variable called {headers}.
     ...     - Takes 2 arguments: {template} and {multitenancy_token}
     ...     - `Dependent of keyword:` commit composition.
     [Arguments]      ${template}     ${multitenancy_token}
-    &{headers}      Create Dictionary
+    Set To Dictionary   ${headers}
     ...     Prefer=return=representation    openEHR-VERSION.lifecycle_state=complete
-    ...     openEHR-TEMPLATE_ID=${template}
-    ...     Content-Type=application/json
-    ...     Accept=application/json
-    ...     Authorization=Bearer ${multitenancy_token}
-    Set Suite Variable      &{headersMultitenancy}  &{headers}
-    Delete All Sessions
-    Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headersMultitenancy}
+    ...     openEHR-TEMPLATE_ID=${template}     Authorization=Bearer ${multitenancy_token}
+    #...     Content-Type=application/json
+    #...     Accept=application/json
+    Set Suite Variable      &{headers}  &{headers}
+    #Delete All Sessions
+    #Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
 
 
 commit composition
@@ -310,23 +311,25 @@ commit composition
     &{headers}=        Create Dictionary   Prefer=return=${prefer}
     ...                openEHR-VERSION.lifecycle_state=${lifecycle}
 
-    IF    '${need_template_id}' == 'true'
-        Set To Dictionary   ${headers}   openEHR-TEMPLATE_ID=${template}
-    END
-
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary   ${headers}
         ...     Authorization=Bearer ${multitenancy_token}
     END
 
+    Set Test Variable   ${headers}      ${headers}
+
+    IF    '${need_template_id}' == 'true'
+        Set To Dictionary   ${headers}   openEHR-TEMPLATE_ID=${template}
+    END
+
     IF   '${format}'=='CANONICAL_JSON'
         Create Session      ${SUT}    ${BASEURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=True
+                            ...     verify=False    #auth=${CREDENTIALS}
         Set To Dictionary   ${headers}   Content-Type=application/json
         Set To Dictionary   ${headers}   Accept=application/json
     ELSE IF   '${format}'=='CANONICAL_XML'
         Create Session      ${SUT}    ${BASEURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=True
+                            ...     verify=False    #auth=${CREDENTIALS}
         Set To Dictionary   ${headers}   Content-Type=application/xml
         Set To Dictionary   ${headers}   Accept=application/xml
     ELSE IF   '${format}'=='FLAT'
@@ -342,26 +345,30 @@ commit composition
         END
         &{params}       Create Dictionary     format=FLAT   ehrId=${ehr_id}     templateId=${template_id}
         Create Session      ${SUT}    ${ECISURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=True
+        ...     verify=False    headers=${headers}      #auth=${CREDENTIALS}
     ELSE IF   '${format}'=='TDD'
         Create Session      ${SUT}    ${BASEURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=True
+                            ...     verify=False    #auth=${CREDENTIALS}
         Set To Dictionary   ${headers}   Content-Type=application/openehr.tds2+xml
         Set To Dictionary   ${headers}   Accept=application/openehr.tds2+xml
     ELSE IF   '${format}'=='STRUCTURED'
         Create Session      ${SUT}    ${BASEURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=True
+                            ...     verify=False    #auth=${CREDENTIALS}
         Set To Dictionary   ${headers}   Content-Type=application/openehr.wt.structured+json
         Set To Dictionary   ${headers}   Accept=application/openehr.wt.structured+json
     END
 
-    IF          '${format}'=='FLAT'
+    IF      '${format}'=='FLAT'
         ${resp}     POST On Session     ${SUT}   composition   params=${params}
         ...     expected_status=anything   data=${file}   headers=${headers}
     ELSE IF     '${multitenancy_token}' != '${None}'
-        Create Session For Commit Composition With Multitenant Token    ${template}    ${multitenancy_token}
+        Set To Dictionary   ${headers}
+        ...     openEHR-TEMPLATE_ID=${template}     Authorization=Bearer ${multitenancy_token}
+        Delete All Sessions
+        Create Session      ${SUT}    ${BASEURL}    debug=2
+        ...                 headers=${headers}      verify=False
         ${resp}     POST On Session     ${SUT}   /ehr/${ehr_id}/composition
-        ...     expected_status=anything   data=${file}   headers=${headersMultitenancy}
+        ...     expected_status=anything   data=${file}   headers=${headers}
     ELSE
         ${resp}     POST On Session     ${SUT}   /ehr/${ehr_id}/composition
         ...     expected_status=anything   data=${file}   headers=${headers}
@@ -483,7 +490,8 @@ Update Composition With Multitenant Token
                         ...                 Authorization=Bearer ${multitenancy_token}
     Create Session      ${SUT}      ${BASEURL}      debug=2
     ...                 verify=True         headers=${headers}
-    ${composition_id}   Remove String       ${composition_uid}    ::${CREATING_SYSTEM_ID}::1
+    @{split_compo_id}   Split String        ${composition_uid}      ::
+    ${composition_id}   Set Variable        ${split_compo_id}[0]
     &{params}           Create Dictionary   ehr_id=${ehr_id}    composition_id=${composition_id}
     ${resp}             PUT On Session      ${SUT}          /ehr/${ehr_id}/composition/${composition_id}
     ...                 data=${file}    headers=${headers}      params=${params}    expected_status=anything
@@ -508,9 +516,8 @@ update composition (JSON)
                             Set Test Variable   ${composition_uid_v2}    ${resp.json()['uid']['value']}    # TODO: remove
                             Set Test Variable   ${version_uid_v2}    ${resp.json()['uid']['value']}
 
-        @{splitted_ver_uid}     Split String    ${version_uid_v2}      ::
-        ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
-                            Set Test Variable   ${versioned_object_uid_v2}    ${short_uid}
+        @{split_compo_id}   Split String        ${version_uid_v2}       ::
+                            Set Test Variable   ${versioned_object_uid_v2}    ${split_compo_id}[0]
 
                             Set Test Variable   ${response}    ${resp}
                             capture point in time    2
@@ -522,7 +529,8 @@ update composition (JSON)
                             ...                 Accept=application/json
                             ...                 Prefer=return=representation
                             ...                 If-Match=${composition_uid}
-        ${composition_id}        Remove String       ${composition_uid}    ::${CREATING_SYSTEM_ID}::1
+        @{split_compo_id}   Split String    ${composition_uid}      ::
+        ${composition_id}   Set Variable    ${split_compo_id}[0]
         &{params}          Create Dictionary     ehr_id=${ehr_id}   composition_id=${composition_id}
         ${resp}             PUT On Session         ${SUT}   /ehr/${ehr_id}/composition/${composition_id}
         ...                 data=${file}   headers=${headers}     params=${params}
@@ -530,9 +538,8 @@ update composition (JSON)
                             Set Test Variable   ${composition_uid_v2}    ${resp.json()['uid']['value']}    # TODO: remove
                             Set Test Variable   ${version_uid_v2}    ${resp.json()['uid']['value']}
 
-        @{splitted_ver_uid}     Split String    ${version_uid_v2}      ::
-        ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
-                            Set Test Variable   ${versioned_object_uid_v2}    ${short_uid}
+        @{split_compo_id}   Split String        ${version_uid_v2}       ::
+                            Set Test Variable   ${versioned_object_uid_v2}    ${split_compo_id}[0]
 
                             Set Test Variable   ${response}    ${resp}
                             capture point in time    2
@@ -552,7 +559,8 @@ update composition (JSON)
         Create Session      ${SUT}    ${BASEURL}    debug=2
         ...                 headers=${headersUpdateCompoMultitenancy}    verify=True
         Set Test Variable   ${headers}      &{headersUpdateCompoMultitenancy}
-        ${composition_id}   Remove String           ${composition_uid}    ::${CREATING_SYSTEM_ID}::1
+        @{split_compo_id}   Split String    ${composition_uid}      ::
+        ${composition_id}   Set Variable    ${split_compo_id}[0]
         &{params}           Create Dictionary       ehr_id=${ehr_id}   composition_id=${composition_id}
         ${resp}             PUT On Session          ${SUT}          /ehr/${ehr_id}/composition/${composition_id}
         ...                 data=${file}    headers=${headers}      params=${params}
@@ -560,9 +568,8 @@ update composition (JSON)
                             Set Test Variable   ${composition_uid_v2}    ${resp.json()['uid']['value']}    # TODO: remove
                             Set Test Variable   ${version_uid_v2}    ${resp.json()['uid']['value']}
 
-        @{splitted_ver_uid}     Split String    ${version_uid_v2}      ::
-        ${short_uid}        Set Variable       ${splitted_ver_uid}[0]
-                            Set Test Variable   ${versioned_object_uid_v2}    ${short_uid}
+        @{split_compo_id}   Split String        ${version_uid_v2}       ::
+                            Set Test Variable   ${versioned_object_uid_v2}    ${split_compo_id}[0]
 
                             Set Test Variable   ${response}    ${resp}
                             capture point in time    2
@@ -679,7 +686,7 @@ check content of updated composition generic (JSON)
                         Should Be Equal     ${text}    ${expectedVal}
 
 update composition (XML)
-    [Arguments]         ${new_version_of_composition}
+    [Arguments]         ${new_version_of_composition}   ${multitenancy_token}=${None}
     [Documentation]     Commit a new version for the COMPOSITION
     ...                 DEPENDENCY: `commit composition (JSON/XML)` keyword
     ...                 PUT /ehr/${ehr_id}/composition/${versioned_object_uid}
@@ -689,6 +696,9 @@ update composition (XML)
                         ...                 Accept=application/xml
                         ...                 Prefer=return=representation
                         ...                 If-Match=${preceding_version_uid}   # TODO: must be ${preceding_version_uid} - has same format as `version_uid`
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
     ${resp}=            PUT On Session         ${SUT}   /ehr/${ehr_id}/composition/${compo_uid_v1}   data=${file}   expected_status=anything   headers=${headers}
                         log to console      ${resp.content}
 
@@ -772,7 +782,7 @@ get composition by composition_uid
         ...     Authorization=Bearer ${multitenancy_token}
         Set Test Variable      &{headers}  &{headers}
         Delete All Sessions
-        Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headersMultitenancy}
+        Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
     END
 
     ${resp}=            GET On Session         ${SUT}    /ehr/${ehr_id}/composition/${uid}    expected_status=anything   headers=${headers}
@@ -791,42 +801,45 @@ get composition by composition_uid
     # because the response from the create compo has this endpoint in the Location header
     &{params}=          Create Dictionary     format=FLAT
     Create Session      ${SUT}    ${ECISURL}    debug=2
-        ...                 auth=${CREDENTIALS}    verify=True
+                        ...     verify=True     #auth=${CREDENTIALS}
     ${resp}=            GET On Session         ${SUT}  composition/${uid}  params=${params}  expected_status=anything   headers=${headers}
                         log to console      ${resp.content}
                         Set Test Variable   ${response}    ${resp}
 
 
 Get Web Template By Template Id (ECIS)
-    [Arguments]         ${template_id}      ${responseFormat}=default
-
+    [Arguments]         ${template_id}      ${responseFormat}=default   ${multitenancy_token}=${None}
     Create Session      ${SUT}    ${ECISURL}    debug=2
-    ...                 auth=${CREDENTIALS}    verify=True
-    IF          '${responseFormat}' == 'JSON'
-        &{params}           Create Dictionary       format=JSON
-        &{headers}          Create Dictionary       Content-Type=application/json
-        ...     Prefer=return=representation        Accept=application/json
-        ${resp}             GET On Session         ${SUT}  template/${template_id}
-        ...     expected_status=anything   headers=${headers}   params=${params}
-    ELSE IF     '${responseFormat}' == 'XML'
-        &{params}           Create Dictionary       format=XML
-        &{headers}          Create Dictionary       Content-Type=application/xml
-        ...     Prefer=return=representation        Accept=application/xml
-        ${resp}             GET On Session          ${SUT}  template/${template_id}
-        ...     expected_status=anything   headers=${headers}   params=${params}
-    ELSE
-        ${resp}             GET On Session         ${SUT}  template/${template_id}
-        ...     expected_status=anything   headers=${headers}
+    ...                 verify=False    #auth=${CREDENTIALS}
+    &{headers}      Create Dictionary
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
-                        log to console      ${resp.content}
-                        Set Test Variable   ${response}    ${resp}
-                        Should Be Equal As Strings   ${resp.status_code}   200
+    IF          '${responseFormat}' == 'JSON'
+        &{params}       Create Dictionary   format=JSON
+        Set To Dictionary       ${headers}
+        ...     Content-Type=application/json   Prefer=return=representation    Accept=application/json
+        ${resp}     GET On Session      ${SUT}      template/${template_id}
+        ...     expected_status=anything    headers=${headers}  params=${params}
+    ELSE IF     '${responseFormat}' == 'XML'
+        &{params}       Create Dictionary   format=XML
+        Set To Dictionary       ${headers}
+        ...     Content-Type=application/xml    Prefer=return=representation    Accept=application/xml
+        ${resp}     GET On Session      ${SUT}      template/${template_id}
+        ...     expected_status=anything    headers=${headers}  params=${params}
+    ELSE
+        ${resp}     GET On Session      ${SUT}      template/${template_id}
+        ...     expected_status=anything    headers=${headers}
+    END
+        log to console      ${resp.content}
+        Set Test Variable   ${response}    ${resp}
+        Should Be Equal     ${resp.status_code}   ${200}
 
 Get Example Of Web Template By Template Id (ECIS)
     [Arguments]         ${template_id}      ${responseFormat}
 
     Create Session      ${SUT}    ${ECISURL}    debug=2
-    ...                 auth=${CREDENTIALS}    verify=True
+						...		verify=True		#auth=${CREDENTIALS}
     &{params}          Create Dictionary      format=${responseFormat}
     ${headers}         Create Dictionary      Accept=application/json
     ...                                       Content-Type=application/xml
@@ -847,7 +860,7 @@ Get Example Of Web Template By Template Id (OPENEHR)
     [Arguments]         ${template_id}      ${responseFormat}
 
     Create Session      ${SUT}    ${baseurl}    debug=2
-    ...                 auth=${CREDENTIALS}    verify=True
+						...		verify=True		#auth=${CREDENTIALS}
     &{params}          Create Dictionary     format=${responseFormat}
     ${headers}         Create Dictionary     Accept=application/json
     ...                                      Content-Type=application/xml
@@ -935,30 +948,38 @@ get versioned composition by uid
 
 # Note: uses REST.GET
 get versioned composition of EHR by UID
-    [Arguments]         ${uid}
+    [Arguments]         ${uid}      ${multitenancy_token}=${None}
     [Documentation]     Gets versioned composition with given uid.
     ...                 DEPENDENCY: `prepare new request session` and keywords that
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
     ...                             and creation of composition, giving its ID as argument
-
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_composition/${uid}
-                        ...         headers={"Accept": "application/json"}
+    &{headers}      Create Dictionary   Accept=application/json
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
+    Create Session      ${SUT}    ${BASEURL}    debug=2
+    ${resp}=            GET On Session           ${SUT}   /ehr/${ehr_id}/versioned_composition/${uid}
+                        ...     expected_status=anything   headers=${headers}
                         Set Test Variable    ${response}    ${resp}
 
 
 get revision history of versioned composition of EHR by UID
-    [Arguments]         ${uid}
+    [Arguments]         ${uid}      ${multitenancy_token}=${None}
     [Documentation]     Gets revision history of versioned composition with given uid.
     ...                 DEPENDENCY: `prepare new request session` and keywords that
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
     ...                             and creation of composition, giving its ID as argument
-
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_composition/${uid}/revision_history
-                        ...         headers={"Accept": "application/json"}
+    &{headers}      Create Dictionary   Accept=application/json
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
+	Create Session      ${SUT}    ${BASEURL}    debug=2
+    ${resp}=            GET On Session           ${SUT}   /ehr/${ehr_id}/versioned_composition/${uid}/revision_history
+                        ...     expected_status=anything   headers=${headers}
                         Set Test Variable    ${response}    ${resp}
                         Log     ${response}
 
@@ -981,32 +1002,40 @@ get version of versioned composition of EHR by UID and time
 
 
 get version of versioned composition of EHR by UID
-    [Arguments]         ${versioned_object_uid}    ${version_uid}
+    [Arguments]         ${versioned_object_uid}    ${version_uid}   ${multitenancy_token}=${None}
     [Documentation]     Gets composition with given version UID
     ...                 DEPENDENCY: `prepare new request session` and keywords that
     ...                             create and expose an `ehr_id` e.g.
     ...                             - `create new EHR`
     ...                             - `generate random ehr_id`
     ...                             and creation of composition, giving its ID as argument
-
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_composition/${versioned_object_uid}/version/${version_uid}
-                        ...         headers={"Accept": "application/json"}
+    &{headers}      Create Dictionary   Accept=application/json
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
+    ${resp}=            GET On Session           ${SUT}
+                        ...     /ehr/${ehr_id}/versioned_composition/${versioned_object_uid}/version/${version_uid}
+                        ...     expected_status=anything   headers=${headers}
                         Set Test Variable    ${response}    ${resp}
 
 
 # internal only, do not call from outside. use "get version of versioned composition of EHR by UID and time" instead
 internal get version of versioned composition of EHR by UID and time with query
     [Arguments]         ${uid}
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_composition/${uid}/version    ${query}
-                        ...         headers={"Accept": "application/json"}
+    &{headers}          Create Dictionary       Accept=application/json
+    ${resp}=            GET On Session           ${SUT}
+                        ...     /ehr/${ehr_id}/versioned_composition/${uid}/version     params=${query}
+                        ...     expected_status=anything   headers=${headers}
                         Set Test Variable    ${response}    ${resp}
 
 
 # internal only, do not call from outside. use "get version of versioned composition of EHR by UID and time" instead
 internal get version of versioned composition of EHR by UID and time without query
     [Arguments]         ${uid}
-    &{resp}=            REST.GET    ${baseurl}/ehr/${ehr_id}/versioned_composition/${uid}/version
-                        ...         headers={"Accept": "application/json"}
+    &{headers}          Create Dictionary       Accept=application/json
+    ${resp}=            GET On Session           ${SUT}
+                        ...     /ehr/${ehr_id}/versioned_composition/${uid}/version
+                        ...     expected_status=anything   headers=${headers}
                         Set Test Variable    ${response}    ${resp}
 
 # get versioned composition by version_uid
@@ -1036,7 +1065,9 @@ get composition - latest version
     ...                 format: JSON or XML for accept/content headers
 
                         prepare new request session    ${format}    Prefer=return=representation
-    ${resp}=            GET On Session           ${SUT}   /ehr/${ehr_id}/versioned_composition/${versioned_object_uid}/version    expected_status=anything   headers=${headers}
+    ${resp}=            GET On Session           ${SUT}
+                        ...     /ehr/${ehr_id}/versioned_composition/${versioned_object_uid}/version
+                        ...     expected_status=anything   headers=${headers}
                         log to console        ${resp.text}
                         Set Test Variable     ${response}    ${resp}
 
@@ -1206,15 +1237,19 @@ delete composition
     [Arguments]         ${uid}      ${ehrScape}=false       ${multitenancy_token}=${None}
     [Documentation]     :uid: preceding_version_uid (format of version_uid)
 
+    IF     '${multitenancy_token}' != '${None}'
+            Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
+    END
+
     IF      '${ehrScape}' == 'false'
-        ${resp}     Delete On Session   ${SUT}   /ehr/${ehr_id}/composition/${uid}   expected_status=anything
+        ${resp}     Delete On Session   ${SUT}   /ehr/${ehr_id}/composition/${uid}   expected_status=anything   headers=${headers}
         Status Should Be    204
                             # the ETag comes with quotes, this removes them
         ${del_version_uid}      Get Substring           ${resp.headers['ETag']}    1    -1
         log to console          \ndeleted version uid:  ${del_version_uid}
         Set Test Variable       ${del_version_uid}      ${del_version_uid}
     ELSE
-        ${resp}     Delete On Session   ${SUT}   /composition/${uid}   expected_status=anything
+        ${resp}     Delete On Session   ${SUT}   /composition/${uid}   expected_status=anything     headers=${headers}
         Status Should Be    200
 
     END
@@ -1372,7 +1407,7 @@ capture point in time
     ...                 e.g. 2015-01-20T19:30:22.765+01:00
     ...                 s. http://robotframework.org/robotframework/latest/libraries/DateTime.html
     ...                 for DateTime Library docs
-                        Sleep    1   # gives DB some time to finish it's operation
+                        Sleep    0.5   # gives DB some time to finish it's operation
     ${zone}=            Set Suite Variable    ${time_zone}    ${{ tzlocal.get_localzone() }}
     ${time}=            Set Variable    ${{ datetime.datetime.now(tz=tzlocal.get_localzone()).isoformat() }}
     ${offset}=          Set Suite Variable    ${utc_offset}    ${time}[-6:]
@@ -1386,7 +1421,7 @@ create EHR and commit a composition for versioned composition tests
 
     prepare new request session    JSON    Prefer=return=representation
     create new EHR
-    Should Be Equal As Strings    ${response.status}    201
+    Status Should Be    201
 
     Upload OPT    minimal/minimal_observation.opt
     commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.xml
@@ -1394,7 +1429,7 @@ create EHR and commit a composition for versioned composition tests
 
 update a composition for versioned composition tests
     [Documentation]     Updates a pre-set composition to alter a versioned test environment.
-    ...                 Requires `${compo_uid_v1}` or to be run after the `create EHR and commit a composition 
+    ...                 Requires `${compo_uid_v1}` or to be run after the `create EHR and commit a composition
     ...                 for versioned composition tests` keyword.
 
     update composition (JSON)   minimal/minimal_observation.composition.participations.extdatetimes.v2.xml

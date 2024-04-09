@@ -1,0 +1,35 @@
+{
+  "q": "SELECT c/${path} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.conformance_cluster.v0]",
+  "columns": [
+    {
+      "path": "c/${path}",
+      "name": "#0"
+    }
+  ],
+  "rows": [
+        [
+			null
+		],
+		[
+			null
+		],
+		[
+			{
+				"_type": "DV_IDENTIFIER",
+				"issuer": "issuer1",
+				"assigner": "assigner1",
+				"id": "id1",
+				"type": "PERSON"
+			}
+		],
+		[
+			{
+				"_type": "DV_IDENTIFIER",
+				"issuer": "issuer2",
+				"assigner": "assigner2",
+				"id": "id2",
+				"type": "PERSON"
+			}
+		]
+  ]
+}

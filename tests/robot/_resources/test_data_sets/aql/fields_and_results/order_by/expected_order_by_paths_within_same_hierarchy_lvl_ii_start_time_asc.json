@@ -1,0 +1,23 @@
+{
+	"q": "SELECT ${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec ORDER BY ${path} ${order}",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "DV_DATE_TIME",
+				"value": "2021-12-21T14:19:31.649613+01:00"
+			}
+		],
+		[
+			{
+				"_type": "DV_DATE_TIME",
+				"value": "2022-12-21T14:19:31.649613+01:00"
+			}
+		]
+	]
+}

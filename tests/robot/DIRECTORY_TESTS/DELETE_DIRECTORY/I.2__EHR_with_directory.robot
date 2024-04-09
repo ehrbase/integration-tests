@@ -32,6 +32,8 @@ Metadata        TOP_TEST_SUITE    DIRECTORY
 
 Resource        ../../_resources/keywords/directory_keywords.robot
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 #Suite Setup  startup SUT
 # Test Setup  start openehr server
@@ -52,3 +54,4 @@ Alternative flow 1: delete directory from EHR with directory
     delete DIRECTORY (JSON)
 
     validate DELETE response - 204 deleted
+     [Teardown]    (admin) delete ehr

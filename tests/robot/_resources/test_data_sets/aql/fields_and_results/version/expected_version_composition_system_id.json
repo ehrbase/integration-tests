@@ -1,0 +1,30 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-06T15:11:29.1454569+02:00",
+		"_executed_aql": "SELECT cv/commit_audit/system_id FROM VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.persistent_minimal.v1] WHERE cv/commit_audit/system_id > 'local.'",
+		"resultsize": 4
+	},
+	"q": "SELECT cv/commit_audit/system_id FROM VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.persistent_minimal.v1] WHERE cv/commit_audit/system_id > 'local.'",
+	"columns": [
+		{
+			"path": "cv/commit_audit/system_id",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"local.ehrbase.org"
+		],
+		[
+			"local.ehrbase.org"
+		],
+		[
+			"local.ehrbase.org"
+		],
+		[
+			"local.ehrbase.org"
+		]
+	]
+}

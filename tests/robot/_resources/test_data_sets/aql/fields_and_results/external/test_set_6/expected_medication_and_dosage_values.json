@@ -1,0 +1,23 @@
+{
+	"q": "SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value AS medication, i/activities[at0001]/description[at0002]/items[at0009]/value/value AS dosage FROM EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i[openEHR-EHR-INSTRUCTION.medication_order.v3] WHERE (c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value = '${ehr_id}')",
+	"columns": [
+		{
+			"path": "i/activities[at0001]/description[at0002]/items[at0070]/value/value",
+			"name": "medication"
+		},
+		{
+			"path": "i/activities[at0001]/description[at0002]/items[at0009]/value/value",
+			"name": "dosage"
+		}
+	],
+	"rows": [
+		[
+			"Dolo",
+			"1-1-1"
+		],
+		[
+			"Augmentin",
+			"1-0-1"
+		]
+	]
+}

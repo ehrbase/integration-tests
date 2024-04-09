@@ -1,0 +1,133 @@
+{
+    "family_history": {
+        "category": [
+            {
+                "|terminology": "openehr",
+                "|code": "433",
+                "|value": "event"
+            }
+        ],
+        "context": [
+            {
+                "start_time": [
+                    "2022-02-03T04:05:06"
+                ],
+                "setting": [
+                    {
+                        "|code": "225",
+                        "|terminology": "openehr",
+                        "|value": "home"
+                    }
+                ],
+                "_end_time": [
+                    "2022-02-03T04:05:06"
+                ],
+                "_health_care_facility": [
+                    {
+                        "|name": "DOE, John"
+                    }
+                ]
+            }
+        ],
+        "family_history": [
+            {
+                "per_family_member": [
+                    {
+                        "family_member_name": [
+                            "Lorem ipsum"
+                        ],
+                        "biological_sex": [
+                            {
+                                "|code": "248152002",
+                                "|terminology": "SNOMED-CT",
+                                "|value": "Female"
+                            }
+                        ],
+                        "relationship": [
+                            {
+                                "|terminology": "SNOMED-CT",
+                                "|code": "444301002",
+                                "|value": "Mother"
+                            }
+                        ],
+                        "date_of_birth": [
+                            "2022-02-03T04:05:06"
+                        ],
+                        "deceased": [
+                            true
+                        ],
+                        "date_of_death": [
+                            "2022-02-03T04:05:06"
+                        ],
+                        "clinical_history": [
+                            {
+                                "problem_diagnosis_name": [
+                                    {
+                                        "|value": "No example for terminology '//fhir.hl7.org/ValueSet/$expand?url=http://hl7.org/fhir/ValueSet/condition-code' available",
+                                        "|terminology": "//fhir.hl7.org/ValueSet/$expand?url=http://hl7.org/fhir/ValueSet/condition-code",
+                                        "|code": "42"
+                                    }
+                                ],
+                                "age_at_onset": [
+                                    "PT0S"
+                                ],
+                                "cause_of_death": [
+                                    {
+                                        "|value": "Direct cause or closely related",
+                                        "|terminology": "local",
+                                        "|code": "at0061"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "language": [
+                    {
+                        "|terminology": "ISO_639-1",
+                        "|code": "en"
+                    }
+                ],
+                "encoding": [
+                    {
+                        "|code": "UTF-8",
+                        "|terminology": "IANA_character-sets"
+                    }
+                ],
+                "_work_flow_id": [
+                    {
+                        "|id": "9e122133-6589-3cfc-a96d-b33785d5f103",
+                        "|id_scheme": "scheme",
+                        "|namespace": "unknown",
+                        "|type": "ANY"
+                    }
+                ],
+                "_guideline_id": [
+                    {
+                        "|id": "6f608111-0960-305a-9bea-8306d1e240e4",
+                        "|id_scheme": "scheme",
+                        "|namespace": "unknown",
+                        "|type": "ANY"
+                    }
+                ]
+            }
+        ],
+        "language": [
+            {
+                "|code": "en",
+                "|terminology": "ISO_639-1"
+            }
+        ],
+        "territory": [
+            {
+                "|terminology": "ISO_3166-1",
+                "|code": "DE"
+            }
+        ],
+        "composer": [
+            {
+                "|name": "Max Mustermann"
+            }
+        ]
+    }
+}

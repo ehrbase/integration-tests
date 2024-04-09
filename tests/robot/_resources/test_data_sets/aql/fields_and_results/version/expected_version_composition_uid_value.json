@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-06T15:06:43.6571956+02:00",
+		"_executed_aql": "SELECT cv/uid/value FROM VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.persistent_minimal.v1] WHERE cv/uid/value = '6ffb6d2d-1ca9-4a1c-8880-71a88e2f55b0::local.ehrbase.org::3' ORDER BY cv/uid/value ASC",
+		"resultsize": 1
+	},
+	"q": "SELECT cv/uid/value FROM VERSION cv[LATEST_VERSION] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.persistent_minimal.v1] WHERE cv/uid/value = '6ffb6d2d-1ca9-4a1c-8880-71a88e2f55b0::local.ehrbase.org::3' ORDER BY cv/uid/value ASC",
+	"columns": [
+		{
+			"path": "cv/uid/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"${compo_uid_2_v3}"
+		]
+	]
+}

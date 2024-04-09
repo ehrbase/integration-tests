@@ -1,0 +1,30 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-07T17:27:45.6802256+02:00",
+		"_executed_aql": "SELECT s/subject/external_ref FROM EHR e CONTAINS EHR_STATUS s",
+		"resultsize": 1
+	},
+	"q": "SELECT s/subject/external_ref FROM EHR e CONTAINS EHR_STATUS s",
+	"columns": [
+		{
+			"path": "s/subject/external_ref",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "PARTY_REF",
+				"namespace": "${ehr_status_subject_namespace}",
+				"type": "PERSON",
+				"id": {
+					"_type": "GENERIC_ID",
+					"value": "${ehr_status_subject_id}",
+					"scheme": "id_scheme"
+				}
+			}
+		]
+	]
+}

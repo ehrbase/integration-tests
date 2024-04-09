@@ -1,0 +1,13 @@
+{
+	"q": "SELECT '3e102' FROM EHR",
+	"columns": [
+		{
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"3e102"
+		]
+	]
+}

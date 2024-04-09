@@ -1,0 +1,47 @@
+{
+	"q": "SELECT DISTINCT o/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0004]/value/value, o/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005]/value/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.symptom_sign_screening.v0] ORDER BY o/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0004]/value/value ASC, o/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005]/value/value ASC",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0004]/value/value",
+			"name": "#0"
+		},
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005]/value/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"Durchfall",
+			"Nicht vorhanden"
+		],
+		[
+			"Fieber oder erhöhte Körpertemperatur",
+			"Vorhanden"
+		],
+		[
+			"Heiserkeit",
+			"Nicht vorhanden"
+		],
+		[
+			"Husten",
+			"Nicht vorhanden"
+		],
+		[
+			"Husten",
+			"Vorhanden"
+		],
+		[
+			"Schnupfen",
+			"Vorhanden"
+		],
+		[
+			"gestörter Geruchssinn",
+			"Nicht vorhanden"
+		],
+		[
+			"gestörter Geschmackssinn",
+			"Nicht vorhanden"
+		]
+	]
+}

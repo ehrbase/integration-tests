@@ -1,0 +1,726 @@
+{
+	"_type": "COMPOSITION",
+	"name": {
+		"_type": "DV_TEXT",
+		"value": "conformance-ehrbase.de.v0"
+	},
+	"archetype_details": {
+		"archetype_id": {
+			"value": "openEHR-EHR-COMPOSITION.conformance_composition_.v0"
+		},
+		"template_id": {
+			"value": "conformance-ehrbase.de.v0"
+		},
+		"rm_version": "1.0.4"
+	},
+	"feeder_audit": {
+		"_type": "FEEDER_AUDIT",
+		"originating_system_item_ids": [
+			{
+				"_type": "DV_IDENTIFIER",
+				"issuer": "issuer1",
+				"assigner": "assigner1",
+				"id": "id1",
+				"type": "PERSON"
+			},
+			{
+				"_type": "DV_IDENTIFIER",
+				"issuer": "issuer2",
+				"assigner": "assigner2",
+				"id": "id2",
+				"type": "PERSON"
+			}
+		],
+		"feeder_system_item_ids": [
+			{
+				"_type": "DV_IDENTIFIER",
+				"issuer": "issuer1",
+				"assigner": "assigner1",
+				"id": "id1",
+				"type": "PERSON"
+			},
+			{
+				"_type": "DV_IDENTIFIER",
+				"issuer": "issuer2",
+				"assigner": "assigner2",
+				"id": "id2",
+				"type": "PERSON"
+			}
+		],
+		"original_content": {
+			"_type": "DV_PARSABLE",
+			"value": "Hello world!",
+			"formalism": "text/plain"
+		},
+		"originating_system_audit": {
+			"_type": "FEEDER_AUDIT_DETAILS",
+			"system_id": "orig",
+			"location": {
+				"_type": "PARTY_IDENTIFIED",
+				"external_ref": {
+					"_type": "PARTY_REF",
+					"namespace": "uk.org.nmc",
+					"type": "PARTY",
+					"id": {
+						"_type": "GENERIC_ID",
+						"value": "12342341",
+						"scheme": "NMC"
+					}
+				},
+				"name": "Org 1"
+			},
+			"provider": {
+				"_type": "PARTY_IDENTIFIED",
+				"external_ref": {
+					"_type": "PARTY_REF",
+					"namespace": "uk.org.nmc",
+					"type": "PARTY",
+					"id": {
+						"_type": "GENERIC_ID",
+						"value": "456",
+						"scheme": "NMC"
+					}
+				},
+				"name": "Per 1"
+			},
+			"subject": {
+				"_type": "PARTY_IDENTIFIED",
+				"external_ref": {
+					"_type": "PARTY_REF",
+					"namespace": "uk.org.nmc",
+					"type": "PARTY",
+					"id": {
+						"_type": "GENERIC_ID",
+						"value": "456",
+						"scheme": "NMC"
+					}
+				},
+				"name": "Per 1"
+			},
+			"time": {
+				"_type": "DV_DATE_TIME",
+				"value": "2021-12-21T16:02:58.0094262+01:00"
+			},
+			"version_id": "final"
+		},
+		"feeder_system_audit": {
+			"_type": "FEEDER_AUDIT_DETAILS",
+			"system_id": "orig",
+			"location": {
+				"_type": "PARTY_IDENTIFIED",
+				"external_ref": {
+					"_type": "PARTY_REF",
+					"namespace": "uk.org.nmc",
+					"type": "PARTY",
+					"id": {
+						"_type": "GENERIC_ID",
+						"value": "12342341",
+						"scheme": "NMC"
+					}
+				},
+				"name": "Org 1"
+			},
+			"provider": {
+				"_type": "PARTY_IDENTIFIED",
+				"external_ref": {
+					"_type": "PARTY_REF",
+					"namespace": "uk.org.nmc",
+					"type": "PARTY",
+					"id": {
+						"_type": "GENERIC_ID",
+						"value": "456",
+						"scheme": "NMC"
+					}
+				},
+				"name": "Per 1"
+			},
+			"subject": {
+				"_type": "PARTY_IDENTIFIED",
+				"external_ref": {
+					"_type": "PARTY_REF",
+					"namespace": "uk.org.nmc",
+					"type": "PARTY",
+					"id": {
+						"_type": "GENERIC_ID",
+						"value": "456",
+						"scheme": "NMC"
+					}
+				},
+				"name": "Per 1"
+			},
+			"time": {
+				"_type": "DV_DATE_TIME",
+				"value": "2021-12-21T16:02:58.0094262+01:00"
+			},
+			"version_id": "final"
+		}
+	},
+	"language": {
+		"_type": "CODE_PHRASE",
+		"terminology_id": {
+			"_type": "TERMINOLOGY_ID",
+			"value": "ISO_639-1"
+		},
+		"code_string": "en"
+	},
+	"territory": {
+		"_type": "CODE_PHRASE",
+		"terminology_id": {
+			"_type": "TERMINOLOGY_ID",
+			"value": "ISO_3166-1"
+		},
+		"code_string": "US"
+	},
+	"category": {
+		"_type": "DV_CODED_TEXT",
+		"value": "event",
+		"defining_code": {
+			"_type": "CODE_PHRASE",
+			"terminology_id": {
+				"_type": "TERMINOLOGY_ID",
+				"value": "openehr"
+			},
+			"code_string": "433"
+		}
+	},
+	"composer": {
+		"_type": "PARTY_IDENTIFIED",
+		"external_ref": {
+			"_type": "PARTY_REF",
+			"namespace": "EHR.NETWORK",
+			"type": "PARTY",
+			"id": {
+				"_type": "GENERIC_ID",
+				"value": "1234-5677",
+				"scheme": "UUID"
+			}
+		},
+		"name": "Anton Blake"
+	},
+	"context": {
+		"_type": "EVENT_CONTEXT",
+		"start_time": {
+			"_type": "DV_DATE_TIME",
+			"value": "2021-12-21T14:19:31.649613+01:00"
+		},
+		"end_time": {
+			"_type": "DV_DATE_TIME",
+			"value": "2021-12-21T15:19:31.649613+01:00"
+		},
+		"location": "microbiology lab 2",
+		"setting": {
+			"_type": "DV_CODED_TEXT",
+			"value": "other care",
+			"defining_code": {
+				"_type": "CODE_PHRASE",
+				"terminology_id": {
+					"_type": "TERMINOLOGY_ID",
+					"value": "openehr"
+				},
+				"code_string": "238"
+			}
+		},
+		"health_care_facility": {
+			"_type": "PARTY_IDENTIFIED",
+			"external_ref": {
+				"_type": "PARTY_REF",
+				"namespace": "HOSPITAL-NS",
+				"type": "PARTY",
+				"id": {
+					"_type": "GENERIC_ID",
+					"value": "9090",
+					"scheme": "HOSPITAL-NS"
+				}
+			},
+			"name": "Hospital 1"
+		},
+		"participations": [
+			{
+				"_type": "PARTICIPATION",
+				"function": {
+					"_type": "DV_TEXT",
+					"value": "requester"
+				},
+				"mode": {
+					"_type": "DV_CODED_TEXT",
+					"value": "face-to-face communication",
+					"defining_code": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "openehr"
+						},
+						"code_string": "216"
+					}
+				},
+				"performer": {
+					"_type": "PARTY_IDENTIFIED",
+					"external_ref": {
+						"_type": "PARTY_REF",
+						"namespace": "HOSPITAL-NS",
+						"type": "PARTY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "199",
+							"scheme": "HOSPITAL-NS"
+						}
+					},
+					"name": "Dr. Marcus Johnson",
+					"identifiers": [
+						{
+							"_type": "DV_IDENTIFIER",
+							"issuer": "issuer",
+							"assigner": "assigner",
+							"id": "200",
+							"type": "type"
+						},
+						{
+							"_type": "DV_IDENTIFIER",
+							"issuer": "issuer",
+							"assigner": "assigner",
+							"id": "201",
+							"type": "type"
+						}
+					]
+				}
+			},
+			{
+				"_type": "PARTICIPATION",
+				"function": {
+					"_type": "DV_TEXT",
+					"value": "requester"
+				},
+				"mode": {
+					"_type": "DV_CODED_TEXT",
+					"value": "face-to-face communication",
+					"defining_code": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "openehr"
+						},
+						"code_string": "216"
+					}
+				},
+				"performer": {
+					"_type": "PARTY_IDENTIFIED",
+					"external_ref": {
+						"_type": "PARTY_REF",
+						"namespace": "HOSPITAL-NS",
+						"type": "PARTY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "200",
+							"scheme": "HOSPITAL-NS"
+						}
+					},
+					"name": "Dr. Stefan Mann",
+					"identifiers": [
+						{
+							"_type": "DV_IDENTIFIER",
+							"issuer": "issuer",
+							"assigner": "assigner",
+							"id": "202",
+							"type": "type"
+						},
+						{
+							"_type": "DV_IDENTIFIER",
+							"issuer": "issuer",
+							"assigner": "assigner",
+							"id": "203",
+							"type": "type"
+						}
+					]
+				}
+			}
+		]
+	},
+	"content": [
+		{
+			"_type": "SECTION",
+			"name": {
+				"_type": "DV_TEXT",
+				"value": "conformance section"
+			},
+			"items": [
+				{
+					"_type": "OBSERVATION",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "Conformance Observation"
+					},
+					"archetype_details": {
+						"archetype_id": {
+							"value": "openEHR-EHR-OBSERVATION.conformance_observation.v0"
+						},
+						"rm_version": "1.0.4"
+					},
+					"language": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "ISO_639-1"
+						},
+						"code_string": "en"
+					},
+					"encoding": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "IANA_character-sets"
+						},
+						"code_string": "UTF-8"
+					},
+					"subject": {
+						"_type": "PARTY_RELATED",
+						"identifiers": [
+							{
+								"_type": "DV_IDENTIFIER",
+								"issuer": "issuer",
+								"assigner": "assigner",
+								"id": "200",
+								"type": "type"
+							},
+							{
+								"_type": "DV_IDENTIFIER",
+								"issuer": "issuer",
+								"assigner": "assigner",
+								"id": "123",
+								"type": "type"
+							}
+						],
+						"relationship": {
+							"_type": "DV_CODED_TEXT",
+							"value": "mother",
+							"defining_code": {
+								"_type": "CODE_PHRASE",
+								"terminology_id": {
+									"_type": "TERMINOLOGY_ID",
+									"value": "openehr"
+								},
+								"code_string": "10"
+							}
+						}
+					},
+					"other_participations": [
+						{
+							"_type": "PARTICIPATION",
+							"function": {
+								"_type": "DV_TEXT",
+								"value": "requester"
+							},
+							"mode": {
+								"_type": "DV_CODED_TEXT",
+								"value": "face-to-face communication",
+								"defining_code": {
+									"_type": "CODE_PHRASE",
+									"terminology_id": {
+										"_type": "TERMINOLOGY_ID",
+										"value": "openehr"
+									},
+									"code_string": "216"
+								}
+							},
+							"performer": {
+								"_type": "PARTY_IDENTIFIED",
+								"external_ref": {
+									"_type": "PARTY_REF",
+									"namespace": "HOSPITAL-NS",
+									"type": "PARTY",
+									"id": {
+										"_type": "GENERIC_ID",
+										"value": "199",
+										"scheme": "HOSPITAL-NS"
+									}
+								},
+								"name": "Dr. Marcus Johnson"
+							}
+						},
+						{
+							"_type": "PARTICIPATION",
+							"function": {
+								"_type": "DV_TEXT",
+								"value": "performer"
+							},
+							"mode": {
+								"_type": "DV_CODED_TEXT",
+								"value": "not specified",
+								"defining_code": {
+									"_type": "CODE_PHRASE",
+									"terminology_id": {
+										"_type": "TERMINOLOGY_ID",
+										"value": "openehr"
+									},
+									"code_string": "193"
+								}
+							},
+							"performer": {
+								"_type": "PARTY_IDENTIFIED",
+								"external_ref": {
+									"_type": "PARTY_REF",
+									"namespace": "HOSPITAL-NS",
+									"type": "PARTY",
+									"id": {
+										"_type": "GENERIC_ID",
+										"value": "198",
+										"scheme": "HOSPITAL-NS"
+									}
+								},
+								"name": "Lara Markham"
+							}
+						}
+					],
+					"data": {
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "History"
+						},
+						"origin": {
+							"_type": "DV_DATE_TIME",
+							"value": "2021-02-03T04:05:06"
+						},
+						"events": [
+							{
+								"_type": "INTERVAL_EVENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Any event"
+								},
+								"time": {
+									"_type": "DV_DATE_TIME",
+									"value": "2021-02-03T04:05:06"
+								},
+								"data": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Tree"
+									},
+									"items": [
+										{
+											"_type": "ELEMENT",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "DV_TEXT"
+											},
+											"value": {
+												"_type": "DV_TEXT",
+												"value": "Lorem ipsum",
+												"formatting": "plain",
+												"mappings": [
+													{
+														"_type": "TERM_MAPPING",
+														"match": "=",
+														"purpose": {
+															"_type": "DV_CODED_TEXT",
+															"value": "research study",
+															"defining_code": {
+																"_type": "CODE_PHRASE",
+																"terminology_id": {
+																	"_type": "TERMINOLOGY_ID",
+																	"value": "openehr"
+																},
+																"code_string": "671"
+															}
+														},
+														"target": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "SNOMED-CT"
+															},
+															"code_string": "21794005"
+														}
+													},
+													{
+														"_type": "TERM_MAPPING",
+														"match": ">",
+														"purpose": {
+															"_type": "DV_CODED_TEXT",
+															"value": "research study",
+															"defining_code": {
+																"_type": "CODE_PHRASE",
+																"terminology_id": {
+																	"_type": "TERMINOLOGY_ID",
+																	"value": "openehr"
+																},
+																"code_string": "671"
+															}
+														},
+														"target": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "SNOMED-CT"
+															},
+															"code_string": "21794007"
+														}
+													}
+												],
+												"language": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "ISO_639-1"
+													},
+													"code_string": "en",
+													"preferred_term": "English"
+												},
+												"encoding": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "IANA_character-sets"
+													},
+													"code_string": "UTF-8"
+												}
+											},
+											"archetype_node_id": "at0004"
+										},
+										{
+											"_type": "ELEMENT",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "DV_COUNT"
+											},
+											"value": {
+												"_type": "DV_COUNT",
+												"normal_status": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "openehr_normal_statuses"
+													},
+													"code_string": "N"
+												},
+												"normal_range": {
+													"_type": "DV_INTERVAL",
+													"lower_included": true,
+													"upper_included": true,
+													"lower_unbounded": false,
+													"upper_unbounded": false,
+													"lower": {
+														"_type": "DV_COUNT",
+														"magnitude": 1
+													},
+													"upper": {
+														"_type": "DV_COUNT",
+														"magnitude": 8
+													}
+												},
+												"other_reference_ranges": [
+													{
+														"_type": "REFERENCE_RANGE",
+														"range": {
+															"_type": "DV_INTERVAL",
+															"lower_included": true,
+															"upper_included": true,
+															"lower_unbounded": false,
+															"upper_unbounded": false,
+															"lower": {
+																"_type": "DV_COUNT",
+																"magnitude": 8
+															},
+															"upper": {
+																"_type": "DV_COUNT",
+																"magnitude": 10
+															}
+														},
+														"meaning": {
+															"_type": "DV_TEXT",
+															"value": "high"
+														}
+													},
+													{
+														"_type": "REFERENCE_RANGE",
+														"range": {
+															"_type": "DV_INTERVAL",
+															"lower_included": true,
+															"upper_included": true,
+															"lower_unbounded": false,
+															"upper_unbounded": false,
+															"lower": {
+																"_type": "DV_COUNT",
+																"magnitude": 11
+															},
+															"upper": {
+																"_type": "DV_COUNT",
+																"magnitude": 12
+															}
+														},
+														"meaning": {
+															"_type": "DV_TEXT",
+															"value": "very high"
+														}
+													}
+												],
+												"magnitude_status": "~",
+												"accuracy": 50.5,
+												"accuracy_is_percent": true,
+												"magnitude": 7
+											},
+											"archetype_node_id": "at0010"
+										}
+									],
+									"archetype_node_id": "at0003"
+								},
+								"width": {
+									"_type": "DV_DURATION",
+									"value": "P40D"
+								},
+								"sample_count": 5,
+								"math_function": {
+									"_type": "DV_CODED_TEXT",
+									"value": "mean",
+									"defining_code": {
+										"_type": "CODE_PHRASE",
+										"terminology_id": {
+											"_type": "TERMINOLOGY_ID",
+											"value": "openehr"
+										},
+										"code_string": "146"
+									}
+								},
+								"archetype_node_id": "at0002"
+							}
+						],
+						"archetype_node_id": "at0001"
+					},
+					"archetype_node_id": "openEHR-EHR-OBSERVATION.conformance_observation.v0"
+				}
+			],
+			"archetype_node_id": "openEHR-EHR-SECTION.conformance_section.v0"
+		}
+	],
+	"archetype_node_id": "openEHR-EHR-COMPOSITION.conformance_composition_.v0",
+	"links": [
+		{
+			"meaning": {
+				"_type": "DV_TEXT",
+				"value": "problem related note"
+			},
+			"type": {
+				"_type": "DV_TEXT",
+				"value": "problem"
+			},
+			"target": {
+				"_type": "DV_EHR_URI",
+				"value": "ehr://ehr.network/347a5490-55ee-4da9-b91a-9bba710f730e"
+			}
+		},
+		{
+			"meaning": {
+				"_type": "DV_TEXT",
+				"value": "problem related note 2"
+			},
+			"type": {
+				"_type": "DV_TEXT",
+				"value": "problem 2"
+			},
+			"target": {
+				"_type": "DV_EHR_URI",
+				"value": "ehr://ehr.network/347a5490-55ee-4da9-b91a-9bba710f730b"
+			}
+		}
+	]
+}

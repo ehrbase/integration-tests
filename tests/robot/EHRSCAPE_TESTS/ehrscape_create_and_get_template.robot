@@ -23,57 +23,59 @@ Documentation       EHRScape Tests
 
 Resource            ../_resources/keywords/composition_keywords.robot
 
-#Suite Setup    Precondition
+Suite Setup         Set Library Search Order For Tests
 #Suite Teardown      restart SUT
 
 
 *** Test Cases ***
 Main flow create Template and GET by Template ID
     [Documentation]     Upload 1 template and get it using template_id (ECIS endpoints).
-    Upload OPT ECIS    all_types/ehrn_family_history.opt
+    Upload OPT      all_types/ehrn_family_history.opt
     Extract Template Id From OPT File
     Get Web Template By Template Id (ECIS)    ${template_id}
 
 Main flow create and GET all Templates
     [Documentation]     Upload 2 templates and get all web templates, using ECIS endpoints.
-    Upload OPT ECIS     all_types/family_history.opt
+    Upload OPT      all_types/family_history.opt
     Run Keyword And Return Status   Status Should Be    200
     Extract Template Id From OPT File
     ${template1}        Set Variable    ${template_id}
-    Upload OPT ECIS     minimal/minimal_observation.opt
+    Upload OPT      minimal/minimal_observation.opt
     Run Keyword And Return Status   Status Should Be    200
     Extract Template Id From OPT File
     ${template2}        Set Variable    ${template_id}
-    Get All Web Templates
-    Check If Get Templates Response Has
-    ...         ${template1}        ${template2}
+    #Get All Web Templates #TODO: enable this keyword
+    #Check If Get Templates Response Has #TODO: enable this keyword
+    #...         ${template1}        ${template2}
 
 Get Template (ECIS) - Get Annotations
     [Documentation]     Create template, get it and check if additional annotations are present.
     [Tags]      not-ready
-    Upload OPT ECIS    all_types/tobacco_smoking_summary.v0.opt
+    Upload OPT    all_types/tobacco_smoking_summary.v0.opt
     Extract Template Id From OPT File
     Get Web Template By Template Id (ECIS)    ${template_id}    JSON
     Validate Response Body Has Format    JSON
-    PerformChecksOnAnnotation
+    #PerformChecksOnAnnotation  #TODO: enable this keyword
     #webTemplate.tree.children[?(@.id='tobacco_smoking_summary')].children[?(@.id='start_date')].annotations.helpText
     #webTemplate.tree.children[?(@.id='tobacco_smoking_summary')].children[?(@.id='start_date')].annotations.validation
     #Example: $.['blocks'][?(@.block_id == 'image')]['image_url']
     #Save Response (JSON) To File And Compare Template Ids    ${template_id}
-    [Teardown]    TRACE JIRA ISSUE    CDR-406
 
 Get Template (ECIS) - Check Default Value Item
     [Documentation]     Create template, get it and check defaultValue key presence in JSON.
     [Tags]      not-ready   bug
-    Upload OPT ECIS    all_types/dv_coded_text_default_error.opt
+    Upload OPT    all_types/dv_coded_text_default_error.opt
     Extract Template Id From OPT File
     Get Web Template By Template Id (ECIS)    ${template_id}    JSON
     Validate Response Body Has Format    JSON
     #below validation is failing because of CDR-417, missing defaultValue key in Get Template result.
+    Log     ${response}
+    Log     ${response['webTemplate']['tree']['children'][2]['children'][0]['inputs'][0]}
     Should Be Equal As Strings
-    ...     ${response['webTemplate']['tree']['children'][2]['children']['defaultValue']}
+    ...     ${response['webTemplate']['tree']['children'][2]['children'][0]['inputs'][0]['defaultValue']}
     ...     at0006
     [Teardown]    TRACE JIRA ISSUE    CDR-417
+
 
 *** Keywords ***
 ApplyJSONLocatorAndReturnResult

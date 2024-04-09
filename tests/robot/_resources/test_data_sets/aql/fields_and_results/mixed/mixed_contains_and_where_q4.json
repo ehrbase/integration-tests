@@ -1,0 +1,39 @@
+{
+	"q": "SELECT s1/feeder_audit/originating_system_item_ids/id, s2/feeder_audit/originating_system_item_ids/id, o/feeder_audit/originating_system_item_ids/id, v/time/value, c1/items[at0001]/value/value, l/value/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s1 CONTAINS SECTION s2 CONTAINS OBSERVATION o CONTAINS EVENT v CONTAINS CLUSTER c1 CONTAINS CLUSTER c2 CONTAINS ELEMENT l WHERE (s1/feeder_audit/originating_system_item_ids/id = 'ad_hoc_heading 2' AND s2/feeder_audit/originating_system_item_ids/id = 'conformance_section 4' AND v/time/value = '2024-02-03T04:05:06' AND l/value/value = 'cluster outer text16')",
+	"columns": [
+		{
+			"path": "s1/feeder_audit/originating_system_item_ids/id",
+			"name": "#0"
+		},
+		{
+			"path": "s2/feeder_audit/originating_system_item_ids/id",
+			"name": "#1"
+		},
+		{
+			"path": "o/feeder_audit/originating_system_item_ids/id",
+			"name": "#2"
+		},
+		{
+			"path": "v/time/value",
+			"name": "#3"
+		},
+		{
+			"path": "c1/items[at0001]/value/value",
+			"name": "#4"
+		},
+		{
+			"path": "l/value/value",
+			"name": "#5"
+		}
+	],
+	"rows": [
+		[
+			"ad_hoc_heading 2",
+			"conformance_section 4",
+			"observation 4",
+			"2024-02-03T04:05:06",
+			"cluster inter text8",
+			"cluster outer text16"
+		]
+	]
+}

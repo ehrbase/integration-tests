@@ -1,0 +1,17 @@
+{
+	"q": "SELECT c/name/value FROM EHR e CONTAINS COMPOSITION c ORDER BY c/name/value ASC",
+	"columns": [
+		{
+			"path": "c/name/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+            "aql-conformance-ehrbase.org.v0"
+        ],
+        [
+            "type_repetition_conformance_ehrbase.org"
+        ]
+	]
+}

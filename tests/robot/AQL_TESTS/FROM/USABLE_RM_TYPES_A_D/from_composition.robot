@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   CHECK AQL RESPONSE ON FROM COMPOSITION
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/FROM_TEST_SUIT.MD#test-from-composition
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FROM_TEST_SUIT.MD#test-from-composition
 ...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
 ...         - Send AQL 'SELECT t FROM {type} t'
 ...         - {type} can be:
@@ -28,6 +28,7 @@ Test From Composition: SELECT t FROM ${type} t
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Create EHR For AQL
     Commit Composition For AQL      conformance_ehrbase.de.v0_max.json
@@ -38,8 +39,12 @@ Execute Query
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
-    ${exclude_paths}    Create List    root['rows'][0][0]['uid']
-    Length Should Be    ${resp_body['rows']}     1
+    ${exclude_paths}    Create List    root['rows'][0][0]['uid']    root['q']   root['meta']
+    IF      '${query}' != 'SELECT t FROM ELEMENT t'
+        Length Should Be    ${resp_body['rows']}     1
+    ELSE
+        Length Should Be    ${resp_body['rows']}     68
+    END
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}

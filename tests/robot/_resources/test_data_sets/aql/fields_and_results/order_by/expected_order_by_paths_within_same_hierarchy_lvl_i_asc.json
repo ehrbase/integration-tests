@@ -1,0 +1,17 @@
+{
+	"q": "SELECT ${path} FROM EHR e CONTAINS COMPOSITION c ORDER BY ${path} ${order}",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"Anton Blake"
+		],
+		[
+			"Silvia Blake"
+		]
+	]
+}

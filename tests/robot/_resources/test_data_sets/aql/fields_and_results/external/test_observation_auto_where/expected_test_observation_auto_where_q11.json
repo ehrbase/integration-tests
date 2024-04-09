@@ -1,0 +1,14 @@
+{
+	"q": "SELECT o/${path} FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.test_all_types.v1] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.test_all_types.v1] WHERE (c/uid/value = '${c_uid}' AND o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value = 'the quick brown fox jumps over the lazy dog')",
+	"columns": [
+		{
+			"path": "o/${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"the quick brown fox jumps over the lazy dog"
+		]
+	]
+}

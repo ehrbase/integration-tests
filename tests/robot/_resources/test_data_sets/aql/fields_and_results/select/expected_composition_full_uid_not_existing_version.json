@@ -1,0 +1,17 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-02-09T11:13:20.8313512+02:00",
+		"_executed_aql": "SELECT c AS full FROM COMPOSITION c WHERE c/uid/value = '459c1971-d372-40f2-ae2f-36a0253df426::local.ehrbase.org::2'",
+		"resultsize": 0
+	},
+	"q": "SELECT c AS full FROM COMPOSITION c WHERE c/uid/value = '459c1971-d372-40f2-ae2f-36a0253df426::local.ehrbase.org::2'",
+	"columns": [
+		{
+			"path": "c",
+			"name": "full"
+		}
+	],
+	"rows": []
+}

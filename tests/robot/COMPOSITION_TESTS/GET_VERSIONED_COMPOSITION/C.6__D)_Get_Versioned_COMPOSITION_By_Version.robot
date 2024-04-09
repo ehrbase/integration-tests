@@ -25,6 +25,8 @@ Metadata    Created    2021.01.26
 Metadata        TOP_TEST_SUITE    EHR_STATUS
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 # Suite Setup  startup SUT
 # Suite Teardown  shutdown SUT
@@ -40,8 +42,9 @@ Force Tags      COMPOSITION_get_versioned
     create EHR and commit a composition for versioned composition tests
 
     get version of versioned composition of EHR by UID    ${versioned_object_uid}    ${version_uid}
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${version_uid}    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${version_uid}    ${response.json()['uid']['value']}
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 1b. Get Versioned Composition Of Existing EHR With 2 Versions by Version UID (JSON)
@@ -54,8 +57,9 @@ Force Tags      COMPOSITION_get_versioned
     Set Test Variable  ${version_uid}  ${version_uid[0:-1]}2
 
     get version of versioned composition of EHR by UID    ${versioned_object_uid}    ${version_uid}
-    Should Be Equal As Strings    ${response.status}    200
-    Should Be Equal As Strings    ${version_uid}    ${response.body.uid.value}
+    Status Should Be    200
+    Should Be Equal As Strings    ${version_uid}    ${response.json()['uid']['value']}
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 1c. Get Versioned Composition Of Existing EHR With 2 Versions by Invalid Version UID (JSON)
@@ -68,7 +72,8 @@ Force Tags      COMPOSITION_get_versioned
     Set Test Variable  ${version_uid}  ${version_uid[0:-1]}3
 
     get version of versioned composition of EHR by UID    ${versioned_object_uid}    ${version_uid}
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 1d. Get Versioned Composition Of Existing EHR by Invalid Version UID (JSON)
@@ -81,7 +86,8 @@ Force Tags      COMPOSITION_get_versioned
     Set Test Variable  ${version_uid}  ${version_uid[0:-1]}-2
 
     get version of versioned composition of EHR by UID    ${versioned_object_uid}    ${version_uid}
-    Should Be Equal As Strings    ${response.status}    400
+    Status Should Be    400
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 1e. Get Versioned Composition Of Existing EHR by Invalid Version UID (JSON)
@@ -94,7 +100,8 @@ Force Tags      COMPOSITION_get_versioned
     Set Test Variable  ${version_uid}  ${version_uid[0:-1]}2.0
 
     get version of versioned composition of EHR by UID    ${versioned_object_uid}    ${version_uid}
-    Should Be Equal As Strings    ${response.status}    400
+    Status Should Be    400
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 1f. Get Versioned Composition Of Existing EHR by Invalid Version UID (JSON)
@@ -104,17 +111,21 @@ Force Tags      COMPOSITION_get_versioned
     
     generate random version_uid
     get version of versioned composition of EHR by UID    ${versioned_object_uid}    ${version_uid}
-    Should Be Equal As Strings    ${response.status}    400
+    Status Should Be    400
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 2. Get Versioned Composition Of EHR by Version UID Invalid EHR (JSON)
     [Documentation]    Simple, invalid EHR_ID (non-existent)
 
     create EHR and commit a composition for versioned composition tests
+    Set Test Variable   ${ehr_id_valid}     ${ehr_id}
     generate random ehr_id
 
     get version of versioned composition of EHR by UID    ${versioned_object_uid}    ${version_uid}
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
+    Set Test Variable   ${ehr_id}     ${ehr_id_valid}
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 3. Get Versioned Composition Of EHR by Version UID Invalid Versioned Object UID (JSON)
@@ -128,7 +139,8 @@ Force Tags      COMPOSITION_get_versioned
     ${version_uid} =  Set Variable  ${original_id}
 
     get version of versioned composition of EHR by UID    ${versioned_object_uid}    ${version_uid}
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 4. Get Versioned Composition Of Existing EHR by Version UID Invalid Version UID (JSON)
@@ -140,7 +152,8 @@ Force Tags      COMPOSITION_get_versioned
     Set Test Variable  ${version_uid}  ${version_uid[0:-1]}2
 
     get version of versioned composition of EHR by UID    ${versioned_object_uid}    ${version_uid}
-    Should Be Equal As Strings    ${response.status}    404
+    Status Should Be    404
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 5. Get Versioned Composition Of Existing EHR With 2 Versions by Version UID Invalid Version UID (JSON)
@@ -156,4 +169,5 @@ Force Tags      COMPOSITION_get_versioned
     Set Test Variable  ${version_uid}  ${version_uid[0:-1]}2
 
     get version of versioned composition of EHR by UID    ${versioned_object_uid}    ${version_uid}
-    Should Be Equal As Strings    ${response.status}    400
+    Status Should Be    400
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs

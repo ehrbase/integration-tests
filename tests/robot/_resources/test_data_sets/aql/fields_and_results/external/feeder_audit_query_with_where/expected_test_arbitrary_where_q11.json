@@ -1,0 +1,17 @@
+{
+	"q": "SELECT c/name/value FROM EHR e CONTAINS COMPOSITION c WHERE ${where}",
+	"columns": [
+		{
+			"path": "c/name/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"Test all types"
+		],
+		[
+			"Test all types"
+		]
+	]
+}

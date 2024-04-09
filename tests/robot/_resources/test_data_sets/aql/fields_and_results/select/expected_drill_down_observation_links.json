@@ -1,0 +1,27 @@
+{
+	"q": "SELECT o/links FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"path": "o/links",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"meaning": {
+					"_type": "DV_TEXT",
+					"value": "problem related note"
+				},
+				"type": {
+					"_type": "DV_TEXT",
+					"value": "problem"
+				},
+				"target": {
+					"_type": "DV_EHR_URI",
+					"value": "ehr://ehr.network/347a5490-55ee-4da9-b91a-9bba710f730e"
+				}
+			}
+		]
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0017]/value/value FROM COMPOSITION c CONTAINS OBSERVATION o WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at0017]/value/value = true",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0017]/value/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			true
+		]
+	]
+}

@@ -1,0 +1,91 @@
+{
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value, o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/magnitude FROM OBSERVATION o[openEHR-EHR-OBSERVATION.choice.v0] ORDER BY o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value ASC",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value",
+			"name": "#0"
+		},
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/magnitude",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			null,
+			2
+		],
+		[
+			null,
+			2.3
+		],
+		[
+			null,
+			3
+		],
+		[
+			null,
+			10
+		],
+		[
+			null,
+			10.5
+		],
+		[
+			"04:05:06",
+			null
+		],
+		[
+			"04:06:06",
+			null
+		],
+		[
+			"2022-03-03",
+			null
+		],
+		[
+			"2022-03-04",
+			null
+		],
+		[
+			"2022-03-03T04:05:06",
+			null
+		],
+		[
+			"2022-03-03T04:06:06",
+			null
+		],
+		[
+			"2022-03-04T04:05:06",
+			null
+		],
+		[
+			"2022-04-03T04:05:06",
+			null
+		],
+		[
+			false,
+			null
+		],
+		[
+			"b",
+			null
+		],
+		[
+			"10.0",
+			null
+		],
+		[
+			"2",
+			null
+		],
+		[
+			true,
+			null
+		],
+		[
+			"a",
+			null
+		]
+	]
+}

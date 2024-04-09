@@ -1,0 +1,17 @@
+{
+	"q": "SELECT c/uid FROM COMPOSITION c",
+	"columns": [
+		{
+			"path": "c/uid",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "OBJECT_VERSION_ID",
+				"value": "a49c3f13-03bc-4c50-a588-ff6647ba9bec::local.ehrbase.org::1"
+			}
+		]
+	]
+}

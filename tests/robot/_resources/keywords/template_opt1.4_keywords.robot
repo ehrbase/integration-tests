@@ -48,7 +48,7 @@ get invalid OPT file
     [Documentation]     Gets an OPT file from test_data_sets/invalid_templates folder
 
     #${file}=            Get File             ${INVALID DATA SETS}/${opt file}
-    ${file}=            Get Binary File		 ${INVALID DATA SETS}/${opt file}
+    ${file}=             Get Binary File      ${INVALID DATA SETS}/${opt file}
 
                         # handle empty file and empty XML
                         Run Keyword And Return If    """${file}"""=='${EMPTY}'
@@ -188,7 +188,7 @@ retrieve OPT by template_id
         ...     Authorization=Bearer ${multitenancy_token}
         Set Test Variable      &{headers}   &{headers}
     END
-
+	Create Session      ${SUT}    ${BASEURL}    debug=2   headers=${headers}
     ${resp}=            GET On Session          ${SUT}    /definition/template/adl1.4/${template_id}   expected_status=anything
                         ...                  headers=${headers}
                         Log    ${resp.text}

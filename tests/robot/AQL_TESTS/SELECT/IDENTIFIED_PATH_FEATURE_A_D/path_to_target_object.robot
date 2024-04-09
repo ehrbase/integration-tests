@@ -1,7 +1,8 @@
 *** Settings ***
 Documentation   CHECK SELECT PATH TO TARGET OBJECT
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/SELECT_TEST_SUIT.md#path-to-target-object
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/SELECT_TEST_SUIT.md#path-to-target-object
 Resource        ../../../_resources/keywords/aql_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 
 *** Test Cases ***
@@ -15,7 +16,7 @@ Test Path To Target Object: SELECT c FROM COMPOSITION c
     ${query1}    Set Variable    SELECT c FROM COMPOSITION c
     Set AQL And Execute Ad Hoc Query        ${query1}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/path_to_target_obj_query1.json
-    ${exclude_paths}    Create List    root['rows'][0][0]['uid']
+    ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
     Length Should Be    ${resp_body['rows']}     1
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
@@ -33,7 +34,7 @@ Test Path To Target Object: SELECT c/uid FROM COMPOSITION c
     Set AQL And Execute Ad Hoc Query        ${query2}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/path_to_target_obj_query2.json
     Log     Add test data once 200 is returned. File: ${expected_result}    console=yes
-    ${exclude_paths}    Create List    root['rows'][0][0]['uid']
+    ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['value']
     Length Should Be    ${resp_body['rows']}     1
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}

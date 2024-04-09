@@ -1,0 +1,29 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-03-07T12:55:11.1502036+02:00",
+		"_executed_aql": "SELECT cv/uid/value, cv/commit_audit/description FROM VERSION cv[LATEST_VERSION] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.minimal.v1] WHERE cv/uid/value = '${compo_uid_1}'",
+		"resultsize": 1
+	},
+	"q": "SELECT cv/uid/value, cv/commit_audit/description FROM VERSION cv[LATEST_VERSION] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.minimal.v1] WHERE cv/uid/value = '${compo_uid_1}'",
+	"columns": [
+		{
+			"path": "cv/uid/value",
+			"name": "#0"
+		},
+		{
+			"path": "cv/commit_audit/description",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"${compo_uid_1}",
+			{
+				"_type": "DV_TEXT",
+				"value": "<optional audit description>"
+			}
+		]
+	]
+}

@@ -1,0 +1,39 @@
+{
+	"q": "SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value, C/items[at0057]/value/magnitude FROM EHR e CONTAINS INSTRUCTION i[openEHR-EHR-INSTRUCTION.medication_order.v3] CONTAINS CLUSTER C[openEHR-EHR-CLUSTER.therapeutic_direction.v1]",
+	"columns": [
+		{
+			"path": "i/activities[at0001]/description[at0002]/items[at0070]/value/value",
+			"name": "#0"
+		},
+		{
+			"path": "C/items[at0057]/value/magnitude",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"Dolo",
+			35
+		],
+		[
+			"Lorem ipsum",
+			22
+		],
+		[
+			"Meftal spas",
+			25
+		],
+		[
+			"Meftal spas",
+			25
+		],
+		[
+			"Dolo",
+			2
+		],
+		[
+			"Dolo",
+			34
+		]
+	]
+}

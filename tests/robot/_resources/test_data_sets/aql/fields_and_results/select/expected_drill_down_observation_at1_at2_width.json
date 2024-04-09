@@ -1,0 +1,26 @@
+{
+  "q": "SELECT o/data[at0001]/events[at0002]/width FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+  "columns": [
+    {
+      "path": "o/data[at0001]/events[at0002]/width",
+      "name": "#0"
+    }
+  ],
+  "rows": [
+    [
+      {
+        "_type": "DV_DURATION",
+        "value": "P30D"
+      }
+    ],
+    [
+      {
+        "_type": "DV_DURATION",
+        "value": "PT42H"
+      }
+    ],
+    [
+      null
+    ]
+  ]
+}

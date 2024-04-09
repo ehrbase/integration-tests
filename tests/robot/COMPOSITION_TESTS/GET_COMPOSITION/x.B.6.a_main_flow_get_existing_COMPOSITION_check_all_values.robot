@@ -19,6 +19,8 @@
 Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 
 *** Test Cases ***
@@ -38,3 +40,4 @@ Get Existing COMPOSITION And Check All Values
     check composition exists
     Set Test Variable   ${template_id}      ssiad_priesm
     Compare content of compositions with the Original (FLAT)  ${COMPO DATA SETS}/FLAT/ssiad_priesm_expected_values.json
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs

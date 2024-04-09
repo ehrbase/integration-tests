@@ -1,0 +1,14 @@
+{
+	"q": "SELECT ec/location FROM EHR e CONTAINS COMPOSITION c CONTAINS EVENT_CONTEXT ec WHERE ec/location = 'microbiology lab 2'",
+	"columns": [
+		{
+			"path": "ec/location",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"microbiology lab 2"
+		]
+	]
+}

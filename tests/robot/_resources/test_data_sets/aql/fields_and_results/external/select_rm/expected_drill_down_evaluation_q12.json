@@ -1,0 +1,36 @@
+{
+	"q": "SELECT ${path} FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.test_all_types.v1] CONTAINS EVALUATION eval[openEHR-EHR-EVALUATION.test_all_types.v1] WHERE c/uid/value = '${c_uid}'",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "ELEMENT",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "interval count"
+				},
+				"value": {
+					"_type": "DV_INTERVAL",
+					"lower": {
+						"_type": "DV_COUNT",
+						"magnitude": 123
+					},
+					"upper": {
+						"_type": "DV_COUNT",
+						"magnitude": 234
+					},
+					"upper_unbounded": false,
+					"lower_unbounded": false,
+					"lower_included": true,
+					"upper_included": true
+				},
+				"archetype_node_id": "at0003"
+			}
+		]
+	]
+}

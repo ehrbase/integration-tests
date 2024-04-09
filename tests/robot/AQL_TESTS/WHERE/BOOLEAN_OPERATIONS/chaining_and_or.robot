@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   WHERE - BOOLEAN OPERATIONS - CHAINING AND / OR
-...             - Covers: https://github.com/ehrbase/AQL_Test_CASES/blob/main/WHERE_TEST_SUIT.md#chaining--and--or
+...             - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/WHERE_TEST_SUIT.md#chaining--and--or
 ...         - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition; 4. Create Composition; 5. Create EHR; 6. Create Composition; 7. Create Composition
 ...         - Send AQL 'SELECT e/ehr_id/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE {where}'
 ...         - {where} can be:
@@ -33,6 +33,7 @@ SELECT e/ehr_id/value, c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE ${whe
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     Create EHR For AQL
     Set Suite Variable       ${ehr_id1}    ${ehr_id}
@@ -60,8 +61,10 @@ Execute Query
     Create File     ${EXPECTED_JSON_DATA_SETS}/where/expected_chaining_and_or_tmp.json
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
+    ${exclude_paths}	Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/where/expected_chaining_and_or_tmp.json
+    ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/where/expected_chaining_and_or_tmp.json

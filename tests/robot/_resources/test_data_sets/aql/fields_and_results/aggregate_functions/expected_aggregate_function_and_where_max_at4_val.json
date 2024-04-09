@@ -1,0 +1,13 @@
+{
+	"q": "SELECT MAX(o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value) FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value != 'Lorem ipsum3'",
+	"columns": [
+		{
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"Lorem ipsum2"
+		]
+	]
+}

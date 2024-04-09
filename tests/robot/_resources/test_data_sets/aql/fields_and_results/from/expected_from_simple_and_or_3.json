@@ -1,0 +1,35 @@
+{
+	"q": "SELECT s1/name/value, o1/name/value, s2/name/value, o2/name/value FROM EHR CONTAINS ((SECTION s1[openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o1[openEHR-EHR-OBSERVATION.conformance_observation.v0]) OR (SECTION s2[openEHR-EHR-SECTION.adhoc.v1, 'Section 1'] CONTAINS OBSERVATION o2[openEHR-EHR-OBSERVATION.conformance_observation.v0]))",
+	"columns": [
+		{
+			"path": "s1/name/value",
+			"name": "#0"
+		},
+		{
+			"path": "o1/name/value",
+			"name": "#1"
+		},
+		{
+			"path": "s2/name/value",
+			"name": "#2"
+		},
+		{
+			"path": "o2/name/value",
+			"name": "#3"
+		}
+	],
+	"rows": [
+		[
+			"conformance section",
+			"Conformance Observation",
+			"Section 1",
+			"Conformance Observation"
+		],
+		[
+			"conformance section",
+			"Conformance Observation",
+			"Section 1",
+			"Conformance Observation"
+		]
+	]
+}

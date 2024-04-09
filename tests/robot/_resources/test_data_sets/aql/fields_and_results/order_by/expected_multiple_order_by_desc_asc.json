@@ -1,0 +1,39 @@
+{
+	"q": "SELECT c/name/value, o/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o ORDER BY c/name/value ${order1}, o/name/value ${order2}",
+	"columns": [
+		{
+			"path": "c/name/value",
+			"name": "#0"
+		},
+		{
+			"path": "o/name/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"type_repetition_conformance_ehrbase.org",
+			"Conformance Observation"
+		],
+		[
+			"aql-conformance-ehrbase.org.v0",
+			"Blood pressure"
+		],
+		[
+			"aql-conformance-ehrbase.org.v0",
+			"Conformance Observation"
+		],
+		[
+			"aql-conformance-ehrbase.org.v0",
+			"Conformance Observation"
+		],
+		[
+			"aql-conformance-ehrbase.org.v0",
+			"Conformance Observation"
+		],
+		[
+			"aql-conformance-ehrbase.org.v0",
+			"Conformance Observation"
+		]
+	]
+}

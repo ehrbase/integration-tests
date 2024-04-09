@@ -1,0 +1,14 @@
+{
+	"q": "SELECT ${path} FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.test_all_types.v1] CONTAINS EVALUATION eval[openEHR-EHR-EVALUATION.test_all_types.v1] WHERE c/uid/value = '${c_uid}'",
+	"columns": [
+		{
+			"path": "${path}",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"at0010"
+		]
+	]
+}

@@ -21,6 +21,8 @@ Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
+Suite Setup     Set Library Search Order For Tests
 
 Force Tags
 
@@ -41,6 +43,6 @@ Alternative flow 3 update an existing persistent COMPOSITION referencing differe
     # comment: Commit a new version for the COMPOSITION referencing the _2 OPT which is a different
     #          one than the one referenced by the first committed COMPO
     update composition - invalid opt reference (XML)    minimal_persistent/persistent_minimal.composition.extdatetime.v2_2.xml
-    Should Be Equal As Strings   ${response.status_code}   400
+    Status Should Be    400
 
-    #[Teardown]    restart SUT
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs

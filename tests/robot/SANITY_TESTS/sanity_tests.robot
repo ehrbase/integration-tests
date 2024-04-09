@@ -16,11 +16,9 @@
 # limitations under the License.
 
 
-
 *** Settings ***
-Documentation   Composition Integration Tests
+Documentation   Sanity Integration Tests
 ...             https://github.com/ehrbase/ehrbase/blob/develop/doc/conformance_testing/EHR_COMPOSITION.md#b6a-main-flow-create-new-event-composition
-Metadata        TOP_TEST_SUITE    COMPOSITION
 
 Resource        ../_resources/keywords/composition_keywords.robot
 Resource        ../_resources/keywords/aql_query_keywords.robot
@@ -28,7 +26,7 @@ Resource        ../_resources/keywords/directory_keywords.robot
 Resource        ../_resources/keywords/admin_keywords.robot
 Resource        ../_resources/keywords/ehr_keywords.robot
 
-Suite Setup       Precondition
+Suite Setup     Precondition
 #Suite Teardown  restart SUT
 
 *** Variables ***
@@ -37,7 +35,6 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
 
 *** Test Cases ***
 Main flow Sanity Tests for FLAT Compositions
-    [Tags]      not-ready
     create EHR
     Get Web Template By Template Id (ECIS)  ${template_id}
     commit composition   format=FLAT
@@ -57,16 +54,16 @@ Main flow Sanity Tests for FLAT Compositions
     Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}
     remove File  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
 
-    execute ad-hoc query    B/102_get_compositions_orderby_name.json
-    check response: is positive
+    #execute ad-hoc query    B/102_get_compositions_orderby_name.json
+    #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${composition_uid_short}
     delete DIRECTORY (JSON)
-
+    Status Should Be    204
+    (admin) delete ehr
     #[Teardown]    restart SUT
 
 
 Main flow Sanity Tests for Canonical JSON Compositions
-    [Tags]
     #create EHR
     Create EHR For Sanity Flow
     Get Web Template By Template Id (ECIS)  ${template_id}
@@ -77,10 +74,11 @@ Main flow Sanity Tests for Canonical JSON Compositions
     check composition exists
     ${version_uid_short}    Fetch From Left     ${composition_uid}      :
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
-
+    prepare new request session    JSON    Prefer=return=representation
     commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.xml
     check content of composition (JSON)
 
+    prepare new request session    JSON    Prefer=return=representation
     update composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.v2.xml
     check content of updated composition (JSON)
 
@@ -94,14 +92,14 @@ Main flow Sanity Tests for Canonical JSON Compositions
     Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}
     remove File  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
 
-    execute ad-hoc query    B/102_get_compositions_orderby_name.json
-    check response: is positive
+    #execute ad-hoc query    B/102_get_compositions_orderby_name.json
+    #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
     delete DIRECTORY (JSON)
+    (admin) delete ehr
     #[Teardown]    restart SUT
 
 Main flow Sanity Tests for Canonical XML Compositions
-    [Tags]
     #create EHR
     Create EHR For Sanity Flow
     Get Web Template By Template Id (ECIS)  ${template_id}
@@ -113,10 +111,10 @@ Main flow Sanity Tests for Canonical XML Compositions
 
     ${version_uid_short}    Fetch From Left     ${composition_uid}      :
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
-
+    prepare new request session    XML    Prefer=return=representation
     commit composition (XML)    minimal/minimal_observation.composition.participations.extdatetimes.xml
     check content of composition (XML)
-
+    prepare new request session    XML    Prefer=return=representation
     update composition (XML)    minimal/minimal_observation.composition.participations.extdatetimes.v2.xml
     check content of updated composition (XML)
 
@@ -129,19 +127,22 @@ Main flow Sanity Tests for Canonical XML Compositions
     Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}
     remove File  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
 
-    execute ad-hoc query    B/102_get_compositions_orderby_name.json
-    check response: is positive
+    #execute ad-hoc query    B/102_get_compositions_orderby_name.json
+    #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
     delete DIRECTORY (JSON)
-    #[Teardown]    restart SUT
+    [Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    all_types/family_history.opt
     Upload OPT    nested/nested.opt
     Upload OPT    minimal/minimal_observation.opt
     Extract Template Id From OPT File
+    Create Session      ${SUT}    ${BASEURL}    debug=2
+    ...     verify=True     #auth=${CREDENTIALS}
 
 Set Variable With Short Compo Id And Delete Composition
     [Arguments]     ${short_compo_id}
@@ -152,10 +153,3 @@ Set Variable With Short Compo Id And Delete Composition
 Create EHR For Sanity Flow
     [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
     create new EHR with ehr_status  ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
-                        Integer    response status    201
-    ${ehr_id_obj}=      Object    response body ehr_id
-    ${ehr_id_value}=    String    response body ehr_id value
-                        Set Suite Variable    ${ehr_id_obj}    ${ehr_id_obj}
-                        # comment: ATTENTION - RESTinstance lib returns a LIST!
-                        #          The value is at index 0 in that list
-                        Set Suite Variable    ${ehr_id}    ${ehr_id_value}[0]

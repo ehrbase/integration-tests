@@ -1,0 +1,13 @@
+{
+	"q": "SELECT 'True' FROM EHR",
+	"columns": [
+		{
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"True"
+		]
+	]
+}

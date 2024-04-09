@@ -1,0 +1,14 @@
+{
+	"q": "SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value/numerator FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value > 14",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value/numerator",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			40.0
+		]
+	]
+}

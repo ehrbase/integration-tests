@@ -19,6 +19,7 @@
 Documentation   Composition Integration Tests
 Metadata        TOP_TEST_SUITE    COMPOSITION
 Resource        ../../_resources/keywords/composition_keywords.robot
+Resource        ../../_resources/keywords/admin_keywords.robot
 
 Suite Setup     Precondition
 Suite Teardown  Postcondition
@@ -46,7 +47,8 @@ Validation test of COMPOSITION class
     invalid      exist        not_exist   not_exist   400
     invalid      not_exist    exist       invalid     400
 
-    [Teardown]    TRACE GITHUB ISSUE    281
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs     AND
+                  ...   TRACE GITHUB ISSUE    281
 
 
 
@@ -68,6 +70,7 @@ Validate of compositions
     check status_code of commit composition    ${status_code}
 
 Precondition
+    Set Library Search Order For Tests
     Upload OPT    validation/clinical_content_validation.opt
     create EHR
 
