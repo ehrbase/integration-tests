@@ -67,14 +67,6 @@
       },
       {
 		"_type": "ORIGINAL_VERSION",
-		"contribution": {
-			"id": {
-				"_type": "HIER_OBJECT_ID",
-				"value": "720ed9fa-4bba-4817-9173-4c05b00acf6a"
-			},
-			"namespace": "EHR::COMMON",
-			"type": "CONTRIBUTION"
-		},
 		"commit_audit": {
 			"_type": "AUDIT_DETAILS",
 			"system_id": "CABOLABS_EHRSERVER",
