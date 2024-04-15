@@ -47,7 +47,7 @@ Create Composition With Invalid Current State On ISM Transition
     [Tags]  Negative    InvalidCurrentState
     commit composition   format=FLAT
     ...                  composition=test-ism.vitagroup.de.v1__ism_invalid_current_state.json
-    check status_code of commit composition    400
+    check status_code of commit composition    422
     Should Contain      ${response.json()["message"]}
     ...     No valid transition found for ism transition[cancel/openehr/166]
     Should Contain      ${response.json()["message"]}
@@ -71,7 +71,7 @@ Create Composition With ISM Wrong Current State
     [Tags]  Negative    ISMMWrongCurrentState
     commit composition   format=FLAT
     ...                  composition=test-ism.vitagroup.de.v1__ism_wrong_current_state.json
-    check status_code of commit composition    400
+    check status_code of commit composition    422
     Should Contain      ${response.json()["message"]}
     ...     No valid transition found for ism transition[cancel/openehr/166]
     Should Contain      ${response.json()["message"]}

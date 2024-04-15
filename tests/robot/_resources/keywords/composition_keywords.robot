@@ -343,8 +343,8 @@ commit composition
             ${template}      Set Variable   ${externalTemplate}
             Set Suite Variable    ${template_id}    ${template}
         END
-        &{params}       Create Dictionary     format=FLAT   ehrId=${ehr_id}     templateId=${template_id}
-        Create Session      ${SUT}    ${ECISURL}    debug=2
+        &{params}       Create Dictionary     format=FLAT   templateId=${template_id}
+        Create Session      ${SUT}    ${BASEURL}    debug=2
         ...     verify=False    headers=${headers}      #auth=${CREDENTIALS}
     ELSE IF   '${format}'=='TDD'
         Create Session      ${SUT}    ${BASEURL}    debug=2
@@ -359,8 +359,9 @@ commit composition
     END
 
     IF      '${format}'=='FLAT'
-        ${resp}     POST On Session     ${SUT}   composition   params=${params}
-        ...     expected_status=anything   data=${file}   headers=${headers}
+        ${resp}     POST On Session     ${SUT}   /ehr/${ehr_id}/composition
+        ...     params=${params}    expected_status=anything
+        ...     data=${file}   headers=${headers}
     ELSE IF     '${multitenancy_token}' != '${None}'
         Set To Dictionary   ${headers}
         ...     openEHR-TEMPLATE_ID=${template}     Authorization=Bearer ${multitenancy_token}
@@ -440,7 +441,8 @@ check the successful result of commit composition
         ${template_id}=       Set Variable   ${template}
         #${composer}           Set Variable   ${response.json()}[${template_for_path}/composer|name]
         #${setting}            Set variable   ${response.json()}[${template_for_path}/context/setting|value]
-        ${compositionUid}=    Collections.Get From Dictionary    ${response.json()}    compositionUid
+        ${locationSplitted}     Split String    ${Location}     /
+        ${compositionUid}=    Set Variable      ${locationSplitted}[-1]
         Set Test Variable     ${compositionUid}  ${composition_uid}
     ELSE IF   '${format}' == 'TDD'
         ${xresp}=             Parse Xml                 ${response.text}
