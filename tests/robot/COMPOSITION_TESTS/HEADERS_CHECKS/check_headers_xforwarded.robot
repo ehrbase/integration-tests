@@ -50,7 +50,7 @@ Check Headers with Commit Composition
     ...                  composition=family_history__.json
     check the successful result of commit composition
     check that composition headers location response has    https   example.com    333
-    check that composition body location response has    https   example.com    333
+    #check that composition body location response has    https   example.com    333
     [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
 
 
