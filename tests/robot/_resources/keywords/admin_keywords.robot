@@ -162,14 +162,15 @@ check composition admin delete table counts
                         ...     verify=False
     ${resp}=            DELETE On Session   ${SUT}  /ehr/${ehr_id}/contribution/${contribution_uid}
                         ...     expected_status=anything    headers=${headers}
-                        Status Should Be    204
-                        Set Test Variable    ${response}    ${resp}
+                        Set Test Variable   ${response}     ${resp}
+                        Should Be Equal     ${response.status_code}     ${204}
 
 
 (admin) delete directory
     [Documentation]     Admin delete of Directory.
     ...                 Needs manually created `${folder_versioned_uid}`.
-
+    Create Session       ${SUT}    ${ADMIN_BASEURL}    debug=2
+                        ...                  verify=True	#auth=${CREDENTIALS}
     ${resp}=            DELETE On Session   ${SUT}  /ehr/${ehr_id}/directory/${folder_versioned_uid}
                         ...     expected_status=anything    headers=${headers}
                         Status Should Be    204

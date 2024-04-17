@@ -18,9 +18,9 @@
 
 *** Settings ***
 Metadata    Version    0.1.0
-Metadata    Authors    *Wladislaw Wagner, Jake Smolka*
+Metadata    Authors    *Wladislaw Wagner, Jake Smolka, Vladislav Ploaia*
 Metadata    Created    2019.02.26
-Metadata    Updated    2020.01.30
+Metadata    Updated    2024.04.17
 
 Documentation       Admin API REST tests \n\n
 ...                 How to run these tests locally \n\n
@@ -40,5 +40,5 @@ Documentation       Admin API REST tests \n\n
 Force Tags    ADMIN
 
 Resource    ${EXECDIR}/robot/_resources/suite_settings.robot
-Suite Setup     startup SUT
-Suite Teardown  shutdown SUT
+#Suite Setup     startup SUT
+#Suite Teardown  shutdown SUT

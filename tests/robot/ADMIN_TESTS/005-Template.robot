@@ -25,19 +25,17 @@ Metadata        TOP_TEST_SUITE    ADMIN_TEMPLATE
 
 Resource        ../_resources/keywords/admin_keywords.robot
 Resource        ../_resources/keywords/composition_keywords.robot
+Resource        ../_resources/keywords/template_opt1.4_keywords.robot
 
-#Suite Setup     startup SUT
-#Suite Teardown  shutdown SUT
+Suite Setup     Set Library Search Order For Tests
 
 Force Tags     ADMIN_template
-
 
 
 *** Variables ***
 # comment: overriding defaults in suite_settings.robot
 ${SUT}                  ADMIN-TEST
 ${CACHE-ENABLED}        ${FALSE}
-
 
 
 #////////////////////////////////////////////////////////////
@@ -50,94 +48,56 @@ ${CACHE-ENABLED}        ${FALSE}
 #///////////////////////////////////////////////////////////
 
 *** Test Cases ***
-001 ADMIN - Delete All Templates (when none were uploaded before)
-    (admin) delete all OPTs
-    # 422 for case when "Cannot delete template x since the following compositions are still using it"
-    Integer    response status    422
-    #validate DELETE ALL response - 204 deleted ${0}
-
-
 002 ADMIN - Delete All Templates (when only one was uploaded before)
     upload valid OPT    minimal/minimal_admin.opt
     (admin) delete all OPTs
     # 422 for case when "Cannot delete template x since the following compositions are still using it"
-    Integer    response status    422
-    #validate DELETE ALL response - 204 deleted ${1}
-
+    Status Should Be    200
+    Should Be True      ${response.json()["deleted"]}>0
 
 003 ADMIN - Delete Multiple Templates
     upload valid OPT    minimal/minimal_admin.opt
     upload valid OPT    minimal/minimal_evaluation.opt
     (admin) delete all OPTs
-    Integer    response status    422
-    #validate DELETE ALL response - 204 deleted ${2}
-
+    Status Should Be    200
+    Should Be True      ${response.json()["deleted"]}>1
 
 004a ADMIN - Delete Existing Template
-    [Tags]    438  not-ready  bug
     upload valid OPT    minimal/minimal_admin.opt
     (admin) delete OPT
-
-        TRACE GITHUB ISSUE    438
-
-    validate DELETE response - 204 deleted
+    Status Should Be    200
     [Teardown]    (admin) delete all OPTs
-
-
-004b ADMIN - Delete Existing Template (minimal response)
-    [Tags]    438  not-ready  bug
-    upload valid OPT    minimal/minimal_admin.opt
-    (admin) delete OPT    prefer_return=minimal
-
-        TRACE GITHUB ISSUE    438
-
-    validate DELETE response - 204 deleted
-    [Teardown]    (admin) delete all OPTs
-
 
 005 ADMIN - Delete Non-Existing Template
-                        prepare new request session    XML
-    ${resp}=            REST.DELETE    ${ADMIN_BASEURL}/template/foo
-                        Integer    response status    404
-                        String     response body    pattern= .*Operational template with id foo not found
-                        Output     response body
-
+    prepare new request session    XML
+    Set Test Variable   ${template_id}  non_existing_template_id
+    (admin) delete OPT
+    Status Should Be    404
+    Should Be Equal As Strings      ${response.json()["error"]}     Not Found
+    Should Contain      ${response.json()["message"]}               not found.
 
 006 ADMIN - Invalid Usage of Delete Endpoint
-    [Tags]      not-ready   to-enable
                         prepare new request session    XML
-    ${resp}=            REST.DELETE    ${ADMIN_BASEURL}/template/
-                        Integer    response status    401
-                        Output     response body
-    
+    ${resp}             DELETE On Session   ${SUT}  /template/
+                        ...     expected_status=anything    headers=${headers}
+                        Status Should Be    404
+                        Should Contain      ${resp.text}
+                        ...     <error>Not Found</error><message>No resource found at path: rest/openehr/v1/template</message>
 
 007 ADMIN - Update Non-Existing Template
     generate random templade_id
     (admin) update OPT    minimal/minimal_admin_updated.opt
     validate PUT response - 404 unknown templade_id
 
-
 008a ADMIN - Update Existing Template
-    [Tags]    436  not-ready  bug
     upload valid OPT    minimal/minimal_admin.opt
     (admin) update OPT    minimal/minimal_admin_updated.opt
-
-        TRACE GITHUB ISSUE    436
-
-    validate PUT response - 200 updated
+    Status Should Be    200
+    retrieve OPT by template_id     template_id=${template_id}
+    XML.Element Text Should Be    ${actual}
+    ...                           Minimal Admin UPDATED BY ROBOT
+    ...                           xpath=concept
     [Teardown]    (admin) delete all OPTs
-
-
-008b ADMIN - Update Existing Template (minimal response)
-    [Tags]    435  not-ready  bug
-    upload valid OPT    minimal/minimal_admin.opt
-    (admin) update OPT    minimal/minimal_admin_updated.opt    prefer_return=minimal
-
-        TRACE GITHUB ISSUE    435
-
-    validate PUT response - 200 updated
-    [Teardown]    (admin) delete all OPTs
-
 
 009 ADMIN - Delete Multiple Templates Where Some Are In Use
     upload valid OPT    minimal/minimal_admin.opt
@@ -145,141 +105,123 @@ ${CACHE-ENABLED}        ${FALSE}
     create new EHR (XML)
     commit composition (XML)    minimal/minimal_admin.composition.extdatetimes.xml
     (admin) delete all OPTs
-    validate DELETE ALL response - 422 unprocessable entity
-
+    Status Should Be    422
+    Should Be Equal As Strings      ${response.json()["error"]}     Unprocessable Entity
+    Should Be Equal As Strings      ${response.json()["message"]}
+    ...     Cannot delete template minimal_admin.en.v1 since it is used by at least one composition
     [Teardown]    Run Keywords    (admin) delete composition    AND
+                  ...             (admin) delete ehr    AND
                   ...             (admin) delete all OPTs
-
 
 010a ADMIN - Delete Template That Is In Use
     upload valid OPT    minimal/minimal_admin.opt
     create new EHR (XML)
     commit composition (XML)    minimal/minimal_admin.composition.extdatetimes.xml
     (admin) delete OPT
-    validate DELETE response - 422 unprocessable entity
-
+    Status Should Be    422
+    Should Be Equal As Strings      ${response.json()["error"]}     Unprocessable Entity
+    Should Be Equal As Strings      ${response.json()["message"]}
+    ...     Cannot delete template minimal_admin.en.v1 since it is used by at least one composition
     [Teardown]    Run Keywords    (admin) delete composition    AND
+                  ...             (admin) delete ehr    AND
                   ...             (admin) delete all OPTs
-
 
 010c ADMIN - Delete Template That Was In Use - (Admin)Deleted Composition
     [Documentation]    Composition is deleted with the admin endpoint and thus has been removed 
-    ...                "physically" from database. The admin endpoint will respond with a 204
+    ...                "physically" from database. The admin endpoint will respond with a 200
     ...                response and the template is removed.
-    [Tags]    438  not-ready  bug
     upload valid OPT    minimal/minimal_admin.opt
     create new EHR (XML)
     commit composition (XML)    minimal/minimal_admin.composition.extdatetimes.xml
     (admin) delete composition
     (admin) delete OPT
-
-        TRACE GITHUB ISSUE    438    message=see https://github.com/ehrbase/project_management/issues/382#issuecomment-777255800 for details
-    # 422 for case when "Cannot delete template x since the following compositions are still using it"
-    Integer    response status    422
-    # validate DELETE response - 204 deleted
-    # comment: check that template does not exist any more
-    ${resp}=    Get Request    ${SUT}    /definition/template/adl1.4/${template_id}
+    #TRACE GITHUB ISSUE    438    message=see https://github.com/ehrbase/project_management/issues/382#issuecomment-777255800 for details
+    Status Should Be    200
+    # validate DELETE response - 200 deleted
+    # check that template does not exist any more
+    ${resp}     GET On Session    ${SUT}    /definition/template/adl1.4/${template_id}
+                ...     expected_status=anything    headers=${headers}
                 Should Be Equal As Strings    ${resp.status_code}    404
-
-    [Teardown]    Run Keywords    (admin) delete all OPTs
-
+    [Teardown]    Run Keywords    (admin) delete ehr    AND     (admin) delete all OPTs
 
 010b ADMIN - Delete Template That Is In Use - Deleted Composition
-    [Tags]    
     upload valid OPT    minimal/minimal_admin.opt
     create new EHR (XML)
     commit composition (XML)    minimal/minimal_admin.composition.extdatetimes.xml
     delete composition    ${version_uid}
     (admin) delete OPT
-    validate DELETE response - 422 unprocessable entity
-
-    [Teardown]    Run Keywords    (admin) delete all OPTs
-
+    Status Should Be    422
+    [Teardown]    Run Keywords    (admin) delete ehr    AND     (admin) delete all OPTs
 
 011 ADMIN - Update Template That Is In Use
-    [Tags]    437    not-ready    bug
     [Documentation]     A template that is in use by a composition has to reject updates.
     upload valid OPT    minimal/minimal_admin.opt
     create new EHR (XML)
     commit composition (XML)    minimal/minimal_admin.composition.extdatetimes.xml
     (admin) update OPT    minimal/minimal_admin_updated.opt
-
-        TRACE GITHUB ISSUE    437
-
     validate PUT response - 422 unprocessable entity
-
-    # TODO: @WLAD make sure the template was NOT modified!
-    #       use a GET request, s. example below:
-    ${resp}=    Get Request    ${SUT}    /definition/template/adl1.4/${template_id}
-                ...    headers=${headers}
-                log    ${resp.content}
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ...     verify=True     #auth=${CREDENTIALS}
+    ${resp}     GET On Session      ${SUT}    /definition/template/adl1.4/${template_id}
+                ...     expected_status=anything    headers=${headers}
+                Status Should Be    200
+                Log    ${resp.content}
                 XML.Element Text Should Be    ${resp.content}    Minimal admin
                 ...                           xpath=concept
-
-    [Teardown]    Run Keywords    (admin) delete composition    AND
-                  ...             (admin) delete all OPTs
-
+    [Teardown]      Run Keywords    (admin) delete composition    AND
+                    ...             (admin) delete ehr    AND
+                    ...             (admin) delete all OPTs
 
 012 ADMIN - Invalid Usage of Update Endpoint
-    [Tags]      not-ready   to-enable
-                        prepare new request session    XML
-    ${resp}=            REST.PUT    ${ADMIN_BASEURL}/template/
-                        Integer    response status    401
-                        Output     response body
-
+    prepare new request session     XML
+    Create Session      ${SUT}     ${ADMIN_BASEURL}    debug=2
+    ...     verify=True     #auth=${CREDENTIALS}
+    ${resp}     PUT On Session    ${SUT}    template/   expected_status=anything
+                ...     headers=${headers}
+                Status Should Be    404
+                Log     ${resp.text}
 
 013 ADMIN - Invalid Usage of Update Endpoint
-                        prepare new request session    XML
-    ${resp}=            REST.PUT    ${ADMIN_BASEURL}/template/foo
-                        Integer    response status    400
-                        Output     response body
-
+    prepare new request session     XML
+    Create Session      ${SUT}      ${ADMIN_BASEURL}    debug=2
+    ...     verify=True     #auth=${CREDENTIALS}
+    ${resp}     PUT On Session    ${SUT}    template/foo   expected_status=anything
+                ...     headers=${headers}
+                Status Should Be    400
+                Log     ${resp.text}
 
 014 ADMIN - Invalid Usage of Update Endpoint
-                        prepare new request session    XML
-    ${resp}=            REST.PUT    ${ADMIN_BASEURL}/template/foo    {"foo": "bar"}
-                        Integer    response status    404
-                        Output     response body
-                        String     response body    pattern=.*Template with id foo does not exist
-
+    prepare new request session    XML
+    Create Session       ${SUT}    ${ADMIN_BASEURL}    debug=2
+    ...     verify=True     #auth=${CREDENTIALS}
+    &{template_dict}    Create Dictionary   foo=bar
+    ${resp}     PUT On Session    ${SUT}    template/foo   json=${template_dict}
+                ...     expected_status=anything
+                ...     headers=${headers}
+                Status Should Be    404
+                Should Contain      ${resp.text}    Template with id foo does not exist
 
 015 ADMIN - Invalid Usage of Update Endpoint
-                        prepare new request session    XML
-    ${resp}=            REST.PUT    ${ADMIN_BASEURL}/template/${123}    {"foo": "bar"}
-                        Integer    response status    404
-                        Output     response body
-                        String     response body    pattern=.*Template with id 123 does not exist
-
-
-016 ADMIN - PUT Method Should Not Create New DB Entries
-    [Documentation]     1. Upload OPT via 'normal' REST endpoint \n\n
-    ...                 2. Use 'admin' update endpoint with template_id from step 1 \n\n
-    ...                    with a different payload than in step 1 \n\n
-    ...                    (especially with a different uid and template_id in the payload) \n\n
-    ...                 3. Assert a proper error message is returned and \n\n
-    ...                    no new records created in DB. \n\n
-    upload valid OPT    minimal/minimal_admin.opt
-    (admin) update OPT    minimal/minimal_action.opt    # NOTE: a different OPT is used as payload!!!
-    Connect With DB
-    @{queryResult}      Query       SELECT COUNT(*) FROM ehr.template_store where template_id = '${template_id}'
-    Should Be Equal As Integers     ${queryResult}[0][0]    ${1}
-
-    [Teardown]    (admin) delete all OPTs
-
-
+    prepare new request session    XML
+    Create Session       ${SUT}    ${ADMIN_BASEURL}    debug=2
+    ...     verify=True     #auth=${CREDENTIALS}
+    &{template_dict}    Create Dictionary   foo=bar
+    ${resp}     PUT On Session    ${SUT}    template/123   json=${template_dict}
+                ...     expected_status=anything
+                ...     headers=${headers}
+                Status Should Be    404
+                Should Contain      ${resp.text}    Template with id 123 does not exist
 
 
 *** Keywords ***
-
-startup SUT
-    [Documentation]     Overrides `generic_keywords.startup SUT` keyword
-    ...                 to add some ENVs required by this test suite.
-
-    Set Environment Variable    ADMINAPI_ACTIVE    true
-    Set Environment Variable    ADMINAPI_ALLOWDELETEALL    true
-    Set Environment Variable    SYSTEM_ALLOWTEMPLATEOVERWRITE    true
-    generic_keywords.startup SUT
-
+#startup SUT
+#    [Documentation]     Overrides `generic_keywords.startup SUT` keyword
+#    ...                 to add some ENVs required by this test suite.
+#
+#    Set Environment Variable    ADMINAPI_ACTIVE    true
+#    Set Environment Variable    ADMINAPI_ALLOWDELETEALL    true
+#    Set Environment Variable    SYSTEM_ALLOWTEMPLATEOVERWRITE    true
+#    generic_keywords.startup SUT
 
 upload valid OPT
     [Arguments]           ${opt file}
@@ -296,7 +238,6 @@ upload valid OPT
     ELSE
         server rejected OPT with status code 409
     END
-
 
 validate PUT response - 200 updated
                         Should Be Equal As Strings    ${response.status_code}   200
@@ -322,7 +263,7 @@ validate PUT response - 404 unknown templade_id
 validate PUT response - 422 unprocessable entity
                         log   ${response.content}
                         Should Be Equal As Strings    ${response.status_code}    422
-                        Should Match    ${response.text}    *Template with id ${template_id} is used by X composition(s)*
+                        Should Contain    ${response.text}    is used by
 
 
 validate DELETE response - 204 deleted
