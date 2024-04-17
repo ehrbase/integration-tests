@@ -120,7 +120,6 @@ robot --include ${tags} \
       --skip TODO \
       --skip future \
       --loglevel INFO \
-      -e ADMIN \
       -e SECURITY \
       --dotted \
       --console quiet \
