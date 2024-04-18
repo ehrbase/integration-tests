@@ -52,7 +52,7 @@ Resource        template_opt1.4_keywords.robot
                         ...                  Prefer=return=${prefer_return}
 
                         Create Session       ${SUT}    ${ADMIN_BASEURL}    debug=2
-                        ...                  auth=${CREDENTIALS}    verify=True
+                        ...                  verify=True    #auth=${CREDENTIALS}
 
     ${resp}=            PUT On Session    ${SUT}    /template/${template_id}   expected_status=anything
                         ...    data=${file}    headers=${headers}
