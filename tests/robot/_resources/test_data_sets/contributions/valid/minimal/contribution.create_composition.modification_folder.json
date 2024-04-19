@@ -59,9 +59,6 @@
 		"commit_audit": {
 			"_type": "AUDIT_DETAILS",
 			"system_id": "CABOLABS_EHRSERVER",
-			"time_committed": {
-				"value": "2021-09-21T21:52:31.869-03:00"
-			},
 			"change_type": {
 				"value": "creation",
 				"defining_code": {
