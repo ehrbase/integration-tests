@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-04-24T14:34:40.4377847+03:00",
+		"_executed_aql": "SELECT o/data/events/data/items/value/magnitude FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value = 82.0",
+		"resultsize": 1
+	},
+	"q": "SELECT o/data/events/data/items/value/magnitude FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value = 82.0",
+	"columns": [
+		{
+			"path": "o/data/events/data/items/value/magnitude",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			82.0
+		]
+	]
+}
