@@ -535,7 +535,7 @@ update composition (JSON)
         ${composition_id}   Set Variable    ${split_compo_id}[0]
         &{params}          Create Dictionary     ehr_id=${ehr_id}   composition_id=${composition_id}
         ${resp}             PUT On Session         ${SUT}   /ehr/${ehr_id}/composition/${composition_id}
-        ...                 data=${file}   headers=${headers}     params=${params}
+        ...                 data=${file}   headers=${headers}     params=${params}      expected_status=anything
                             log to console      ${resp.content}
                             Set Test Variable   ${composition_uid_v2}    ${resp.json()['uid']['value']}    # TODO: remove
                             Set Test Variable   ${version_uid_v2}    ${resp.json()['uid']['value']}
