@@ -536,6 +536,7 @@ update composition (JSON)
         &{params}          Create Dictionary     ehr_id=${ehr_id}   composition_id=${composition_id}
         ${resp}             PUT On Session         ${SUT}   /ehr/${ehr_id}/composition/${composition_id}
         ...                 data=${file}   headers=${headers}     params=${params}      expected_status=anything
+                            Set Test Variable   ${response}    ${resp}
                             log to console      ${resp.content}
                             Set Test Variable   ${composition_uid_v2}    ${resp.json()['uid']['value']}    # TODO: remove
                             Set Test Variable   ${version_uid_v2}    ${resp.json()['uid']['value']}
@@ -543,7 +544,7 @@ update composition (JSON)
         @{split_compo_id}   Split String        ${version_uid_v2}       ::
                             Set Test Variable   ${versioned_object_uid_v2}    ${split_compo_id}[0]
 
-                            Set Test Variable   ${response}    ${resp}
+
                             capture point in time    2
 
     ELSE IF      '${file_type}' == 'json' and '${multitenancy_token}' != ${None}
