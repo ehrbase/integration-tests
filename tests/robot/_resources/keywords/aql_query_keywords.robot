@@ -507,8 +507,13 @@ GET /query/{qualified_query_name}
     ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
     ...                 Expected status code 200.
     ...                 Returns {resp}, with query and rows from response.
-    [Arguments]     ${qualif_name}      &{params}=${FALSE}
-    &{headers}      Create Dictionary       Content-Type=application/json
+    [Arguments]     ${qualif_name}      &{params}=${FALSE}      ${req_headers}=default
+    IF      '''${req_headers}''' != '''default'''
+        #${req_headers} should contain data in dictionary format
+        &{headers}      Set Variable    ${req_headers}
+    ELSE
+        &{headers}      Create Dictionary   Content-Type=application/json
+    END
     Create Session      ${SUT}      ${BASEURL}      debug=2
     IF      """${params}""" == """${FALSE}"""
         ${resp}     GET On Session      ${SUT}
@@ -532,8 +537,13 @@ POST /query/{qualified_query_name}
     ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
     ...                 Expected status code 200.
     ...                 Returns {resp}, with query and rows from response.
-    [Arguments]     ${qualif_name}
-    &{headers}      Create Dictionary       Content-Type=application/json
+    [Arguments]     ${qualif_name}      ${req_headers}=default
+    IF      '''${req_headers}''' != '''default'''
+        #${req_headers} should contain data in dictionary format
+        &{headers}      Set Variable    ${req_headers}
+    ELSE
+        &{headers}      Create Dictionary   Content-Type=application/json
+    END
     Create Session      ${SUT}      ${BASEURL}      debug=2
     ${resp}     POST On Session      ${SUT}
     ...         /query/${qualif_name}
