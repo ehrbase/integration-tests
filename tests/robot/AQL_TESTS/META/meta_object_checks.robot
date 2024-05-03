@@ -29,10 +29,10 @@ Suite Teardown  Admin Delete EHR For AQL       #enable this keyword if AQL check
 
 
 *** Variables ***
-@{expected_meta_keys_post}      _created    _executed_aql   _generator  _schema_version     _type   resultsize
-@{expected_meta_keys_get}       _created    _executed_aql   _generator   _href   _schema_version     _type   resultsize
-@{expected_meta_keys_get_fetch_offset}       _created    _executed_aql  _generator  _href   _schema_version     _type   fetch  offset   resultsize
-@{expected_meta_keys_post_fetch_offset}      _created    _executed_aql  _generator  _schema_version     _type   fetch  offset  resultsize
+@{expected_meta_keys_post}      _created    _dry_run    _executed_aql   _generator  _schema_version     _type   resultsize
+@{expected_meta_keys_get}       _created    _dry_run    _executed_aql   _generator   _href   _schema_version     _type   resultsize
+@{expected_meta_keys_get_fetch_offset}       _created    _dry_run   _executed_aql  _generator  _href   _schema_version     _type   fetch  offset   resultsize
+@{expected_meta_keys_post_fetch_offset}      _created    _dry_run   _executed_aql  _generator  _schema_version     _type   fetch  offset  resultsize
 ${query1}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o CONTAINS CLUSTER
 ${query2}   SELECT o FROM SECTION CONTAINS OBSERVATION o CONTAINS CLUSTER
 ${query3}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o
