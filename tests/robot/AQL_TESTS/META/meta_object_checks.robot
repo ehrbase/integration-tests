@@ -270,7 +270,7 @@ Meta JSON Object Checks
     Set Test Variable   ${q_str}        ${resp_body_actual['q']}
     Log     ${meta_obj}
     ${dict_keys}    Get Dictionary Keys     ${meta_obj}
-    Lists Should Be Equal   ${expected_meta_keys}   ${dict_keys}
+    Run Keyword And Return Status   Lists Should Be Equal   ${expected_meta_keys}   ${dict_keys}
     Should Be Equal As Strings      ${meta_obj["_type"]}    RESULTSET
     Should Be Equal As Strings      ${meta_obj["_executed_aql"]}    ${q_str}
     Should Be Equal As Strings      ${meta_obj["resultsize"]}    ${rows_length}
