@@ -26,7 +26,7 @@ Resource        ../_resources/keywords/contribution_keywords.robot
 Resource        ../_resources/keywords/admin_keywords.robot
 Resource        ../_resources/keywords/ehr_keywords.robot
 
-Suite Setup       Precondition
+Suite Setup       Set Library Search Order For Tests
 
 
 *** Variables ***
@@ -38,42 +38,51 @@ ${non_existing_err_msg}     The value non-existing-code-string does not match an
     [Tags]      Positive
     [Documentation]     Create Composition with ValueSet value 'D' present in http://terminology.hl7.org/ValueSet/surface
     ...                 \nExpect 201 status code
+    [Setup]     Precondition
     commit composition   format=CANONICAL_JSON
     ...                  composition=teminology_test.ehrbase.org.v1__valid.json
     check the successful result of commit composition
+    [Teardown]      (admin) delete ehr
 
 2. Create Composition - Non Existing ValueSet Value
     [Tags]      Negative
     [Documentation]     Create Composition with ValueSet value 'non-existing-code-string' not present in http://terminology.hl7.org/ValueSet/surface
     ...                 \nExpect 422 status code
     ...                 \nError message to contain: ${non_existing_err_msg}
+    [Setup]     Precondition
     commit composition   format=CANONICAL_JSON
     ...                  composition=teminology_test.ehrbase.org.v1__invalid.json
     Expect Status Code And Error Message
     ...     response=${response}    status_code=${422}    error_message=${non_existing_err_msg}
+    [Teardown]      (admin) delete ehr
 
 3. Create Contribution - Existing ValueSet Value
     [Tags]      Positive
     [Documentation]     Create Contribution where Composition contains ValueSet value 'MO' present in http://terminology.hl7.org/ValueSet/surface
     ...                 \nExpect 201 status code
+    [Setup]     Precondition
     commit CONTRIBUTION (JSON)      minimal/contribution.create_composition.teminology_test_valid_valueset.json
     Should Be Equal     ${response.status_code}     ${201}
+    [Teardown]      (admin) delete ehr
 
 4. Create Contribution - Non Existing ValueSet Value
     [Tags]      Negative
     [Documentation]     Create Contribution where Composition contains ValueSet value 'non-existing-code-string' not present in http://terminology.hl7.org/ValueSet/surface
     ...                 \nExpect 400 status code
     ...                 \nError message to contain: ${non_existing_err_msg}
+    [Setup]     Precondition
     Run Keyword And Expect Error    *
     ...     commit CONTRIBUTION (JSON)      minimal/contribution.create_composition.teminology_test_invalid_valueset.json
     Expect Status Code And Error Message
     ...     response=${response}    status_code=${400}    error_message=${non_existing_err_msg}
+    [Teardown]      (admin) delete ehr
 
 5. Update Composition - With Another Existing ValueSet Value
     [Tags]      Positive
     [Documentation]     Update Composition with ValueSet value 'DI' present in http://terminology.hl7.org/ValueSet/surface
     ...                 \nExpect 200 status code.
     ...                 \nInitially created composition has code_string="D"
+    [Setup]     Precondition
     commit composition   format=CANONICAL_JSON
     ...                  composition=teminology_test.ehrbase.org.v1__valid.json
     check the successful result of commit composition
@@ -81,6 +90,7 @@ ${non_existing_err_msg}     The value non-existing-code-string does not match an
     update composition (JSON)    teminology_test.ehrbase.org.v1__valid_v2.json     file_type=json
     Should Be Equal     ${response.status_code}     ${200}
     Should Contain      ${composition_uid_v2}   ::2
+    [Teardown]      (admin) delete ehr
 
 6. Update Composition - With Non Existing ValueSet Value
     [Tags]      Negative
@@ -88,6 +98,7 @@ ${non_existing_err_msg}     The value non-existing-code-string does not match an
     ...                 \nExpect 422 status code.
     ...                 \nInitially created composition has code_string="D"
     ...                 \nError message to contain: ${non_existing_err_msg}
+    [Setup]     Precondition
     commit composition   format=CANONICAL_JSON
     ...                  composition=teminology_test.ehrbase.org.v1__valid.json
     check the successful result of commit composition
@@ -101,7 +112,7 @@ ${non_existing_err_msg}     The value non-existing-code-string does not match an
 
 *** Keywords ***
 Precondition
-    Set Library Search Order For Tests
+    #Set Library Search Order For Tests
     Upload OPT    all_types/teminology_test.ehrbase.org.v1.opt
     create EHR
 
