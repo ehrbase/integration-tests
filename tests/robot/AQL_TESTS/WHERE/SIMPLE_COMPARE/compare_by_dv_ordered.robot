@@ -15,7 +15,7 @@ Suite Teardown  Admin Delete EHR For AQL    ${ehr_id}
 
 
 *** Test Cases ***
-SELECT ${path}${spath} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE ${path} ${condition}
+SELECT ${path}${spath} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE ${path} ${condition}
     #[Tags]      not-ready
     [Template]      Execute Query
     ${path}     ${spath}    ${condition}    ${expected_file}    ${nr_of_results}
@@ -33,7 +33,7 @@ Execute Query
     [Arguments]     ${path}     ${spath}     ${condition}     ${expected_file}   ${nr_of_results}
     #Log     Add test data once 200 is returned. File: ${expected_file}    console=yes
     ${query_dict}   Create Dictionary
-    ...     tmp_query=SELECT ${path}${spath} FROM OBSERVATION o [openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE ${path} ${condition}
+    ...     tmp_query=SELECT ${path}${spath} FROM OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE ${path} ${condition}
     Log     ${query_dict["tmp_query"]}
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Log     ${query}

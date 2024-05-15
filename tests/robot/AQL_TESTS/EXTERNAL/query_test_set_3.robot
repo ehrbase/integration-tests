@@ -69,8 +69,8 @@ SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value, a/des
     Execute Query   query=${query}    expected_rows_nr=49
     ...     expected_file=${expected_result}
 
-SELECT a/description[at0001]/items[at0002]/value/value, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (COMPOSITION c1[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o)
-    ${query}    Set Variable    SELECT a/description[at0001]/items[at0002]/value/value, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (COMPOSITION c1[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o)
+SELECT a/description[at0001]/items[at0002]/value/value, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS ((COMPOSITION c1[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o))
+    ${query}    Set Variable    SELECT a/description[at0001]/items[at0002]/value/value, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS ((COMPOSITION c1[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o))
     ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_x_action_or_composition_x_observation.json
     Execute Query   query=${query}    expected_rows_nr=77
     ...     expected_file=${expected_result}

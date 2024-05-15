@@ -1,5 +1,5 @@
 {
-	"q": "SELECT c/context/other_context[at0001]/name/value FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.report-result.v1]",
+	"q": "SELECT c/context/other_context[at0001]/name/value FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.report-result.v1] ",
 	"columns": [
 		{
 			"path": "c/context/other_context[at0001]/name/value",

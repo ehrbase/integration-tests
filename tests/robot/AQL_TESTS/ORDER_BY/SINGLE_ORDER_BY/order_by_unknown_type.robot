@@ -14,7 +14,7 @@ Suite Teardown  Admin Delete EHR For AQL    ${ehr_id}
 
 
 *** Test Cases ***
-SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value, o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/magnitude FROM OBSERVATION o [openEHR-EHR-OBSERVATION.choice.v0] ORDER BY ${path} ASC
+SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value, o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/magnitude FROM OBSERVATION o[openEHR-EHR-OBSERVATION.choice.v0] ORDER BY ${path} ASC
     #[Tags]      not-ready
     [Template]      Execute Query
     ${query_nr}     ${path}     ${expected_file}    ${nr_of_results}
@@ -31,7 +31,7 @@ Precondition
 Execute Query
     [Arguments]     ${query_nr}     ${path}     ${expected_file}    ${nr_of_results}
     ${query_dict}   Create Dictionary
-    ...     tmp_query=SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value, o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/magnitude FROM OBSERVATION o [openEHR-EHR-OBSERVATION.choice.v0] ORDER BY ${path} ASC
+    ...     tmp_query=SELECT o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/value, o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value/magnitude FROM OBSERVATION o[openEHR-EHR-OBSERVATION.choice.v0] ORDER BY ${path} ASC
     Log     ${query_dict["tmp_query"]}
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Log     ${query}

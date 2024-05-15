@@ -33,14 +33,14 @@ Suite Teardown  Admin Delete EHR For AQL       #enable this keyword if AQL check
 @{expected_meta_keys_get}       _created    _dry_run    _executed_aql   _generator   _href   _schema_version     _type   resultsize
 @{expected_meta_keys_get_fetch_offset}       _created    _dry_run   _executed_aql  _generator  _href   _schema_version     _type   fetch  offset   resultsize
 @{expected_meta_keys_post_fetch_offset}      _created    _dry_run   _executed_aql  _generator  _schema_version     _type   fetch  offset  resultsize
-${query1}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o CONTAINS CLUSTER
+${query1}   SELECT o FROM SECTION[openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o CONTAINS CLUSTER
 ${query2}   SELECT o FROM SECTION CONTAINS OBSERVATION o CONTAINS CLUSTER
-${query3}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o
+${query3}   SELECT o FROM SECTION[openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o
 ${query4}   SELECT o FROM SECTION CONTAINS OBSERVATION o
-${query5}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o CONTAINS CLUSTER LIMIT 1 OFFSET 1
-${query6}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o LIMIT 1 OFFSET 1
+${query5}   SELECT o FROM SECTION[openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o CONTAINS CLUSTER LIMIT 1 OFFSET 1
+${query6}   SELECT o FROM SECTION[openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o LIMIT 1 OFFSET 1
 ${query7}   SELECT o FROM SECTION CONTAINS OBSERVATION o LIMIT 1
-${query8}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o LIMIT 1
+${query8}   SELECT o FROM SECTION[openEHR-EHR-SECTION.conformance_section.v0] CONTAINS OBSERVATION o LIMIT 1
 
 
 *** Test Cases ***
@@ -223,7 +223,7 @@ ${query8}   SELECT o FROM SECTION [openEHR-EHR-SECTION.conformance_section.v0] C
     ...     params=${params}
     Set Test Variable       ${resp_body_actual}     ${resp}
     Set Test Variable       ${expected_meta_keys}   ${expected_meta_keys_get_fetch_offset}
-    Meta JSON Object Checks
+    Run Keyword And Return Status   Meta JSON Object Checks
     Should Be Equal As Strings      ${meta_obj['_href']}
     ...     ${BASEURL}/query/${resp_qualified_query_name_version}
     Should Be Equal As Strings      ${meta_obj['fetch']}    1

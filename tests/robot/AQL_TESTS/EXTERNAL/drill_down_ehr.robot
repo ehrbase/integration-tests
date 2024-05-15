@@ -19,7 +19,7 @@ ${EXPECTED_JSON_RESULTS}    ${EXPECTED_JSON_DATA_SETS}/external/drill_down_ehr
 
 
 *** Test Cases ***
-SELECT e/ehr_status/${path} FROM EHR e[ehr_id/value = '${ehr_id}']
+SELECT e/ehr_status/${path} FROM EHR e[ehr_id/value='${ehr_id}']
     [Template]      Execute Query
     ${path}    ${expected_file}    ${nr_of_results}
 
@@ -34,7 +34,7 @@ Execute Query
     ${actual_file}      Set Variable    ${EXPECTED_JSON_RESULTS}/${expected_file}
     ${tmp_file}         Set Variable    ${EXPECTED_JSON_RESULTS}/expected_drill_down_ehr_tmp.json
     ${query_dict}   Create Dictionary
-    ...     tmp_query=SELECT e/ehr_status/${path} FROM EHR e[ehr_id/value = '${ehr_id}']
+    ...     tmp_query=SELECT e/ehr_status/${path} FROM EHR e[ehr_id/value='${ehr_id}']
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Set AQL And Execute Ad Hoc Query    ${query}
     ${expected_res_tmp}      Set Variable       ${actual_file}
@@ -42,7 +42,7 @@ Execute Query
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     Create File     ${tmp_file}     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
-    ${exclude_paths}	Create List    root['meta']
+    ${exclude_paths}	Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${tmp_file}
     ...     exclude_paths=${exclude_paths}

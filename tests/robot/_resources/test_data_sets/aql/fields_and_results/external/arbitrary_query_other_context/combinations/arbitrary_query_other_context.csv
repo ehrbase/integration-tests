@@ -8,6 +8,6 @@ ${query_nr},${path},${where},${expected_file},${nr_of_results}
 7.,"c/context/other_context[at0001]/items[at0002]/name/value","",expected_arbitrary_query_other_context_q7.json,1
 8.,"c/context/other_context[at0001]/items[at0002]/value/value","",expected_arbitrary_query_other_context_q8.json,1
 9.,"c/context/other_context/items[openEHR-EHR-CLUSTER.case_identification.v0,'Fallidentifikation']/items[at0001]/value/value","",expected_arbitrary_query_other_context_q9.json,1
-10.,"c/context/other_context/items[openEHR-EHR-CLUSTER.case_identification.v0,'Fallidentifikation']/items[at0001,'Fall-Kennung']/value/value","",expected_arbitrary_query_other_context_q10.json,1
-11.,"c/name/value","WHERE c/context/other_context/items[openEHR-EHR-CLUSTER.case_identification.v0,'Fallidentifikation']/items[at0001,'Fall-Kennung']/value/value = '9251377'",expected_arbitrary_query_other_context_q11.json,1
-12.,"c/name/value","WHERE c/context/other_context/items[openEHR-EHR-CLUSTER.case_identification.v0,'Fallidentifikation']/items[at0001,'no data']/value/value = '9251377'",expected_arbitrary_query_other_context_q12.json,0
+10.,"c/context/other_context/items[openEHR-EHR-CLUSTER.case_identification.v0,'Fallidentifikation']/items[at0001, 'Fall-Kennung']/value/value","",expected_arbitrary_query_other_context_q10.json,1
+11.,"c/name/value","WHERE c/context/other_context/items[openEHR-EHR-CLUSTER.case_identification.v0, 'Fallidentifikation']/items[at0001, 'Fall-Kennung']/value/value = '9251377'",expected_arbitrary_query_other_context_q11.json,1
+12.,"c/name/value","WHERE c/context/other_context/items[openEHR-EHR-CLUSTER.case_identification.v0, 'Fallidentifikation']/items[at0001, 'no data']/value/value = '9251377'",expected_arbitrary_query_other_context_q12.json,0

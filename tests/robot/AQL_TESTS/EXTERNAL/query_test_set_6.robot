@@ -15,10 +15,10 @@ ${EXPECTED_JSON_RESULTS}    ${EXPECTED_JSON_DATA_SETS}/external/test_set_6
 
 
 *** Test Cases ***
-Medication Values: SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value as medication FROM EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i [openEHR-EHR-INSTRUCTION.medication_order.v3] WHERE c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value='${ehr_id}'
+Medication Values: SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value as medication FROM EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i[openEHR-EHR-INSTRUCTION.medication_order.v3] WHERE (c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value = '${ehr_id}')
     ${actual_file}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_medication_values.json
     ${tmp_file}         Set Variable    ${EXPECTED_JSON_RESULTS}/expected_medication_values_tmp.json
-    ${query}    Set Variable    SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value as medication FROM EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i [openEHR-EHR-INSTRUCTION.medication_order.v3] WHERE c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value='${ehr_id}'
+    ${query}    Set Variable    SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value as medication FROM EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i[openEHR-EHR-INSTRUCTION.medication_order.v3] WHERE (c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value = '${ehr_id}')
     ${expected_result}      Set Variable    ${actual_file}
     ${file_without_replaced_vars}       Get File     ${expected_result}
     ${data_replaced_vars}   Replace Variables      ${file_without_replaced_vars}
@@ -28,10 +28,10 @@ Medication Values: SELECT i/activities[at0001]/description[at0002]/items[at0070]
     ...     expected_file=${tmp_file}
     [Teardown]      Remove File         ${tmp_file}
 
-Medication And Dosage Values: SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value AS medication, i/activities[at0001]/description[at0002]/items[at0009]/value/value AS dosage FROM EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i [openEHR-EHR-INSTRUCTION.medication_order.v3] WHERE c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value='${ehr_id}'
+Medication And Dosage Values: SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value AS medication, i/activities[at0001]/description[at0002]/items[at0009]/value/value AS dosage FROM EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i[openEHR-EHR-INSTRUCTION.medication_order.v3] WHERE (c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value = '${ehr_id}')
     ${actual_file}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_medication_and_dosage_values.json
     ${tmp_file}         Set Variable    ${EXPECTED_JSON_RESULTS}/expected_medication_and_dosage_values_tmp.json
-    ${query}    Set Variable    SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value AS medication, i/activities[at0001]/description[at0002]/items[at0009]/value/value AS dosage FROM EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i [openEHR-EHR-INSTRUCTION.medication_order.v3] WHERE c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value='${ehr_id}'
+    ${query}    Set Variable    SELECT i/activities[at0001]/description[at0002]/items[at0070]/value/value AS medication, i/activities[at0001]/description[at0002]/items[at0009]/value/value AS dosage FROM EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i[openEHR-EHR-INSTRUCTION.medication_order.v3] WHERE (c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value = '${ehr_id}')
     ${expected_result}      Set Variable    ${actual_file}
     ${file_without_replaced_vars}       Get File     ${expected_result}
     ${data_replaced_vars}   Replace Variables      ${file_without_replaced_vars}
@@ -41,10 +41,10 @@ Medication And Dosage Values: SELECT i/activities[at0001]/description[at0002]/it
     ...     expected_file=${tmp_file}
     [Teardown]      Remove File         ${tmp_file}
 
-Medication Without Instruction: SELECT c/content[openEHR-EHR-INSTRUCTION.medication_order.v3]/activities[at0001]/description[at0002]/items[at0070]/value/value AS medication FROM EHR e CONTAINS COMPOSITION c WHERE c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value='${ehr_id}'
+Medication Without Instruction: SELECT c/content[openEHR-EHR-INSTRUCTION.medication_order.v3]/activities[at0001]/description[at0002]/items[at0070]/value/value AS medication FROM EHR e CONTAINS COMPOSITION c WHERE (c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value = '${ehr_id}')
     ${actual_file}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_medication_without_instruction.json
     ${tmp_file}         Set Variable    ${EXPECTED_JSON_RESULTS}/expected_medication_without_instruction_tmp.json
-    ${query}    Set Variable    SELECT c/content[openEHR-EHR-INSTRUCTION.medication_order.v3]/activities[at0001]/description[at0002]/items[at0070]/value/value AS medication FROM EHR e CONTAINS COMPOSITION c WHERE c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value='${ehr_id}'
+    ${query}    Set Variable    SELECT c/content[openEHR-EHR-INSTRUCTION.medication_order.v3]/activities[at0001]/description[at0002]/items[at0070]/value/value AS medication FROM EHR e CONTAINS COMPOSITION c WHERE (c/archetype_details/template_id/value MATCHES {'vitagroup-medication-list.v0'} AND e/ehr_id/value = '${ehr_id}')
     ${expected_result}      Set Variable    ${actual_file}
     ${file_without_replaced_vars}       Get File     ${expected_result}
     ${data_replaced_vars}   Replace Variables      ${file_without_replaced_vars}
