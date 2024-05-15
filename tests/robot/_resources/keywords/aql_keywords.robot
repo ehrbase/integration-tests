@@ -345,25 +345,3 @@ Set Debug Options In Dict
     Set Test Variable   ${query_plan}   ${query_plan}
     [Return]        ${debug_headers}
 
-Response Body Meta Checks For Debug Opts
-    [Arguments]     ${resultsize_count}=${0}    ${dry_run}=${TRUE}
-    #${resp_body} is set in kw 'Send Ad Hoc Request'
-    Should Be Equal     ${resp_body['meta']['_dry_run']}        ${dry_run}
-    Should Be Equal     ${resp_body['meta']['resultsize']}      ${resultsize_count}
-    Dictionary Should Contain Key   ${resp_body['meta']}    _executed_aql
-    IF  '${exec_sql}' == 'true'
-        Dictionary Should Contain Key   ${resp_body['meta']}    _executed_sql
-    ELSE
-        Dictionary Should Not Contain Key   ${resp_body['meta']}    _executed_sql
-    END
-    ##
-    IF      '${query_plan}' == 'true'
-        Dictionary Should Contain Key   ${resp_body['meta']}    _query_plan
-        Dictionary Should Contain Key   ${resp_body['meta']['_query_plan']}     records
-        Dictionary Should Contain Key   ${resp_body['meta']['_query_plan']}     fields
-        Should Be Equal     ${resp_body['meta']['_query_plan']['fields'][0]['name']}    QUERY PLAN
-        Should Be Equal     ${resp_body['meta']['_query_plan']['fields'][0]['type']}    JSON
-    ELSE
-        Dictionary Should Not Contain Key   ${resp_body['meta']}    _query_plan
-    END
-    #Log     ${resp_body['meta']['_executed_sql']}
