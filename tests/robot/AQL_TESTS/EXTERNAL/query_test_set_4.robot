@@ -27,8 +27,8 @@ SELECT o1/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude
     Execute Query   query=${query}    expected_rows_nr=24
     ...     expected_file=${expected_result}
 
-SELECT o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (COMPOSITION c1[openEHR-EHR-COMPOSITION.health_summary.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o)
-    ${query}    Set Variable    SELECT o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS (COMPOSITION c1[openEHR-EHR-COMPOSITION.health_summary.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o)
+SELECT o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS ((COMPOSITION c1[openEHR-EHR-COMPOSITION.health_summary.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o))
+    ${query}    Set Variable    SELECT o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, a/description[at0001]/items[at0002]/value/value FROM EHR e CONTAINS ((COMPOSITION c1[openEHR-EHR-COMPOSITION.health_summary.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o))
     ${expected_result}      Set Variable    ${EXPECTED_JSON_RESULTS}/expected_composition_x_action_or_composition_x_observation.json
     Execute Query   query=${query}    expected_rows_nr=16
     ...     expected_file=${expected_result}

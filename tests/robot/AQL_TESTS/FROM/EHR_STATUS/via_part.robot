@@ -44,7 +44,7 @@ Execute Query
     Create File     ${expected_result_file}
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
-    ${exclude_paths}	Create List    root['meta']
+    ${exclude_paths}	Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result_file}
     ...     exclude_paths=${exclude_paths}

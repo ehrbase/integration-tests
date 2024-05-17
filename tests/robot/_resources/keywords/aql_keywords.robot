@@ -66,13 +66,40 @@ Set AQL And Execute Ad Hoc Query
     #${actual_rows}      Set Variable    ${resp_body_rows[0]}
     ${columns_length}   Get Length      ${resp_body_columns}
 
+Send Ad Hoc Request Through GET
+    [Arguments]     ${q_param}     ${req_headers}=default
+    IF      '''${req_headers}''' != '''default'''
+        #${req_headers} should contain data in dictionary format
+        &{headers}      Set Variable    ${req_headers}
+    ELSE
+        &{headers}      Create Dictionary   Content-Type=application/json
+    END
+    Create Session      ${SUT}      ${BASEURL}
+    ...     debug=2     headers=${headers}      verify=True
+    ${query_params}     Set Variable    q=${q_param}
+    ${resp}             GET On Session     ${SUT}   /query/aql   expected_status=anything
+                        ...                 params=${query_params}
+                        Should Be Equal As Strings      ${resp.status_code}     ${200}      msg=${resp.status_code},${resp.json()}
+                        Set Test Variable   ${resp_status_code}     ${resp}
+                        Set Test Variable   ${resp_body}    ${resp.json()}
+                        Set Test Variable   ${resp_body_query}      ${resp_body['q']}
+                        Set Test Variable   ${resp_body_columns}    ${resp_body['columns']}
+
+Send Execute Stored Query Request Through GET
+
 Send Ad Hoc Request
     [Documentation]     Prepare and send Ad Hoc request to {baseurl}/query/aql.
     ...                 - Method: *POST*, expects: *200*.
     ...                 - Takes 1 mandatory argument: aql_body, to be provided in format {"q":"${query}"}
     ...                 - Stores response in 4 vars: resp_body, resp_body_query, resp_body_columns, resp_body_rows
-    [Arguments]     ${aql_body}
-    &{headers}          Create Dictionary   Content-Type=application/json
+    [Arguments]     ${aql_body}     ${req_headers}=default
+
+    IF      '''${req_headers}''' != '''default'''
+        #${req_headers} should contain data in dictionary format
+        &{headers}      Set Variable    ${req_headers}
+    ELSE
+        &{headers}      Create Dictionary   Content-Type=application/json
+    END
     Create Session      ${SUT}      ${BASEURL}
     ...     debug=2     headers=${headers}      verify=True
     ${resp}             POST On Session     ${SUT}   /query/aql   expected_status=anything
@@ -92,9 +119,9 @@ Send Ad Hoc Request
                             #Pass On Expected Message    ${resp.json()["message"]}
                         END
                         Should Be Equal As Strings      ${resp.status_code}     ${200}      msg=${resp.status_code},${resp.json()}
-                        Set Test Variable   ${resp_status_code}    ${resp}
+                        Set Test Variable   ${resp_status_code}     ${resp}
                         Set Test Variable   ${resp_body}    ${resp.json()}
-                        Set Test Variable   ${resp_body_query}    ${resp_body['q']}
+                        Set Test Variable   ${resp_body_query}      ${resp_body['q']}
                         Set Test Variable   ${resp_body_columns}    ${resp_body['columns']}
                         #Log     ${resp_body_query}
                         #Log     ${resp_body_columns}
@@ -305,3 +332,16 @@ Delete Composition For AQL
     Status Should Be    204
     ${del_version_uid}      Get Substring           ${resp.headers['ETag']}    1    -1
     Set Suite Variable      ${del_version_uid}      ${del_version_uid}
+
+Set Debug Options In Dict
+    [Arguments]     ${dry_run}=false     ${exec_sql}=false   ${query_plan}=false
+    &{debug_headers}    Create Dictionary
+    ...     Content-Type=application/json
+    ...     EHRbase-AQL-DRY_RUN=${dry_run}
+    ...     EHRbase-AQL-EXECUTED_SQL=${exec_sql}
+    ...     EHRbase-AQL-QUERY_PLAN=${query_plan}
+    Set Test Variable   ${dry_run}      ${dry_run}
+    Set Test Variable   ${exec_sql}     ${exec_sql}
+    Set Test Variable   ${query_plan}   ${query_plan}
+    [Return]        ${debug_headers}
+

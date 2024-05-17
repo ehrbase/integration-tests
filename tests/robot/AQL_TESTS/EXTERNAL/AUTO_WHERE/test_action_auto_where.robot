@@ -16,7 +16,7 @@ ${EXPECTED_JSON_RESULTS}    ${EXPECTED_JSON_DATA_SETS}/external/test_action_auto
 
 
 *** Test Cases ***
-${query_nr} SELECT a/${path} FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.test_all_types.v1] CONTAINS SECTION s[openEHR-EHR-SECTION.test_all_types.v1] CONTAINS ACTION a[openEHR-EHR-ACTION.test_all_types.v1] WHERE ${where}
+${query_nr} SELECT a/${path} FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.test_all_types.v1] CONTAINS SECTION s[openEHR-EHR-SECTION.test_all_types.v1] CONTAINS ACTION a[openEHR-EHR-ACTION.test_all_types.v1] WHERE ${where}
     [Template]      Execute Query
     ${query_nr}     ${path}     ${where}    ${expected_file}    ${nr_of_results}
 
@@ -35,7 +35,7 @@ Execute Query
     ${actual_file}      Set Variable    ${EXPECTED_JSON_RESULTS}/${expected_file}
     ${tmp_file}         Set Variable    ${EXPECTED_JSON_RESULTS}/expected_test_action_auto_where_tmp.json
     ${query_dict}   Create Dictionary
-    ...     tmp_query=SELECT a/${path} FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.test_all_types.v1] CONTAINS SECTION s[openEHR-EHR-SECTION.test_all_types.v1] CONTAINS ACTION a[openEHR-EHR-ACTION.test_all_types.v1] WHERE ${where}
+    ...     tmp_query=SELECT a/${path} FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.test_all_types.v1] CONTAINS SECTION s[openEHR-EHR-SECTION.test_all_types.v1] CONTAINS ACTION a[openEHR-EHR-ACTION.test_all_types.v1] WHERE ${where}
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Set AQL And Execute Ad Hoc Query    ${query}
     ${expected_res_tmp}      Set Variable       ${actual_file}

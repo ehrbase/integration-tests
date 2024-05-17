@@ -1,0 +1,120 @@
+*** Settings ***
+Documentation   CHECK Query Request Debug Options
+...             - Covers: https://vitagroup-ag.atlassian.net/browse/CDR-1397
+...             - PR: https://github.com/ehrbase/ehrbase/pull/1296
+...             - Latest requirements changes here: https://vitagroup-ag.atlassian.net/browse/CDR-1258
+Resource        ../../../_resources/keywords/aql_keywords.robot
+Resource        ../../../_resources/keywords/aql_query_keywords.robot
+Suite Setup     Set Library Search Order For Tests
+
+
+*** Test Cases ***
+1. Query - Ad-Hoc Query POST
+    [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
+    ...         - Send AQL "SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '{compo_id}::{system_id_with_tenant}::1'"
+    ...         - Check _executed_aql item is present in response body, meta object.
+    [Setup]     Precondition
+    Set Test Variable      ${query1}
+    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    Set Test Variable       ${test_data}    {"q":"${query1}"}
+    Send Ad Hoc Request     aql_body=${test_data}
+    Check Reponse Body
+    Should Be Equal As Strings      ${resp_body_query}   ${query1}
+
+1.a Query - Ad-Hoc Query POST - Query Params
+    Set Test Variable       ${query2}
+    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = \$compo_id
+    ${parameter_obj}    Set Variable    {"compo_id": \"${compo_id}::${system_id_with_tenant}::1\" }
+    Set Test Variable       ${test_data}    {"q":"${query2}","query_parameters":${parameter_obj}}
+    Send Ad Hoc Request     aql_body=${test_data}
+    Check Reponse Body
+    Should Be Equal As Strings      ${resp_body_query}   ${query2}
+    Should Be Equal As Strings      ${executed_aql}
+    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+
+1.b Query - Ad-Hoc Query POST - Query Params - Limit And Offset
+    Set Test Variable       ${query2}
+    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = \$compo_id
+    ${parameter_obj}    Set Variable    {"compo_id": \"${compo_id}::${system_id_with_tenant}::1\" }
+    Set Test Variable       ${test_data}    {"q":"${query2}","query_parameters":${parameter_obj}, "offset": 1, "fetch": 2}
+    Send Ad Hoc Request     aql_body=${test_data}
+    Length Should Be    ${resp_body['rows']}    ${2}
+    Should Be Equal     ${resp_body['meta']['resultsize']}      ${2}
+    Should Be Equal As Strings      ${resp_body_query}      ${query2}
+    Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}
+    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1' LIMIT 2 OFFSET 1
+
+2. Query - Ad-Hoc Query GET
+    Set Test Variable       ${query3}
+    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id}'
+    Send Ad Hoc Request Through GET     q_param=${query3}
+    Length Should Be    ${resp_body_columns}    ${1}
+    Should Be Equal     ${resp_body['meta']['resultsize']}      ${1}
+    Should Be Equal As Strings      ${resp_body_query}      ${query3}
+    Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}
+    ...     ${query3}
+
+2.a Query - Ad-Hoc Query GET - Query Params
+    Set Test Variable       ${query3}
+    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = \$ehr_id
+    ${parameter_obj}    Set Variable    {"ehr_id": \"${ehr_id}\" }
+    Set Test Variable      ${test_data}    {"q":"${query3}","query_parameters":${parameter_obj}}
+    Send Ad Hoc Request     aql_body=${test_data}
+    Length Should Be    ${resp_body_columns}    ${1}
+    Should Be Equal     ${resp_body['meta']['resultsize']}      ${1}
+    Should Be Equal As Strings      ${resp_body_query}      ${query3}
+    Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}
+    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id}'
+
+2.b Query - Ad-Hoc Query GET - Query Params - Limit And Offset
+    Set Test Variable       ${query3}
+    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = \$ehr_id
+    ${parameter_obj}    Set Variable    {"ehr_id": \"${ehr_id}\" }
+    Set Test Variable       ${test_data}    {"q":"${query3}","query_parameters":${parameter_obj}, "offset": 1, "fetch": 1}
+    Send Ad Hoc Request     aql_body=${test_data}
+    Length Should Be    ${resp_body['rows']}    ${0}
+    Should Be Equal As Strings      ${resp_body_query}      ${query3}
+    Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}
+    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id}' LIMIT 1 OFFSET 1
+
+3. Query - Stored Query GET By Qualified Query Name And Version
+    Set Test Variable      ${query3}
+    ...     SELECT c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    ${resp_qualified_query_name_version}     PUT /definition/query/{qualified_query_name}/{version}
+    ...     query_to_store=${query3}     format=text
+    GET /query/{qualified_query_name}
+    ...     qualif_name=${resp_qualified_query_name_version}
+    Set Test Variable   ${resp_body}    ${resp}
+    Length Should Be    ${resp_body['columns']}    ${3}
+    Should Be Equal As Strings      ${resp_body['q']}       ${query3}
+    Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}      ${query3}
+
+4. Query - Stored Query POST By Qualified Query Name
+    [Documentation]     - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
+    Set Test Variable      ${query4}
+    ...     SELECT o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    ${resp_qualified_query_name}     PUT /definition/query/{qualified_query_name}
+    ...     query_to_store=${query4}     format=text
+    ${resp_query}       POST /query/{qualified_query_name}
+    ...     qualif_name=${resp_qualified_query_name}
+    Set Test Variable   ${resp_body}    ${resp}
+    Length Should Be    ${resp_body['columns']}    ${2}
+    Should Be Equal As Strings      ${resp_body['q']}       ${query4}
+    Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}      ${query4}
+    [Teardown]      Admin Delete EHR For AQL
+
+
+*** Keywords ***
+Precondition
+    Upload OPT For AQL      aql-conformance-ehrbase.org.v0.opt
+    Create EHR For AQL
+    Commit Composition For AQL      aql-conformance-ehrbase.org.v0_contains.json
+    Set Suite Variable       ${compo_id}     ${composition_short_uid}
+
+Check Reponse Body
+    Length Should Be    ${resp_body_columns}    ${4}
+    ${rows_count}   Get Length      ${resp_body['rows']}
+    Length Should Be    ${resp_body['rows']}    ${5}
+    Dictionary Should Contain Key   ${resp_body['meta']}    _executed_aql
+    Set Test Variable   ${executed_aql}     ${resp_body['meta']['_executed_aql']}
+    Should Be Equal     ${resp_body['meta']['resultsize']}      ${rows_count}

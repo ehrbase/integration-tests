@@ -31,7 +31,7 @@ SELECT e/ehr_status/name FROM EHR e [ehr_id/value = '${ehr_id}']
     ${query}    Set Variable
     ...     SELECT e/ehr_status/name FROM EHR e [ehr_id/value = '${ehr_id}']
     ${expected_returned_query}      Set Variable
-    ...     SELECT s/name FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS EHR_STATUS s
+    ...     SELECT e/ehr_status/name FROM EHR e [ehr_id/value = '${ehr_id}']
     Set AQL And Execute Ad Hoc Query        ${query}
     Should Be Equal As Strings      ${resp_body_query}      ${expected_returned_query}
     ${response_rows}    Set Variable     ${resp_body_actual['rows'][0][0]}
@@ -43,7 +43,7 @@ SELECT e/ehr_status/archetype_node_id FROM EHR e[ehr_id/value = '${ehr_id}']
     ${query}    Set Variable
     ...     SELECT e/ehr_status/archetype_node_id FROM EHR e[ehr_id/value = '${ehr_id}']
     ${expected_returned_query}      Set Variable
-    ...     SELECT s/archetype_node_id FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS EHR_STATUS s
+    ...     SELECT e/ehr_status/archetype_node_id FROM EHR e[ehr_id/value = '${ehr_id}']
     Set AQL And Execute Ad Hoc Query        ${query}
     Should Be Equal As Strings      ${resp_body_query}      ${expected_returned_query}
     Should Be Equal As Strings      ${resp_body_actual['rows'][0][0]}   openEHR-EHR-EHR_STATUS.generic.v1
@@ -53,7 +53,7 @@ SELECT e/ehr_status/name/value FROM EHR e[ehr_id/value = '${ehr_id}']
     ${query}    Set Variable
     ...     SELECT e/ehr_status/name/value FROM EHR e[ehr_id/value = '${ehr_id}']
     ${expected_returned_query}      Set Variable
-    ...     SELECT s/name/value FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS EHR_STATUS s
+    ...     SELECT e/ehr_status/name/value FROM EHR e[ehr_id/value = '${ehr_id}']
     Set AQL And Execute Ad Hoc Query        ${query}
     Should Be Equal As Strings      ${resp_body_query}      ${expected_returned_query}
     Should Be Equal As Strings      ${resp_body_actual['rows'][0][0]}   EHR Status

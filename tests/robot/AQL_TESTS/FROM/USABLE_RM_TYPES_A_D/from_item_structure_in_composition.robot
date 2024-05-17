@@ -19,7 +19,7 @@ Suite Teardown  Admin Delete EHR For AQL       #enable this keyword if AQL check
 
 
 *** Test Cases ***
-Test From Item Structure In Composition: SELECT t FROM COMPOSITION contains ${type} t
+Test From Item Structure In Composition: SELECT t FROM COMPOSITION CONTAINS ${type} t
     #[Tags]      not-ready
     [Template]      Execute Query
     ${type}     ${expected_file}    ${nr_of_results}
@@ -34,7 +34,7 @@ Precondition
 
 Execute Query
     [Arguments]     ${type}     ${expected_file}    ${nr_of_results}
-    ${query}    Set Variable    SELECT t FROM COMPOSITION contains ${type} t
+    ${query}    Set Variable    SELECT t FROM COMPOSITION CONTAINS ${type} t
     Set AQL And Execute Ad Hoc Query    ${query}
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/${expected_file}
