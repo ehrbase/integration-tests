@@ -121,6 +121,7 @@ robot --include ${tags} \
       --skip future \
       --loglevel INFO \
       -e SECURITY \
+      -e AQL_DEBUG_OPTS \
       --dotted \
       --console quiet \
       --skiponfailure not-ready -L TRACE \
