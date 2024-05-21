@@ -1,5 +1,5 @@
 *** Settings ***
-Metadata    Author    *Vladislav Plaaia*
+Metadata    Author    *Vladislav Ploaia*
 
 Documentation   AQL DEBUG OPTIONS CHECKS
 ...             Test documentation: https://vitagroup-ag.atlassian.net/browse/CDR-1430
