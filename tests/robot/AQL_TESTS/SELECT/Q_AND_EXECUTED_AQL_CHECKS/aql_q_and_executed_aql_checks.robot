@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation   CHECK Query Request Debug Options
+Documentation   Checks q and _executed_aql API response body for AQL call -> Ad-Hoc and Stored Query.
 ...             - Covers: https://vitagroup-ag.atlassian.net/browse/CDR-1397
 ...             - PR: https://github.com/ehrbase/ehrbase/pull/1296
 ...             - Latest requirements changes here: https://vitagroup-ag.atlassian.net/browse/CDR-1258
