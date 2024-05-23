@@ -122,6 +122,36 @@ echo "Running Robot Test-Suite [name: ${name}, path: ${path}, tags: ${tags}, env
 echo "---------------------------------------------------------------------------------------"
 
 cd tests
+echo "Robot Command:"
+echo "robot --include ${tags} \
+      --skip TODO \
+      --skip future \
+      --loglevel INFO \
+      -e SECURITY \
+      -e AQL_DEBUG_OPTS \
+      --dotted \
+      --console quiet \
+      --skiponfailure not-ready -L TRACE \
+      --flattenkeywords for \
+      --flattenkeywords foritem \
+      --flattenkeywords name:_resources.* \
+      --flattenkeywords \"name:composition_keywords.Load Json File With Composition\" \
+      --flattenkeywords \"name:template_opt1.4_keywords.upload OPT file\" \
+      --removekeywords \"name:JSONLibrary.Load Json From File\" \
+      --removekeywords \"name:Change Json KeyValue and Save Back To File\" \
+      --removekeywords \"name:JSONLibrary.Update Value To Json\" \
+      --removekeywords \"name:JSONLibrary.Convert JSON To String\" \
+      --removekeywords \"name:JSONLibrary.Get Value From Json\" \
+      --report NONE \
+      --name ${name} \
+      --outputdir ${dirResults}/${name} \
+      -v SUT:${suite} \
+      -v nodocker \
+      -v AUTH_TYPE:${env} \
+      -v NODENAME:${serverNodeName} \
+      -v BASEURL:${serverBase}/ehrbase/rest/openehr/v1 \
+      robot/${path}"
+
 robot --include ${tags} \
       --skip TODO \
       --skip future \
