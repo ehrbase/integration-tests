@@ -30,6 +30,7 @@ showHelp()
 name=0
 path=0
 tags=0
+env=0
 suite='TEST'
 serverBase=${EHRBASE_BASE_URL:-http://ehrbase:8080}
 serverNodeName=${SERVER_NODENAME:-local.ehrbase.org}
@@ -117,7 +118,7 @@ rm -Rf ${dirResults}/${name}
 ############################################################
 
 echo "---------------------------------------------------------------------------------------"
-echo "Running Robot Test-Suite [name: ${name}, path: ${path}, tags: ${tags}, env: ${env}, suite: ${suite}]"
+echo "Running Robot Test-Suite [name: ${name}, path: ${path}, tags: ${tags}, env=${env}, suite: ${suite}]"
 echo "---------------------------------------------------------------------------------------"
 
 cd tests
