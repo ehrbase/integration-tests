@@ -146,7 +146,7 @@ robot --include ${tags} \
       --outputdir ${dirResults}/${name} \
       -v SUT:${suite} \
       -v nodocker \
-      -v AUTH_TYPE:BASIC \
+      -v AUTH_TYPE:${env.AUTH_TYPE} \
       -v NODENAME:${serverNodeName} \
       -v BASEURL:${serverBase}/ehrbase/rest/openehr/v1 \
       robot/${path}
