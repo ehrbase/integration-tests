@@ -30,6 +30,7 @@ showHelp()
 name=0
 path=0
 tags=0
+env=0
 suite='TEST'
 serverBase=${EHRBASE_BASE_URL:-http://ehrbase:8080}
 serverNodeName=${SERVER_NODENAME:-local.ehrbase.org}
@@ -56,6 +57,11 @@ while [[ $# -gt 0 ]]; do
       shift # past value
       ;;
     -t|--tags)
+      tags="$2"
+      shift # past argument
+      shift # past value
+      ;;
+    -e|--env)
       tags="$2"
       shift # past argument
       shift # past value
@@ -112,7 +118,7 @@ rm -Rf ${dirResults}/${name}
 ############################################################
 
 echo "---------------------------------------------------------------------------------------"
-echo "Running Robot Test-Suite [name: ${name}, path: ${path}, tags: ${tags}, suite: ${suite}]"
+echo "Running Robot Test-Suite [name: ${name}, path: ${path}, tags: ${tags}, env: ${env}, suite: ${suite}]"
 echo "---------------------------------------------------------------------------------------"
 
 cd tests
@@ -140,6 +146,7 @@ robot --include ${tags} \
       --outputdir ${dirResults}/${name} \
       -v SUT:${suite} \
       -v nodocker \
+      -v AUTH_TYPE:BASIC \
       -v NODENAME:${serverNodeName} \
       -v BASEURL:${serverBase}/ehrbase/rest/openehr/v1 \
       robot/${path}
