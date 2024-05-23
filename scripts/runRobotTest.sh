@@ -30,7 +30,6 @@ showHelp()
 name=0
 path=0
 tags=0
-env=0
 suite='TEST'
 serverBase=${EHRBASE_BASE_URL:-http://ehrbase:8080}
 serverNodeName=${SERVER_NODENAME:-local.ehrbase.org}
@@ -146,7 +145,7 @@ robot --include ${tags} \
       --outputdir ${dirResults}/${name} \
       -v SUT:${suite} \
       -v nodocker \
-      -v AUTH_TYPE:${env.AUTH_TYPE} \
+      -v AUTH_TYPE:${env} \
       -v NODENAME:${serverNodeName} \
       -v BASEURL:${serverBase}/ehrbase/rest/openehr/v1 \
       robot/${path}
