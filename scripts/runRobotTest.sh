@@ -62,7 +62,7 @@ while [[ $# -gt 0 ]]; do
       shift # past value
       ;;
     -e|--env)
-      tags="$2"
+      env="$2"
       shift # past argument
       shift # past value
       ;;
