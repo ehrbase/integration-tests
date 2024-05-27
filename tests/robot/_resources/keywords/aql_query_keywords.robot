@@ -279,11 +279,15 @@ PUT /definition/query/{qualified_query_name}
     ...                 Returns combination of qualified_query_name and version, in format
     ...                 {random_query_qualified_name}/{random_query_version}
     [Arguments]     ${query_to_store}    ${format}=json     ${multitenancy_token}=${None}
+    &{headers}      Create Dictionary
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     IF      '${format}' == 'json'
-        &{headers}      Create Dictionary       Content-Type=application/json
+        Set To Dictionary       ${headers}      Content-Type=application/json
         ${query}    Set Variable    {"q":"${query_to_store}"}
     ELSE IF     '${format}' == 'text'
-        &{headers}      Create Dictionary       Content-Type=text/plain
+        Set To Dictionary       ${headers}      Content-Type=text/plain
         ${query}    Set Variable    ${query_to_store}
     END
     IF  '${multitenancy_token}' != '${None}'
@@ -316,11 +320,15 @@ PUT /definition/query/{qualified_query_name}/{version}
     ...                 Returns combination of qualified_query_name and version, in format
     ...                 {random_query_qualified_name}/{random_query_version}
     [Arguments]     ${query_to_store}    ${format}=json     ${multitenancy_token}=${None}
+    &{headers}      Create Dictionary
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     IF      '${format}' == 'json'
-        &{headers}      Create Dictionary       Content-Type=application/json
+        Set To Dictionary   ${headers}      Content-Type=application/json
         ${query}    Set Variable    {"q":"${query_to_store}"}
     ELSE IF     '${format}' == 'text'
-        &{headers}      Create Dictionary       Content-Type=text/plain
+        Set To Dictionary   ${headers}      Content-Type=text/plain
         ${query}    Set Variable    ${query_to_store}
     END
     IF  '${multitenancy_token}' != '${None}'
@@ -349,6 +357,9 @@ GET /definition/query/{qualified_query_name} / including {version}
     ...                 Returns {resp_query}, query from response.
     [Arguments]     ${qualif_name}      ${multitenancy_token}=${None}
     &{headers}      Create Dictionary       Content-Type=application/json
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     Create Session      ${SUT}      ${BASEURL}      debug=2
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
@@ -370,6 +381,9 @@ GET /definition/query
     [Documentation]     List all stored AQL from EHRBase.
     ...                 Expected status code 200.
     &{headers}      Create Dictionary       Content-Type=application/json
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     Create Session      ${SUT}      ${BASEURL}      debug=2
     ${resp}     GET On Session      ${SUT}
     ...         /definition/query
@@ -384,6 +398,9 @@ DELETE /definition/query/{qualified_query_name}/{version}
     ...                 Expected status code 405 - endpoint available operations PUT, GET only.
     [Arguments]     ${qualif_name}
     &{headers}      Create Dictionary       Content-Type=application/json
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     Create Session      ${SUT}      ${BASEURL}      debug=2
     ${resp}     DELETE On Session       ${SUT}
     ...         /definition/query/${qualif_name}
@@ -514,6 +531,9 @@ GET /query/{qualified_query_name}
     ELSE
         &{headers}      Create Dictionary   Content-Type=application/json
     END
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     Create Session      ${SUT}      ${BASEURL}      debug=2
     IF      """${params}""" == """${FALSE}"""
         ${resp}     GET On Session      ${SUT}
@@ -544,6 +564,9 @@ POST /query/{qualified_query_name}
     ELSE
         &{headers}      Create Dictionary   Content-Type=application/json
     END
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     Create Session      ${SUT}      ${BASEURL}      debug=2
     ${resp}     POST On Session      ${SUT}
     ...         /query/${qualif_name}
@@ -572,6 +595,9 @@ GET /query/{qualified_query_name}/{version}
     ...                 Returns {resp}, with query and rows from response.
     [Arguments]     ${qualif_name}      &{params}=${FALSE}
     &{headers}      Create Dictionary       Content-Type=application/json
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     Create Session      ${SUT}      ${BASEURL}      debug=2
     IF      """${params}""" == """${FALSE}"""
         ${resp}     GET On Session      ${SUT}
@@ -598,6 +624,9 @@ POST /query/{qualified_query_name}/{version}
     ...                 Returns {resp}, with query and rows from response.
     [Arguments]     ${qualif_name}
     &{headers}      Create Dictionary       Content-Type=application/json
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     Create Session      ${SUT}      ${BASEURL}      debug=2
     ${resp}     POST On Session      ${SUT}
     ...         /query/${qualif_name}
@@ -614,6 +643,9 @@ DELETE /query/{qualified_query_name}/{version} ADMIN
     ...                 Expected status code .
     [Arguments]     ${qualif_name}
     &{headers}      Create Dictionary       Content-Type=application/json
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     Create Session      ${SUT}      ${ADMIN_BASEURL}      debug=2
     ${resp}     DELETE On Session      ${SUT}
     ...         /query/${qualif_name}

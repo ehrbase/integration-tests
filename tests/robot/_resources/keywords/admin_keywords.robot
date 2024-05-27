@@ -31,6 +31,9 @@ Resource        template_opt1.4_keywords.robot
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
                         ...     verify=False    #auth=${CREDENTIALS}
     ${resp}     DELETE On session     ${SUT}    /ehr/${ehr_id}
@@ -97,6 +100,9 @@ Resource        template_opt1.4_keywords.robot
     IF     '${multitenancy_token}' != '${None}'
             Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
     END
+    IF      '${AUTH_TYPE}' == 'BASIC'
+            Set To Dictionary       ${headers}      &{authorization}
+    END
     Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
                             ...     verify=False
     ${resp}         DELETE On Session   ${SUT}  /ehr/${ehr_id}/composition/${versioned_object_uid}
@@ -104,6 +110,18 @@ Resource        template_opt1.4_keywords.robot
                     Status Should Be    204
                     Set Test Variable    ${response}    ${resp}
 
+(admin) delete stored query
+    [Documentation]     Admin delete of Stored Query (by qualified_verion or qualified_verion/id).
+    [Arguments]     ${qualif_name}
+    IF      '${AUTH_TYPE}' == 'BASIC'
+            Set To Dictionary       ${headers}      &{authorization}
+    END
+    Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
+                            ...     verify=False
+    ${resp}         DELETE On Session   ${SUT}  /query/${qualif_name}
+                    ...     expected_status=anything    headers=${headers}
+                    Status Should Be    200
+                    Set Test Variable   ${response}     ${resp}
 
 Delete Composition Using API
     IF      '${versioned_object_uid}' != '${None}'

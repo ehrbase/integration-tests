@@ -310,6 +310,9 @@ commit composition
 
     &{headers}=        Create Dictionary   Prefer=return=${prefer}
     ...                openEHR-VERSION.lifecycle_state=${lifecycle}
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
 
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary   ${headers}
@@ -589,6 +592,9 @@ update composition (FLAT)
     &{headers}=         Create Dictionary   Content-Type=application/json
                         ...                 Accept=application/json
                         ...                 Prefer=return=representation
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
 
     &{params}=          Create Dictionary     format=FLAT   ehrId=${ehr_id}  templateId=${template_id}
 
@@ -815,6 +821,9 @@ Get Web Template By Template Id (ECIS)
     Create Session      ${SUT}    ${ECISURL}    debug=2
     ...                 verify=False    #auth=${CREDENTIALS}
     &{headers}      Create Dictionary
+    IF  '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary   ${headers}      &{authorization}
+    END
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
@@ -847,6 +856,9 @@ Get Example Of Web Template By Template Id (ECIS)
     ${headers}         Create Dictionary      Accept=application/json
     ...                                       Content-Type=application/xml
     ...                                       Prefer=return=representation
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     IF      '${responseFormat}' != 'FLAT'
             ${resp}            GET On Session         ${SUT}
                         ...     template/${template_id}/example  expected_status=anything   headers=${headers}
@@ -868,14 +880,18 @@ Get Example Of Web Template By Template Id (OPENEHR)
     ${headers}         Create Dictionary     Accept=application/json
     ...                                      Content-Type=application/xml
     ...                                      Prefer=return=representation
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     IF      '${responseFormat}' == 'JSON'
             ${resp}            GET On Session         ${SUT}
                                 ...     definition/template/adl1.4/${template_id}/example  expected_status=anything
                                 ...     headers=${headers}      params=${params}
     ELSE IF      '${responseFormat}' == 'XML'
-            ${headers}         Create Dictionary     Accept=application/xml
-            ...                                      Content-Type=application/xml
-            ...                                      Prefer=return=representation
+            Set To Dictionary   ${headers}
+            ...     Accept=application/xml
+            ...     Content-Type=application/xml
+            ...     Prefer=return=representation
             ${resp}            GET On Session         ${SUT}
                                 ...     definition/template/adl1.4/${template_id}/example
                                 ...     expected_status=anything        headers=${headers}
