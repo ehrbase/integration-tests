@@ -77,6 +77,49 @@ Suite Setup     Set Library Search Order For Tests
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}
     ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id}' LIMIT 1 OFFSET 1
 
+2.c Query - Ad-Hoc Query GET - Query Params Fetch And Offset - Query Limit And Offset
+    [Documentation]     Covers https://vitagroup-ag.atlassian.net/browse/CDR-1391
+    Set Test Variable       ${query3}
+    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = \$ehr_id LIMIT 1 OFFSET 1
+    ${parameter_obj}    Set Variable    {"ehr_id": \"${ehr_id}\" }
+    Set Test Variable       ${test_data}    {"q":"${query3}","query_parameters":${parameter_obj}, "offset": 1, "fetch": 1}
+    ${err_msg}  Run Keyword And Expect Error    *
+    ...     Send Ad Hoc Request     aql_body=${test_data}
+    Should Contain      ${err_msg}      422 != 200
+    Should Contain      ${err_msg}      Query contains a LIMIT clause, fetch and offset parameters must not be used
+
+2.d Query - Ad-Hoc Query GET - Query Param Fetch - Query Limit And Offset
+    [Documentation]     Covers https://vitagroup-ag.atlassian.net/browse/CDR-1391
+    Set Test Variable       ${query3}
+    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = \$ehr_id LIMIT 1 OFFSET 1
+    ${parameter_obj}    Set Variable    {"ehr_id": \"${ehr_id}\" }
+    Set Test Variable       ${test_data}    {"q":"${query3}","query_parameters":${parameter_obj}, "offset": 1}
+    ${err_msg}  Run Keyword And Expect Error    *
+    ...     Send Ad Hoc Request     aql_body=${test_data}
+    Should Contain      ${err_msg}      422 != 200
+    Should Contain      ${err_msg}      Query contains a LIMIT clause, fetch and offset parameters must not be used
+
+2.e Query - Ad-Hoc Query GET - Query Param Offset - Query Limit And Offset
+    [Documentation]     Covers https://vitagroup-ag.atlassian.net/browse/CDR-1391
+    Set Test Variable       ${query3}
+    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = \$ehr_id LIMIT 1 OFFSET 1
+    ${parameter_obj}    Set Variable    {"ehr_id": \"${ehr_id}\" }
+    Set Test Variable       ${test_data}    {"q":"${query3}","query_parameters":${parameter_obj}, "offset": 1}
+    ${err_msg}  Run Keyword And Expect Error    *
+    ...     Send Ad Hoc Request     aql_body=${test_data}
+    Should Contain      ${err_msg}      422 != 200
+    Should Contain      ${err_msg}      Query contains a LIMIT clause, fetch and offset parameters must not be used
+
+2.f Query - Ad-Hoc Query GET - Query Param ehr_id - Query Limit And Offset
+    [Documentation]     Covers https://vitagroup-ag.atlassian.net/browse/CDR-1391
+    Set Test Variable       ${query3}
+    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = \$ehr_id LIMIT 1 OFFSET 1
+    ${parameter_obj}    Set Variable    {"ehr_id": \"${ehr_id}\" }
+    Set Test Variable       ${test_data}    {"q":"${query3}","query_parameters":${parameter_obj}}
+    Send Ad Hoc Request     aql_body=${test_data}
+    Length Should Be    ${resp_body['rows']}    ${0}
+    Should Be Equal As Strings      ${resp_body_query}      ${query3}
+
 3. Query - Stored Query GET By Qualified Query Name And Version
     Set Test Variable      ${query3}
     ...     SELECT c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
