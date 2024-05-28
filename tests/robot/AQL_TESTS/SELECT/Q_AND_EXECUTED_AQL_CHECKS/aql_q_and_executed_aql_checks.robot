@@ -93,7 +93,7 @@ Suite Setup     Set Library Search Order For Tests
     Set Test Variable       ${query3}
     ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = \$ehr_id LIMIT 1 OFFSET 1
     ${parameter_obj}    Set Variable    {"ehr_id": \"${ehr_id}\" }
-    Set Test Variable       ${test_data}    {"q":"${query3}","query_parameters":${parameter_obj}, "offset": 1}
+    Set Test Variable       ${test_data}    {"q":"${query3}","query_parameters":${parameter_obj}, "fetch": 1}
     ${err_msg}  Run Keyword And Expect Error    *
     ...     Send Ad Hoc Request     aql_body=${test_data}
     Should Contain      ${err_msg}      422 != 200
