@@ -100,7 +100,7 @@ Send Ad Hoc Request
     ELSE
         &{headers}      Create Dictionary   Content-Type=application/json
     END
-    IF      '${AUTH_TYPE}' == 'BASIC'
+    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
         Set To Dictionary       ${headers}      &{authorization}
     END
     Create Session      ${SUT}      ${BASEURL}

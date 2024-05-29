@@ -310,7 +310,7 @@ commit composition
 
     &{headers}=        Create Dictionary   Prefer=return=${prefer}
     ...                openEHR-VERSION.lifecycle_state=${lifecycle}
-    IF      '${AUTH_TYPE}' == 'BASIC'
+    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
         Set To Dictionary       ${headers}      &{authorization}
     END
 

@@ -31,7 +31,7 @@ Resource        template_opt1.4_keywords.robot
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     END
-    IF      '${AUTH_TYPE}' == 'BASIC'
+    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
         Set To Dictionary       ${headers}      &{authorization}
     END
     Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
@@ -100,7 +100,7 @@ Resource        template_opt1.4_keywords.robot
     IF     '${multitenancy_token}' != '${None}'
             Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
     END
-    IF      '${AUTH_TYPE}' == 'BASIC'
+    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
             Set To Dictionary       ${headers}      &{authorization}
     END
     Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
@@ -113,7 +113,7 @@ Resource        template_opt1.4_keywords.robot
 (admin) delete stored query
     [Documentation]     Admin delete of Stored Query (by qualified_verion or qualified_verion/id).
     [Arguments]     ${qualif_name}
-    IF      '${AUTH_TYPE}' == 'BASIC'
+    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
             Set To Dictionary       ${headers}      &{authorization}
     END
     Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2

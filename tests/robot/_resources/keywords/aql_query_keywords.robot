@@ -321,7 +321,7 @@ PUT /definition/query/{qualified_query_name}/{version}
     ...                 {random_query_qualified_name}/{random_query_version}
     [Arguments]     ${query_to_store}    ${format}=json     ${multitenancy_token}=${None}
     &{headers}      Create Dictionary
-    IF      '${AUTH_TYPE}' == 'BASIC'
+    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
         Set To Dictionary       ${headers}      &{authorization}
     END
     IF      '${format}' == 'json'
@@ -357,7 +357,7 @@ GET /definition/query/{qualified_query_name} / including {version}
     ...                 Returns {resp_query}, query from response.
     [Arguments]     ${qualif_name}      ${multitenancy_token}=${None}
     &{headers}      Create Dictionary       Content-Type=application/json
-    IF      '${AUTH_TYPE}' == 'BASIC'
+    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
         Set To Dictionary       ${headers}      &{authorization}
     END
     Create Session      ${SUT}      ${BASEURL}      debug=2
@@ -624,7 +624,7 @@ POST /query/{qualified_query_name}/{version}
     ...                 Returns {resp}, with query and rows from response.
     [Arguments]     ${qualif_name}
     &{headers}      Create Dictionary       Content-Type=application/json
-    IF      '${AUTH_TYPE}' == 'BASIC'
+    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
         Set To Dictionary       ${headers}      &{authorization}
     END
     Create Session      ${SUT}      ${BASEURL}      debug=2

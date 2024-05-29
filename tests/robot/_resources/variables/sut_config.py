@@ -31,9 +31,9 @@ KAFKA_URL_FROM_YAML = GLOBAL_VARS_FROM_YAML_FUNC["KAFKA_URL"]
 # KEYCLOAK SETTINGS
 HEADER = {"Content-Type": "application/x-www-form-urlencoded"}
 KEYCLOAK_URL = "http://localhost:8081/auth"
-KC_AUTH_URL = KEYCLOAK_URL + "/realms/ehrbase/protocol/openid-connect/auth"
-KC_ACCESS_TOKEN_URL = KEYCLOAK_URL + "/realms/ehrbase/protocol/openid-connect/token"
-KC_JWT_ISSUERURI = KEYCLOAK_URL + "/realms/ehrbase"
+KC_AUTH_URL = KEYCLOAK_URL + "/realms/cdr-core-sanity-check/protocol/openid-connect/auth"
+KC_ACCESS_TOKEN_URL = KEYCLOAK_URL + "/realms/cdr-core-sanity-check/protocol/openid-connect/token"
+KC_JWT_ISSUERURI = KEYCLOAK_URL + "/realms/cdr-core-sanity-check"
 
 
 # SUT CONFIGURATIONS
@@ -145,11 +145,11 @@ TEST_CONFIG = {
     "NODENAME": "local.ehrbase.org",  # alias CREATING_SYSTEM_ID
     "CONTROL_MODE": "docker",
     "OAUTH_ACCESS_GRANT": {
-        "client_id": "ehrbase-robot",
-        "scope": "openid",
-        "username": "robot",
-        "password": "robot",
+        "client_id": "HIP-CDR-EHRbase-Service",
         "grant_type": "password",
+        "client_secret": "bT5T4oWn3xNdBytQsl2cfpBDi1pp15Va",
+        "username": "ehrbase-user",
+        "password": "SuperSecretPassword1!"
     },
     "JWT_ISSUERURI": KC_JWT_ISSUERURI,
     "OAUTH_NAME": "Robot Framework",
@@ -180,11 +180,11 @@ ADMIN_TEST_CONFIG = {
     "NODENAME": "local.ehrbase.org",  # alias CREATING_SYSTEM_ID
     "CONTROL_MODE": "docker",
     "OAUTH_ACCESS_GRANT": {
-        "client_id": "ehrbase-robot",
-        "scope": "openid",
-        "username": "admin-robot",  # TODO: recreate exported-keycloak-config to have this user!
-        "password": "admin-robot",  #       check README.md in SECURITY_TESTS folder for how to
+        "client_id": "HIP-CDR-EHRbase-Service",
         "grant_type": "password",
+        "client_secret": "bT5T4oWn3xNdBytQsl2cfpBDi1pp15Va",
+        "username": "ehrbase-admin",
+        "password": "EvenMoreSecretPassword1!"
     },
     "JWT_ISSUERURI": KC_JWT_ISSUERURI,
     "OAUTH_NAME": "Admin Robot Framework",
