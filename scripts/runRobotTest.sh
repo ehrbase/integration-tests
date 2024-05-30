@@ -34,6 +34,7 @@ env=0
 suite='TEST'
 serverBase=${EHRBASE_BASE_URL:-http://ehrbase:8080}
 serverNodeName=${SERVER_NODENAME:-local.ehrbase.org}
+keycloakBase=${KEYCLOAK_URL:-http://keycloak:8081}
 POSITIONAL_ARGS=()
 
 ############################################################
@@ -179,6 +180,6 @@ robot --include ${tags} \
       -v NODOCKER:False \
       -v AUTH_TYPE:${env} \
       -v NODENAME:${serverNodeName} \
-      -v KEYCLOAK_URL:http://localhost:8081/auth \
+      -v KEYCLOAK_URL:${keycloakBase}/auth \
       -v BASEURL:${serverBase}/ehrbase/rest/openehr/v1 \
       robot/${path}
