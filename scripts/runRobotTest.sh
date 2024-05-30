@@ -146,7 +146,7 @@ echo "robot --include ${tags} \
       --name ${name} \
       --outputdir ${dirResults}/${name} \
       -v SUT:${suite} \
-      -v NODOCKER:false \
+      -v NODOCKER:False \
       -v AUTH_TYPE:${env} \
       -v NODENAME:${serverNodeName} \
       -v KEYCLOAK_URL:http://localhost:8081/auth \
@@ -176,7 +176,7 @@ robot --include ${tags} \
       --name ${name} \
       --outputdir ${dirResults}/${name} \
       -v SUT:${suite} \
-      -v NODOCKER:false \
+      -v NODOCKER:False \
       -v AUTH_TYPE:${env} \
       -v NODENAME:${serverNodeName} \
       -v KEYCLOAK_URL:http://localhost:8081/auth \
