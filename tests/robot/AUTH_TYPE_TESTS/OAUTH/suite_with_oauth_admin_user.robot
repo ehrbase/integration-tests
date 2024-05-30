@@ -13,6 +13,10 @@ Suite Setup     Set Library Search Order For Tests
 
 *** Variables ***
 ${SUT}      ADMIN-TEST
+&{TEMP_OAUTH_ACCESS_GRANT}   client_id=HIP-CDR-EHRbase-Service
+...     grant_type=password     client_secret=bT5T4oWn3xNdBytQsl2cfpBDi1pp15Va
+...     username=ehrbase-admin  password=EvenMoreSecretPassword1!
+## the same configuration as in sut_config.py, ADMIN_TEST_CONFIG
 
 
 *** Test Cases ***
@@ -22,7 +26,7 @@ ${SUT}      ADMIN-TEST
                     Create Session    keycloak    ${KEYCLOAK_URL}
     ${resp}         R.Get On Session    keycloak    /
                     Should Be Equal As Strings 	  ${resp.status_code}    200
-    Should Be Equal     ${OAUTH_ACCESS_GRANT['username']}       ehrbase-admin
+    Should Be Equal     ${TEMP_OAUTH_ACCESS_GRANT['username']}       ehrbase-admin
 
 2. cdr-core-sanity-check realm exists - OAUTH Admin User
     ${resp}         R.Get On Session    keycloak    /realms/cdr-core-sanity-check
@@ -31,7 +35,7 @@ ${SUT}      ADMIN-TEST
     Log     Token service URL: ${resp.json()["token-service"]}      console=yes
 
 3. Test Get Token - OAUTH Admin User
-    Request Access Token    ${OAUTH_ACCESS_GRANT}
+    Request Access Token    ${TEMP_OAUTH_ACCESS_GRANT}
     Status Should Be    200
 
 4. Upload Template - OAUTH Admin User Creds

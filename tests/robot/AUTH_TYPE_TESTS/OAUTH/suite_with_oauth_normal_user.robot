@@ -16,6 +16,7 @@ ${SUT}      TEST
 &{TEMP_OAUTH_ACCESS_GRANT}   client_id=HIP-CDR-EHRbase-Service
 ...     grant_type=password     client_secret=bT5T4oWn3xNdBytQsl2cfpBDi1pp15Va
 ...     username=ehrbase-admin  password=EvenMoreSecretPassword1!
+## the same configuration as in sut_config.py, ADMIN_TEST_CONFIG
 
 
 *** Test Cases ***
@@ -95,9 +96,6 @@ ${SUT}      TEST
     ${err_msg}  Run Keyword And Expect Error    *
     ...     (admin) delete stored query     ${resp_qualified_query_name_version}
     Should Contain      ${err_msg}      Expected status: 403 != 200
-    &{OAUTH_ACCESS_GRANT}   Create Dictionary   client_id=HIP-CDR-EHRbase-Service
-    ...     grant_type=password     client_secret=bT5T4oWn3xNdBytQsl2cfpBDi1pp15Va
-    ...     username=ehrbase-admin  password=EvenMoreSecretPassword1!
     Request Access Token    ${TEMP_OAUTH_ACCESS_GRANT}
     Status Should Be    200
     &{authorization}        Create Dictionary
