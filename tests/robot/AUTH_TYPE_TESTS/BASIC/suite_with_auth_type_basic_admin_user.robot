@@ -15,6 +15,7 @@ Suite Setup     Set Library Search Order For Tests
 
 *** Variables ***
 ${SUT}      ADMIN-TEST
+&{ADMIN_BASIC_AUTH}     Authorization=Basic ZWhyYmFzZS1hZG1pbjpFdmVuTW9yZVNlY3JldFBhc3N3b3Jk
 
 
 *** Test Cases ***
@@ -64,9 +65,11 @@ Execute Ad-Hoc Query - Admin User Creds
     Send Ad Hoc Request     aql_body=${test_data}
 
 Admin Delete Composition - Admin User Creds
+    Set Test Variable   ${authorization}    ${ADMIN_BASIC_AUTH}
     Set Test Variable   ${versioned_object_uid}     ${compo_id}
     (admin) delete composition
 
 Admin Delete Stored Query - Admin User Creds
+    Set Test Variable   ${authorization}    ${ADMIN_BASIC_AUTH}
     (admin) delete stored query     ${resp_qualified_query_name_version}
     [Teardown]      (admin) delete ehr
