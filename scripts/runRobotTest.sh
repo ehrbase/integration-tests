@@ -150,7 +150,7 @@ echo "robot --include ${tags} \
       -v NODOCKER:False \
       -v AUTH_TYPE:${env} \
       -v NODENAME:${serverNodeName} \
-      -v KEYCLOAK_URL:http://localhost:8081/auth \
+      -v KEYCLOAK_URL:${keycloakBase}/auth \
       -v BASEURL:${serverBase}/ehrbase/rest/openehr/v1 \
       robot/${path}"
 
