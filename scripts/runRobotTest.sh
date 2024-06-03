@@ -34,7 +34,7 @@ env=0
 suite='TEST'
 serverBase=${EHRBASE_BASE_URL:-http://ehrbase:8080}
 serverNodeName=${SERVER_NODENAME:-local.ehrbase.org}
-keycloakBase=${KEYCLOAK_BASE_URL:-http://keycloak:8081}
+keycloakBase=${KEYCLOAK_BASE_URL:-http://localhost:8081}
 POSITIONAL_ARGS=()
 
 ############################################################
