@@ -36,8 +36,6 @@ Suite Setup     Set Library Search Order For Tests
     Should Be Equal As Strings      ${resp_body_query}   ${query1}
 
 1.a Query - Ad-Hoc Query POST - Query Params - Check Debug Options
-    [Documentation]     Failing due to 500 Internal Server Error - https://vitagroup-ag.atlassian.net/issues/CDR-1438
-    [Tags]      not-ready   CDR-1438
     &{request_headers}      Create Dictionary
     ...     Content-Type=application/json
     ...     EHRbase-AQL-Dry-Run=false
