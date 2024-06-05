@@ -122,6 +122,11 @@ echo "--------------------------------------------------------------------------
 echo "Running Robot Test-Suite [name: ${name}, path: ${path}, tags: ${tags}, env=${env}, suite: ${suite}]"
 echo "---------------------------------------------------------------------------------------"
 
+if [ "$env" == "NONE" ]; then
+  echo "Environment is set to NONE, changing env to BASIC"
+  env="BASIC"
+fi
+
 cd tests
 echo "Robot Command:"
 echo "robot --include ${tags} \
