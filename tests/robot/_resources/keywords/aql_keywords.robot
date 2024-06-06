@@ -100,6 +100,9 @@ Send Ad Hoc Request
     ELSE
         &{headers}      Create Dictionary   Content-Type=application/json
     END
+    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     Create Session      ${SUT}      ${BASEURL}
     ...     debug=2     headers=${headers}      verify=True
     ${resp}             POST On Session     ${SUT}   /query/aql   expected_status=anything
