@@ -13,7 +13,7 @@ Suite Setup     Set Library Search Order For Tests
 
 *** Variables ***
 ${SUT}      ADMIN-TEST
-&{TEMP_OAUTH_ACCESS_GRANT}   client_id=HIP-CDR-EHRbase-Service
+&{TEMP_OAUTH_ACCESS_GRANT}   client_id=ehrbase
 ...     grant_type=password     client_secret=bT5T4oWn3xNdBytQsl2cfpBDi1pp15Va
 ...     username=ehrbase-admin  password=EvenMoreSecretPassword1!
 ## the same configuration as in sut_config.py, ADMIN_TEST_CONFIG
@@ -28,10 +28,10 @@ ${SUT}      ADMIN-TEST
                     Should Be Equal As Strings 	  ${resp.status_code}    200
     Should Be Equal     ${TEMP_OAUTH_ACCESS_GRANT['username']}       ehrbase-admin
 
-2. cdr-core-sanity-check realm exists - OAUTH Admin User
-    ${resp}         R.Get On Session    keycloak    /realms/cdr-core-sanity-check
+2. ehrbase realm exists - OAUTH Admin User
+    ${resp}         R.Get On Session    keycloak    /realms/ehrbase
     Status Should Be    200
-    Should Be Equal     ${resp.json()["realm"]}     cdr-core-sanity-check
+    Should Be Equal     ${resp.json()["realm"]}     ehrbase
     Log     Token service URL: ${resp.json()["token-service"]}      console=yes
 
 3. Test Get Token - OAUTH Admin User
@@ -100,7 +100,7 @@ Request Access Token
     [Arguments]         ${grant}
                         Create Session    keycloak   ${KEYCLOAK_URL}   verify=${False}    debug=3
     &{headers}=         Create Dictionary    Content-Type=application/x-www-form-urlencoded
-    ${resp}=            R.POST On Session    keycloak   /realms/cdr-core-sanity-check/protocol/openid-connect/token
+    ${resp}=            R.POST On Session    keycloak   /realms/ehrbase/protocol/openid-connect/token
                         ...     expected_status=anything
                         ...     data=${grant}   headers=${headers}
                         Set Test Variable       ${resp}     ${resp}

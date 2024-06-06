@@ -32,9 +32,9 @@ KEYCLOAK_URL_FROM_YAML = GLOBAL_VARS_FROM_YAML_FUNC["KEYCLOAK_URL"]
 # KEYCLOAK SETTINGS
 HEADER = {"Content-Type": "application/x-www-form-urlencoded"}
 KEYCLOAK_URL = KEYCLOAK_URL_FROM_YAML
-KC_AUTH_URL = KEYCLOAK_URL + "/realms/cdr-core-sanity-check/protocol/openid-connect/auth"
-KC_ACCESS_TOKEN_URL = KEYCLOAK_URL + "/realms/cdr-core-sanity-check/protocol/openid-connect/token"
-KC_JWT_ISSUERURI = KEYCLOAK_URL + "/realms/cdr-core-sanity-check"
+KC_AUTH_URL = KEYCLOAK_URL + "/realms/ehrbase/protocol/openid-connect/auth"
+KC_ACCESS_TOKEN_URL = KEYCLOAK_URL + "/realms/ehrbase/protocol/openid-connect/token"
+KC_JWT_ISSUERURI = KEYCLOAK_URL + "/realms/ehrbase"
 
 
 # SUT CONFIGURATIONS
@@ -146,7 +146,7 @@ TEST_CONFIG = {
     "NODENAME": "local.ehrbase.org",  # alias CREATING_SYSTEM_ID
     "CONTROL_MODE": "docker",
     "OAUTH_ACCESS_GRANT": {
-        "client_id": "HIP-CDR-EHRbase-Service",
+        "client_id": "ehrbase",
         "grant_type": "password",
         "client_secret": "bT5T4oWn3xNdBytQsl2cfpBDi1pp15Va",
         "username": "ehrbase-user",
@@ -181,7 +181,7 @@ ADMIN_TEST_CONFIG = {
     "NODENAME": "local.ehrbase.org",  # alias CREATING_SYSTEM_ID
     "CONTROL_MODE": "docker",
     "OAUTH_ACCESS_GRANT": {
-        "client_id": "HIP-CDR-EHRbase-Service",
+        "client_id": "ehrbase",
         "grant_type": "password",
         "client_secret": "bT5T4oWn3xNdBytQsl2cfpBDi1pp15Va",
         "username": "ehrbase-admin",
