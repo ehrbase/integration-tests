@@ -321,7 +321,9 @@ PUT /definition/query/{qualified_query_name}/{version}
     ...                 {random_query_qualified_name}/{random_query_version}
     [Arguments]     ${query_to_store}    ${format}=json     ${multitenancy_token}=${None}
     &{headers}      Create Dictionary
-    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    ELSE IF     ('${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH') and '${multitenancy_token}' == '${None}'
         Set To Dictionary       ${headers}      &{authorization}
     END
     IF      '${format}' == 'json'
@@ -330,9 +332,6 @@ PUT /definition/query/{qualified_query_name}/{version}
     ELSE IF     '${format}' == 'text'
         Set To Dictionary   ${headers}      Content-Type=text/plain
         ${query}    Set Variable    ${query_to_store}
-    END
-    IF  '${multitenancy_token}' != '${None}'
-        Set To Dictionary    ${headers}    Authorization=Bearer ${multitenancy_token}
     END
     Create Session      ${SUT}      ${BASEURL}      debug=2
     ${random_version}   Generate Version Number To Store Query Multitenancy
@@ -357,13 +356,12 @@ GET /definition/query/{qualified_query_name} / including {version}
     ...                 Returns {resp_query}, query from response.
     [Arguments]     ${qualif_name}      ${multitenancy_token}=${None}
     &{headers}      Create Dictionary       Content-Type=application/json
-    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    ELSE IF     ('${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH') and '${multitenancy_token}' == '${None}'
         Set To Dictionary       ${headers}      &{authorization}
     END
     Create Session      ${SUT}      ${BASEURL}      debug=2
-    IF  '${multitenancy_token}' != '${None}'
-        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
-    END
     ${resp}     GET On Session      ${SUT}
     ...         /definition/query/${qualif_name}
     ...         expected_status=anything

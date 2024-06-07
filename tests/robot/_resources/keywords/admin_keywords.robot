@@ -30,8 +30,7 @@ Resource        template_opt1.4_keywords.robot
     [Arguments]         ${multitenancy_token}=${None}
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
-    END
-    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
+    ELSE IF     ('${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH') and '${multitenancy_token}' == '${None}'
         Set To Dictionary       ${headers}      &{authorization}
     END
     Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
@@ -97,11 +96,10 @@ Resource        template_opt1.4_keywords.robot
     ...                 Needs `${versioned_object_uid}` var from e.g. `commit composition (JSON)` KW.
     [Arguments]         ${multitenancy_token}=${None}
 
-    IF     '${multitenancy_token}' != '${None}'
-            Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
-    END
-    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
-            Set To Dictionary       ${headers}      &{authorization}
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    ELSE IF     ('${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH') and '${multitenancy_token}' == '${None}'
+        Set To Dictionary       ${headers}      &{authorization}
     END
     Create Session      ${SUT}    ${ADMIN_BASEURL}    debug=2
                             ...     verify=False
