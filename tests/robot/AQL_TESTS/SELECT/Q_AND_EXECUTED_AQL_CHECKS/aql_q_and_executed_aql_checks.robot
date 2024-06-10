@@ -108,7 +108,7 @@ Suite Setup     Set Library Search Order For Tests
     ${err_msg}  Run Keyword And Expect Error    *
     ...     Send Ad Hoc Request     aql_body=${test_data}
     Should Contain      ${err_msg}      422 != 200
-    Should Contain      ${err_msg}      Query contains a LIMIT clause, fetch and offset parameters must not be used
+    Should Contain      ${err_msg}      Query parameter for offset provided, but no fetch parameter
 
 2.f Query - Ad-Hoc Query GET - Query Param ehr_id - Query Limit And Offset
     [Documentation]     Covers https://vitagroup-ag.atlassian.net/browse/CDR-1391
