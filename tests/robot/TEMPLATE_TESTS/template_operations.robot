@@ -71,20 +71,40 @@ Suite Setup 		Set Library Search Order For Tests
     ...     Prefer=return=representation
     ${resp}     GET On Session      ${SUT}    /definition/template/adl1.4/${template_id}    expected_status=anything
                 ...     headers=${headers}
-                Log     ${resp.text}
                 Should Be Equal As Strings   ${resp.status_code}   200
-    ${xml}      Parse Xml       ${resp.text}
-                Set Test Variable    ${actual}    ${xml}
 
 9. Get Template With Accept (application/json)
-    ## Must return 200, as per JIRA ticket CDR-1471
+    ## Must return 200, as per JIRA ticket CDR-1471 - but returns 400
     [Tags]      Positive    not-ready
     prepare new request session     no content header
     ...     Prefer=return=representation
     ${resp}     GET On Session      ${SUT}    /definition/template/adl1.4/${template_id}    expected_status=anything
                 ...     headers=${headers}
-                Log     ${resp.text}
                 Should Be Equal As Strings   ${resp.status_code}   200
-#    ${xml}      Parse Xml       ${resp.text}
-#                Set Test Variable    ${actual}    ${xml}
-    [Teardown]      Run Keyword And Return Status   (admin) delete OPT
+
+10. Get Template With Accept (application/openehr.wt+json)
+    ## Must return 200, as per JIRA ticket CDR-1471 - but returns 406
+    [Tags]      Positive    not-ready
+    prepare new request session     no headers
+    ...     Accept=application/openehr.wt+json
+    ...     Prefer=return=representation
+    ${resp}     GET On Session      ${SUT}    /definition/template/adl1.4/${template_id}    expected_status=anything
+                ...     headers=${headers}
+                Should Be Equal As Strings   ${resp.status_code}   200
+
+11. Get All Templates
+    Set Test Variable   ${template_id_1}    ${template_id}      #template_id created in '6. Get Template'
+    Upload OPT      minimal/minimal_action.opt
+    Extract Template Id From OPT File
+    Set Test Variable   ${template_id_2}    ${template_id}
+    prepare new request session    no headers
+    ...     Prefer=return=representation
+    ${resp}     GET On Session      ${SUT}    /definition/template/adl1.4       expected_status=anything
+                ...     headers=${headers}
+                Should Be Equal As Strings   ${resp.status_code}   200
+                ${len}     Get Length   ${resp.json()}
+                Should Be True      ${len}>1
+    Set Test Variable   ${template_id}    ${template_id_1}
+    (admin) delete OPT
+    Set Test Variable   ${template_id}    ${template_id_2}
+    (admin) delete OPT
