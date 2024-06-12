@@ -20,7 +20,7 @@ Suite Setup 		Set Library Search Order For Tests
     ...     Prefer=return=representation
     get valid OPT file      all_types/test_event.opt
     upload OPT file
-    Should Be Equal     ${response_code}    ${406}
+    Should Be Equal     ${response_code}    ${415}
     [Teardown]      Run Keyword And Return Status   (admin) delete OPT
 
 3. Create Template With Content Type (application/json)
@@ -36,7 +36,7 @@ Suite Setup 		Set Library Search Order For Tests
     prepare new request session    no content header
     ...     Prefer=return=representation
     upload OPT file
-    Should Be Equal     ${response_code}    ${406}
+    Should Be Equal     ${response_code}    ${415}
     [Teardown]      Run Keyword And Return Status   (admin) delete OPT
 
 5. Create Template With No Headers
@@ -44,8 +44,8 @@ Suite Setup 		Set Library Search Order For Tests
     prepare new request session    no headers
     ...     Prefer=return=representation
     upload OPT file
-    Should Be Equal     ${response_code}    ${400}
-    Should Contain      ${response.json()["message"]}       Content-Type
+    Should Be Equal     ${response_code}    ${415}
+    Should Contain      ${response.json()["error"]}       Unsupported Media Type
     [Teardown]      Run Keyword And Return Status   (admin) delete OPT
 
 6. Get Template
@@ -74,8 +74,7 @@ Suite Setup 		Set Library Search Order For Tests
                 Should Be Equal As Strings   ${resp.status_code}   200
 
 9. Get Template With Accept (application/json)
-    ## Must return 200, as per JIRA ticket CDR-1471 - but returns 400
-    [Tags]      Positive    not-ready
+    [Tags]      Positive
     prepare new request session     no content header
     ...     Prefer=return=representation
     ${resp}     GET On Session      ${SUT}    /definition/template/adl1.4/${template_id}    expected_status=anything
@@ -83,8 +82,7 @@ Suite Setup 		Set Library Search Order For Tests
                 Should Be Equal As Strings   ${resp.status_code}   200
 
 10. Get Template With Accept (application/openehr.wt+json)
-    ## Must return 200, as per JIRA ticket CDR-1471 - but returns 406
-    [Tags]      Positive    not-ready
+    [Tags]      Positive
     prepare new request session     no headers
     ...     Accept=application/openehr.wt+json
     ...     Prefer=return=representation
@@ -93,6 +91,7 @@ Suite Setup 		Set Library Search Order For Tests
                 Should Be Equal As Strings   ${resp.status_code}   200
 
 11. Get All Templates
+    [Tags]      Positive
     Set Test Variable   ${template_id_1}    ${template_id}      #template_id created in '6. Get Template'
     Upload OPT      minimal/minimal_action.opt
     Extract Template Id From OPT File
