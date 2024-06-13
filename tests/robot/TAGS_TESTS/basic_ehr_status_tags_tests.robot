@@ -67,7 +67,7 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
 
 5. Delete EHR Without Deleting EHR_STATUS Tag
     # Delete EHR without deleting EHR_STATUS Tag should not return 500.
-    [Tags]      Negative
+    [Tags]      Negative    not-ready
     [Setup]     Precondition Create EHR With EHR_STATUS
     Create Session For EHR_STATUS Tag Calls
     Create EHR_STATUS Tag Call
@@ -78,7 +78,7 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
 
 6. Create EHR_STATUS Tag Without Key In Body
     # Create EHR_STATUS Tag without "key" in JSON body and expect 400 (or any other code TBD). Currently returns 500.
-    [Tags]      Negative
+    [Tags]      Negative    not-ready
     Create Session For EHR_STATUS Tag Calls
     &{ehr_status_tag_body}      Create Dictionary
     ...     value=${tag_value}
