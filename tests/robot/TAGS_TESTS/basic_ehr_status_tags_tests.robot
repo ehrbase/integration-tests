@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation   Test suite to check Basic Tags functionality.
+Documentation   Test suite to check Basic EHR_STATUS Tags functionality.
 ...             \nCovers https://vitagroup-ag.atlassian.net/browse/CDR-1451
 ...             \nCovers below operations on EHR_STATUS Tags:
 ...             - 1. Create EHR_STATUS Tag - PUT /ehrbase/rest/experimental/tags/ehr/{ehr_id}/ehr_status/{ehr_status_uid}/item_tag
@@ -57,7 +57,7 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
     Length Should Be    ${resp.json()}    2
 
 4. Delete EHR_STATUS Tag
-    #Expect 204 on Update EHR_STATUS Tag
+    #Expect 204 on Delete EHR_STATUS Tag
     [Tags]      Positive
     @{tags_ids_list}    Create List     ${EHR_STATUS_TAG_ID_1}      ${EHR_STATUS_TAG_ID_2}
     Delete EHR_STATUS Tag Call      ehr_status_ids_list=${tags_ids_list}
@@ -66,27 +66,31 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
     [Teardown]      (admin) delete ehr
 
 5. Delete EHR Without Deleting EHR_STATUS Tag
-    # Delete EHR without deleting EHR_STATUS Tag should not return 500.
-    [Tags]      Negative    not-ready
+    # Delete EHR without deleting EHR_STATUS Tag should pass and return 204.
+    [Tags]      Negative
     [Setup]     Precondition Create EHR With EHR_STATUS
     Create Session For EHR_STATUS Tag Calls
     Create EHR_STATUS Tag Call
     Set Suite Variable      ${EHR_STATUS_TAG_ID_TEMP}      ${EHR_STATUS_TAG_ID}
     @{tags_ids_list}    Create List     ${EHR_STATUS_TAG_ID_TEMP}
     (admin) delete ehr
-    [Teardown]      Delete EHR_STATUS Tag Call      ${tags_ids_list}
+    ${err_msg}  Run Keyword And Expect Error    *
+    ...     Delete EHR_STATUS Tag Call      ${tags_ids_list}
+    Should Contain      ${err_msg}      404 != 204
 
 6. Create EHR_STATUS Tag Without Key In Body
-    # Create EHR_STATUS Tag without "key" in JSON body and expect 400 (or any other code TBD). Currently returns 500.
-    [Tags]      Negative    not-ready
+    # Create EHR_STATUS Tag without "key" in JSON body and expect 422 Unprocessable Entity as "key" is mandatory.
+    [Tags]      Negative
+    [Setup]     Precondition Create EHR With EHR_STATUS
     Create Session For EHR_STATUS Tag Calls
     &{ehr_status_tag_body}      Create Dictionary
     ...     value=${tag_value}
     ...     target_path=/name/value/temp
     ${err_msg}  Run Keyword And Expect Error    *
     ...     Create EHR_STATUS Tag Call      ${ehr_status_tag_body}
-    Should Not Contain      ${err_msg}      500 != 200
-    [Teardown]      Run Keyword And Return Status   (admin) delete ehr
+    Should Contain      ${err_msg}      422 != 200
+    Should Be Equal     ${resp.json()['error']}     Unprocessable Entity
+    [Teardown]      (admin) delete ehr
 
 
 *** Keywords ***
