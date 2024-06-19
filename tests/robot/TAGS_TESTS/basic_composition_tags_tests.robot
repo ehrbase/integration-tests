@@ -93,8 +93,23 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
     Should Be Equal     ${resp.json()['error']}     Unprocessable Entity
     [Teardown]      (admin) delete ehr
 
-7. Delete Composition Tag Through Delete EHR_STATUS Tag
-    # Needs analysis as Delete Composition Tag should not be done through Delete EHR_STATUS Tag endpoint.
+7. Create Composition Tag With Invalid Target Path In Body
+    [Tags]      Negative
+    [Setup]     Precondition Upload OPT - Create EHR - Create Composition
+    Create Session For Composition Tag Calls
+    &{composition_tag_body}      Create Dictionary
+    ...     key=${{str(uuid.uuid4())}}
+    ...     value=${tag_value}
+    ...     target_path=name/value
+    ${err_msg}  Run Keyword And Expect Error    *
+    ...     Create Composition Tag Call      ${composition_tag_body}
+    Should Contain      ${err_msg}      422 != 200
+    Should Be Equal     ${resp.json()['error']}     Unprocessable Entity
+    Should Contain      ${resp.json()['message']}   target_path 'name/value' does not start at root
+    [Teardown]      (admin) delete ehr
+
+8. Delete Composition Tag Through Delete EHR_STATUS Tag
+    # Needs analysis as Delete Composition Tag should not be allowed through Delete EHR_STATUS Tag endpoint.
     # Case described in comments from https://vitagroup-ag.atlassian.net/browse/CDR-1451
     [Tags]      Negative    not-ready
     [Setup]     Precondition Upload OPT - Create EHR - Create Composition
@@ -108,7 +123,6 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
     Get Composition Tag Call
     Length Should Be    ${resp.json()}    1
     [Teardown]      (admin) delete ehr
-
 
 
 *** Keywords ***

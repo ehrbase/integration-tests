@@ -92,6 +92,21 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
     Should Be Equal     ${resp.json()['error']}     Unprocessable Entity
     [Teardown]      (admin) delete ehr
 
+7. Create EHR_STATUS Tag With Invalid Target Path In Body
+    [Tags]      Negative
+    [Setup]     Precondition Create EHR With EHR_STATUS
+    Create Session For EHR_STATUS Tag Calls
+    &{ehr_status_tag_body}      Create Dictionary
+    ...     key=${{str(uuid.uuid4())}}
+    ...     value=${tag_value}
+    ...     target_path=name/value
+    ${err_msg}  Run Keyword And Expect Error    *
+    ...     Create EHR_STATUS Tag Call      ${ehr_status_tag_body}
+    Should Contain      ${err_msg}      422 != 200
+    Should Be Equal     ${resp.json()['error']}     Unprocessable Entity
+    Should Contain      ${resp.json()['message']}   target_path 'name/value' does not start at root
+    [Teardown]      (admin) delete ehr
+
 
 *** Keywords ***
 Precondition Create EHR With EHR_STATUS
