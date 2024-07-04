@@ -155,7 +155,8 @@ Create New EHR With Multitenant Token
     ...         expected_status=anything        headers=${headers}
     Should Be Equal As Strings      ${resp.status_code}     201
     ${ehrstatus_uid}    Set Variable        ${resp.json()['ehr_status']['uid']['value']}
-    ${short_uid}        Remove String       ${ehrstatus_uid}    ::${CREATING_SYSTEM_ID}::1
+    @{split_ehrstatus_uid}      Split String    ${ehrstatus_uid}    ::
+    ${short_uid}        Set Variable        ${split_ehrstatus_uid}[0]
     Set Suite Variable    ${ehr_id}         ${resp.json()['ehr_id']['value']}
     Set Suite Variable    ${system_id}      ${resp.json()['system_id']['value']}
     Set Suite Variable    ${ehr_status}     ${resp.json()['ehr_status']}
