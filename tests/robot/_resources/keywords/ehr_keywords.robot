@@ -248,13 +248,21 @@ validate POST response - 201 created ehr
 
 
 validate POST response - 204 no content
-    [Documentation]     CASE: new ehr was created.
+    [Documentation]     Old keyword. To be removed if not used by tests.
+    ...                 CASE: new ehr was created.
     ...                 Request was send w/o `Prefer=return` header or with
     ...                 `Prefer=return=minimal`. Body has to be empty.
 
     Status Should Be    204
     Should Be Equal As Strings     ${response.content}     ${EMPTY}
 
+validate POST response - 201 no content
+    [Documentation]     CASE: new ehr was created.
+    ...                 Request was send w/o `Prefer=return` header or with
+    ...                 `Prefer=return=minimal`. Body has to be empty.
+
+    Status Should Be    201
+    Should Be Equal As Strings     ${response.content}     ${EMPTY}
 
 # PUT PUT PUT PUT PUT
 #/////////////////////

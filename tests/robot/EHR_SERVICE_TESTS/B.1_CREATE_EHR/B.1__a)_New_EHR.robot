@@ -67,7 +67,15 @@ Force Tags      refactor
     15	  false	        true	       provided    provided       provided
     16	  false	        false	       provided    provided       provided
 
-
+Create new EHR (without body content)
+    [Documentation]     Covers happy path with empty body content
+    [Tags]
+    prepare new request session    JSON    Prefer=return=representation
+    POST /ehr
+    Status Should Be    201
+    Should Be Equal     ${response.json()['ehr_status']['is_queryable']}    ${True}
+    Should Be Equal     ${response.json()['ehr_status']['is_modifiable']}   ${True}
+    [Teardown]      (admin) delete ehr
 
 MF-019 - Create new EHR (valid ehr_status with other_details)
     [Documentation]     Covers happy path with "other_details" _type ITEM_TREE
@@ -87,7 +95,6 @@ MF-019 - Create new EHR (valid ehr_status with other_details)
                         Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      (admin) delete ehr
 
-
 MF-020 - Create new EHR (valid ehr_status with other_details)
     [Documentation]     Covers happy path with "other_details" _type ITEM_LIST
     [Tags]              
@@ -105,7 +112,6 @@ MF-020 - Create new EHR (valid ehr_status with other_details)
                         Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      (admin) delete ehr
 
-
 MF-021 - Create new EHR (valid ehr_status with other_details)
     [Documentation]     Covers happy path with "other_details" _type ITEM_SINGLE
     [Tags]
@@ -114,7 +120,6 @@ MF-021 - Create new EHR (valid ehr_status with other_details)
     POST /ehr    ${body}
     Status Should Be    201
     [Teardown]      (admin) delete ehr
-
 
 MF-022 - Create new EHR (valid ehr_status with other_details)
     [Documentation]     Covers happy path with "other_details" _type ITEM_TABLE
@@ -126,15 +131,13 @@ MF-022 - Create new EHR (valid ehr_status with other_details)
     #TRACE GITHUB ISSUE  162  bug
     [Teardown]      (admin) delete ehr
 
-
-
 MF-051 - Create new EHR providing an ehr_id (valid ehr_status with other_details)
     [Documentation]     Covers happy path with "other_details" _type ITEM_TREE
-    [Tags]              
+    [Tags]              not-ready   CDR-1517
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    valid/002_ehr_status_with_other_details_item_tree.json
     PUT /ehr/ehr_id    body=${body}
-    Status Should Be    201
+    Status Should Be    200
 
     ${actual_ehr_status}=    Set Variable       ${response.json()['ehr_status']}
     Set Test Variable    ${expected_ehr_status}    ${body}
@@ -144,15 +147,14 @@ MF-051 - Create new EHR providing an ehr_id (valid ehr_status with other_details
                         ...    exclude_paths=${exclude_paths}
                         Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      (admin) delete ehr
-
 
 MF-052 - Create new EHR providing an ehr_id (valid ehr_status with other_details)
     [Documentation]     Covers happy path with "other_details" _type ITEM_LIST
-    [Tags]              
+    [Tags]              not-ready   CDR-1517
     prepare new request session    JSON
     ${body}=     randomize subject_id in test-data-set    valid/003_ehr_status_with_other_details_item_list.json
     PUT /ehr/ehr_id    body=${body}
-    Status Should Be    201
+    Status Should Be    200
 
     ${actual_ehr_status}=    Set Variable       ${response.json()['ehr_status']}
     Set Test Variable    ${expected_ehr_status}    ${body}
@@ -163,27 +165,25 @@ MF-052 - Create new EHR providing an ehr_id (valid ehr_status with other_details
                         Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      (admin) delete ehr
 
-
 MF-053 - Create new EHR providing an ehr_id (valid ehr_status with other_details)
     [Documentation]     Covers happy path with "other_details" _type ITEM_SINGLE
-    [Tags]
+    [Tags]              not-ready   CDR-1517
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    valid/004_ehr_status_with_other_details_item_single.json
     PUT /ehr/ehr_id    body=${body}
-    Status Should Be    201
+    Status Should Be    200
     [Teardown]      (admin) delete ehr
-
 
 MF-054 - Create new EHR providing an ehr_id (valid ehr_status with other_details)
     [Documentation]     Covers happy path with "other_details" _type ITEM_TABLE
+    [Tags]              not-ready   CDR-1517
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    valid/005_ehr_status_with_other_details_item_table.json
     PUT /ehr/ehr_id    body=${body}
-    Status Should Be    201
+    Status Should Be    200
     #https://github.com/ehrbase/project_management/issues/162
     #TRACE GITHUB ISSUE  162  bug
     [Teardown]      (admin) delete ehr
-
 
 
 
@@ -196,132 +196,117 @@ MF-054 - Create new EHR providing an ehr_id (valid ehr_status with other_details
 002 - POST /ehr (no accept header, content-type=xml)
     prepare new request session    no accept header xml    Prefer=${None}
     create supernew ehr
-    ehr_keywords.validate POST response - 204 no content
+    ehr_keywords.validate POST response - 201 no content
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
-
 
 003 - POST /ehr (no content header)
     prepare new request session    no content header    Prefer=${None}
     create supernew ehr
-    ehr_keywords.validate POST response - 204 no content
+    ehr_keywords.validate POST response - 201 no content
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
-
 
 004 - POST /ehr (no accept/content-type headers)
     prepare new request session    no accept/content headers    Prefer=${None}
     create supernew ehr
-    ehr_keywords.validate POST response - 204 no content
+    ehr_keywords.validate POST response - 201 no content
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
-
 
 005 - POST /ehr (no headers)
     prepare new request session    no headers    Prefer=WLADISLAW
     create supernew ehr
-    ehr_keywords.validate POST response - 204 no content
+    ehr_keywords.validate POST response - 201 no content
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
-
 
 MF-001 - Create new EHR (without Prefer header)
     [Tags]
     prepare new request session    JSON    Prefer=${None}
     create supernew ehr
-    ehr_keywords.validate POST response - 204 no content
+    ehr_keywords.validate POST response - 201 no content
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
-
 
 MF-001a - Create new EHR (without Prefer and Accept header)
     [Tags]
     prepare new request session    no accept header    Prefer=${None}
     create supernew ehr
-    ehr_keywords.validate POST response - 204 no content
+    ehr_keywords.validate POST response - 201 no content
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
-
 
 MF-002 - Create new EHR (Prefer header: minimal)
     [Tags]
     [Documentation]     This test should behave equqly to MF-001
     prepare new request session    JSON    Prefer=return=minimal
     create supernew ehr
-    ehr_keywords.validate POST response - 204 no content
+    ehr_keywords.validate POST response - 201 no content
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
-
 
 MF-003 - Create new EHR (XML, Prefer header: minimal)
     [Tags]
     prepare new request session    XML    Prefer=return=minimal
     # create new EHR (XML)
     create supernew ehr
-    ehr_keywords.validate POST response - 204 no content
+    ehr_keywords.validate POST response - 201 no content
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
-
 
 MF-005 - Create new EHR (XML, Prefer header: representation)
     [tags]    EHR_STATUS_create_xml
     prepare new request session    XML    Prefer=return=representation
     create new EHR (XML)
-    # comment: check steps
     Should Contain      ${response.text}     <?xml version
     Should Contain      ${response.text}     <ehr_id><value>
     #Should Contain     ${response.text}    <ehr_status><name><value>EHR Status</value></name><uid
     [Teardown]      (admin) delete ehr
 
-
 MF-033 - Create new EHR providing an ehr_id (without Prefer header)
-    [Tags]
+    [Tags]      not-ready   CDR-1517
     # TODO: @WLAD update as soon as RESTInstance allows unsetting/clearing headers
     #       remove "Prefer=${None}"
     prepare new request session    JSON    Prefer=${None}
     PUT /ehr/ehr_id
-    ehr_keywords.validate PUT response - 204 no content
+    Status Should Be    204
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
 
-
 MF-034 - Create new EHR providing an ehr_id (Prefer header: minimal)
-    [Tags]
+    [Tags]      not-ready   CDR-1517
     [Documentation]     This test should behave equqly to MF-033
     prepare new request session    JSON    Prefer=return=minimal
     PUT /ehr/ehr_id
-    ehr_keywords.validate PUT response - 204 no content
+    Status Should Be    204
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
-
 
 MF-035 - Create new EHR providing an ehr_id (XML, Prefer header: minimal)
-    [Tags]
+    [Tags]      not-ready   CDR-1517
     prepare new request session    XML    Prefer=return=minimal
     PUT /ehr/ehr_id
-    ehr_keywords.validate PUT response - 204 no content
+    Status Should Be    204
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
 
-
 MF-036 - Create new EHR providing an ehr_id (Prefer header: representation)
-    [Tags]
+    [Tags]      not-ready   CDR-1517
     prepare new request session    JSON    Prefer=return=representation
     PUT /ehr/ehr_id
-    # comment: check step
-    Status Should Be    201
+    Status Should Be    200
     Dictionary Should Contain Key   ${response.json()['system_id']}     value
     Dictionary Should Contain Key   ${response.json()['ehr_id']}        value
     Dictionary Should Contain Key   ${response.json()['ehr_status']}    uid
     Dictionary Should Contain Key   ${response.json()['time_created']}  value
     [Teardown]      (admin) delete ehr
 
-
 MF-037 - Create new EHR providing an ehr_id (XML, Prefer header: representation)
-    [tags]    EHR_STATUS_create_xml
+    [tags]    not-ready   CDR-1517  EHR_STATUS_create_xml
     prepare new request session    XML    Prefer=return=representation
     PUT /ehr/ehr_id
-    # comment: check steps
+    Status Should Be    200
     Should Contain      ${response.text}    <?xml version
     Should Contain      ${response.text}    <ehr_id><value>
     #String    response body    pattern=<?xml version
@@ -331,7 +316,6 @@ MF-037 - Create new EHR providing an ehr_id (XML, Prefer header: representation)
     [Teardown]      (admin) delete ehr
 
 
-
 #///////////////////////////////////////////////
 #                                             //
 # CASES WITH INVALID DATA SETS                //
@@ -339,15 +323,13 @@ MF-037 - Create new EHR providing an ehr_id (XML, Prefer header: representation)
 #///////////////////////////////////////////////
 
 MF-006 - Create new EHR (invalid ehr_status)
-    [Documentation]     Covers case where provided ehr_staus is just empty json
+    [Documentation]     Covers case where provided ehr_status is just empty json
     [Tags]
     prepare new request session    JSON    Prefer=return=representation
     POST /ehr    {}
 
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-007 - Create new EHR (invalid ehr_status)
     [Documentation]     Covers case where _type is missing
@@ -355,22 +337,16 @@ MF-007 - Create new EHR (invalid ehr_status)
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/000_ehr_status_type_missing.json
     POST /ehr    ${body}
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-008 - Create new EHR (invalid ehr_status)
     [Documentation]     Covers case where mandatory subject is missing
     [Tags]
     prepare new request session    JSON    Prefer=return=representation
     POST /ehr    ${EXECDIR}/robot/_resources/test_data_sets/ehr/invalid/001_ehr_status_subject_missing.json
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-009 - Create new EHR (invalid ehr_status)
     [Documentation]     Covers case where multiple mandatory elements are missing:
@@ -380,33 +356,24 @@ MF-009 - Create new EHR (invalid ehr_status)
     ${body}=     randomize subject_id in test-data-set
     ...          invalid/002_ehr_status_subject_and_archetype_and_name_missing.json
     POST /ehr    ${body}
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-010 - Create new EHR (invalid ehr_status)
     [Documentation]     Covers case where mandatory subject..id is empty
     [Tags]
     prepare new request session    JSON    Prefer=return=representation
     POST /ehr    ${EXECDIR}/robot/_resources/test_data_sets/ehr/invalid/003_ehr_status_subject_id_empty.json
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-011 - Create new EHR (invalid ehr_status)
     [Documentation]     Covers case where mandatory subject..id is missing
     [Tags]
     prepare new request session    JSON    Prefer=return=representation
     POST /ehr    ${EXECDIR}/robot/_resources/test_data_sets/ehr/invalid/004_ehr_status_subject_id_missing.json
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-012 - Create new EHR (invalid ehr_status)
     [Documentation]     Covers case where mandatory subject..namespace is missing
@@ -414,11 +381,8 @@ MF-012 - Create new EHR (invalid ehr_status)
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/005_ehr_status_subject_namespace_missing.json
     POST /ehr    ${body}
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-013 - Create new EHR (invalid ehr_status)
     [Documentation]     Covers case where mandatory subject..namespace is empty
@@ -426,55 +390,41 @@ MF-013 - Create new EHR (invalid ehr_status)
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/006_ehr_status_subject_namespace_empty.json
     POST /ehr    ${body}
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-014 - Create new EHR (invalid ehr_status - mandatory is_modifiable is missing)
     [Documentation]     Covers case where mandatory is_modifiable is missing
-    [Tags]              295    not-ready
+    ...     https://vitagroup-ag.atlassian.net/browse/CDR-1506
+    [Tags]      not-ready   CDR-1506
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/007_ehr_status_is_modifiable_missing.json
     POST /ehr    ${body}
-
-        TRACE GITHUB ISSUE  295  bug
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-015 - Create new EHR (invalid ehr_status - mandatory is_queryable is missing)
     [Documentation]     Covers case where mandatory is_queryable is missing
-    [Tags]              295    not-ready
+    ...     https://vitagroup-ag.atlassian.net/browse/CDR-1506
+    [Tags]      not-ready   CDR-1506
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/008_ehr_status_is_queryable_missing.json
     POST /ehr    ${body}
-
-        TRACE GITHUB ISSUE  295  bug
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-016 - Create new EHR (invalid ehr_status - mandatory is_modifiable and is_queryable are missing)
     [Documentation]     Covers case where mandatory is_modifiable and is_queryable are missing
-    [Tags]              295    not-ready
+    ...     https://vitagroup-ag.atlassian.net/browse/CDR-1506
+    [Tags]      not-ready   CDR-1506
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/009_ehr_status_is_mod_and_is_quer_missing.json
     POST /ehr    ${body}
-
-        TRACE GITHUB ISSUE  295  bug
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
 
-
 MF-024 - Create new EHR (POST /ehr invalid ehr_status variants)
+    [Documentation]     Bug ticket https://github.com/ehrbase/project_management/issues/295
     [Tags]    295    not-ready
     [Template]          create ehr from data table (invalid)
 
@@ -489,8 +439,6 @@ MF-024 - Create new EHR (POST /ehr invalid ehr_status variants)
     given      0               0              400
     given      "true"          "true"         400
     given      "false"         "false"        400
-    [Teardown]      TRACE GITHUB ISSUE  295  bug
-
 
 MF-025 - Create new EHR (POST /ehr invalid subject variants)
     [Documentation]     Covers invalid cases where \n\n
@@ -498,6 +446,7 @@ MF-025 - Create new EHR (POST /ehr invalid subject variants)
     ...                 2) subject is provided but is invalid \n\n
     ...                    because some of it's mandatory elements are missing \n\n
     ...                 3) subject is missing completely \n\n
+    ...                 Bug ticket https://github.com/ehrbase/project_management/issues/295
     [Tags]              295    not-ready
     [Template]          create ehr from data table (invalid)
 
@@ -521,10 +470,9 @@ MF-025 - Create new EHR (POST /ehr invalid subject variants)
     missing    true            false          400
     missing    false           true           400
     missing    false           false          400
-    [Teardown]      TRACE GITHUB ISSUE  295  bug
-
 
 MF-031 - Create new EHR providing an ehr_id (PUT /ehr/ehr_id invalid variants)
+    [Documentation]     Bug ticket https://github.com/ehrbase/project_management/issues/295
     [Tags]              295    not-ready
     [Template]          create ehr with given ehr_id but invalid subject from data table
 
@@ -545,8 +493,6 @@ MF-031 - Create new EHR providing an ehr_id (PUT /ehr/ehr_id invalid variants)
     given   ${EMPTY}   true            false          400
     given   ${EMPTY}   false           false          400
     given   ${EMPTY}   false           true           400
-    [Teardown]      TRACE GITHUB ISSUE  295  bug
-
 
 MF-032 - Create new EHR with invalid ehr_id (PUT /ehr/ehr_id variants)
     [Tags]
@@ -559,17 +505,13 @@ MF-032 - Create new EHR with invalid ehr_id (PUT /ehr/ehr_id variants)
     ${{ ''.join(random.choices(string.digits, k=10)) }}           ${EMPTY}  ${EMPTY}       false         400
     0000000${{random.randint(1,1000)}}                            ${EMPTY}  false          ${EMPTY}      400
 
-
 MF-038 - Create new EHR providing an ehr_id (invalid ehr_status)
     [Documentation]     Covers case where provided ehr_staus is just empty json
     [Tags]
     prepare new request session    JSON    Prefer=return=representation
     PUT /ehr/ehr_id    body={}
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-039 - Create new EHR providing an ehr_id (invalid ehr_status)
     [Documentation]     Covers case where _type is missing
@@ -577,22 +519,16 @@ MF-039 - Create new EHR providing an ehr_id (invalid ehr_status)
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/000_ehr_status_type_missing.json
     PUT /ehr/ehr_id    body=${body}
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-040 - Create new EHR providing an ehr_id (invalid ehr_status)
     [Documentation]     Covers case where mandatory subject is missing
     [Tags]
     prepare new request session    JSON    Prefer=return=representation
     PUT /ehr/ehr_id    body=${EXECDIR}/robot/_resources/test_data_sets/ehr/invalid/001_ehr_status_subject_missing.json
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-041 - Create new EHR providing an ehr_id (invalid ehr_status)
     [Documentation]     Covers case where the following mandatory elements are missing:
@@ -601,33 +537,24 @@ MF-041 - Create new EHR providing an ehr_id (invalid ehr_status)
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/002_ehr_status_subject_and_archetype_and_name_missing.json
     PUT /ehr/ehr_id    body=${body}
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-042 - Create new EHR providing an ehr_id (invalid ehr_status)
     [Documentation]     Covers case where mandatory subject..id is empty
     [Tags]
     prepare new request session    JSON    Prefer=return=representation
     PUT /ehr/ehr_id    body=${EXECDIR}/robot/_resources/test_data_sets/ehr/invalid/003_ehr_status_subject_id_empty.json
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-043 - Create new EHR providing an ehr_id (invalid ehr_status)
     [Documentation]     Covers case where mandatory subject..id is missing
     [Tags]
     prepare new request session    JSON    Prefer=return=representation
     PUT /ehr/ehr_id    body=${EXECDIR}/robot/_resources/test_data_sets/ehr/invalid/004_ehr_status_subject_id_missing.json
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-044 - Create new EHR providing an ehr_id (invalid ehr_status)
     [Documentation]     Covers case where mandatory subject..namespace is missing
@@ -635,11 +562,8 @@ MF-044 - Create new EHR providing an ehr_id (invalid ehr_status)
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/005_ehr_status_subject_namespace_missing.json
     PUT /ehr/ehr_id    body=${body}
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
-
 
 MF-045 - Create new EHR providing an ehr_id (invalid ehr_status)
     [Documentation]     Covers case where mandatory subject..namespace is empty
@@ -647,63 +571,46 @@ MF-045 - Create new EHR providing an ehr_id (invalid ehr_status)
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/006_ehr_status_subject_namespace_empty.json
     PUT /ehr/ehr_id    body=${body}
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
 
-
 MF-046 - Create new EHR providing an ehr_id (invalid ehr_status - mandatory is_modifiable is missing)
-    [Documentation]     Covers case where mandatory is_modifiable is missing
+    [Documentation]     Covers case where mandatory is_modifiable is missing.
+    ...                 Bug ticket https://github.com/ehrbase/project_management/issues/295
     [Tags]              295    not-ready
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/007_ehr_status_is_modifiable_missing.json
     PUT /ehr/ehr_id    body=${body}
-
-        TRACE GITHUB ISSUE  295  bug
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
 
-
 MF-047 - Create new EHR providing an ehr_id (invalid ehr_status - mandatory is_queryable is missing)
     [Documentation]     Covers case where mandatory is_queryable is missing
+    ...                 Bug ticket https://github.com/ehrbase/project_management/issues/295
     [Tags]              295    not-ready
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/008_ehr_status_is_queryable_missing.json
     PUT /ehr/ehr_id    body=${body}
-
-        TRACE GITHUB ISSUE  295  bug
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
 
-
 MF-048 - Create new EHR providing an ehr_id (invalid ehr_status - is_queryable, is_modifiable are missing)
     [Documentation]     Covers case where mandatory is_modifiable and is_queryableis are missing
+    ...                 Bug ticket https://github.com/ehrbase/project_management/issues/295
     [Tags]              295    not-ready
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/009_ehr_status_is_mod_and_is_quer_missing.json
     PUT /ehr/ehr_id    body=${body}
-
-        TRACE GITHUB ISSUE  295  bug
-
-    # comment: check step
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
 
-
 MF-050 - Create new EHR providing an ehr_id (invalid ehr_status - subject empty)
     [Documentation]     Covers INVALID case where subject is empty JSON
+    ...                 Bug ticket https://github.com/ehrbase/project_management/issues/295
     [Tags]              295    not-ready
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/001_ehr_status_subject_empty.json
     PUT /ehr/ehr_id    body=${body}
-
-        TRACE GITHUB ISSUE  295  bug
-
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
 
