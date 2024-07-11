@@ -42,7 +42,7 @@ Create Same EHR Twice For The Same Patient (JSON)
 
     generate random subject_id
     create new EHR for subject_id (JSON)    ${subject_id}
-    Status Should Be    204
+    Status Should Be    201
     Get EHR ID From Location Headers
     create new EHR for subject_id (JSON)    ${subject_id}
 

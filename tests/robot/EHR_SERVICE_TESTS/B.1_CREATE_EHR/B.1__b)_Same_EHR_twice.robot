@@ -55,7 +55,7 @@ Create Same EHR Twice (JSON)
     prepare new request session    JSON
     generate random ehr_id
     create new EHR by ID        ${ehr_id}
-    Status Should Be    204
+    Status Should Be    201
 
     create new EHR by ID        ${ehr_id}
     server complains about already existing ehr_id
@@ -69,7 +69,7 @@ Create Same EHR Twice (XML)
     prepare new request session    XML
     generate random ehr_id
     create new EHR by ID        ${ehr_id}
-    Status Should Be    204
+    Status Should Be    201
 
     create new EHR by ID        ${ehr_id}
     server complains about already existing ehr_id
