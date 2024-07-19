@@ -261,29 +261,24 @@ MF-005 - Create new EHR (XML, Prefer header: representation)
     [Teardown]      (admin) delete ehr
 
 MF-033 - Create new EHR providing an ehr_id (without Prefer header)
-    [Tags]      not-ready   CDR-1517
-    # TODO: @WLAD update as soon as RESTInstance allows unsetting/clearing headers
-    #       remove "Prefer=${None}"
     prepare new request session    JSON    Prefer=${None}
     PUT /ehr/ehr_id
-    Status Should Be    204
+    Status Should Be    201
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
 
 MF-034 - Create new EHR providing an ehr_id (Prefer header: minimal)
-    [Tags]      not-ready   CDR-1517
     [Documentation]     This test should behave equqly to MF-033
     prepare new request session    JSON    Prefer=return=minimal
     PUT /ehr/ehr_id
-    Status Should Be    204
+    Status Should Be    201
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
 
 MF-035 - Create new EHR providing an ehr_id (XML, Prefer header: minimal)
-    [Tags]      not-ready   CDR-1517
     prepare new request session    XML    Prefer=return=minimal
     PUT /ehr/ehr_id
-    Status Should Be    204
+    Status Should Be    201
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
 
@@ -414,8 +409,13 @@ MF-016 - Create new EHR (invalid ehr_status - mandatory is_modifiable and is_que
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
 
 MF-024 - Create new EHR (POST /ehr invalid ehr_status variants)
-    [Documentation]     Bug ticket https://github.com/ehrbase/project_management/issues/295
-    [Tags]    295    not-ready
+    # Previous bug ticket https://github.com/ehrbase/project_management/issues/295
+    # Alexander Lehnert comments (on cases with 201):
+    # regarding the 0/1 boolean interpretation I would keep it as it is.
+    # It can be disabled "globally" for all json interpretations but, it is a feature not a bug.
+    # The introduction of 0/1 boolean interpretation in Jackson (for java) is for compatibility reasons.
+    # Languages like C or Perl does not have a primitive boolean type,
+    # so they sometime serialise such fields as 0/1 but can read "true"/"false" at the same time.
     [Template]          create ehr from data table (invalid)
 
   # SUBJECT    IS_MODIFIABLE   IS_QUERYABLE   R.CODE
@@ -425,10 +425,10 @@ MF-024 - Create new EHR (POST /ehr invalid ehr_status variants)
     given      true            ${EMPTY}       400
     given      null            null           400
     given      "null"          "null"         400
-    given      1               1              400
-    given      0               0              400
-    given      "true"          "true"         400
-    given      "false"         "false"        400
+    given      1               1              201
+    given      0               0              201
+    given      "true"          "true"         201
+    given      "false"         "false"        201
 
 MF-025 - Create new EHR (POST /ehr invalid subject variants)
     [Documentation]     Covers invalid cases where \n\n
@@ -462,9 +462,15 @@ MF-025 - Create new EHR (POST /ehr invalid subject variants)
     missing    false           false          400
 
 MF-031 - Create new EHR providing an ehr_id (PUT /ehr/ehr_id invalid variants)
-    [Documentation]     Bug ticket https://github.com/ehrbase/project_management/issues/295
-    [Tags]              295    not-ready
+    # Previous bug ticket https://github.com/ehrbase/project_management/issues/295
     [Template]          create ehr with given ehr_id but invalid subject from data table
+
+    # Alexander Lehnert comments (on cases with 201 when IS_MODIFIABLE / IS_QUERYABLE = 0/1/"true"/"false"):
+    # regarding the 0/1 boolean interpretation I would keep it as it is.
+    # It can be disabled "globally" for all json interpretations but, it is a feature not a bug.
+    # The introduction of 0/1 boolean interpretation in Jackson (for java) is for compatibility reasons.
+    # Languages like C or Perl does not have a primitive boolean type,
+    # so they sometime serialise such fields as 0/1 but can read "true"/"false" at the same time.
 
   # EHR_ID  SUBJECT    IS_MODIFIABLE   IS_QUERYABLE   R.CODE
     given   given      ${EMPTY}        true           400
@@ -474,10 +480,10 @@ MF-031 - Create new EHR providing an ehr_id (PUT /ehr/ehr_id invalid variants)
 
     given   given      null            null           400
     given   given      "null"          "null"         400
-    given   given      1               1              400
-    given   given      0               0              400
-    given   given      "true"          "true"         400
-    given   given      "false"         "false"        400
+    given   given      1               1              201
+    given   given      0               0              201
+    given   given      "true"          "true"         201
+    given   given      "false"         "false"        201
     ## below cases must return 201 as "subject" : {} is accepted. See https://vitagroup-ag.atlassian.net/browse/CDR-1524
     given   ${EMPTY}   true            true           201
     given   ${EMPTY}   true            false          201
