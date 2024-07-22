@@ -42,6 +42,14 @@ Suite Setup       Precondition
     Set Suite Variable  ${system_id_with_tenant}    ${compo_uid_splitted}[1]
     Headers Checks Composition
 
+1.a Create Compo FLAT With Uid
+    [Documentation]     Covers https://vitagroup-ag.atlassian.net/browse/CDR-1512
+    Commit Composition OpenEHR
+    ...     composition=family_history__with_uid.json   format=FLAT     with_compo_uid=true
+    Should Be Equal     ${resp.status_code}     ${201}
+    Set Test Variable   ${compo_uid}        ${resp.json()['family_history/_uid']}
+    Should Be Equal     ${generated_compo_uid}      ${compo_uid}
+
 2. Create Compo JSON EHRSCAPE Migrated
     Commit Composition OpenEHR      composition=family_history__.json   format=JSON
     Should Be Equal     ${resp.status_code}     ${201}
@@ -52,6 +60,14 @@ Suite Setup       Precondition
     Should Be Equal     ${compo_uid_splitted}[2]    1
     Headers Checks Composition
 
+2.a Create Compo JSON With Uid
+    [Documentation]     Covers https://vitagroup-ag.atlassian.net/browse/CDR-1512
+    Commit Composition OpenEHR
+    ...     composition=family_history__with_uid.json   format=JSON     with_compo_uid=true
+    Should Be Equal     ${resp.status_code}     ${201}
+    Set Test Variable   ${compo_uid}    ${resp.json()['uid']['value']}
+    Should Be Equal     ${generated_compo_uid}      ${compo_uid}
+
 3. Create Compo XML EHRSCAPE Migrated
     Commit Composition OpenEHR      composition=family_history__.xml   format=XML
     Should Be Equal     ${resp.status_code}     ${201}
@@ -60,6 +76,15 @@ Suite Setup       Precondition
     @{compo_uid_splitted}   Split String    ${compo_uid}    ::
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
     Headers Checks Composition
+
+3.a Create Compo XML With Uid
+    [Documentation]     Covers https://vitagroup-ag.atlassian.net/browse/CDR-1512
+    Commit Composition OpenEHR
+    ...     composition=family_history__with_uid.xml   format=XML     with_compo_uid=true
+    Should Be Equal     ${resp.status_code}     ${201}
+    ${xresp}        Parse Xml       ${resp.text}
+    ${compo_uid}    Get Element Text        ${xresp}    uid/value
+    Should Be Equal     ${generated_compo_uid}      ${compo_uid}
 
 4. Create Compo STRUCTURED EHRSCAPE Migrated
     Commit Composition OpenEHR      composition=family_history__.json   format=STRUCTURED
@@ -70,6 +95,14 @@ Suite Setup       Precondition
     Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    1
     Headers Checks Composition
+
+4.a Create Compo STRUCTURED With Uid
+    [Documentation]     Covers https://vitagroup-ag.atlassian.net/browse/CDR-1512
+    Commit Composition OpenEHR
+    ...     composition=family_history__with_uid.json   format=STRUCTURED     with_compo_uid=true
+    Should Be Equal     ${resp.status_code}     ${201}
+    Set Test Variable   ${compo_uid}    ${resp.json()['family_history']['_uid']}
+    Should Be Equal     ${generated_compo_uid}      ${compo_uid}
 
 5. Update Compo FLAT EHRSCAPE Migrated
     Update Composition OpenEHR       composition=family_history.v2__.json   format=FLAT
@@ -252,8 +285,14 @@ Headers Checks Composition
 Commit Composition OpenEHR
     [Documentation]     Commit Composition using OpenEHR endpoint. Previously EHRSCAPE endpoint was used.
     ...                 DEPENDENCY: `Precondition` keyword as there is Upload OPT, Create EHR and Create Session
-    [Arguments]     ${composition}      ${format}=FLAT
+    [Arguments]     ${composition}      ${format}=FLAT      ${with_compo_uid}=false
     Set Params And Headers For API Call    format=${format}    composition=${composition}
+    IF      '${with_compo_uid}' != 'false'
+        Set Test Variable       ${generated_compo_uid}
+        ...     ${{str(uuid.uuid4())}}::${system_id_with_tenant}::1
+        ${temp_file}    Replace String      ${file}     __TO_BE_REPLACED_BY_TEST__   ${generated_compo_uid}
+        ${file}     Set Variable    ${temp_file}
+    END
     ${resp}     POST On Session     ${SUT}      /ehr/${ehr_id}/composition      expected_status=anything
     ...     data=${file}    params=${params}    headers=${headers}
     Set Test Variable   ${resp}     ${resp}
