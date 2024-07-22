@@ -101,7 +101,7 @@ Suite Setup       Precondition
     Commit Composition OpenEHR
     ...     composition=family_history__with_uid.json   format=STRUCTURED     with_compo_uid=true
     Should Be Equal     ${resp.status_code}     ${201}
-    Set Test Variable   ${compo_uid}    ${resp.json()['family_history']['_uid']}
+    Set Test Variable   ${compo_uid}    ${resp.json()['family_history']['_uid'][0]}
     Should Be Equal     ${generated_compo_uid}      ${compo_uid}
 
 5. Update Compo FLAT EHRSCAPE Migrated
