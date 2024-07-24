@@ -44,5 +44,5 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-feature
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-feature-CDR-1466_robot_tests_dv_multimedia
           labels: ${{ steps.meta.outputs.labels }}
