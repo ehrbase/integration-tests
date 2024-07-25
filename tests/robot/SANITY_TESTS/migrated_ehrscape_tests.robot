@@ -268,12 +268,12 @@ Suite Setup       Precondition
 
 
 21. Check Media File Content Data Value After Commit And Get Composition (FLAT)
-    [Tags]      not-ready   CDR-1466
     [Documentation]     *Checks the media_file/content|data value to be the same as in Committed Composition.*
     ...                 \nmedia_file/content|data value is checked in 2 places:
     ...                 - 1. After Commit Composition (from returned composition)
     ...                 - 2. After Get Composition (FLAT)
     ...                 \n In both cases, value from \*{initial_content_data}* should be equal with value stored in \*{content_data}*.
+    ...                 Covers: CDR-1466
     [Setup]     Precondition    template_file=all_types/EHRN-ABDM-OPConsultRecord.v2.0.opt
     Commit Composition OpenEHR       composition=consult_record__.json   format=FLAT
     Should Be Equal     ${resp.status_code}     ${201}
@@ -289,19 +289,20 @@ Suite Setup       Precondition
     Should Be Equal     ${initial_content_data}     ${content_data}     {initial_content_data} value != {content_data}
 
 22. Check Media File Content Data Value After Commit And Get Composition (JSON)
-    [Tags]      not-ready   CDR-1466
     [Documentation]     *Checks the media_file/content|data value to be the same as in Committed Composition.*
     ...                 \nmedia_file/content|data value is checked in 2 places:
     ...                 - 1. After Commit Composition (from returned composition)
     ...                 - 2. After Get Composition (JSON)
     ...                 \n In both cases, value from \*{initial_content_data}* should be equal with value stored in \*{content_data}*.
+    ...                 Covers: CDR-1466
     Commit Composition OpenEHR       composition=consult_record__.json   format=JSON
     Should Be Equal     ${resp.status_code}     ${201}
     Set Test Variable   ${compo_uid}    ${resp.json()['uid']['value']}
     ${file_content_json}    evaluate    json.loads('''${file}''')    json
     ${initial_content_data}      Get Value From Json     ${file_content_json}
     ...     $..content..data..items[?(@._type == 'CLUSTER')]..items[?(@._type == 'ELEMENT')].value.data
-    ${content_data}      Get Value From Json    ${resp.json()}
+    Set Suite Variable  ${tmp_initial_content_data}     ${initial_content_data}
+    ${content_data}     Get Value From Json    ${resp.json()}
     ...     $..content..data..items[?(@._type == 'CLUSTER')]..items[?(@._type == 'ELEMENT')].value.data
     Should Be Equal     ${initial_content_data[0]}     ${content_data[0]}     {initial_content_data} value != {content_data}
     #### Get Composition (in JSON) and compare {initial_content_data} with {content_data} value returned after Get Compo.
@@ -312,30 +313,33 @@ Suite Setup       Precondition
     Should Be Equal     ${initial_content_data[0]}     ${content_data[0]}     {initial_content_data} value != {content_data}
 
 23. Check Media File Content Data Value After Commit And Get Composition (XML)
-    [Tags]      not-ready   CDR-1466    refactoring
-    # it is failing at commit composition - should be fixed, after that will complete the automation for this case
     [Documentation]     *Checks the media_file/content|data value to be the same as in Committed Composition.*
     ...                 \nmedia_file/content|data value is checked in 2 places:
     ...                 - 1. After Commit Composition (from returned composition)
     ...                 - 2. After Get Composition (XML)
     ...                 \n In both cases, value from \*{initial_content_data}* should be equal with value stored in \*{content_data}*.
+    ...                 Covers: CDR-1466
     Commit Composition OpenEHR       composition=consult_record__.xml   format=XML
     Should Be Equal     ${resp.status_code}     ${201}
-    ${xresp}        Parse Xml       ${resp.text}
-    ${compo_uid}    Get Element Text        ${xresp}    uid/value
-    #TODO: Store in {initial_content_data} the data value from DV_MULTIMEDIA (value before commiting the compo)
-    # Store in {content_data} the data value from DV_MULTIMEDIA (value after commiting the compo - response)
-    # Add 'Should Be Equal' check between {initial_content_data} and {content_data}
-    #TODO: Store in {content_data} the data value from DV_MULTIMEDIA (value after get compo)
-    # Add 'Should Be Equal' check between {initial_content_data} and {content_data}
+    ${xresp}            Parse Xml       ${resp.text}
+    ${compo_uid}        Get Element Text        ${xresp}    uid/value
+    Set Test Variable   ${compo_uid}    ${compo_uid}
+    ${content_data}     Get Element Text        ${xresp}    content/data/items[3]/items[1]/value/data
+    Should Be Equal     ${tmp_initial_content_data[0]}     ${content_data}     {initial_content_data} value != {content_data}
+    #### Get Composition (in JSON) and compare {initial_content_data} with {content_data} value returned after Get Compo.
+    Get Versioned Composition OpenEHR   format=XML
+    Should Be Equal     ${resp.status_code}     ${200}
+    ${xresp}            Parse Xml       ${resp.text}
+    ${content_data}     Get Element Text        ${xresp}    content/data/items[3]/items[1]/value/data
+    Should Be Equal     ${tmp_initial_content_data[0]}     ${content_data}     {initial_content_data} value != {content_data}
 
 24. Check Media File Content Data Value After Commit And Get Composition (STRUCTURED)
-    [Tags]      not-ready   CDR-1466
     [Documentation]     *Checks the media_file/content|data value to be the same as in Committed Composition.*
     ...                 \nmedia_file/content|data value is checked in 2 places:
     ...                 - 1. After Commit Composition (from returned composition)
     ...                 - 2. After Get Composition (STRUCTURED)
     ...                 \n In both cases, value from \*{initial_content_data}* should be equal with value stored in \*{content_data}*.
+    ...                 Covers: CDR-1466
     Commit Composition OpenEHR       composition=consult_record__.json   format=STRUCTURED
     Should Be Equal     ${resp.status_code}     ${201}
     Set Test Variable   ${compo_uid}    ${resp.json()['opconsultation']['_uid'][0]}
