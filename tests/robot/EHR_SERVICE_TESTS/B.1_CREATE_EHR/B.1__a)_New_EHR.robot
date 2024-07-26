@@ -133,11 +133,10 @@ MF-022 - Create new EHR (valid ehr_status with other_details)
 
 MF-051 - Create new EHR providing an ehr_id (valid ehr_status with other_details)
     [Documentation]     Covers happy path with "other_details" _type ITEM_TREE
-    [Tags]              not-ready   CDR-1517
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    valid/002_ehr_status_with_other_details_item_tree.json
     PUT /ehr/ehr_id    body=${body}
-    Status Should Be    200
+    Status Should Be    201
 
     ${actual_ehr_status}=    Set Variable       ${response.json()['ehr_status']}
     Set Test Variable    ${expected_ehr_status}    ${body}
@@ -150,11 +149,10 @@ MF-051 - Create new EHR providing an ehr_id (valid ehr_status with other_details
 
 MF-052 - Create new EHR providing an ehr_id (valid ehr_status with other_details)
     [Documentation]     Covers happy path with "other_details" _type ITEM_LIST
-    [Tags]              not-ready   CDR-1517
     prepare new request session    JSON
     ${body}=     randomize subject_id in test-data-set    valid/003_ehr_status_with_other_details_item_list.json
     PUT /ehr/ehr_id    body=${body}
-    Status Should Be    200
+    Status Should Be    201
 
     ${actual_ehr_status}=    Set Variable       ${response.json()['ehr_status']}
     Set Test Variable    ${expected_ehr_status}    ${body}
@@ -167,20 +165,18 @@ MF-052 - Create new EHR providing an ehr_id (valid ehr_status with other_details
 
 MF-053 - Create new EHR providing an ehr_id (valid ehr_status with other_details)
     [Documentation]     Covers happy path with "other_details" _type ITEM_SINGLE
-    [Tags]              not-ready   CDR-1517
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    valid/004_ehr_status_with_other_details_item_single.json
     PUT /ehr/ehr_id    body=${body}
-    Status Should Be    200
+    Status Should Be    201
     [Teardown]      (admin) delete ehr
 
 MF-054 - Create new EHR providing an ehr_id (valid ehr_status with other_details)
     [Documentation]     Covers happy path with "other_details" _type ITEM_TABLE
-    [Tags]              not-ready   CDR-1517
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    valid/005_ehr_status_with_other_details_item_table.json
     PUT /ehr/ehr_id    body=${body}
-    Status Should Be    200
+    Status Should Be    201
     #https://github.com/ehrbase/project_management/issues/162
     #TRACE GITHUB ISSUE  162  bug
     [Teardown]      (admin) delete ehr
@@ -265,37 +261,31 @@ MF-005 - Create new EHR (XML, Prefer header: representation)
     [Teardown]      (admin) delete ehr
 
 MF-033 - Create new EHR providing an ehr_id (without Prefer header)
-    [Tags]      not-ready   CDR-1517
-    # TODO: @WLAD update as soon as RESTInstance allows unsetting/clearing headers
-    #       remove "Prefer=${None}"
     prepare new request session    JSON    Prefer=${None}
     PUT /ehr/ehr_id
-    Status Should Be    204
+    Status Should Be    201
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
 
 MF-034 - Create new EHR providing an ehr_id (Prefer header: minimal)
-    [Tags]      not-ready   CDR-1517
     [Documentation]     This test should behave equqly to MF-033
     prepare new request session    JSON    Prefer=return=minimal
     PUT /ehr/ehr_id
-    Status Should Be    204
+    Status Should Be    201
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
 
 MF-035 - Create new EHR providing an ehr_id (XML, Prefer header: minimal)
-    [Tags]      not-ready   CDR-1517
     prepare new request session    XML    Prefer=return=minimal
     PUT /ehr/ehr_id
-    Status Should Be    204
+    Status Should Be    201
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
 
 MF-036 - Create new EHR providing an ehr_id (Prefer header: representation)
-    [Tags]      not-ready   CDR-1517
     prepare new request session    JSON    Prefer=return=representation
     PUT /ehr/ehr_id
-    Status Should Be    200
+    Status Should Be    201
     Dictionary Should Contain Key   ${response.json()['system_id']}     value
     Dictionary Should Contain Key   ${response.json()['ehr_id']}        value
     Dictionary Should Contain Key   ${response.json()['ehr_status']}    uid
@@ -303,15 +293,16 @@ MF-036 - Create new EHR providing an ehr_id (Prefer header: representation)
     [Teardown]      (admin) delete ehr
 
 MF-037 - Create new EHR providing an ehr_id (XML, Prefer header: representation)
-    [tags]    not-ready   CDR-1517  EHR_STATUS_create_xml
+    [tags]    EHR_STATUS_create_xml
     prepare new request session    XML    Prefer=return=representation
     PUT /ehr/ehr_id
-    Status Should Be    200
+    Status Should Be    201
     Should Contain      ${response.text}    <?xml version
     Should Contain      ${response.text}    <ehr_id><value>
-    #String    response body    pattern=<?xml version
-    #String    response body    pattern=<ehr_id><value>
-    # String    response body    pattern=<ehr_status><name><value>EHR Status</value></name><uid
+    Should Contain      ${response.text}    <ehr_status><uid>
+    Should Contain      ${response.text}    <archetype_node_id>
+    Should Contain      ${response.text}    <is_queryable>true
+    Should Contain      ${response.text}    <is_modifiable>true
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
 
@@ -395,8 +386,6 @@ MF-013 - Create new EHR (invalid ehr_status)
 
 MF-014 - Create new EHR (invalid ehr_status - mandatory is_modifiable is missing)
     [Documentation]     Covers case where mandatory is_modifiable is missing
-    ...     https://vitagroup-ag.atlassian.net/browse/CDR-1506
-    [Tags]      not-ready   CDR-1506
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/007_ehr_status_is_modifiable_missing.json
     POST /ehr    ${body}
@@ -405,8 +394,6 @@ MF-014 - Create new EHR (invalid ehr_status - mandatory is_modifiable is missing
 
 MF-015 - Create new EHR (invalid ehr_status - mandatory is_queryable is missing)
     [Documentation]     Covers case where mandatory is_queryable is missing
-    ...     https://vitagroup-ag.atlassian.net/browse/CDR-1506
-    [Tags]      not-ready   CDR-1506
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/008_ehr_status_is_queryable_missing.json
     POST /ehr    ${body}
@@ -415,8 +402,6 @@ MF-015 - Create new EHR (invalid ehr_status - mandatory is_queryable is missing)
 
 MF-016 - Create new EHR (invalid ehr_status - mandatory is_modifiable and is_queryable are missing)
     [Documentation]     Covers case where mandatory is_modifiable and is_queryable are missing
-    ...     https://vitagroup-ag.atlassian.net/browse/CDR-1506
-    [Tags]      not-ready   CDR-1506
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/009_ehr_status_is_mod_and_is_quer_missing.json
     POST /ehr    ${body}
@@ -424,8 +409,13 @@ MF-016 - Create new EHR (invalid ehr_status - mandatory is_modifiable and is_que
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
 
 MF-024 - Create new EHR (POST /ehr invalid ehr_status variants)
-    [Documentation]     Bug ticket https://github.com/ehrbase/project_management/issues/295
-    [Tags]    295    not-ready
+    # Previous bug ticket https://github.com/ehrbase/project_management/issues/295
+    # Alexander Lehnert comments (on cases with 201):
+    # regarding the 0/1 boolean interpretation I would keep it as it is.
+    # It can be disabled "globally" for all json interpretations but, it is a feature not a bug.
+    # The introduction of 0/1 boolean interpretation in Jackson (for java) is for compatibility reasons.
+    # Languages like C or Perl does not have a primitive boolean type,
+    # so they sometime serialise such fields as 0/1 but can read "true"/"false" at the same time.
     [Template]          create ehr from data table (invalid)
 
   # SUBJECT    IS_MODIFIABLE   IS_QUERYABLE   R.CODE
@@ -435,10 +425,10 @@ MF-024 - Create new EHR (POST /ehr invalid ehr_status variants)
     given      true            ${EMPTY}       400
     given      null            null           400
     given      "null"          "null"         400
-    given      1               1              400
-    given      0               0              400
-    given      "true"          "true"         400
-    given      "false"         "false"        400
+    given      1               1              201
+    given      0               0              201
+    given      "true"          "true"         201
+    given      "false"         "false"        201
 
 MF-025 - Create new EHR (POST /ehr invalid subject variants)
     [Documentation]     Covers invalid cases where \n\n
@@ -446,19 +436,19 @@ MF-025 - Create new EHR (POST /ehr invalid subject variants)
     ...                 2) subject is provided but is invalid \n\n
     ...                    because some of it's mandatory elements are missing \n\n
     ...                 3) subject is missing completely \n\n
-    ...                 Bug ticket https://github.com/ehrbase/project_management/issues/295
-    [Tags]              295    not-ready
+    ...                 Previously reported bug ticket https://github.com/ehrbase/project_management/issues/295
     [Template]          create ehr from data table (invalid)
+    ### cases with 201 are ok, as "subject" : {} is accepted. See https://vitagroup-ag.atlassian.net/browse/CDR-1524
 
   # SUBJECT    IS_MODIFIABLE   IS_QUERYABLE   R.CODE
     ${EMPTY}   ${EMPTY}        true           400
     ${EMPTY}   true            ${EMPTY}       400
-    ${EMPTY}   true            true           400
+    ${EMPTY}   true            true           201
     ${EMPTY}   ${EMPTY}        false          400
-    ${EMPTY}   true            false          400
+    ${EMPTY}   true            false          201
     ${EMPTY}   false           ${EMPTY}       400
-    ${EMPTY}   false           true           400
-    ${EMPTY}   false           false          400
+    ${EMPTY}   false           true           201
+    ${EMPTY}   false           false          201
 
     invalid    true            true           400
     invalid    true            false          400
@@ -472,9 +462,15 @@ MF-025 - Create new EHR (POST /ehr invalid subject variants)
     missing    false           false          400
 
 MF-031 - Create new EHR providing an ehr_id (PUT /ehr/ehr_id invalid variants)
-    [Documentation]     Bug ticket https://github.com/ehrbase/project_management/issues/295
-    [Tags]              295    not-ready
+    # Previous bug ticket https://github.com/ehrbase/project_management/issues/295
     [Template]          create ehr with given ehr_id but invalid subject from data table
+
+    # Alexander Lehnert comments (on cases with 201 when IS_MODIFIABLE / IS_QUERYABLE = 0/1/"true"/"false"):
+    # regarding the 0/1 boolean interpretation I would keep it as it is.
+    # It can be disabled "globally" for all json interpretations but, it is a feature not a bug.
+    # The introduction of 0/1 boolean interpretation in Jackson (for java) is for compatibility reasons.
+    # Languages like C or Perl does not have a primitive boolean type,
+    # so they sometime serialise such fields as 0/1 but can read "true"/"false" at the same time.
 
   # EHR_ID  SUBJECT    IS_MODIFIABLE   IS_QUERYABLE   R.CODE
     given   given      ${EMPTY}        true           400
@@ -484,15 +480,15 @@ MF-031 - Create new EHR providing an ehr_id (PUT /ehr/ehr_id invalid variants)
 
     given   given      null            null           400
     given   given      "null"          "null"         400
-    given   given      1               1              400
-    given   given      0               0              400
-    given   given      "true"          "true"         400
-    given   given      "false"         "false"        400
-
-    given   ${EMPTY}   true            true           400
-    given   ${EMPTY}   true            false          400
-    given   ${EMPTY}   false           false          400
-    given   ${EMPTY}   false           true           400
+    given   given      1               1              201
+    given   given      0               0              201
+    given   given      "true"          "true"         201
+    given   given      "false"         "false"        201
+    ## below cases must return 201 as "subject" : {} is accepted. See https://vitagroup-ag.atlassian.net/browse/CDR-1524
+    given   ${EMPTY}   true            true           201
+    given   ${EMPTY}   true            false          201
+    given   ${EMPTY}   false           false          201
+    given   ${EMPTY}   false           true           201
 
 MF-032 - Create new EHR with invalid ehr_id (PUT /ehr/ehr_id variants)
     [Tags]
@@ -604,14 +600,13 @@ MF-048 - Create new EHR providing an ehr_id (invalid ehr_status - is_queryable, 
     Status Should Be    400
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
 
-MF-050 - Create new EHR providing an ehr_id (invalid ehr_status - subject empty)
-    [Documentation]     Covers INVALID case where subject is empty JSON
-    ...                 Bug ticket https://github.com/ehrbase/project_management/issues/295
-    [Tags]              295    not-ready
+MF-050 - Create new EHR providing an ehr_id (valid ehr_status - subject empty)
+    [Documentation]     Covers valid case where subject is empty JSON
+    #...                 Previously reported bug ticket https://github.com/ehrbase/project_management/issues/295
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/001_ehr_status_subject_empty.json
     PUT /ehr/ehr_id    body=${body}
-    Status Should Be    400
+    Status Should Be    201
     [Teardown]      Run Keyword And Return Status   (admin) delete ehr
 
 
