@@ -363,7 +363,7 @@ Suite Setup       Precondition
     ...                 - 2. After Get Composition (JSON)
     ...                 \n In both cases, value from \*{initial_content_data}* should be equal with value stored in \*{content_data}*.
     ...                 Covers: CDR-1466
-    [Setup]     Precondition    template_file=all_types/EHRN-ABDM-OPConsultRecord.v2.0.opt
+    #[Setup]     Precondition    template_file=all_types/EHRN-ABDM-OPConsultRecord.v2.0.opt
     Commit Composition OpenEHR       composition=consult_record__.json   format=FLAT
     Should Be Equal     ${resp.status_code}     ${201}
     ${file_content_json}    evaluate    json.loads('''${file}''')    json
@@ -385,7 +385,7 @@ Suite Setup       Precondition
     ...                 - 2. After Get Composition (XML)
     ...                 \n In both cases, value from \*{initial_content_data}* should be equal with value stored in \*{content_data}*.
     ...                 Covers: CDR-1466
-    [Setup]     Precondition    template_file=all_types/EHRN-ABDM-OPConsultRecord.v2.0.opt
+    #[Setup]     Precondition    template_file=all_types/EHRN-ABDM-OPConsultRecord.v2.0.opt
     Commit Composition OpenEHR       composition=consult_record__.json   format=FLAT
     Should Be Equal     ${resp.status_code}     ${201}
     ${file_content_json}    evaluate    json.loads('''${file}''')    json
@@ -407,7 +407,7 @@ Suite Setup       Precondition
     ...                 - 2. After Get Composition (STRUCTURED)
     ...                 \n In both cases, value from \*{initial_content_data}* should be equal with value stored in \*{content_data}*.
     ...                 Covers: CDR-1466
-    [Setup]     Precondition    template_file=all_types/EHRN-ABDM-OPConsultRecord.v2.0.opt
+    #[Setup]     Precondition    template_file=all_types/EHRN-ABDM-OPConsultRecord.v2.0.opt
     Commit Composition OpenEHR       composition=consult_record__.json   format=FLAT
     Should Be Equal     ${resp.status_code}     ${201}
     ${file_content_json}    evaluate    json.loads('''${file}''')    json
