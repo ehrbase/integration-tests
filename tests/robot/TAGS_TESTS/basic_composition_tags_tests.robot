@@ -47,7 +47,7 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
     &{composition_tag_body}      Create Dictionary
     ...     key=${tag_key}
     ...     value=${tag_value}
-    ...     target_path=/name/value/temp
+    ...     target_path=name/value/temp
     ...     id=${COMPOSITION_TAG_ID_2}
     Update Composition Tag Call      custom_tag_body=${composition_tag_body}
     Should Be Equal     ${firstRespArrEl['id']}     ${COMPOSITION_TAG_ID_2}
@@ -86,7 +86,7 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
     Create Session For Composition Tag Calls
     &{composition_tag_body}      Create Dictionary
     ...     value=${tag_value}
-    ...     target_path=/name/value/temp
+    ...     target_path=name/value/temp
     ${err_msg}  Run Keyword And Expect Error    *
     ...     Create Composition Tag Call      ${composition_tag_body}
     Should Contain      ${err_msg}      422 != 200
@@ -100,7 +100,7 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
     &{composition_tag_body}      Create Dictionary
     ...     key=${{str(uuid.uuid4())}}
     ...     value=${tag_value}
-    ...     target_path=name/value
+    ...     target_path=/name/value
     ${err_msg}  Run Keyword And Expect Error    *
     ...     Create Composition Tag Call      ${composition_tag_body}
     Should Contain      ${err_msg}      422 != 200
@@ -150,7 +150,7 @@ Set Tag Body In Array
         &{composition_tag_body}      Create Dictionary
         ...     key=${tag_key}
         ...     value=${tag_value}
-        ...     target_path=/name/value
+        ...     target_path=name/value
         @{tags_list}    Create List     ${composition_tag_body}
     END
     Set Test Variable   ${tags_list}      ${tags_list}
@@ -162,7 +162,7 @@ Default Checks For Tag Response
     Should Be Equal     ${compo_uid_value_temp}      ${firstRespArrEl['target']}
     Should Be Equal     COMPOSITION      ${firstRespArrEl['target_type']}
     Should Be Equal     ${tag_value}    ${firstRespArrEl['value']}
-    Should Be Equal     /name/value     ${firstRespArrEl['target_path']}
+    Should Be Equal     name/value     ${firstRespArrEl['target_path']}
 
 Create Composition Tag Call
     [Arguments]     ${custom_tag_body}=${NONE}
