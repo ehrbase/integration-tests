@@ -572,8 +572,6 @@ MF-045 - Create new EHR providing an ehr_id (invalid ehr_status)
 
 MF-046 - Create new EHR providing an ehr_id (invalid ehr_status - mandatory is_modifiable is missing)
     [Documentation]     Covers case where mandatory is_modifiable is missing.
-    ...                 Bug ticket https://github.com/ehrbase/project_management/issues/295
-    [Tags]              295    not-ready
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/007_ehr_status_is_modifiable_missing.json
     PUT /ehr/ehr_id    body=${body}
@@ -582,8 +580,6 @@ MF-046 - Create new EHR providing an ehr_id (invalid ehr_status - mandatory is_m
 
 MF-047 - Create new EHR providing an ehr_id (invalid ehr_status - mandatory is_queryable is missing)
     [Documentation]     Covers case where mandatory is_queryable is missing
-    ...                 Bug ticket https://github.com/ehrbase/project_management/issues/295
-    [Tags]              295    not-ready
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/008_ehr_status_is_queryable_missing.json
     PUT /ehr/ehr_id    body=${body}
@@ -592,8 +588,6 @@ MF-047 - Create new EHR providing an ehr_id (invalid ehr_status - mandatory is_q
 
 MF-048 - Create new EHR providing an ehr_id (invalid ehr_status - is_queryable, is_modifiable are missing)
     [Documentation]     Covers case where mandatory is_modifiable and is_queryableis are missing
-    ...                 Bug ticket https://github.com/ehrbase/project_management/issues/295
-    [Tags]              295    not-ready
     prepare new request session    JSON    Prefer=return=representation
     ${body}=     randomize subject_id in test-data-set    invalid/009_ehr_status_is_mod_and_is_quer_missing.json
     PUT /ehr/ehr_id    body=${body}
