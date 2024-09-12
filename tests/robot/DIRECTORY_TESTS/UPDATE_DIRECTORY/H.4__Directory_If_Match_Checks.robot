@@ -29,7 +29,6 @@ Update Directory - If-Match With Non-Existing UUID Version Number
     [Teardown]    (admin) delete ehr
 
 Update Directory - If-Match With Non-Existing UID Value
-    [Tags]      not-ready   CDR-1580
     [Documentation]     Update Directory with If-Match value (non-existing uid value).
     ...     Example: If-Match=2c7d2873-fcba-4fb6-c55r-13ce977b0547::local.ehrbase.org::1
     ...     Expect 412.
@@ -44,7 +43,6 @@ Update Directory - If-Match With Non-Existing UID Value
     Set Suite Variable      ${preceding_version_uid}   ${directory_uuid_non_existing_value}
     Log     ${preceding_version_uid}
     update DIRECTORY (JSON)    update/2_add_subfolders.json     isModifiable=${FALSE}
-    Log     https://vitagroup-ag.atlassian.net/browse/CDR-1580
     Should Be Equal     ${response.status_code}     ${412}
     [Teardown]    (admin) delete ehr
 

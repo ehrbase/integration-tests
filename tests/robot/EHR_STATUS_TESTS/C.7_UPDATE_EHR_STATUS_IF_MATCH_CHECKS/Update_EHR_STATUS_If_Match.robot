@@ -38,7 +38,6 @@ Update EHR Status - If-Match With Non-Existing UUID Version Number
     [Teardown]      (admin) delete ehr
 
 Update EHR Status - If-Match With Non-Existing UID Value
-    [Tags]      not-ready   CDR-1580
     [Documentation]     Update EHR_STATUS with If-Match value (non-existing uid value).
     ...     Example: If-Match=2c7d2873-fcba-4fb6-c55r-13ce977b0547::local.ehrbase.org::1
     ...     Expect 412.
@@ -49,7 +48,6 @@ Update EHR Status - If-Match With Non-Existing UID Value
     Set Suite Variable      ${ehrstatus_uid}   ${ehr_status_uuid_non_existing_value}
     ${err_msg}  Run Keyword And Expect Error    *
     ...     set ehr_status of EHR       multitenancy_token=${None}
-    Log     https://vitagroup-ag.atlassian.net/browse/CDR-1580
     Should Contain      ${err_msg}      412 != 200
     [Teardown]      (admin) delete ehr
 
