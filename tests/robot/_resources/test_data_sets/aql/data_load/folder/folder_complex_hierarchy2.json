@@ -1,0 +1,90 @@
+{
+  "_type": "FOLDER",
+  "uuid": {
+    "_type": "HIER_OBJECT_ID",
+    "value": "10e952ca-a5b2-4f24-8d37-59240fd37020"
+  },
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "root1"
+  },
+  "archetype_node_id": "openEHR-EHR-FOLDER.generic.v1",
+  "folders": [
+    {
+      "_type": "FOLDER",
+      "uuid": {
+        "_type": "HIER_OBJECT_ID",
+        "value": "d936409e-901f-4994-8d33-ed104d460151"
+      },
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "subfolder1"
+      },
+      "archetype_node_id": "openEHR-EHR-FOLDER.generic.v1",
+      "folders": [
+        {
+          "_type": "FOLDER",
+          "uuid": {
+            "_type": "HIER_OBJECT_ID",
+            "value": "04689137-90bf-456b-8afc-7c5774843919"
+          },
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "subsubfolder1"
+          },
+          "archetype_node_id": "openEHR-EHR-FOLDER.episode_of_care.v1"
+        },
+        {
+          "_type": "FOLDER",
+          "uuid": {
+            "_type": "HIER_OBJECT_ID",
+            "value": "8984f35c-8c68-41c4-af70-f4a9c2d676a0"
+          },
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "subsubfolder2"
+          },
+          "archetype_node_id": "openEHR-EHR-FOLDER.episode_of_care.v1"
+        }
+      ]
+    },
+    {
+      "_type": "FOLDER",
+      "uuid": {
+        "_type": "HIER_OBJECT_ID",
+        "value": "ac1e12cb-b9db-4f15-a8aa-4e62a9d97231"
+      },
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "subfolder2"
+      },
+      "archetype_node_id": "openEHR-EHR-FOLDER.generic.v1",
+      "folders": [
+        {
+          "_type": "FOLDER",
+          "uuid": {
+            "_type": "HIER_OBJECT_ID",
+            "value": "59bbd141-c51b-435a-9cbb-85d953ebfcd3"
+          },
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "subsubfolder1"
+          },
+          "archetype_node_id": "openEHR-EHR-FOLDER.episode_of_care.v1"
+        },
+        {
+          "_type": "FOLDER",
+          "uuid": {
+            "_type": "HIER_OBJECT_ID",
+            "value": "0760c7d6-8ab9-4c6a-bd8e-f4fe3cc0e79b"
+          },
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "subsubfolder2"
+          },
+          "archetype_node_id": "openEHR-EHR-FOLDER.episode_of_care.v1"
+        }
+      ]
+    }
+  ]
+}

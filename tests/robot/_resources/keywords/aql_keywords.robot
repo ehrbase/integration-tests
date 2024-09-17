@@ -31,6 +31,8 @@ ${EHR_STATUS_DATA_SETS_AQL}     ${PROJECT_ROOT}/tests/robot/_resources/test_data
 ${COMPOSITIONS_DATA_SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/data_load/compositions
 ${EXPECTED_JSON_DATA_SETS}      ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/fields_and_results
 ${VALID CONTRI DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/contributions/valid
+${FOLDERS_DATA_SETS}            ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/aql/data_load/folder
+
 
 *** Keywords ***
 Execute Ad Hoc Query
@@ -326,7 +328,6 @@ Update Composition For AQL
     Set Suite Variable       ${updated_version_composition_uid}      ${resp.json()['uid']['value']}
     Should Be Equal As Strings      ${resp.status_code}     ${200}
 
-
 Delete Composition For AQL
     [Arguments]         ${composition_uid}
     ${resp}     Delete On Session   ${SUT}  /ehr/${ehr_id}/composition/${composition_uid}
@@ -335,6 +336,20 @@ Delete Composition For AQL
     Status Should Be    204
     ${del_version_uid}      Get Substring           ${resp.headers['ETag']}    1    -1
     Set Suite Variable      ${del_version_uid}      ${del_version_uid}
+
+Create Directory For AQL
+    [Arguments]     ${valid_test_data_set}
+    ${json}     Load JSON From File     ${FOLDERS_DATA_SETS}/${valid_test_data_set}
+    Set Suite Variable      ${test_data}    ${json}
+    prepare new request session    JSON
+    ...     Prefer=return=representation
+    ${resp}     POST On Session     ${SUT}   /ehr/${ehr_id}/directory   expected_status=anything
+                ...                 json=${test_data}
+                ...                 headers=${headers}
+    Set Suite Variable      ${response}     ${resp}
+    Status Should Be        201
+    Set Suite Variable      ${folder_uid}   ${response.json()['uid']['value']}
+
 
 Set Debug Options In Dict
     [Arguments]     ${dry_run}=false     ${exec_sql}=false   ${query_plan}=false
