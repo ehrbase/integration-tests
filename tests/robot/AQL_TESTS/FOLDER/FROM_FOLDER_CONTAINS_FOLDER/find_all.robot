@@ -1,0 +1,1 @@
+##TODO: Implementation to be continued from https://github.com/ehrbase/conformance-testing-documentation/blob/cc2de61cd54975d1cf40be066afd88616e294aa1/FOLDER.md#folder-contains-folder
