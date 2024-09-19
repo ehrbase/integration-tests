@@ -1,0 +1,38 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-09-19T12:51:27.3390078+03:00",
+		"_executed_aql": "SELECT e/ehr_id/value, f/uid/value FROM EHR e CONTAINS FOLDER f[openEHR-EHR-FOLDER.episode_of_care.v1, 'subsubfolder1']",
+		"resultsize": 4
+	},
+	"q": "SELECT e/ehr_id/value, f/uid/value FROM EHR e CONTAINS FOLDER f[openEHR-EHR-FOLDER.episode_of_care.v1,'subsubfolder1']",
+	"columns": [
+		{
+			"path": "e/ehr_id/value",
+			"name": "#0"
+		},
+		{
+			"path": "f/uid/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_id1}",
+			"0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3"
+		],
+		[
+			"${ehr_id1}",
+			"13661fe2-1e16-4c75-a10d-9b8040487a72"
+		],
+		[
+			"${ehr_id2}",
+			"04689137-90bf-456b-8afc-7c5774843919"
+		],
+		[
+			"${ehr_id2}",
+			"59bbd141-c51b-435a-9cbb-85d953ebfcd3"
+		]
+	]
+}

@@ -5,19 +5,17 @@ Documentation   CHECK AQL RESPONSE ON FOLDER FROM
 ...         - *Postcondition:* Delete EHR using ADMIN endpoint.
 Resource        ../../../_resources/keywords/aql_keywords.robot
 
-#Suite Setup  Skip    enable Setup 'Precondition' if AQL checks are passing !!!
-#Suite Teardown  Skip    enable Teardown 'Admin Delete EHR For AQL' if AQL checks are passing !!!
 Suite Setup     Precondition        #enable this keyword if AQL checks are passing !!!
 Suite Teardown  Admin Delete EHR For AQL       #enable this keyword if AQL checks are passing !!!
 
 
 *** Test Cases ***
-Find All: SELECT f/uid/value, f/name/value, f/name/value, f/archetype_node_id FROM FOLDER f
-    [Tags]      not-ready
+Find All: SELECT f/uid/value, f/name/value, f/archetype_node_id FROM FOLDER f
     [Documentation]
     ...     Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FOLDER.md#find-all
-    ${query}    Set Variable    SELECT f/uid/value, f/name/value, f/name/value, f/archetype_node_id FROM FOLDER f
+    ${query}    Set Variable    SELECT f/uid/value, f/name/value, f/archetype_node_id FROM FOLDER f
     Set AQL And Execute Ad Hoc Query    ${query}
+    Length Should Be    ${resp_body['rows']}     3
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/expected_find_all.json
     ${exclude_paths}    Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
@@ -27,7 +25,6 @@ Find All: SELECT f/uid/value, f/name/value, f/name/value, f/archetype_node_id FR
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
 Find By Archetype: SELECT f/uid/value FROM FOLDER f[openEHR-EHR-FOLDER.episode_of_care.v1]
-    [Tags]      not-ready
     [Documentation]
     ...     Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FOLDER.md#find-by-archetype
     ${query}    Set Variable    SELECT f/uid/value FROM FOLDER f[openEHR-EHR-FOLDER.episode_of_care.v1]
@@ -40,7 +37,6 @@ Find By Archetype: SELECT f/uid/value FROM FOLDER f[openEHR-EHR-FOLDER.episode_o
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
 Find By Name: SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'root1'
-    [Tags]      not-ready
     [Documentation]
     ...     Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FOLDER.md#find-by-name
     ${query}    Set Variable    SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'root1'
@@ -53,7 +49,6 @@ Find By Name: SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'root1'
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
 Find By Name: SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'subfolder1'
-    [Tags]      not-ready
     [Documentation]
     ...     Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FOLDER.md#find-by-name
     ${query}    Set Variable    SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'subfolder1'
@@ -66,7 +61,6 @@ Find By Name: SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'subfolder1'
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
 Find By Name: SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'subsubfolder1'
-    [Tags]      not-ready
     [Documentation]
     ...     Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FOLDER.md#find-by-name
     ${query}    Set Variable    SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'subsubfolder1'

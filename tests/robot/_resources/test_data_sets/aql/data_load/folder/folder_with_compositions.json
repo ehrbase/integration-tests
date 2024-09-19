@@ -47,7 +47,7 @@
                 {
                   "id": {
                     "_type": "HIER_OBJECT_ID",
-                    "value": "{comp_id4}"
+                    "value": "${c_uid4}"
                   },
                   "namespace": "my.system.id",
                   "type": "VERSIONED_COMPOSITION"
@@ -60,7 +60,7 @@
             {
               "id": {
                 "_type": "HIER_OBJECT_ID",
-                "value": "{comp_id2}"
+                "value": "${c_uid2}"
               },
               "namespace": "my.system.id",
               "type": "VERSIONED_COMPOSITION"
@@ -82,7 +82,7 @@
             {
               "id": {
                 "_type": "HIER_OBJECT_ID",
-                "value": "{comp_id3}"
+                "value": "${c_uid3}"
               },
               "namespace": "my.system.id",
               "type": "VERSIONED_COMPOSITION"
@@ -96,7 +96,7 @@
         {
           "id": {
             "_type": "HIER_OBJECT_ID",
-            "value": "{comp_id1}"
+            "value": "${c_uid1}"
           },
           "namespace": "my.system.id",
           "type": "VERSIONED_COMPOSITION"

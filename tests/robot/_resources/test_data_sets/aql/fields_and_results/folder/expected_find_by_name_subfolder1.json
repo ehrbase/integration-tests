@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-09-19T11:43:08.0279372+03:00",
+		"_executed_aql": "SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'subfolder1'",
+		"resultsize": 1
+	},
+	"q": "SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'subfolder1'",
+	"columns": [
+		{
+			"path": "f/uid/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"d936409e-901f-4994-8d33-ed104d460151"
+		]
+	]
+}

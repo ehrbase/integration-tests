@@ -338,8 +338,15 @@ Delete Composition For AQL
     Set Suite Variable      ${del_version_uid}      ${del_version_uid}
 
 Create Directory For AQL
-    [Arguments]     ${valid_test_data_set}
-    ${json}     Load JSON From File     ${FOLDERS_DATA_SETS}/${valid_test_data_set}
+    [Arguments]     ${valid_test_data_set}      ${has_robot_vars}=${FALSE}
+    IF      '${has_robot_vars}' == '${TRUE}'
+        ${json_str}     Get File     ${FOLDERS_DATA_SETS}/${valid_test_data_set}
+        ${json_str_replaced}    Replace Variables   ${json_str}
+        ${json_converted}       Evaluate    json.loads('''${json_str_replaced}''')    json
+        ${json}     Set Variable   ${json_converted}
+    ELSE
+        ${json}     Load JSON From File     ${FOLDERS_DATA_SETS}/${valid_test_data_set}
+    END
     Set Suite Variable      ${test_data}    ${json}
     prepare new request session    JSON
     ...     Prefer=return=representation

@@ -1,6 +1,6 @@
 {
   "_type": "FOLDER",
-  "uuid": {
+  "uid": {
     "_type": "HIER_OBJECT_ID",
     "value": "10e952ca-a5b2-4f24-8d37-59240fd37020"
   },
@@ -12,7 +12,7 @@
   "folders": [
     {
       "_type": "FOLDER",
-      "uuid": {
+      "uid": {
         "_type": "HIER_OBJECT_ID",
         "value": "d936409e-901f-4994-8d33-ed104d460151"
       },
@@ -24,7 +24,7 @@
       "folders": [
         {
           "_type": "FOLDER",
-          "uuid": {
+          "uid": {
             "_type": "HIER_OBJECT_ID",
             "value": "0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3"
           },
