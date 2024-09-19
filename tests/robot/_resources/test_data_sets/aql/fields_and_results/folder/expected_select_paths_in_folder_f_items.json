@@ -1,0 +1,43 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-09-19T17:55:32.4102703+03:00",
+		"_executed_aql": "SELECT f/items FROM FOLDER f",
+		"resultsize": 3
+	},
+	"q": "SELECT f/items FROM FOLDER f",
+	"columns": [
+		{
+			"path": "f/items",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			null
+		],
+		[
+			{
+				"_type": "OBJECT_REF",
+				"namespace": "my.system.id",
+				"type": "VERSIONED_COMPOSITION",
+				"id": {
+					"_type": "HIER_OBJECT_ID",
+					"value": "7c0a9df0-564f-4f34-8e65-92586c64ef56"
+				}
+			}
+		],
+		[
+			{
+				"_type": "OBJECT_REF",
+				"namespace": "my.system.id",
+				"type": "VERSIONED_COMPOSITION",
+				"id": {
+					"_type": "HIER_OBJECT_ID",
+					"value": "c68131a3-72da-41fe-8d11-c4fccfd2d2d0"
+				}
+			}
+		]
+	]
+}

@@ -1,0 +1,30 @@
+{
+  "_type": "FOLDER",
+  "uuid": {
+    "_type": "HIER_OBJECT_ID",
+    "value": "10e952ca-a5b2-4f24-8d37-59240fd37020"
+  },
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "root1"
+  },
+  "archetype_node_id": "openEHR-EHR-FOLDER.generic.v1",
+  "items": [
+    {
+      "id": {
+        "_type": "HIER_OBJECT_ID",
+        "value": "${c_uid1}"
+      },
+      "namespace": "my.system.id",
+      "type": "VERSIONED_COMPOSITION"
+    },
+    {
+      "id": {
+        "_type": "HIER_OBJECT_ID",
+        "value": "${c_uid2}"
+      },
+      "namespace": "my.system.id",
+      "type": "VERSIONED_COMPOSITION"
+    }
+  ]
+}
