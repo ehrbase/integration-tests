@@ -12,7 +12,6 @@ Suite Teardown  Admin Delete EHR For AQL
 
 *** Test Cases ***
 Find All: SELECT f1/uid/value, f1/name/value, f2/uid/value, f2/name/value FROM FOLDER f1 CONTAINS FOLDER f2
-    [Tags]      not-ready
     ${query}    Set Variable    SELECT f1/uid/value, f1/name/value, f2/uid/value, f2/name/value FROM FOLDER f1 CONTAINS FOLDER f2
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     10

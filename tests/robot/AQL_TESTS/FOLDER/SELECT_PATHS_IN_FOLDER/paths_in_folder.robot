@@ -17,7 +17,6 @@ Suite Teardown  Admin Delete EHR For AQL
 
 *** Test Cases ***
 ${query_nr} SELECT ${path} FROM FOLDER f
-    [Tags]      not-ready
     [Template]      Execute Query
     ${path}    ${expected_file}    ${nr_of_results}
 

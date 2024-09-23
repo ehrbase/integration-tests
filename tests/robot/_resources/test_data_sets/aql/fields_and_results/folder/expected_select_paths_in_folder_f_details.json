@@ -1,0 +1,66 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-09-23T16:27:25.4942934+03:00",
+		"_executed_aql": "SELECT f/details FROM FOLDER f",
+		"resultsize": 2
+	},
+	"q": "SELECT f/details FROM FOLDER f",
+	"columns": [
+		{
+			"path": "f/details",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "ITEM_TREE",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "Tree"
+				},
+				"items": [
+					{
+						"_type": "ELEMENT",
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "text"
+						},
+						"value": {
+							"_type": "DV_TEXT",
+							"value": "value2"
+						},
+						"archetype_node_id": "at0004"
+					}
+				],
+				"archetype_node_id": "at0003"
+			}
+		],
+		[
+			{
+				"_type": "ITEM_TREE",
+				"name": {
+					"_type": "DV_TEXT",
+					"value": "Tree"
+				},
+				"items": [
+					{
+						"_type": "ELEMENT",
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "text"
+						},
+						"value": {
+							"_type": "DV_TEXT",
+							"value": "value1"
+						},
+						"archetype_node_id": "at0004"
+					}
+				],
+				"archetype_node_id": "at0003"
+			}
+		]
+	]
+}

@@ -15,7 +15,6 @@ Suite Teardown  Admin Delete EHR For AQL    ${ehr_id}
 
 *** Test Cases ***
 ${query_nr} SELECT f2/uid/value, f2/name/value FROM FOLDER f1[${predicate1}] CONTAINS FOLDER f2[${predicate2}]
-    [Tags]      not-ready
     [Template]      Execute Query
     ${predicate1}    ${predicate2}      ${expected_file}    ${nr_of_results}
 
