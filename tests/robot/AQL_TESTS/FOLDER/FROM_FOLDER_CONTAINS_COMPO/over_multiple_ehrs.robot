@@ -38,6 +38,7 @@ Over Multiple EHRs: ${q}
     ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
     Create File     ${temporary_file}
     ...     ${data_replaced_vars}
+    ${exclude_paths}    Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
     ...		ignore_string_case=${TRUE}

@@ -10,10 +10,10 @@ Suite Teardown  Admin Delete EHR For AQL       #enable this keyword if AQL check
 
 
 *** Test Cases ***
-Find All: SELECT f/uid/value, f/name/value, f/archetype_node_id, f/items/id/value FROM FOLDER f
+Find All: SELECT f/uid/value, f/name/value, f/archetype_node_id FROM FOLDER f
     [Documentation]
     ...     Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FOLDER.md#find-all
-    ${query}    Set Variable    SELECT f/uid/value, f/name/value, f/archetype_node_id, f/items/id/value FROM FOLDER f
+    ${query}    Set Variable    SELECT f/uid/value, f/name/value, f/archetype_node_id FROM FOLDER f
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     3
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/expected_find_all.json

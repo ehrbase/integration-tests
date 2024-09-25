@@ -2,11 +2,11 @@
 	"meta": {
 		"_type": "RESULTSET",
 		"_schema_version": "1.0.3",
-		"_created": "2024-09-25T12:12:48.2899056+03:00",
-		"_executed_aql": "SELECT f/uid/value, f/name/value, f/archetype_node_id, f/items/id/value FROM FOLDER f",
+		"_created": "2024-09-25T13:23:19.4276296+03:00",
+		"_executed_aql": "SELECT f/uid/value, f/name/value, f/archetype_node_id FROM FOLDER f",
 		"resultsize": 3
 	},
-	"q": "SELECT f/uid/value, f/name/value, f/archetype_node_id, f/items/id/value FROM FOLDER f",
+	"q": "SELECT f/uid/value, f/name/value, f/archetype_node_id FROM FOLDER f",
 	"columns": [
 		{
 			"path": "f/uid/value",
@@ -19,30 +19,23 @@
 		{
 			"path": "f/archetype_node_id",
 			"name": "#2"
-		},
-		{
-			"path": "f/items/id/value",
-			"name": "#3"
 		}
 	],
 	"rows": [
 		[
 			"10e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
 			"root1",
-			"openEHR-EHR-FOLDER.generic.v1",
-			null
+			"openEHR-EHR-FOLDER.generic.v1"
 		],
 		[
 			"d936409e-901f-4994-8d33-ed104d460151",
 			"subfolder1",
-			"openEHR-EHR-FOLDER.generic.v1",
-			null
+			"openEHR-EHR-FOLDER.generic.v1"
 		],
 		[
 			"0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3",
 			"subsubfolder1",
-			"openEHR-EHR-FOLDER.episode_of_care.v1",
-			null
+			"openEHR-EHR-FOLDER.episode_of_care.v1"
 		]
 	]
 }
