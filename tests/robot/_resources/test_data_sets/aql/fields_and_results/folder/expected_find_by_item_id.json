@@ -1,0 +1,31 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-09-25T12:39:47.4116434+03:00",
+		"_executed_aql": "SELECT f/uid/value, f/name/value, f/items/id/value FROM FOLDER f WHERE f/items/id/value = '7c0a9df0-564f-4f34-8e65-92586c64ef56'",
+		"resultsize": 1
+	},
+	"q": "SELECT f/uid/value, f/name/value, f/items/id/value FROM FOLDER f WHERE f/items/id/value = '7c0a9df0-564f-4f34-8e65-92586c64ef56'",
+	"columns": [
+		{
+			"path": "f/uid/value",
+			"name": "#0"
+		},
+		{
+			"path": "f/name/value",
+			"name": "#1"
+		},
+		{
+			"path": "f/items/id/value",
+			"name": "#2"
+		}
+	],
+	"rows": [
+		[
+			"d936409e-901f-4994-8d33-ed104d460151",
+			"subfolder1",
+			"7c0a9df0-564f-4f34-8e65-92586c64ef56"
+		]
+	]
+}
