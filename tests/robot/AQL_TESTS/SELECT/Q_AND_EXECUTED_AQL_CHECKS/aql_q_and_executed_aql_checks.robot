@@ -44,6 +44,42 @@ Suite Setup     Set Library Search Order For Tests
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}
     ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1' LIMIT 2 OFFSET 1
 
+1.c Query - Ad-Hoc Query POST - Query Params - MATCHES Multiple Values
+    Set Test Variable       ${query_matches1}
+    ...     SELECT pe/time/value, s/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s CONTAINS POINT_EVENT pe WHERE s/name/value MATCHES {'Section 1', 'Section 2'}
+    Set Test Variable       ${test_data}    {"q":"${query_matches1}"}
+    Send Ad Hoc Request     aql_body=${test_data}
+    Length Should Be    ${resp_body['rows']}    ${2}
+    Should Be Equal     ${resp_body['meta']['resultsize']}      ${2}
+    Should Be Equal As Strings      ${resp_body_query}      ${query_matches1}
+    Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}       ${query_matches1}
+    Should Be Equal As Strings      ${resp_body['rows'][0]}    ['2022-02-03T04:05:06', 'Section 1']
+    Should Be Equal As Strings      ${resp_body['rows'][1]}    ['2022-02-03T04:05:06', 'Section 2']
+
+1.d Query - Ad-Hoc Query POST - MATCHES Multiple Values
+    Set Test Variable       ${query_matches2}
+    ...     SELECT pe/time/value, s/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s CONTAINS POINT_EVENT pe WHERE s/name/value MATCHES {$sections}
+    Set Test Variable       ${test_data}    {"q":"${query_matches2}","query_parameters": {"sections": ["Section 1","Section 2"]}}
+    Send Ad Hoc Request     aql_body=${test_data}
+    Length Should Be    ${resp_body['rows']}    ${2}
+    Should Be Equal     ${resp_body['meta']['resultsize']}      ${2}
+    Should Be Equal As Strings      ${resp_body_query}      ${query_matches2}
+    Should Be Equal As Strings      ${resp_body['rows'][0]}    ['2022-02-03T04:05:06', 'Section 1']
+    Should Be Equal As Strings      ${resp_body['rows'][1]}    ['2022-02-03T04:05:06', 'Section 2']
+    ### Check with one item in list
+    Set Test Variable       ${query_matches3}
+    ...     SELECT pe/time/value, s/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s CONTAINS POINT_EVENT pe WHERE s/name/value MATCHES {$sections}
+    Set Test Variable       ${test_data}    {"q":"${query_matches3}","query_parameters": {"sections": ["Section 1"]}}
+    Send Ad Hoc Request     aql_body=${test_data}
+    Length Should Be    ${resp_body['rows']}    ${1}
+    Should Be Equal     ${resp_body['meta']['resultsize']}      ${1}
+    ### Check with non-existing Section name value
+    Set Test Variable       ${query_matches4}
+    ...     SELECT pe/time/value, s/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s CONTAINS POINT_EVENT pe WHERE s/name/value MATCHES {$sections}
+    Set Test Variable       ${test_data}    {"q":"${query_matches4}","query_parameters": {"sections": ["Non existing section"]}}
+    Send Ad Hoc Request     aql_body=${test_data}
+    Length Should Be    ${resp_body['rows']}    ${0}
+
 2. Query - Ad-Hoc Query GET
     Set Test Variable       ${query3}
     ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id}'
