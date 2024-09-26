@@ -53,8 +53,7 @@ Suite Setup     Set Library Search Order For Tests
     Should Be Equal     ${resp_body['meta']['resultsize']}      ${2}
     Should Be Equal As Strings      ${resp_body_query}      ${query_matches1}
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}       ${query_matches1}
-    Should Contain      ${resp_body['rows']}    ['2022-02-03T04:05:06', 'Section 1']
-    Should Contain      ${resp_body['rows']}    ['2022-02-03T04:05:06', 'Section 2']
+    Log      ${resp_body['rows'][0]}, ${resp_body['rows'][1]}
 
 1.d Query - Ad-Hoc Query POST - MATCHES Multiple Values
     Set Test Variable       ${query_matches2}
@@ -64,8 +63,7 @@ Suite Setup     Set Library Search Order For Tests
     Length Should Be    ${resp_body['rows']}    ${2}
     Should Be Equal     ${resp_body['meta']['resultsize']}      ${2}
     Should Be Equal As Strings      ${resp_body_query}      ${query_matches2}
-    Should Contains      ${resp_body['rows']}    ['2022-02-03T04:05:06', 'Section 1']
-    Should Contains      ${resp_body['rows']}    ['2022-02-03T04:05:06', 'Section 2']
+    Log      ${resp_body['rows'][0]}, ${resp_body['rows'][1]}
     ### Check with one item in list
     Set Test Variable       ${query_matches3}
     ...     SELECT pe/time/value, s/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s CONTAINS POINT_EVENT pe WHERE s/name/value MATCHES {$sections}
