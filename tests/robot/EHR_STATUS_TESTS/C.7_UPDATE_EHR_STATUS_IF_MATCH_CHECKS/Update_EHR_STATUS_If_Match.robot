@@ -53,6 +53,30 @@ Update EHR Status - If-Match With Non-Existing UID Value
     Should Contain      ${err_msg}      412 != 200
     [Teardown]      (admin) delete ehr
 
+Update EHR Status - If-Match With Non-Existing UID Value - System Id - Version
+    [Documentation]     Update EHR_STATUS with If-Match value (non-existing uid, system_id and version number).
+    ...     Example: If-Match=049addcd-9094-4d3c-8b79-9bb62b38cac2::non-existing-system-id::6
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    #set {ehrstatus_uid} with replaced uid value (non-existing uid value)
+    ${ehr_status_uuid_non_existing_value}     Replace String
+    ...     ${ehrstatus_uid}    ${versioned_status_uid}     ${{str(uuid.uuid4())}}
+    ${ehrstatus_uid}    Set Variable   ${ehr_status_uuid_non_existing_value}
+    #set {ehrstatus_uid} with replaced original system_id with non-existing-system-id
+    @{ehr_status_uid_list}      Split String    ${ehrstatus_uid}    ::
+    Set Test Variable    ${initial_system_id}    ${ehr_status_uid_list}[1]
+    ${ehr_status_system_id_non_existing_value}     Replace String
+    ...     ${ehrstatus_uid}    ${initial_system_id}     non-existing-system-id
+    #Set Suite Variable      ${ehrstatus_uid}   ${ehr_status_system_id_non_existing_value}
+    ${ehrstatus_uid}    Set Variable   ${ehr_status_system_id_non_existing_value}
+    ${ehr_status_non_existing_version}     Replace String
+    ...     ${ehrstatus_uid}    ::1     ::5
+    Set Suite Variable      ${ehrstatus_uid}   ${ehr_status_non_existing_version}
+    ${err_msg}  Run Keyword And Expect Error    *
+    ...     set ehr_status of EHR       multitenancy_token=${None}
+    Should Contain      ${err_msg}      412 != 200
+    [Teardown]      (admin) delete ehr
+
 Update EHR Status - If-Match With Wrong Value
     [Tags]      not-ready   CDR-1586
     [Documentation]     Update EHR_STATUS with If-Match value (wrong format).
