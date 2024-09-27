@@ -736,7 +736,7 @@ update ehr_status of fake EHR (with body)
 
     generate fake ehr_status
     Set To Dictionary       ${headers}       Content-Type=application/json   Prefer=return=representation
-                            ...        If-Match=${ehr_id}
+                            ...        If-Match=${ehr_id}::${NODENAME}::1
     ${resp}         PUT On Session     ${SUT}    /ehr/${ehr_id}/ehr_status      json=${ehr_status}
                     ...     headers=${headers}      expected_status=anything
                     # NOTE: spec --> "If-Match: {preceding_version_uid}"
