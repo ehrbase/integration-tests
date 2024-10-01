@@ -34,7 +34,7 @@ Execute Query
     Log     ${expected_file}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/${expected_file}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
-    ${exclude_paths}	Create List    root['meta']     root['rows'][0][0]['uid']
+    ${exclude_paths}	Create List    root['meta']     root['q']    root['rows'][0][0]['uid']
     ...     root['rows'][0][0]['folders'][0]['uid']   root['rows'][1][0]['uid']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_result}

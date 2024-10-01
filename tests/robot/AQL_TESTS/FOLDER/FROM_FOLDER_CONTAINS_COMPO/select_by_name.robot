@@ -18,7 +18,6 @@ Suite Teardown  Admin Delete EHR For AQL
 
 *** Test Cases ***
 ${query_nr} SELECT c/uid/value FROM FOLDER f CONTAINS COMPOSITION c WHERE f/name/value = '${name}'
-    [Tags]      not-ready
     [Template]      Execute Query
     ${name}    ${expected_file}    ${nr_of_results}
 
@@ -46,12 +45,12 @@ Execute Query
     ...     ${EXPECTED_JSON_DATA_SETS}/folder/expected_folder_contains_compo_select_by_name_tmp.json
     Set AQL And Execute Ad Hoc Query    ${query}
     ${expected_res_tmp}     Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/${expected_file}
-    ${file_without_replaced_vars}   Get Binary File    ${expected_res_tmp}
+    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
     ${data_replaced_vars}   Replace Variables  ${file_without_replaced_vars}
     Create Binary File      ${expected_file_with_replaced_vars}
     ...     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
-    ${exclude_paths}	Create List    root['meta']
+    ${exclude_paths}	Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
     ...     ${resp_body_actual}     ${expected_file_with_replaced_vars}
     ...     exclude_paths=${exclude_paths}

@@ -15,7 +15,6 @@ Suite Teardown  Admin Delete EHR For AQL
 
 *** Test Cases ***
 Folder Contains Composition: SELECT c/uid/value, f/name/value FROM FOLDER f CONTAINS COMPOSITION c
-    [Tags]      not-ready
     ${query}    Set Variable
     ...     SELECT c/uid/value, f/name/value FROM FOLDER f CONTAINS COMPOSITION c
     ${temporary_file}     Set Variable  ${EXPECTED_JSON_DATA_SETS}/folder/expected_folder_contains_compo_select_all_tmp.json

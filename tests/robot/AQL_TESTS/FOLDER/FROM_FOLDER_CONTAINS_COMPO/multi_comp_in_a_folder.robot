@@ -19,17 +19,23 @@ ${q}   SELECT c/uid/value FROM FOLDER f CONTAINS COMPOSITION c
 
 *** Test Cases ***
 Multi Comp In A Folder: ${q}
-    [Tags]      not-ready
     Set Test Variable   ${query}    ${q}
     Set AQL And Execute Ad Hoc Query    ${query}
+    ${temporary_file}     Set Variable  ${EXPECTED_JSON_DATA_SETS}/folder/expected_contains_compo_multi_compo_in_folder_tmp.json
     Length Should Be    ${resp_body['rows']}     2
-    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/expected_contains_compo_multi_compo_in_folder.json
+    ${expected_file}      Set Variable    expected_contains_compo_multi_compo_in_folder.json
+    ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/folder/${expected_file}
+    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
+    ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
+    Create File     ${temporary_file}
+    ...     ${data_replaced_vars}
     ${exclude_paths}    Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ...     ${resp_body_actual}     ${temporary_file}      exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}
     ...		ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
+    [Teardown]      Remove File     ${temporary_file}
 
 
 *** Keywords ***

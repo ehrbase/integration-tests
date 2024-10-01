@@ -21,12 +21,11 @@ Suite Teardown  Run Keywords    Admin Delete EHR For AQL    ${ehr_id1}      AND
 
 
 *** Variables ***
-${q}   SELECT e/ehr_id/value, c/uid/value FROM EHR e CONTAINS FOLDER f CONTAINS COMPOSITION c WHERE f/name/value = 'subsubsubfolder1'
+${q}   SELECT e/ehr_id/value, c/uid/value FROM EHR e CONTAINS FOLDER f CONTAINS COMPOSITION c WHERE f/name/value = 'subsubsubfolder2'
 
 
 *** Test Cases ***
 Over Multiple EHRs: ${q}
-    [Tags]      not-ready
     Set Test Variable   ${query}    ${q}
     ${temporary_file}   Set Variable
     ...     ${EXPECTED_JSON_DATA_SETS}/folder/expected_contains_compo_over_multiple_ehrs_tmp.json
@@ -40,7 +39,7 @@ Over Multiple EHRs: ${q}
     ...     ${data_replaced_vars}
     ${exclude_paths}    Create List    root['meta']     root['q']
     ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ...     ${resp_body_actual}     ${temporary_file}      exclude_paths=${exclude_paths}
     ...		ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Remove File     ${temporary_file}
