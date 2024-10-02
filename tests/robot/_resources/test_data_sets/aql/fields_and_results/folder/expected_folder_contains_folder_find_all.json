@@ -27,7 +27,7 @@
 	],
 	"rows": [
 		[
-			"10e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
 			"root1",
 			"e9ae5700-d969-430a-b4f2-445e3091a901",
 			"subsubfolder2"
@@ -39,7 +39,7 @@
 			"subsubfolder2"
 		],
 		[
-			"10e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
 			"root1",
 			"13661fe2-1e16-4c75-a10d-9b8040487a72",
 			"subsubfolder1"
@@ -51,13 +51,13 @@
 			"subsubfolder1"
 		],
 		[
-			"10e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
 			"root1",
 			"ac1e12cb-b9db-4f15-a8aa-4e62a9d97231",
 			"subfolder2"
 		],
 		[
-			"10e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
 			"root1",
 			"3cb9efa5-fe71-49e9-a02f-d38835c27d1b",
 			"subsubfolder2"
@@ -69,7 +69,7 @@
 			"subsubfolder2"
 		],
 		[
-			"10e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
 			"root1",
 			"0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3",
 			"subsubfolder1"
@@ -81,7 +81,7 @@
 			"subsubfolder1"
 		],
 		[
-			"10e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
 			"root1",
 			"d936409e-901f-4994-8d33-ed104d460151",
 			"subfolder1"

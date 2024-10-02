@@ -1,8 +1,8 @@
 {
   "_type": "FOLDER",
-  "uuid": {
+  "uid": {
     "_type": "HIER_OBJECT_ID",
-    "value": "10e952ca-a5b2-4f24-8d37-59240fd37020"
+    "value": "70e952ca-a5b2-4f24-8d37-59240fd37020"
   },
   "name": {
     "_type": "DV_TEXT",
@@ -12,7 +12,7 @@
   "folders": [
     {
       "_type": "FOLDER",
-      "uuid": {
+      "uid": {
         "_type": "HIER_OBJECT_ID",
         "value": "d936409e-901f-4994-8d33-ed104d460151"
       },
@@ -24,7 +24,7 @@
       "folders": [
         {
           "_type": "FOLDER",
-          "uuid": {
+          "uid": {
             "_type": "HIER_OBJECT_ID",
             "value": "0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3"
           },
@@ -35,7 +35,7 @@
           "folders": [
             {
               "_type": "FOLDER",
-              "uuid": {
+              "uid": {
                 "_type": "HIER_OBJECT_ID",
                 "value": "70939d97-8add-4419-b27c-516e64b1c744 "
               },
@@ -70,7 +70,7 @@
         },
         {
           "_type": "FOLDER",
-          "uuid": {
+          "uid": {
             "_type": "HIER_OBJECT_ID",
             "value": "643b71ca-f9d5-4d84-9f39-b2d89cbab44a"
           },
