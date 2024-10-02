@@ -27,13 +27,13 @@
 	],
 	"rows": [
 		[
-			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"40e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
 			"root1",
 			"openEHR-EHR-FOLDER.generic.v1",
 			"${c_uid1}"
 		],
 		[
-			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"40e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
 			"root1",
 			"openEHR-EHR-FOLDER.generic.v1",
 			"${c_uid2}"
