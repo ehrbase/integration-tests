@@ -15,7 +15,6 @@ Documentation       STORED QUERY TEST SUITE
 ...                 - GET /rest/openehr/v1/query/{qualified_query_name}/{version}
 ...                 - POST /rest/openehr/v1/query/{qualified_query_name}/{version}
 ...                 JIRA ticket: https://vitagroup-ag.atlassian.net/browse/CDR-1068
-...                 \n*Bug ticket for skipped tests with Negative tag*: https://vitagroup-ag.atlassian.net/browse/CDR-1069
 
 Resource            ../_resources/keywords/composition_keywords.robot
 Resource            ../_resources/keywords/ehr_keywords.robot
@@ -114,7 +113,7 @@ Definition API - GET Stored Query Using Qualified Query Name And Version
     Log     ${resp['saved']}
 
 Definition API - GET Stored Query Using Inexistent Qualified Query Name And Version
-    [Tags]      not-ready   Negative    CDR-1069
+    [Tags]     Negative
     [Documentation]     Test to check below endpoint:
     ...                 - GET /rest/openehr/v1/definition/query/{qualified_query_name} with inexistent {qualified_query_name} and {version} values
     ...                 \n Check that 404 is returned on GET /definition/query/{qualified_query_name}/{version} for inexistent query.
@@ -201,7 +200,7 @@ Query API - GET Stored Query Using Qualified Query Name With Ehr Id Param
     END
 
 Query API - GET Stored Query Using Inexistent Qualified Query Name
-    [Tags]      not-ready   Negative    CDR-1069
+    [Tags]      Negative
     [Documentation]     Test to check below endpoint:
     ...                 - GET /rest/openehr/v1/query/{qualified_query_name} with inexistent {qualified_query_name} value
     ...                 \n Check that 404 is returned on GET /query/{qualified_query_name} for inexistent query.
@@ -319,10 +318,6 @@ Query API - DELETE Stored Query Using Qualified Query Name And Version
     ...                 \n Check that 404 is returned
     ${resp_query}       DELETE /query/{qualified_query_name}/{version} ADMIN
     ...     qualif_name=${second_resp_qualified_query_name_version}
-    ###get deleted stored query - bug CDR-1069
-#    Run Keyword And Expect Error    	404 != 200
-#    ...     GET /query/{qualified_query_name}/{version}
-#    ...     qualif_name=${second_resp_qualified_query_name_version}
 
 
 *** Keywords ***
