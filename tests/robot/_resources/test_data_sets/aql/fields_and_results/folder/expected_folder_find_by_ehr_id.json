@@ -1,0 +1,34 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-10-01T16:32:57.6462362+03:00",
+		"_executed_aql": "SELECT e/ehr_id/value, f/uid/value FROM EHR e CONTAINS FOLDER f WHERE e/ehr_id/value = '69a7fedf-061a-42d4-a946-3519d69e2f46'",
+		"resultsize": 3
+	},
+	"q": "SELECT e/ehr_id/value, f/uid/value FROM EHR e CONTAINS FOLDER f WHERE e/ehr_id/value = '69a7fedf-061a-42d4-a946-3519d69e2f46'",
+	"columns": [
+		{
+			"path": "e/ehr_id/value",
+			"name": "#0"
+		},
+		{
+			"path": "f/uid/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_id1}",
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1"
+		],
+		[
+			"${ehr_id1}",
+			"d936409e-901f-4994-8d33-ed104d460151"
+		],
+		[
+			"${ehr_id1}",
+			"0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3"
+		]
+	]
+}

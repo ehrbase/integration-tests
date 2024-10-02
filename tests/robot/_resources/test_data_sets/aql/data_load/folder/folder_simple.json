@@ -1,0 +1,13 @@
+{
+  "_type": "FOLDER",
+  "uid": {
+    "_type": "HIER_OBJECT_ID",
+    "value": "9655f56f-16c7-4d48-8dfd-8457d9789e40"
+  },
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "simple"
+  },
+  "archetype_node_id": "openEHR-EHR-FOLDER.generic.v1",
+  "folders": [ ]
+}

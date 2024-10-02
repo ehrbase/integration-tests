@@ -72,6 +72,19 @@ Find By Name: SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'subsubfolde
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
+Find By Folder Id: SELECT f/name/value, f/uid/value FROM FOLDER f WHERE f/uid/value = '0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3'
+    [Documentation]
+    ...     Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FOLDER.md#find-by-folder-id
+    ${query}    Set Variable
+    ...     SELECT f/name/value, f/uid/value FROM FOLDER f WHERE f/uid/value = '0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3'
+    Set AQL And Execute Ad Hoc Query    ${query}
+    Length Should Be    ${resp_body['rows']}     1
+    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/expected_find_by_folder_id.json
+    ${exclude_paths}    Create List    root['meta']     root['q']
+    ${diff}     compare json-string with json-file
+    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    Should Be Empty    ${diff}    msg=DIFF DETECTED!
+
 
 *** Keywords ***
 Precondition
