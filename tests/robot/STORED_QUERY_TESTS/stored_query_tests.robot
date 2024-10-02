@@ -114,7 +114,7 @@ Definition API - GET Stored Query Using Qualified Query Name And Version
     Log     ${resp['saved']}
 
 Definition API - GET Stored Query Using Inexistent Qualified Query Name And Version
-    [Tags]      not-ready   Negative    CDR-1069
+    [Tags]     Negative
     [Documentation]     Test to check below endpoint:
     ...                 - GET /rest/openehr/v1/definition/query/{qualified_query_name} with inexistent {qualified_query_name} and {version} values
     ...                 \n Check that 404 is returned on GET /definition/query/{qualified_query_name}/{version} for inexistent query.
