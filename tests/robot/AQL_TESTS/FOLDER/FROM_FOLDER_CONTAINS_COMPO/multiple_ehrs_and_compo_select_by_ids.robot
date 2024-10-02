@@ -22,8 +22,6 @@ Suite Teardown  Run Keywords    Admin Delete EHR For AQL    ${ehr_id1}      AND
 
 *** Test Cases ***
 SELECT e/ehr_id/value, f/uid/value, c/uid/value FROM EHR e CONTAINS FOLDER f CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id2}' AND f/uid/value = '70939d97-8add-4419-b27c-516e64b1c744' AND c/uid/value = '${c_uid4b}'
-    [Tags]      not-ready
-    Log     Skipped as returns emtpy rows.     console=yes
     ${query}    Set Variable
     ...     SELECT e/ehr_id/value, f/uid/value, c/uid/value FROM EHR e CONTAINS FOLDER f CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id2}' AND f/uid/value = '70939d97-8add-4419-b27c-516e64b1c744' AND c/uid/value = '${c_uid4b}'
     Set AQL And Execute Ad Hoc Query    ${query}
