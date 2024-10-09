@@ -186,6 +186,7 @@ Create EHR For AQL
     Status Should Be    201
     Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
     Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
+    Set Suite Variable      ${system_id_with_tenant}     ${resp.json()['system_id']['value']}
     Set Suite Variable      ${ehr_id}     ${ehr_id_value}
 
 Create EHR For AQL With Custom EHR Status

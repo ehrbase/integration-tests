@@ -17,7 +17,7 @@
 		[
 			{
 				"_type": "HIER_OBJECT_ID",
-				"value": "${CREATING_SYSTEM_ID}"
+				"value": "${system_id_with_tenant}"
 			}
 		]
 	]

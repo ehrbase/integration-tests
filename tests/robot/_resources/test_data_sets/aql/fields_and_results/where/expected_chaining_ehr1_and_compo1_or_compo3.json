@@ -13,11 +13,11 @@
 	"rows": [
 		[
 			"${ehr_id1}",
-			"${c_uid1}::${CREATING_SYSTEM_ID}::1"
+			"${c_uid1}::${system_id_with_tenant}::1"
 		],
 		[
 			"${ehr_id2}",
-			"${c_uid3}::${CREATING_SYSTEM_ID}::1"
+			"${c_uid3}::${system_id_with_tenant}::1"
 		]
 	]
 }
