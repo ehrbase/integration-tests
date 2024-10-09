@@ -12,13 +12,13 @@ Suite Teardown  Run Keywords    Admin Delete EHR For AQL    ${ehr_id1}      AND
 
 
 *** Test Cases ***
-SELECT e/ehr_id/value, f/uid/value FROM EHR e CONTAINS FOLDER f WHERE e/ehr_id/value = '${ehr_id1}' AND f/uid/value = '13661fe2-1e16-4c75-a10d-9b8040487a72'
+SELECT e/ehr_id/value, f/name/value, f/uid/value FROM EHR e CONTAINS FOLDER f WHERE e/ehr_id/value = '${ehr_id1}' AND f/uid/value = 'd936409e-901f-4994-8d33-ed104d460151'
     [Tags]      not-ready
     [Documentation]
     ...     Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FOLDER.md#select-by-folder-and-ehr-id
     Log     Skipped as returns emtpy rows.     console=yes
     ${query}    Set Variable
-    ...     SELECT e/ehr_id/value, f/uid/value FROM EHR e CONTAINS FOLDER f WHERE e/ehr_id/value = '${ehr_id1}' AND f/uid/value = '13661fe2-1e16-4c75-a10d-9b8040487a72'
+    ...     SELECT e/ehr_id/value, f/name/value, f/uid/value FROM EHR e CONTAINS FOLDER f WHERE e/ehr_id/value = '${ehr_id1}' AND f/uid/value = 'd936409e-901f-4994-8d33-ed104d460151'
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     1
     ${temporary_file}     Set Variable  ${EXPECTED_JSON_DATA_SETS}/folder/expected_folder_select_by_folder_and_ehr_id_tmp.json
