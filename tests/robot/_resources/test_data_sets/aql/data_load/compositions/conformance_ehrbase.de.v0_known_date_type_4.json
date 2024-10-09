@@ -218,9 +218,5 @@
       "archetype_node_id": "openEHR-EHR-SECTION.conformance_section.v0"
     }
   ],
-  "archetype_node_id": "openEHR-EHR-COMPOSITION.conformance_composition_.v0",
-  "uid": {
-    "_type": "OBJECT_VERSION_ID",
-    "value": "0c9bc72a-8ec3-402c-8401-40bd4efe7d83::local.ehrbase.org::1"
-  }
+  "archetype_node_id": "openEHR-EHR-COMPOSITION.conformance_composition_.v0"
 }
