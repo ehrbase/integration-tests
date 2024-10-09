@@ -294,7 +294,7 @@
 	],
 	"uid": {
         "_type": "OBJECT_VERSION_ID",
-        "value": "a9ac5dd6-6cd6-4adb-9eb5-586930ae13e9::local.ehrbase.org::1"
+        "value": "a9ac5dd6-6cd6-4adb-9eb5-586930ae13e9::${system_id_with_tenant}::1"
     },
 	"archetype_node_id": "openEHR-EHR-COMPOSITION.conformance_composition_.v0"
 }

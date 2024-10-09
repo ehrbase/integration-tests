@@ -972,7 +972,7 @@
 	],
 	"uid": {
         "_type": "OBJECT_VERSION_ID",
-        "value": "b037bf7c-0ecb-40fb-aada-fc7d559815ea::local.ehrbase.org::1"
+        "value": "b037bf7c-0ecb-40fb-aada-fc7d559815ea::${system_id_with_tenant}::1"
     },
 	"archetype_node_id": "openEHR-EHR-COMPOSITION.conformance_composition_.v0"
 }
