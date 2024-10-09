@@ -94,7 +94,7 @@ Check Composition Is Not Returned For Full Composition Uid - Non Existing System
     ${err_msg}  Run Keyword And Expect Error    *
     ...     Set AQL And Execute Ad Hoc Query        ${query}
     Should Contain      ${err_msg}      400 != 200
-    Should Contain      ${err_msg}      does not match this server (local.ehrbase.org)
+    Should Contain      ${err_msg}      does not match this server (${system_id_with_tenant})
     [Teardown]      Admin Delete EHR For AQL
 
 Check Composition Is Returned For Full Composition Uid - Complex Query
@@ -133,9 +133,11 @@ Check Two Composition UIDs Are Returned - AQL With Lower Than Sign
     ${query}    Set Variable    SELECT c/uid/value AS full FROM COMPOSITION c WHERE c/uid/value<'d037bf7c-0ecb-40fb-aada-fc7d559815ea::::1'
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_lower_than.json
+    ${file_content}     Get File    ${expected_result}
+    ${file_content_replaced}     Replace Variables      ${file_content}
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${file_content_replaced}    exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
 
@@ -151,9 +153,11 @@ Check One Composition UID Is Returned - AQL With Greater Than Sign
     ${query}    Set Variable    SELECT c/uid/value AS full FROM COMPOSITION c WHERE c/uid/value>'b037bf7c-0ecb-40fb-aada-fc7d559815ea::${system_id_with_tenant}::1'
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_greater_than.json
+    ${file_content}     Get File    ${expected_result}
+    ${file_content_replaced}     Replace Variables      ${file_content}
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${file_content_replaced}      exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
 
@@ -169,9 +173,11 @@ Check Two Composition UIDs Are Returned - AQL With Lower Equals Sign
     ${query}    Set Variable    SELECT c/uid/value AS full FROM COMPOSITION c WHERE c/uid/value<='c037bf7c-0ecb-40fb-aada-fc7d559815ea::${system_id_with_tenant}::1'
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_lower_equals_than.json
+    ${file_content}     Get File    ${expected_result}
+    ${file_content_replaced}     Replace Variables      ${file_content}
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${file_content_replaced}      exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
 
@@ -187,9 +193,11 @@ Check Two Composition UIDs Are Returned - AQL With Greater Equals Sign
     ${query}    Set Variable    SELECT c/uid/value AS full FROM COMPOSITION c WHERE c/uid/value>='b037bf7c-0ecb-40fb-aada-fc7d559815ea::::1'
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_greater_equals_than.json
+    ${file_content}     Get File    ${expected_result}
+    ${file_content_replaced}     Replace Variables      ${file_content}
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${file_content_replaced}      exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
 
@@ -205,9 +213,11 @@ Check One Composition UID Is Returned - AQL With Different Than Sign
     ${query}    Set Variable    SELECT c/uid/value AS full FROM COMPOSITION c WHERE c/uid/value!='c037bf7c-0ecb-40fb-aada-fc7d559815ea::::1'
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_different_than.json
+    ${file_content}     Get File    ${expected_result}
+    ${file_content_replaced}     Replace Variables      ${file_content}
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${file_content_replaced}      exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
 
