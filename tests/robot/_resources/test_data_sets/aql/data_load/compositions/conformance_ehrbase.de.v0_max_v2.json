@@ -2683,10 +2683,6 @@
 		}
 	],
 	"archetype_node_id": "openEHR-EHR-COMPOSITION.conformance_composition_.v0",
-	"uid": {
-		"_type": "OBJECT_VERSION_ID",
-		"value": "8d7caca5-9cdb-4da4-beba-d82544f66680::local.ehrbase.org::1"
-	},
 	"links": [
 		{
 			"meaning": {

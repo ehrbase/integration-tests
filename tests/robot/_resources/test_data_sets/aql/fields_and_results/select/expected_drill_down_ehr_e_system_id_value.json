@@ -15,7 +15,7 @@
 	],
 	"rows": [
 		[
-			"${CREATING_SYSTEM_ID}"
+			"${system_id_with_tenant}"
 		]
 	]
 }
