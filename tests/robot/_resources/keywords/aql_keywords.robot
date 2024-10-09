@@ -184,6 +184,7 @@ Create EHR For AQL
     Status Should Be    201
     Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
     Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
+    Set Suite Variable      ${system_id_with_tenant}     ${resp.json()['system_id']['value']}
     Set Suite Variable      ${ehr_id}     ${ehr_id_value}
 
 Create EHR For AQL With Custom EHR Status
@@ -220,8 +221,22 @@ Commit Composition For AQL
         &{params}       Create Dictionary
         ...     format=FLAT     ehrId=${ehr_id}     templateId=${template_id}
     END
-    ${file}     Get Binary File     ${COMPOSITIONS_DATA_SETS}/${composition_file}
-    IF          '${format}' == 'FLAT'
+    ##
+    ${is_var_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${system_id_with_tenant}
+    ${temp_file_content}    Get File    ${COMPOSITIONS_DATA_SETS}/${composition_file}
+    ${is_var_present_in_file}   Run Keyword And Return Status
+    ...     Should Contain    ${temp_file_content}    \${system_id_with_tenant}
+    IF  '${is_var_exists}' == '${TRUE}' and '${is_var_present_in_file}' == '${TRUE}'
+        ${replaced_file_str}    Replace String      ${temp_file_content}
+        ...     \${system_id_with_tenant}   ${system_id_with_tenant}
+        ${file}         Set Variable        ${replaced_file_str}
+    ELSE
+        ${file_tmp}     Get Binary File     ${COMPOSITIONS_DATA_SETS}/${composition_file}
+        ${file}         Set Variable        ${file_tmp}
+    END
+    ##
+    IF      '${format}' == 'FLAT'
         ${resp}     POST On Session     ${SUT}      composition
         ...     params=${params}    expected_status=anything
         ...     data=${file}        headers=${headers}

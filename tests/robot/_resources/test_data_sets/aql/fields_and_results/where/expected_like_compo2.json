@@ -13,7 +13,7 @@
 	"rows": [
 		[
 			"type_repetition_conformance_ehrbase.org",
-			"${c_uid2}::${CREATING_SYSTEM_ID}::1"
+			"${c_uid2}::${system_id_with_tenant}::1"
 		]
 	]
 }

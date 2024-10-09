@@ -21,61 +21,61 @@
 	"rows": [
 		[
 			"${ehr_id}",
-			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
+			"${c_uid1}::${system_id_with_tenant}::1",
 			"893506a7-462b-40b8-9638-0aa3990642d9",
 			"2022-02-03T04:05:06"
 		],
 		[
 			"${ehr_id}",
-			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
+			"${c_uid1}::${system_id_with_tenant}::1",
 			"d4cccdfc-9c90-402f-b4bb-94e8dc4ea429",
 			"2022-02-03T04:05:06"
 		],
 		[
 			"${ehr_id}",
-			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
+			"${c_uid1}::${system_id_with_tenant}::1",
 			"2183807d-af68-41c5-9bfe-28cd150d62f7",
 			"2022-02-03T04:05:06"
 		],
 		[
 			"${ehr_id}",
-			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
+			"${c_uid1}::${system_id_with_tenant}::1",
 			"55415141-17e4-4c71-9429-aa0fe6694c83",
 			"2022-02-03T04:05:06"
 		],
 		[
 			"${ehr_id}",
-			"${c_uid1}::${CREATING_SYSTEM_ID}::1",
+			"${c_uid1}::${system_id_with_tenant}::1",
 			"94c0e756-e892-4985-884b-46829605a236",
 			"2022-02-03T04:05:06"
 		],
 		[
 			"${ehr_id}",
-			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
+			"${c_uid2}::${system_id_with_tenant}::1",
 			"893506a7-462b-40b8-9638-0aa3990642d9",
 			"2022-02-03T04:05:06"
 		],
 		[
 			"${ehr_id}",
-			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
+			"${c_uid2}::${system_id_with_tenant}::1",
 			"d4cccdfc-9c90-402f-b4bb-94e8dc4ea429",
 			"2022-02-03T04:05:06"
 		],
 		[
 			"${ehr_id}",
-			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
+			"${c_uid2}::${system_id_with_tenant}::1",
 			"2183807d-af68-41c5-9bfe-28cd150d62f7",
 			"2022-02-03T04:05:06"
 		],
 		[
 			"${ehr_id}",
-			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
+			"${c_uid2}::${system_id_with_tenant}::1",
 			"55415141-17e4-4c71-9429-aa0fe6694c83",
 			"2022-02-03T04:05:06"
 		],
 		[
 			"${ehr_id}",
-			"${c_uid2}::${CREATING_SYSTEM_ID}::1",
+			"${c_uid2}::${system_id_with_tenant}::1",
 			"94c0e756-e892-4985-884b-46829605a236",
 			"2022-02-03T04:05:06"
 		]

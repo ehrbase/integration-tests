@@ -13,11 +13,11 @@
 	"rows": [
 		[
 			"conformance-ehrbase.de.v0",
-			"${c_uid1}::${CREATING_SYSTEM_ID}::1"
+			"${c_uid1}::${system_id_with_tenant}::1"
 		],
 		[
 			"type_repetition_conformance_ehrbase.org",
-			"${c_uid2}::${CREATING_SYSTEM_ID}::1"
+			"${c_uid2}::${system_id_with_tenant}::1"
 		]
 	]
 }
