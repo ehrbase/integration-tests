@@ -26,6 +26,8 @@ Precondition
     Upload OPT For AQL      conformance_ehrbase.de.v0.opt
     ###
     Create EHR For AQL
+    ${tenant_id}    Evaluate    '${system_id_with_tenant}'.split('.')[0:1]
+    Set Suite Variable      ${tenant_id_from_system_id}     ${tenant_id}[0].
     Set Suite Variable      ${ehr_id1}  ${ehr_id}
     Commit Contribution For AQL     minimal_persistent/minimal_persistent.contribution.json
     Set Suite Variable      ${compo_uid_1}      ${versions[0]['id']['value']}

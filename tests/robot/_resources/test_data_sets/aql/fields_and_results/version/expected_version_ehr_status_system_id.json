@@ -15,10 +15,10 @@
 	],
 	"rows": [
 		[
-			"local.ehrbase.org"
+			"${system_id_with_tenant}"
 		],
 		[
-			"local.ehrbase.org"
+			"${system_id_with_tenant}"
 		]
 	]
 }
