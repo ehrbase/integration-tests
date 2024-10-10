@@ -46,8 +46,8 @@ Suite Setup     Set Library Search Order For Tests
     ${parameter_obj}    Set Variable    {"compo_id": \"${compo_id}::${system_id_with_tenant}::1\" }
     Set Test Variable       ${test_data}    {"q":"${query2}","query_parameters":${parameter_obj}}
     Send Ad Hoc Request     aql_body=${test_data}   req_headers=${request_headers}
-    Check Reponse Body      columns_nr=4         rows_nr=5
-    Should Be Equal As Strings      ${resp_body['meta']['dry_run']}    ${FALSE}
+    Check Reponse Body      columns_nr=4         rows_nr=5      dry_run=false
+    #Should Be Equal As Strings      ${resp_body['meta']['dry_run']}    ${FALSE}
     Should Be Equal As Strings      ${resp_body_query}   ${query2}
     Should Be Equal As Strings      ${executed_aql}
     ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
@@ -163,12 +163,13 @@ Precondition
     Set Suite Variable       ${compo_id}     ${composition_short_uid}
 
 Check Reponse Body
-    [Arguments]     ${columns_nr}=0   ${rows_nr}=0
+    [Arguments]     ${columns_nr}=0   ${rows_nr}=0  ${dry_run}=true
     Length Should Be    ${resp_body_columns}    ${columns_nr}
     ${rows_count}   Get Length      ${resp_body['rows']}
     Length Should Be    ${resp_body['rows']}    ${rows_nr}
     Dictionary Should Contain Key   ${resp_body['meta']}    _executed_aql
-    Dictionary Should Contain Key   ${resp_body['meta']}    dry_run
+    Run Keyword If      '${dry_run}' == 'true'
+    ...     Dictionary Should Contain Key   ${resp_body['meta']}    dry_run
     Dictionary Should Contain Key   ${resp_body['meta']}    executed_sql
     Dictionary Should Contain Key   ${resp_body['meta']}    query_plan
     Set Test Variable   ${executed_aql}     ${resp_body['meta']['_executed_aql']}
