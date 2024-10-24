@@ -1,0 +1,24 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-10-01T12:27:45.5967066+03:00",
+		"_executed_aql": "SELECT c/uid/value FROM FOLDER f CONTAINS COMPOSITION c WHERE f/name/value = 'subsubfolder1'",
+		"resultsize": 2
+	},
+	"q": "SELECT c/uid/value FROM FOLDER f CONTAINS COMPOSITION c WHERE f/name/value = 'subsubfolder1'",
+	"columns": [
+		{
+			"path": "c/uid/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"${c_uid2}::local.ehrbase.org::1"
+		],
+		[
+			"${c_uid4}::local.ehrbase.org::1"
+		]
+	]
+}

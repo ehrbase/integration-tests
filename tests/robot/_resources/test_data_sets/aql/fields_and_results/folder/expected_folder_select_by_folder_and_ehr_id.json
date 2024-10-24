@@ -1,0 +1,31 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-10-09T11:56:59.6362002+03:00",
+		"_executed_aql": "SELECT e/ehr_id/value, f/name/value, f/uid/value FROM EHR e CONTAINS FOLDER f WHERE (e/ehr_id/value = '1dbf007a-6b50-4000-a172-cfb5674c3ddf' AND f/uid/value = 'd936409e-901f-4994-8d33-ed104d460151')",
+		"resultsize": 1
+	},
+	"q": "SELECT e/ehr_id/value, f/name/value, f/uid/value FROM EHR e CONTAINS FOLDER f WHERE e/ehr_id/value = '1dbf007a-6b50-4000-a172-cfb5674c3ddf' AND f/uid/value = 'd936409e-901f-4994-8d33-ed104d460151'",
+	"columns": [
+		{
+			"path": "e/ehr_id/value",
+			"name": "#0"
+		},
+		{
+			"path": "f/name/value",
+			"name": "#1"
+		},
+		{
+			"path": "f/uid/value",
+			"name": "#2"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_id1}",
+			"subfolder1",
+			"d936409e-901f-4994-8d33-ed104d460151"
+		]
+	]
+}

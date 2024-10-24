@@ -1,0 +1,88 @@
+{
+  "_type": "FOLDER",
+  "uid": {
+    "_type": "HIER_OBJECT_ID",
+    "value": "30e952ca-a5b2-4f24-8d37-59240fd37020"
+  },
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "root1"
+  },
+  "archetype_node_id": "openEHR-EHR-FOLDER.generic.v1",
+  "details": {
+    "_type": "ITEM_TREE",
+    "name": {
+      "_type": "DV_TEXT",
+      "value": "Tree"
+    },
+    "archetype_node_id": "at0003",
+    "items": [
+      {
+        "_type": "ELEMENT",
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "text"
+        },
+        "archetype_node_id": "at0004",
+        "value": {
+          "_type": "DV_TEXT",
+          "value": "value2"
+        }
+      }
+    ]
+  },
+  "folders": [
+    {
+      "_type": "FOLDER",
+      "uid": {
+        "_type": "HIER_OBJECT_ID",
+        "value": "d936409e-901f-4994-8d33-ed104d460151"
+      },
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "subfolder1"
+      },
+      "archetype_node_id": "openEHR-EHR-FOLDER.episode_of_care.v1",
+      "items": [
+        {
+          "id": {
+            "_type": "HIER_OBJECT_ID",
+            "value": "7c0a9df0-564f-4f34-8e65-92586c64ef56"
+          },
+          "namespace": "my.system.id",
+          "type": "VERSIONED_COMPOSITION"
+        },
+        {
+          "id": {
+            "_type": "HIER_OBJECT_ID",
+            "value": "c68131a3-72da-41fe-8d11-c4fccfd2d2d0"
+          },
+          "namespace": "my.system.id",
+          "type": "VERSIONED_COMPOSITION"
+        }
+      ],
+      "details": {
+        "_type": "ITEM_TREE",
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "Tree"
+        },
+        "archetype_node_id": "at0003",
+        "items": [
+          {
+            "_type": "ELEMENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "text"
+            },
+            "archetype_node_id": "at0004",
+            "value": {
+              "_type": "DV_TEXT",
+              "value": "value1"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-09-23T16:42:12.446094+03:00",
+		"_executed_aql": "SELECT f/details[at0003]/items[at0004]/value/value FROM FOLDER f",
+		"resultsize": 2
+	},
+	"q": "SELECT f/details[at0003]/items[at0004]/value/value FROM FOLDER f",
+	"columns": [
+		{
+			"path": "f/details[at0003]/items[at0004]/value/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"value2"
+		],
+		[
+			"value1"
+		]
+	]
+}

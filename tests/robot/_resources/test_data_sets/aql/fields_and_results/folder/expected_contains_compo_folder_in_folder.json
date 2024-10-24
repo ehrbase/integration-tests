@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-10-08T09:33:02.8728411+03:00",
+		"_executed_aql": "SELECT c/uid/value FROM FOLDER f1[openEHR-EHR-FOLDER.episode_of_care.v1] CONTAINS FOLDER f2[openEHR-EHR-FOLDER.episode_of_care.v1] CONTAINS COMPOSITION c",
+		"resultsize": 1
+	},
+	"q": "SELECT c/uid/value FROM FOLDER f1[openEHR-EHR-FOLDER.episode_of_care.v1] CONTAINS FOLDER f2[openEHR-EHR-FOLDER.episode_of_care.v1] CONTAINS COMPOSITION c",
+	"columns": [
+		{
+			"path": "c/uid/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"${c_uid4}::local.ehrbase.org::1"
+		]
+	]
+}

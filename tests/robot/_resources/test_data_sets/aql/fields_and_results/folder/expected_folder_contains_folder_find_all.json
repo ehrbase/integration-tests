@@ -1,0 +1,90 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-09-23T16:20:39.3052084+03:00",
+		"_executed_aql": "SELECT f1/uid/value, f1/name/value, f2/uid/value, f2/name/value FROM FOLDER f1 CONTAINS FOLDER f2",
+		"resultsize": 10
+	},
+	"q": "SELECT f1/uid/value, f1/name/value, f2/uid/value, f2/name/value FROM FOLDER f1 CONTAINS FOLDER f2",
+	"columns": [
+		{
+			"path": "f1/uid/value",
+			"name": "#0"
+		},
+		{
+			"path": "f1/name/value",
+			"name": "#1"
+		},
+		{
+			"path": "f2/uid/value",
+			"name": "#2"
+		},
+		{
+			"path": "f2/name/value",
+			"name": "#3"
+		}
+	],
+	"rows": [
+		[
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"root1",
+			"e9ae5700-d969-430a-b4f2-445e3091a901",
+			"subsubfolder2"
+		],
+		[
+			"ac1e12cb-b9db-4f15-a8aa-4e62a9d97231",
+			"subfolder2",
+			"e9ae5700-d969-430a-b4f2-445e3091a901",
+			"subsubfolder2"
+		],
+		[
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"root1",
+			"13661fe2-1e16-4c75-a10d-9b8040487a72",
+			"subsubfolder1"
+		],
+		[
+			"ac1e12cb-b9db-4f15-a8aa-4e62a9d97231",
+			"subfolder2",
+			"13661fe2-1e16-4c75-a10d-9b8040487a72",
+			"subsubfolder1"
+		],
+		[
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"root1",
+			"ac1e12cb-b9db-4f15-a8aa-4e62a9d97231",
+			"subfolder2"
+		],
+		[
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"root1",
+			"3cb9efa5-fe71-49e9-a02f-d38835c27d1b",
+			"subsubfolder2"
+		],
+		[
+			"d936409e-901f-4994-8d33-ed104d460151",
+			"subfolder1",
+			"3cb9efa5-fe71-49e9-a02f-d38835c27d1b",
+			"subsubfolder2"
+		],
+		[
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"root1",
+			"0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3",
+			"subsubfolder1"
+		],
+		[
+			"d936409e-901f-4994-8d33-ed104d460151",
+			"subfolder1",
+			"0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3",
+			"subsubfolder1"
+		],
+		[
+			"00e952ca-a5b2-4f24-8d37-59240fd37020::local.ehrbase.org::1",
+			"root1",
+			"d936409e-901f-4994-8d33-ed104d460151",
+			"subfolder1"
+		]
+	]
+}

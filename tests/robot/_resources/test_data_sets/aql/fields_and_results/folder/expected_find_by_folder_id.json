@@ -1,0 +1,26 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-10-01T16:40:04.5370886+03:00",
+		"_executed_aql": "SELECT f/name/value, f/uid/value FROM FOLDER f WHERE f/uid/value = '0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3'",
+		"resultsize": 1
+	},
+	"q": "SELECT f/name/value, f/uid/value FROM FOLDER f WHERE f/uid/value = '0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3'",
+	"columns": [
+		{
+			"path": "f/name/value",
+			"name": "#0"
+		},
+		{
+			"path": "f/uid/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"subsubfolder1",
+			"0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3"
+		]
+	]
+}

@@ -1,0 +1,31 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-10-02T17:22:48.3197573+03:00",
+		"_executed_aql": "SELECT e/ehr_id/value, f/uid/value, c/uid/value FROM EHR e CONTAINS FOLDER f CONTAINS COMPOSITION c WHERE (e/ehr_id/value = '2fd7ff0d-78e7-487f-b31e-e9a25a83e442' AND f/uid/value = '70939d97-8add-4419-b27c-516e64b1c744' AND c/uid/value = 'c599d95d-f258-4f95-9b99-122fc049f5f0')",
+		"resultsize": 1
+	},
+	"q": "SELECT e/ehr_id/value, f/uid/value, c/uid/value FROM EHR e CONTAINS FOLDER f CONTAINS COMPOSITION c WHERE e/ehr_id/value = '2fd7ff0d-78e7-487f-b31e-e9a25a83e442' AND f/uid/value = '70939d97-8add-4419-b27c-516e64b1c744' AND c/uid/value = 'c599d95d-f258-4f95-9b99-122fc049f5f0'",
+	"columns": [
+		{
+			"path": "e/ehr_id/value",
+			"name": "#0"
+		},
+		{
+			"path": "f/uid/value",
+			"name": "#1"
+		},
+		{
+			"path": "c/uid/value",
+			"name": "#2"
+		}
+	],
+	"rows": [
+		[
+			"${ehr_id2}",
+			"70939d97-8add-4419-b27c-516e64b1c744",
+			"${c_uid4b}::local.ehrbase.org::1"
+		]
+	]
+}

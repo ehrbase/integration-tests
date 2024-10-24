@@ -1,0 +1,38 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2024-09-23T16:27:24.7116624+03:00",
+		"_executed_aql": "SELECT f2/uid/value, f2/name/value FROM FOLDER f1[openEHR-EHR-FOLDER.generic.v1, 'root1'] CONTAINS FOLDER f2[openEHR-EHR-FOLDER.episode_of_care.v1]",
+		"resultsize": 4
+	},
+	"q": "SELECT f2/uid/value, f2/name/value FROM FOLDER f1[openEHR-EHR-FOLDER.generic.v1,'root1'] CONTAINS FOLDER f2[openEHR-EHR-FOLDER.episode_of_care.v1]",
+	"columns": [
+		{
+			"path": "f2/uid/value",
+			"name": "#0"
+		},
+		{
+			"path": "f2/name/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"3cb9efa5-fe71-49e9-a02f-d38835c27d1b",
+			"subsubfolder2"
+		],
+		[
+			"13661fe2-1e16-4c75-a10d-9b8040487a72",
+			"subsubfolder1"
+		],
+		[
+			"e9ae5700-d969-430a-b4f2-445e3091a901",
+			"subsubfolder2"
+		],
+		[
+			"0cc504b1-4d6d-4cd5-81d9-0ef1b870edb3",
+			"subsubfolder1"
+		]
+	]
+}
