@@ -12,7 +12,7 @@
 		},
 		"template_id": {
 			"_type": "TEMPLATE_ID",
-			"value": "test_all_types.en.v1"
+			"value": "nodes_in_template_invalid"
 		},
 		"rm_version": "1.0.2"
 	},
