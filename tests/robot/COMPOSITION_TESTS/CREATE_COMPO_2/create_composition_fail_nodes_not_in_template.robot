@@ -15,8 +15,8 @@ Suite Setup       Run Keywords
 
 *** Test Cases ***
 1. Create Composition Fails If Nodes Are Not Present In Template 1
-    [Tags]      Negative
-    #[Setup]     Precondition
+    [Tags]      Negative    not-ready
+    # To remove not-ready when latest ehrbase version is applied to HIP EHRBase develop
     Set Test Variable   ${template_id}          ${template_id_1}
     Set Test Variable   ${composition_file}     ${template_id}__.json
     commit composition      format=CANONICAL_JSON
@@ -25,7 +25,8 @@ Suite Setup       Run Keywords
     [Teardown]      Delete Template Using API
 
 2. Create Composition Fails If Nodes Are Not Present In Template 2
-    [Tags]      Negative
+    [Tags]      Negative    not-ready
+    # To remove not-ready when latest ehrbase version is applied to HIP EHRBase develop
     Set Test Variable   ${template_id}          ${template_id_2}
     Set Test Variable   ${composition_file}     ${template_id}__.json
     commit composition      format=CANONICAL_JSON
