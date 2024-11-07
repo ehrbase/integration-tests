@@ -1,0 +1,5296 @@
+{
+	"_type": "COMPOSITION",
+	"name": {
+		"_type": "DV_TEXT",
+		"value": "HC3 Spirometry test result"
+	},
+	"archetype_details": {
+		"archetype_id": {
+			"value": "openEHR-EHR-COMPOSITION.report-result.v1"
+		},
+		"template_id": {
+			"value": "hc3_spirometry_test_result_v0.6"
+		},
+		"rm_version": "1.0.4"
+	},
+	"language": {
+		"_type": "CODE_PHRASE",
+		"terminology_id": {
+			"_type": "TERMINOLOGY_ID",
+			"value": "ISO_639-1"
+		},
+		"code_string": "en"
+	},
+	"territory": {
+		"_type": "CODE_PHRASE",
+		"terminology_id": {
+			"_type": "TERMINOLOGY_ID",
+			"value": "ISO_3166-1"
+		},
+		"code_string": "DE"
+	},
+	"category": {
+		"_type": "DV_CODED_TEXT",
+		"value": "event",
+		"defining_code": {
+			"_type": "CODE_PHRASE",
+			"terminology_id": {
+				"_type": "TERMINOLOGY_ID",
+				"value": "openehr"
+			},
+			"code_string": "433"
+		}
+	},
+	"composer": {
+		"_type": "PARTY_IDENTIFIED",
+		"name": "Max Mustermann"
+	},
+	"context": {
+		"_type": "EVENT_CONTEXT",
+		"start_time": {
+			"_type": "DV_DATE_TIME",
+			"value": "2022-02-03T04:05:06"
+		},
+		"end_time": {
+			"_type": "DV_DATE_TIME",
+			"value": "2022-02-03T04:05:06"
+		},
+		"setting": {
+			"_type": "DV_CODED_TEXT",
+			"value": "home",
+			"defining_code": {
+				"_type": "CODE_PHRASE",
+				"terminology_id": {
+					"_type": "TERMINOLOGY_ID",
+					"value": "openehr"
+				},
+				"code_string": "225"
+			}
+		},
+		"other_context": {
+			"_type": "ITEM_TREE",
+			"name": {
+				"_type": "DV_TEXT",
+				"value": "Tree"
+			},
+			"items": [
+				{
+					"_type": "CLUSTER",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "XDS Metadata"
+					},
+					"archetype_details": {
+						"archetype_id": {
+							"value": "openEHR-EHR-CLUSTER.xds_metadata.v0"
+						},
+						"rm_version": "1.0.4"
+					},
+					"items": [
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Author specialty"
+							},
+							"value": {
+								"_type": "DV_TEXT",
+								"value": "Lorem ipsum"
+							},
+							"archetype_node_id": "at0001"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Class code"
+							},
+							"value": {
+								"_type": "DV_CODED_TEXT",
+								"value": "No example for terminology null available",
+								"defining_code": {
+									"_type": "CODE_PHRASE",
+									"terminology_id": {
+										"_type": "TERMINOLOGY_ID",
+										"value": "external"
+									},
+									"code_string": "42"
+								}
+							},
+							"archetype_node_id": "at0002"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Document type"
+							},
+							"value": {
+								"_type": "DV_CODED_TEXT",
+								"value": "No example for terminology null available",
+								"defining_code": {
+									"_type": "CODE_PHRASE",
+									"terminology_id": {
+										"_type": "TERMINOLOGY_ID",
+										"value": "external"
+									},
+									"code_string": "42"
+								}
+							},
+							"archetype_node_id": "at0003"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Confidentiality code"
+							},
+							"value": {
+								"_type": "DV_CODED_TEXT",
+								"value": "No example for terminology null available",
+								"defining_code": {
+									"_type": "CODE_PHRASE",
+									"terminology_id": {
+										"_type": "TERMINOLOGY_ID",
+										"value": "external"
+									},
+									"code_string": "42"
+								}
+							},
+							"archetype_node_id": "at0004"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Health care facility type"
+							},
+							"value": {
+								"_type": "DV_TEXT",
+								"value": "Lorem ipsum"
+							},
+							"archetype_node_id": "at0032"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Practice setting code"
+							},
+							"value": {
+								"_type": "DV_TEXT",
+								"value": "Lorem ipsum"
+							},
+							"archetype_node_id": "at0009"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Event code"
+							},
+							"value": {
+								"_type": "DV_TEXT",
+								"value": "Lorem ipsum"
+							},
+							"archetype_node_id": "at0011"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Document_media"
+							},
+							"value": {
+								"_type": "DV_URI",
+								"value": "https://www.example.com/sample"
+							},
+							"archetype_node_id": "at0010"
+						}
+					],
+					"archetype_node_id": "openEHR-EHR-CLUSTER.xds_metadata.v0"
+				},
+				{
+					"_type": "CLUSTER",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "Admin Salut"
+					},
+					"archetype_details": {
+						"archetype_id": {
+							"value": "openEHR-EHR-CLUSTER.admin_salut.v0"
+						},
+						"rm_version": "1.0.4"
+					},
+					"items": [
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Document authorisation date"
+							},
+							"value": {
+								"_type": "DV_DATE_TIME",
+								"value": "2022-02-03T04:05:06"
+							},
+							"archetype_node_id": "at0001"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Document creation date"
+							},
+							"value": {
+								"_type": "DV_DATE_TIME",
+								"value": "2022-02-03T04:05:06"
+							},
+							"archetype_node_id": "at0002"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Document publication date"
+							},
+							"value": {
+								"_type": "DV_DATE_TIME",
+								"value": "2022-02-03T04:05:06"
+							},
+							"archetype_node_id": "at0023"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Economic code"
+							},
+							"value": {
+								"_type": "DV_CODED_TEXT",
+								"value": "No example for terminology null available",
+								"defining_code": {
+									"_type": "CODE_PHRASE",
+									"terminology_id": {
+										"_type": "TERMINOLOGY_ID",
+										"value": "external"
+									},
+									"code_string": "42"
+								}
+							},
+							"archetype_node_id": "at0003"
+						},
+						{
+							"_type": "ELEMENT",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Responsible region"
+							},
+							"value": {
+								"_type": "DV_CODED_TEXT",
+								"value": "No example for terminology null available",
+								"defining_code": {
+									"_type": "CODE_PHRASE",
+									"terminology_id": {
+										"_type": "TERMINOLOGY_ID",
+										"value": "external"
+									},
+									"code_string": "42"
+								}
+							},
+							"archetype_node_id": "at0004"
+						},
+						{
+							"_type": "CLUSTER",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Performing institution"
+							},
+							"items": [
+								{
+									"_type": "ELEMENT",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Performing centre"
+									},
+									"value": {
+										"_type": "DV_CODED_TEXT",
+										"value": "No example for terminology null available",
+										"defining_code": {
+											"_type": "CODE_PHRASE",
+											"terminology_id": {
+												"_type": "TERMINOLOGY_ID",
+												"value": "external"
+											},
+											"code_string": "42"
+										}
+									},
+									"archetype_node_id": "at0011"
+								},
+								{
+									"_type": "ELEMENT",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Performing SA"
+									},
+									"value": {
+										"_type": "DV_CODED_TEXT",
+										"value": "No example for terminology null available",
+										"defining_code": {
+											"_type": "CODE_PHRASE",
+											"terminology_id": {
+												"_type": "TERMINOLOGY_ID",
+												"value": "external"
+											},
+											"code_string": "42"
+										}
+									},
+									"archetype_node_id": "at0012"
+								},
+								{
+									"_type": "ELEMENT",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Performing UP"
+									},
+									"value": {
+										"_type": "DV_CODED_TEXT",
+										"value": "No example for terminology null available",
+										"defining_code": {
+											"_type": "CODE_PHRASE",
+											"terminology_id": {
+												"_type": "TERMINOLOGY_ID",
+												"value": "external"
+											},
+											"code_string": "42"
+										}
+									},
+									"archetype_node_id": "at0013"
+								}
+							],
+							"archetype_node_id": "at0005"
+						},
+						{
+							"_type": "CLUSTER",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Publishing institution"
+							},
+							"items": [
+								{
+									"_type": "ELEMENT",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Publishing centre"
+									},
+									"value": {
+										"_type": "DV_CODED_TEXT",
+										"value": "No example for terminology null available",
+										"defining_code": {
+											"_type": "CODE_PHRASE",
+											"terminology_id": {
+												"_type": "TERMINOLOGY_ID",
+												"value": "external"
+											},
+											"code_string": "42"
+										}
+									},
+									"archetype_node_id": "at0014"
+								},
+								{
+									"_type": "ELEMENT",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Publishing SA"
+									},
+									"value": {
+										"_type": "DV_CODED_TEXT",
+										"value": "No example for terminology null available",
+										"defining_code": {
+											"_type": "CODE_PHRASE",
+											"terminology_id": {
+												"_type": "TERMINOLOGY_ID",
+												"value": "external"
+											},
+											"code_string": "42"
+										}
+									},
+									"archetype_node_id": "at0015"
+								},
+								{
+									"_type": "ELEMENT",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Publishing UP"
+									},
+									"value": {
+										"_type": "DV_CODED_TEXT",
+										"value": "No example for terminology null available",
+										"defining_code": {
+											"_type": "CODE_PHRASE",
+											"terminology_id": {
+												"_type": "TERMINOLOGY_ID",
+												"value": "external"
+											},
+											"code_string": "42"
+										}
+									},
+									"archetype_node_id": "at0016"
+								}
+							],
+							"archetype_node_id": "at0007"
+						},
+						{
+							"_type": "CLUSTER",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Custodial institution"
+							},
+							"items": [
+								{
+									"_type": "ELEMENT",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Custodial centre"
+									},
+									"value": {
+										"_type": "DV_CODED_TEXT",
+										"value": "No example for terminology null available",
+										"defining_code": {
+											"_type": "CODE_PHRASE",
+											"terminology_id": {
+												"_type": "TERMINOLOGY_ID",
+												"value": "external"
+											},
+											"code_string": "42"
+										}
+									},
+									"archetype_node_id": "at0017"
+								},
+								{
+									"_type": "ELEMENT",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Custodial SA"
+									},
+									"value": {
+										"_type": "DV_CODED_TEXT",
+										"value": "No example for terminology null available",
+										"defining_code": {
+											"_type": "CODE_PHRASE",
+											"terminology_id": {
+												"_type": "TERMINOLOGY_ID",
+												"value": "external"
+											},
+											"code_string": "42"
+										}
+									},
+									"archetype_node_id": "at0018"
+								},
+								{
+									"_type": "ELEMENT",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Custodial UP"
+									},
+									"value": {
+										"_type": "DV_CODED_TEXT",
+										"value": "No example for terminology null available",
+										"defining_code": {
+											"_type": "CODE_PHRASE",
+											"terminology_id": {
+												"_type": "TERMINOLOGY_ID",
+												"value": "external"
+											},
+											"code_string": "42"
+										}
+									},
+									"archetype_node_id": "at0019"
+								}
+							],
+							"archetype_node_id": "at0010"
+						},
+						{
+							"_type": "CLUSTER",
+							"name": {
+								"_type": "DV_TEXT",
+								"value": "Requesting institution"
+							},
+							"items": [
+								{
+									"_type": "ELEMENT",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Requesting centre"
+									},
+									"value": {
+										"_type": "DV_CODED_TEXT",
+										"value": "No example for terminology null available",
+										"defining_code": {
+											"_type": "CODE_PHRASE",
+											"terminology_id": {
+												"_type": "TERMINOLOGY_ID",
+												"value": "external"
+											},
+											"code_string": "42"
+										}
+									},
+									"archetype_node_id": "at0020"
+								},
+								{
+									"_type": "ELEMENT",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Requesting SA"
+									},
+									"value": {
+										"_type": "DV_CODED_TEXT",
+										"value": "No example for terminology null available",
+										"defining_code": {
+											"_type": "CODE_PHRASE",
+											"terminology_id": {
+												"_type": "TERMINOLOGY_ID",
+												"value": "external"
+											},
+											"code_string": "42"
+										}
+									},
+									"archetype_node_id": "at0021"
+								},
+								{
+									"_type": "ELEMENT",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Requesting UP"
+									},
+									"value": {
+										"_type": "DV_CODED_TEXT",
+										"value": "No example for terminology null available",
+										"defining_code": {
+											"_type": "CODE_PHRASE",
+											"terminology_id": {
+												"_type": "TERMINOLOGY_ID",
+												"value": "external"
+											},
+											"code_string": "42"
+										}
+									},
+									"archetype_node_id": "at0022"
+								}
+							],
+							"archetype_node_id": "at0009"
+						}
+					],
+					"archetype_node_id": "openEHR-EHR-CLUSTER.admin_salut.v0"
+				}
+			],
+			"archetype_node_id": "at0001"
+		},
+		"health_care_facility": {
+			"_type": "PARTY_IDENTIFIED",
+			"name": "DOE, John"
+		}
+	},
+	"content": [
+		{
+			"_type": "SECTION",
+			"name": {
+				"_type": "DV_TEXT",
+				"value": "Patient information"
+			},
+			"archetype_details": {
+				"archetype_id": {
+					"value": "openEHR-EHR-SECTION.adhoc.v1"
+				},
+				"rm_version": "1.0.4"
+			},
+			"items": [
+				{
+					"_type": "OBSERVATION",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "Height"
+					},
+					"archetype_details": {
+						"archetype_id": {
+							"value": "openEHR-EHR-OBSERVATION.height.v2"
+						},
+						"rm_version": "1.0.4"
+					},
+					"language": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "ISO_639-1"
+						},
+						"code_string": "en"
+					},
+					"encoding": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "IANA_character-sets"
+						},
+						"code_string": "ISO-10646-UTF-1"
+					},
+					"workflow_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "9716088c-2276-392e-aeba-ab979cdb6418",
+							"scheme": "scheme"
+						}
+					},
+					"subject": {
+						"_type": "PARTY_SELF"
+					},
+					"provider": {
+						"_type": "PARTY_SELF"
+					},
+					"protocol": {
+						"_type": "ITEM_TREE",
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "List"
+						},
+						"items": [
+							{
+								"_type": "CLUSTER",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "System code"
+								},
+								"archetype_details": {
+									"archetype_id": {
+										"value": "openEHR-EHR-CLUSTER.coding_.v0"
+									},
+									"rm_version": "1.0.4"
+								},
+								"items": [
+									{
+										"_type": "ELEMENT",
+										"name": {
+											"_type": "DV_TEXT",
+											"value": "Code"
+										},
+										"value": {
+											"_type": "DV_CODED_TEXT",
+											"value": "No example for terminology null available",
+											"defining_code": {
+												"_type": "CODE_PHRASE",
+												"terminology_id": {
+													"_type": "TERMINOLOGY_ID",
+													"value": "external"
+												},
+												"code_string": "42"
+											}
+										},
+										"archetype_node_id": "at0001"
+									}
+								],
+								"archetype_node_id": "openEHR-EHR-CLUSTER.coding_.v0"
+							}
+						],
+						"archetype_node_id": "at0007"
+					},
+					"guideline_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "eb435f68-d060-3831-82f2-ee0ee10c5d7c",
+							"scheme": "scheme"
+						}
+					},
+					"data": {
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "history"
+						},
+						"origin": {
+							"_type": "DV_DATE_TIME",
+							"value": "2022-02-03T04:05:06"
+						},
+						"period": {
+							"_type": "DV_DURATION",
+							"value": "PT0S"
+						},
+						"duration": {
+							"_type": "DV_DURATION",
+							"value": "PT0S"
+						},
+						"events": [
+							{
+								"_type": "POINT_EVENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Any event"
+								},
+								"time": {
+									"_type": "DV_DATE_TIME",
+									"value": "2022-02-03T04:05:06"
+								},
+								"data": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Simple"
+									},
+									"items": [
+										{
+											"_type": "ELEMENT",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Height"
+											},
+											"value": {
+												"_type": "DV_QUANTITY",
+												"units": "cm",
+												"magnitude": 500.0
+											},
+											"archetype_node_id": "at0004"
+										}
+									],
+									"archetype_node_id": "at0003"
+								},
+								"archetype_node_id": "at0002"
+							}
+						],
+						"archetype_node_id": "at0001"
+					},
+					"archetype_node_id": "openEHR-EHR-OBSERVATION.height.v2"
+				},
+				{
+					"_type": "OBSERVATION",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "Weight"
+					},
+					"archetype_details": {
+						"archetype_id": {
+							"value": "openEHR-EHR-OBSERVATION.body_weight.v2"
+						},
+						"rm_version": "1.0.4"
+					},
+					"language": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "ISO_639-1"
+						},
+						"code_string": "en"
+					},
+					"encoding": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "IANA_character-sets"
+						},
+						"code_string": "ISO-10646-UTF-1"
+					},
+					"workflow_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "761a37cd-cae8-3238-96ac-0034169969db",
+							"scheme": "scheme"
+						}
+					},
+					"subject": {
+						"_type": "PARTY_SELF"
+					},
+					"provider": {
+						"_type": "PARTY_SELF"
+					},
+					"protocol": {
+						"_type": "ITEM_TREE",
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "protocol structure"
+						},
+						"items": [
+							{
+								"_type": "CLUSTER",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "System code"
+								},
+								"archetype_details": {
+									"archetype_id": {
+										"value": "openEHR-EHR-CLUSTER.coding_.v0"
+									},
+									"rm_version": "1.0.4"
+								},
+								"items": [
+									{
+										"_type": "ELEMENT",
+										"name": {
+											"_type": "DV_TEXT",
+											"value": "Code"
+										},
+										"value": {
+											"_type": "DV_CODED_TEXT",
+											"value": "No example for terminology null available",
+											"defining_code": {
+												"_type": "CODE_PHRASE",
+												"terminology_id": {
+													"_type": "TERMINOLOGY_ID",
+													"value": "external"
+												},
+												"code_string": "42"
+											}
+										},
+										"archetype_node_id": "at0001"
+									}
+								],
+								"archetype_node_id": "openEHR-EHR-CLUSTER.coding_.v0"
+							}
+						],
+						"archetype_node_id": "at0015"
+					},
+					"guideline_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "800e576b-5167-3be9-9318-97542a009719",
+							"scheme": "scheme"
+						}
+					},
+					"data": {
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "history"
+						},
+						"origin": {
+							"_type": "DV_DATE_TIME",
+							"value": "2022-02-03T04:05:06"
+						},
+						"period": {
+							"_type": "DV_DURATION",
+							"value": "PT0S"
+						},
+						"duration": {
+							"_type": "DV_DURATION",
+							"value": "PT0S"
+						},
+						"events": [
+							{
+								"_type": "POINT_EVENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Any event"
+								},
+								"time": {
+									"_type": "DV_DATE_TIME",
+									"value": "2022-02-03T04:05:06"
+								},
+								"data": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Simple"
+									},
+									"items": [
+										{
+											"_type": "ELEMENT",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Weight"
+											},
+											"value": {
+												"_type": "DV_QUANTITY",
+												"units": "kg",
+												"magnitude": 500.0
+											},
+											"archetype_node_id": "at0004"
+										}
+									],
+									"archetype_node_id": "at0001"
+								},
+								"archetype_node_id": "at0003"
+							}
+						],
+						"archetype_node_id": "at0002"
+					},
+					"archetype_node_id": "openEHR-EHR-OBSERVATION.body_weight.v2"
+				},
+				{
+					"_type": "EVALUATION",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "Ethnicity"
+					},
+					"archetype_details": {
+						"archetype_id": {
+							"value": "openEHR-EHR-EVALUATION.ethnicity.v1"
+						},
+						"rm_version": "1.0.4"
+					},
+					"language": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "ISO_639-1"
+						},
+						"code_string": "en"
+					},
+					"encoding": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "IANA_character-sets"
+						},
+						"code_string": "ISO-10646-UTF-1"
+					},
+					"workflow_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "382a7a0d-99bf-3103-8587-2d97a02aea96",
+							"scheme": "scheme"
+						}
+					},
+					"subject": {
+						"_type": "PARTY_SELF"
+					},
+					"provider": {
+						"_type": "PARTY_SELF"
+					},
+					"guideline_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "babb14c4-4f63-3aa5-bded-b285da19d9f9",
+							"scheme": "scheme"
+						}
+					},
+					"data": {
+						"_type": "ITEM_TREE",
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "Item tree"
+						},
+						"items": [
+							{
+								"_type": "ELEMENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Ethnicity"
+								},
+								"value": {
+									"_type": "DV_CODED_TEXT",
+									"value": "No example for terminology null available",
+									"defining_code": {
+										"_type": "CODE_PHRASE",
+										"terminology_id": {
+											"_type": "TERMINOLOGY_ID",
+											"value": "external"
+										},
+										"code_string": "42"
+									}
+								},
+								"archetype_node_id": "at0003"
+							}
+						],
+						"archetype_node_id": "at0001"
+					},
+					"archetype_node_id": "openEHR-EHR-EVALUATION.ethnicity.v1"
+				},
+				{
+					"_type": "OBSERVATION",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "Tobacco Use"
+					},
+					"archetype_details": {
+						"archetype_id": {
+							"value": "openEHR-EHR-OBSERVATION.tobacco_use.v0"
+						},
+						"rm_version": "1.0.4"
+					},
+					"language": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "ISO_639-1"
+						},
+						"code_string": "en"
+					},
+					"encoding": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "IANA_character-sets"
+						},
+						"code_string": "ISO-10646-UTF-1"
+					},
+					"workflow_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "ada6697f-d54a-32e6-93a5-77f854e8e8c2",
+							"scheme": "scheme"
+						}
+					},
+					"subject": {
+						"_type": "PARTY_SELF"
+					},
+					"provider": {
+						"_type": "PARTY_SELF"
+					},
+					"guideline_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "3f4c03ee-35ef-35cc-a2c5-04b4d4e639b1",
+							"scheme": "scheme"
+						}
+					},
+					"data": {
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "Event Series"
+						},
+						"origin": {
+							"_type": "DV_DATE_TIME",
+							"value": "2022-02-03T04:05:06"
+						},
+						"period": {
+							"_type": "DV_DURATION",
+							"value": "PT0S"
+						},
+						"duration": {
+							"_type": "DV_DURATION",
+							"value": "PT0S"
+						},
+						"events": [
+							{
+								"_type": "INTERVAL_EVENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Any event"
+								},
+								"time": {
+									"_type": "DV_DATE_TIME",
+									"value": "2022-02-03T04:05:06"
+								},
+								"data": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Tree"
+									},
+									"items": [
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Usage Details"
+											},
+											"items": [
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Amount"
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Number Smoked"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "/h",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0014"
+														}
+													],
+													"archetype_node_id": "at0015"
+												}
+											],
+											"archetype_node_id": "at0005"
+										}
+									],
+									"archetype_node_id": "at0003"
+								},
+								"width": {
+									"_type": "DV_DURATION",
+									"value": "PT42H"
+								},
+								"math_function": {
+									"_type": "DV_CODED_TEXT",
+									"value": "minimum",
+									"defining_code": {
+										"_type": "CODE_PHRASE",
+										"terminology_id": {
+											"_type": "TERMINOLOGY_ID",
+											"value": "openehr"
+										},
+										"code_string": "145"
+									}
+								},
+								"archetype_node_id": "at0002"
+							}
+						],
+						"archetype_node_id": "at0001"
+					},
+					"archetype_node_id": "openEHR-EHR-OBSERVATION.tobacco_use.v0"
+				},
+				{
+					"_type": "OBSERVATION",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "Age"
+					},
+					"archetype_details": {
+						"archetype_id": {
+							"value": "openEHR-EHR-OBSERVATION.age.v0"
+						},
+						"rm_version": "1.0.4"
+					},
+					"language": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "ISO_639-1"
+						},
+						"code_string": "en"
+					},
+					"encoding": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "IANA_character-sets"
+						},
+						"code_string": "ISO-10646-UTF-1"
+					},
+					"workflow_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "27a4d21e-7bf7-3039-9b97-75bf1ecd2d54",
+							"scheme": "scheme"
+						}
+					},
+					"subject": {
+						"_type": "PARTY_SELF"
+					},
+					"provider": {
+						"_type": "PARTY_SELF"
+					},
+					"guideline_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "a333cd25-442c-39c3-89a5-71c5d5c3e61c",
+							"scheme": "scheme"
+						}
+					},
+					"data": {
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "Event Series"
+						},
+						"origin": {
+							"_type": "DV_DATE_TIME",
+							"value": "2022-02-03T04:05:06"
+						},
+						"period": {
+							"_type": "DV_DURATION",
+							"value": "PT0S"
+						},
+						"duration": {
+							"_type": "DV_DURATION",
+							"value": "PT0S"
+						},
+						"events": [
+							{
+								"_type": "POINT_EVENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Point in time event"
+								},
+								"time": {
+									"_type": "DV_DATE_TIME",
+									"value": "2022-02-03T04:05:06"
+								},
+								"data": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Tree"
+									},
+									"items": [
+										{
+											"_type": "ELEMENT",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Chronological age"
+											},
+											"value": {
+												"_type": "DV_DURATION",
+												"value": "PT0S"
+											},
+											"archetype_node_id": "at0004"
+										}
+									],
+									"archetype_node_id": "at0003"
+								},
+								"archetype_node_id": "at0002"
+							}
+						],
+						"archetype_node_id": "at0001"
+					},
+					"archetype_node_id": "openEHR-EHR-OBSERVATION.age.v0"
+				}
+			],
+			"archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+		},
+		{
+			"_type": "SECTION",
+			"name": {
+				"_type": "DV_TEXT",
+				"value": "Spirometry test result list"
+			},
+			"archetype_details": {
+				"archetype_id": {
+					"value": "openEHR-EHR-SECTION.adhoc.v1"
+				},
+				"rm_version": "1.0.4"
+			},
+			"items": [
+				{
+					"_type": "OBSERVATION",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "Spirometry result - CatSalut"
+					},
+					"archetype_details": {
+						"archetype_id": {
+							"value": "openEHR-EHR-OBSERVATION.spirometry_result-CatSalut.v2"
+						},
+						"rm_version": "1.0.4"
+					},
+					"language": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "ISO_639-1"
+						},
+						"code_string": "en"
+					},
+					"encoding": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "IANA_character-sets"
+						},
+						"code_string": "ISO-10646-UTF-1"
+					},
+					"workflow_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "1a172687-5ae0-3cb7-bbb8-1a2746de667c",
+							"scheme": "scheme"
+						}
+					},
+					"subject": {
+						"_type": "PARTY_SELF"
+					},
+					"provider": {
+						"_type": "PARTY_SELF"
+					},
+					"protocol": {
+						"_type": "ITEM_TREE",
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "Tree"
+						},
+						"items": [
+							{
+								"_type": "CLUSTER",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Medical device"
+								},
+								"archetype_details": {
+									"archetype_id": {
+										"value": "openEHR-EHR-CLUSTER.device.v1"
+									},
+									"rm_version": "1.0.4"
+								},
+								"items": [
+									{
+										"_type": "ELEMENT",
+										"name": {
+											"_type": "DV_TEXT",
+											"value": "Transducer type"
+										},
+										"value": {
+											"_type": "DV_CODED_TEXT",
+											"value": "No example for terminology null available",
+											"defining_code": {
+												"_type": "CODE_PHRASE",
+												"terminology_id": {
+													"_type": "TERMINOLOGY_ID",
+													"value": "external"
+												},
+												"code_string": "42"
+											}
+										},
+										"archetype_node_id": "at0001"
+									},
+									{
+										"_type": "CLUSTER",
+										"name": {
+											"_type": "DV_TEXT",
+											"value": "Medical device details"
+										},
+										"archetype_details": {
+											"archetype_id": {
+												"value": "openEHR-EHR-CLUSTER.device_details.v0"
+											},
+											"rm_version": "1.0.4"
+										},
+										"items": [
+											{
+												"_type": "ELEMENT",
+												"name": {
+													"_type": "DV_TEXT",
+													"value": "Date and time of callibration"
+												},
+												"value": {
+													"_type": "DV_DATE_TIME",
+													"value": "2022-02-03T04:05:06"
+												},
+												"archetype_node_id": "at0017"
+											}
+										],
+										"archetype_node_id": "openEHR-EHR-CLUSTER.device_details.v0"
+									}
+								],
+								"archetype_node_id": "openEHR-EHR-CLUSTER.device.v1"
+							},
+							{
+								"_type": "CLUSTER",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Knowledge base reference"
+								},
+								"archetype_details": {
+									"archetype_id": {
+										"value": "openEHR-EHR-CLUSTER.knowledge_base_reference.v1"
+									},
+									"rm_version": "1.0.4"
+								},
+								"items": [
+									{
+										"_type": "ELEMENT",
+										"name": {
+											"_type": "DV_TEXT",
+											"value": "Reference table"
+										},
+										"value": {
+											"_type": "DV_CODED_TEXT",
+											"value": "No example for terminology null available",
+											"defining_code": {
+												"_type": "CODE_PHRASE",
+												"terminology_id": {
+													"_type": "TERMINOLOGY_ID",
+													"value": "external"
+												},
+												"code_string": "42"
+											}
+										},
+										"archetype_node_id": "at0001"
+									}
+								],
+								"archetype_node_id": "openEHR-EHR-CLUSTER.knowledge_base_reference.v1"
+							},
+							{
+								"_type": "CLUSTER",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Total number of maneuvers"
+								},
+								"archetype_details": {
+									"archetype_id": {
+										"value": "openEHR-EHR-CLUSTER.spirometry_test_additional_information.v0"
+									},
+									"rm_version": "1.0.4"
+								},
+								"items": [
+									{
+										"_type": "CLUSTER",
+										"name": {
+											"_type": "DV_TEXT",
+											"value": "Number of maneuvers"
+										},
+										"items": [
+											{
+												"_type": "ELEMENT",
+												"name": {
+													"_type": "DV_TEXT",
+													"value": "Total number of basal maneuvers"
+												},
+												"value": {
+													"_type": "DV_QUANTITY",
+													"units": "mm",
+													"magnitude": 22.0
+												},
+												"archetype_node_id": "at0026"
+											},
+											{
+												"_type": "ELEMENT",
+												"name": {
+													"_type": "DV_TEXT",
+													"value": "Total number of postbronchodilator maneuvers"
+												},
+												"value": {
+													"_type": "DV_QUANTITY",
+													"units": "mm",
+													"magnitude": 22.0
+												},
+												"archetype_node_id": "at0027"
+											}
+										],
+										"archetype_node_id": "at0010"
+									}
+								],
+								"archetype_node_id": "openEHR-EHR-CLUSTER.spirometry_test_additional_information.v0"
+							}
+						],
+						"archetype_node_id": "at0029"
+					},
+					"guideline_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "3e10f5c3-02fa-31d9-b569-99504d276953",
+							"scheme": "scheme"
+						}
+					},
+					"data": {
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "Event Series"
+						},
+						"origin": {
+							"_type": "DV_DATE_TIME",
+							"value": "2022-02-03T04:05:06"
+						},
+						"period": {
+							"_type": "DV_DURATION",
+							"value": "PT0S"
+						},
+						"duration": {
+							"_type": "DV_DURATION",
+							"value": "PT0S"
+						},
+						"events": [
+							{
+								"_type": "POINT_EVENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Basal test"
+								},
+								"time": {
+									"_type": "DV_DATE_TIME",
+									"value": "2022-02-03T04:05:06"
+								},
+								"state": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Tree"
+									},
+									"items": [
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Environmental conditions - CatSalut"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.environmental_conditions-CatSalut.v0"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Ambient temperature"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "Cel",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0001.1"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Relative humidity"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "%",
+														"magnitude": 50.0
+													},
+													"archetype_node_id": "at0002.1"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Atmospheric pressure"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "kPa",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0011.1"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.environmental_conditions-CatSalut.v0"
+										}
+									],
+									"archetype_node_id": "at0031"
+								},
+								"data": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Tree"
+									},
+									"items": [
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FVC",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0065"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0054"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0044"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV1_non_existing_code",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0067"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0054"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0044"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV0.5",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0145"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV3",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0068"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV6",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0069"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0054"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0044"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FIVC",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0172"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0054"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0044"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "PEFR",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0152"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0008"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0122"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEF25-75%",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0072"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0008"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0122"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEF75%",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0179"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEF50%",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0178"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0008"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0122"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEF25%",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0177"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FIF50%",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0187"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0008"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0122"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV1/FVC ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0081"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV1/FEV6 ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0189"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV1/VC ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0.1"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV0.5/FVC ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0.3"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV3/FVC ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0.4"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEF50%/FIF50% ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0.5"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "ELEMENT",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Forced expiratory time (FET)"
+											},
+											"value": {
+												"_type": "DV_DURATION",
+												"value": "PT0S"
+											},
+											"archetype_node_id": "at0013"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "SVTFVC"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "SVTFVC graphic"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "SFVFVC"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "SFVFVC graphic"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Signals SVTFVC"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Signals SVTFVC"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Signals SFVFVC"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Signals SFVFVC"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Graphic URL"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Graphic URL"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Spirometry test additional measurements"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.spirometry_test_additional_information.v0"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_CODED_TEXT",
+														"value": "PEFT",
+														"defining_code": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "local"
+															},
+															"code_string": "at0004"
+														}
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Result"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "s",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0003"
+														}
+													],
+													"archetype_node_id": "at0002"
+												},
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_CODED_TEXT",
+														"value": "EOTV",
+														"defining_code": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "local"
+															},
+															"code_string": "at0005"
+														}
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Result"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "L",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0003"
+														}
+													],
+													"archetype_node_id": "at0002"
+												},
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_CODED_TEXT",
+														"value": "T0",
+														"defining_code": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "local"
+															},
+															"code_string": "at0006"
+														}
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Result"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "s",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0003"
+														}
+													],
+													"archetype_node_id": "at0002"
+												},
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_CODED_TEXT",
+														"value": "BEV",
+														"defining_code": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "local"
+															},
+															"code_string": "at0007"
+														}
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Result"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "L",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0003"
+														}
+													],
+													"archetype_node_id": "at0002"
+												},
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_CODED_TEXT",
+														"value": "FVCL",
+														"defining_code": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "local"
+															},
+															"code_string": "at0009"
+														}
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Result"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "L",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0003"
+														}
+													],
+													"archetype_node_id": "at0002"
+												},
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_CODED_TEXT",
+														"value": "VTCL",
+														"defining_code": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "local"
+															},
+															"code_string": "at0008"
+														}
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Result"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "L",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0003"
+														}
+													],
+													"archetype_node_id": "at0002"
+												},
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Maneuver information"
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Maneuver number"
+															},
+															"value": {
+																"_type": "DV_ORDINAL",
+																"symbol": {
+																	"_type": "DV_CODED_TEXT",
+																	"value": "1",
+																	"defining_code": {
+																		"_type": "CODE_PHRASE",
+																		"terminology_id": {
+																			"_type": "TERMINOLOGY_ID",
+																			"value": "external"
+																		},
+																		"code_string": "at0012"
+																	}
+																},
+																"value": 1
+															},
+															"archetype_node_id": "at0011"
+														},
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Sampling frequency"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "Hz",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0021"
+														}
+													],
+													"archetype_node_id": "at0010"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.spirometry_test_additional_information.v0"
+										}
+									],
+									"archetype_node_id": "at0003"
+								},
+								"archetype_node_id": "at0002"
+							},
+							{
+								"_type": "POINT_EVENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Basal test - best result"
+								},
+								"time": {
+									"_type": "DV_DATE_TIME",
+									"value": "2022-02-03T04:05:06"
+								},
+								"state": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Tree"
+									},
+									"items": [
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Environmental conditions - CatSalut"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.environmental_conditions-CatSalut.v0"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Ambient temperature"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "Cel",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0001.1"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Relative humidity"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "%",
+														"magnitude": 50.0
+													},
+													"archetype_node_id": "at0002.1"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Atmospheric pressure"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "kPa",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0011.1"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.environmental_conditions-CatSalut.v0"
+										}
+									],
+									"archetype_node_id": "at0031"
+								},
+								"data": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Tree"
+									},
+									"items": [
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FVC",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0065"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0054"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0044"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV1",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0067"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0054"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0044"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "PEFR",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0152"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0008"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0122"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEF25-75%",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0072"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0008"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0122"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV1/FVC ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0081"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "SVTFVC"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "SVTFVC graphic"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "SFVFVC"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "SFVFVC graphic"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Graphic URL"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Graphic URL"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Spirometry test additional maneuver information"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.spirometry_test_additional_information.v0"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Maneuver information"
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Quality of maneuver"
+															},
+															"value": {
+																"_type": "DV_CODED_TEXT",
+																"value": "No example for terminology null available",
+																"defining_code": {
+																	"_type": "CODE_PHRASE",
+																	"terminology_id": {
+																		"_type": "TERMINOLOGY_ID",
+																		"value": "external"
+																	},
+																	"code_string": "42"
+																}
+															},
+															"archetype_node_id": "at0020"
+														}
+													],
+													"archetype_node_id": "at0010"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.spirometry_test_additional_information.v0"
+										}
+									],
+									"archetype_node_id": "at0003"
+								},
+								"archetype_node_id": "at0002"
+							},
+							{
+								"_type": "POINT_EVENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Post-bronchodilator test"
+								},
+								"time": {
+									"_type": "DV_DATE_TIME",
+									"value": "2022-02-03T04:05:06"
+								},
+								"state": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Tree"
+									},
+									"items": [
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Environmental conditions - CatSalut"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.environmental_conditions-CatSalut.v0"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Ambient temperature"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "Cel",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0001.1"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Relative humidity"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "%",
+														"magnitude": 50.0
+													},
+													"archetype_node_id": "at0002.1"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Atmospheric pressure"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "kPa",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0011.1"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.environmental_conditions-CatSalut.v0"
+										}
+									],
+									"archetype_node_id": "at0031"
+								},
+								"data": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Tree"
+									},
+									"items": [
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FVC",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0065"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0054"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0044"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV1",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0067"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0054"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0044"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV0.5",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0145"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV3",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0068"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV6",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0069"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0054"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0044"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FIVC",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0172"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0054"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0044"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "PEFR",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0152"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0008"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0122"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEF25-75%",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0072"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0008"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0122"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEF75%",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0179"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEF50%",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0178"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0008"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0122"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEF25%",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0177"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FIF50%",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0187"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0008"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0122"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV1/FVC ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0081"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV1/FEV6 ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0189"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV1/VC ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0.1"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV0.5/FVC ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0.3"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV3/FVC ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0.4"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEF50%/FIF50% ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0.5"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "ELEMENT",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Forced expiratory time (FET)"
+											},
+											"value": {
+												"_type": "DV_DURATION",
+												"value": "PT0S"
+											},
+											"archetype_node_id": "at0013"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "SVTFVC"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "SVTFVC graphic"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "SFVFVC"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "SFVFVC graphic"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Signals SVTFVC"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Signals SVTFVC"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Graphic URL"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Graphic URL"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Signals SFVFVC"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Signals SFVFVC"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Spirometry test additional information"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.spirometry_test_additional_information.v0"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_CODED_TEXT",
+														"value": "PEFT",
+														"defining_code": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "local"
+															},
+															"code_string": "at0004"
+														}
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Result"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "s",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0003"
+														}
+													],
+													"archetype_node_id": "at0002"
+												},
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_CODED_TEXT",
+														"value": "EOTV",
+														"defining_code": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "local"
+															},
+															"code_string": "at0005"
+														}
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Result"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "L",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0003"
+														}
+													],
+													"archetype_node_id": "at0002"
+												},
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_CODED_TEXT",
+														"value": "T0",
+														"defining_code": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "local"
+															},
+															"code_string": "at0006"
+														}
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Result"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "s",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0003"
+														}
+													],
+													"archetype_node_id": "at0002"
+												},
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_CODED_TEXT",
+														"value": "BEV",
+														"defining_code": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "local"
+															},
+															"code_string": "at0007"
+														}
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Result"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "L",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0003"
+														}
+													],
+													"archetype_node_id": "at0002"
+												},
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_CODED_TEXT",
+														"value": "FVCL",
+														"defining_code": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "local"
+															},
+															"code_string": "at0009"
+														}
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Result"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "L",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0003"
+														}
+													],
+													"archetype_node_id": "at0002"
+												},
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_CODED_TEXT",
+														"value": "VTCL",
+														"defining_code": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "local"
+															},
+															"code_string": "at0008"
+														}
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Result"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "L",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0003"
+														}
+													],
+													"archetype_node_id": "at0002"
+												},
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Maneuver information"
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Maneuver number"
+															},
+															"value": {
+																"_type": "DV_ORDINAL",
+																"symbol": {
+																	"_type": "DV_CODED_TEXT",
+																	"value": "1",
+																	"defining_code": {
+																		"_type": "CODE_PHRASE",
+																		"terminology_id": {
+																			"_type": "TERMINOLOGY_ID",
+																			"value": "external"
+																		},
+																		"code_string": "at0012"
+																	}
+																},
+																"value": 1
+															},
+															"archetype_node_id": "at0011"
+														},
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Sampling frequency"
+															},
+															"value": {
+																"_type": "DV_QUANTITY",
+																"units": "Hz",
+																"magnitude": 42.0
+															},
+															"archetype_node_id": "at0021"
+														}
+													],
+													"archetype_node_id": "at0010"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.spirometry_test_additional_information.v0"
+										}
+									],
+									"archetype_node_id": "at0003"
+								},
+								"archetype_node_id": "at0002"
+							},
+							{
+								"_type": "POINT_EVENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Post-bronchodilator test - best result"
+								},
+								"time": {
+									"_type": "DV_DATE_TIME",
+									"value": "2022-02-03T04:05:06"
+								},
+								"state": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Tree"
+									},
+									"items": [
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Environmental conditions - CatSalut"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.environmental_conditions-CatSalut.v0"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Ambient temperature"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "Cel",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0001.1"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Relative humidity"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "%",
+														"magnitude": 50.0
+													},
+													"archetype_node_id": "at0002.1"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Atmospheric pressure"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "kPa",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0011.1"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.environmental_conditions-CatSalut.v0"
+										}
+									],
+									"archetype_node_id": "at0031"
+								},
+								"data": {
+									"_type": "ITEM_TREE",
+									"name": {
+										"_type": "DV_TEXT",
+										"value": "Tree"
+									},
+									"items": [
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FVC",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0065"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0054"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0044"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV1",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0067"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0053"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0054"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0044"
+												}
+											],
+											"archetype_node_id": "at0052"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "PEFR",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0152"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0008"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0122"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEF25-75%",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0072"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0058"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Predicted result"
+													},
+													"value": {
+														"_type": "DV_QUANTITY",
+														"units": "L/s",
+														"magnitude": 21.0
+													},
+													"archetype_node_id": "at0008"
+												},
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Measured/predicted ratio"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0122"
+												}
+											],
+											"archetype_node_id": "at0057"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_CODED_TEXT",
+												"value": "FEV1/FVC ratio",
+												"defining_code": {
+													"_type": "CODE_PHRASE",
+													"terminology_id": {
+														"_type": "TERMINOLOGY_ID",
+														"value": "local"
+													},
+													"code_string": "at0081"
+												}
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Result"
+													},
+													"value": {
+														"_type": "DV_PROPORTION",
+														"numerator": 21.0,
+														"denominator": 100.0,
+														"type": 3
+													},
+													"archetype_node_id": "at0056"
+												}
+											],
+											"archetype_node_id": "at0055.1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "SVTFVC"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "SVTFVC graphic"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "SFVFVC"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "SFVFVC graphic"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Graphic URL"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.media_file.v1"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "ELEMENT",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Graphic URL"
+													},
+													"value": {
+														"_type": "DV_MULTIMEDIA",
+														"uri": {
+															"_type": "DV_URI",
+															"value": "https://www.example.com/sample"
+														},
+														"media_type": {
+															"_type": "CODE_PHRASE",
+															"terminology_id": {
+																"_type": "TERMINOLOGY_ID",
+																"value": "IANA_media-types"
+															},
+															"code_string": "video/H261"
+														},
+														"size": 504903212
+													},
+													"archetype_node_id": "at0001"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.media_file.v1"
+										},
+										{
+											"_type": "CLUSTER",
+											"name": {
+												"_type": "DV_TEXT",
+												"value": "Spirometry test additional maneuver information"
+											},
+											"archetype_details": {
+												"archetype_id": {
+													"value": "openEHR-EHR-CLUSTER.spirometry_test_additional_information.v0"
+												},
+												"rm_version": "1.0.4"
+											},
+											"items": [
+												{
+													"_type": "CLUSTER",
+													"name": {
+														"_type": "DV_TEXT",
+														"value": "Maneuver information"
+													},
+													"items": [
+														{
+															"_type": "ELEMENT",
+															"name": {
+																"_type": "DV_TEXT",
+																"value": "Quality of maneuver"
+															},
+															"value": {
+																"_type": "DV_CODED_TEXT",
+																"value": "No example for terminology null available",
+																"defining_code": {
+																	"_type": "CODE_PHRASE",
+																	"terminology_id": {
+																		"_type": "TERMINOLOGY_ID",
+																		"value": "external"
+																	},
+																	"code_string": "42"
+																}
+															},
+															"archetype_node_id": "at0020"
+														}
+													],
+													"archetype_node_id": "at0010"
+												}
+											],
+											"archetype_node_id": "openEHR-EHR-CLUSTER.spirometry_test_additional_information.v0"
+										}
+									],
+									"archetype_node_id": "at0003"
+								},
+								"archetype_node_id": "at0002"
+							}
+						],
+						"archetype_node_id": "at0001"
+					},
+					"archetype_node_id": "openEHR-EHR-OBSERVATION.spirometry_result-CatSalut.v2"
+				},
+				{
+					"_type": "EVALUATION",
+					"name": {
+						"_type": "DV_TEXT",
+						"value": "Spirometry general comment"
+					},
+					"archetype_details": {
+						"archetype_id": {
+							"value": "openEHR-EHR-EVALUATION.clinical_synopsis.v1"
+						},
+						"rm_version": "1.0.4"
+					},
+					"language": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "ISO_639-1"
+						},
+						"code_string": "en"
+					},
+					"encoding": {
+						"_type": "CODE_PHRASE",
+						"terminology_id": {
+							"_type": "TERMINOLOGY_ID",
+							"value": "IANA_character-sets"
+						},
+						"code_string": "ISO-10646-UTF-1"
+					},
+					"workflow_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "2c697790-6af8-3a9d-8dd9-7b1c219a911b",
+							"scheme": "scheme"
+						}
+					},
+					"subject": {
+						"_type": "PARTY_SELF"
+					},
+					"provider": {
+						"_type": "PARTY_SELF"
+					},
+					"guideline_id": {
+						"_type": "OBJECT_REF",
+						"namespace": "unknown",
+						"type": "ANY",
+						"id": {
+							"_type": "GENERIC_ID",
+							"value": "9bd7cdab-b9fb-3b82-a9d4-523a75ea0b54",
+							"scheme": "scheme"
+						}
+					},
+					"data": {
+						"_type": "ITEM_TREE",
+						"name": {
+							"_type": "DV_TEXT",
+							"value": "List"
+						},
+						"items": [
+							{
+								"_type": "ELEMENT",
+								"name": {
+									"_type": "DV_TEXT",
+									"value": "Comment"
+								},
+								"value": {
+									"_type": "DV_TEXT",
+									"value": "Lorem ipsum"
+								},
+								"archetype_node_id": "at0002"
+							}
+						],
+						"archetype_node_id": "at0001"
+					},
+					"archetype_node_id": "openEHR-EHR-EVALUATION.clinical_synopsis.v1"
+				}
+			],
+			"archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+		}
+	],
+	"archetype_node_id": "openEHR-EHR-COMPOSITION.report-result.v1"
+}
