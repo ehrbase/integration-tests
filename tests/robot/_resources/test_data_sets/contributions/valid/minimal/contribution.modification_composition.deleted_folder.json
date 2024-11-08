@@ -164,27 +164,21 @@
 					  "value": "Arbol"
 				  },
 				  "archetype_node_id": "at0001",
-				  "items": [{
-					  "_type": "ELEMENT",
-					  "name": {
-						  "_type": "DV_TEXT",
-						  "value": "ordinal"
-					  },
-					  "archetype_node_id": "at0002",
-					  "value": {
-						  "_type": "DV_ORDINAL",
-						  "value": 1,
-						  "symbol": {
-							  "value": "option 1",
-							  "defining_code": {
-								  "terminology_id": {
-									  "value": "local"
-								  },
-								  "code_string": "at0003"
-							  }
-						  }
-					  }
-				  }]
+				  "items": [
+					  {
+                        "_type": "ELEMENT",
+                        "name": {
+                            "_type": "DV_TEXT",
+                            "value": "quantity"
+                        },
+                        "value": {
+                            "_type": "DV_QUANTITY",
+                            "units": "kg",
+                            "magnitude": 42.0
+                        },
+                        "archetype_node_id": "at0002"
+                    }
+				  ]
 			  }
 		  }]
 	  },
