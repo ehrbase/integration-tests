@@ -127,7 +127,7 @@
 			  }]
 		  },
 		  "content": [{
-			  "_type": "ADMIN_ENTRY",
+			  "_type": "EVALUATION",
 			  "name": {
 				  "_type": "DV_TEXT",
 				  "value": "Minimal"
