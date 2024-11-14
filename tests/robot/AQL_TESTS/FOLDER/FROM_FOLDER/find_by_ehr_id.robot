@@ -18,19 +18,14 @@ Find By EHR Id: SELECT e/ehr_id/value, f/uid/value FROM EHR e CONTAINS FOLDER f 
     ${query}    Set Variable   SELECT e/ehr_id/value, f/uid/value FROM EHR e CONTAINS FOLDER f WHERE e/ehr_id/value = '${ehr_id1}'
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     3
-    ${temporary_file}     Set Variable  ${EXPECTED_JSON_DATA_SETS}/folder/expected_folder_find_by_ehr_id_tmp.json
-    ${expected_file}      Set Variable    expected_folder_find_by_ehr_id.json
-    ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/folder/${expected_file}
-    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
-    ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
-    Create File     ${temporary_file}
-    ...     ${data_replaced_vars}
+    ${expected_result_file}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/folder/expected_folder_find_by_ehr_id.json
     ${exclude_paths}    Create List    root['meta']     root['q']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${temporary_file}      exclude_paths=${exclude_paths}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}      exclude_paths=${exclude_paths}
     ...		ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
-    [Teardown]      Remove File     ${temporary_file}
 
 
 *** Keywords ***

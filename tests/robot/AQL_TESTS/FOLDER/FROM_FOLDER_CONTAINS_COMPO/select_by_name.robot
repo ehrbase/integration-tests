@@ -41,19 +41,14 @@ Precondition
 Execute Query
     [Arguments]     ${name}     ${expected_file}    ${nr_of_results}
     ${query}    Set Variable    SELECT c/uid/value FROM FOLDER f CONTAINS COMPOSITION c WHERE f/name/value = '${name}'
-    ${expected_file_with_replaced_vars}     Set Variable
-    ...     ${EXPECTED_JSON_DATA_SETS}/folder/expected_folder_contains_compo_select_by_name_tmp.json
     Set AQL And Execute Ad Hoc Query    ${query}
-    ${expected_res_tmp}     Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/${expected_file}
-    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
-    ${data_replaced_vars}   Replace Variables  ${file_without_replaced_vars}
-    Create Binary File      ${expected_file_with_replaced_vars}
-    ...     ${data_replaced_vars}
+    ${expected_result_file}     Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/${expected_file}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${exclude_paths}	Create List    root['meta']     root['q']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_file_with_replaced_vars}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}
     ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
-    [Teardown]      Remove File     ${expected_file_with_replaced_vars}

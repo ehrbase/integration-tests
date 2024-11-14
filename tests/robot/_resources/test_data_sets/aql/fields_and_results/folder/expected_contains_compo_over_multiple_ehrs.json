@@ -20,11 +20,11 @@
 	"rows": [
 		[
 			"${ehr_id1}",
-			"${c_uid4}::local.ehrbase.org::1"
+			"${c_uid4}::${system_id_with_tenant}::1"
 		],
 		[
 			"${ehr_id2}",
-			"${c_uid4b}::local.ehrbase.org::1"
+			"${c_uid4b}::${system_id_with_tenant}::1"
 		]
 	]
 }

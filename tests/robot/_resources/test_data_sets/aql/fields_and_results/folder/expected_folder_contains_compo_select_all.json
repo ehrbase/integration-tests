@@ -19,51 +19,51 @@
 	],
 	"rows": [
 		[
-			"${c_uid1}::local.ehrbase.org::1",
+			"${c_uid1}::${system_id_with_tenant}::1",
 			"root1"
 		],
 		[
-			"${c_uid2}::local.ehrbase.org::1",
+			"${c_uid2}::${system_id_with_tenant}::1",
 			"root1"
 		],
 		[
-			"${c_uid3}::local.ehrbase.org::1",
+			"${c_uid3}::${system_id_with_tenant}::1",
 			"root1"
 		],
 		[
-			"${c_uid4}::local.ehrbase.org::1",
+			"${c_uid4}::${system_id_with_tenant}::1",
 			"root1"
 		],
 		[
-			"${c_uid1}::local.ehrbase.org::1",
+			"${c_uid1}::${system_id_with_tenant}::1",
 			"subfolder1"
 		],
 		[
-			"${c_uid2}::local.ehrbase.org::1",
+			"${c_uid2}::${system_id_with_tenant}::1",
 			"subfolder1"
 		],
 		[
-			"${c_uid3}::local.ehrbase.org::1",
+			"${c_uid3}::${system_id_with_tenant}::1",
 			"subfolder1"
 		],
 		[
-			"${c_uid4}::local.ehrbase.org::1",
+			"${c_uid4}::${system_id_with_tenant}::1",
 			"subfolder1"
 		],
 		[
-			"${c_uid2}::local.ehrbase.org::1",
+			"${c_uid2}::${system_id_with_tenant}::1",
 			"subsubfolder1"
 		],
 		[
-			"${c_uid4}::local.ehrbase.org::1",
+			"${c_uid4}::${system_id_with_tenant}::1",
 			"subsubfolder1"
 		],
 		[
-			"${c_uid4}::local.ehrbase.org::1",
+			"${c_uid4}::${system_id_with_tenant}::1",
 			"subsubsubfolder2"
 		],
 		[
-			"${c_uid3}::local.ehrbase.org::1",
+			"${c_uid3}::${system_id_with_tenant}::1",
 			"subsubfolder2"
 		]
 	]
