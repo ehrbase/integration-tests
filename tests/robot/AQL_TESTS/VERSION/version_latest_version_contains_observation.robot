@@ -18,44 +18,42 @@ ${query2}   SELECT e/ehr_id/value, cv/uid/value, cv/contribution/id/value, cv/co
 
 *** Test Cases ***
 1. ${query1}
-    ${expected_file}    Set Variable    latest_version_contains_observation_sanity_check.json
-    ${actual_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/${expected_file}
-    ${tmp_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_observation_sanity_check_tmp.json
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_observation_sanity_check.json
     ${time_committed_observation1}   Get Composition Time Committed     ${compo_uid_2_v3}
     ${time_committed_observation2}   Get Composition Time Committed     ${compo_uid_3_v2}
+    Set Test Variable   ${time_committed_observation1}      ${time_committed_observation1}
+    Set Test Variable   ${time_committed_observation2}      ${time_committed_observation2}
     Set AQL And Execute Ad Hoc Query    ${query1}
-    ${file_without_replaced_vars}       Get File    ${actual_file}
-    ${data_replaced_vars}    Replace Variables      ${file_without_replaced_vars}
-                        Create File     ${tmp_file}     ${data_replaced_vars}
-                        Length Should Be    ${resp_body['rows']}     2
+    Length Should Be    ${resp_body['rows']}     2
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${tmp_file}     exclude_paths=${exclude_paths}
-                Should Be Empty     ${diff}    msg=DIFF DETECTED!
-    [Teardown]  Remove File     ${tmp_file}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}     exclude_paths=${exclude_paths}
+    Should Be Empty     ${diff}    msg=DIFF DETECTED!
 
 2. ${query2}
-    ${expected_file}    Set Variable    latest_version_contains_observation_contribution_check.json
-    ${actual_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/${expected_file}
-    ${tmp_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_observation_contribution_check_tmp.json
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_observation_contribution_check.json
     ${time_committed_observation1}   Get Composition Time Committed     ${compo_uid_1}
     ${time_committed_observation2}   Get Composition Time Committed     ${compo_uid_2_v3}
     ${time_committed_observation3}   Get Composition Time Committed     ${compo_uid_3_v2}
     ${time_committed_observation4}   Get Composition Time Committed     ${compo_uid_7_v2}
+    Set Test Variable   ${time_committed_observation1}      ${time_committed_observation1}
+    Set Test Variable   ${time_committed_observation2}      ${time_committed_observation2}
+    Set Test Variable   ${time_committed_observation3}      ${time_committed_observation3}
+    Set Test Variable   ${time_committed_observation4}      ${time_committed_observation4}
     Set AQL And Execute Ad Hoc Query    ${query2}
     Set Suite Variable   ${contribution_id1}     ${resp_body['rows'][0][2]}
     Set Suite Variable   ${contribution_id2}     ${resp_body['rows'][1][2]}
     Set Suite Variable   ${contribution_id3}     ${resp_body['rows'][2][2]}
     Set Suite Variable   ${contribution_id4}     ${resp_body['rows'][3][2]}
-    ${file_without_replaced_vars}       Get File    ${actual_file}
-    ${data_replaced_vars}    Replace Variables      ${file_without_replaced_vars}
-                        Create File     ${tmp_file}     ${data_replaced_vars}
-                        Length Should Be    ${resp_body['rows']}     4
+    Length Should Be    ${resp_body['rows']}     4
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${tmp_file}     exclude_paths=${exclude_paths}
-                Should Be Empty     ${diff}    msg=DIFF DETECTED!
-    [Teardown]  Remove File     ${tmp_file}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}     exclude_paths=${exclude_paths}
+    Should Be Empty     ${diff}    msg=DIFF DETECTED!
 
 3. Check Contributions Exists And Valid - Latest Version Observation
     Set Test Variable   ${contribution_uid}    ${contribution_id1}

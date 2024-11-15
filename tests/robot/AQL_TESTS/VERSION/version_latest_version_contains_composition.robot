@@ -19,44 +19,45 @@ ${query2}   SELECT cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_
 
 *** Test Cases ***
 1. ${query1}
-    ${expected_file}    Set Variable    latest_version_contains_composition_sanity_check.json
-    ${actual_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/${expected_file}
-    ${tmp_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_composition_sanity_check_tmp.json
+    ${expected_result_file}      Set Variable
+    ...     ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_composition_sanity_check.json
     ${time_committed_composition1}   Get Composition Time Committed     ${compo_uid_1}
     ${time_committed_composition2}   Get Composition Time Committed     ${compo_uid_2_v3}
     ${time_committed_composition3}   Get Composition Time Committed     ${compo_uid_3_v2}
     ${time_committed_composition4}   Get Composition Time Committed     ${compo_uid_5}
     ${time_committed_composition5}   Get Composition Time Committed     ${compo_uid_7_v2}
     ${time_committed_composition6}   Get Composition Time Committed     ${compo_uid_8}
+    Set Test Variable   ${time_committed_composition1}      ${time_committed_composition1}
+    Set Test Variable   ${time_committed_composition2}      ${time_committed_composition2}
+    Set Test Variable   ${time_committed_composition3}      ${time_committed_composition3}
+    Set Test Variable   ${time_committed_composition4}      ${time_committed_composition4}
+    Set Test Variable   ${time_committed_composition5}      ${time_committed_composition5}
+    Set Test Variable   ${time_committed_composition6}      ${time_committed_composition6}
     Set AQL And Execute Ad Hoc Query    ${query1}
-    ${file_without_replaced_vars}       Get File    ${actual_file}
-    ${data_replaced_vars}    Replace Variables      ${file_without_replaced_vars}
-                        Create File     ${tmp_file}     ${data_replaced_vars}
-                        Length Should Be    ${resp_body['rows']}     6
+    Length Should Be    ${resp_body['rows']}     6
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${tmp_file}     exclude_paths=${exclude_paths}
-                Should Be Empty     ${diff}    msg=DIFF DETECTED!
-    [Teardown]  Remove File     ${tmp_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}     exclude_paths=${exclude_paths}
+    Should Be Empty     ${diff}    msg=DIFF DETECTED!
 
 2. ${query2}
-    ${expected_file}    Set Variable    latest_version_contains_composition_contribution_check.json
-    ${actual_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/${expected_file}
-    ${tmp_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_composition_contribution_check_tmp.json
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_composition_contribution_check.json
     ${time_committed_composition5}   Get Composition Time Committed     ${compo_uid_5}
     ${time_committed_composition8}   Get Composition Time Committed     ${compo_uid_8}
+    Set Test Variable   ${time_committed_composition5}      ${time_committed_composition5}
+    Set Test Variable   ${time_committed_composition8}      ${time_committed_composition8}
     Set AQL And Execute Ad Hoc Query    ${query2}
     Set Suite Variable   ${contribution_id1}     ${resp_body['rows'][0][1]}
     Set Suite Variable   ${contribution_id2}     ${resp_body['rows'][1][1]}
-    ${file_without_replaced_vars}       Get File    ${actual_file}
-    ${data_replaced_vars}    Replace Variables      ${file_without_replaced_vars}
-                        Create File     ${tmp_file}     ${data_replaced_vars}
-                        Length Should Be    ${resp_body['rows']}     2
+    Length Should Be    ${resp_body['rows']}     2
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${tmp_file}     exclude_paths=${exclude_paths}
-                Should Be Empty     ${diff}    msg=DIFF DETECTED!
-    [Teardown]  Remove File     ${tmp_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}     exclude_paths=${exclude_paths}
+    Should Be Empty     ${diff}    msg=DIFF DETECTED!
 
 3. Check Contributions Exists And Valid - Latest Version Composition
     Set Test Variable   ${contribution_uid}    ${contribution_id1}

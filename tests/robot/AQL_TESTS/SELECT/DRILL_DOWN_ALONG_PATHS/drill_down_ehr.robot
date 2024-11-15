@@ -35,24 +35,21 @@ Precondition
 
 Execute Query
     [Arguments]     ${path}     ${expected_file}    ${nr_of_results}
-    ${temp_file}    Set Variable
-    ...     ${EXPECTED_JSON_DATA_SETS}/version/expected_drill_down_ehr_tmp.json
-    ${expected_res_tmp}     Set Variable
+    ${expected_result_file}     Set Variable
     ...     ${EXPECTED_JSON_DATA_SETS}/select/${expected_file}
     ${query_dict}   Create Dictionary
     ...     tmp_query=SELECT ${path} FROM EHR e
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
-    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
-    ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
-    Log     Expected data: ${data_replaced_vars}
-    Create File     ${temp_file}    ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${exclude_paths}	Create List    root['meta']     root['q']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${temp_file}
+    Set Test Variable   ${path}     ${path}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    #Log     Expected data: ${expected_json}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}
     ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
-    [Teardown]      Remove File     ${temp_file}

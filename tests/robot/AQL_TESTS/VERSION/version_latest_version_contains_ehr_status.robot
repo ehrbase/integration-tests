@@ -19,40 +19,32 @@ ${query2}   SELECT cv/uid/value, cv/contribution/id/value, cv/commit_audit/time_
 *** Test Cases ***
 1. ${query1}
     Log     ${ehr_id1}, ${ehr_status_id1} \n ${ehr_id3}, ${ehr_status_id3}
-    ${expected_file}    Set Variable    latest_version_contains_ehr_status_sanity_check.json
-    ${actual_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/${expected_file}
-    ${tmp_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_ehr_status_sanity_check_tmp.json
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_ehr_status_sanity_check.json
     ${time_committed_ehr_status1}   Get EHR Status Time Committed   ${ehr_status_id1}
     ${time_committed_ehr_status2}   Get EHR Status Time Committed   ${ehr_status_id3_version2}
                         Set Suite Variable  ${time_committed_ehr_status1}   ${time_committed_ehr_status1}
                         Set Suite Variable  ${time_committed_ehr_status2}   ${time_committed_ehr_status2}
     Set AQL And Execute Ad Hoc Query    ${query1}
-    ${file_without_replaced_vars}       Get File    ${actual_file}
-    ${data_replaced_vars}    Replace Variables      ${file_without_replaced_vars}
-                        Create File     ${tmp_file}     ${data_replaced_vars}
-                        Length Should Be    ${resp_body['rows']}     2
+    Length Should Be    ${resp_body['rows']}     2
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${tmp_file}     exclude_paths=${exclude_paths}
-                Should Be Empty     ${diff}    msg=DIFF DETECTED!
-    [Teardown]  Remove File     ${tmp_file}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}     exclude_paths=${exclude_paths}
+    Should Be Empty     ${diff}    msg=DIFF DETECTED!
 
 2. ${query2}
-    ${expected_file}    Set Variable    latest_version_contains_ehr_status_contribution_check.json
-    ${actual_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/${expected_file}
-    ${tmp_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_ehr_status_contribution_check_tmp.json
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/version/latest_version_contains_ehr_status_contribution_check.json
     Set AQL And Execute Ad Hoc Query    ${query2}
     Set Suite Variable   ${contribution_id1}     ${resp_body['rows'][0][1]}
     Set Suite Variable   ${contribution_id2}     ${resp_body['rows'][1][1]}
-    ${file_without_replaced_vars}       Get File    ${actual_file}
-    ${data_replaced_vars}    Replace Variables      ${file_without_replaced_vars}
-                        Create File     ${tmp_file}     ${data_replaced_vars}
-                        Length Should Be    ${resp_body['rows']}     2
+    Length Should Be    ${resp_body['rows']}     2
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${tmp_file}     exclude_paths=${exclude_paths}
-                Should Be Empty     ${diff}    msg=DIFF DETECTED!
-    [Teardown]  Remove File     ${tmp_file}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}     exclude_paths=${exclude_paths}
+    Should Be Empty     ${diff}    msg=DIFF DETECTED!
 
 3. Check Contributions Exists And Valid - Latest Version EHR Status
     Set Test Variable   ${contribution_uid}    ${contribution_id1}
