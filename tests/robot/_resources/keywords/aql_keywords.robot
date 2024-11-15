@@ -385,3 +385,12 @@ Set Debug Options In Dict
     Set Test Variable   ${query_plan}   ${query_plan}
     [Return]        ${debug_headers}
 
+Get File And Replace Dynamic Vars In File And Store As String
+    # Reads file identified by full path provided to test_data_file
+    # Replace all variables from the readed file content if it contains any
+    # Returns json with replaced variables
+    [Arguments]     ${test_data_file}
+    ${json_str}     Get File     ${test_data_file}
+    ${json_str_replaced}    Replace Variables   ${json_str}
+    Log     ${json_str_replaced}
+    [return]    ${json_str_replaced}

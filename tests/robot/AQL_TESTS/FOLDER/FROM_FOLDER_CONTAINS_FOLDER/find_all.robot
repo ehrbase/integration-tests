@@ -15,10 +15,13 @@ Find All: SELECT f1/uid/value, f1/name/value, f2/uid/value, f2/name/value FROM F
     ${query}    Set Variable    SELECT f1/uid/value, f1/name/value, f2/uid/value, f2/name/value FROM FOLDER f1 CONTAINS FOLDER f2
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     10
-    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/expected_folder_contains_folder_find_all.json
+    ${expected_result_file}      Set Variable
+    ...     ${EXPECTED_JSON_DATA_SETS}/folder/expected_folder_contains_folder_find_all.json
     ${exclude_paths}    Create List    root['meta']     root['q']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}      exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}
     ...		ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!

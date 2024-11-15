@@ -26,19 +26,15 @@ SELECT e/ehr_id/value, f/uid/value, c/uid/value FROM EHR e CONTAINS FOLDER f CON
     ...     SELECT e/ehr_id/value, f/uid/value, c/uid/value FROM EHR e CONTAINS FOLDER f CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id2}' AND f/uid/value = '70939d97-8add-4419-b27c-516e64b1c744' AND c/uid/value = '${c_uid4b}'
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     1
-    ${temporary_file}     Set Variable  ${EXPECTED_JSON_DATA_SETS}/folder/expected_multiple_ehrs_and_compo_select_by_ids_tmp.json
-    ${expected_file}      Set Variable    expected_multiple_ehrs_and_compo_select_by_ids.json
-    ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/folder/${expected_file}
-    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
-    ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
-    Create File     ${temporary_file}
-    ...     ${data_replaced_vars}
+    ${expected_result_file}      Set Variable
+    ...     ${EXPECTED_JSON_DATA_SETS}/folder/expected_multiple_ehrs_and_compo_select_by_ids.json
     ${exclude_paths}    Create List    root['meta']     root['q']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${temporary_file}      exclude_paths=${exclude_paths}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}      exclude_paths=${exclude_paths}
     ...		ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
-    [Teardown]      Remove File     ${temporary_file}
 
 
 *** Keywords ***

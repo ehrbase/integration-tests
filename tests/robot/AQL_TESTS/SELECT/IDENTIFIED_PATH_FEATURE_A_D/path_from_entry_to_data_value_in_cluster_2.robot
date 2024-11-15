@@ -37,17 +37,14 @@ Execute Query
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
-    ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/select/${expected_file}
-    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
-    ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
-    Log     Expected data: ${data_replaced_vars}
-    Create File     ${EXPECTED_JSON_DATA_SETS}/select/path_from_entry_to_data_value_cluster_second_query_tmp.json
-    ...     ${data_replaced_vars}
+    ${expected_result_file}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/select/${expected_file}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${exclude_paths}	Create List    root['meta']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/select/path_from_entry_to_data_value_cluster_second_query_tmp.json
+    Set Test Variable   ${path}     ${path}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}
     ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
-    [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/select/path_from_entry_to_data_value_cluster_second_query_tmp.json

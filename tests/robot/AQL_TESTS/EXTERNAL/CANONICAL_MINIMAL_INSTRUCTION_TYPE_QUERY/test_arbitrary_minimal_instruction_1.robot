@@ -35,21 +35,19 @@ Precondition
 
 Execute Query
     [Arguments]     ${query_nr}     ${path}     ${where}    ${expected_file}    ${nr_of_results}
-    ${actual_file}      Set Variable    ${EXPECTED_JSON_RESULTS}/${expected_file}
-    ${tmp_file}         Set Variable    ${EXPECTED_JSON_RESULTS}/expected_test_arbitrary_minimal_instruction_1_tmp.json
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_RESULTS}/${expected_file}
     ${query_dict}   Create Dictionary
     ...     tmp_query=SELECT i/${path} FROM EHR e CONTAINS COMPOSITION c CONTAINS INSTRUCTION i[openEHR-EHR-INSTRUCTION.minimal.v1] WHERE ${where}
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Set AQL And Execute Ad Hoc Query    ${query}
-    ${expected_res_tmp}      Set Variable       ${actual_file}
-    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
-    ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
-    Create File     ${tmp_file}     ${data_replaced_vars}
     Length Should Be    ${resp_body['rows']}     ${nr_of_results}
     ${exclude_paths}	Create List    root['meta']     root['q']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${tmp_file}
+    Set Test Variable   ${query_nr}     ${query_nr}
+    Set Test Variable   ${path}         ${path}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}
     ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
-    [Teardown]      Remove File     ${tmp_file}

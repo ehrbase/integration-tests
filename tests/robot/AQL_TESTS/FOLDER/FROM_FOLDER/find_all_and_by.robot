@@ -16,10 +16,12 @@ Find All: SELECT f/uid/value, f/name/value, f/archetype_node_id FROM FOLDER f
     ${query}    Set Variable    SELECT f/uid/value, f/name/value, f/archetype_node_id FROM FOLDER f
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     3
-    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/expected_find_all.json
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/expected_find_all.json
     ${exclude_paths}    Create List    root['meta']     root['q']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}      exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}
     ...		ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
@@ -42,10 +44,12 @@ Find By Name: SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'root1'
     ${query}    Set Variable    SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'root1'
     Set AQL And Execute Ad Hoc Query    ${query}
     Length Should Be    ${resp_body['rows']}     1
-    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/expected_find_by_name_root1.json
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/folder/expected_find_by_name_root1.json
     ${exclude_paths}    Create List    root['meta']     root['q']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}      exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
 
 Find By Name: SELECT f/uid/value FROM FOLDER f WHERE f/name/value = 'subfolder1'

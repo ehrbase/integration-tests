@@ -37,17 +37,13 @@ Execute Query
     ${query}    Set Variable    ${query_dict["tmp_query"]}
     Log     ${query}
     Set AQL And Execute Ad Hoc Query    ${query}
-    ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/where/${expected_file}
-    ${file_without_replaced_vars}   Get Binary File    ${expected_res_tmp}
-    ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
-    Log     Expected data: ${data_replaced_vars}
-    Create Binary File     ${EXPECTED_JSON_DATA_SETS}/where/compare_by_paths_over_hierarchy_lvl_tmp.json
-    ...     ${data_replaced_vars}
+    ${expected_result_file}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/where/${expected_file}
     Length Should Be    ${resp_body['rows']}     1
     ${exclude_paths}	Create List    root['meta']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${EXPECTED_JSON_DATA_SETS}/where/compare_by_paths_over_hierarchy_lvl_tmp.json
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}
     ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
-    [Teardown]      Remove File     ${EXPECTED_JSON_DATA_SETS}/where/compare_by_paths_over_hierarchy_lvl_tmp.json

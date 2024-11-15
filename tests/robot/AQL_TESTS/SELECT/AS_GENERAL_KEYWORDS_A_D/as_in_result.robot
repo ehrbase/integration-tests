@@ -106,20 +106,15 @@ Check Composition Is Returned For Full Composition Uid - Complex Query
     [Setup]     Precondition
     ${query}    Set Variable    SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value='${compo_id}::${system_id_with_tenant}::1'
     Set AQL And Execute Ad Hoc Query        ${query}
-    ${expected_res_tmp}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/select/expected_composition_full_uid_complex_query.json
-    ${file_without_replaced_vars}   Get File    ${expected_res_tmp}
-    ${data_replaced_vars}    Replace Variables  ${file_without_replaced_vars}
-    Log     Expected data: ${data_replaced_vars}
-    Create File     ${EXPECTED_JSON_DATA_SETS}/select/expected_composition_full_uid_complex_query_tmp.json
-    ...     ${data_replaced_vars}
-    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_composition_full_uid_complex_query_tmp.json
+    ${expected_result_file}      Set Variable       ${EXPECTED_JSON_DATA_SETS}/select/expected_composition_full_uid_complex_query.json
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
-    ${diff}     compare json-string with json-file
-    ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
+    #Log     Expected data: ${expected_json}
+    ${diff}     compare json-strings
+    ...     ${resp_body_actual}     ${expected_json}    exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
-    [Teardown]      Run Keywords
-    ...     Remove File     ${EXPECTED_JSON_DATA_SETS}/select/expected_composition_full_uid_complex_query_tmp.json
-    ...     AND     Admin Delete EHR For AQL
+    [Teardown]      Admin Delete EHR For AQL
 
 Check Two Composition UIDs Are Returned - AQL With Lower Than Sign
     [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHR;
@@ -132,12 +127,12 @@ Check Two Composition UIDs Are Returned - AQL With Lower Than Sign
     [Setup]     Precondition - Add 2 Compositions With Fixed UIDs
     ${query}    Set Variable    SELECT c/uid/value AS full FROM COMPOSITION c WHERE c/uid/value<'d037bf7c-0ecb-40fb-aada-fc7d559815ea::::1'
     Set AQL And Execute Ad Hoc Query        ${query}
-    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_lower_than.json
-    ${file_content}     Get File    ${expected_result}
-    ${file_content_replaced}     Replace Variables      ${file_content}
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_lower_than.json
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
     ${diff}     compare json-strings
-    ...     ${resp_body_actual}     ${file_content_replaced}    exclude_paths=${exclude_paths}
+    ...     ${resp_body_actual}     ${expected_json}    exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
 
@@ -152,12 +147,12 @@ Check One Composition UID Is Returned - AQL With Greater Than Sign
     [Setup]     Precondition - Add 2 Compositions With Fixed UIDs
     ${query}    Set Variable    SELECT c/uid/value AS full FROM COMPOSITION c WHERE c/uid/value>'b037bf7c-0ecb-40fb-aada-fc7d559815ea::${system_id_with_tenant}::1'
     Set AQL And Execute Ad Hoc Query        ${query}
-    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_greater_than.json
-    ${file_content}     Get File    ${expected_result}
-    ${file_content_replaced}     Replace Variables      ${file_content}
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_greater_than.json
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
     ${diff}     compare json-strings
-    ...     ${resp_body_actual}     ${file_content_replaced}      exclude_paths=${exclude_paths}
+    ...     ${resp_body_actual}     ${expected_json}    exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
 
@@ -172,12 +167,12 @@ Check Two Composition UIDs Are Returned - AQL With Lower Equals Sign
     [Setup]     Precondition - Add 2 Compositions With Fixed UIDs
     ${query}    Set Variable    SELECT c/uid/value AS full FROM COMPOSITION c WHERE c/uid/value<='c037bf7c-0ecb-40fb-aada-fc7d559815ea::${system_id_with_tenant}::1'
     Set AQL And Execute Ad Hoc Query        ${query}
-    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_lower_equals_than.json
-    ${file_content}     Get File    ${expected_result}
-    ${file_content_replaced}     Replace Variables      ${file_content}
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_lower_equals_than.json
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
     ${diff}     compare json-strings
-    ...     ${resp_body_actual}     ${file_content_replaced}      exclude_paths=${exclude_paths}
+    ...     ${resp_body_actual}     ${expected_json}      exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
 
@@ -192,12 +187,12 @@ Check Two Composition UIDs Are Returned - AQL With Greater Equals Sign
     [Setup]     Precondition - Add 2 Compositions With Fixed UIDs
     ${query}    Set Variable    SELECT c/uid/value AS full FROM COMPOSITION c WHERE c/uid/value>='b037bf7c-0ecb-40fb-aada-fc7d559815ea::::1'
     Set AQL And Execute Ad Hoc Query        ${query}
-    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_greater_equals_than.json
-    ${file_content}     Get File    ${expected_result}
-    ${file_content_replaced}     Replace Variables      ${file_content}
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_greater_equals_than.json
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
     ${diff}     compare json-strings
-    ...     ${resp_body_actual}     ${file_content_replaced}      exclude_paths=${exclude_paths}
+    ...     ${resp_body_actual}     ${expected_json}      exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
 
@@ -212,12 +207,12 @@ Check One Composition UID Is Returned - AQL With Different Than Sign
     [Setup]     Precondition - Add 2 Compositions With Fixed UIDs
     ${query}    Set Variable    SELECT c/uid/value AS full FROM COMPOSITION c WHERE c/uid/value!='c037bf7c-0ecb-40fb-aada-fc7d559815ea::::1'
     Set AQL And Execute Ad Hoc Query        ${query}
-    ${expected_result}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_different_than.json
-    ${file_content}     Get File    ${expected_result}
-    ${file_content_replaced}     Replace Variables      ${file_content}
+    ${expected_result_file}      Set Variable    ${EXPECTED_JSON_DATA_SETS}/select/expected_compositions_with_fixed_uid_different_than.json
     ${exclude_paths}    Create List    root['meta']     root['q']   root['rows'][0][0]['uid']
+    ${expected_json}    Get File And Replace Dynamic Vars In File And Store As String
+    ...     test_data_file=${expected_result_file}
     ${diff}     compare json-strings
-    ...     ${resp_body_actual}     ${file_content_replaced}      exclude_paths=${exclude_paths}
+    ...     ${resp_body_actual}     ${expected_json}      exclude_paths=${exclude_paths}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
 

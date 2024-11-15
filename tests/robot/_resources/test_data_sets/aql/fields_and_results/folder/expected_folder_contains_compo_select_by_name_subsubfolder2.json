@@ -15,7 +15,7 @@
 	],
 	"rows": [
 		[
-			"${c_uid3}::local.ehrbase.org::1"
+			"${c_uid3}::${system_id_with_tenant}::1"
 		]
 	]
 }
