@@ -26,20 +26,20 @@ Force Tags
 
 *** Test Cases ***
 Alternative flow: create directory with the same existing uid under another EHR
-    [Tags]      not-ready   CDR-1615
-    [Documentation]     Fails due to https://vitagroup-ag.atlassian.net/browse/CDR-1615
-    ...                 \nMarked as skipped, as bug ticket not fixed yet.
+    [Tags]      not-ready
+    [Documentation]     Previously failing due to https://vitagroup-ag.atlassian.net/browse/CDR-1615
+    ## remove not-ready tag
+    ## when branch https://github.com/ehrbase/ehrbase/tree/refs/heads/feature/CDR-1615-Fix-dublicate-folder-vo_id is merged
     create EHR
     Set Test Variable   ${ehr_id1}  ${ehr_id}
     create DIRECTORY (JSON)    empty_directory_with_defined_uid.json     isModifiable=${TRUE}
     Status Should Be    201
     create EHR
     Set Test Variable   ${ehr_id2}  ${ehr_id}
-    create DIRECTORY (JSON)    empty_directory_with_defined_uid.json     isModifiable=${TRUE}
-    Should Not Be Equal As Strings      ${response.status_code}      201
-    ...     Bug ticket https://vitagroup-ag.atlassian.net/browse/CDR-1615
-    #Status Should Be        409
-    #Should Contain    ${response.text}    does not allow modification
+    Run Keyword And Return Status   create DIRECTORY (JSON)    empty_directory_with_defined_uid.json     isModifiable=${TRUE}
+    Should Be Equal As Strings      ${response.status_code}      409
+    Should Be Equal As Strings      ${response.json()['error']}     Conflict
+    Should Be Equal As Strings      ${response.json()['message']}   FOLDER with uid e5ee0249-60c6-47b0-80cc-f5cef3172015 already exist.
     [Teardown]    Delete EHRs
 
 
