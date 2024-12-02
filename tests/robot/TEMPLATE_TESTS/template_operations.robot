@@ -107,3 +107,16 @@ Suite Setup 		Set Library Search Order For Tests
     (admin) delete OPT
     Set Test Variable   ${template_id}    ${template_id_2}
     (admin) delete OPT
+
+12. Create Second Same Template Without Compositions And Expect 409
+    [Documentation]     Check that template overwrite is not possible.
+    ...     Expected 409. Operational template with this template ID already exists: test_event
+    ...     EHRBase started with default system.allow-template-overwrite: false
+    ...     Covers bug ticket https://vitagroup-ag.atlassian.net/browse/CDR-1616
+    [Tags]      Negative
+    Upload OPT      all_types/test_event.opt
+    Extract Template Id From OPT File
+    Upload OPT      all_types/test_event.opt
+    Should Be Equal As Strings      ${response_code}    409
+    Should Contain      ${response.text}      Operational template with this template ID already exists: test_event
+    [Teardown]      (admin) delete OPT

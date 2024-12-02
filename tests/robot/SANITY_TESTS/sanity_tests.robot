@@ -59,6 +59,7 @@ Main flow Sanity Tests for FLAT Compositions
     Set Variable With Short Compo Id And Delete Composition     ${composition_uid_short}
     delete DIRECTORY (JSON)
     Status Should Be    204
+
     (admin) delete ehr
     #[Teardown]    restart SUT
 
@@ -131,6 +132,12 @@ Main flow Sanity Tests for Canonical XML Compositions
     #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
     delete DIRECTORY (JSON)
+    ## Covers bug ticket https://vitagroup-ag.atlassian.net/browse/CDR-1616
+    ## system.allow-template-overwrite: false
+    Upload OPT      nested/nested.opt
+    Should Be Equal As Strings      ${response_code}    409
+    Should Contain  ${response.text}
+    ...     Operational template with this template ID already exists: nested.en.v1
     [Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 
