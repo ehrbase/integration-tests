@@ -114,7 +114,7 @@ Suite Setup 		Set Library Search Order For Tests
     ...     EHRBase started with default system.allow-template-overwrite: false
     ...     Covers bug ticket https://vitagroup-ag.atlassian.net/browse/CDR-1616
     #To remove not-ready tag when https://vitagroup-ag.atlassian.net/browse/CDR-1616 is merged
-    [Tags]      Negative    not-ready
+    [Tags]      Negative
     Upload OPT      all_types/test_event.opt
     Extract Template Id From OPT File
     Upload OPT      all_types/test_event.opt

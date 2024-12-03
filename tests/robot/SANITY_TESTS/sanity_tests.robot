@@ -101,7 +101,6 @@ Main flow Sanity Tests for Canonical JSON Compositions
     #[Teardown]    restart SUT
 
 Main flow Sanity Tests for Canonical XML Compositions
-    [Tags]      not-ready
     #To remove not-ready tag when https://vitagroup-ag.atlassian.net/browse/CDR-1616 is merged
     #create EHR
     Create EHR For Sanity Flow
