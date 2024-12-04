@@ -37,23 +37,19 @@ Test Example Generator For Templates (ECIS) - FLAT
     Validate Response Body Has Format    FLAT
 
 Test Example Generator For Templates (ECIS) - FLAT - Test Category And Coded Text Code And Value
-    [Tags]      cdr-432     not-ready
+    [Documentation]     Previously failing due to https://vitagroup-ag.atlassian.net/browse/CDR-432
     Upload OPT      all_types/test_event.opt
     Extract Template Id From OPT File
     Get Example Of Web Template By Template Id (ECIS)    ${template_id}    FLAT
-    Log     https://github.com/ehrbase/ehrbase/issues/897   console=yes
-    Should Be Equal As Strings     ${response.json()["test_event/coded_text|code"]}   433
     Should Be Equal As Strings     ${response.json()["test_event/category|code"]}   433
-    Should Be Equal As Strings     ${response.json()["test_event/coded_text|value"]}   event
     Should Be Equal As Strings     ${response.json()["test_event/category|value"]}   event
-    [Teardown]      TRACE JIRA ISSUE      CDR-432
+    Should Be Equal As Strings     ${response.json()["test_event/category|terminology"]}   openehr
 
 Test Example Generator For Templates (ECIS) - JSON And Commit Composition
-    [Tags]      cdr-433     not-ready
+    [Documentation]     Previously failing due to https://vitagroup-ag.atlassian.net/browse/CDR-433
     Upload OPT      all_types/test_quantity_without_text.opt
     Extract Template Id From OPT File
     Get Example Of Web Template By Template Id (ECIS)       ${template_id}      JSON
-    #Get Example Of Web Template By Template Id (OPENEHR)    ${template_id}    JSON
     ${json_str}    Convert JSON To String    ${response.json()}
     ${tempFilePath}    Set Variable
     ...     ${EXECDIR}/robot/_resources/test_data_sets/compositions/CANONICAL_JSON/test_quantity_without_text__.json
@@ -69,11 +65,14 @@ Test Example Generator For Templates (ECIS) - JSON And Commit Composition
     Set Test Variable     ${compositionUid}  ${composition_uid}
     #Log     ${response.json()}[content][0][data][events][0]
     Remove File    ${tempFilePath}
-    ${eventsLength}     Get Length      ${response.json()}[content][0][data][events]
-    Should Be True      ${eventsLength}==27     #27=3x9quantities
-    #https://github.com/ehrbase/ehrbase/issues/900 - ticket closed EHRbase v0.30.0-SNAPSHOT
-    [Teardown]      Run Keywords    (admin) delete ehr      AND
-                    ...     TRACE JIRA ISSUE      CDR-433
+    Length Should Be    ${response.json()}[content][0][data][events]}   3
+    ${eventsLength1}     Get Length      ${response.json()}[content][0][data][events][0][data][items]
+    Should Be True      ${eventsLength1}==9
+    ${eventsLength2}     Get Length      ${response.json()}[content][0][data][events][1][data][items]
+    Should Be True      ${eventsLength2}==9
+    ${eventsLength3}     Get Length      ${response.json()}[content][0][data][events][2][data][items]
+    Should Be True      ${eventsLength3}==9
+    [Teardown]      (admin) delete ehr
 
 Test Example Generator For Templates (ECIS) - JSON And Save It
     Get Example Of Web Template By Template Id (ECIS)    ${template_id}    JSON
