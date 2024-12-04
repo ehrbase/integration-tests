@@ -64,12 +64,12 @@ Test Example Generator For Templates (ECIS) - JSON And Commit Composition
     ${template_id}      Set Variable    ${response.json()}[archetype_details][template_id][value]
     Set Test Variable     ${compositionUid}  ${composition_uid}
     Remove File    ${tempFilePath}
-    Length Should Be    ${response.json()}[content][0][data][events][0]}   3
-    ${eventsLength1}     Get Length      ${response.json()}[content][0][data][events][0][data][items][0]
+    Length Should Be    ${response.json()['content'][0]['data']['events']}   3
+    ${eventsLength1}     Get Length      ${response.json()['content'][0]['data']['events'][0]['data']['items']}
     Should Be True      ${eventsLength1}==9
-    ${eventsLength2}     Get Length      ${response.json()}[content][0][data][events][1][data][items][0]
+    ${eventsLength2}     Get Length      ${response.json()['content'][0]['data']['events'][1]['data']['items']}
     Should Be True      ${eventsLength2}==9
-    ${eventsLength3}     Get Length      ${response.json()}[content][0][data][events][2][data][items][0]
+    ${eventsLength3}     Get Length      ${response.json()['content'][0]['data']['events'][2]['data']['items']}
     Should Be True      ${eventsLength3}==9
     [Teardown]      (admin) delete ehr
 
