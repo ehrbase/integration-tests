@@ -26,10 +26,7 @@ Force Tags
 
 *** Test Cases ***
 Alternative flow: create directory with the same existing uid under another EHR
-    [Tags]      not-ready
     [Documentation]     Previously failing due to https://vitagroup-ag.atlassian.net/browse/CDR-1615
-    ## remove not-ready tag
-    ## when branch https://github.com/ehrbase/ehrbase/tree/refs/heads/feature/CDR-1615-Fix-dublicate-folder-vo_id is merged
     create EHR
     Set Test Variable   ${ehr_id1}  ${ehr_id}
     create DIRECTORY (JSON)    empty_directory_with_defined_uid.json     isModifiable=${TRUE}
