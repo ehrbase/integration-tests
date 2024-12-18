@@ -26,6 +26,8 @@ Force Tags
 
 *** Test Cases ***
 Alternative flow: create directory with the same existing uid under another EHR
+    # https://git.vitasystems.dev/pem/cdr-core/hip-ehrbase/-/merge_requests/83 should be merged to remove not-ready tag
+    [Tags]      not-ready
     [Documentation]     Previously failing due to https://vitagroup-ag.atlassian.net/browse/CDR-1615
     create EHR
     Set Test Variable   ${ehr_id1}  ${ehr_id}
