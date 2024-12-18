@@ -46,7 +46,7 @@ Suite Setup     Set Library Search Order For Tests
 
 1.c Query - Ad-Hoc Query POST - Query Params - MATCHES Multiple Values
     Set Test Variable       ${query_matches1}
-    ...     SELECT pe/time/value, s/name/value FROM EHR e CONTAINS COMPOSITION c CONTAINS SECTION s CONTAINS POINT_EVENT pe WHERE s/name/value MATCHES {'Section 1', 'Section 2'}
+    ...     SELECT pe/time/value, s/name/value FROM COMPOSITION c CONTAINS SECTION s CONTAINS POINT_EVENT pe WHERE s/name/value MATCHES {'Section 1', 'Section 2'}
     Set Test Variable       ${test_data}    {"q":"${query_matches1}"}
     Send Ad Hoc Request     aql_body=${test_data}
     Length Should Be    ${resp_body['rows']}    ${2}
@@ -156,7 +156,7 @@ Suite Setup     Set Library Search Order For Tests
 
 3. Query - Stored Query GET By Qualified Query Name And Version
     Set Test Variable      ${query3}
-    ...     SELECT c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    ...     SELECT c/uid/value, o/uid/value, p/time/value FROM COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
     ${resp_qualified_query_name_version}     PUT /definition/query/{qualified_query_name}/{version}
     ...     query_to_store=${query3}     format=text
     GET /query/{qualified_query_name}
@@ -169,7 +169,7 @@ Suite Setup     Set Library Search Order For Tests
 4. Query - Stored Query POST By Qualified Query Name
     [Documentation]     - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
     Set Test Variable      ${query4}
-    ...     SELECT o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    ...     SELECT o/uid/value, p/time/value FROM COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
     ${resp_qualified_query_name}     PUT /definition/query/{qualified_query_name}
     ...     query_to_store=${query4}     format=text
     ${resp_query}       POST /query/{qualified_query_name}
