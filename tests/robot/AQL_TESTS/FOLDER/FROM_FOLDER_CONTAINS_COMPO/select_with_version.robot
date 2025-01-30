@@ -47,7 +47,7 @@ Execute Query
     # Below is regexp to match with date in format 2025-01-30T15:28:45.348179+02:00
     FOR     ${INDEX}   IN RANGE     0   ${nr_of_results}
         Log     ${resp_body['rows'][${INDEX}][1]}
-        Should Match Regexp    ${resp_body['rows'][${INDEX}][1]}    ^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{5,6}[+-]\\d{2}:\\d{2}$
+        Run Keyword And Return Status   Should Match Regexp    ${resp_body['rows'][${INDEX}][1]}    ^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{5,6}[+-]\\d{2}:\\d{2}$
     END
     ${exclude_paths}	Create List    root['meta']     root['q']       root['rows'][0][1]      root['rows'][1][1]
     ...     root['rows'][2][1]      root['rows'][3][1]
