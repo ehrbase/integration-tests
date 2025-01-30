@@ -1,0 +1,38 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.3",
+		"_created": "2025-01-30T14:46:11.6377882+02:00",
+		"_executed_aql": "SELECT c/uid/value, cv0/commit_audit/time_committed/value FROM FOLDER f CONTAINS VERSION cv0[LATEST_VERSION] CONTAINS COMPOSITION c WHERE f/name/value = 'subfolder1'",
+		"resultsize": 4
+	},
+	"q": "SELECT c/uid/value, cv0/commit_audit/time_committed/value FROM FOLDER f CONTAINS VERSION cv0[LATEST_VERSION] CONTAINS COMPOSITION c WHERE f/name/value = 'subfolder1'",
+	"columns": [
+		{
+			"path": "c/uid/value",
+			"name": "#0"
+		},
+		{
+			"path": "cv0/commit_audit/time_committed/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"${c_uid1}::${system_id_with_tenant}::1",
+			"2025-01-30T14:46:10.908687+02:00"
+		],
+		[
+			"${c_uid2}::${system_id_with_tenant}::1",
+			"2025-01-30T14:46:11.082152+02:00"
+		],
+		[
+			"${c_uid3}::${system_id_with_tenant}::1",
+			"2025-01-30T14:46:11.373754+02:00"
+		],
+		[
+			"${c_uid4}::${system_id_with_tenant}::1",
+			"2025-01-30T14:46:11.227102+02:00"
+		]
+	]
+}
