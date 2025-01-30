@@ -3,7 +3,7 @@ Documentation   CHECK FOLDER CONTAINS COMPOSITION - Select with version
 ...         - Covers: https://github.com/ehrbase/conformance-testing-documentation/blob/main/FOLDER.md#select-with-version
 ...         - *Precondition:*
 ...         - 1. Upload OPT; 2. Create EHR;
-...         3. Create 4 compositions with conformance_ehrbase.de.v0_max.json and store their compo_ids;
+...         - 3. Create 4 compositions with conformance_ehrbase.de.v0_max.json and store their compo_ids;
 ...         - 4. Create Directory with folder_with_compositions.json;
 ...         - Send AQL query and compare response body with expected file content.
 ...         - *Postcondition:* Delete EHR using ADMIN endpoint.
