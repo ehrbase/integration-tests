@@ -7,6 +7,10 @@ Resource            ../_resources/keywords/admin_keywords.robot
 Suite Setup 		Set Library Search Order For Tests
 
 
+*** Variables ***
+${WEB TEMPLATES DATA SETS}     ${PROJECT_ROOT}${/}tests${/}robot${/}_resources${/}test_data_sets${/}valid_templates${/}expected_webtemplates
+
+
 *** Test Cases ***
 1. Create Template
     [Tags]      Positive
@@ -120,4 +124,58 @@ Suite Setup 		Set Library Search Order For Tests
     Upload OPT      all_types/test_event.opt
     Should Be Equal As Strings      ${response_code}    409
     Should Contain      ${response.text}      Operational template with this template ID already exists: test_event
+    [Teardown]      (admin) delete OPT
+
+13. Check Corona Anamnese Template Returned In Web Template Format
+    [Documentation]     Covers: https://vitagroup-ag.atlassian.net/browse/CDR-1780
+    [Tags]      Positive
+    Upload OPT      all_types/Corona_Anamnese.opt
+    Extract Template Id From OPT File
+    prepare new request session    webtemplate format
+    ...     Prefer=return=representation
+    ${resp}     GET On Session      ${SUT}    /definition/template/adl1.4/${template_id}
+                ...     expected_status=anything
+                ...     headers=${headers}
+                Should Be Equal As Strings   ${resp.status_code}   200
+    ${expected_result}      Set Variable    ${WEB TEMPLATES DATA SETS}/Corona_Anamnese_wt.json
+    ${diff}     compare json-string with json-file
+    ...     ${resp.json()}     ${expected_result}
+    ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
+    Should Be Empty    ${diff}    msg=DIFF DETECTED!
+    [Teardown]      (admin) delete OPT
+
+14. Check IPS Template Returned In Web Template Format
+    [Documentation]     Covers: https://vitagroup-ag.atlassian.net/browse/CDR-1780
+    [Tags]      Positive
+    Upload OPT      all_types/International_Patient_Summary.opt
+    Extract Template Id From OPT File
+    prepare new request session    webtemplate format
+    ...     Prefer=return=representation
+    ${resp}     GET On Session      ${SUT}    /definition/template/adl1.4/${template_id}
+                ...     expected_status=anything
+                ...     headers=${headers}
+                Should Be Equal As Strings   ${resp.status_code}   200
+    ${expected_result}      Set Variable    ${WEB TEMPLATES DATA SETS}/International_Patient_Summary_wt.json
+    ${diff}     compare json-string with json-file
+    ...     ${resp.json()}     ${expected_result}
+    ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
+    Should Be Empty    ${diff}    msg=DIFF DETECTED!
+    [Teardown]      (admin) delete OPT
+
+15. Check GECCO Template Returned In Web Template Format
+    [Documentation]     Covers: https://vitagroup-ag.atlassian.net/browse/CDR-1780
+    [Tags]      Positive
+    Upload OPT      all_types/GECCO_Serologischer_Befund.opt
+    Extract Template Id From OPT File
+    prepare new request session    webtemplate format
+    ...     Prefer=return=representation
+    ${resp}     GET On Session      ${SUT}    /definition/template/adl1.4/${template_id}
+                ...     expected_status=anything
+                ...     headers=${headers}
+                Should Be Equal As Strings   ${resp.status_code}   200
+    ${expected_result}      Set Variable    ${WEB TEMPLATES DATA SETS}/GECCO_Serologischer_Befund_wt.json
+    ${diff}     compare json-string with json-file
+    ...     ${resp.json()}     ${expected_result}
+    ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
+    Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      (admin) delete OPT

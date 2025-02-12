@@ -383,6 +383,12 @@ prepare new request session
                         Run Keyword If      $headers=='no headers'    set request headers
                         ...                 &{extra_headers}
 
+                        # case: webtemplate format
+                        Run Keyword If      $headers=='webtemplate format'    set request headers
+                        ...                 content=application/json
+                        ...                 accept=application/openehr.wt+json
+                        ...                 &{extra_headers}
+
                         # case: mixed cases like JSON/XML or XML/JSON can be added here!
 
 set request headers
