@@ -60,7 +60,7 @@ Main flow Sanity Tests for FLAT Compositions
     delete DIRECTORY (JSON)
     Status Should Be    204
 
-    (admin) delete ehr
+    #(admin) delete ehr
     #[Teardown]    restart SUT
 
 
@@ -97,7 +97,7 @@ Main flow Sanity Tests for Canonical JSON Compositions
     #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
     delete DIRECTORY (JSON)
-    (admin) delete ehr
+    #(admin) delete ehr
     #[Teardown]    restart SUT
 
 Main flow Sanity Tests for Canonical XML Compositions
@@ -139,7 +139,7 @@ Main flow Sanity Tests for Canonical XML Compositions
     Should Be Equal As Strings      ${response_code}    409
     Should Contain  ${response.text}
     ...     Operational template with this template ID already exists: nested.en.v1
-    [Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
+    #[Teardown]      Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
 
 *** Keywords ***
