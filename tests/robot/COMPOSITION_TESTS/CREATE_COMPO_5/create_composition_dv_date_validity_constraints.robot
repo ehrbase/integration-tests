@@ -132,7 +132,7 @@ Change XML Value And Save Back To New OPT
     Log     Modified C_DATE pattern value is = ${patternElementChanged.text}
     Should Be Equal As Strings    ${patternElementChanged.text}       ${c_date_pattern_value}
     Save Xml    ${xmlContent}   ${newOPTFile}
-    [return]    ${opt_temp_file}
+    RETURN    ${opt_temp_file}
 
 Admin Delete EHR
     [Documentation]     Delete EHR using ADMIN endpoint.

@@ -455,7 +455,7 @@ Commit Composition With Modified DV_INTERVAL<DV_COUNT> Values
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_INTERVAL<DV_COUNT> lower, upper, lower_unb, upper_unb, lower_incl, upper_incl
@@ -508,4 +508,4 @@ Change Json KeyValue and Save Back To File
     ${changedDvUpperIncl}   Get Value From Json     ${jsonContent}      ${dvUpperInclJsonPath}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}

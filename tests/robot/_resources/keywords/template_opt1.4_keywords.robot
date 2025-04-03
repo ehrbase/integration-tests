@@ -196,7 +196,7 @@ retrieve OPT by template_id
                         Should Be Equal As Strings   ${resp.status_code}   200
     ${xml}=             Parse Xml            ${resp.text}
                         Set Suite Variable    ${actual}    ${xml}
-    [Return]    ${xml}
+    RETURN    ${xml}
 
 
 verify content of OPT

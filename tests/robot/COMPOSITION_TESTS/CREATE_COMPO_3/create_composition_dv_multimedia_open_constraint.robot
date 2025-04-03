@@ -132,7 +132,7 @@ Commit Composition With Modified DV_MULTIMEDIA Code String And Size
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_MULTIMEDIA.code_string and DV_MULTIMEDIA.size values
@@ -177,4 +177,4 @@ Change Json KeyValue and Save Back To File
     ${changedDvMultimediaSize3}   Get Value From Json     ${jsonContent}      ${dvMultimediaSizeJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}

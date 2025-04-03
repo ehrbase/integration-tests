@@ -131,7 +131,7 @@ Commit Composition With Modified DV_ORDINAL Symbol And Value
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_ORDINAL Symbol And Value
@@ -179,10 +179,10 @@ Change Json KeyValue and Save Back To File
     ${changedDvOrdinalValue3}   Get Value From Json     ${jsonContent}      ${dvOrdinalValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}
 
 Prepare Dictionary To Be Added In DV_ORDINAL Symbol
     &{terminologyIdContent}		Create Dictionary	_type=TERMINOLOGY_ID	value=external
     &{definingCodeContent}		Create Dictionary	_type=CODE_PHRASE	terminology_id=${terminologyIdContent}		code_string=kg
     &{mainDict}     Create Dictionary   type=DV_CODED_TEXT      value=local::at0005		defining_code=${definingCodeContent}
-    [Return]        ${mainDict}
+    RETURN        ${mainDict}

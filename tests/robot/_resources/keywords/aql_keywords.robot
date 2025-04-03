@@ -289,7 +289,7 @@ Get EHR Status Time Committed
     ...     CONTAINS EHR_STATUS s
     ...     WHERE cv/uid/value = '${ehr_status_uid}'
     Set AQL And Execute Ad Hoc Query    ${query_to_get_time_committed}
-    [Return]    ${resp_body['rows'][0][0]}
+    RETURN    ${resp_body['rows'][0][0]}
 
 Get Composition Time Committed
     [Arguments]     ${composition_uid}
@@ -299,7 +299,7 @@ Get Composition Time Committed
     ...     CONTAINS COMPOSITION s
     ...     WHERE cv/uid/value = '${composition_uid}'
     Set AQL And Execute Ad Hoc Query    ${query_to_get_time_committed}
-    [Return]    ${resp_body['rows'][0][0]}
+    RETURN    ${resp_body['rows'][0][0]}
 
 Get Observation Time Committed
     [Arguments]     ${composition_uid}
@@ -309,7 +309,7 @@ Get Observation Time Committed
     ...     CONTAINS OBSERVATION s
     ...     WHERE cv/uid/value = '${composition_uid}'
     Set AQL And Execute Ad Hoc Query    ${query_to_get_time_committed}
-    [Return]    ${resp_body['rows'][0][0]}
+    RETURN    ${resp_body['rows'][0][0]}
 
 Commit Contribution For AQL
     [Arguments]     ${valid_test_data_set}
@@ -383,7 +383,7 @@ Set Debug Options In Dict
     Set Test Variable   ${dry_run}      ${dry_run}
     Set Test Variable   ${exec_sql}     ${exec_sql}
     Set Test Variable   ${query_plan}   ${query_plan}
-    [Return]        ${debug_headers}
+    RETURN        ${debug_headers}
 
 Get File And Replace Dynamic Vars In File And Store As String
     # Reads file identified by full path provided to test_data_file
@@ -393,4 +393,4 @@ Get File And Replace Dynamic Vars In File And Store As String
     ${json_str}     Get File     ${test_data_file}
     ${json_str_replaced}    Replace Variables   ${json_str}
     Log     ${json_str_replaced}
-    [return]    ${json_str_replaced}
+    RETURN    ${json_str_replaced}

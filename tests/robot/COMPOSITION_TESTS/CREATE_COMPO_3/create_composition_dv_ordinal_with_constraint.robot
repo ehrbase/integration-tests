@@ -129,7 +129,7 @@ Commit Composition With Modified DV_ORDINAL Symbol And Value
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_ORDINAL Symbol And Value
@@ -177,4 +177,4 @@ Change Json KeyValue and Save Back To File
     ${changedDvOrdinalValue3}   Get Value From Json     ${jsonContent}      ${dvOrdinalValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}

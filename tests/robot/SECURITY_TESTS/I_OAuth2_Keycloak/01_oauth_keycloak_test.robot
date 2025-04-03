@@ -615,11 +615,11 @@ Set EHR Subject Id To Be Patient Id
     ${subject_id}=      Set Variable    ${patient_id}
     ${body}=            Load JSON From File    ${EXECDIR}/robot/_resources/test_data_sets/ehr/${test_data_set}
     ${body}=            Update Value To Json    ${body}  $..subject.external_ref.id.value  ${subject_id}
-    [RETURN]            ${body}
+    RETURN            ${body}
 
 generate random id
     ${uuid}=            Set Variable    ${{str(uuid.uuid4())}}
-    [RETURN]            ${uuid}
+    RETURN            ${uuid}
 
 Upload OPTs
     Upload OPT    all_types/Corona_Anamnese.opt

@@ -394,7 +394,7 @@ Commit Composition With Modified DV_PROPORTION Values Open Constraint
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_PROPORTION type, numerator, denominator
@@ -425,4 +425,4 @@ Change Json KeyValue and Save Back To File
     ${changedTypeValue}   Get Value From Json     ${jsonContent}      ${denominatorValueJsonPath}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}

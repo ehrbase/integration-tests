@@ -68,7 +68,7 @@ CircleCI Cache Restored
     ${cache_exists}     Set Variable If    ${db_cache_exists} and ${exp_results_1} and ${exp_results_2}    ${TRUE}    ${FALSE}
                         Set Global Variable    ${CACHE_EXISTS}    ${cache_exists}
     
-    [Return]            ${cache_exists}
+    RETURN            ${cache_exists}
 
 Establish Preconditions
     # comment: WHEN TEST-DATA HAS NOT CHANGED RESTORE DB FROM DUMP (IF CACHE EXISTS) AND SKIP REST OF THIS KW!
@@ -306,7 +306,7 @@ PUT /definition/query/{qualified_query_name}
                 IF      '${format}' == 'json'
                     Set Test Variable       ${resp}     ${resp.json()}
                 END
-    [Return]    ${random_query_qualified_name}
+    RETURN    ${random_query_qualified_name}
 
 PUT /definition/query/{qualified_query_name}/{version}
     [Documentation]     Send PUT AQL to store query.
@@ -347,7 +347,7 @@ PUT /definition/query/{qualified_query_name}/{version}
                 IF      '${format}' == 'json'
                     Set Test Variable       ${resp}     ${resp.json()}
                 END
-    [Return]    ${qualif_query_name_and_version}
+    RETURN    ${qualif_query_name_and_version}
 
 GET /definition/query/{qualified_query_name} / including {version}
     [Documentation]     Get stored AQL from EHRBase.
@@ -389,7 +389,7 @@ GET /definition/query
     ...         headers=${headers}
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
-    [return]    ${resp}
+    RETURN    ${resp}
 
 DELETE /definition/query/{qualified_query_name}/{version}
     [Documentation]     Delete stored AQL from EHRBase using its qualified_query_name/version.
@@ -466,7 +466,7 @@ PUT AQL Query With Qualified Name And Version Multitenancy
                 IF      '${format}' == 'json'
                     Set Test Variable       ${resp}     ${resp.json()}
                 END
-    [Return]    ${qualif_query_name_and_version}
+    RETURN    ${qualif_query_name_and_version}
 
 Get AQL Stored Query Using Qualified Name And Version Multitenancy
     [Documentation]     Get stored AQL from EHRBase.
@@ -491,17 +491,17 @@ Get AQL Stored Query Using Qualified Name And Version Multitenancy
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
                 Set Test Variable       ${resp_query}   ${resp['q']}
-    [Return]    ${resp_query}
+    RETURN    ${resp_query}
 
 Generate Version Number To Store Query Multitenancy
     ${part1}    Generate Random String	    1   [NUMBERS]
     ${part2}    Generate Random String	    1   [NUMBERS]
     ${part3}    Generate Random String	    1   [NUMBERS]
-    [Return]    ${part1}.${part2}.${part3}
+    RETURN    ${part1}.${part2}.${part3}
 
 Generate Qualified Query Name To Store Query Multitenancy
     ${qualified_name_extension}    Generate Random String   4   [LOWER]
-    [Return]    org.openehr.${qualified_name_extension}::compositions
+    RETURN    org.openehr.${qualified_name_extension}::compositions
 
 # oooo            .       .                                            .
 # `888          .o8     .o8                                          .o8
@@ -522,7 +522,7 @@ GET /query/{qualified_query_name}
     ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
     ...                 Expected status code 200.
     ...                 Returns {resp}, with query and rows from response.
-    [Arguments]     ${qualif_name}      &{params}=${FALSE}      ${req_headers}=default
+    [Arguments]     ${qualif_name}      ${params}=${FALSE}      ${req_headers}=default
     IF      '''${req_headers}''' != '''default'''
         #${req_headers} should contain data in dictionary format
         &{headers}      Set Variable    ${req_headers}
@@ -547,7 +547,7 @@ GET /query/{qualified_query_name}
     END
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
-    [Return]    ${resp}
+    RETURN    ${resp}
 
 POST /query/{qualified_query_name}
     [Documentation]     Execute through POST stored AQL from EHRBase, using below endpoint:
@@ -572,7 +572,7 @@ POST /query/{qualified_query_name}
     ...         headers=${headers}
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
-    [Return]    ${resp}
+    RETURN    ${resp}
 
 GET /query/{qualified_query_name}/?ehr_id
     No Operation
@@ -591,7 +591,7 @@ GET /query/{qualified_query_name}/{version}
     ...                 {qualif_name} must have the following format: {qualified_query_name}/{version}
     ...                 Expected status code 200.
     ...                 Returns {resp}, with query and rows from response.
-    [Arguments]     ${qualif_name}      &{params}=${FALSE}
+    [Arguments]     ${qualif_name}      ${params}=${FALSE}
     &{headers}      Create Dictionary       Content-Type=application/json
     IF      '${AUTH_TYPE}' == 'BASIC'
         Set To Dictionary       ${headers}      &{authorization}
@@ -611,7 +611,7 @@ GET /query/{qualified_query_name}/{version}
     END
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
-    [Return]    ${resp}
+    RETURN    ${resp}
 
 POST /query/{qualified_query_name}/{version}
     [Documentation]     Execute through POST stored AQL from EHRBase, using below endpoint:
@@ -632,7 +632,7 @@ POST /query/{qualified_query_name}/{version}
     ...         headers=${headers}
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
-    [Return]    ${resp}
+    RETURN    ${resp}
 
 DELETE /query/{qualified_query_name}/{version} ADMIN
     [Documentation]     Execute through POST stored AQL from EHRBase, using below endpoint:

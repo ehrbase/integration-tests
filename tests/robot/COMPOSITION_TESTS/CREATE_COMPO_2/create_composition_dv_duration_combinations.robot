@@ -115,4 +115,4 @@ Change Json KeyValue and Save Back To File
     Should Be Equal As Strings     ${changedDvDurationValue[0]}   ${valueToUpdate}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}    ${json_str}
-    [return]    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}
+    RETURN    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}

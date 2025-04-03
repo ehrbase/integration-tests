@@ -106,4 +106,4 @@ Change Json KeyValue and Save Back To File
     Should Be Equal     ${changedDvDateTimeValue[0]}   ${valueToUpdate}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}

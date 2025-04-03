@@ -205,7 +205,7 @@ Commit Composition With Modified Code_String And Terminology_Id Value
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]        ${isStatusCodeEqual}
+    RETURN        ${isStatusCodeEqual}
     [Teardown]     Remove File      ${returnedJsonFile}
 
 Change Json KeyValue and Save Back To File
@@ -254,4 +254,4 @@ Change Json KeyValue and Save Back To File
     ${changedTerminologyIdValue3}   Get Value From Json     ${jsonContent}      ${terminologyIdValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}    ${json_str}
-    [return]    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}
+    RETURN    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}

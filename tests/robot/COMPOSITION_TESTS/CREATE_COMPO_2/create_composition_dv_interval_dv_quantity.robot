@@ -256,7 +256,7 @@ Commit Composition With Modified DV_INTERVAL<DV_QUANTITY> Values
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]        ${isStatusCodeEqual}
+    RETURN        ${isStatusCodeEqual}
     [Teardown]      Remove File     ${returnedJsonFile}
 
 Change Json KeyValue and Save Back To File
@@ -322,7 +322,7 @@ Change Json KeyValue and Save Back To File
     ${changedDvUpperIncl}   Get Value From Json     ${jsonContent}      ${dvUpperInclJsonPath}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}    ${json_str}
-    [return]    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}
+    RETURN    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}
 
 
 ### Below cases are not valid as NULL value is not possible on DV_QUANTITY.magnitude

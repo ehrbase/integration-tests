@@ -819,13 +819,13 @@ randomize subject_id in test-data-set
     ${subject_id}=      generate random id
     ${body}=            Load JSON From File    ${EXECDIR}/robot/_resources/test_data_sets/ehr/${test_data_set}
     ${body}=            Update Value To Json    ${body}  $..subject.external_ref.id.value  ${subject_id}
-    [RETURN]            ${body}
+    RETURN            ${body}
 
 
 generate random id
     # ${uuid}=            Evaluate    str(uuid.uuid4())    uuid
     ${uuid}=            Set Variable    ${{str(uuid.uuid4())}}
-    [RETURN]            ${uuid}
+    RETURN            ${uuid}
 
 
 POST /ehr
@@ -847,7 +847,7 @@ PUT /ehr/ehr_id
                         Set Test Variable   ${response}     ${response}
                         Run Keyword And Return Status
                         ...     Set Test Variable   ${ehr_id}       ${response.json()['ehr_id']['value']}
-    # [RETURN]            ${response}
+    # RETURN            ${response}
 
 
 check response

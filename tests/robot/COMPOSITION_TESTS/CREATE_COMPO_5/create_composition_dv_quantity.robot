@@ -524,7 +524,7 @@ Commit Composition With Modified DV_QUANTITY Units And Magnitude Values
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_QUANTITY Units And Magnitude
@@ -572,4 +572,4 @@ Change Json KeyValue and Save Back To File
     ${changedMagnitudeValue3}   Get Value From Json     ${jsonContent}      ${magnitudeValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}

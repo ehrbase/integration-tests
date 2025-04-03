@@ -85,7 +85,7 @@ ApplyJSONLocatorAndReturnResult
     ...     $.webTemplate.tree.children[?(@.id='tobacco_smoking_summary')].children[?(@.id='${children_id_with_annotation}')].annotations.${annotation_key}
     ${lenReturnValue}   Get Length  ${returnValue}
     Should Be True      ${lenReturnValue} > 0
-    [Return]    ${returnValue}
+    RETURN    ${returnValue}
 
 PerformChecksOnAnnotation
     [Documentation]     Store JSON Path evaluation to variables.

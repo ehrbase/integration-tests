@@ -129,7 +129,7 @@ Change XML Value And Save Back To New OPT
     Log     Modified C_DURATION pattern value is = ${patternElementChanged.text}
     Should Be Equal As Strings    ${patternElementChanged.text}       ${valueToUpdate}
     Save Xml    ${xmlContent}   ${newOPTFile}
-    [return]    minimal/newly_generated_file.opt
+    RETURN    minimal/newly_generated_file.opt
 
 Admin Delete EHR
     [Documentation]     Delete EHR using ADMIN endpoint.
