@@ -194,39 +194,39 @@ Compose Slack Message
     # ${build_url}        Get Value From Json    ${file}  $.['blocks'][?(@.block_id == 'actions')]['elements'][?(@.action_id == 'build')]['url']
 
     # update image title
-                    Update Value To Json    ${file}
+    ${file}         Update Value To Json    ${file}
                     ...    $.['blocks'][?(@.block_id == 'image')]['title']['text']
                     ...    ${CIRCLE_PROJECT_REPONAME} | branch: ${CIRCLE_BRANCH} | :${EMOJI}:
 
     # update image_url with direct_link
-                    Update Value To Json    ${file}
+    ${file}         Update Value To Json    ${file}
                     ...    $.['blocks'][?(@.block_id == 'image')]['image_url']
                     ...    ${direct_link}
 
     # update dashboard, report and log urls
-                    Update Value To Json    ${file}
+    ${file}         Update Value To Json    ${file}
                     ...     $.['blocks'][?(@.block_id == 'actions')]['elements'][?(@.action_id == 'dash')]['url']
                     ...     https://${CIRCLE_BUILD_NUM}-${VCS_ID}-bb.circle-artifacts.com/0/home/circleci/project/tests/results/metrics.html
 
-                    Update Value To Json    ${file}
+    ${file}         Update Value To Json    ${file}
                     ...    $.['blocks'][?(@.block_id == 'actions')]['elements'][?(@.action_id == 'report')]['url']
                     ...    https://${CIRCLE_BUILD_NUM}-${VCS_ID}-bb.circle-artifacts.com/0/home/circleci/project/tests/results/report.html
 
-                    Update Value To Json    ${file}
+    ${file}         Update Value To Json    ${file}
                     ...    $.['blocks'][?(@.block_id == 'actions')]['elements'][?(@.action_id == 'log')]['url']
                     ...    https://${CIRCLE_BUILD_NUM}-${VCS_ID}-bb.circle-artifacts.com/0/home/circleci/project/tests/results/log.html
 
-                    Update Value To Json    ${file}
+    ${file}         Update Value To Json    ${file}
                     ...    $.['blocks'][?(@.block_id == 'actions')]['elements'][?(@.action_id == 'flow')]['url']
                     ...    https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}
-                    Update Value To Json    ${file}
+    ${file}         Update Value To Json    ${file}
                     ...    $.['blocks'][?(@.block_id == 'actions')]['elements'][?(@.action_id == 'flow')]['style']
                     ...    ${BUTTONSTYLE}
 
-                    Update Value To Json    ${file}
+    ${file}         Update Value To Json    ${file}
                     ...    $.['blocks'][?(@.block_id == 'actions')]['elements'][?(@.action_id == 'build')]['url']
                     ...    ${CIRCLE_BUILD_URL}
-                    Update Value To Json    ${file}
+    ${file}         Update Value To Json    ${file}
                     ...    $.['blocks'][?(@.block_id == 'actions')]['elements'][?(@.action_id == 'build')]['style']
                     ...    ${BUTTONSTYLE}
 

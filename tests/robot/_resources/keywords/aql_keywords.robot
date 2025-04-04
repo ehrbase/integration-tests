@@ -175,9 +175,9 @@ Create EHR For AQL
     prepare new request session    JSON      Prefer=return=representation
     IF      '${ehr_id}' != '${NONE}'
         ${ehr_status_json}  Load JSON From File     ${EHR_DATA_SETS}/000_ehr_status_with_other_details.json
-        Update Value To Json    ${ehr_status_json}    $.subject.external_ref.id.value
+        ${ehr_status_json}  Update Value To Json    ${ehr_status_json}    $.subject.external_ref.id.value
         ...    ${{str(uuid.uuid4())}}
-        Update Value To Json    ${ehr_status_json}    $.subject.external_ref.namespace
+        ${ehr_status_json}  Update Value To Json    ${ehr_status_json}    $.subject.external_ref.namespace
         ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
         create new EHR by ID    ehr_id=${ehr_id}   ehr_status_json=${ehr_status_json}
     ELSE

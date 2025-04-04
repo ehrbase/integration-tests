@@ -172,9 +172,9 @@ Create EHR With Subject External Ref With Multitenant Token
     [Arguments]     ${encodedToken}     ${ehr_status_obj}=${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
     Create Session For EHR With Headers For Multitenancy With Bearer Token      ${encodedToken}
     ${ehr_status_json}  Load JSON From File    ${ehr_status_obj}
-                        Update Value To Json    ${ehr_status_json}    $.subject.external_ref.id.value
-                        ...    ${{str(uuid.uuid4())}}
-                        Update Value To Json    ${ehr_status_json}    $.subject.external_ref.namespace
+    ${ehr_status_json}     Update Value To Json     ${ehr_status_json}    $.subject.external_ref.id.value
+                                    ...    ${{str(uuid.uuid4())}}
+    ${ehr_status_json}     Update Value To Json    ${ehr_status_json}     $.subject.external_ref.namespace
                         ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
     ${resp}             POST on session     ${SUT}    /ehr      json=${ehr_status_json}
     ...         expected_status=anything        headers=${headers}
@@ -307,10 +307,10 @@ create new EHR with ehr_status
     ...                 :ehr_status_object: ehr_status_as_json_file
 
     ${ehr_status_json}  Load JSON From File    ${ehr_status_object}
-                        Update Value To Json    ${ehr_status_json}    $.subject.external_ref.id.value
+    ${ehr_status_json}  Update Value To Json    ${ehr_status_json}    $.subject.external_ref.id.value
                         ...    ${{str(uuid.uuid4())}}
 
-                        Update Value To Json    ${ehr_status_json}    $.subject.external_ref.namespace
+    ${ehr_status_json}  Update Value To Json    ${ehr_status_json}    $.subject.external_ref.namespace
                         ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
 
     Create Session      ${SUT}    ${BASEURL}    debug=2
@@ -355,8 +355,8 @@ create new EHR by ID
 create new EHR for subject_id (JSON)
     [Arguments]         ${subject_id}
     ${ehr_status_json}  Load JSON From File   ${VALID EHR DATA SETS}/000_ehr_status.json
-                        Update Value To Json  ${ehr_status_json}   $.subject.external_ref.id.value
-                        ...                   ${subject_id}
+    ${ehr_status_json}  Update Value To Json  ${ehr_status_json}   $.subject.external_ref.id.value
+                        ...     ${subject_id}
 
     ${resp}             POST On Session     ${SUT}      /ehr    json=${ehr_status_json}
                         ...     expected_status=anything    headers=${headers}
@@ -367,8 +367,8 @@ create new EHR with subject_id (JSON)
 
                         generate random subject_id
     ${ehr_status_json}  Load JSON From File   ${VALID EHR DATA SETS}/000_ehr_status.json
-                        Update Value To Json  ${ehr_status_json}   $.subject.external_ref.id.value
-                        ...                   ${subject_id}
+    ${ehr_status_json}      Update Value To Json    ${ehr_status_json}      $.subject.external_ref.id.value
+                            ...     ${subject_id}
 
     ${resp}             POST On Session     ${SUT}      /ehr    json=${ehr_status_json}
                         ...     expected_status=anything    headers=${headers}
@@ -397,8 +397,8 @@ create new EHR can't be modified
     generate random subject_id
 
     ${ehr_status_json}  Load JSON From File   ${VALID EHR DATA SETS}/ehr_can_not_be_modifyable.json
-                        Update Value To Json  ${ehr_status_json}   $.subject.external_ref.id.value
-                        ...                   ${subject_id}
+    ${ehr_status_json}  Update Value To Json  ${ehr_status_json}   $.subject.external_ref.id.value
+                        ...     ${subject_id}
 
     ${resp}     POST On Session     ${SUT}    /ehr      json=${ehr_status_json}
                 ...     expected_status=anything        headers=${headers}
