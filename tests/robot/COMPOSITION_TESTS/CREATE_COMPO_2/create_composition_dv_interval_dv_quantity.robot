@@ -293,33 +293,33 @@ Change Json KeyValue and Save Back To File
     ${json_object}          Update Value To Json	json_object=${jsonContent}
     ...             json_path=${dvLowerJsonPath}
     ...             new_value=${dvLowerToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvLowerUnitsJsonPath}
     ...             new_value=${dvIntervalQuantityUnitsToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvUpperJsonPath}
     ...             new_value=${dvUpperToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvUpperUnitsJsonPath}
     ...             new_value=${dvIntervalQuantityUnitsToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvLowerUnbJsonPath}
     ...             new_value=${dvLowerUnbToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvUpperUnbJsonPath}
     ...             new_value=${dvUpperUnbToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvLowerInclJsonPath}
     ...             new_value=${dvLowerInclToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvUpperInclJsonPath}
     ...             new_value=${dvUpperInclToUpdate}
-    ${changedDvLower}   Get Value From Json     ${jsonContent}      ${dvLowerJsonPath}
-    ${changedDvUpper}   Get Value From Json     ${jsonContent}      ${dvUpperJsonPath}
-    ${changedDvLowerUnb}   Get Value From Json      ${jsonContent}      ${dvLowerUnbJsonPath}
-    ${changedDvUpperUnb}   Get Value From Json      ${jsonContent}      ${dvUpperUnbJsonPath}
-    ${changedDvLowerIncl}   Get Value From Json     ${jsonContent}      ${dvLowerInclJsonPath}
-    ${changedDvUpperIncl}   Get Value From Json     ${jsonContent}      ${dvUpperInclJsonPath}
+    ${changedDvLower}   Get Value From Json     ${json_object}      ${dvLowerJsonPath}
+    ${changedDvUpper}   Get Value From Json     ${json_object}      ${dvUpperJsonPath}
+    ${changedDvLowerUnb}   Get Value From Json      ${json_object}      ${dvLowerUnbJsonPath}
+    ${changedDvUpperUnb}   Get Value From Json      ${json_object}      ${dvUpperUnbJsonPath}
+    ${changedDvLowerIncl}   Get Value From Json     ${json_object}      ${dvLowerInclJsonPath}
+    ${changedDvUpperIncl}   Get Value From Json     ${json_object}      ${dvUpperInclJsonPath}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}    ${json_str}
     RETURN    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}

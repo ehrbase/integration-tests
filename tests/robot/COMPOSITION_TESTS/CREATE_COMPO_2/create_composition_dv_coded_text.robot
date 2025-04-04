@@ -231,27 +231,27 @@ Change Json KeyValue and Save Back To File
     ${json_object}          Update Value To Json	json_object=${jsonContent}
     ...             json_path=${codeStringValueJsonPath1}
     ...             new_value=${codeStringValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${codeStringValueJsonPath2}
     ...             new_value=${codeStringValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${codeStringValueJsonPath3}
     ...             new_value=${codeStringValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${terminologyIdValueJsonPath1}
     ...             new_value=${terminologyIdValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${terminologyIdValueJsonPath2}
     ...             new_value=${terminologyIdValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${terminologyIdValueJsonPath3}
     ...             new_value=${terminologyIdValueToUpdate}
-    ${changedCodeStringValue1}   Get Value From Json     ${jsonContent}      ${codeStringValueJsonPath1}
-    ${changedCodeStringValue2}   Get Value From Json     ${jsonContent}      ${codeStringValueJsonPath2}
-    ${changedCodeStringValue3}   Get Value From Json     ${jsonContent}      ${codeStringValueJsonPath3}
-    ${changedTerminologyIdValue1}   Get Value From Json     ${jsonContent}      ${terminologyIdValueJsonPath1}
-    ${changedTerminologyIdValue2}   Get Value From Json     ${jsonContent}      ${terminologyIdValueJsonPath2}
-    ${changedTerminologyIdValue3}   Get Value From Json     ${jsonContent}      ${terminologyIdValueJsonPath3}
+    ${changedCodeStringValue1}   Get Value From Json     ${json_object}      ${codeStringValueJsonPath1}
+    ${changedCodeStringValue2}   Get Value From Json     ${json_object}      ${codeStringValueJsonPath2}
+    ${changedCodeStringValue3}   Get Value From Json     ${json_object}      ${codeStringValueJsonPath3}
+    ${changedTerminologyIdValue1}   Get Value From Json     ${json_object}      ${terminologyIdValueJsonPath1}
+    ${changedTerminologyIdValue2}   Get Value From Json     ${json_object}      ${terminologyIdValueJsonPath2}
+    ${changedTerminologyIdValue3}   Get Value From Json     ${json_object}      ${terminologyIdValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}    ${json_str}
     RETURN    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}
