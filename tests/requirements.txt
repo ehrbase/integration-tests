@@ -1,4 +1,4 @@
-robotframework == 7.2.2
+robotframework == 7.2.1
 tzlocal == 5.3.1
 
 robotframework-jsonlibrary == 0.5
