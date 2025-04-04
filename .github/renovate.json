@@ -1,0 +1,12 @@
+{
+  "extends": ["config:recommended"],
+  "pip_requirements": {
+    "fileMatch": ["^tests/requirements\\.txt$"]
+  },
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["robotframework"],
+      "groupName": "robotframework libraries"
+    }
+  ]
+}
