@@ -468,7 +468,7 @@ retrieve EHR by subject_id
     &{prms}=            Create Dictionary   subject_id=${subject_id}
                         ...     subject_namespace=${subject_namespace}
 
-    ${resp}=            R.GET On Session      ${SUT}      /ehr    params=${prms}
+    ${resp}=            GET On Session      ${SUT}      /ehr    params=${prms}
                         ...     expected_status=anything        headers=${headers}
                         Status Should Be    200
 
