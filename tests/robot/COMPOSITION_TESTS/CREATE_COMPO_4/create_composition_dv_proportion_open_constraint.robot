@@ -414,15 +414,15 @@ Change Json KeyValue and Save Back To File
     ${json_object}          Update Value To Json	json_object=${jsonContent}
     ...             json_path=${typeValueJsonPath}
     ...             new_value=${typeValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${numeratorValueJsonPath}
     ...             new_value=${numeratorValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${denominatorValueJsonPath}
     ...             new_value=${denominatorValueToUpdate}
-    ${changedTypeValue}   Get Value From Json     ${jsonContent}      ${typeValueJsonPath}
-    ${changedTypeValue}   Get Value From Json     ${jsonContent}      ${numeratorValueJsonPath}
-    ${changedTypeValue}   Get Value From Json     ${jsonContent}      ${denominatorValueJsonPath}
+    ${changedTypeValue}   Get Value From Json     ${json_object}      ${typeValueJsonPath}
+    ${changedTypeValue}   Get Value From Json     ${json_object}      ${numeratorValueJsonPath}
+    ${changedTypeValue}   Get Value From Json     ${json_object}      ${denominatorValueJsonPath}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
     RETURN    ${compositionFilePath}

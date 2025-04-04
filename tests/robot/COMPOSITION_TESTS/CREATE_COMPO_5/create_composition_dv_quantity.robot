@@ -549,27 +549,27 @@ Change Json KeyValue and Save Back To File
     ${json_object}          Update Value To Json	json_object=${jsonContent}
     ...             json_path=${unitsValueJsonPath1}
     ...             new_value=${unitsValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${unitsValueJsonPath2}
     ...             new_value=${unitsValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${unitsValueJsonPath3}
     ...             new_value=${unitsValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${magnitudeValueJsonPath1}
     ...             new_value=${magnitudeValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${magnitudeValueJsonPath2}
     ...             new_value=${magnitudeValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${magnitudeValueJsonPath3}
     ...             new_value=${magnitudeValueToUpdate}
-    ${changedUnitsValue1}   Get Value From Json     ${jsonContent}      ${unitsValueJsonPath1}
-    ${changedUnitsValue2}   Get Value From Json     ${jsonContent}      ${unitsValueJsonPath2}
-    ${changedUnitsValue3}   Get Value From Json     ${jsonContent}      ${unitsValueJsonPath3}
-    ${changedMagnitudeValue1}   Get Value From Json     ${jsonContent}      ${magnitudeValueJsonPath1}
-    ${changedMagnitudeValue2}   Get Value From Json     ${jsonContent}      ${magnitudeValueJsonPath2}
-    ${changedMagnitudeValue3}   Get Value From Json     ${jsonContent}      ${magnitudeValueJsonPath3}
+    ${changedUnitsValue1}   Get Value From Json     ${json_object}      ${unitsValueJsonPath1}
+    ${changedUnitsValue2}   Get Value From Json     ${json_object}      ${unitsValueJsonPath2}
+    ${changedUnitsValue3}   Get Value From Json     ${json_object}      ${unitsValueJsonPath3}
+    ${changedMagnitudeValue1}   Get Value From Json     ${json_object}      ${magnitudeValueJsonPath1}
+    ${changedMagnitudeValue2}   Get Value From Json     ${json_object}      ${magnitudeValueJsonPath2}
+    ${changedMagnitudeValue3}   Get Value From Json     ${json_object}      ${magnitudeValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
     RETURN    ${compositionFilePath}

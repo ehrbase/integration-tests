@@ -110,7 +110,7 @@ Change Json KeyValue And Save Back To File
     ${objPath}      Set Variable        $.content[0].data.events[0].data.items[5].value.value
     ${json_object}          Update Value To Json	${jsonContent}
     ...             ${objPath}        ${valueToUpdate}
-    ${json_object}          Update Value To Json	${jsonContent}
+    ${json_object}          Update Value To Json	${json_object}
     ...             $.content[2].items[0].items[0].items[0].activities[0].description.items[0].value.value
     ...             ${valueToUpdate}
     ${json_str}     Convert JSON To String    ${json_object}
