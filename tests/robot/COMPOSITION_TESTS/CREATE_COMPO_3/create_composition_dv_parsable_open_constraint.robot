@@ -151,28 +151,28 @@ Change Json KeyValue and Save Back To File
     ${json_object}          Update Value To Json	json_object=${jsonContent}
     ...             json_path=${dvParsableValueJsonPath1}
     ...             new_value=${dvParsableValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvParsableValueJsonPath2}
     ...             new_value=${dvParsableValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvParsableValueJsonPath3}
     ...             new_value=${dvParsableValueToUpdate}
     ####
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvParsableFormalismJsonPath1}
     ...             new_value=${dvParsableFormalismToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvParsableFormalismJsonPath2}
     ...             new_value=${dvParsableFormalismToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvParsableFormalismJsonPath3}
     ...             new_value=${dvParsableFormalismToUpdate}
-    ${changedDvParsableValue1}   Get Value From Json     ${jsonContent}      ${dvParsableValueJsonPath1}
-    ${changedDvParsableValue2}   Get Value From Json     ${jsonContent}      ${dvParsableValueJsonPath2}
-    ${changedDvParsableValue3}   Get Value From Json     ${jsonContent}      ${dvParsableValueJsonPath3}
-    ${changedDvParsableFormalism1}   Get Value From Json     ${jsonContent}      ${dvParsableFormalismJsonPath1}
-    ${changedDvParsableFormalism2}   Get Value From Json     ${jsonContent}      ${dvParsableFormalismJsonPath2}
-    ${changedDvParsableFormalism3}   Get Value From Json     ${jsonContent}      ${dvParsableFormalismJsonPath3}
+    ${changedDvParsableValue1}   Get Value From Json     ${json_object}      ${dvParsableValueJsonPath1}
+    ${changedDvParsableValue2}   Get Value From Json     ${json_object}      ${dvParsableValueJsonPath2}
+    ${changedDvParsableValue3}   Get Value From Json     ${json_object}      ${dvParsableValueJsonPath3}
+    ${changedDvParsableFormalism1}   Get Value From Json     ${json_object}      ${dvParsableFormalismJsonPath1}
+    ${changedDvParsableFormalism2}   Get Value From Json     ${json_object}      ${dvParsableFormalismJsonPath2}
+    ${changedDvParsableFormalism3}   Get Value From Json     ${json_object}      ${dvParsableFormalismJsonPath3}
     #Should Be Equal     ${changedDvDateTimeValue[0]}   ${valueToUpdate}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}

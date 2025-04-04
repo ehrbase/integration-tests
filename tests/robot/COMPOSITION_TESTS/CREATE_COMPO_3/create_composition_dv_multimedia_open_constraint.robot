@@ -154,27 +154,27 @@ Change Json KeyValue and Save Back To File
     ${json_object}          Update Value To Json	json_object=${jsonContent}
     ...             json_path=${dvMultimediaCodeStringJsonPath1}
     ...             new_value=${dvMultimediaCodeStringToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvMultimediaCodeStringJsonPath2}
     ...             new_value=${dvMultimediaCodeStringToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvMultimediaCodeStringJsonPath3}
     ...             new_value=${dvMultimediaCodeStringToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvMultimediaSizeJsonPath1}
     ...             new_value=${dvMultimediaSizeToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvMultimediaSizeJsonPath2}
     ...             new_value=${dvMultimediaSizeToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvMultimediaSizeJsonPath3}
     ...             new_value=${dvMultimediaSizeToUpdate}
-    ${changedDvMultimediaCodeString1}   Get Value From Json     ${jsonContent}      ${dvMultimediaCodeStringJsonPath1}
-    ${changedDvMultimediaCodeString2}   Get Value From Json     ${jsonContent}      ${dvMultimediaCodeStringJsonPath2}
-    ${changedDvMultimediaCodeString3}   Get Value From Json     ${jsonContent}      ${dvMultimediaCodeStringJsonPath3}
-    ${changedDvMultimediaSize1}   Get Value From Json     ${jsonContent}      ${dvMultimediaSizeJsonPath1}
-    ${changedDvMultimediaSize2}   Get Value From Json     ${jsonContent}      ${dvMultimediaSizeJsonPath2}
-    ${changedDvMultimediaSize3}   Get Value From Json     ${jsonContent}      ${dvMultimediaSizeJsonPath3}
+    ${changedDvMultimediaCodeString1}   Get Value From Json     ${json_object}      ${dvMultimediaCodeStringJsonPath1}
+    ${changedDvMultimediaCodeString2}   Get Value From Json     ${json_object}      ${dvMultimediaCodeStringJsonPath2}
+    ${changedDvMultimediaCodeString3}   Get Value From Json     ${json_object}      ${dvMultimediaCodeStringJsonPath3}
+    ${changedDvMultimediaSize1}   Get Value From Json     ${json_object}      ${dvMultimediaSizeJsonPath1}
+    ${changedDvMultimediaSize2}   Get Value From Json     ${json_object}      ${dvMultimediaSizeJsonPath2}
+    ${changedDvMultimediaSize3}   Get Value From Json     ${json_object}      ${dvMultimediaSizeJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
     RETURN    ${compositionFilePath}
