@@ -645,10 +645,10 @@ compose ehr payload
         ${payload}=    randomize subject_id in test-data-set    valid/000_ehr_status_with_other_details.json
     END
 
-    ${payload=}     Update Value To Json    ${payload}  $.is_modifiable    ${modifiable}
-    ${payload}=     Update Value To Json    ${payload}  $.is_queryable    ${queryable}
-                    Output    ${payload}
-                    Set Test Variable    ${payload}    ${payload}
+    ${payload}      Update Value To Json    ${payload}      $.is_modifiable     ${modifiable}
+    ${payload}      Update Value To Json    ${payload}      $.is_queryable      ${queryable}
+                    Output      ${payload}
+                    Set Test Variable       ${payload}      ${payload}
 
 
 create ehr
