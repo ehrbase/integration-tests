@@ -628,7 +628,8 @@ Create EHR From Valid Data Set
                     prepare new request session    Prefer=return=representation
                     compose ehr payload    ${No.}    ${other_details}    ${modifiable}    ${queryable}
                     create ehr    ${ehrid}
-                    validate response    ${No.}  ${queryable}    ${modifiable}    ${subject}   ${other_details}    ${ehrid}
+                    validate response   ${No.}          ${queryable}        ${modifiable}
+                    ...                 ${subject}      ${other_details}    ${ehrid}
     [Teardown]      (admin) delete ehr
 
 
@@ -818,7 +819,7 @@ randomize subject_id in test-data-set
     [Arguments]         ${test_data_set}
     ${subject_id}=      generate random id
     ${body}=            Load JSON From File    ${EXECDIR}/robot/_resources/test_data_sets/ehr/${test_data_set}
-    ${body}=            Update Value To Json    ${body}  $..subject.external_ref.id.value  ${subject_id}
+    ${body}=            Update Value To Json    ${body}     $..subject.external_ref.id.value  ${subject_id}
     RETURN            ${body}
 
 
