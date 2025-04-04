@@ -34,7 +34,7 @@ Library     DatabaseLibrary
 Library     distutils.util
 Library     MockServerLibrary
 
-Library     libraries/dockerlib.py
+#Library     libraries/dockerlib.py
 Library     libraries/jsonlib.py
 Library     libraries/token_decoder.py
 Library     libraries/composition_validation_lib.py
