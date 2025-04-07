@@ -50,7 +50,7 @@ Execute Query
     IF      ${query_nr} == ${2}
         Checks For Second And Third Query
         ...     aql_resp=${resp_body_actual}
-        ...     json_path=$..rows[?(@[0] != null)]
+        ...     arr_item_to_exclude=0       #similar to this $..rows[?(@[0] != null)], to exclude items with None at position 0
         ...     expected_file=expected_order_by_unknown_type_at4_1_part_ordered_asc.json
         ...     ignore_order=${FALSE}
         #$..rows[?(@[0] != null)] - get all row items without null value in column at index 0
@@ -58,20 +58,27 @@ Execute Query
     IF      ${query_nr} == ${3}
         Checks For Second And Third Query
         ...     aql_resp=${resp_body_actual}
-        ...     json_path=$..rows[?(@[1] != null)]
+        ...     arr_item_to_exclude=1       #similar to this $..rows[?(@[1] != null)], to exclude items with None at position 1
         ...     expected_file=expected_order_by_unknown_type_at4_2_part_ordered_asc.json
         ...     ignore_order=${FALSE}
         #$..rows[?(@[1] != null)] - get all row items without null value in column at index 1
     END
 
 Checks For Second And Third Query
-    [Arguments]     ${aql_resp}    ${json_path}    ${expected_file}     ${ignore_order}=${FALSE}
+    [Arguments]     ${aql_resp}    ${arr_item_to_exclude}    ${expected_file}     ${ignore_order}=${FALSE}
     ${temp_aql_resp}    Set Variable    ${aql_resp}
-    ${json_obj_tmp}     Get Value From Json	    ${temp_aql_resp}	    ${json_path}
-    ${json_obj_tmp2}    Update Value To Json    ${temp_aql_resp}	    $.rows	    ${json_obj_tmp}
+    ${all_rows}    Get Value From Json    ${temp_aql_resp}    $.rows[*]
+    ${filtered_rows}    Create List
+    FOR    ${row}    IN    @{all_rows}
+        Run Keyword If    '${row[${arr_item_to_exclude}]}' != 'None'    Append To List    ${filtered_rows}    ${row}
+    END
+    #Log     ${filtered_rows}
+    ${updated}      Update Value To Json    ${temp_aql_resp}    $.rows    ${filtered_rows}
+    #Log     ${updated}
     ${exclude_paths}	Create List    root['meta']
+    ###
     ${diff}     compare json-string with json-file
-    ...     ${temp_aql_resp}     ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
+    ...     ${updated}     ${EXPECTED_JSON_DATA_SETS}/order_by/${expected_file}
     ...     exclude_paths=${exclude_paths}
     ...     ignore_order=${ignore_order}    ignore_string_case=${TRUE}
     ${temp_aql_resp1}     Set Variable    ${None}
