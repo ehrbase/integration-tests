@@ -47,9 +47,11 @@ Alternative flow 3 create new invalid event COMPOSITION FLAT
     check status_code of commit composition    400
 
 Alternative flow 3 create new invalid event COMPOSITION FLAT - DV Duration Near To Max
+    [Tags]      not-ready   CDR-1855
+    [Documentation]     Bug ticket: https://vitagroup-ag.atlassian.net/browse/CDR-1855
     commit composition   format=FLAT
     ...                  composition=dv_duration_max__.json
-    #Github issue: https://github.com/ehrbase/ehrbase/issues/926
+    #Old Github issue (fixed and closed): https://github.com/ehrbase/ehrbase/issues/926
     check status_code of commit composition    400
     [Teardown]  Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
