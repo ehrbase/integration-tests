@@ -12,5 +12,5 @@ COPY --chmod=755 ./scripts/runRobotTest.sh /bin/runRobotTest
 COPY ./tests ./tests
 
 # Install dependencies
-RUN mv ./tests/requirements.txt ./requirements.txt && \
+RUN pip install --upgrade pip && mv ./tests/requirements.txt ./requirements.txt && \
     pip install --no-cache-dir -r requirements.txt
