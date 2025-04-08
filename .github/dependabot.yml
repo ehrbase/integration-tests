@@ -1,9 +1,0 @@
-version: 2
-updates:
-  - package-ecosystem: "pip"
-    directory: "/tests"               # 👈 path to requirements.txt
-    schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 5
-    commit-message:
-      prefix: "chore(deps)"
