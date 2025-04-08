@@ -208,7 +208,7 @@ Commit Composition With Modified DV_TEXT Value
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_TEXT.value
@@ -237,4 +237,4 @@ Change Json KeyValue and Save Back To File
     ${changedDvTextValue3}   Get Value From Json     ${jsonContent}      ${dvTextValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}

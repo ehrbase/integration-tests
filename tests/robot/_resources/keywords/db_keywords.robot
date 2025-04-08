@@ -171,7 +171,7 @@ Count Rows In DB Table
     [Arguments]         ${table_name}
 
     ${rowCount}=        Row Count    SELECT * FROM ${table_name}
-    [Return]            ${rowCount}
+    RETURN            ${rowCount}
 
 # check https://github.com/franz-see/Robotframework-Database-Library/blob/master/test/PostgreSQL_DB_Tests.robot
 # for more examples

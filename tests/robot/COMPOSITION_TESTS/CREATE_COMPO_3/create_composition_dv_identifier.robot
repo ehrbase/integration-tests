@@ -301,7 +301,7 @@ Commit Composition With Modified DV_IDENTIFIER Value
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 
 Change Json KeyValue and Save Back To File
@@ -332,7 +332,7 @@ Change Json KeyValue and Save Back To File
     ${changedDvIdentifierValue3}   Get Value From Json     ${jsonContent}      ${dvIdentifierValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}
 
 Restore Initial Version Of Composition DV_IDENTIFIER Values
     [Arguments]     ${valueToBeRestoredInKey}=id

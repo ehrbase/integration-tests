@@ -146,7 +146,7 @@ Change XML Value And Save Back To New OPT
     Should Be Equal As Strings    ${rangeLowerElementChanged.text}       ${range_lower_value}
     Should Be Equal As Strings    ${rangeUpperElementChanged.text}       ${range_upper_value}
     Save Xml    ${xmlContent}   ${newOPTFile}
-    [return]    minimal/newly_generated_file_range_combinations.opt
+    RETURN    minimal/newly_generated_file_range_combinations.opt
 
 Admin Delete EHR
     [Documentation]     Delete EHR using ADMIN endpoint.

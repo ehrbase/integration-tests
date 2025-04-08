@@ -101,7 +101,7 @@ Commit Composition With Modified DV_BOOLEAN Value
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_BOOLEAN.value value
@@ -119,15 +119,15 @@ Change Json KeyValue and Save Back To File
     ${json_object}          Update Value To Json	json_object=${jsonContent}
     ...             json_path=${dvBooleanValueJsonPath1}
     ...             new_value=${dvBooleanValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvBooleanValueJsonPath2}
     ...             new_value=${dvBooleanValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvBooleanValueJsonPath3}
     ...             new_value=${dvBooleanValueToUpdate}
-    ${changedDvBooleanValue1}   Get Value From Json     ${jsonContent}      ${dvBooleanValueJsonPath1}
-    ${changedDvBooleanValue2}   Get Value From Json     ${jsonContent}      ${dvBooleanValueJsonPath2}
-    ${changedDvBooleanValue3}   Get Value From Json     ${jsonContent}      ${dvBooleanValueJsonPath3}
+    ${changedDvBooleanValue1}   Get Value From Json     ${json_object}      ${dvBooleanValueJsonPath1}
+    ${changedDvBooleanValue2}   Get Value From Json     ${json_object}      ${dvBooleanValueJsonPath2}
+    ${changedDvBooleanValue3}   Get Value From Json     ${json_object}      ${dvBooleanValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}

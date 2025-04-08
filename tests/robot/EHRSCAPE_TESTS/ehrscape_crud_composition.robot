@@ -110,7 +110,7 @@ Create Composition With Period Having Fractional Unit
 
     ${expected}     Load JSON From File    ${compo_file_path}/${composition_file}
                     Log     ${expected['medications/medication_list/medication_statement:0/timing_-_non-daily/repetition_interval']}
-                    Update Value To Json   ${expected}
+    ${expected}     Update Value To Json   ${expected}
                     ...     ['medications/medication_list/medication_statement:0/timing_-_non-daily/repetition_interval']
                     ...     P1.5Y
                     #...     P1.5Y

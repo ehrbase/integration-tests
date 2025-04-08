@@ -117,10 +117,10 @@ Change Json KeyValue and Save Back To File
     [Arguments]     ${jsonContent}      ${valueToUpdate}
     #${objPath}      Set Variable        $..data.events..items.[?(@._type=='DV_TIME')].value
     ${objPath}      Set Variable        $..data.events..items.[8].value.value
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
-    ...             json_path=${objPath}        new_value=${valueToUpdate}
-    ${changedDvTimeValue}   Get Value From Json     ${jsonContent}      ${objPath}
+    ${json_object}  Update Value To Json	json_object=${jsonContent}
+    ...             json_path=${objPath}    new_value=${valueToUpdate}
+    ${changedDvTimeValue}   Get Value From Json     ${json_object}      ${objPath}
     Should Be Equal As Strings     ${changedDvTimeValue[0]}   ${valueToUpdate}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}    ${json_str}
-    [return]    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}
+    RETURN    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}

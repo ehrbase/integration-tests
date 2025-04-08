@@ -113,7 +113,7 @@ Commit Composition With Modified DV_BOOLEAN Value
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_BOOLEAN.value value
@@ -142,4 +142,4 @@ Change Json KeyValue and Save Back To File
     ${changedDvBooleanValue3}   Get Value From Json     ${jsonContent}      ${dvBooleanValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}

@@ -210,7 +210,7 @@ Commit Composition With Modified DV_EHR_URI Value
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_EHR_URI.value value
@@ -239,4 +239,4 @@ Change Json KeyValue and Save Back To File
     ${changedDvEhrUriValue3}   Get Value From Json     ${jsonContent}      ${dvEhrUriValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}

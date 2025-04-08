@@ -172,7 +172,7 @@ CommitCompositionTemplate
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 Change Json KeyValue And Save Back To File
     [Documentation]     Updates DV_DATE_TIME values to
@@ -207,7 +207,7 @@ Change XML Value And Save Back To New OPT
     Log     Modified C_DATE_TIME pattern value is = ${patternElementChanged.text}
     Should Be Equal As Strings    ${patternElementChanged.text}       ${c_date_time_pattern_value}
     Save Xml    ${xmlContent}   ${newOPTFile}
-    [return]    ${opt_temp_file}
+    RETURN    ${opt_temp_file}
 
 Load Json File With Composition
     [Documentation]     Loads Json content from composition file.

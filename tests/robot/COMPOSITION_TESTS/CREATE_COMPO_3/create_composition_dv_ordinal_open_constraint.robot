@@ -131,7 +131,7 @@ Commit Composition With Modified DV_ORDINAL Symbol And Value
     ELSE
         Set Suite Variable   ${versioned_object_uid}    ${None}
     END
-    [Return]    ${isStatusCodeEqual}
+    RETURN    ${isStatusCodeEqual}
 
 Change Json KeyValue and Save Back To File
     [Documentation]     Updates DV_ORDINAL Symbol And Value
@@ -156,33 +156,33 @@ Change Json KeyValue and Save Back To File
     ${json_object}          Update Value To Json	json_object=${jsonContent}
     ...             json_path=${symbolValueJsonPath1}
     ...             new_value=${symbolValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${symbolValueJsonPath2}
     ...             new_value=${symbolValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${symbolValueJsonPath3}
     ...             new_value=${symbolValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvOrdinalValueJsonPath1}
     ...             new_value=${dvOrdinalValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvOrdinalValueJsonPath2}
     ...             new_value=${dvOrdinalValueToUpdate}
-    ${json_object}          Update Value To Json	json_object=${jsonContent}
+    ${json_object}          Update Value To Json	json_object=${json_object}
     ...             json_path=${dvOrdinalValueJsonPath3}
     ...             new_value=${dvOrdinalValueToUpdate}
-    ${changedSymbolValue1}   Get Value From Json     ${jsonContent}      ${symbolValueJsonPath1}
-    ${changedSymbolValue2}   Get Value From Json     ${jsonContent}      ${symbolValueJsonPath2}
-    ${changedSymbolValue3}   Get Value From Json     ${jsonContent}      ${symbolValueJsonPath3}
-    ${changedDvOrdinalValue1}   Get Value From Json     ${jsonContent}      ${dvOrdinalValueJsonPath1}
-    ${changedDvOrdinalValue2}   Get Value From Json     ${jsonContent}      ${dvOrdinalValueJsonPath2}
-    ${changedDvOrdinalValue3}   Get Value From Json     ${jsonContent}      ${dvOrdinalValueJsonPath3}
+    ${changedSymbolValue1}   Get Value From Json     ${json_object}      ${symbolValueJsonPath1}
+    ${changedSymbolValue2}   Get Value From Json     ${json_object}      ${symbolValueJsonPath2}
+    ${changedSymbolValue3}   Get Value From Json     ${json_object}      ${symbolValueJsonPath3}
+    ${changedDvOrdinalValue1}   Get Value From Json     ${json_object}      ${dvOrdinalValueJsonPath1}
+    ${changedDvOrdinalValue2}   Get Value From Json     ${json_object}      ${dvOrdinalValueJsonPath2}
+    ${changedDvOrdinalValue3}   Get Value From Json     ${json_object}      ${dvOrdinalValueJsonPath3}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}
 
 Prepare Dictionary To Be Added In DV_ORDINAL Symbol
     &{terminologyIdContent}		Create Dictionary	_type=TERMINOLOGY_ID	value=external
     &{definingCodeContent}		Create Dictionary	_type=CODE_PHRASE	terminology_id=${terminologyIdContent}		code_string=kg
     &{mainDict}     Create Dictionary   type=DV_CODED_TEXT      value=local::at0005		defining_code=${definingCodeContent}
-    [Return]        ${mainDict}
+    RETURN        ${mainDict}

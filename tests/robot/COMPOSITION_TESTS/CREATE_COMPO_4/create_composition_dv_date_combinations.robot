@@ -102,8 +102,8 @@ Change Json KeyValue and Save Back To File
     ${objPath}      Set Variable        $..description.items[0].value.value
     ${json_object}          Update Value To Json	json_object=${jsonContent}
     ...             json_path=${objPath}        new_value=${valueToUpdate}
-    ${changedDvDateTimeValue}   Get Value From Json     ${jsonContent}      ${objPath}
+    ${changedDvDateTimeValue}   Get Value From Json     ${json_object}      ${objPath}
     Should Be Equal     ${changedDvDateTimeValue[0]}   ${valueToUpdate}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${compositionFilePath}    ${json_str}
-    [return]    ${compositionFilePath}
+    RETURN    ${compositionFilePath}

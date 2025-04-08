@@ -78,7 +78,7 @@ compare json-strings
 
     &{diff}=            compare jsons    ${actual_json}    ${expected_json}    &{options}
 
-    [Return]            ${diff}
+    RETURN            ${diff}
 
 
 compare json-files
@@ -93,7 +93,7 @@ compare json-files
 
     &{diff}=            compare jsons    ${actual}    ${expected}    &{options}
 
-    [Return]            ${diff}
+    RETURN            ${diff}
 
 
 compare json-string with json-file
@@ -109,7 +109,7 @@ compare json-string with json-file
 
     &{diff}=            compare jsons    ${actual}    ${expected}    &{options}
 
-    [Return]            ${diff}
+    RETURN            ${diff}
 
 
 compare json-file with json-string
@@ -125,7 +125,7 @@ compare json-file with json-string
 
     &{diff}=            compare jsons    ${actual}    ${expected}    &{options}
 
-    [Return]            ${diff}
+    RETURN            ${diff}
 
 
 
@@ -174,7 +174,7 @@ unzip file_repo_content.zip
 
 operational_templates folder exists
     ${result}=  Run Keyword And Return Status  Directory Should Exist  ${PROJECT_ROOT}${/}file_repo${/}knowledge/operational_templates
-    [Return]  ${result}
+    RETURN  ${result}
 
 
 operational_templates folder is empty
@@ -448,7 +448,7 @@ server sanity check
     ...                 the server is up and running.
     
     ${server_status}    Run Keyword And Return Status    openehr server is online
-    [RETURN]            ${server_status}
+    RETURN            ${server_status}
 
 
 database sanity check
@@ -464,7 +464,7 @@ database sanity check
 
     ${db_status}        Run Keyword And Return Status    Connect With DB
                         Run Keyword If    $db_status    Disconnect From Database
-    [RETURN]            ${db_status}
+    RETURN            ${db_status}
 
 
 do quick sanity check
@@ -479,7 +479,7 @@ do quick sanity check
                         Set Global Variable    @{TEST_ENVIRONMENT_STATUS}
                         ...                    ${env_status}    ${server_status}    ${db_status}
 
-    [RETURN]            ${env_status}    ${server_status}    ${db_status}
+    RETURN            ${env_status}    ${server_status}    ${db_status}
 
 
 warn about manual test environment start up

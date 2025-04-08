@@ -109,10 +109,10 @@ Change Json KeyValue and Save Back To File
     ...     2 - value to be on $.content[0].data.events[0].data.items[11].value.value key
     [Arguments]     ${jsonContent}      ${valueToUpdate}
     ${objPath}      Set Variable        $.content[0].data.events[0].data.items[11].value.value
-    ${json_object}          Update Value To Json	${jsonContent}
+    ${json_object}  Update Value To Json	${jsonContent}
     ...             ${objPath}        ${valueToUpdate}
-    ${changedDvDurationValue}   Get Value From Json     ${jsonContent}      ${objPath}
+    ${changedDvDurationValue}   Get Value From Json     ${json_object}      ${objPath}
     Should Be Equal As Strings     ${changedDvDurationValue[0]}   ${valueToUpdate}
     ${json_str}     Convert JSON To String    ${json_object}
     Create File     ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}    ${json_str}
-    [return]    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}
+    RETURN    ${COMPO DATA SETS}/CANONICAL_JSON/${composition_file_tmp}

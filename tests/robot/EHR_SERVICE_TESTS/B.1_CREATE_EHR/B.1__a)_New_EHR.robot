@@ -628,7 +628,8 @@ Create EHR From Valid Data Set
                     prepare new request session    Prefer=return=representation
                     compose ehr payload    ${No.}    ${other_details}    ${modifiable}    ${queryable}
                     create ehr    ${ehrid}
-                    validate response    ${No.}  ${queryable}    ${modifiable}    ${subject}   ${other_details}    ${ehrid}
+                    validate response   ${No.}          ${queryable}        ${modifiable}
+                    ...                 ${subject}      ${other_details}    ${ehrid}
     [Teardown]      (admin) delete ehr
 
 
@@ -645,10 +646,10 @@ compose ehr payload
         ${payload}=    randomize subject_id in test-data-set    valid/000_ehr_status_with_other_details.json
     END
 
-    ${payload=}     Update Value To Json    ${payload}  $.is_modifiable    ${modifiable}
-    ${payload}=     Update Value To Json    ${payload}  $.is_queryable    ${queryable}
-                    Output    ${payload}
-                    Set Test Variable    ${payload}    ${payload}
+    ${payload}      Update Value To Json    ${payload}      $.is_modifiable     ${modifiable}
+    ${payload}      Update Value To Json    ${payload}      $.is_queryable      ${queryable}
+                    Output      ${payload}
+                    Set Test Variable       ${payload}      ${payload}
 
 
 create ehr
@@ -818,14 +819,14 @@ randomize subject_id in test-data-set
     [Arguments]         ${test_data_set}
     ${subject_id}=      generate random id
     ${body}=            Load JSON From File    ${EXECDIR}/robot/_resources/test_data_sets/ehr/${test_data_set}
-    ${body}=            Update Value To Json    ${body}  $..subject.external_ref.id.value  ${subject_id}
-    [RETURN]            ${body}
+    ${body}=            Update Value To Json    ${body}     $..subject.external_ref.id.value  ${subject_id}
+    RETURN            ${body}
 
 
 generate random id
     # ${uuid}=            Evaluate    str(uuid.uuid4())    uuid
     ${uuid}=            Set Variable    ${{str(uuid.uuid4())}}
-    [RETURN]            ${uuid}
+    RETURN            ${uuid}
 
 
 POST /ehr
@@ -847,7 +848,7 @@ PUT /ehr/ehr_id
                         Set Test Variable   ${response}     ${response}
                         Run Keyword And Return Status
                         ...     Set Test Variable   ${ehr_id}       ${response.json()['ehr_id']['value']}
-    # [RETURN]            ${response}
+    # RETURN            ${response}
 
 
 check response

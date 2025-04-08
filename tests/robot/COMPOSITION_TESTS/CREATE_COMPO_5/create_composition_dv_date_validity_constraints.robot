@@ -110,7 +110,7 @@ Change Json KeyValue And Save Back To File
     ${objPath}      Set Variable        $.content[0].data.events[0].data.items[5].value.value
     ${json_object}          Update Value To Json	${jsonContent}
     ...             ${objPath}        ${valueToUpdate}
-    ${json_object}          Update Value To Json	${jsonContent}
+    ${json_object}          Update Value To Json	${json_object}
     ...             $.content[2].items[0].items[0].items[0].activities[0].description.items[0].value.value
     ...             ${valueToUpdate}
     ${json_str}     Convert JSON To String    ${json_object}
@@ -132,7 +132,7 @@ Change XML Value And Save Back To New OPT
     Log     Modified C_DATE pattern value is = ${patternElementChanged.text}
     Should Be Equal As Strings    ${patternElementChanged.text}       ${c_date_pattern_value}
     Save Xml    ${xmlContent}   ${newOPTFile}
-    [return]    ${opt_temp_file}
+    RETURN    ${opt_temp_file}
 
 Admin Delete EHR
     [Documentation]     Delete EHR using ADMIN endpoint.
