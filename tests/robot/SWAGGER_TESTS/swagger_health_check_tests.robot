@@ -33,24 +33,14 @@ ${api_docs_version_part}     /v3/api-docs
                 Dictionary Should Contain Key     ${resp_json_paths}    /rest/openehr/v1/definition/template/adl1.4/{template_id}/example
                 Dictionary Should Contain Key     ${resp_json_paths}    /rest/openehr/v1/definition/query
 
-3. Check Swagger EhrScape API Availability
-    ${resp}     GET On Session      ${SUT}      ${api_docs_version_part}/2. EhrScape API     expected_status=anything
-                Status Should Be    200     ${resp}
-                Dictionary Should Contain Key     ${resp.json()}    paths
-                Set Test Variable       ${resp_json_paths}      ${resp.json()['paths']}
-                Dictionary Should Contain Key     ${resp_json_paths}    /rest/ecis/v1/composition/{uid}
-                Dictionary Should Contain Key     ${resp_json_paths}    /rest/ecis/v1/composition
-                Dictionary Should Contain Key     ${resp_json_paths}    /rest/ecis/v1/template/{templateId}
-                Dictionary Should Contain Key     ${resp_json_paths}    /rest/ecis/v1/template/{templateId}/example
-
-4. Check Swagger EHRbase Status Endpoint
-    ${resp}     GET On Session      ${SUT}      ${api_docs_version_part}/3. EHRbase Status Endpoint    expected_status=anything
+3. Check Swagger EHRbase Status Endpoint
+    ${resp}     GET On Session      ${SUT}      ${api_docs_version_part}/2. EHRbase Status Endpoint    expected_status=anything
                 Status Should Be    200     ${resp}
                 Dictionary Should Contain Key     ${resp.json()}    paths
                 Dictionary Should Contain Key     ${resp.json()['paths']}    /rest/status
 
-5. Check Swagger EHRbase Admin API
-    ${resp}     GET On Session      ${SUT}      ${api_docs_version_part}/4. EHRbase Admin API    expected_status=anything
+4. Check Swagger EHRbase Admin API
+    ${resp}     GET On Session      ${SUT}      ${api_docs_version_part}/3. EHRbase Admin API    expected_status=anything
                 Status Should Be    200     ${resp}
                 Dictionary Should Contain Key     ${resp.json()}    paths
                 Set Test Variable       ${resp_json_paths}      ${resp.json()['paths']}
@@ -63,6 +53,6 @@ ${api_docs_version_part}     /v3/api-docs
                 Dictionary Should Contain Key     ${resp_json_paths}    /rest/admin/ehr/{ehr_id}/directory/{directory_id}
                 Dictionary Should Contain Key     ${resp_json_paths}    /rest/admin/ehr/{ehr_id}/composition/{composition_id}
 
-6. Check Swagger Management API
-    ${resp}     GET On Session      ${SUT}      ${api_docs_version_part}/5. Management API    expected_status=anything
+5. Check Swagger Management API
+    ${resp}     GET On Session      ${SUT}      ${api_docs_version_part}/4. Management API    expected_status=anything
                 Status Should Be    200     ${resp}
