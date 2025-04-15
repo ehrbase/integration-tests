@@ -10,7 +10,7 @@ robotframework-databaselibrary == 2.1.3
 git+https://github.com/etsi-cti-admin/robotframework-mockserver.git
 robotframework-robocop == 6.1.0
 robotframework-tidy == 4.16.0
-RESTinstance == 1.5.1
+RESTinstance == 1.5.2
 
 docker == 7.1.0
 deepdiff == 8.4.2
