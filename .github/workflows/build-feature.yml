@@ -29,6 +29,11 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      
+      #Get current branch name to be used to push with tag latest-feature_branch_name
+      - name: Get current branch name
+        id: branch
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF##*/} | tr '/' '-' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       # setup qemu for multi arch
       - name: Set up QEMU
@@ -44,5 +49,5 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-feature
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-feature_${{ env.BRANCH_NAME }}
           labels: ${{ steps.meta.outputs.labels }}
