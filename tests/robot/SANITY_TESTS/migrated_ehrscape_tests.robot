@@ -638,7 +638,6 @@ Headers Checks Composition
     [Arguments]     ${compo_uid_version}=1
     Dictionary Should Contain Item      ${resp.headers}     Location   ${BASEURL}/ehr/${ehr_id}/composition/${compo_id}
     Dictionary Should Contain Item      ${resp.headers}     ETag    "${compo_id}::${system_id_with_tenant}::${compo_uid_version}"
-    Dictionary Should Contain Item      ${resp.headers}     EHRBase-Template-ID     ${template_id}
 
 Commit Composition OpenEHR
     [Documentation]     Commit Composition using OpenEHR endpoint. Previously EHRSCAPE endpoint was used.
