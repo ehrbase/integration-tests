@@ -26,7 +26,7 @@ Test Complete Return Of Composition
     ${query_count}      Set Variable    SELECT COUNT(*) FROM COMPOSITION c
     Set AQL And Execute Ad Hoc Query        ${query_count}
     Log     ${resp_body_actual}
-    Log     ${resp_body_actual[0][0]}
+    Log     ${resp_body_actual['rows'][0][0]}
     [Teardown]      Admin Delete EHR For AQL
 
 
