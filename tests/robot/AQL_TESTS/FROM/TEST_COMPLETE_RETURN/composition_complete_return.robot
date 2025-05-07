@@ -21,6 +21,12 @@ Test Complete Return Of Composition
     ...     ${resp_body_actual}     ${expected_result}      exclude_paths=${exclude_paths}
     #Log To Console    \n\n${diff}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
+
+    ## Get count of compositions
+    ${query_count}      Set Variable    SELECT COUNT(*) FROM COMPOSITION c
+    Set AQL And Execute Ad Hoc Query        ${query_count}
+    Log     ${resp_body_actual}
+    Log     ${resp_body_actual['rows'][0][0]}
     [Teardown]      Admin Delete EHR For AQL
 
 
