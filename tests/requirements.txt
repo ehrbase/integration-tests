@@ -13,7 +13,7 @@ robotframework-tidy == 4.16.0
 RESTinstance == 1.5.2
 
 docker == 7.1.0
-deepdiff == 8.4.2
+deepdiff == 8.5.0
 psycopg2-binary == 2.9.10
 python-benedict == 0.34.1
 
