@@ -178,7 +178,7 @@ Suite Setup       Precondition
     Should Be Equal     ${compo_uid_splitted}[2]    7
     Log     ${resp.headers}
     Dictionary Should Contain Item      ${resp.headers}     ETag    "${compo_uid}"
-    Dictionary Should Contain Item      ${resp.headers}     EHRBase-Template-ID     ${template_id}
+    Dictionary Should Not Contain Key   ${resp.headers}     EHRBase-Template-ID
 
 12. Get Compo JSON EHRSCAPE Migrated
     Set Test Variable       ${compo_uid}    ${compo_id}::${system_id_with_tenant}::6
@@ -190,7 +190,7 @@ Suite Setup       Precondition
     Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    6
     Dictionary Should Contain Item      ${resp.headers}     ETag    "${compo_uid}"
-    Dictionary Should Contain Item      ${resp.headers}     EHRBase-Template-ID     ${template_id}
+    Dictionary Should Not Contain Key   ${resp.headers}     EHRBase-Template-ID
 
 13. Get Compo XML EHRSCAPE Migrated
     Set Test Variable       ${compo_uid}    ${compo_id}::${system_id_with_tenant}::5
@@ -203,7 +203,7 @@ Suite Setup       Precondition
     Should Be Equal     ${compo_uid_splitted}[2]    5
     Set Test Variable       ${compo_id}     ${compo_uid_splitted}[0]
     Dictionary Should Contain Item      ${resp.headers}     ETag    "${compo_uid}"
-    Dictionary Should Contain Item      ${resp.headers}     EHRBase-Template-ID     ${template_id}
+    Dictionary Should Not Contain Key   ${resp.headers}     EHRBase-Template-ID
 
 14. Get Compo STRUCTURED EHRSCAPE Migrated
     Set Test Variable       ${compo_uid}    ${compo_id}::${system_id_with_tenant}::4
@@ -215,7 +215,7 @@ Suite Setup       Precondition
     Should Be Equal     ${compo_uid_splitted}[1]    ${system_id_with_tenant}
     Should Be Equal     ${compo_uid_splitted}[2]    4
     Dictionary Should Contain Item      ${resp.headers}     ETag    "${compo_uid}[0]"
-    Dictionary Should Contain Item      ${resp.headers}     EHRBase-Template-ID     ${template_id}
+    Dictionary Should Not Contain Key   ${resp.headers}     EHRBase-Template-ID
 
 15. Delete Compo V1 EHRSCAPE Migrated
     Commit Composition OpenEHR       composition=family_history__.json   format=FLAT
@@ -638,6 +638,7 @@ Headers Checks Composition
     [Arguments]     ${compo_uid_version}=1
     Dictionary Should Contain Item      ${resp.headers}     Location   ${BASEURL}/ehr/${ehr_id}/composition/${compo_id}
     Dictionary Should Contain Item      ${resp.headers}     ETag    "${compo_id}::${system_id_with_tenant}::${compo_uid_version}"
+    Dictionary Should Not Contain Key   ${resp.headers}     EHRBase-Template-ID
 
 Commit Composition OpenEHR
     [Documentation]     Commit Composition using OpenEHR endpoint. Previously EHRSCAPE endpoint was used.
