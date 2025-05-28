@@ -23,7 +23,7 @@
                             "notify": {
                                 "command": "publish",
                                 "channel": "amqp",
-                                "exchange": "ehr",
+                                "exchange": "cdr-robot-test-trigger-event",
                                 "routing-key": ""
                             }
                         },
