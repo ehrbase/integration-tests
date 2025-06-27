@@ -1,0 +1,299 @@
+{
+  "_type": "COMPOSITION",
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "Body weight"
+  },
+  "archetype_details": {
+    "archetype_id": {
+      "value": "openEHR-EHR-COMPOSITION.encounter.v1"
+    },
+    "template_id": {
+      "value": "cistec.openehr.body_weight.v1"
+    },
+    "rm_version": "1.1.0"
+  },
+  "language": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_639-1"
+    },
+    "code_string": "de"
+  },
+  "territory": {
+    "_type": "CODE_PHRASE",
+    "terminology_id": {
+      "_type": "TERMINOLOGY_ID",
+      "value": "ISO_3166-1"
+    },
+    "code_string": "CH"
+  },
+  "category": {
+    "_type": "DV_CODED_TEXT",
+    "value": "event",
+    "defining_code": {
+      "_type": "CODE_PHRASE",
+      "terminology_id": {
+        "_type": "TERMINOLOGY_ID",
+        "value": "openehr"
+      },
+      "code_string": "433"
+    }
+  },
+  "composer": {
+    "_type": "PARTY_IDENTIFIED",
+    "name": "hendrik.heiser@cistec.com"
+  },
+  "context": {
+    "_type": "EVENT_CONTEXT",
+    "start_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2025-04-30T16:49:37.739232906+02:00"
+    },
+    "setting": {
+      "_type": "DV_CODED_TEXT",
+      "value": "other care",
+      "defining_code": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "openehr"
+        },
+        "code_string": "238"
+      }
+    }
+  },
+  "content": [
+    {
+      "_type": "OBSERVATION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Body weight"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-OBSERVATION.body_weight.v2"
+        },
+        "rm_version": "1.1.0"
+      },
+      "language": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "ISO_639-1"
+        },
+        "code_string": "de"
+      },
+      "encoding": {
+        "_type": "CODE_PHRASE",
+        "terminology_id": {
+          "_type": "TERMINOLOGY_ID",
+          "value": "IANA_character-sets"
+        },
+        "code_string": "UTF-8"
+      },
+      "subject": {
+        "_type": "PARTY_SELF"
+      },
+      "protocol": {
+        "_type": "ITEM_TREE",
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "protocol structure"
+        },
+        "items": [
+          {
+            "_type": "CLUSTER",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Scale"
+            },
+            "archetype_details": {
+              "archetype_id": {
+                "value": "openEHR-EHR-CLUSTER.device.v1"
+              },
+              "rm_version": "1.1.0"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Device name"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Floor scale, electronic",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "SNOMED-CT"
+                    },
+                    "code_string": "469204003"
+                  }
+                },
+                "archetype_node_id": "at0001"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Type"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Scale, device",
+                  "defining_code": {
+                    "_type": "CODE_PHRASE",
+                    "terminology_id": {
+                      "_type": "TERMINOLOGY_ID",
+                      "value": "SNOMED-CT"
+                    },
+                    "code_string": "19892000"
+                  }
+                },
+                "archetype_node_id": "at0003"
+              }
+            ],
+            "archetype_node_id": "openEHR-EHR-CLUSTER.device.v1"
+          }
+        ],
+        "archetype_node_id": "at0015"
+      },
+      "data": {
+        "name": {
+          "_type": "DV_TEXT",
+          "value": "history"
+        },
+        "origin": {
+          "_type": "DV_DATE_TIME",
+          "value": "2025-04-30T16:49:37.739232906+02:00"
+        },
+        "events": [
+          {
+            "_type": "POINT_EVENT",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Point in time"
+            },
+            "time": {
+              "_type": "DV_DATE_TIME",
+              "value": "2025-04-30T16:49:37.739232906+02:00"
+            },
+            "state": {
+              "_type": "ITEM_TREE",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "state structure"
+              },
+              "items": [
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "State of dress"
+                  },
+                  "value": {
+                    "_type": "DV_CODED_TEXT",
+                    "value": "Fully clothed, without shoes",
+                    "defining_code": {
+                      "_type": "CODE_PHRASE",
+                      "terminology_id": {
+                        "_type": "TERMINOLOGY_ID",
+                        "value": "local"
+                      },
+                      "code_string": "at0028"
+                    }
+                  },
+                  "archetype_node_id": "at0009"
+                },
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Confounding factors"
+                  },
+                  "value": {
+                    "_type": "DV_TEXT",
+                    "value": "before dialysis"
+                  },
+                  "archetype_node_id": "at0025"
+                },
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Confounding factors"
+                  },
+                  "value": {
+                    "_type": "DV_TEXT",
+                    "value": "during pregnancy"
+                  },
+                  "archetype_node_id": "at0025"
+                }
+              ],
+              "archetype_node_id": "at0008"
+            },
+            "data": {
+              "_type": "ITEM_TREE",
+              "name": {
+                "_type": "DV_TEXT",
+                "value": "Simple"
+              },
+              "items": [
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Weight"
+                  },
+                  "value": {
+                    "_type": "DV_QUANTITY",
+                    "units": "kg",
+                    "magnitude": 105.04
+                  },
+                  "archetype_node_id": "at0004"
+                },
+                {
+                  "_type": "ELEMENT",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Comment"
+                  },
+                  "feeder_audit": {
+                    "_type": "FEEDER_AUDIT",
+                    "original_content": {
+                      "_type": "DV_PARSABLE",
+                      "value": "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1031{\\fonttbl{\\f0\\fswiss\\fprq2\\fcharset0 Arial;}{\\f1\\fnil\\fcharset2 Symbol;}}\r\n{\\colortbl ;\\red0\\green0\\blue0;\\red255\\green255\\blue255;\\red213\\green0\\blue0;\\red255\\green192\\blue0;\\red255\\green255\\blue255;}\r\n{\\*\\generator Riched20 5.40.11.2210;}\\viewkind4\\uc1\\pard\\qc\\cf1\\highlight2\\lang2055\\f0\\fs20 Wir berichten Ihnen \\'fcber\\b  oben genannten\\b0  \\fs28 Patienten\\fs20 , welchen wir am \\cf3 19.05.2025\\cf1  in unserer \\highlight4 Sprechstunde \\highlight2 gesehen haben.\\par\r\n\\pard{\\pntext\\f1\\'B7\\tab}{\\*\\pn\\pnlvlblt\\pnf1\\pnindent357{\\pntxtb\\'B7}}\\fi-357\\li357\\qc Untersuchung 1\\par\r\n{\\pntext\\f1\\'B7\\tab}Untersuchung 2\\par\r\n\\pard\\highlight5\\lang1031\\par\r\n}\r\n",
+                      "formalism": "application/rtf"
+                    },
+                    "originating_system_audit": {
+                      "_type": "FEEDER_AUDIT_DETAILS",
+                      "system_id": "RTF 1.9.1"
+                    }
+                  },
+                  "value": {
+                    "_type": "DV_TEXT",
+                    "value": "Wir berichten Ihnen über oben genannten Patienten, welchen wir am 19.05.2025 in unserer Sprechstunde gesehen haben. -Untersuchung 1 -Untersuchung 2"
+                  },
+                  "archetype_node_id": "at0024"
+                }
+              ],
+              "archetype_node_id": "at0001"
+            },
+            "archetype_node_id": "at0003"
+          }
+        ],
+        "archetype_node_id": "at0002"
+      },
+      "archetype_node_id": "openEHR-EHR-OBSERVATION.body_weight.v2",
+      "uid": {
+        "_type": "OBJECT_VERSION_ID",
+        "value": "57461022-3809-4ffd-bbab-3878b2c93944"
+      }
+    }
+  ],
+  "archetype_node_id": "openEHR-EHR-COMPOSITION.encounter.v1"
+}
