@@ -1,15 +1,15 @@
-robotframework == 7.3.1
+robotframework == 7.3.2
 tzlocal == 5.3.1
 
 robotframework-jsonlibrary == 0.5
 robotframework-datadriver == 1.11.2
 robotframework-requests == 0.9.7
 requests == 2.32.4
-robotframework-databaselibrary == 2.1.3
+robotframework-databaselibrary == 2.1.4
 #robotframework-mockserver == 0.0.7
 git+https://github.com/etsi-cti-admin/robotframework-mockserver.git
 robotframework-robocop == 6.5.0
-robotframework-tidy == 4.17.0
+robotframework-tidy == 4.18.0
 RESTinstance == 1.5.2
 
 docker == 7.1.0
