@@ -18,6 +18,6 @@ def get_variables():
                 "PLUGIN_URL": os.environ.get('PLUGIN_URL', f'{ehrbase_baseurl}/ehrbase/plugin'),
                 "RABBITMQ_URL": os.environ.get('RABBITMQ_URL', "http://127.0.0.1:15672/api"),
                 "KAFKA_URL": os.environ.get('KAFKA_URL', "http://127.0.0.1:8082"),
-                "KEYCLOAK_URL": os.environ.get('KEYCLOAK_URL', f'{keycloak_baseurl}/auth')
+                "KEYCLOAK_URL": os.environ.get('KEYCLOAK_URL', f'{keycloak_baseurl}/auth/')
             }
     return json_obj
