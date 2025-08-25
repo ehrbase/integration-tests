@@ -278,7 +278,7 @@ PUT /definition/query/{qualified_query_name}
     ...                 Expected status code 200.
     ...                 Returns combination of qualified_query_name and version, in format
     ...                 {random_query_qualified_name}/{random_query_version}
-    [Arguments]     ${query_to_store}    ${format}=json     ${multitenancy_token}=${None}
+    [Arguments]     ${query_to_store}    ${format}=json     ${multitenancy_token}=${None}   ${query_type}=${None}
     &{headers}      Create Dictionary
     IF      '${AUTH_TYPE}' == 'BASIC'
         Set To Dictionary       ${headers}      &{authorization}
@@ -298,14 +298,26 @@ PUT /definition/query/{qualified_query_name}
     Set Test Variable   ${random_query_version}   ${random_version}
     ${random_qualified_name}    Generate Qualified Query Name To Store Query Multitenancy
     Set Test Variable   ${random_query_qualified_name}      ${random_qualified_name}
-    ${resp}     PUT On Session      ${SUT}
-    ...         /definition/query/${random_query_qualified_name}
-    ...         expected_status=anything
-    ...         data=${query}       headers=${headers}
-                Should Be Equal As Strings      ${resp.status_code}     ${200}
-                IF      '${format}' == 'json'
-                    Set Test Variable       ${resp}     ${resp.json()}
-                END
+    IF      '${query_type}' != '${None}'
+        ${query_type_param}     Create Dictionary   query_type=${query_type}
+        ${resp}     PUT On Session      ${SUT}
+        ...         /definition/query/${random_query_qualified_name}
+        ...         expected_status=anything
+        ...         data=${query}       params=${query_type_param}      headers=${headers}
+                    Should Be Equal As Strings      ${resp.status_code}     ${200}
+                    IF      '${format}' == 'json'
+                        Set Test Variable       ${resp}     ${resp.json()}
+                    END
+    ELSE
+        ${resp}     PUT On Session      ${SUT}
+        ...         /definition/query/${random_query_qualified_name}
+        ...         expected_status=anything
+        ...         data=${query}       headers=${headers}
+                    Should Be Equal As Strings      ${resp.status_code}     ${200}
+                    IF      '${format}' == 'json'
+                        Set Test Variable       ${resp}     ${resp.json()}
+                    END
+    END
     RETURN    ${random_query_qualified_name}
 
 PUT /definition/query/{qualified_query_name}/{version}
