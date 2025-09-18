@@ -304,19 +304,21 @@ PUT /definition/query/{qualified_query_name}
         ...         /definition/query/${random_query_qualified_name}
         ...         expected_status=anything
         ...         data=${query}       params=${query_type_param}      headers=${headers}
+                    Set Test Variable       ${resp}     ${resp}
                     Should Be Equal As Strings      ${resp.status_code}     ${200}
-                    IF      '${format}' == 'json'
-                        Set Test Variable       ${resp}     ${resp.json()}
-                    END
+#                    IF      '${format}' == 'json'
+#                        Set Test Variable       ${resp}     ${resp.json()}
+#                    END
     ELSE
         ${resp}     PUT On Session      ${SUT}
         ...         /definition/query/${random_query_qualified_name}
         ...         expected_status=anything
         ...         data=${query}       headers=${headers}
+                    Set Test Variable       ${resp}     ${resp}
                     Should Be Equal As Strings      ${resp.status_code}     ${200}
-                    IF      '${format}' == 'json'
-                        Set Test Variable       ${resp}     ${resp.json()}
-                    END
+#                    IF      '${format}' == 'json'
+#                        Set Test Variable       ${resp}     ${resp.json()}
+#                    END
     END
     RETURN    ${random_query_qualified_name}
 
@@ -624,6 +626,30 @@ GET /query/{qualified_query_name}/{version}
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
     RETURN    ${resp}
+
+GET /query/{qualified_query_name}/{version} With Query Params
+    [Documentation]     Execute through GET stored AQL from EHRBase, using below endpoint:
+    ...                 - GET /rest/openehr/v1/query/{qualified_query_name}/{version}
+    ...                 Takes 2 mandatory args {qualif_name} as criteria to get the query, {query_params} as dict to get values from
+    ...                 {qualif_name} must have the following format: {qualified_query_name}/{version}
+    ...                 {query_params} must have the following format: {"query_parameters": {"var1":"value1","var2":"value2",...}}
+    ...                 Expected status code 200.
+    ...                 Returns {resp}, with query and rows from response.
+    [Arguments]     ${qualif_name}      ${query_params}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${query_params_to_inject}     Set Variable    {"query_parameters": ${query_params}}
+    ${resp}     GET On Session      ${SUT}
+    ...         /query/${qualif_name}
+    ...         expected_status=anything
+    ...         json=${query_params_to_inject}
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Set Test Variable   ${resp}     ${resp.json()}
+    RETURN      ${resp}
 
 POST /query/{qualified_query_name}/{version}
     [Documentation]     Execute through POST stored AQL from EHRBase, using below endpoint:
