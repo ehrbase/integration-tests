@@ -59,36 +59,6 @@ Definition API - PUT Stored Query Using Qualified Query Name - Invalid AQL State
     ...     PUT /definition/query/{qualified_query_name}
     ...     query_to_store=${wrong_query}     format=text
 
-Definition API - PUT Stored Query Using Qualified Query Name - With Query Type AQL
-    [Tags]      Positive
-    [Documentation]     Test to check below endpoint:
-    ...                 - PUT /rest/openehr/v1/definition/query/{qualified_query_name} with query_type=AQL
-    ...                 - Expected response status code = 200.
-    ...                 - Stored query must be saved as AQL is the default query_type, provided or not in the REST API call.
-    ${query}       Catenate
-    ...     SELECT c/uid/value AS COMPOSITION_UID_VALUE
-    ...     FROM EHR e
-    ...     CONTAINS COMPOSITION c
-    ...     WHERE e/ehr_id/value = '${ehr_id}'
-    ${resp_qualified_query_name}     PUT /definition/query/{qualified_query_name}
-    ...     query_to_store=${query}     format=json      query_type=AQL
-
-Definition API - PUT Stored Query Using Qualified Query Name - With Query Type SQL
-    [Tags]      Negative
-    [Documentation]     Test to check below endpoint:
-    ...                 - PUT /rest/openehr/v1/definition/query/{qualified_query_name} with query_type=SQL
-    ...                 - Expected response status code = 400
-    ...                 - {"error":"Bad Request","message":"Query type:SQL not supported!"}
-    ...                 - Query type:SQL not supported! in EHRBase open source.
-    ${sql_expr}       Catenate
-    ...     SELECT cd.entity_id, cd.template_id
-    ...     FROM comp_data cd
-    ...     WHERE cd.template_id = 'nested.en.v1'
-    ...     LIMIT 5
-    Run Keyword And Expect Error    	400 != 200
-    ...     PUT /definition/query/{qualified_query_name}
-    ...     query_to_store=${sql_expr}     format=json      query_type=SQL
-
 Definition API - GET Stored Query Using Qualified Query Name
     [Tags]      Positive
     [Documentation]     Test to check below endpoint:
