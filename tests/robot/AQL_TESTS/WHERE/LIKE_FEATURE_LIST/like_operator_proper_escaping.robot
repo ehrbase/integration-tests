@@ -1,7 +1,6 @@
 *** Settings ***
 Documentation   WHERE - LIKE FEATURE LIST - LIKE OPERATOR PROPER ESCAPING
 ...             - Covers bug ticket: https://vitagroup-ag.atlassian.net/browse/CDR-1675
-Library         Dialogs
 
 Resource        ../../../_resources/keywords/aql_keywords.robot
 
@@ -59,4 +58,3 @@ Precondition
     Create EHR For AQL
     Commit Composition For AQL      nested_compo_custom_dv_text.json
     Set Suite Variable       ${c_uid}       ${composition_short_uid}
-    Pause Execution
