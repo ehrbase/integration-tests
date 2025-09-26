@@ -627,12 +627,34 @@ GET /query/{qualified_query_name}/{version}
                 Set Test Variable       ${resp}         ${resp.json()}
     RETURN    ${resp}
 
+POST /query/{qualified_query_name}/{version} With Query Params
+    [Documentation]     Execute through POST stored AQL from EHRBase, using below endpoint:
+    ...                 - POST /rest/openehr/v1/query/{qualified_query_name}/{version}
+    ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
+    ...                 {qualif_name} must have the following format: {qualified_query_name}/{version}
+    ...                 Expected status code 200.
+    ...                 Returns {resp}, with query and rows from response.
+    [Arguments]     ${qualif_name}  ${query_params}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${query_params_to_inject}       Create Dictionary     query_parameters=${query_params}
+    ${resp}     POST On Session      ${SUT}
+    ...         /query/${qualif_name}
+    ...         expected_status=anything
+    ...         json=${query_params_to_inject}
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Set Test Variable       ${resp}         ${resp.json()}
+    RETURN    ${resp}
+
 GET /query/{qualified_query_name}/{version} With Query Params
     [Documentation]     Execute through GET stored AQL from EHRBase, using below endpoint:
-    ...                 - GET /rest/openehr/v1/query/{qualified_query_name}/{version}
-    ...                 Takes 2 mandatory args {qualif_name} as criteria to get the query, {query_params} as dict to get values from
+    ...                 - GET /rest/openehr/v1/query/{qualified_query_name}/{version}?query_parameters={query_params}
+    ...                 Takes 2 mandatory args {qualif_name} as criteria to get the query, {query_params} as ehr_id=your-uuid
     ...                 {qualif_name} must have the following format: {qualified_query_name}/{version}
-    ...                 {query_params} must have the following format: {"query_parameters": {"var1":"value1","var2":"value2",...}}
     ...                 Expected status code 200.
     ...                 Returns {resp}, with query and rows from response.
     [Arguments]     ${qualif_name}      ${query_params}
@@ -641,11 +663,11 @@ GET /query/{qualified_query_name}/{version} With Query Params
         Set To Dictionary       ${headers}      &{authorization}
     END
     Create Session      ${SUT}      ${BASEURL}      debug=2
-    ${query_params_to_inject}     Set Variable    {"query_parameters": ${query_params}}
+    ${query_params_to_inject}       Create Dictionary     query_parameters=${query_params}
     ${resp}     GET On Session      ${SUT}
     ...         /query/${qualif_name}
     ...         expected_status=anything
-    ...         json=${query_params_to_inject}
+    ...         params=query_parameters=${query_params}
     ...         headers=${headers}
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable   ${resp}     ${resp.json()}
