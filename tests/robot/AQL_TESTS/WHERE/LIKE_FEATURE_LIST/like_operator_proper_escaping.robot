@@ -28,7 +28,6 @@ ${global_query}     SELECT c0/content/items/activities/description/items[openEHR
     Should Contain                  ${resp_body['rows'][0][1]}     20\%
 
 2. Like '* 20%*'
-    [Tags]      not-ready
     ${temp_query}    Catenate   ${global_query}
     ...                         LIKE '* 20%*'
     ${query}    Replace Variables       ${temp_query}
@@ -39,16 +38,13 @@ ${global_query}     SELECT c0/content/items/activities/description/items[openEHR
     Should Contain                  ${resp_body['rows'][0][1]}     20\%
 
 3. Like '*20\\\\%*'
-    [Tags]      not-ready
     [Documentation]     Expects 400, with IllegalAqlException.
-    ...                 Currently returns 500 Internal Server Error, with IllegalArgumentException.
     ${temp_query}   Catenate   ${global_query}
     ...                         LIKE '*20\\\\\\\\%*'
-    #Log     ${query}   LIKE '*20\\\\\\\\%*'
     ${err_msg}      Run Keyword And Expect Error    *
     ...     Set AQL And Execute Ad Hoc Query    ${temp_query}
     Should Contain      ${err_msg}      400 != 200
-    Should Contain      ${err_msg}      JSON parse error: Unrecognized character escape '%'
+    Should Contain      ${err_msg}      Invalid LIKE pattern: *20\\\\%*
 
 
 *** Keywords ***
