@@ -278,7 +278,7 @@ PUT /definition/query/{qualified_query_name}
     ...                 Expected status code 200.
     ...                 Returns combination of qualified_query_name and version, in format
     ...                 {random_query_qualified_name}/{random_query_version}
-    [Arguments]     ${query_to_store}    ${format}=json     ${multitenancy_token}=${None}
+    [Arguments]     ${query_to_store}    ${format}=json     ${multitenancy_token}=${None}   ${query_type}=${None}
     &{headers}      Create Dictionary
     IF      '${AUTH_TYPE}' == 'BASIC'
         Set To Dictionary       ${headers}      &{authorization}
@@ -298,14 +298,28 @@ PUT /definition/query/{qualified_query_name}
     Set Test Variable   ${random_query_version}   ${random_version}
     ${random_qualified_name}    Generate Qualified Query Name To Store Query Multitenancy
     Set Test Variable   ${random_query_qualified_name}      ${random_qualified_name}
-    ${resp}     PUT On Session      ${SUT}
-    ...         /definition/query/${random_query_qualified_name}
-    ...         expected_status=anything
-    ...         data=${query}       headers=${headers}
-                Should Be Equal As Strings      ${resp.status_code}     ${200}
-                IF      '${format}' == 'json'
-                    Set Test Variable       ${resp}     ${resp.json()}
-                END
+    IF      '${query_type}' != '${None}'
+        ${query_type_param}     Create Dictionary   query_type=${query_type}
+        ${resp}     PUT On Session      ${SUT}
+        ...         /definition/query/${random_query_qualified_name}
+        ...         expected_status=anything
+        ...         data=${query}       params=${query_type_param}      headers=${headers}
+                    Set Test Variable       ${resp}     ${resp}
+                    Should Be Equal As Strings      ${resp.status_code}     ${200}
+#                    IF      '${format}' == 'json'
+#                        Set Test Variable       ${resp}     ${resp.json()}
+#                    END
+    ELSE
+        ${resp}     PUT On Session      ${SUT}
+        ...         /definition/query/${random_query_qualified_name}
+        ...         expected_status=anything
+        ...         data=${query}       headers=${headers}
+                    Set Test Variable       ${resp}     ${resp}
+                    Should Be Equal As Strings      ${resp.status_code}     ${200}
+#                    IF      '${format}' == 'json'
+#                        Set Test Variable       ${resp}     ${resp.json()}
+#                    END
+    END
     RETURN    ${random_query_qualified_name}
 
 PUT /definition/query/{qualified_query_name}/{version}
@@ -612,6 +626,52 @@ GET /query/{qualified_query_name}/{version}
                 Should Be Equal As Strings      ${resp.status_code}     ${200}
                 Set Test Variable       ${resp}         ${resp.json()}
     RETURN    ${resp}
+
+POST /query/{qualified_query_name}/{version} With Query Params
+    [Documentation]     Execute through POST stored AQL from EHRBase, using below endpoint:
+    ...                 - POST /rest/openehr/v1/query/{qualified_query_name}/{version}
+    ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
+    ...                 {qualif_name} must have the following format: {qualified_query_name}/{version}
+    ...                 Expected status code 200.
+    ...                 Returns {resp}, with query and rows from response.
+    [Arguments]     ${qualif_name}  ${query_params}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${query_params_to_inject}       Create Dictionary     query_parameters=${query_params}
+    ${resp}     POST On Session      ${SUT}
+    ...         /query/${qualif_name}
+    ...         expected_status=anything
+    ...         json=${query_params_to_inject}
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Set Test Variable       ${resp}         ${resp.json()}
+    RETURN    ${resp}
+
+GET /query/{qualified_query_name}/{version} With Query Params
+    [Documentation]     Execute through GET stored AQL from EHRBase, using below endpoint:
+    ...                 - GET /rest/openehr/v1/query/{qualified_query_name}/{version}?query_parameters={query_params}
+    ...                 Takes 2 mandatory args {qualif_name} as criteria to get the query, {query_params} as ehr_id=your-uuid
+    ...                 {qualif_name} must have the following format: {qualified_query_name}/{version}
+    ...                 Expected status code 200.
+    ...                 Returns {resp}, with query and rows from response.
+    [Arguments]     ${qualif_name}      ${query_params}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    IF      '${AUTH_TYPE}' == 'BASIC'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
+    Create Session      ${SUT}      ${BASEURL}      debug=2
+    ${query_params_to_inject}       Create Dictionary     query_parameters=${query_params}
+    ${resp}     GET On Session      ${SUT}
+    ...         /query/${qualif_name}
+    ...         expected_status=anything
+    ...         params=query_parameters=${query_params}
+    ...         headers=${headers}
+                Should Be Equal As Strings      ${resp.status_code}     ${200}
+                Set Test Variable   ${resp}     ${resp.json()}
+    RETURN      ${resp}
 
 POST /query/{qualified_query_name}/{version}
     [Documentation]     Execute through POST stored AQL from EHRBase, using below endpoint:
