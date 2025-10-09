@@ -1,0 +1,68 @@
+{
+	"meta": {
+		"_type": "RESULTSET",
+		"_schema_version": "1.0.4",
+		"_created": "2024-02-07T14:27:03.3849392+02:00",
+		"_executed_aql": "SELECT MAX(o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value), o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+		"resultsize": 3
+	},
+	"q": "SELECT MAX(o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value), o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"name": "#0"
+		},
+		{
+			"path": "o/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			null,
+			{
+				"_type": "DV_TEXT",
+				"value": "Lorem ipsum2"
+			}
+		],
+		[
+			null,
+			{
+				"_type": "DV_TEXT",
+				"value": "Lorem ipsum",
+				"mappings": [
+					{
+						"_type": "TERM_MAPPING",
+						"match": "=",
+						"target": {
+							"_type": "CODE_PHRASE",
+							"terminology_id": {
+								"_type": "TERMINOLOGY_ID",
+								"value": "SNOMED-CT"
+							},
+							"code_string": "21794005"
+						}
+					},
+					{
+						"_type": "TERM_MAPPING",
+						"match": ">",
+						"target": {
+							"_type": "CODE_PHRASE",
+							"terminology_id": {
+								"_type": "TERMINOLOGY_ID",
+								"value": "SNOMED-CT"
+							},
+							"code_string": "21794000"
+						}
+					}
+				]
+			}
+		],
+		[
+			null,
+			{
+				"_type": "DV_TEXT",
+				"value": "Lorem ipsum3"
+			}
+		]
+	]
+}

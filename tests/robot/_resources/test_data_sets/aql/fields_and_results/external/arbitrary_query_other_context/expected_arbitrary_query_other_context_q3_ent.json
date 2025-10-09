@@ -1,0 +1,17 @@
+{
+	"q": "SELECT c/context/other_context/name FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.report-result.v1] ",
+	"columns": [
+		{
+			"path": "c/context/other_context/name",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "DV_TEXT",
+				"value": "Baum"
+			}
+		]
+	]
+}
