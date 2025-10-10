@@ -1,5 +1,5 @@
 {
-	"q": "SELECT c/uid/value FROM EHR e[ehr_id/value = '${ehr_id1}' or ehr_id/value = '${ehr_id2}'] CONTAINS COMPOSITION c WHERE ${where}",
+	"q": "SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE ${where}",
 	"columns": [
 		{
 			"path": "c/uid/value",
