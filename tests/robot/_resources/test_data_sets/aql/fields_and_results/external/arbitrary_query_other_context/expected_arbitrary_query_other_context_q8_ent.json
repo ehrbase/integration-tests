@@ -1,0 +1,14 @@
+{
+	"q": "SELECT c/context/other_context[at0001]/items[at0002]/value/value FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.report-result.v1] ",
+	"columns": [
+		{
+			"path": "c/context/other_context[at0001]/items[at0002]/value/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"15a69a62-1ea7-4111-98a5-28aeae854bcd"
+		]
+	]
+}

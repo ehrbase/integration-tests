@@ -1,0 +1,79 @@
+{
+	"q": "SELECT o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude, a/description[at0001]/items[at0002]/value/value FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS ((COMPOSITION c1[openEHR-EHR-COMPOSITION.health_summary.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o))",
+	"columns": [
+		{
+			"path": "o/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude",
+			"name": "#0"
+		},
+		{
+			"path": "a/description[at0001]/items[at0002]/value/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			null,
+			"Ultrasound"
+		],
+		[
+			null,
+			"Lorem ipsum"
+		],
+		[
+			null,
+			"Ultrasound"
+		],
+		[
+			null,
+			"Ultrasound"
+		],
+		[
+			100.0,
+			"Ultrasound"
+		],
+		[
+			100.0,
+			"Lorem ipsum"
+		],
+		[
+			100.0,
+			"Ultrasound"
+		],
+		[
+			100.0,
+			"Ultrasound"
+		],
+		[
+			null,
+			"Ultrasound"
+		],
+		[
+			null,
+			"Lorem ipsum"
+		],
+		[
+			null,
+			"Ultrasound"
+		],
+		[
+			null,
+			"Ultrasound"
+		],
+		[
+			130.0,
+			"Ultrasound"
+		],
+		[
+			130.0,
+			"Lorem ipsum"
+		],
+		[
+			130.0,
+			"Ultrasound"
+		],
+		[
+			130.0,
+			"Ultrasound"
+		]
+	]
+}
