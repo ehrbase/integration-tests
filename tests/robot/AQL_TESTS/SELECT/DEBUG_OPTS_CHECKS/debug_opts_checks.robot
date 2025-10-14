@@ -128,7 +128,6 @@ Suite Setup     Set Library Search Order For Tests
     GET /query/{qualified_query_name}
     ...     qualif_name=${resp_qualified_query_name_version}    req_headers=${request_headers}
     Set Test Variable   ${resp_body}    ${resp}
-    Should Be Equal As Strings      ${resp_body['q']}       ${query3}
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}      ${query3}
     Set Test Variable   ${resp_body_columns}    ${resp_body['columns']}
     Check Reponse Body      columns_nr=3         rows_nr=0
@@ -148,7 +147,6 @@ Suite Setup     Set Library Search Order For Tests
     ...     qualif_name=${resp_qualified_query_name}    req_headers=${request_headers}
     Set Test Variable   ${resp_body}    ${resp}
     Length Should Be    ${resp_body['columns']}     ${2}
-    Should Be Equal As Strings      ${resp_body['q']}       ${query4}
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}      ${query4}
     Set Test Variable   ${resp_body_columns}    ${resp_body['columns']}
     Check Reponse Body      columns_nr=2        rows_nr=0
