@@ -29,7 +29,7 @@ Suite Setup     Set Library Search Order For Tests
     ...     EHRbase-AQL-Executed-SQL=true
     ...     EHRbase-AQL-Query-Plan=true
     Set Test Variable      ${query1}
-    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c[uid/value='${compo_id}::${system_id_with_tenant}::1'] CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
     Set Test Variable       ${test_data}    {"q":"${query1}"}
     Send Ad Hoc Request     aql_body=${test_data}   req_headers=${request_headers}
     Check Reponse Body      columns_nr=4         rows_nr=0
@@ -50,7 +50,7 @@ Suite Setup     Set Library Search Order For Tests
     #Should Be Equal As Strings      ${resp_body['meta']['dry_run']}    ${FALSE}
     Should Be Equal As Strings      ${resp_body_query}   ${query2}
     Should Be Equal As Strings      ${executed_aql}
-    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c[uid/value='${compo_id}::${system_id_with_tenant}::1'] CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
 
 1.b Query - Ad-Hoc Query POST - Query Params - Limit And Offset - Check Debug Options
     &{request_headers}      Create Dictionary
@@ -59,7 +59,7 @@ Suite Setup     Set Library Search Order For Tests
     ...     EHRbase-AQL-Executed-SQL=true
     ...     EHRbase-AQL-Query-Plan=true
     Set Test Variable       ${query2}
-    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = \$compo_id
+    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c[uid/value=\$compo_id] CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
     ${parameter_obj}    Set Variable    {"compo_id": \"${compo_id}::${system_id_with_tenant}::1\" }
     Set Test Variable       ${test_data}    {"q":"${query2}","query_parameters":${parameter_obj}, "offset": 1, "fetch": 2}
     Send Ad Hoc Request     aql_body=${test_data}   req_headers=${request_headers}
@@ -72,7 +72,7 @@ Suite Setup     Set Library Search Order For Tests
     ...     EHRbase-AQL-Executed-SQL=false
     ...     EHRbase-AQL-Query-Plan=true
     Set Test Variable       ${query3}
-    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id}'
+    ...     SELECT c/uid/value FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c
     Send Ad Hoc Request Through GET     q_param=${query3}   req_headers=${request_headers}
     Length Should Be    ${resp_body_columns}    ${1}
     Length Should Be    ${resp_body['rows']}    ${0}
@@ -96,7 +96,7 @@ Suite Setup     Set Library Search Order For Tests
     Length Should Be    ${resp_body['rows']}    ${0}
     Should Be Equal As Strings      ${resp_body_query}      ${query3}
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}
-    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id}'
+    ...     SELECT c/uid/value FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c
     Dictionary Should Not Contain Key   ${resp_body['meta']}    query_plan
 
 2.b Query - Ad-Hoc Query GET - Query Params - Limit And Offset - Check Debug Options
@@ -112,7 +112,7 @@ Suite Setup     Set Library Search Order For Tests
     Send Ad Hoc Request     aql_body=${test_data}   req_headers=${request_headers}
     Should Be Equal As Strings      ${resp_body_query}      ${query3}
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}
-    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id}' LIMIT 1 OFFSET 1
+    ...     SELECT c/uid/value FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c LIMIT 1 OFFSET 1
     Check Reponse Body      columns_nr=1         rows_nr=0
 
 3. Query - Stored Query GET By Qualified Query Name And Version - Check Debug Options
@@ -122,7 +122,7 @@ Suite Setup     Set Library Search Order For Tests
     ...     EHRbase-AQL-Executed-SQL=true
     ...     EHRbase-AQL-Query-Plan=true
     Set Test Variable      ${query3}
-    ...     SELECT c/uid/value, o/uid/value, p/time/value FROM COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    ...     SELECT c/uid/value, o/uid/value, p/time/value FROM COMPOSITION c[uid/value='${compo_id}::${system_id_with_tenant}::1'] CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
     ${resp_qualified_query_name_version}     PUT /definition/query/{qualified_query_name}/{version}
     ...     query_to_store=${query3}     format=text
     GET /query/{qualified_query_name}
@@ -141,7 +141,7 @@ Suite Setup     Set Library Search Order For Tests
     ...     EHRbase-AQL-Executed-SQL=true
     ...     EHRbase-AQL-Query-Plan=true
     Set Test Variable      ${query4}
-    ...     SELECT o/uid/value, p/time/value FROM COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    ...     SELECT o/uid/value, p/time/value FROM COMPOSITION c[uid/value='${compo_id}::${system_id_with_tenant}::1'] CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
     ${resp_qualified_query_name}     PUT /definition/query/{qualified_query_name}
     ...     query_to_store=${query4}     format=text
     ${resp_query}       POST /query/{qualified_query_name}

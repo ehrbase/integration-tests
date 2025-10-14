@@ -11,11 +11,11 @@ Suite Setup     Set Library Search Order For Tests
 *** Test Cases ***
 1. Query - Ad-Hoc Query POST
     [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
-    ...         - Send AQL "SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '{compo_id}::{system_id_with_tenant}::1'"
+    ...         - Send AQL "SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c[uid/value='${compo_id}::${system_id_with_tenant}::1'] CONTAINS OBSERVATION o CONTAINS POINT_EVENT p"
     ...         - Check _executed_aql item is present in response body, meta object.
     [Setup]     Precondition
     Set Test Variable      ${query1}
-    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c[uid/value='${compo_id}::${system_id_with_tenant}::1'] CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
     Set Test Variable       ${test_data}    {"q":"${query1}"}
     Send Ad Hoc Request     aql_body=${test_data}
     Check Reponse Body
@@ -30,7 +30,7 @@ Suite Setup     Set Library Search Order For Tests
     Check Reponse Body
     Should Be Equal As Strings      ${resp_body_query}   ${query2}
     Should Be Equal As Strings      ${executed_aql}
-    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c[uid/value='${compo_id}::${system_id_with_tenant}::1'] CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
 
 1.b Query - Ad-Hoc Query POST - Query Params - Limit And Offset
     Set Test Variable       ${query2}
@@ -42,7 +42,7 @@ Suite Setup     Set Library Search Order For Tests
     Should Be Equal     ${resp_body['meta']['resultsize']}      ${2}
     Should Be Equal As Strings      ${resp_body_query}      ${query2}
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}
-    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1' LIMIT 2 OFFSET 1
+    ...     SELECT e/ehr_id/value, c/uid/value, o/uid/value, p/time/value FROM EHR e CONTAINS COMPOSITION c[uid/value='${compo_id}::${system_id_with_tenant}::1'] CONTAINS OBSERVATION o CONTAINS POINT_EVENT p LIMIT 2 OFFSET 1
 
 1.c Query - Ad-Hoc Query POST - Query Params - MATCHES Multiple Values
     Set Test Variable       ${query_matches1}
@@ -80,7 +80,7 @@ Suite Setup     Set Library Search Order For Tests
 
 2. Query - Ad-Hoc Query GET
     Set Test Variable       ${query3}
-    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id}'
+    ...     SELECT c/uid/value FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c
     Send Ad Hoc Request Through GET     q_param=${query3}
     Length Should Be    ${resp_body_columns}    ${1}
     Should Be Equal     ${resp_body['meta']['resultsize']}      ${1}
@@ -98,7 +98,7 @@ Suite Setup     Set Library Search Order For Tests
     Should Be Equal     ${resp_body['meta']['resultsize']}      ${1}
     Should Be Equal As Strings      ${resp_body_query}      ${query3}
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}
-    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id}'
+    ...     SELECT c/uid/value FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c
 
 2.b Query - Ad-Hoc Query GET - Query Params - Limit And Offset
     Set Test Variable       ${query3}
@@ -109,7 +109,7 @@ Suite Setup     Set Library Search Order For Tests
     Length Should Be    ${resp_body['rows']}    ${0}
     Should Be Equal As Strings      ${resp_body_query}      ${query3}
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}
-    ...     SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value = '${ehr_id}' LIMIT 1 OFFSET 1
+    ...     SELECT c/uid/value FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS COMPOSITION c LIMIT 1 OFFSET 1
 
 2.c Query - Ad-Hoc Query GET - Query Params Fetch And Offset - Query Limit And Offset
     [Documentation]     Covers https://vitagroup-ag.atlassian.net/browse/CDR-1391
@@ -156,7 +156,7 @@ Suite Setup     Set Library Search Order For Tests
 
 3. Query - Stored Query GET By Qualified Query Name And Version
     Set Test Variable      ${query3}
-    ...     SELECT c/uid/value, o/uid/value, p/time/value FROM COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    ...     SELECT c/uid/value, o/uid/value, p/time/value FROM COMPOSITION c[uid/value='${compo_id}::${system_id_with_tenant}::1'] CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
     ${resp_qualified_query_name_version}     PUT /definition/query/{qualified_query_name}/{version}
     ...     query_to_store=${query3}     format=text
     GET /query/{qualified_query_name}
@@ -169,7 +169,7 @@ Suite Setup     Set Library Search Order For Tests
 4. Query - Stored Query POST By Qualified Query Name
     [Documentation]     - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
     Set Test Variable      ${query4}
-    ...     SELECT o/uid/value, p/time/value FROM COMPOSITION c CONTAINS OBSERVATION o CONTAINS POINT_EVENT p WHERE c/uid/value = '${compo_id}::${system_id_with_tenant}::1'
+    ...     SELECT o/uid/value, p/time/value FROM COMPOSITION c[uid/value='${compo_id}::${system_id_with_tenant}::1'] CONTAINS OBSERVATION o CONTAINS POINT_EVENT p
     ${resp_qualified_query_name}     PUT /definition/query/{qualified_query_name}
     ...     query_to_store=${query4}     format=text
     ${resp_query}       POST /query/{qualified_query_name}
