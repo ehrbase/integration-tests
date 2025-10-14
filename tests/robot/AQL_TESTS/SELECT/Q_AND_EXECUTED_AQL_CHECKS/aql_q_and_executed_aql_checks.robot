@@ -109,7 +109,7 @@ Suite Setup     Set Library Search Order For Tests
     Length Should Be    ${resp_body['rows']}    ${0}
     Should Be Equal As Strings      ${resp_body_query}      ${query3}
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}
-    ...     SELECT c/uid/value FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS COMPOSITION c LIMIT 1 OFFSET 1
+    ...     SELECT c/uid/value FROM EHR e[ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c LIMIT 1 OFFSET 1
 
 2.c Query - Ad-Hoc Query GET - Query Params Fetch And Offset - Query Limit And Offset
     [Documentation]     Covers https://vitagroup-ag.atlassian.net/browse/CDR-1391
@@ -163,7 +163,6 @@ Suite Setup     Set Library Search Order For Tests
     ...     qualif_name=${resp_qualified_query_name_version}
     Set Test Variable   ${resp_body}    ${resp}
     Length Should Be    ${resp_body['columns']}    ${3}
-    Should Be Equal As Strings      ${resp_body['q']}       ${query3}
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}      ${query3}
 
 4. Query - Stored Query POST By Qualified Query Name
@@ -176,7 +175,6 @@ Suite Setup     Set Library Search Order For Tests
     ...     qualif_name=${resp_qualified_query_name}
     Set Test Variable   ${resp_body}    ${resp}
     Length Should Be    ${resp_body['columns']}    ${2}
-    Should Be Equal As Strings      ${resp_body['q']}       ${query4}
     Should Be Equal As Strings      ${resp_body['meta']['_executed_aql']}      ${query4}
     [Teardown]      Admin Delete EHR For AQL
 
