@@ -58,7 +58,7 @@ GET Stored Query - Admin User Creds
 Execute Stored Query (POST) - Admin User Creds
     ${resp_query}       POST /query/{qualified_query_name}/{version}
     ...     qualif_name=${resp_qualified_query_name_version}
-    Should Be Equal As Strings      ${resp_query['q']}  ${initial_query}
+    Should Be Equal As Strings      ${resp_query['name']}  ${resp_qualified_query_name_version}
 
 Execute Ad-Hoc Query - Admin User Creds
     Set Test Variable       ${test_data}    {"q":"${initial_query}"}
