@@ -1,0 +1,16 @@
+{
+	"q": "SELECT MAX(o/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value) FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0]",
+	"columns": [
+		{
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			{
+				"_type": "DV_DATE_TIME",
+				"value": "2023-02-03T04:05:06"
+			}
+		]
+	]
+}

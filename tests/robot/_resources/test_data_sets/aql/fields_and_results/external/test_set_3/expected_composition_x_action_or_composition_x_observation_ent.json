@@ -1,0 +1,323 @@
+{
+	"q": "SELECT a/description[at0001]/items[at0002]/value/value, a/description[at0001]/items[at0002]/value/value FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS ((COMPOSITION c1[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS ACTION a) OR (COMPOSITION c2[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION o))",
+	"columns": [
+		{
+			"path": "a/description[at0001]/items[at0002]/value/value",
+			"name": "#0"
+		},
+		{
+			"path": "a/description[at0001]/items[at0002]/value/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"Lorem ipsum",
+			"Lorem ipsum"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"Lorem ipsum",
+			"Lorem ipsum"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"Lorem ipsum",
+			"Lorem ipsum"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"Lorem ipsum",
+			"Lorem ipsum"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"Lorem ipsum",
+			"Lorem ipsum"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"Lorem ipsum",
+			"Lorem ipsum"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"Lorem ipsum",
+			"Lorem ipsum"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"Lorem ipsum",
+			"Lorem ipsum"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"Lorem ipsum",
+			"Lorem ipsum"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"Lorem ipsum",
+			"Lorem ipsum"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		],
+		[
+			"Lorem ipsum",
+			"Lorem ipsum"
+		],
+		[
+			"X-Ray Of Arm",
+			"X-Ray Of Arm"
+		],
+		[
+			"Ultrasound of Abdomen",
+			"Ultrasound of Abdomen"
+		]
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"q": "SELECT MAX(o/data[at0001]/events[at0002]/data[at0003]/items[at0005]/value/value) FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.conformance_observation.v0] WHERE o/data[at0001]/events[at0002]/data[at0003]/items[at0005]/value/value != 'term1'",
+	"columns": [
+		{
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			null
+		]
+	]
+}
