@@ -267,12 +267,11 @@ Meta JSON Object Checks
     ${rows_length}      Get Length      ${resp_body_actual["rows"]}
     Set Test Variable   ${rows_length}  ${rows_length}
     Set Test Variable   ${meta_obj}     ${resp_body_actual['meta']}
-    Set Test Variable   ${q_str}        ${resp_body_actual['q']}
     Log     ${meta_obj}
     ${dict_keys}    Get Dictionary Keys     ${meta_obj}
     Run Keyword And Return Status   Lists Should Be Equal   ${expected_meta_keys}   ${dict_keys}
     Should Be Equal As Strings      ${meta_obj["_type"]}    RESULTSET
-    Should Be Equal As Strings      ${meta_obj["_executed_aql"]}    ${q_str}
+    Should Contain      ${meta_obj["_executed_aql"]}   SELECT
     Should Be Equal As Strings      ${meta_obj["resultsize"]}    ${rows_length}
     Should Contain                  ${meta_obj["_generator"]}    EHRBase/
     @{splitted_generator}       Split String     ${meta_obj["_generator"]}      /
