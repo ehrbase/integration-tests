@@ -9,6 +9,7 @@
 	"rows": [
 		[
 			{
+                "_type": "HISTORY",
 				"name": {
 					"_type": "DV_TEXT",
 					"value": "History"
