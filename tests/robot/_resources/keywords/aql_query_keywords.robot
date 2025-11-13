@@ -171,10 +171,10 @@ load expected results-data-set (EMPTY DB)
                         Set Test Variable      ${expected_result}    ${file}
 
 Replace Uid With Actual
-    [Arguments]    ${input file}  ${uid}  ${output file}
+    [Arguments]    ${input file}  ${uid}  ${output file}    ${str_to_be_replaced}=replaceme
     [Documentation]     Takes the uid and aql file as input and replace the string 'replaceme' with the uid
     ${template} = 	Get File 	${input file}
-    ${replaced_template}=  Replace String  ${template}  replaceme  ${uid}
+    ${replaced_template}    Replace String   ${template}    ${str_to_be_replaced}   ${uid}
     Create File     ${output file}    ${replaced_template}
     #Output Debug Info To Console
 
