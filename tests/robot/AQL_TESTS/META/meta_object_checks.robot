@@ -157,7 +157,7 @@ ${query8}   SELECT o FROM SECTION[openEHR-EHR-SECTION.conformance_section.v0] CO
 
 4. Execute Ad Hoc Query With GET Limit 1 As Parameter And Check Meta JSON Object
     [Documentation]     *Query*: ${query3}
-    ...     ${\n}*Method and endpoint:* GET http://{base_url}/ehrbase/rest/openehr/v1/query/aql?q={query8}&limit=1
+    ...     ${\n}*Method and endpoint:* GET http://{base_url}/ehrbase/rest/openehr/v1/query/aql?q={query3}&limit=1
     ...     \n*Expect:* \nmeta object content: ${expected_meta_keys_get}
     ...     \nRows items length = value from meta.resultsize
     ...     \nmeta._type = RESULTSET

@@ -1,5 +1,5 @@
 {
-    "q": "SELECT o FROM COMPOSITION CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS ELEMENT e[at0004]",
+    "q": "SELECT o FROM COMPOSITION CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.blood_pressure.v2] CONTAINS ELEMENT[at0004]",
     "columns": [
         {
             "path": "o",

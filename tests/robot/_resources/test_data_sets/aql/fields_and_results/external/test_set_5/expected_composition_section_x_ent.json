@@ -1,0 +1,137 @@
+{
+	"q": "SELECT s/name/value as name FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS COMPOSITION CONTAINS SECTION s[openEHR-EHR-SECTION.adhoc.v1]",
+	"columns": [
+		{
+			"path": "s/name/value",
+			"name": "name"
+		}
+	],
+	"rows": [
+		[
+			"Lab Tests"
+		],
+		[
+			"Pathology Test"
+		],
+		[
+			"Vitals"
+		],
+		[
+			"Procedure"
+		],
+		[
+			"Service Request"
+		],
+		[
+			"Medication Order"
+		],
+		[
+			"Lab Tests"
+		],
+		[
+			"Pathology Test"
+		],
+		[
+			"Vitals"
+		],
+		[
+			"Procedure"
+		],
+		[
+			"Service Request"
+		],
+		[
+			"Medication Order"
+		],
+		[
+			"Lab Tests"
+		],
+		[
+			"Pathology Test"
+		],
+		[
+			"Vitals"
+		],
+		[
+			"Procedure"
+		],
+		[
+			"Service Request"
+		],
+		[
+			"Medication Order"
+		],
+		[
+			"Lab Tests"
+		],
+		[
+			"Pathology Test"
+		],
+		[
+			"Vitals"
+		],
+		[
+			"Procedure"
+		],
+		[
+			"Service Request"
+		],
+		[
+			"Medication Order"
+		],
+		[
+			"Lab Tests"
+		],
+		[
+			"Pathology Test"
+		],
+		[
+			"Vitals"
+		],
+		[
+			"Procedure"
+		],
+		[
+			"Service Request"
+		],
+		[
+			"Medication Order"
+		],
+		[
+			"Lab Tests"
+		],
+		[
+			"Pathology Test"
+		],
+		[
+			"Vitals"
+		],
+		[
+			"Procedure"
+		],
+		[
+			"Service Request"
+		],
+		[
+			"Medication Order"
+		],
+		[
+			"Lab Tests"
+		],
+		[
+			"Pathology Test"
+		],
+		[
+			"Vitals"
+		],
+		[
+			"Procedure"
+		],
+		[
+			"Service Request"
+		],
+		[
+			"Medication Order"
+		]
+	]
+}
