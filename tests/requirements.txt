@@ -8,7 +8,7 @@ requests == 2.32.5
 robotframework-databaselibrary == 2.3.3
 #robotframework-mockserver == 0.0.7
 git+https://github.com/etsi-cti-admin/robotframework-mockserver.git
-robotframework-robocop == 6.10.1
+robotframework-robocop == 6.12.0
 robotframework-tidy == 4.18.0
 RESTinstance == 1.6.1
 
