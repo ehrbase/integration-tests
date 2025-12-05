@@ -71,11 +71,10 @@ Definition API - GET Stored Query Using Qualified Query Name
     ...                 \n*DEPENDS ON TEST* 'Definition API - PUT Stored Query Using Qualified Query Name'
     ${resp_query}       GET /definition/query/{qualified_query_name} / including {version}
     ...     qualif_name=${resp_qualified_query_name}
-    ${resp_versions_arr}    Set Variable    ${resp['versions'][0]}
-    Should Be Equal As Strings     ${resp_versions_arr['name']}       ${resp_qualified_query_name}
-    Should Be Equal As Strings     ${resp_versions_arr['type']}       AQL
-    Should Be Equal As Strings     ${resp_versions_arr['version']}    1.0.0
-    Log     ${resp_versions_arr['saved']}
+    Should Be Equal As Strings     ${resp_query['name']}       ${resp_qualified_query_name}
+    Should Be Equal As Strings     ${resp_query['type']}       AQL
+    Should Be Equal As Strings     ${resp_query['version']}    1.0.0
+    Log     ${resp_query['saved']}
 
 Definition API - PUT Stored Query Using Qualified Query Name And Version
     [Tags]      Positive
@@ -126,12 +125,21 @@ Definition API - GET All Stored Queries
     ...                 Expected:
     ...                 - response status code = 200
     ...                 - {stored_queries_count} > 1
+#    ${r1}   Set Variable    {"q":"123 SELECT c FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION obs[openEHR-EHR-OBSERVATION.blood_pressure.v1] WHERE obs/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude >= $systolic_bp","name":"org.openehr::compositionsaaa","type":"AQL","version":"1.0.0","saved":"2025-01-23T15:09:02.11303+01:00"}
+#    ${dict1}    Evaluate    json.loads('''${r1}''')    json
+#    ${r2}   Set Variable    {"q":"456 SELECT c FROM EHR e CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1] CONTAINS OBSERVATION obs[openEHR-EHR-OBSERVATION.blood_pressure.v1] WHERE obs/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude >= $systolic_bp","name":"org.openehr::compositionsccc","type":"AQL","version":"2.0.0","saved":"2025-04-23T17:23:43.11303+01:00"}
+#    ${dict2}    Evaluate    json.loads('''${r2}''')    json
+#    ${resp_query}     Create List     ${dict1}   ${dict2}
     ${resp_query}       GET /definition/query
-    ${resp_versions_arr}        Set Variable    ${resp_query['versions']}
-    ${stored_queries_count}     Get Length      ${resp_versions_arr}
+    ${stored_queries_count}     Get Length      ${resp_query}
     Should Be True    ${stored_queries_count} > ${1}
     FOR     ${INDEX}  IN RANGE  0   ${stored_queries_count}
-        Log     ${resp_versions_arr}[${INDEX}]
+        Dictionary Should Contain Key   ${resp_query[${INDEX}]}     q
+        Dictionary Should Contain Key   ${resp_query[${INDEX}]}     name
+        Dictionary Should Contain Key   ${resp_query[${INDEX}]}     type
+        Dictionary Should Contain Key   ${resp_query[${INDEX}]}     version
+        Dictionary Should Contain Key   ${resp_query[${INDEX}]}     saved
+        Should Be Equal     ${resp_query[${INDEX}]['type']}     AQL
     END
 
 Definition API - Non Existing Endpoint - DELETE Stored Query Using Qualified Query Name And Version
