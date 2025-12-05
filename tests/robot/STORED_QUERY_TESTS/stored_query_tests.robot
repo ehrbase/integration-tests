@@ -71,10 +71,11 @@ Definition API - GET Stored Query Using Qualified Query Name
     ...                 \n*DEPENDS ON TEST* 'Definition API - PUT Stored Query Using Qualified Query Name'
     ${resp_query}       GET /definition/query/{qualified_query_name} / including {version}
     ...     qualif_name=${resp_qualified_query_name}
-    Should Be Equal As Strings     ${resp_query['name']}       ${resp_qualified_query_name}
-    Should Be Equal As Strings     ${resp_query['type']}       AQL
-    Should Be Equal As Strings     ${resp_query['version']}    1.0.0
-    Log     ${resp_query['saved']}
+    ${resp_query_item}      Set Variable    ${resp_query[0]}
+    Should Be Equal As Strings     ${resp_query_item['name']}       ${resp_qualified_query_name}
+    Should Be Equal As Strings     ${resp_query_item['type']}       AQL
+    Should Be Equal As Strings     ${resp_query_item['version']}    1.0.0
+    Log     ${resp_query_item['saved']}
 
 Definition API - PUT Stored Query Using Qualified Query Name And Version
     [Tags]      Positive
