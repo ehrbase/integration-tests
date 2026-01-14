@@ -72,4 +72,5 @@ Force Tags
     Should Be Equal     ${response.json()['commit_audit']['change_type']['value']}   deleted
     Should Be True      '${create_compo_commit_audit_datetime}' != '${update_compo_commit_audit_datetime}'
     Should Be True      '${update_compo_commit_audit_datetime}' != '${delete_compo_commit_audit_datetime}'
+    Should Be True      '${create_compo_commit_audit_datetime}' != '${delete_compo_commit_audit_datetime}'
     [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
