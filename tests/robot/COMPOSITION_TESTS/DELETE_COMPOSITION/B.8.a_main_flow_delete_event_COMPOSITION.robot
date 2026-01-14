@@ -59,13 +59,13 @@ Force Tags
     get composition - latest version    JSON
     Set Test Variable   ${create_compo_commit_audit_datetime}     ${response.json()['commit_audit']['time_committed']['value']}
     Should Be Equal     ${response.json()['commit_audit']['change_type']['value']}   creation
-    Sleep   1s
+    Sleep   0.5s
     update composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.v2.xml
     check content of updated composition (JSON)
     get composition - latest version    JSON
     Set Test Variable   ${update_compo_commit_audit_datetime}     ${response.json()['commit_audit']['time_committed']['value']}
     Should Be Equal     ${response.json()['commit_audit']['change_type']['value']}   modification
-    Sleep   1s
+    Sleep   0.5s
     delete composition    ${composition_uid_v2}
     get composition - latest version    JSON
     Set Test Variable   ${delete_compo_commit_audit_datetime}     ${response.json()['commit_audit']['time_committed']['value']}
