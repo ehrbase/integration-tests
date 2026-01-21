@@ -1,0 +1,14 @@
+{
+	"q": "SELECT c/uid/value FROM EHR e CONTAINS COMPOSITION c WHERE ${where}",
+	"columns": [
+		{
+			"path": "c/uid/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"${c_uid1}::${system_id_with_tenant}::1"
+		]
+	]
+}

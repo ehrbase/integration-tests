@@ -87,8 +87,6 @@ Send Ad Hoc Request Through GET
                         Set Test Variable   ${resp_body_query}      ${resp_body['q']}
                         Set Test Variable   ${resp_body_columns}    ${resp_body['columns']}
 
-Send Execute Stored Query Request Through GET
-
 Send Ad Hoc Request
     [Documentation]     Prepare and send Ad Hoc request to {baseurl}/query/aql.
     ...                 - Method: *POST*, expects: *200*.
@@ -104,6 +102,11 @@ Send Ad Hoc Request
     END
     IF      '${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH'
         Set To Dictionary       ${headers}      &{authorization}
+    END
+    ${variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${EHRBASE_AQL_IMP}
+    IF      ${variable_exists} == ${TRUE}
+        Set To Dictionary       ${headers}      EHRbase-AQL-IMP=${EHRBASE_AQL_IMP}
     END
     Create Session      ${SUT}      ${BASEURL}
     ...     debug=2     headers=${headers}      verify=True

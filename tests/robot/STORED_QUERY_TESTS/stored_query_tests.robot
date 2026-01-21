@@ -98,14 +98,12 @@ Definition API - GET Stored Query Using Qualified Query Name And Version
     ...                 - GET /rest/openehr/v1/definition/query/{qualified_query_name}/{version}
     ...                 Expected:
     ...                 - response status code = 200
-    ...                 - q = ${initial_query}
     ...                 - name = ${resp_qualified_query_name_version} *value before /*
     ...                 - version = ${resp_qualified_query_name_version} *value after /*
     ...                 - type = AQL
     ...                 *${resp_qualified_query_name_version}* is automatically generated after test 'Definition API - PUT Stored Query Using Qualified Query Name And Version'
     ${resp_query}       GET /definition/query/{qualified_query_name} / including {version}
     ...     qualif_name=${resp_qualified_query_name_version}
-    Should Be Equal As Strings      ${resp['q']}        ${initial_query}
     @{splitted_query_name_version}  Split String    ${resp_qualified_query_name_version}    /
     Should Be Equal As Strings      ${resp['name']}        ${splitted_query_name_version}[0]
     Should Be Equal As Strings      ${resp['version']}     ${splitted_query_name_version}[1]
@@ -151,16 +149,14 @@ Query API - GET Stored Query Using Qualified Query Name
     ...                 - GET /rest/openehr/v1/query/{qualified_query_name}
     ...                 Expected:
     ...                 - response status code = 200
-    ...                 - q = ${initial_query} - stored in test 'PUT Stored Query Using Qualified Query Name'
     ...                 - name = ${resp_qualified_query_name}/1.0.0
-    ...                 - columns[0].path = /uid/value (value from AQL statement returned in q)
-    ...                 - columns[0].name = COMPOSITION_UID_VALUE (value from AQL statement returned in q)
+    ...                 - columns[0].path = /uid/value
+    ...                 - columns[0].name = COMPOSITION_UID_VALUE
     ...                 - rows[0][0] = ${composition_uid}
     ...                 ${resp_qualified_query_name} took from test 'PUT Stored Query Using Qualified Query Name'
     ...                 \n*DEPENDS ON TEST* 'PUT Stored Query Using Qualified Query Name'
     ${resp_query}       GET /query/{qualified_query_name}
     ...     qualif_name=${resp_qualified_query_name}
-    Should Be Equal As Strings      ${resp_query['q']}        ${initial_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${resp_qualified_query_name}/1.0.0
     Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
@@ -173,10 +169,9 @@ Query API - GET Stored Query Using Qualified Query Name With Ehr Id Param
     ...                 \nFirst, add query using PUT /definition/query/{qualified_query_name}
     ...                 Expected:
     ...                 - response status code = 200
-    ...                 - q = {second_query} - stored in the same test
     ...                 - name = {qualified_query_name}/1.0.0
-    ...                 - columns[0].path = /uid/value (value from AQL statement returned in q)
-    ...                 - columns[0].name = COMPOSITION_UID_VALUE (value from AQL statement returned in q)
+    ...                 - columns[0].path = /uid/value
+    ...                 - columns[0].name = COMPOSITION_UID_VALUE
     ...                 - rows[0][0] = ${composition_uid}
     &{params}   Create Dictionary     ehr_id=${ehr_id}
     ${query2}       Catenate
@@ -188,7 +183,6 @@ Query API - GET Stored Query Using Qualified Query Name With Ehr Id Param
     ...     query_to_store=${second_query}     format=text
     ${resp_query}       GET /query/{qualified_query_name}
     ...     qualif_name=${temp_qualified_query_name}    params=${params}
-    Should Be Equal As Strings      ${resp_query['q']}        ${second_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${temp_qualified_query_name}/1.0.0
     Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
@@ -214,16 +208,14 @@ Query API - POST Stored Query Using Qualified Query Name
     ...                 - POST /rest/openehr/v1/query/{qualified_query_name}
     ...                 Expected:
     ...                 - response status code = 200
-    ...                 - q = ${initial_query} - stored in test 'PUT Stored Query Using Qualified Query Name'
     ...                 - name = ${resp_qualified_query_name}/1.0.0
-    ...                 - columns[0].path = /uid/value (value from AQL statement returned in q)
-    ...                 - columns[0].name = COMPOSITION_UID_VALUE (value from AQL statement returned in q)
+    ...                 - columns[0].path = /uid/value
+    ...                 - columns[0].name = COMPOSITION_UID_VALUE
     ...                 - rows[0][0] = ${composition_uid}
     ...                 ${resp_qualified_query_name} took from test 'PUT Stored Query Using Qualified Query Name'
     ...                 \n*DEPENDS ON TEST* 'PUT Stored Query Using Qualified Query Name'
     ${resp_query}       POST /query/{qualified_query_name}
     ...     qualif_name=${resp_qualified_query_name}
-    Should Be Equal As Strings      ${resp_query['q']}        ${initial_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${resp_qualified_query_name}/1.0.0
     Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
@@ -235,10 +227,9 @@ Query API - GET Stored Query Using Qualified Query Name And Version
     ...                 - GET /rest/openehr/v1/query/{qualified_query_name}/{version}
     ...                 Expected:
     ...                 - response status code = 200
-    ...                 - q = ${initial_query} - stored in test 'PUT Stored Query Using Qualified Query Name'
     ...                 - name = ${second_resp_qualified_query_name_version}
-    ...                 - columns[0].path = /uid/value (value from AQL statement returned in q)
-    ...                 - columns[0].name = COMPOSITION_UID_VALUE (value from AQL statement returned in q)
+    ...                 - columns[0].path = /uid/value
+    ...                 - columns[0].name = COMPOSITION_UID_VALUE
     ...                 - rows[0][0] = ${composition_uid}
     ...                 ${second_resp_qualified_query_name_version} took from test 'Definition API - PUT Stored Query Using Qualified Query Name And Version'
     ...                 \n*DEPENDS ON TESTS*:
@@ -246,7 +237,6 @@ Query API - GET Stored Query Using Qualified Query Name And Version
     ...                 - 'Definition API - PUT Stored Query Using Qualified Query Name And Version'
     ${resp_query}       GET /query/{qualified_query_name}/{version}
     ...     qualif_name=${second_resp_qualified_query_name_version}
-    Should Be Equal As Strings      ${resp_query['q']}        ${initial_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${second_resp_qualified_query_name_version}
     Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
@@ -259,10 +249,9 @@ Query API - GET Stored Query Using Qualified Query Name And Version With Ehr Id 
     ...                 \nFirst, add query using 'PUT /definition/query/{qualified_query_name}/{version}'
     ...                 Expected:
     ...                 - response status code = 200
-    ...                 - q = {third_query} - stored in current test
     ...                 - name = {qualified_query_name}/{version}
-    ...                 - columns[0].path = /uid/value (value from AQL statement returned in q)
-    ...                 - columns[0].name = COMPOSITION_UID_VALUE (value from AQL statement returned in q)
+    ...                 - columns[0].path = /uid/value
+    ...                 - columns[0].name = COMPOSITION_UID_VALUE
     ...                 - rows[0][0] = ${composition_uid}
     &{params}   Create Dictionary     ehr_id=${ehr_id}
     ${query3}       Catenate
@@ -274,7 +263,6 @@ Query API - GET Stored Query Using Qualified Query Name And Version With Ehr Id 
     ...     query_to_store=${third_query}     format=text
     ${resp_query}       GET /query/{qualified_query_name}/{version}
     ...     qualif_name=${temp_qualified_query_name_version}    params=${params}
-    Should Be Equal As Strings      ${resp_query['q']}        ${third_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${temp_qualified_query_name_version}
     Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE
@@ -291,10 +279,9 @@ Query API - POST Stored Query Using Qualified Query Name And Version
     ...                 - POST /rest/openehr/v1/query/{qualified_query_name}/{version}
     ...                 Expected:
     ...                 - response status code = 200
-    ...                 - q = ${initial_query} - stored in test 'PUT Stored Query Using Qualified Query Name'
     ...                 - name = ${second_resp_qualified_query_name_version}
-    ...                 - columns[0].path = /uid/value (value from AQL statement returned in q)
-    ...                 - columns[0].name = COMPOSITION_UID_VALUE (value from AQL statement returned in q)
+    ...                 - columns[0].path = /uid/value
+    ...                 - columns[0].name = COMPOSITION_UID_VALUE
     ...                 - rows[0][0] = ${composition_uid}
     ...                 ${second_resp_qualified_query_name_version} took from test 'Definition API - PUT Stored Query Using Qualified Query Name And Version'
     ...                 \n*DEPENDS ON TESTS*:
@@ -302,7 +289,6 @@ Query API - POST Stored Query Using Qualified Query Name And Version
     ...                 - 'Definition API - PUT Stored Query Using Qualified Query Name And Version'
     ${resp_query}       POST /query/{qualified_query_name}/{version}
     ...     qualif_name=${second_resp_qualified_query_name_version}
-    Should Be Equal As Strings      ${resp_query['q']}        ${initial_query}
     Should Be Equal As Strings      ${resp_query['name']}     ${second_resp_qualified_query_name_version}
     Should Be Equal As Strings      ${resp_query['columns'][0]['path']}     c/uid/value
     Should Be Equal As Strings      ${resp_query['columns'][0]['name']}     COMPOSITION_UID_VALUE

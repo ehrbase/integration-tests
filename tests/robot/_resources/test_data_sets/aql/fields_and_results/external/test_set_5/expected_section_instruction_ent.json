@@ -1,0 +1,53 @@
+{
+	"q": "SELECT i/name/value FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS SECTION CONTAINS INSTRUCTION i",
+	"columns": [
+		{
+			"path": "i/name/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"Service request"
+		],
+		[
+			"Medication order"
+		],
+		[
+			"Service request"
+		],
+		[
+			"Medication order"
+		],
+		[
+			"Service request"
+		],
+		[
+			"Medication order"
+		],
+		[
+			"Service request"
+		],
+		[
+			"Medication order"
+		],
+		[
+			"Service request"
+		],
+		[
+			"Medication order"
+		],
+		[
+			"Service request"
+		],
+		[
+			"Medication order"
+		],
+		[
+			"Service request"
+		],
+		[
+			"Medication order"
+		]
+	]
+}

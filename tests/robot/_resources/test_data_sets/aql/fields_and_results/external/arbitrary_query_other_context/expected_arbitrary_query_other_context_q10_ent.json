@@ -1,0 +1,14 @@
+{
+	"q": "SELECT c/context/other_context/items[openEHR-EHR-CLUSTER.case_identification.v0,'Fallidentifikation']/items[at0001, 'Fall-Kennung']/value/value FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.report-result.v1] ",
+	"columns": [
+		{
+			"path": "c/context/other_context/items[openEHR-EHR-CLUSTER.case_identification.v0, 'Fallidentifikation']/items[at0001, 'Fall-Kennung']/value/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"9251377"
+		]
+	]
+}

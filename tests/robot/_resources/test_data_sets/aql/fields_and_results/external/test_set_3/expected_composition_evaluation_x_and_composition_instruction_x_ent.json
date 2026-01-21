@@ -1,0 +1,211 @@
+{
+	"q": "SELECT alg/data[at0001]/items[at0002]/value/value, med/activities[at0001]/description[at0002]/items[at0070]/value/value FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS ((COMPOSITION c1 CONTAINS EVALUATION alg[openEHR-EHR-EVALUATION.problem_diagnosis.v1]) AND (COMPOSITION c2 CONTAINS INSTRUCTION med[openEHR-EHR-INSTRUCTION.medication_order.v3]))",
+	"columns": [
+		{
+			"path": "alg/data[at0001]/items[at0002]/value/value",
+			"name": "#0"
+		},
+		{
+			"path": "med/activities[at0001]/description[at0002]/items[at0070]/value/value",
+			"name": "#1"
+		}
+	],
+	"rows": [
+		[
+			"Lorem ipsum",
+			"Meftal spas"
+		],
+		[
+			"Infection",
+			"Meftal spas"
+		],
+		[
+			"Pain",
+			"Meftal spas"
+		],
+		[
+			"Pain",
+			"Meftal spas"
+		],
+		[
+			"Infection",
+			"Meftal spas"
+		],
+		[
+			"Infection",
+			"Meftal spas"
+		],
+		[
+			"Pain",
+			"Meftal spas"
+		],
+		[
+			"Lorem ipsum",
+			"Dolo"
+		],
+		[
+			"Infection",
+			"Dolo"
+		],
+		[
+			"Pain",
+			"Dolo"
+		],
+		[
+			"Pain",
+			"Dolo"
+		],
+		[
+			"Infection",
+			"Dolo"
+		],
+		[
+			"Infection",
+			"Dolo"
+		],
+		[
+			"Pain",
+			"Dolo"
+		],
+		[
+			"Lorem ipsum",
+			"Dolo"
+		],
+		[
+			"Infection",
+			"Dolo"
+		],
+		[
+			"Pain",
+			"Dolo"
+		],
+		[
+			"Pain",
+			"Dolo"
+		],
+		[
+			"Infection",
+			"Dolo"
+		],
+		[
+			"Infection",
+			"Dolo"
+		],
+		[
+			"Pain",
+			"Dolo"
+		],
+		[
+			"Lorem ipsum",
+			"Meftal spas"
+		],
+		[
+			"Infection",
+			"Meftal spas"
+		],
+		[
+			"Pain",
+			"Meftal spas"
+		],
+		[
+			"Pain",
+			"Meftal spas"
+		],
+		[
+			"Infection",
+			"Meftal spas"
+		],
+		[
+			"Infection",
+			"Meftal spas"
+		],
+		[
+			"Pain",
+			"Meftal spas"
+		],
+		[
+			"Lorem ipsum",
+			"Meftal spas"
+		],
+		[
+			"Infection",
+			"Meftal spas"
+		],
+		[
+			"Pain",
+			"Meftal spas"
+		],
+		[
+			"Pain",
+			"Meftal spas"
+		],
+		[
+			"Infection",
+			"Meftal spas"
+		],
+		[
+			"Infection",
+			"Meftal spas"
+		],
+		[
+			"Pain",
+			"Meftal spas"
+		],
+		[
+			"Lorem ipsum",
+			"Dolo"
+		],
+		[
+			"Infection",
+			"Dolo"
+		],
+		[
+			"Pain",
+			"Dolo"
+		],
+		[
+			"Pain",
+			"Dolo"
+		],
+		[
+			"Infection",
+			"Dolo"
+		],
+		[
+			"Infection",
+			"Dolo"
+		],
+		[
+			"Pain",
+			"Dolo"
+		],
+		[
+			"Lorem ipsum",
+			"Lorem ipsum"
+		],
+		[
+			"Infection",
+			"Lorem ipsum"
+		],
+		[
+			"Pain",
+			"Lorem ipsum"
+		],
+		[
+			"Pain",
+			"Lorem ipsum"
+		],
+		[
+			"Infection",
+			"Lorem ipsum"
+		],
+		[
+			"Infection",
+			"Lorem ipsum"
+		],
+		[
+			"Pain",
+			"Lorem ipsum"
+		]
+	]
+}

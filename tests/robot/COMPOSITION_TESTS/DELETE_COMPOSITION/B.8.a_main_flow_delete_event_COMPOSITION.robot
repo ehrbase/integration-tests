@@ -29,7 +29,7 @@ Force Tags
 
 
 *** Test Cases ***
-Main flow delete event COMPOSITION
+1. Main flow delete event COMPOSITION
 
     Upload OPT    minimal/minimal_observation.opt
 
@@ -46,4 +46,31 @@ Main flow delete event COMPOSITION
     Set Test Variable       ${del_version_uid}      ${short_compo_id}
     get deleted composition
 
+    [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
+
+2. Create Update Delete Composition And Check Time Committed
+    [Documentation]     Covers bug https://vitagroup-ag.atlassian.net/browse/CDR-2181
+    Upload OPT    minimal/minimal_observation.opt
+
+    create EHR
+
+    commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.xml
+    check content of composition (JSON)
+    get composition - latest version    JSON
+    Set Test Variable   ${create_compo_commit_audit_datetime}     ${response.json()['commit_audit']['time_committed']['value']}
+    Should Be Equal     ${response.json()['commit_audit']['change_type']['value']}   creation
+    Sleep   0.5s
+    update composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.v2.xml
+    check content of updated composition (JSON)
+    get composition - latest version    JSON
+    Set Test Variable   ${update_compo_commit_audit_datetime}     ${response.json()['commit_audit']['time_committed']['value']}
+    Should Be Equal     ${response.json()['commit_audit']['change_type']['value']}   modification
+    Sleep   0.5s
+    delete composition    ${composition_uid_v2}
+    get composition - latest version    JSON
+    Set Test Variable   ${delete_compo_commit_audit_datetime}     ${response.json()['commit_audit']['time_committed']['value']}
+    Should Be Equal     ${response.json()['commit_audit']['change_type']['value']}   deleted
+    Should Be True      '${create_compo_commit_audit_datetime}' != '${update_compo_commit_audit_datetime}'
+    Should Be True      '${update_compo_commit_audit_datetime}' != '${delete_compo_commit_audit_datetime}'
+    Should Be True      '${create_compo_commit_audit_datetime}' != '${delete_compo_commit_audit_datetime}'
     [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs

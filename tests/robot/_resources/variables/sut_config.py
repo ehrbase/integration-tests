@@ -32,7 +32,7 @@ KEYCLOAK_URL_FROM_YAML = GLOBAL_VARS_FROM_YAML_FUNC["KEYCLOAK_URL"]
 # KEYCLOAK SETTINGS
 HEADER = {"Content-Type": "application/x-www-form-urlencoded"}
 KEYCLOAK_URL = KEYCLOAK_URL_FROM_YAML
-KC_AUTH_URL = KEYCLOAK_URL + "/realms/ehrbase/protocol/openid-connect/auth"
+KC_AUTH_URL = KEYCLOAK_URL + "/realms/ehrbase/protocol/openid-connect/auth/"
 KC_ACCESS_TOKEN_URL = KEYCLOAK_URL + "/realms/ehrbase/protocol/openid-connect/token"
 KC_JWT_ISSUERURI = KEYCLOAK_URL + "/realms/ehrbase"
 

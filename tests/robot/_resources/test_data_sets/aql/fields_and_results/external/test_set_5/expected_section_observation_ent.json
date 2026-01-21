@@ -1,0 +1,95 @@
+{
+	"q": "SELECT obs/name/value FROM EHR e[ehr_id/value = '${ehr_id}'] CONTAINS SECTION s CONTAINS OBSERVATION obs",
+	"columns": [
+		{
+			"path": "obs/name/value",
+			"name": "#0"
+		}
+	],
+	"rows": [
+		[
+			"Laboratory test result"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Blood pressure"
+		],
+		[
+			"Body temperature"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Blood pressure"
+		],
+		[
+			"Body temperature"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Blood pressure"
+		],
+		[
+			"Body temperature"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Blood pressure"
+		],
+		[
+			"Body temperature"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Blood pressure"
+		],
+		[
+			"Body temperature"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Blood pressure"
+		],
+		[
+			"Body temperature"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Laboratory test result"
+		],
+		[
+			"Blood pressure"
+		],
+		[
+			"Body temperature"
+		]
+	]
+}
