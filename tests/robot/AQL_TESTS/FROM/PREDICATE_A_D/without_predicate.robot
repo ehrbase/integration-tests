@@ -4,9 +4,12 @@ Documentation   CHECK FROM WITHOUT PREDICATE
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Suite Setup     Set Library Search Order For Tests
 
+Test Setup      Precondition
+Test Teardown   Admin Delete EHR For AQL
+
 
 *** Test Cases ***
-Test From Without Predicate
+1. Test From Without Predicate
     [Documentation]     - *Precondition:* 1. Create OPT; 2. Create EHR; 3. Create Composition
     ...         - Send AQL 'SELECT o FROM OBSERVATION o'
     ...         - Check query from response == query from script
@@ -14,7 +17,6 @@ Test From Without Predicate
     ...         - Check that all items from rows are of _type=OBSERVATION
     ...         - *Postcondition:* Delete EHR using ADMIN endpoint. This is deleting compositions linked to EHR.
     #[Tags]      not-ready
-    [Setup]     Precondition
     ${query}    Set Variable    SELECT o FROM OBSERVATION o
     Set AQL And Execute Ad Hoc Query        ${query}
     Should Be Equal As Strings      ${resp_body_query}      ${query}
@@ -28,7 +30,12 @@ Test From Without Predicate
             Should Be Equal As Strings     ${resp_body['rows'][${INDEX}][0]["_type"]}       OBSERVATION
         END
     END
-    [Teardown]      Admin Delete EHR For AQL
+
+2. SELECT c0/uid/value FROM COMPOSITION c0[uid/value='${c_uid}'] CONTAINS COMPOSITION c1
+    [Documentation]     - Covers https://vitagroup-ag.atlassian.net/browse/CDR-2248
+    ${query}    Set Variable    SELECT c0/uid/value FROM COMPOSITION c0[uid/value='${c_uid}'] CONTAINS COMPOSITION c1
+    Set AQL And Execute Ad Hoc Query        ${query}
+    Should Be Empty     ${resp_body['rows']}
 
 
 *** Keywords ***
@@ -36,3 +43,4 @@ Precondition
     Upload OPT For AQL      aql-conformance-ehrbase.org.v0.opt
     Create EHR For AQL
     Commit Composition For AQL      aql-conformance-ehrbase.org.v0_contains.json
+    Set Suite Variable       ${c_uid}       ${composition_short_uid}
