@@ -16,7 +16,7 @@ Suite Teardown  Run Keywords
 
 
 *** Test Cases ***
-SELECT s/subject/external_ref/id/value, s/other_details/items[at0001]/value/id FROM EHR e CONTAINS EHR_STATUS s
+1. SELECT s/subject/external_ref/id/value, s/other_details/items[at0001]/value/id FROM EHR e CONTAINS EHR_STATUS s
     ${query}    Set Variable    SELECT s/subject/external_ref/id/value, s/other_details/items[at0001]/value/id FROM EHR e CONTAINS EHR_STATUS s
     Set AQL And Execute Ad Hoc Query        ${query}
     ${expected_result_file}         Set Variable    ${EXPECTED_JSON_DATA_SETS}/from/expected_ehr_status_from_multiple_ehrs.json
@@ -34,6 +34,12 @@ SELECT s/subject/external_ref/id/value, s/other_details/items[at0001]/value/id F
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Run Keyword And Return Status   Remove File     ${expected_result_file_tmp}
+
+2. SELECT eq/subject/external_ref/id/value FROM EHR_STATUS eq CONTAINS EHR_STATUS eq
+    [Documentation]     - Covers https://vitagroup-ag.atlassian.net/browse/CDR-2248
+    ${query}    Set Variable    SELECT eq/subject/external_ref/id/value FROM EHR_STATUS eq CONTAINS EHR_STATUS eq
+    Set AQL And Execute Ad Hoc Query        ${query}
+    Should Be Empty     ${resp_body['rows']}
 
 
 *** Keywords ***
