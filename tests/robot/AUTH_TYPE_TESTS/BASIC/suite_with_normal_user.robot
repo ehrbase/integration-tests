@@ -28,7 +28,6 @@ Create EHR - Normal User Creds
     create new EHR with ehr_status  ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
     Should Be Equal     ${resp.status_code}     ${201}
     Log     ${ehr_id}
-    Get EHR_STATUS Of EHR And Store Subject External Ref Value
 
 Create Composition - Normal User Creds
     prepare new request session    JSON    Prefer=return=representation
