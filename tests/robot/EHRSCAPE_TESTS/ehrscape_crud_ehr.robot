@@ -37,8 +37,9 @@ Main Flow Create EHR
     Extract Template Id From OPT File
     Get Web Template By Template Id (ECIS)    ${template_id}
     Create EHR With EHR Status
-    Set Suite Variable      ${subject_id}           ${response.json()["ehr_status"]["subject"]["external_ref"]["id"]["value"]}
-    Set Suite Variable      ${subject_namespace}    ${response.json()["ehr_status"]["subject"]["external_ref"]["namespace"]}
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
+    Set Suite Variable      ${subject_id}           ${ehr_status_subject_external_ref_value}
+    Set Suite Variable      ${subject_namespace}    ${response.json()["subject"]["external_ref"]["namespace"]}
     ${externalTemplate}    Set Variable    ${template_id}
     Set Test Variable       ${externalTemplate}
 
