@@ -183,16 +183,15 @@ Create EHR For AQL
         ${ehr_status_json}  Update Value To Json    ${ehr_status_json}    $.subject.external_ref.namespace
         ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
         create new EHR by ID    ehr_id=${ehr_id}   ehr_status_json=${ehr_status_json}
-        #Get EHR_STATUS Of EHR And Store Subject External Ref Value
     ELSE
         create new EHR with ehr_status  ${EHR_DATA_SETS}/000_ehr_status_with_other_details.json
-        #Get EHR_STATUS Of EHR And Store Subject External Ref Value
     END
     Status Should Be    201
     Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
     Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
     Set Suite Variable      ${system_id_with_tenant}     ${resp.json()['system_id']['value']}
     Set Suite Variable      ${ehr_id}     ${ehr_id_value}
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
 
 Create EHR For AQL With Custom EHR Status
     [Documentation]     Create EHR with custom EHR_STATUS, filename provided in mandatory arg {file_name}.
