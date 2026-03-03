@@ -131,6 +131,7 @@ Precondition Upload OPT - Create EHR - Create Composition
     prepare new request session    JSON
     ...     Prefer=return=representation
     create new EHR with ehr_status      ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     commit composition   format=CANONICAL_JSON
     ...                  composition=nested.en.v1__full_without_links.json
     Set Suite Variable      ${compo_uid_value}      ${response.json()['uid']['value']}

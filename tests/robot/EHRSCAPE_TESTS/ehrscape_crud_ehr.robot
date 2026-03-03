@@ -70,3 +70,4 @@ Create EHR With EHR Status
     [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
     prepare new request session     JSON
     create new EHR with ehr_status  ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value

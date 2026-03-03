@@ -154,7 +154,7 @@ Create New EHR With Multitenant Token
     ${resp}             POST on session     ${SUT}    /ehr
     ...         expected_status=anything        headers=${headers}
     Should Be Equal As Strings      ${resp.status_code}     201
-    ${ehrstatus_uid}    Set Variable        ${resp.json()['ehr_status']['uid']['value']}
+    ${ehrstatus_uid}    Set Variable        ${resp.json()['ehr_status']['id']['value']}
     @{split_ehrstatus_uid}      Split String    ${ehrstatus_uid}    ::
     ${short_uid}        Set Variable        ${split_ehrstatus_uid}[0]
     Set Suite Variable    ${ehr_id}         ${resp.json()['ehr_id']['value']}
@@ -179,7 +179,7 @@ Create EHR With Subject External Ref With Multitenant Token
     ${resp}             POST on session     ${SUT}    /ehr      json=${ehr_status_json}
     ...         expected_status=anything        headers=${headers}
     Should Be Equal As Strings      ${resp.status_code}     201
-    ${ehrstatus_uid}    Set Variable        ${resp.json()['ehr_status']['uid']['value']}
+    ${ehrstatus_uid}    Set Variable        ${resp.json()['ehr_status']['id']['value']}
     ${short_uid}        Remove String       ${ehrstatus_uid}    ::${CREATING_SYSTEM_ID}::1
     Set Suite Variable    ${ehr_id}         ${resp.json()['ehr_id']['value']}
     Set Suite Variable    ${system_id}      ${resp.json()['system_id']['value']}
@@ -323,18 +323,29 @@ create new EHR with ehr_status
                         Status Should Be    201
                         Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
                         Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
-                        Set Suite Variable      ${ehrstatus_uid_value}      ${resp.json()['ehr_status']['uid']['value']}
+                        Set Suite Variable      ${ehrstatus_uid_value}      ${resp.json()['ehr_status']['id']['value']}
                         Set Suite Variable      ${ehrstatus_uid}    ${ehrstatus_uid_value}
-                        Set Suite Variable      ${ehr_status_subject_external_ref_value}
-                        ...     ${resp.json()['ehr_status']['subject']['external_ref']['id']['value']}
-                        Set Suite Variable      ${subject_external_ref_value}
-                        ...     ${ehr_status_subject_external_ref_value}
                         Set Suite Variable      ${ehr_id}       ${ehr_id_value}
+
+Get EHR_STATUS Of EHR And Store Subject External Ref Value
+    [Arguments]     ${multitenancy_token}=${None}
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    END
+    get ehr_status of EHR   ${multitenancy_token}
+    Should Be Equal     ${response.status_code}     ${200}
+    Set Suite Variable
+    ...     ${ehr_status_subject_external_ref_value}
+    ...     ${resp_json['subject']['external_ref']['id']['value']}
+    Set Suite Variable
+    ...     ${subject_external_ref_value}
+    ...     ${ehr_status_subject_external_ref_value}
 
 Create EHR With Subject External Ref
     [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
     prepare new request session     headers=JSON    Prefer=return=representation
     create new EHR with ehr_status  ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
 
 create new EHR by ID
     [Arguments]         ${ehr_id}   ${ehr_status_json}=${NONE}
@@ -558,7 +569,8 @@ get ehr_status of EHR
     END
     ${resp}=            GET On Session      ${SUT}      /ehr/${ehr_id}/ehr_status
                         ...     expected_status=anything        headers=${headers}
-                        Set Test Variable    ${response}    ${resp}
+                        Set Test Variable   ${response}    ${resp}
+                        Set Test Variable   ${resp_json}    ${resp.json()}
 
 
 # get ehr_status of EHR with version at time
@@ -886,7 +898,7 @@ extract ehrstatus_uid (JSON)
     [Documentation]     Extracts uuid of ehr_status from response of preceding request.
     ...                 DEPENDENCY: `create new EHR`
 
-    Set Suite Variable      ${ehrstatus_uid}       ${resp.json()['ehr_status']['uid']['value']}
+    Set Suite Variable      ${ehrstatus_uid}       ${resp.json()['ehr_status']['id']['value']}
     #Log To Console      \n\tDEBUG OUTPUT - EHR_STATUS UUID: \n${ehrstatus_uid}
     @{ehr_status_uid}       Split String        ${ehrstatus_uid}      ::
                             Set Suite Variable  ${versioned_status_uid}   ${ehr_status_uid}[0]
