@@ -62,7 +62,7 @@ Precondition
     ###
     Create EHR For AQL
     Set Suite Variable      ${ehr_id3}  ${ehr_id}
-    Set Suite Variable      ${ehr_status_id3}   ${response.json()['ehr_status']['id']['value']}
+    Set Suite Variable      ${ehr_status_id3}   ${response.json()['id']['value']}
     Update EHR Status For EHR
     ...     ehr_id=${ehr_id3}   ehrstatus_uid=${ehr_status_id3}     ehr_status_file=status3.json
     ###

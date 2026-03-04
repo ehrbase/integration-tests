@@ -206,9 +206,9 @@ Create EHR For AQL With Custom EHR Status
     Set Suite Variable      ${ehr_id}         ${ehr_id_value}
     Get EHR_STATUS Of EHR And Store Subject External Ref Value
     Set Suite Variable      ${subject_external_ref_value}
-    ...     ${resp_json['ehr_status']['subject']['external_ref']['id']['value']}
+    ...     ${ehr_status_subject_external_ref_value}
     Set Suite Variable      ${subject_external_ref_namespace}
-    ...     ${resp_json['ehr_status']['subject']['external_ref']['namespace']}
+    ...     ${resp_json['subject']['external_ref']['namespace']}
 
 Commit Composition For AQL
     [Documentation]     Create Composition for AQL checks.

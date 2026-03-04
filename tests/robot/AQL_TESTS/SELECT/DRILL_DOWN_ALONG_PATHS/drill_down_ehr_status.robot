@@ -26,11 +26,11 @@ Precondition
     generate random ehr_id
     Create EHR For AQL      ehr_id=${ehr_id}
 	Set Suite Variable 		${resp_json}		${response.json()}
-    Set Suite Variable      ${ehr_status_uid}	${resp_json['ehr_status']['uid']['value']}
+    Set Suite Variable      ${ehr_status_uid}	${resp_json['uid']['value']}
     Set Suite Variable      ${ehr_status_subject_id}
-    ...     ${resp_json['ehr_status']['subject']['external_ref']['id']['value']}
+    ...     ${resp_json['subject']['external_ref']['id']['value']}
     Set Suite Variable      ${ehr_status_subject_namespace}
-    ...     ${resp_json['ehr_status']['subject']['external_ref']['namespace']}
+    ...     ${resp_json['subject']['external_ref']['namespace']}
     Set Suite Variable      ${ehr_time_created}     ${resp_json['time_created']['value']}
 
 Execute Query
