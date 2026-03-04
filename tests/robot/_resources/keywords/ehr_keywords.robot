@@ -39,7 +39,7 @@ update EHR: set ehr_status is_queryable
     extract ehr_id from response (JSON)
     extract system_id from response (JSON)
     extract ehrstatus_uid (JSON)
-    extract ehr_status from response (JSON)
+    set full ehr_status from original_ehr_status var (JSON)
 
     set is_queryable / is_modifiable    is_queryable=${value}
 
@@ -56,7 +56,7 @@ update EHR: set ehr-status modifiable
     extract system_id from response (JSON)
     extract subject_id from response (JSON)
     extract ehrstatus_uid (JSON)
-    extract ehr_status from response (JSON)
+    set full ehr_status from original_ehr_status var (JSON)
 
     set is_queryable / is_modifiable    is_modifiable=${value}
 
@@ -336,12 +336,16 @@ Get EHR_STATUS Of EHR And Store Subject External Ref Value
     END
     get ehr_status of EHR   ${multitenancy_token}
     Should Be Equal     ${response.status_code}     ${200}
-    Set Suite Variable
+    Set Suite Variable  ${original_ehr_status}      ${resp_json}
+    ${is_external_ref_set}  Run Keyword And Return Status
+    ...     Set Suite Variable
     ...     ${ehr_status_subject_external_ref_value}
     ...     ${resp_json['subject']['external_ref']['id']['value']}
-    Set Suite Variable
-    ...     ${subject_external_ref_value}
-    ...     ${ehr_status_subject_external_ref_value}
+    IF  ${is_external_ref_set}
+        Set Suite Variable
+        ...     ${subject_external_ref_value}
+        ...     ${ehr_status_subject_external_ref_value}
+    END
 
 Create EHR With Subject External Ref
     [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
@@ -895,6 +899,10 @@ extract ehr_status from response (JSON)
     Set Suite Variable      ${ehr_status}       ${resp.json()['ehr_status']}
     #Log To Console      \n\tDEBUG OUTPUT - EHR_STATUS: \n${ehr_status}
 
+set full ehr_status from original_ehr_status var (JSON)
+    [Documentation]     Extracts ehr_status-object from response of preceding request.
+    ...                 DEPENDENCY: `Get EHR_STATUS Of EHR And Store Subject External Ref Value`
+    Set Suite Variable      ${ehr_status}       ${original_ehr_status}
 
 extract ehrstatus_uid (JSON)
     [Documentation]     Extracts uuid of ehr_status from response of preceding request.
