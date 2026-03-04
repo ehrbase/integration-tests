@@ -323,9 +323,12 @@ create new EHR with ehr_status
                         Status Should Be    201
                         Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
                         Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
-                        Set Suite Variable      ${ehrstatus_uid_value}      ${resp.json()['ehr_status']['id']['value']}
+                        Set Suite Variable      ${ehr_id}           ${ehr_id_value}
+
+                        Get EHR_STATUS Of EHR And Store Subject External Ref Value
+                        Set Suite Variable      ${ehrstatus_uid_value}      ${response.json()['id']['value']}
                         Set Suite Variable      ${ehrstatus_uid}    ${ehrstatus_uid_value}
-                        Set Suite Variable      ${ehr_id}       ${ehr_id_value}
+
 
 Get EHR_STATUS Of EHR And Store Subject External Ref Value
     [Arguments]     ${multitenancy_token}=${None}
