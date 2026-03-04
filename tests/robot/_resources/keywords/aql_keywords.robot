@@ -183,10 +183,10 @@ Create EHR For AQL
         ${ehr_status_json}  Update Value To Json    ${ehr_status_json}    $.subject.external_ref.namespace
         ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
         create new EHR by ID    ehr_id=${ehr_id}   ehr_status_json=${ehr_status_json}
+        Status Should Be    201
     ELSE
         create new EHR with ehr_status  ${EHR_DATA_SETS}/000_ehr_status_with_other_details.json
     END
-    Status Should Be    201
     Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
     Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
     Set Suite Variable      ${system_id_with_tenant}     ${resp.json()['system_id']['value']}
