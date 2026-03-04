@@ -198,17 +198,17 @@ Create EHR For AQL With Custom EHR Status
     [Arguments]     ${file_name}
     prepare new request session    JSON      Prefer=return=representation
     create new EHR with ehr_status      ${EHR_STATUS_DATA_SETS_AQL}/${file_name}
-    Status Should Be    201
     Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
     Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
     Set Suite Variable      ${ehr_id_obj}     ${ehr_id_obj}
-    Set Suite Variable      ${ehr_status_uid}     ${response.json()['ehr_status']['id']['value']}
+
     Set Suite Variable      ${ehr_id}         ${ehr_id_value}
     Get EHR_STATUS Of EHR And Store Subject External Ref Value
     Set Suite Variable      ${subject_external_ref_value}
     ...     ${ehr_status_subject_external_ref_value}
     Set Suite Variable      ${subject_external_ref_namespace}
     ...     ${resp_json['subject']['external_ref']['namespace']}
+    Set Suite Variable      ${ehr_status_uid}     ${response.json()['uid']['value']}
 
 Commit Composition For AQL
     [Documentation]     Create Composition for AQL checks.

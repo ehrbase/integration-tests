@@ -31,7 +31,7 @@ Precondition
     ...     ${resp_json['subject']['external_ref']['id']['value']}
     Set Suite Variable      ${ehr_status_subject_namespace}
     ...     ${resp_json['subject']['external_ref']['namespace']}
-    Set Suite Variable      ${ehr_time_created}		${resp_json['time_created']['value']}
+    Set Suite Variable      ${ehr_time_created}		${resp.json()['time_created']['value']}
 
 Execute Query
     [Arguments]     ${path}     ${expected_file}    ${nr_of_results}
