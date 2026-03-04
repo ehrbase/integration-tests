@@ -665,9 +665,11 @@ get versioned ehr_status of EHR by time
     # Trick to see if ${query} was set. (if not, "Get Variable Value" will set the value to None)
     ${query} = 	Get Variable Value 	${query}
     # Only run the GET with query if $query was set
-    Run Keyword Unless 	$query is None 	internal get versioned ehr_status of EHR by time with query
-    Run Keyword If 	$query is None 	internal get versioned ehr_status of EHR by time without query
-
+    IF  $query != $None
+        internal get versioned ehr_status of EHR by time with query
+    ELSE
+        internal get versioned ehr_status of EHR by time without query
+    END
 
 # internal only, do not call from outside. use "get versioned ehr_status of EHR by time" instead
 internal get versioned ehr_status of EHR by time with query
@@ -928,7 +930,7 @@ extract ehrstatus_uid (XML)
     ...                 DEPENDENCY: `create new EHR`
 
     ${xml}=             Parse Xml    ${response.content}
-    ${ehrstatus_uid}=   Get Element Text    ${xml}    xpath=ehr_status/uid/value
+    ${ehrstatus_uid}=   Get Element Text    ${xml}    xpath=ehr_status/id/value
                         Set Test Variable   ${ehrstatus_uid}    ${ehrstatus_uid}
 
 extract system_id from response (XML)

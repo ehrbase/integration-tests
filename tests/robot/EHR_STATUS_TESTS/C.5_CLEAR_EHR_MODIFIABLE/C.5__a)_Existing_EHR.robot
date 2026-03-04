@@ -40,7 +40,7 @@ Clear EHR modifiable of existing EHR
     prepare new request session    JSON    Prefer=return=representation
 
     create new EHR
-
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     update EHR: set ehr-status modifiable    ${FALSE}
 
     check response of 'update EHR' (JSON)
