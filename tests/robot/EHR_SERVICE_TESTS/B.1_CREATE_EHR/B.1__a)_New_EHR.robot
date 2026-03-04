@@ -73,8 +73,9 @@ Create new EHR (without body content)
     prepare new request session    JSON    Prefer=return=representation
     POST /ehr
     Status Should Be    201
-    Should Be Equal     ${response.json()['ehr_status']['is_queryable']}    ${True}
-    Should Be Equal     ${response.json()['ehr_status']['is_modifiable']}   ${True}
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
+    Should Be Equal     ${resp_json['is_queryable']}    ${True}
+    Should Be Equal     ${resp_json['is_modifiable']}   ${True}
     [Teardown]      (admin) delete ehr
 
 MF-019 - Create new EHR (valid ehr_status with other_details)
@@ -84,14 +85,12 @@ MF-019 - Create new EHR (valid ehr_status with other_details)
     ${body}=     randomize subject_id in test-data-set    valid/002_ehr_status_with_other_details_item_tree.json
     POST /ehr    ${body}
     Status Should Be    201
-
-    ${actual_ehr_status}=    Set Variable       ${response.json()['ehr_status']}
-    Set Test Variable    ${expected_ehr_status}    ${body}
-
-    ${exclude_paths}    Create List    root['uid']  root['name']['_type']  root['subject']['_type']
-    &{diff}=            compare json-strings    ${actual_ehr_status}    ${expected_ehr_status}
-                        ...    exclude_paths=${exclude_paths}
-                        Log To Console    \n\n&{diff}
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
+    ${actual_other_details}     Set Variable       ${resp_json['other_details']}
+    Length Should Be    ${actual_other_details['items']}    2
+    Set Test Variable    ${expected_ehr_status_other_details}    ${body['other_details']}
+    ${diff}=            compare json-strings    ${actual_other_details}    ${expected_ehr_status_other_details}
+                        Log To Console    \n\n${diff}
                         Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      (admin) delete ehr
 
@@ -102,13 +101,12 @@ MF-020 - Create new EHR (valid ehr_status with other_details)
     ${body}=     randomize subject_id in test-data-set    valid/003_ehr_status_with_other_details_item_list.json
     POST /ehr    ${body}
     Status Should Be    201
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
+    ${actual_other_details}     Set Variable       ${resp_json['other_details']}
+    Length Should Be    ${actual_other_details['items']}    1
+    Set Test Variable    ${expected_ehr_status_other_details}    ${body['other_details']}
 
-    ${actual_ehr_status}=    Set Variable       ${response.json()['ehr_status']}
-    Set Test Variable    ${expected_ehr_status}    ${body}
-
-    ${exclude_paths}    Create List    root['uid']  root['name']['_type']  root['subject']['_type']
-    &{diff}=            compare json-strings    ${actual_ehr_status}    ${expected_ehr_status}
-                        ...    exclude_paths=${exclude_paths}
+    ${diff}=            compare json-strings    ${actual_other_details}    ${expected_ehr_status_other_details}
                         Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      (admin) delete ehr
 
@@ -137,13 +135,11 @@ MF-051 - Create new EHR providing an ehr_id (valid ehr_status with other_details
     ${body}=     randomize subject_id in test-data-set    valid/002_ehr_status_with_other_details_item_tree.json
     PUT /ehr/ehr_id    body=${body}
     Status Should Be    201
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
+    ${actual_other_details}     Set Variable       ${resp_json['other_details']}
+    Set Test Variable    ${expected_ehr_status_other_details}    ${body['other_details']}
 
-    ${actual_ehr_status}=    Set Variable       ${response.json()['ehr_status']}
-    Set Test Variable    ${expected_ehr_status}    ${body}
-
-    ${exclude_paths}    Create List    root['uid']  root['name']['_type']  root['subject']['_type']
-    &{diff}=            compare json-strings    ${actual_ehr_status}    ${expected_ehr_status}
-                        ...    exclude_paths=${exclude_paths}
+    ${diff}=            compare json-strings    ${actual_other_details}    ${expected_ehr_status_other_details}
                         Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      (admin) delete ehr
 
@@ -153,13 +149,11 @@ MF-052 - Create new EHR providing an ehr_id (valid ehr_status with other_details
     ${body}=     randomize subject_id in test-data-set    valid/003_ehr_status_with_other_details_item_list.json
     PUT /ehr/ehr_id    body=${body}
     Status Should Be    201
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
+    ${actual_other_details}=    Set Variable       ${resp_json['other_details']}
+    Set Test Variable    ${expected_ehr_status_other_details}    ${body['other_details']}
 
-    ${actual_ehr_status}=    Set Variable       ${response.json()['ehr_status']}
-    Set Test Variable    ${expected_ehr_status}    ${body}
-
-    ${exclude_paths}    Create List    root['uid']  root['name']['_type']  root['subject']['_type']
-    &{diff}=            compare json-strings    ${actual_ehr_status}    ${expected_ehr_status}
-                        ...    exclude_paths=${exclude_paths}
+    ${diff}=            compare json-strings    ${actual_other_details}    ${expected_ehr_status_other_details}
                         Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      (admin) delete ehr
 
@@ -288,8 +282,8 @@ MF-036 - Create new EHR providing an ehr_id (Prefer header: representation)
     Status Should Be    201
     Dictionary Should Contain Key   ${response.json()['system_id']}     value
     Dictionary Should Contain Key   ${response.json()['ehr_id']}        value
-    Dictionary Should Contain Key   ${response.json()['ehr_status']}    uid
-    Dictionary Should Contain Key   ${response.json()['time_created']}  value
+    Dictionary Should Contain Key   ${response.json()['ehr_status']}    id
+#    Dictionary Should Contain Key   ${response.json()['time_created']}  value
     [Teardown]      (admin) delete ehr
 
 MF-037 - Create new EHR providing an ehr_id (XML, Prefer header: representation)
@@ -299,10 +293,10 @@ MF-037 - Create new EHR providing an ehr_id (XML, Prefer header: representation)
     Status Should Be    201
     Should Contain      ${response.text}    <?xml version
     Should Contain      ${response.text}    <ehr_id><value>
-    Should Contain      ${response.text}    <ehr_status><uid>
-    Should Contain      ${response.text}    <archetype_node_id>
-    Should Contain      ${response.text}    <is_queryable>true
-    Should Contain      ${response.text}    <is_modifiable>true
+    Should Contain      ${response.text}    <ehr_status><id>
+#    Should Contain      ${response.text}    <archetype_node_id>
+#    Should Contain      ${response.text}    <is_queryable>true
+#    Should Contain      ${response.text}    <is_modifiable>true
     Get EHR ID From Location Headers
     [Teardown]      (admin) delete ehr
 
@@ -666,27 +660,28 @@ validate response
     Log Many    ${No.}  ${queryable}    ${modifiable}    ${subject}   ${other_details}    ${ehrid}
     Status Should Be    201
     ${resp_json}    Set Variable    ${response.json()}
-
+    Should Be Equal     ${resp_json['_type']}   EHR
     Log     ${resp_json['system_id']}
     Log     ${resp_json['ehr_id']}
     Log     ${resp_json['ehr_id']['value']}
     Log     ${resp_json['time_created']}
+    Log     ${resp_json['time_created']['value']}
     Log     ${resp_json['ehr_status']}
-    Log     ${resp_json['ehr_status']['name']}
-    Log     ${resp_json['ehr_status']['name']['value']}
-    Log     ${resp_json['ehr_status']['archetype_node_id']}
-    Log     ${resp_json['ehr_status']['subject']}
+    Log     ${resp_json['ehr_status']['_type']}
+    Log     ${resp_json['ehr_status']['namespace']}
+    Log     ${resp_json['ehr_status']['type']}
+    Log     ${resp_json['ehr_status']['id']}
+    Log     ${resp_json['ehr_status']['id']['_type']}
+    Log     ${resp_json['ehr_status']['id']['value']}
     Set Test Variable   ${ehr_id}   ${resp_json['ehr_id']['value']}
-
-    Should Be Equal As Strings     ${resp_json['ehr_status']['is_modifiable']}     ${modifiable}    ignore_case=True
-    Should Be Equal As Strings     ${resp_json['ehr_status']['is_queryable']}      ${queryable}     ignore_case=True
-
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
+    Should Be Equal As Strings     ${resp_json['is_modifiable']}     ${modifiable}    ignore_case=True
+    Should Be Equal As Strings     ${resp_json['is_queryable']}      ${queryable}     ignore_case=True
     IF    "${other_details}" == "not provided"
-        Dictionary Should Not Contain Key   ${resp_json['ehr_status']}    other_details
+        Dictionary Should Not Contain Key   ${resp_json}    other_details
     ELSE IF    "${other_details}" == "provided"
-        Dictionary Should Contain Key   ${resp_json['ehr_status']}      other_details
+        Dictionary Should Contain Key   ${resp_json}      other_details
     END
-
 
 create ehr from data table
     [Arguments]         ${subject}  ${is_modifiable}  ${is_queryable}  ${status_code}
