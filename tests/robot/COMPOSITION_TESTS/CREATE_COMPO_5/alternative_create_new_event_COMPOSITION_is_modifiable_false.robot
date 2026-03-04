@@ -49,8 +49,10 @@ Main flow create new event COMPOSITION FLAT
     check response: is negative indicating does not allow modification
     [Teardown]  Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
 
+
 *** Keywords ***
 Precondition
     Set Library Search Order For Tests
     Upload OPT    nested/nested.opt
     create EHR
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value

@@ -114,6 +114,9 @@ Precondition Create EHR With EHR_STATUS
     ...     Prefer=return=representation
     create new EHR with ehr_status      ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
     Get EHR_STATUS Of EHR And Store Subject External Ref Value
+    Set Suite Variable      ${ehrstatus_uid_value}      ${response.json()['uid']['value']}
+    Set Suite Variable      ${ehrstatus_uid}    ${ehrstatus_uid_value}
+
 
 Create Session For EHR_STATUS Tag Calls
     ${temp_str}     Remove String       ${BASEURL}      /rest/openehr/v1

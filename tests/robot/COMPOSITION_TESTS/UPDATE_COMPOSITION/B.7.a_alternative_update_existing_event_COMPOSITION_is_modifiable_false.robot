@@ -34,7 +34,7 @@ Alternative flow update existing event COMPOSITION when EHR status is_modifiable
     Upload OPT    minimal/minimal_observation.opt
 
     create EHR
-
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.xml
     check content of composition (JSON)
     update EHR: set ehr-status modifiable    ${FALSE}

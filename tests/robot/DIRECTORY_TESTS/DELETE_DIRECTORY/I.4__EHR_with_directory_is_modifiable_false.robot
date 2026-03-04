@@ -46,7 +46,7 @@ Force Tags
 Alternative flow : delete directory from EHR with directory and is_modifiable False
 
     create EHR
-
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     create DIRECTORY (JSON)    subfolders_in_directory_items.json
     update EHR: set ehr-status modifiable    ${FALSE}
     delete DIRECTORY (JSON)
