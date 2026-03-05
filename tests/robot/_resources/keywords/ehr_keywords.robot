@@ -458,6 +458,7 @@ Retrieve EHR By Ehr_id With Multitenant Token
     END
     ${resp}     GET on session     ${SUT}    /ehr/${ehr_id}
     ...         expected_status=anything        headers=${headers}
+    Set Suite Variable    ${resp}       ${resp}
     Set Suite Variable    ${response}       ${resp}
     Set Suite Variable    ${statusCode}     ${resp.status_code}
     Should Be Equal As Strings      ${resp.status_code}     ${expected_code}
