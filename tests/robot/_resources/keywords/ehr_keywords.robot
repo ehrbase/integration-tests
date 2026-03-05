@@ -186,12 +186,13 @@ Create EHR With Subject External Ref With Multitenant Token
     Set Suite Variable    ${ehr_status}     ${resp.json()['ehr_status']}
     Set Suite Variable    ${ehrstatus_uid}     ${ehrstatus_uid}
     Set Suite Variable    ${versioned_status_uid}       ${short_uid}
-    Set Suite Variable    ${subject_external_ref_value}     ${resp.json()['ehr_status']['subject']['external_ref']['id']['value']}
     Set Suite Variable    ${response}       ${resp}
     Log     ${ehr_id}
     Log     ${system_id}
     Log     ${ehr_status}
     Log     ${versioned_status_uid}
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value      ${encodedToken}
+    Set Suite Variable    ${subject_external_ref_value}     ${ehr_status_subject_external_ref_value}
 
 #TODO: @WLAD  rename KW name when refactor this resource file
 create supernew ehr
