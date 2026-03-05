@@ -191,6 +191,7 @@ Create EHR For AQL
     Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
     Set Suite Variable      ${system_id_with_tenant}     ${resp.json()['system_id']['value']}
     Set Suite Variable      ${ehr_id}     ${ehr_id_value}
+    Set Suite Variable      ${ehr_time_created}		${resp.json()['time_created']['value']}
     Get EHR_STATUS Of EHR And Store Subject External Ref Value
 
 Create EHR For AQL With Custom EHR Status
