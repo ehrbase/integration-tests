@@ -67,7 +67,7 @@ CircleCI Cache Restored
     ${exp_results_2}    Run Keyword And Return Status    File Should Exist    ${EXECDIR}/robot/_resources/test_data_sets/query/expected_results/loaded_db/D/503.tmp.json
     ${cache_exists}     Set Variable If    ${db_cache_exists} and ${exp_results_1} and ${exp_results_2}    ${TRUE}    ${FALSE}
                         Set Global Variable    ${CACHE_EXISTS}    ${cache_exists}
-    
+
     RETURN            ${cache_exists}
 
 Establish Preconditions
@@ -75,10 +75,10 @@ Establish Preconditions
     #          below trueth table applies
     #
     #          Data Changed    Cache Restored    Restore DB!    (Re)Dump DB!
-    #          true            true              no             yes         
-    #          true            false             no             yes         
-    #          false           true              yes            no          
-    #          false           false             no             yes         
+    #          true            true              no             yes
+    #          true            false             no             yes
+    #          false           true              yes            no
+    #          false           false             no             yes
 
     ${data-changed}     Run Keyword And Return Status    File Should Exist    /tmp/DATA_CHANGED_NOTICE
     ${cache-exist}      CircleCI Cache Restored
@@ -88,7 +88,7 @@ Establish Preconditions
     #          via ${REDUMP_REQUIRED} global var which is used in `shut down sut` KW.
     ${redump_required}  Set Variable If    not ${data-changed} and ${cache-exist}    ${FALSE}    ${TRUE}
                         Set Global Variable    ${REDUMP_REQUIRED}    ${redump_required}
-   
+
     # comment: WHEN /tmp/DATA_CHANGED_NOTICE FILE EXIST DO THIS!
     Preconditions (PART 1) - Load Blueprints of Queries and Expected-Results
     Preconditions (PART 2) - Generate Test-Data and Expected-Results
@@ -221,7 +221,7 @@ POST /query/aql
                         Set Test Variable   ${response}    ${resp}
                         Set Test Variable   ${response body}    ${resp.content}
                         # Output Debug Info:  POST /query/aql
-    
+
     # UNCOMMENT NEXT BLOCK FOR DEBUGGING (BETTER OUTPUT IN CONSOLE)
     # TODO: rm/comment it out when test stable
                         Log To Console  \n//////////// ACTUAL //////////////////////////////
@@ -246,7 +246,7 @@ POST /query/aql (REST)
 
                         Integer    response status    200
                         Set Test Variable   ${response}    ${resp}
-    
+
     # UNCOMMENT NEXT BLOCK FOR DEBUGGING (BETTER OUTPUT IN CONSOLE)
     # TODO: rm/comment it out when test stable
                         Log To Console  \n//////////// ACTUAL //////////////////////////////
@@ -386,7 +386,7 @@ GET /definition/query/{qualified_query_name} / including {version}
                 IF      '${q_exists}' == '${TRUE}'
                     Set Test Variable       ${resp_query}   ${resp['q']}
                 ELSE IF     '${q_exists}' == '${FALSE}'
-                    Set Test Variable       ${resp_versions}   ${resp['versions'][0]}
+                    Set Test Variable       ${resp_versions}   ${resp[0]}
                 END
 
 GET /definition/query
