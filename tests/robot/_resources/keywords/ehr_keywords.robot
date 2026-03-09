@@ -912,7 +912,12 @@ extract ehrstatus_uid (JSON)
     [Documentation]     Extracts uuid of ehr_status from response of preceding request.
     ...                 DEPENDENCY: `create new EHR`
 
-    Set Suite Variable      ${ehrstatus_uid}       ${resp.json()['ehr_status']['id']['value']}
+    ${is_ehr_status_id_value_present}   Run Keyword And Return Status
+    ...     Set Suite Variable      ${ehrstatus_uid}       ${resp.json()['ehr_status']['id']['value']}
+    ## Below case is for Message API, as there is still ehr_status.uid.value
+    IF  not ${is_ehr_status_id_value_present}
+        Set Suite Variable      ${ehrstatus_uid}       ${resp.json()['ehr_status']['uid']['value']}
+    END
     #Log To Console      \n\tDEBUG OUTPUT - EHR_STATUS UUID: \n${ehrstatus_uid}
     @{ehr_status_uid}       Split String        ${ehrstatus_uid}      ::
                             Set Suite Variable  ${versioned_status_uid}   ${ehr_status_uid}[0]
