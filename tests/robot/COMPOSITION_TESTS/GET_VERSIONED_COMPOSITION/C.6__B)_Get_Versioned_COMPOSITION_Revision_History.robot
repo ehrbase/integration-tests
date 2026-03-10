@@ -43,10 +43,10 @@ Force Tags      COMPOSITION_get_versioned
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
     Should Be Equal As Strings    ${response.status_code}   200
-    ${length} =    Get Length    ${response.json()}
+    ${length} =    Get Length    ${response.json()['items']}
     Should Be Equal As Integers 	${length} 	1
 
-    ${item1} =    Get From List    ${response.json()}    0
+    ${item1} =    Get From List    ${response.json()['items']}    0
     Should Be Equal As Strings    ${version_uid}    ${item1['version_id']['value']}
     Should Contain Any     ${item1['audits'][0]['time_committed']['value']}      +   -   Z   timezone not present in timestamp
     [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
@@ -64,13 +64,13 @@ Force Tags      COMPOSITION_get_versioned
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
     Should Be Equal As Strings    ${response.status_code}   200
-    ${length} =    Get Length    ${response.json()}
+    ${length}=    Get Length    ${response.json()['items']}
     Should Be Equal As Integers 	${length} 	2
 
-    ${item1} =    Get From List    ${response.json()}    0
+    ${item1} =    Get From List    ${response.json()['items']}    0
     Should Be Equal As Strings    ${version_uid[0:-1]}2    ${item1['version_id']['value']}
 
-    ${item2} =    Get From List    ${response.json()}    1
+    ${item2} =    Get From List    ${response.json()['items']}    1
     Should Be Equal As Strings    ${version_uid[0:-1]}1    ${item2['version_id']['value']}
     [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs     AND
                   ...   TRACE JIRA ISSUE    CDR-413
@@ -86,11 +86,11 @@ Force Tags      COMPOSITION_get_versioned
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
     Should Be Equal As Strings    ${response.status_code}   200
-    ${length} =    Get Length    ${response.json()}
+    ${length} =    Get Length    ${response.json()['items']}
     Should Be Equal As Integers 	${length} 	2
 
     # comment: Attention: the following code is depending on the order of the array!
-    ${item1} =    Get From List    ${response.json()}    0
+    ${item1} =    Get From List    ${response.json()['items']}    0
     Should Be Equal As Strings    ${version_uid[0:-1]}2    ${item1['version_id']['value']}
     # comment: check if change type is "creation"
     ${audit1} =    Get From List    ${item1['audits']}    0
@@ -98,7 +98,7 @@ Force Tags      COMPOSITION_get_versioned
     # comment: save timestamp to compare later
     ${timestamp1} = 	Convert Date    ${audit1['time_committed']['value']}    result_format=%Y-%m-%dT%H:%M:%S.%f
 
-    ${item2} =    Get From List    ${response.json()}    1
+    ${item2} =    Get From List    ${response.json()['items']}    1
     Should Be Equal As Strings    ${version_uid[0:-1]}1    ${item2['version_id']['value']}
     # comment: check if change type is "modification"
     ${audit2} =    Get From List    ${item2['audits']}    0
@@ -157,6 +157,6 @@ Force Tags      COMPOSITION_get_versioned
 
     get revision history of versioned composition of EHR by UID    ${versioned_object_uid}
     Should Be Equal As Strings      ${response.status_code}   200
-    ${item1}    Get From List       ${response.json()}        0
+    ${item1}    Get From List       ${response.json()['items']}        0
     Should Contain Any     ${item1['audits'][0]['time_committed']['value']}      +   -   Z   timezone not present in timestamp
     [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs

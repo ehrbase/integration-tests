@@ -48,6 +48,7 @@ Force Tags
 *** Test Cases ***
 Alternative flow: create directory on empty EHR, with is_modifiable set to False
     create EHR
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     update EHR: set ehr-status modifiable    ${FALSE}
     create DIRECTORY (JSON)    empty_directory.json     isModifiable=${FALSE}
     Status Should Be        409

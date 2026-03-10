@@ -66,6 +66,7 @@ Alternative flow: update directory from EHR with directory, second update with i
 Preconditions
     Set Library Search Order For Tests
     create EHR
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     create DIRECTORY (JSON)    update/1_create_empty_directory.json
 
 

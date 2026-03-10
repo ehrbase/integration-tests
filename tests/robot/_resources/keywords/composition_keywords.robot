@@ -1011,11 +1011,13 @@ get version of versioned composition of EHR by UID and time
     ...                 which can be empty too
 
     # Trick to see if ${query} was set. (if not, "Get Variale Value" will set the value to None)
-    ${query} = 	Get Variable Value 	${query}
+    ${query}= 	Get Variable Value 	${query}
     # Only run the GET with query if $query was set
-    Run Keyword Unless 	$query is None 	internal get version of versioned composition of EHR by UID and time with query    ${uid}
-    Run Keyword If 	$query is None 	internal get version of versioned composition of EHR by UID and time without query    ${uid}
-
+    IF  $query != $None
+        internal get version of versioned composition of EHR by UID and time with query    ${uid}
+    ELSE
+        internal get version of versioned composition of EHR by UID and time without query    ${uid}
+    END
 
 get version of versioned composition of EHR by UID
     [Arguments]         ${versioned_object_uid}    ${version_uid}   ${multitenancy_token}=${None}

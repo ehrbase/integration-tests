@@ -71,7 +71,7 @@ Definition API - GET Stored Query Using Qualified Query Name
     ...                 \n*DEPENDS ON TEST* 'Definition API - PUT Stored Query Using Qualified Query Name'
     ${resp_query}       GET /definition/query/{qualified_query_name} / including {version}
     ...     qualif_name=${resp_qualified_query_name}
-    ${resp_versions_arr}    Set Variable    ${resp['versions'][0]}
+    ${resp_versions_arr}    Set Variable    ${resp[0]}
     Should Be Equal As Strings     ${resp_versions_arr['name']}       ${resp_qualified_query_name}
     Should Be Equal As Strings     ${resp_versions_arr['type']}       AQL
     Should Be Equal As Strings     ${resp_versions_arr['version']}    1.0.0
@@ -127,7 +127,7 @@ Definition API - GET All Stored Queries
     ...                 - response status code = 200
     ...                 - {stored_queries_count} > 1
     ${resp_query}       GET /definition/query
-    ${resp_versions_arr}        Set Variable    ${resp_query['versions']}
+    ${resp_versions_arr}        Set Variable    ${resp_query}
     ${stored_queries_count}     Get Length      ${resp_versions_arr}
     Should Be True    ${stored_queries_count} > ${1}
     FOR     ${INDEX}  IN RANGE  0   ${stored_queries_count}
@@ -321,3 +321,4 @@ Precondition
 Create EHR With EHR Status
     [Documentation]     Create EHR with EHR_Status and other details, so it can contain correct subject object.
     create new EHR with ehr_status  ${VALID EHR DATA SETS}/000_ehr_status_with_other_details.json
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value

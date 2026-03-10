@@ -55,6 +55,7 @@ Main flow: successfully commit CONTRIBUTION with EHR status Modifiable True
 
     Upload OPT    minimal/minimal_evaluation.opt
     create EHR
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     update EHR: set ehr-status modifiable    ${TRUE}
     commit CONTRIBUTION (JSON)  minimal/minimal_evaluation.contribution.json
     check response: is positive - returns version id
@@ -66,6 +67,7 @@ Main flow: does not allow to commit CONTRIBUTION with EHR status Modifiable Fals
 
     Upload OPT    minimal/minimal_evaluation.opt
     create EHR
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     update EHR: set ehr-status modifiable    ${FALSE}
     commit CONTRIBUTION (JSON) is modifiable false  minimal/minimal_evaluation.contribution.json
     check response: is negative indicating does not allow modification

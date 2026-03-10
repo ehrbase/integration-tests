@@ -183,30 +183,33 @@ Create EHR For AQL
         ${ehr_status_json}  Update Value To Json    ${ehr_status_json}    $.subject.external_ref.namespace
         ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
         create new EHR by ID    ehr_id=${ehr_id}   ehr_status_json=${ehr_status_json}
+        Status Should Be    201
     ELSE
         create new EHR with ehr_status  ${EHR_DATA_SETS}/000_ehr_status_with_other_details.json
     END
-    Status Should Be    201
     Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
     Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
     Set Suite Variable      ${system_id_with_tenant}     ${resp.json()['system_id']['value']}
     Set Suite Variable      ${ehr_id}     ${ehr_id_value}
+    Set Suite Variable      ${ehr_time_created}		${resp.json()['time_created']['value']}
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
 
 Create EHR For AQL With Custom EHR Status
     [Documentation]     Create EHR with custom EHR_STATUS, filename provided in mandatory arg {file_name}.
     [Arguments]     ${file_name}
     prepare new request session    JSON      Prefer=return=representation
     create new EHR with ehr_status      ${EHR_STATUS_DATA_SETS_AQL}/${file_name}
-    Status Should Be    201
     Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
     Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
     Set Suite Variable      ${ehr_id_obj}     ${ehr_id_obj}
-    Set Suite Variable      ${ehr_status_uid}     ${response.json()['ehr_status']['uid']['value']}
+
     Set Suite Variable      ${ehr_id}         ${ehr_id_value}
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     Set Suite Variable      ${subject_external_ref_value}
-    ...     ${response.json()['ehr_status']['subject']['external_ref']['id']['value']}
+    ...     ${ehr_status_subject_external_ref_value}
     Set Suite Variable      ${subject_external_ref_namespace}
-    ...     ${response.json()['ehr_status']['subject']['external_ref']['namespace']}
+    ...     ${resp_json['subject']['external_ref']['namespace']}
+    Set Suite Variable      ${ehr_status_uid}     ${response.json()['uid']['value']}
 
 Commit Composition For AQL
     [Documentation]     Create Composition for AQL checks.

@@ -60,7 +60,7 @@ Force Tags
 
     create new EHR
     Status Should Be    201
-
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
 
@@ -79,7 +79,7 @@ Force Tags
 
     create new EHR
     Status Should Be    201
-
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
 
@@ -97,7 +97,7 @@ Force Tags
 
     create new EHR
     Status Should Be    201
-
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
 
@@ -115,7 +115,7 @@ Force Tags
 
     create new EHR
     Status Should Be    201
-
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
 
@@ -176,7 +176,7 @@ Force Tags
 
     create new EHR
     Status Should Be    201
-
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
 

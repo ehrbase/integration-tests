@@ -14,6 +14,7 @@ Suite Setup     Set Library Search Order For Tests
 Update EHR Status - If-Match With Existing UUID
     prepare new request session    JSON    Prefer=return=representation
     create new EHR
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
     [Teardown]      (admin) delete ehr
@@ -113,3 +114,5 @@ Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
     extract ehrstatus_uid (JSON)
     extract ehr_status from response (JSON)
     set is_queryable / is_modifiable    is_queryable=True
+    Get EHR_STATUS Of EHR And Store Subject External Ref Value
+    set full ehr_status from original_ehr_status var (JSON)
