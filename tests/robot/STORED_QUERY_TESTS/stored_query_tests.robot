@@ -129,6 +129,11 @@ Definition API - GET All Stored Queries
     ${resp_query}       GET /definition/query
     ${resp_versions_arr}        Set Variable    ${resp_query}
     ${stored_queries_count}     Get Length      ${resp_versions_arr}
+    Dictionary Should Contain Key       ${resp_versions_arr[0]}     q
+    Dictionary Should Contain Key       ${resp_versions_arr[0]}     name
+    Dictionary Should Contain Key       ${resp_versions_arr[0]}     type
+    Dictionary Should Contain Key       ${resp_versions_arr[0]}     version
+    Dictionary Should Contain Key       ${resp_versions_arr[0]}     saved
     Should Be True    ${stored_queries_count} > ${1}
     FOR     ${INDEX}  IN RANGE  0   ${stored_queries_count}
         Log     ${resp_versions_arr}[${INDEX}]
