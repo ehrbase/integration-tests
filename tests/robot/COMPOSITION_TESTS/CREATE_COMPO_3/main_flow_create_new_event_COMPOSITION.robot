@@ -64,8 +64,27 @@ Alternative flow create COMPOSITION After Delete And Upload Template
     commit composition   format=CANONICAL_JSON
     ...                  composition=nested.en.tmp.v1__full_without_links.json
     Status Should Be    201
-    [Teardown]      Run Keywords    (admin) delete OPT      AND
-                    ...     (admin) delete ehr      AND     (admin) delete all OPTs
+    [Teardown]      Run Keywords
+                    ...     (admin) delete OPT      AND
+                    ...     (admin) delete ehr      AND
+                    ...     (admin) delete all OPTs
+
+Create Composition In Spanish
+    [Documentation]     Covers: https://vitagroup-ag.atlassian.net/browse/CDR-2274
+    ...                 - Expect 201 Created.
+    ${template_file}    Set Variable        all_types/my_spanish_template_v0.opt
+    Set Test Variable   ${template_id}      my_spanish_template_v0
+    Upload OPT      ${template_file}
+    create EHR
+    commit composition   format=CANONICAL_JSON
+    ...                  composition=composition_my_spanish_template_v0.json
+    Set Test Variable   ${template_id}      my_spanish_template_v0
+    check the successful result of commit composition
+    [Teardown]      Run Keywords
+                    ...     (admin) delete OPT          AND
+                    ...     (admin) delete ehr          AND
+                    ...     (admin) delete all OPTs
+
 
 # Main flow create new event COMPOSITION TDD
 #     [Tags]    future
