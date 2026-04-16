@@ -85,7 +85,7 @@ ${CACHE-ENABLED}        ${FALSE}
                         ...     <error>Not Found</error><message>No resource found at path: rest/openehr/v1/template</message>
 
 007 ADMIN - Update Non-Existing Template
-    generate random templade_id
+    Set Test Variable   ${template_id}      minimal_admin.en.v1
     (admin) update OPT    minimal/minimal_admin_updated.opt
     validate PUT response - 404 unknown templade_id
 
@@ -190,27 +190,16 @@ ${CACHE-ENABLED}        ${FALSE}
                 Status Should Be    400
                 Log     ${resp.text}
 
-014 ADMIN - Invalid Usage of Update Endpoint
+014 ADMIN - Invalid Usage of Update Endpoint - JSON Body - Expect 400
     prepare new request session    XML
     Create Session       ${SUT}    ${ADMIN_BASEURL}    debug=2
     ...     verify=True     #auth=${CREDENTIALS}
     &{template_dict}    Create Dictionary   foo=bar
-    ${resp}     PUT On Session    ${SUT}    template/foo   json=${template_dict}
+    ${resp}     PUT On Session    ${SUT}    template/test   json=${template_dict}
                 ...     expected_status=anything
                 ...     headers=${headers}
-                Status Should Be    404
-                Should Contain      ${resp.text}    Template with id foo does not exist
-
-015 ADMIN - Invalid Usage of Update Endpoint
-    prepare new request session    XML
-    Create Session       ${SUT}    ${ADMIN_BASEURL}    debug=2
-    ...     verify=True     #auth=${CREDENTIALS}
-    &{template_dict}    Create Dictionary   foo=bar
-    ${resp}     PUT On Session    ${SUT}    template/123   json=${template_dict}
-                ...     expected_status=anything
-                ...     headers=${headers}
-                Status Should Be    404
-                Should Contain      ${resp.text}    Template with id 123 does not exist
+                Status Should Be    400
+                Should Contain      ${resp.text}    error: Content is not allowed in prolog.
 
 
 *** Keywords ***
