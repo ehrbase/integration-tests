@@ -74,7 +74,7 @@ ${CACHE-ENABLED}        ${FALSE}
     (admin) delete OPT
     Status Should Be    404
     Should Be Equal As Strings      ${response.json()["error"]}     Not Found
-    Should Contain      ${response.json()["message"]}               not found.
+    Should Contain      ${response.json()["message"]}               does not exist
 
 006 ADMIN - Invalid Usage of Delete Endpoint
                         prepare new request session    XML
@@ -127,7 +127,7 @@ ${CACHE-ENABLED}        ${FALSE}
                   ...             (admin) delete all OPTs
 
 010c ADMIN - Delete Template That Was In Use - (Admin)Deleted Composition
-    [Documentation]    Composition is deleted with the admin endpoint and thus has been removed 
+    [Documentation]    Composition is deleted with the admin endpoint and thus has been removed
     ...                "physically" from database. The admin endpoint will respond with a 200
     ...                response and the template is removed.
     upload valid OPT    minimal/minimal_admin.opt
@@ -246,7 +246,7 @@ validate PUT response - 200 updated
 validate PUT response - 404 unknown templade_id
                         log   ${response.content}
                         Should Be Equal As Strings    ${response.status_code}    404
-                        Should Match    ${response.text}    *Template with id ${template_id} does not exist*
+                        Should Match    ${response.text}    *Template with template_id '${template_id}' does not exist*
 
 
 validate PUT response - 422 unprocessable entity
