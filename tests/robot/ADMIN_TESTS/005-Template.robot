@@ -74,7 +74,7 @@ ${CACHE-ENABLED}        ${FALSE}
     (admin) delete OPT
     Status Should Be    404
     Should Be Equal As Strings      ${response.json()["error"]}     Not Found
-    Should Contain      ${response.json()["message"]}               not found.
+    Should Contain      ${response.json()["message"]}               does not exist
 
 006 ADMIN - Invalid Usage of Delete Endpoint
                         prepare new request session    XML
@@ -85,7 +85,7 @@ ${CACHE-ENABLED}        ${FALSE}
                         ...     <error>Not Found</error><message>No resource found at path: rest/openehr/v1/template</message>
 
 007 ADMIN - Update Non-Existing Template
-    generate random templade_id
+    Set Test Variable   ${template_id}      minimal_admin.en.v1
     (admin) update OPT    minimal/minimal_admin_updated.opt
     validate PUT response - 404 unknown templade_id
 
@@ -127,7 +127,7 @@ ${CACHE-ENABLED}        ${FALSE}
                   ...             (admin) delete all OPTs
 
 010c ADMIN - Delete Template That Was In Use - (Admin)Deleted Composition
-    [Documentation]    Composition is deleted with the admin endpoint and thus has been removed 
+    [Documentation]    Composition is deleted with the admin endpoint and thus has been removed
     ...                "physically" from database. The admin endpoint will respond with a 200
     ...                response and the template is removed.
     upload valid OPT    minimal/minimal_admin.opt
@@ -190,27 +190,16 @@ ${CACHE-ENABLED}        ${FALSE}
                 Status Should Be    400
                 Log     ${resp.text}
 
-014 ADMIN - Invalid Usage of Update Endpoint
+014 ADMIN - Invalid Usage of Update Endpoint - JSON Body - Expect 400
     prepare new request session    XML
     Create Session       ${SUT}    ${ADMIN_BASEURL}    debug=2
     ...     verify=True     #auth=${CREDENTIALS}
     &{template_dict}    Create Dictionary   foo=bar
-    ${resp}     PUT On Session    ${SUT}    template/foo   json=${template_dict}
+    ${resp}     PUT On Session    ${SUT}    template/test   json=${template_dict}
                 ...     expected_status=anything
                 ...     headers=${headers}
-                Status Should Be    404
-                Should Contain      ${resp.text}    Template with id foo does not exist
-
-015 ADMIN - Invalid Usage of Update Endpoint
-    prepare new request session    XML
-    Create Session       ${SUT}    ${ADMIN_BASEURL}    debug=2
-    ...     verify=True     #auth=${CREDENTIALS}
-    &{template_dict}    Create Dictionary   foo=bar
-    ${resp}     PUT On Session    ${SUT}    template/123   json=${template_dict}
-                ...     expected_status=anything
-                ...     headers=${headers}
-                Status Should Be    404
-                Should Contain      ${resp.text}    Template with id 123 does not exist
+                Status Should Be    400
+                Should Contain      ${resp.text}    error: Content is not allowed in prolog.
 
 
 *** Keywords ***
@@ -257,7 +246,7 @@ validate PUT response - 200 updated
 validate PUT response - 404 unknown templade_id
                         log   ${response.content}
                         Should Be Equal As Strings    ${response.status_code}    404
-                        Should Match    ${response.text}    *Template with id ${template_id} does not exist*
+                        Should Match    ${response.text}    *Template with template_id '${template_id}' does not exist*
 
 
 validate PUT response - 422 unprocessable entity

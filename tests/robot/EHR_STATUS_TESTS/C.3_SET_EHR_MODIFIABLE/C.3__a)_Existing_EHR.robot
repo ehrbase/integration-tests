@@ -55,4 +55,14 @@ Set EHR modifiable of an existing EHR
     update EHR: set ehr-status modifiable    ${TRUE}
 
     check response of 'update EHR' (JSON)
+    Set Test Variable   ${expected_ehr_status_json}     ${response.json()}
+
+    internal get versioned ehr_status of EHR by time without query
+    Should Be Equal     ${response.status_code}     ${200}
+    Set Test Variable   ${actual_ehr_status_json}     ${response.json()['data']}
+
+    ${diff}     compare json-strings
+    ...     ${actual_ehr_status_json}     ${expected_ehr_status_json}
+    ...     ignore_order=${FALSE}    ignore_string_case=${TRUE}
+    Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      (admin) delete ehr
