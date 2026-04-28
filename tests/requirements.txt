@@ -14,7 +14,7 @@ RESTinstance == 1.8.0
 
 docker == 7.1.0
 deepdiff == 9.0.0
-psycopg2-binary == 2.9.11
+psycopg2-binary == 2.9.12
 python-benedict == 0.36.0
 
 pyjwt == 2.12.1
