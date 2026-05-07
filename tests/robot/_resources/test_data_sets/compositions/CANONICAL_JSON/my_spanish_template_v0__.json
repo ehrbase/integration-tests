@@ -43,7 +43,7 @@
     },
     "composer": {
         "_type": "PARTY_IDENTIFIED",
-        "name": "Max Mustermann"
+        "name": "composer test value"
     },
     "context": {
         "_type": "EVENT_CONTEXT",

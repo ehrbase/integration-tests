@@ -77,7 +77,7 @@ Create Composition In Spanish
     Upload OPT      ${template_file}
     create EHR
     commit composition   format=CANONICAL_JSON
-    ...                  composition=composition_my_spanish_template_v0.json
+    ...                  composition=my_spanish_template_v0__.json
     Set Test Variable   ${template_id}      my_spanish_template_v0
     check the successful result of commit composition
     [Teardown]      Run Keywords
