@@ -1110,7 +1110,7 @@ Compare content of compositions with the Original (FLAT)
                         Log To Console  \n/////////// EXPECTED //////////////////////////////
                         Output    ${expected result}
                         Set Test Variable  ${actual_response}   ${response.json()}
-                        Log To Console  \n/////////// ACTUAL  //////////////////////////////
+                        Log To Console  \n/////////// ACTUAL //////////////////////////////
                         Output    ${actual_response}
     &{diff}=            compare_jsons_ignoring_properties  ${actual_response["composition"]}  ${expected result}  ${template_id}/_uid
                         Should Be Empty  ${diff}  msg=DIFF DETECTED!
@@ -1264,12 +1264,11 @@ delete composition
         Status Should Be    204
                             # the ETag comes with quotes, this removes them
         ${del_version_uid}      Get Substring           ${resp.headers['ETag']}    1    -1
-        log to console          \ndeleted version uid:  ${del_version_uid}
+        log to console          \ndeleted version uid: ${del_version_uid}
         Set Test Variable       ${del_version_uid}      ${del_version_uid}
     ELSE
         ${resp}     Delete On Session   ${SUT}   /composition/${uid}   expected_status=anything     headers=${headers}
         Status Should Be    200
-
     END
         log to console      ${resp.headers}
         log to console      ${resp.content}
