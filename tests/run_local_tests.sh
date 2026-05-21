@@ -26,11 +26,21 @@ export LOG_LEVEL=TRACE
 # robot --include XXX --outputdir results -L $LOG_LEVEL robot/
 
 
+# RUN SANITY TESTS
+robot -i Sanity -e circleci -e EHRSCAPE -e obsolete -e libtest \
+      --outputdir results/test-suites/SANITY_TESTS \
+      --skiponfailure not-ready \
+      --flattenkeywords for \
+      --flattenkeywords foritem \
+      --flattenkeywords name:_resources.* \
+      --loglevel $LOG_LEVEL \
+      --name SANITY \
+      robot/SANITY_TESTS/
 
 # RUN CONTRIBUTION SERVICE TESTS
 robot -i CONTRIBUTION -e circleci -e EHRSCAPE -e obsolete -e libtest \
       --outputdir results/test-suites/CONTRIBUTION_SERVICE \
-      --noncritical not-ready \
+      --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
       --flattenkeywords name:_resources.* \
@@ -38,10 +48,54 @@ robot -i CONTRIBUTION -e circleci -e EHRSCAPE -e obsolete -e libtest \
       --name CONTRI \
       robot/CONTRIBUTION_TESTS/
 
+# RUN SWAGGER TESTS
+robot -i SWAGGER_EHRBASE -e circleci -e EHRSCAPE -e obsolete -e libtest \
+      --outputdir results/test-suites/SWAGGER_TESTS \
+      --skiponfailure not-ready \
+      --flattenkeywords for \
+      --flattenkeywords foritem \
+      --flattenkeywords name:_resources.* \
+      --loglevel $LOG_LEVEL \
+      --name SWAGGER \
+      robot/SWAGGER_TESTS/
+
+# RUN TEMPLATE TESTS
+robot -i template -e circleci -e EHRSCAPE -e obsolete -e libtest \
+      --outputdir results/test-suites/TEMPLATE_TESTS \
+      --skiponfailure not-ready \
+      --flattenkeywords for \
+      --flattenkeywords foritem \
+      --flattenkeywords name:_resources.* \
+      --loglevel $LOG_LEVEL \
+      --name TEMPLATE \
+      robot/TEMPLATE_TESTS/
+
+# RUN STORED QUERY TESTS
+robot -i stored_query -e circleci -e EHRSCAPE -e obsolete -e libtest \
+      --outputdir results/test-suites/STORED_QUERY_TESTS \
+      --skiponfailure not-ready \
+      --flattenkeywords for \
+      --flattenkeywords foritem \
+      --flattenkeywords name:_resources.* \
+      --loglevel $LOG_LEVEL \
+      --name STORED_QUERY \
+      robot/STORED_QUERY_TESTS/
+
+# RUN TAGS TESTS
+robot -i TAGS_SUITES -e circleci -e EHRSCAPE -e obsolete -e libtest \
+      --outputdir results/test-suites/TAGS_TESTS \
+      --skiponfailure not-ready \
+      --flattenkeywords for \
+      --flattenkeywords foritem \
+      --flattenkeywords name:_resources.* \
+      --loglevel $LOG_LEVEL \
+      --name TAGS \
+      robot/TAGS_TESTS/
+
 # RUN COMPOSITION SERVICE TESTS
 robot -i COMPOSITION -e circleci -e EHRSCAPE -e obsolete -e libtest \
       --outputdir results/test-suites/COMPOSITION_SERVICE \
-      --noncritical not-ready \
+      --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
       --flattenkeywords name:_resources.* \
@@ -50,9 +104,9 @@ robot -i COMPOSITION -e circleci -e EHRSCAPE -e obsolete -e libtest \
       robot/COMPOSITION_TESTS/
 
 # RUN DIRECTORY SERVICE TESTS
-robot -i directory -e circleci -e EHRSCAPE -e obsolete -e libtest \
+robot -i DIRECTORY -e circleci -e EHRSCAPE -e obsolete -e libtest \
       --outputdir results/test-suites/DIRECTORY_SERVICE \
-      --noncritical not-ready \
+      --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
       --flattenkeywords name:_resources.* \
@@ -60,10 +114,21 @@ robot -i directory -e circleci -e EHRSCAPE -e obsolete -e libtest \
       --name DIR \
       robot/DIRECTORY_TESTS/
 
+# RUN AQL TESTS
+robot -i AQL_TESTS_PACKAGE -e circleci -e EHRSCAPE -e obsolete -e libtest \
+      --outputdir results/test-suites/AQL_TESTS \
+      --skiponfailure not-ready \
+      --flattenkeywords for \
+      --flattenkeywords foritem \
+      --flattenkeywords name:_resources.* \
+      --loglevel $LOG_LEVEL \
+      --name AQL \
+      robot/AQL_TESTS/
+
 # RUN EHR SERVICE TESTS
 robot -i EHR_SERVICE -e circleci -e EHRSCAPE -e obsolete -e libtest \
       --outputdir results/test-suites/EHR_SERVICE \
-      --noncritical not-ready \
+      --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
       --flattenkeywords name:_resources.* \
@@ -74,7 +139,7 @@ robot -i EHR_SERVICE -e circleci -e EHRSCAPE -e obsolete -e libtest \
 # RUN EHR STATUS TESTS
 robot -i EHR_STATUS -e circleci -e EHRSCAPE -e obsolete -e libtest \
       --outputdir results/test-suites/EHR_STATUS \
-      --noncritical not-ready \
+      --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
       --flattenkeywords name:_resources.* \
@@ -85,35 +150,13 @@ robot -i EHR_STATUS -e circleci -e EHRSCAPE -e obsolete -e libtest \
 # RUN KNOWLEDGE SERVICE TESTS
 robot -i KNOWLEDGE -e circleci -e EHRSCAPE -e obsolete -e libtest \
       --outputdir results/test-suites/KNOWLEDGE_SERVICE \
-      --noncritical not-ready \
+      --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
       --flattenkeywords name:_resources.* \
       --loglevel $LOG_LEVEL \
       --name KNOWLEDGE \
       robot/KNOWLEDGE_TESTS/
-
-# RUN QUERY SERVICE TESTS - PART I (empty DB)
-robot -i aqlANDempty_db -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/QUERY_SERVICE_I \
-      --noncritical not-ready \
-      --flattenkeywords for \
-      --flattenkeywords foritem \
-      --flattenkeywords name:_resources.* \
-      --loglevel $LOG_LEVEL \
-      --name AQL1 \
-      robot/QUERY_SERVICE_TESTS/
-
-# RUN QUERY SERVICE TESTS - PART II (loaded DB)
-robot -i aqlANDloaded_db -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/QUERY_SERVICE_II \
-      --noncritical not-ready \
-      --flattenkeywords for \
-      --flattenkeywords foritem \
-      --flattenkeywords name:_resources.* \
-      --loglevel $LOG_LEVEL \
-      --name AQL2 \
-      robot/QUERY_SERVICE_TESTS/
 
 
 # POST PROCESS & MERGE OUTPUTS
@@ -125,7 +168,7 @@ rebot --outputdir results \
       --removekeywords for \
       --removekeywords wuks \
       --loglevel TRACE \
-      --noncritical not-ready \
+      --skiponfailure not-ready \
       --timestampoutputs \
       --output EHRbase-output.xml \
       --log EHRbase-log.html \
@@ -152,7 +195,7 @@ rebot --outputdir results \
 # docker run --rm -it --env HOST_UID=$(id -u) --env HOST_GID=$(id -g) --network host \
 # --volume "$PWD/robot":/home/robot/tests \
 # --volume "$PWD/results":/home/robot/results \
-# robod0ck/robod0ck --noncritical not-ready -e BDD -L TRACE tests/
+# robod0ck/robod0ck --skiponfailure not-ready -e BDD -L TRACE tests/
 
 # # CLEANUP after test run
 # ## 1. Remove all containers and volumes
