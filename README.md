@@ -3,8 +3,10 @@
 ## Running the tests locally
 
 Before running the tests, make sure the following prerequisites are in place:
-1. Python 3.7+ & Pip are installed
-2. Robot Framework & dependencies are installed (`pip install -r requirements.txt` inside the `tests` folder)
+1. Python 3.11.* & Pip are installed:
+- https://www.python.org/downloads/
+- https://pip.pypa.io/en/stable/installation/
+2. Robot Framework & dependencies are installed (run `pip install -r requirements.txt` inside the `tests` folder)
 3. An EHRbase instance is running on port `8080`
 
 This command will run all tests from `tests/robot` folder.
