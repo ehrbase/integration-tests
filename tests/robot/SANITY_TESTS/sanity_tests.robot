@@ -46,26 +46,20 @@ Main flow Sanity Tests for FLAT Compositions
     Update Composition (FLAT)  family_history.v2__.json
     (FLAT) get composition by composition_uid    ${composition_uid}
     check composition exists
-
     ${composition_uid_short}=  Fetch From Left  ${composition_uid}  :
     Replace Uid With Actual  robot/_resources/test_data_sets/directory/empty_directory_items.json  ${composition_uid_short}  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
     create DIRECTORY (JSON)    empty_directory_items_uid_replaced.json
     Should Be Equal As Strings    ${response.status_code}    201
     Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}
     remove File  robot/_resources/test_data_sets/directory/empty_directory_items_uid_replaced.json
-
     #execute ad-hoc query    B/102_get_compositions_orderby_name.json
     #check response: is positive
     Set Variable With Short Compo Id And Delete Composition     ${composition_uid_short}
     delete DIRECTORY (JSON)
     Status Should Be    204
-
     (admin) delete ehr
-    #[Teardown]    restart SUT
-
 
 Main flow Sanity Tests for Canonical JSON Compositions
-    #create EHR
     Create EHR For Sanity Flow
     Get Web Template By Template Id (ECIS)  ${template_id}
     commit composition   format=CANONICAL_JSON
@@ -98,11 +92,8 @@ Main flow Sanity Tests for Canonical JSON Compositions
     Set Variable With Short Compo Id And Delete Composition     ${version_uid_short}
     delete DIRECTORY (JSON)
     (admin) delete ehr
-    #[Teardown]    restart SUT
 
 Main flow Sanity Tests for Canonical XML Compositions
-    #To remove not-ready tag when https://vitagroup-ag.atlassian.net/browse/CDR-1616 is merged
-    #create EHR
     Create EHR For Sanity Flow
     Get Web Template By Template Id (ECIS)  ${template_id}
     commit composition   format=CANONICAL_XML
