@@ -179,3 +179,20 @@ ${WEB TEMPLATES DATA SETS}     ${PROJECT_ROOT}${/}tests${/}robot${/}_resources${
     ...     ignore_order=${TRUE}    ignore_string_case=${TRUE}
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      (admin) delete OPT
+
+16. Check Template family_history.v.1.2.3 Is Possible To Be Created But Not Updated - Allow-Overwrite False
+    [Documentation]     - Template with id family_history.v.1.2.3 can be created but cannot be updated (422)
+    ...                 due to default allow-overwrite=false option set in application.yml file.
+    ...                 - Template id format family_history.v.1.2.3 instead of family_history.v1.2.3 must be accepted for create template.
+    ...                 - Covers: https://vitagroup-ag.atlassian.net/browse/CDR-2428
+    [Tags]      Positive
+    Upload OPT      all_types/family_history.v.1.2.3.opt
+    create EHR
+    commit composition   format=CANONICAL_JSON
+    ...                  composition=family_history.v.1.2.3__.json
+    (admin) update OPT    all_types/family_history.v.1.2.3_updated.opt
+    Should Be Equal As Strings    ${response.status_code}    422
+    Should Contain    ${response.text}    is used by
+    [Teardown]      Run Keywords
+    ...             (admin) delete ehr      AND
+    ...             (admin) delete OPT
