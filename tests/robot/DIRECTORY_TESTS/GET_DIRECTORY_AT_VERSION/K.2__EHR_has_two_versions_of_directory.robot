@@ -66,3 +66,28 @@ Alternative flow 1: get directory at version from existent EHR that has two vers
     # TODO: check that it is the SECOND version
     validate GET-@version response - 200 retrieved    root
     [Teardown]    (admin) delete ehr
+
+Alternative flow 2: get updated and deleted directory by version id and expect 200
+    [Documentation]     - Check that Get Directory by version_uid is returning 200 for created, updated, deleted directory.
+    ...                 - Use default application.yml setup, with ehrbase.versioning.ehr-folder.data-retention=KEEP_ALL
+    [Setup]     create EHR
+    create DIRECTORY (JSON)    subfolders_in_directory.json
+    update DIRECTORY (JSON)    subfolders_in_directory_with_details.json
+    Set Test Variable   ${folder_version_uid_2}     ${version_uid}
+    ${folder_version_uid_1}     Replace String	    ${folder_version_uid_2} 	::2     ::1
+    Set Test Variable   ${folder_version_uid_1}     ${folder_version_uid_1}
+    update DIRECTORY (JSON)    update/3_add_items.json
+    Set Test Variable   ${folder_version_uid_3}     ${version_uid}
+    delete DIRECTORY (JSON)
+    validate DELETE response - 204 deleted
+    ##
+    Set Test Variable   ${version_uid}      ${folder_version_uid_1}
+    get DIRECTORY at version (JSON)
+    validate GET-@version response - 200 retrieved    root
+    Set Test Variable   ${version_uid}      ${folder_version_uid_2}
+    get DIRECTORY at version (JSON)
+    validate GET-@version response - 200 retrieved    root
+    Set Test Variable   ${version_uid}      ${folder_version_uid_3}
+    get DIRECTORY at version (JSON)
+    validate GET-@version response - 200 retrieved    root
+    [Teardown]    (admin) delete ehr
