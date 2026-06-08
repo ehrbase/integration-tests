@@ -217,7 +217,7 @@ Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021-01-00 - Upper 2022-01-01 - Lo
     ...     ${FALSE}     ${FALSE}     ${TRUE}    ${TRUE}
     ...     ${expectedStatusCode}
     Should Contain      ${response.json()["message"]}
-    ...      Text '2021-01-00' could not be parsed: Invalid value for DayOfMonth (valid values 1 - 28/31): 0:2021-01-00
+    ...      Invalid value for DayOfMonth (valid values 1 - 28/31): 0:2021-01-00
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
@@ -238,7 +238,7 @@ Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021-01-32 - Upper 2022-01-01 - Lo
     ...     ${FALSE}     ${FALSE}     ${TRUE}    ${TRUE}
     ...     ${expectedStatusCode}
     Should Contain      ${response.json()["message"]}
-    ...      Text '2021-01-32' could not be parsed: Invalid value for DayOfMonth (valid values 1 - 28/31): 32:2021-01-32
+    ...      Invalid value for DayOfMonth (valid values 1 - 28/31): 32:2021-01-32
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
@@ -259,7 +259,7 @@ Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021-01-01 - Upper 2022-01-00 - Lo
     ...     ${FALSE}     ${FALSE}     ${TRUE}    ${TRUE}
     ...     ${expectedStatusCode}
     Should Contain      ${response.json()["message"]}
-    ...      Text '2022-01-00' could not be parsed: Invalid value for DayOfMonth (valid values 1 - 28/31): 0:2022-01-00
+    ...      Invalid value for DayOfMonth (valid values 1 - 28/31): 0:2022-01-00
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
@@ -280,7 +280,7 @@ Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021-01-30 - Upper 2022-01-00 - Lo
     ...     ${FALSE}     ${FALSE}     ${TRUE}    ${TRUE}
     ...     ${expectedStatusCode}
     Should Contain      ${response.json()["message"]}
-    ...      Text '2022-01-00' could not be parsed: Invalid value for DayOfMonth (valid values 1 - 28/31): 0:2022-01-00
+    ...      Invalid value for DayOfMonth (valid values 1 - 28/31): 0:2022-01-00
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
@@ -321,7 +321,7 @@ Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021-10-24T48 - Upper 2022-01-15T1
     ...     ${FALSE}     ${FALSE}     ${TRUE}    ${TRUE}
     ...     ${expectedStatusCode}
     Should Contain      ${response.json()["message"]}
-    ...     Text '2021-10-24T48' could not be parsed: Invalid value for HourOfDay (valid values 0 - 23): 48:2021-10-24T48
+    ...     Invalid value for HourOfDay (valid values 0 - 23): 48:2021-10-24T48
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
@@ -342,7 +342,7 @@ Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021-10-24T21 - Upper 2022-01-15T7
     ...     ${FALSE}     ${FALSE}     ${TRUE}    ${TRUE}
     ...     ${expectedStatusCode}
     Should Contain      ${response.json()["message"]}
-    ...     Text '2022-01-15T73' could not be parsed: Invalid value for HourOfDay (valid values 0 - 23): 73:2022-01-15T73
+    ...     Invalid value for HourOfDay (valid values 0 - 23): 73:2022-01-15T73
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
@@ -382,7 +382,7 @@ Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021-10-24T05:30 - Upper 2022-01-1
     ...     ${FALSE}     ${FALSE}     ${TRUE}    ${TRUE}
     ...     ${expectedStatusCode}
     Should Contain     ${response.json()["message"]}
-    ...     Text '2022-01-15T10:61' could not be parsed: Invalid value for MinuteOfHour (valid values 0 - 59): 61:2022-01-15T10:61
+    ...     Invalid value for MinuteOfHour (valid values 0 - 59): 61:2022-01-15T10:61
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
@@ -422,7 +422,7 @@ Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021-10-24T05:30:78 - Upper 2022-0
     ...     ${FALSE}     ${FALSE}     ${TRUE}    ${TRUE}
     ...     ${expectedStatusCode}
     Should Contain     ${response.json()["message"]}
-    ...     Text '2021-10-24T05:30:78' could not be parsed: Invalid value for SecondOfMinute (valid values 0 - 59): 78:2021-10-24T05:30:78
+    ...     Invalid value for SecondOfMinute (valid values 0 - 59): 78:2021-10-24T05:30:78
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
