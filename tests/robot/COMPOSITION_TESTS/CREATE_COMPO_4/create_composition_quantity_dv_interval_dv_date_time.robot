@@ -144,7 +144,7 @@ Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower Null - Upper 2022 - Lower Unb 0 - 
     [Teardown]     Delete Composition Using API
 
 Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021 - Upper 2022 - Lower Unb 0 - Upper Unb 0 - Lower Incl 1 - Upper Incl 1
-    [Tags]      Positive    not-ready   bug
+    [Tags]      Positive
     [Documentation]     Positive case for QUANTITY DV_INTERVAL<DV_DATE_TIME>
     ...     Lower 2021, Upper 2022, Lower Unb 0, Upper Unb 0, Lower Incl 1, Upper Incl 1
     ...     \n*See suite documentation to understand what are 1 and 0 values!*
@@ -160,7 +160,7 @@ Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021 - Upper 2022 - Lower Unb 0 - 
     IF      ${statusCodeBoolean} == ${FALSE}
         Fail    Commit composition expected status code ${expectedStatusCode} is different.
     END
-    [Teardown]     Run Keywords     Delete Composition Using API    AND     TRACE JIRA ISSUE    CDR-541
+    [Teardown]     Delete Composition Using API
 
 Test QUANTITY DV_INTERVAL<DV_DATE_TIME> Lower 2021-00 - Upper 2022-01 - Lower Unb 0 - Upper Unb 0 - Lower Incl 1 - Upper Incl 1
     [Tags]      Negative
