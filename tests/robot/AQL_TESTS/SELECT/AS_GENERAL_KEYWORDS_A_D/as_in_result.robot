@@ -216,6 +216,19 @@ Check One Composition UID Is Returned - AQL With Different Than Sign
     Should Be Empty    ${diff}    msg=DIFF DETECTED!
     [Teardown]      Admin Delete EHR For AQL
 
+SELECT Date From EHR - AQL Stays The Same In Result
+    [Documentation]     Covers https://vitagroup-ag.atlassian.net/browse/CDR-2460
+    [Setup]     Create EHR For AQL
+    Select Date From EHR And Expect 20260102
+    Select Date From EHR And Expect 02012026
+    Select Date From EHR And Expect 202601
+    Select Date From EHR And Expect 2026
+    Select Date From EHR And Expect 02-01-2026
+    Select Date From EHR And Expect 2026-01-02T14:30:00+02:00
+    Select Date From EHR And Expect 2026-01-02T14:45:00-03:00
+    Select Date From EHR And Expect 2026-01-02T14:50
+    [Teardown]      Admin Delete EHR For AQL
+
 
 *** Keywords ***
 Precondition
@@ -231,3 +244,10 @@ Precondition - Add 2 Compositions With Fixed UIDs
     Log     ${composition_short_uid}
     Commit Composition For AQL      aql-conformance-ehrbase.org.v0_contains_with_compo_uid_2.json
     Log     ${composition_short_uid}
+
+Select Date From EHR And Expect ${date_format}
+    ${query}    Set Variable    SELECT '${date_format}' FROM EHR e LIMIT 1
+    Set AQL And Execute Ad Hoc Query    ${query}
+    Should Be Equal     ${resp_body_query}      ${query}
+    Should Be Equal     ${resp_body['meta']['_executed_aql']}      ${query}
+    Should Be Equal     ${resp_body['rows'][0][0]}     ${date_format}
