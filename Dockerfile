@@ -11,8 +11,10 @@ COPY --chmod=755 ./scripts/runRobotTest.sh /bin/runRobotTest
 # Copy the rest of the project files to the working directory
 COPY ./tests ./tests
 
-# install git
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+# Combined update/install line with strict non-interactive and cache-busting configurations
+RUN apt-get update -o Acquire::http::No-Cache=true -o Acquire::https::No-Cache=true \
+    && apt-get install -y --no-install-recommends git \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies
 RUN mv ./tests/requirements.txt ./requirements.txt && \
