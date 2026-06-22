@@ -1,0 +1,12 @@
+{
+  "fields": {
+    "project": {
+      "key": "CDR"
+    },
+    "summary": "OPEN-EHR Base Robot Test Execution",
+    "issuetype": {
+      "name": "Test Execution"
+    },
+    "customfield_10041": 124
+  }
+}
