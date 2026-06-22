@@ -1,0 +1,38 @@
+{
+  "_type": "FOLDER",
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "hospital episodes"
+  },
+  "archetype_node_id": "openEHR-EHR-FOLDER.directory.v1",
+  "folders": [
+    {
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "patient entered data"
+      },
+      "archetype_node_id": "at0001",
+      "folders": [
+        {
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "diabetes monitoring"
+          },
+          "archetype_node_id": "at0001"
+        }
+      ],
+      "items": [{
+        "namespace": "local",
+        "type": "COMPOSITION",
+        "value": "${compo_id}"
+      }]
+    },
+    {
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "caregiver entered data"
+      },
+      "archetype_node_id": "at0001"
+    }
+  ]
+}
