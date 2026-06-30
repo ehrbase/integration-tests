@@ -1,5 +1,5 @@
 robotframework == 7.4.2
-tzlocal == 5.4
+tzlocal == 5.4.4
 
 robotframework-jsonlibrary == 0.5
 robotframework-datadriver == 1.11.2
