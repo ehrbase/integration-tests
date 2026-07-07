@@ -1,22 +1,26 @@
 # EHRbase Integration Tests with Robot Framework
 
+# Table of Contents
+- [1. Trigger Robot tests outside of Docker](#Trigger Robot tests outside of Docker)
+- [2. Running tests in Docker](#Running tests in Docker)
+
+## Trigger Robot tests outside of Docker
+
 <details>
 <summary><b>Prerequisites</b></summary>
 <br>
 
-1. **Docker installed.**
+1. **Docker installed**
     * [Get Docker](https://docs.docker.com/get-started/get-docker/)
 2. **Python 3.11.x & Pip installed:**
     * [Python Downloads](https://www.python.org/downloads/)
     * [Pip Installation Guide](https://pip.pypa.io/en/stable/installation/)
-
-2. **Robot Framework & dependencies installed:**
+3. **Robot Framework & dependencies installed:**
     * Run the following command inside your `tests` folder:
       ```bash
       pip install -r requirements.txt
       ```
-
-3. **An EHRbase instance running on port `8080`:**
+4. **An EHRbase instance running on port `8080`:**
    <details>
    <summary><i>Click to expand: Configure & run EHRbase instance</i></summary>
    <br>
@@ -51,7 +55,6 @@
    </details>
 </details>
 
-### Trigger Robot tests locally
 From /ehrbase root project directory, run:
 ```bash
 cd tests
