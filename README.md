@@ -1,10 +1,6 @@
 # EHRbase Integration Tests with Robot Framework
 
-# Table of Contents
-- [1. Trigger Robot tests outside of Docker](#Trigger Robot tests outside of Docker)
-- [2. Running tests in Docker](#Running tests in Docker)
-
-## Trigger Robot tests outside of Docker
+## Running Robot tests outside of Docker
 
 <details>
 <summary><b>Prerequisites</b></summary>
@@ -61,7 +57,7 @@ cd tests
 ./run_local_tests.sh
 ```
 
-## Running tests in Docker
+## Running Robot tests in Docker
 
 <details>
 <summary><b>Prerequisites</b></summary>
