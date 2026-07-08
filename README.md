@@ -39,15 +39,15 @@
         ```
        > **Note:** If you need to modify other settings, feel free to do so. However, please note that existing Robot tests are tightly coupled to the default configuration and may fail if other values are changed.
 
-    4. Build the project (run from the root `/ehrbase` folder):
+    5. Build the project (run from the root `/ehrbase` folder):
        ```bash
        mvn clean install -Dmaven.test.skip=true
        ```
-    5. Start the application (run from the root `/ehrbase` folder):
+    6. Start the application (run from the root `/ehrbase` folder):
        ```bash
        java -jar application/target/ehrbase.jar --server.nodename=local.ehrbase.org
        ```
-    6. Wait for the confirmation message in your console:  
+    7. Wait for the confirmation message in your console:  
        `Started EhrBase in X seconds`
    </details>
 </details>
@@ -57,6 +57,7 @@ From `/integration-tests` root project directory, run:
 cd tests
 ./run_local_tests.sh
 ```
+Results will be stored in `./integration-tests/results/test-suites`
 
 ## Running Robot tests in Docker
 
