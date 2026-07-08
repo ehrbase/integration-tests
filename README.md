@@ -12,7 +12,7 @@
     * [Python Downloads](https://www.python.org/downloads/)
     * [Pip Installation Guide](https://pip.pypa.io/en/stable/installation/)
 3. **Robot Framework & dependencies installed:**
-    * Run the following command inside your `tests` folder:
+    * Run the following command inside your `/tests` folder:
       ```bash
       pip install -r requirements.txt
       ```
@@ -29,13 +29,14 @@
        ```bash
        docker run --name ehrdb --network ehrbase-net -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 ehrbase/ehrbase-v2-postgres:16.2
        ```
-    3. Change the following properties in `ehrbase/configuration/src/main/resources/application.yml`:
-       ```yaml
-       ehrscape.enabled: true
-       tags.enabled: true
-       aql.debugging-enabled: true
-       aql.response.generator-details-enabled: true
-       ```
+    3. Get EHRBase repository locally from https://github.com/ehrbase/ehrbase 
+    4. Change the following properties in `ehrbase/configuration/src/main/resources/application.yml`:
+        ```yaml
+        ehrscape.enabled: true
+        tags.enabled: true
+        aql.debugging-enabled: true
+        aql.response.generator-details-enabled: true
+        ```
        > **Note:** If you need to modify other settings, feel free to do so. However, please note that existing Robot tests are tightly coupled to the default configuration and may fail if other values are changed.
 
     4. Build the project (run from the root `/ehrbase` folder):
@@ -51,7 +52,7 @@
    </details>
 </details>
 
-From /ehrbase root project directory, run:
+From `/integration-tests` root project directory, run:
 ```bash
 cd tests
 ./run_local_tests.sh
@@ -63,7 +64,8 @@ cd tests
 <summary><b>Prerequisites</b></summary>
 <br>
 
-1. Change the following properties in `ehrbase/configuration/src/main/resources/application.yml`:
+1. Get EHRBase repository locally from https://github.com/ehrbase/ehrbase (if not present)
+2. Change the following properties in `ehrbase/configuration/src/main/resources/application.yml`:
     ```yaml
     ehrscape.enabled: true
     tags.enabled: true
