@@ -59,6 +59,7 @@ cd tests
 ```
 Results will be stored in `./integration-tests/results/test-suites`
 
+---
 ## Running Robot tests in Docker
 
 <details>
