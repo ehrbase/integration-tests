@@ -90,7 +90,7 @@ Results will be stored in `./integration-tests/results/test-suites`
 </details>
 
 Execute a single test suite (run from the root `./ehrbase` folder).
-* Results will be stored under in `./ehrbase/tests/results/(folder_with_test_suite_path_name)`.
+* Results will be stored in `./ehrbase/tests/results/(folder_with_test_suite_path_name)`.
 * Example:
   - ./ehrbase/tests/results/SANITY
   - ./ehrbase/tests/results/STORED_QUERY
