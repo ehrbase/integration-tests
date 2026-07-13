@@ -12,7 +12,7 @@
     * [Python Downloads](https://www.python.org/downloads/)
     * [Pip Installation Guide](https://pip.pypa.io/en/stable/installation/)
 3. **Robot Framework & dependencies installed:**
-    * Run the following command inside your `/tests` folder:
+    * Run the following command inside your `.\integration-tests\tests` folder path:
       ```bash
       pip install -r requirements.txt
       ```
@@ -52,12 +52,12 @@
    </details>
 </details>
 
-From `/integration-tests` root project directory, run:
+From `.\integration-tests` root project directory, run:
 ```bash
 cd tests
-./run_local_tests.sh
+.\run_local_tests.sh
 ```
-Results will be stored in `./integration-tests/results/test-suites`
+Results will be stored in `.\integration-tests\results\test-suites`
 
 ---
 ## Running Robot tests in Docker
@@ -67,7 +67,7 @@ Results will be stored in `./integration-tests/results/test-suites`
 <br>
 
 1. Get EHRBase repository locally from https://github.com/ehrbase/ehrbase (if not present)
-2. Change the following properties in `ehrbase/configuration/src/main/resources/application.yml`:
+2. Change the following properties in `.\ehrbase\configuration\src\main\resources\application.yml`:
     ```yaml
     ehrscape.enabled: true
     tags.enabled: true
@@ -75,11 +75,11 @@ Results will be stored in `./integration-tests/results/test-suites`
     aql.response.generator-details-enabled: true
     ```
     > **Note:** If you need to modify other settings, feel free to do so. However, please note that existing Robot tests are tightly coupled to the default configuration and may fail if other values are changed.
-2. Build the project (run from the root `/ehrbase` folder):
+2. Build the project (run from the root `.\ehrbase` folder):
    ```bash
    mvn clean install -Dmaven.test.skip=true
    ```
-3. Build Docker image (run from the root `/ehrbase` folder):
+3. Build Docker image (run from the root `.\ehrbase` folder):
    ```bash
    docker build -t ehrbase/ehrbase:next .
    ```
@@ -89,11 +89,11 @@ Results will be stored in `./integration-tests/results/test-suites`
    ```
 </details>
 
-Execute a single test suite (run from the root `./ehrbase` folder).
-* Results will be stored in `./ehrbase/tests/results/(folder_with_test_suite_path_name)`.
+Execute a single test suite (run from the root `.\ehrbase` folder).
+* Results will be stored in `.\ehrbase\tests\results\(folder_with_test_suite_path_name)`.
 * Example:
-  - ./ehrbase/tests/results/SANITY
-  - ./ehrbase/tests/results/STORED_QUERY
+  - .\ehrbase\tests\results\SANITY
+  - .\ehrbase\tests\results\STORED_QUERY
 <details>
 <summary><b>Expand commands to run tests in Docker</b></summary>
 <br>
