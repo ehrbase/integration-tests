@@ -89,7 +89,11 @@ Results will be stored in `./integration-tests/results/test-suites`
    ```
 </details>
 
-Execute a single test suite and store results in `./tests/results` (run from the root `/ehrbase` folder):
+Execute a single test suite (run from the root `./ehrbase` folder).
+* Results will be stored under in `./ehrbase/tests/results/(folder_with_test_suite_path_name)`.
+* Example:
+  - ./ehrbase/tests/results/SANITY
+  - ./ehrbase/tests/results/STORED_QUERY
 <details>
 <summary><b>Expand commands to run tests in Docker</b></summary>
 <br>
@@ -182,3 +186,13 @@ For the other suites, just replace below lines (for example) in the above full c
 ...
 ```
 </details>
+
+
+## Reading results
+For both options, log.html and output.xml files will be created where:
+1. **output.xml** - generated during test execution. After test execution is completed, it will be automatically post-processed by [Rebot](https://robot-framework.readthedocs.io/en/stable/_modules/robot/rebot.html) tool, which is an integral part of Robot Framework, generating the user-friendly **log.html** file.
+2. **log.html** - contains details about the executed test cases in HTML format. Test suite, test case and keyword details have a hierarchical structure for better readability.
+
+References:
+- [output.xml](https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#output-file)
+- [log.html](https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#log-file)
