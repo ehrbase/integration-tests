@@ -19,7 +19,7 @@
 
 
 # Set desired loglevel: NONE, INFO, DEBUG, TRACE (most details)
-export LOG_LEVEL=TRACE
+export LOG_LEVEL=DEBUG
 
 
 # # UNCOMMENT NEXT LINE & COMMENT-OUT ALL OTHERS BELOW TO RUN ONLY 'XXX' TESTS
@@ -28,7 +28,7 @@ export LOG_LEVEL=TRACE
 
 # RUN SANITY TESTS
 robot -i Sanity -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/SANITY_TESTS \
+      --outputdir ../results/test-suites/SANITY_TESTS \
       --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
@@ -39,7 +39,7 @@ robot -i Sanity -e circleci -e EHRSCAPE -e obsolete -e libtest \
 
 # RUN CONTRIBUTION SERVICE TESTS
 robot -i CONTRIBUTION -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/CONTRIBUTION_SERVICE \
+      --outputdir ../results/test-suites/CONTRIBUTION_SERVICE \
       --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
@@ -50,7 +50,7 @@ robot -i CONTRIBUTION -e circleci -e EHRSCAPE -e obsolete -e libtest \
 
 # RUN SWAGGER TESTS
 robot -i SWAGGER_EHRBASE -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/SWAGGER_TESTS \
+      --outputdir ../results/test-suites/SWAGGER_TESTS \
       --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
@@ -61,7 +61,7 @@ robot -i SWAGGER_EHRBASE -e circleci -e EHRSCAPE -e obsolete -e libtest \
 
 # RUN TEMPLATE TESTS
 robot -i template -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/TEMPLATE_TESTS \
+      --outputdir ../results/test-suites/TEMPLATE_TESTS \
       --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
@@ -72,7 +72,7 @@ robot -i template -e circleci -e EHRSCAPE -e obsolete -e libtest \
 
 # RUN STORED QUERY TESTS
 robot -i stored_query -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/STORED_QUERY_TESTS \
+      --outputdir ../results/test-suites/STORED_QUERY_TESTS \
       --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
@@ -83,7 +83,7 @@ robot -i stored_query -e circleci -e EHRSCAPE -e obsolete -e libtest \
 
 # RUN TAGS TESTS
 robot -i TAGS_SUITES -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/TAGS_TESTS \
+      --outputdir ../results/test-suites/TAGS_TESTS \
       --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
@@ -94,7 +94,7 @@ robot -i TAGS_SUITES -e circleci -e EHRSCAPE -e obsolete -e libtest \
 
 # RUN COMPOSITION SERVICE TESTS
 robot -i COMPOSITION -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/COMPOSITION_SERVICE \
+      --outputdir ../results/test-suites/COMPOSITION_SERVICE \
       --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
@@ -105,7 +105,7 @@ robot -i COMPOSITION -e circleci -e EHRSCAPE -e obsolete -e libtest \
 
 # RUN DIRECTORY SERVICE TESTS
 robot -i DIRECTORY -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/DIRECTORY_SERVICE \
+      --outputdir ../results/test-suites/DIRECTORY_SERVICE \
       --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
@@ -116,7 +116,7 @@ robot -i DIRECTORY -e circleci -e EHRSCAPE -e obsolete -e libtest \
 
 # RUN AQL TESTS
 robot -i AQL_TESTS_PACKAGE -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/AQL_TESTS \
+      --outputdir ../results/test-suites/AQL_TESTS \
       --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
@@ -127,43 +127,43 @@ robot -i AQL_TESTS_PACKAGE -e circleci -e EHRSCAPE -e obsolete -e libtest \
 
 # RUN EHR SERVICE TESTS
 robot -i EHR_SERVICE -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/EHR_SERVICE \
+      --outputdir ../results/test-suites/EHR_SERVICE \
       --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
       --flattenkeywords name:_resources.* \
       --loglevel $LOG_LEVEL \
-      --name EHR \
+      --name EHR_SERVICE \
       robot/EHR_SERVICE_TESTS/
 
 # RUN EHR STATUS TESTS
 robot -i EHR_STATUS -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/EHR_STATUS \
+      --outputdir ../results/test-suites/EHR_STATUS \
       --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
       --flattenkeywords name:_resources.* \
       --loglevel $LOG_LEVEL \
-      --name EHR \
+      --name EHR_STATUS \
       robot/EHR_STATUS_TESTS/
 
-# RUN KNOWLEDGE SERVICE TESTS
-robot -i KNOWLEDGE -e circleci -e EHRSCAPE -e obsolete -e libtest \
-      --outputdir results/test-suites/KNOWLEDGE_SERVICE \
+# RUN EHRSCAPE TESTS
+robot -i EhrScapeTag -e circleci -e EHRSCAPE -e obsolete -e libtest \
+      --outputdir ../results/test-suites/EHRSCAPE \
       --skiponfailure not-ready \
       --flattenkeywords for \
       --flattenkeywords foritem \
       --flattenkeywords name:_resources.* \
       --loglevel $LOG_LEVEL \
-      --name KNOWLEDGE \
-      robot/KNOWLEDGE_TESTS/
+      --name EHRSCAPE \
+      robot/EHRSCAPE_TESTS/
 
 
 # POST PROCESS & MERGE OUTPUTS
 
 # Create Log/Report with ALL DETAILS
-rebot --outputdir results \
-      --name EHRbase \
+rebot --outputdir ../results \
+      --name EHRbase Open Source Robot Tests \
       --exclude TODO -e future -e obsolete -e libtest \
       --removekeywords for \
       --removekeywords wuks \
@@ -173,7 +173,7 @@ rebot --outputdir results \
       --output EHRbase-output.xml \
       --log EHRbase-log.html \
       --report EHRbase-report.html \
-      results/test-suites/*/*.xml
+      ../results/test-suites/*/*.xml
 
 
 
