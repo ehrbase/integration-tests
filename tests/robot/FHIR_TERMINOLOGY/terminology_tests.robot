@@ -30,7 +30,7 @@ Suite Setup       Set Library Search Order For Tests
 
 
 *** Variables ***
-${non_existing_err_msg}     The value non-existing-code-string does not match any option from value set
+${non_existing_err_msg}     Invalid terminology: Unknown code
 
 
 *** Test Cases ***
