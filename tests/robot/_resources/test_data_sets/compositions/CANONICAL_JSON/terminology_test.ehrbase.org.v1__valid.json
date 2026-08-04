@@ -2,14 +2,14 @@
   "_type": "COMPOSITION",
   "name": {
     "_type": "DV_TEXT",
-    "value": "teminology_test.ehrbase.org.v1"
+    "value": "terminology_test.ehrbase.org.v1"
   },
   "archetype_details": {
     "archetype_id": {
       "value": "openEHR-EHR-COMPOSITION.report.v1"
     },
     "template_id": {
-      "value": "teminology_test.ehrbase.org.v1"
+      "value": "terminology_test.ehrbase.org.v1"
     },
     "rm_version": "1.0.4"
   },
@@ -111,11 +111,11 @@
       "_type": "OBSERVATION",
       "name": {
         "_type": "DV_TEXT",
-        "value": "teminology_test"
+        "value": "terminology_test"
       },
       "archetype_details": {
         "archetype_id": {
-          "value": "openEHR-EHR-OBSERVATION.teminology_test.v0"
+          "value": "openEHR-EHR-OBSERVATION.terminology_test.v0"
         },
         "rm_version": "1.0.4"
       },
@@ -200,18 +200,18 @@
                   "_type": "ELEMENT",
                   "name": {
                     "_type": "DV_TEXT",
-                    "value": "Distoincisal"
+                    "value": "Occlusal"
                   },
                   "value": {
                     "_type": "DV_CODED_TEXT",
-                    "value": "The Distoincisal surfaces of a tooth.",
+                    "value": "The chewing surface of posterior teeth.",
                     "defining_code": {
                       "_type": "CODE_PHRASE",
                       "terminology_id": {
                         "_type": "TERMINOLOGY_ID",
                         "value": "http://terminology.hl7.org/CodeSystem/FDI-surface"
                       },
-                      "code_string": "DI"
+                      "code_string": "D"
                     }
                   },
                   "archetype_node_id": "at0004"
@@ -258,18 +258,18 @@
                   "_type": "ELEMENT",
                   "name": {
                     "_type": "DV_TEXT",
-                    "value": "Distoincisal"
+                    "value": "Occlusal"
                   },
                   "value": {
                     "_type": "DV_CODED_TEXT",
-                    "value": "The Distoincisal surfaces of a tooth.",
+                    "value": "The chewing surface of posterior teeth.",
                     "defining_code": {
                       "_type": "CODE_PHRASE",
                       "terminology_id": {
                         "_type": "TERMINOLOGY_ID",
                         "value": "http://terminology.hl7.org/CodeSystem/FDI-surface"
                       },
-                      "code_string": "DI"
+                      "code_string": "D"
                     }
                   },
                   "archetype_node_id": "at0004"
@@ -300,18 +300,18 @@
                   "_type": "ELEMENT",
                   "name": {
                     "_type": "DV_TEXT",
-                    "value": "Distoincisal"
+                    "value": "Occlusal"
                   },
                   "value": {
                     "_type": "DV_CODED_TEXT",
-                    "value": "The Distoincisal surfaces of a tooth.",
+                    "value": "The chewing surface of posterior teeth.",
                     "defining_code": {
                       "_type": "CODE_PHRASE",
                       "terminology_id": {
                         "_type": "TERMINOLOGY_ID",
                         "value": "http://terminology.hl7.org/CodeSystem/FDI-surface"
                       },
-                      "code_string": "DI"
+                      "code_string": "D"
                     }
                   },
                   "archetype_node_id": "at0004"
@@ -340,7 +340,7 @@
         ],
         "archetype_node_id": "at0001"
       },
-      "archetype_node_id": "openEHR-EHR-OBSERVATION.teminology_test.v0"
+      "archetype_node_id": "openEHR-EHR-OBSERVATION.terminology_test.v0"
     }
   ],
   "archetype_node_id": "openEHR-EHR-COMPOSITION.report.v1"

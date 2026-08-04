@@ -31,9 +31,9 @@
         <value>b517c19b-c4ab-46a9-97e9-d92cf2169cdf</value>
     </uid>
     <template_id>
-        <value>teminology_test2.ehrbase.org.v1</value>
+        <value>terminology_test2.ehrbase.org.v1</value>
     </template_id>
-    <concept>teminology_test2.ehrbase.org.v1</concept>
+    <concept>terminology_test2.ehrbase.org.v1</concept>
     <definition>
         <rm_type_name>COMPOSITION</rm_type_name>
         <occurrences>
@@ -460,7 +460,7 @@
                     </children>
                 </attributes>
                 <archetype_id>
-                    <value>openEHR-EHR-OBSERVATION.teminology_test.v0</value>
+                    <value>openEHR-EHR-OBSERVATION.terminology_test.v0</value>
                 </archetype_id>
                 <term_definitions code="at0001">
                     <items id="text">History</items>
@@ -479,8 +479,8 @@
                     <items id="description"></items>
                 </term_definitions>
                 <term_definitions code="at0000">
-                    <items id="text">teminology_test</items>
-                    <items id="description">teminology_test</items>
+                    <items id="text">terminology_test</items>
+                    <items id="description">terminology_test</items>
                 </term_definitions>
             </children>
             <cardinality>
@@ -499,7 +499,7 @@
             <value>openEHR-EHR-COMPOSITION.report.v1</value>
         </archetype_id>
         <template_id>
-            <value>teminology_test2.ehrbase.org.v1</value>
+            <value>terminology_test2.ehrbase.org.v1</value>
         </template_id>
         <term_definitions code="at0001">
             <items id="text">Tree</items>
@@ -519,7 +519,7 @@
             <items id="comment">For example: local information requirements or additional metadata to align with FHIR or CIMI equivalents.</items>
         </term_definitions>
         <term_definitions code="at0000">
-            <items id="text">teminology_test2.ehrbase.org.v1</items>
+            <items id="text">terminology_test2.ehrbase.org.v1</items>
             <items id="description">Document to communicate information to others, commonly in response to a request from another party.</items>
         </term_definitions>
     </definition>
