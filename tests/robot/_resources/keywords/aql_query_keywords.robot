@@ -536,7 +536,14 @@ GET /query/{qualified_query_name}
     ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
     ...                 Expected status code 200.
     ...                 Returns {resp}, with query and rows from response.
-    [Arguments]     ${qualif_name}      ${params}=${FALSE}      ${req_headers}=default
+    [Arguments]     ${qualif_name}      ${params}=${FALSE}
+    ...             ${req_headers}=default      ${multitenancy_token}=${None}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    ELSE IF     ('${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH') and '${multitenancy_token}' == '${None}'
+        Set To Dictionary     ${headers}    &{authorization}
+    END
     IF      '''${req_headers}''' != '''default'''
         #${req_headers} should contain data in dictionary format
         &{headers}      Set Variable    ${req_headers}
@@ -569,7 +576,13 @@ POST /query/{qualified_query_name}
     ...                 Takes 1 mandatory arg {qualif_name} as criteria to get the query.
     ...                 Expected status code 200.
     ...                 Returns {resp}, with query and rows from response.
-    [Arguments]     ${qualif_name}      ${req_headers}=default
+    [Arguments]     ${qualif_name}      ${req_headers}=default      ${multitenancy_token}=${None}
+    &{headers}      Create Dictionary       Content-Type=application/json
+    IF  '${multitenancy_token}' != '${None}'
+        Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
+    ELSE IF     ('${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH') and '${multitenancy_token}' == '${None}'
+        Set To Dictionary       ${headers}      &{authorization}
+    END
     IF      '''${req_headers}''' != '''default'''
         #${req_headers} should contain data in dictionary format
         &{headers}      Set Variable    ${req_headers}
