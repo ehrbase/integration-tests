@@ -1424,7 +1424,7 @@ capture point in time
     ...                 e.g. 2015-01-20T19:30:22.765+01:00
     ...                 s. http://robotframework.org/robotframework/latest/libraries/DateTime.html
     ...                 for DateTime Library docs
-                        Sleep    0.5   # gives DB some time to finish it's operation
+                        Sleep    0.2   # gives DB some time to finish it's operation
     ${zone}=            Set Suite Variable    ${time_zone}    ${{ tzlocal.get_localzone() }}
     ${time}=            Set Variable    ${{ datetime.datetime.now(tz=tzlocal.get_localzone()).isoformat() }}
     ${offset}=          Set Suite Variable    ${utc_offset}    ${time}[-6:]
