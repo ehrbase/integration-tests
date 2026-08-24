@@ -103,7 +103,7 @@ docker compose -f docker-compose.yml -f tests/docker-compose-int-test.yml run \
   --remove-orphans --rm ehrbase-integration-tests runRobotTest \
   --serverBase http://ehrbase:8080 \
   --name SANITY \
-  --path SANITY_TESTS \
+  --path SANITY \
   --tags Sanity \
   --env NONE
 ```
@@ -111,77 +111,77 @@ For the other suites, just replace below lines (for example) in the above full c
 ```bash
 ...
   --name STORED_QUERY \
-  --path STORED_QUERY_TESTS \
+  --path STORED_QUERY \
   --tags stored_query \
 ...
 ```
 ```bash
 ...
   --name COMPOSITION \
-  --path COMPOSITION_TESTS \
+  --path COMPOSITION \
   --tags COMPOSITION \
 ...
 ```
 ```bash
 ...
   --name CONTRIBUTION \
-  --path CONTRIBUTION_TESTS \
+  --path CONTRIBUTION \
   --tags CONTRIBUTION \
 ...
 ```
 ```bash
 ...
   --name DIRECTORY \
-  --path DIRECTORY_TESTS \
+  --path DIRECTORY \
   --tags DIRECTORY \
 ...
 ```
 ```bash
 ...
   --name AQL \
-  --path AQL_TESTS \
+  --path AQL \
   --tags AQL_TESTS_PACKAGE \
 ...
 ```
 ```bash
 ...
   --name EHR_SERVICE \
-  --path EHR_SERVICE_TESTS \
+  --path EHR_SERVICE \
   --tags EHR_SERVICE \
 ...
 ```
 ```bash
 ...
   --name EHR_STATUS \
-  --path EHR_STATUS_TESTS \
+  --path EHR_STATUS \
   --tags EHR_STATUS \
 ...
 ```
 ```bash
 ...
   --name EHRSCAPE \
-  --path EHRSCAPE_TESTS \
+  --path EHRSCAPE \
   --tags EhrScapeTag \
 ...
 ```
 ```bash
 ...
   --name TAGS \
-  --path TAGS_TESTS \
+  --path TAGS \
   --tags TAGS_SUITES \
 ...
 ```
 ```bash
 ...
   --name TEMPLATE \
-  --path TEMPLATE_TESTS \
+  --path TEMPLATE \
   --tags template \
 ...
 ```
 ```bash
 ...
   --name SWAGGER \
-  --path SWAGGER_TESTS \
+  --path SWAGGER \
   --tags SWAGGER_EHRBASE \
 ...
 ```

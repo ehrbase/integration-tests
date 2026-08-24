@@ -13,8 +13,8 @@ licenseheaders -t license_template -d ../../libraries --additional-extensions ro
 #licenseheaders -t license_template -d ../../suite_settings.robot --additional-extensions robot=[.robot]
 #licenseheaders -t license_template -d ../../../ci_test_dummy.robot
 
-licenseheaders -t license_template -d ../../../COMPOSITION_TESTS/ --additional-extensions robot=[.robot]
-licenseheaders -t license_template -d ../../../CONTRIBUTION_TESTS/ --additional-extensions robot=[.robot]
-licenseheaders -t license_template -d ../../../EHR_SERVICE_TESTS/ --additional-extensions robot=[.robot]
-licenseheaders -t license_template -d ../../../KNOWLEDGE_TESTS/ --additional-extensions robot=[.robot]
-licenseheaders -t license_template -d ../../../QUERY_SERVICE_TESTS/ --additional-extensions robot=[.robot]
+licenseheaders -t license_template -d ../../../COMPOSITION/ --additional-extensions robot=[.robot]
+licenseheaders -t license_template -d ../../../CONTRIBUTION/ --additional-extensions robot=[.robot]
+licenseheaders -t license_template -d ../../../EHR_SERVICE/ --additional-extensions robot=[.robot]
+licenseheaders -t license_template -d ../../../KNOWLEDGE/ --additional-extensions robot=[.robot]
+licenseheaders -t license_template -d ../../../QUERY_SERVICE/ --additional-extensions robot=[.robot]

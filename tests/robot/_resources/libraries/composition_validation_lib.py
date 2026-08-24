@@ -3,7 +3,7 @@ from benedict import benedict
 
 '''
 This library is created for testing composition validation:
-robot\COMPOSITION_TESTS\VALIDATION
+robot\COMPOSITION\VALIDATION
 '''
 
 

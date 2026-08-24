@@ -33,7 +33,7 @@ Prerequisites:
 Usage:
     >>> cp TEST_SUITE_LAYOUT.yaml /path/to/target_folder
     >>> cp generate_test_suite.py /path/to/target_folder
-    # e.g. project_root/tests/robot/CONTRIBUTION_TESTS
+    # e.g. project_root/tests/robot/CONTRIBUTION
 
     >>> cd /path/to/target_folder
 

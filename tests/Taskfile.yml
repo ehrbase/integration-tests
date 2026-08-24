@@ -173,24 +173,24 @@ tasks:
     desc: RUN SPECIFIED TESTS
     cmds:
       ## adjust this part to the needs of your current test session
-      # - robot -v nodocker -i empty_db -e future -e circleci -e TODO -e obsolete -d results -L TRACE --noncritical not-ready robot/QUERY_SERVICE_TESTS
+      # - robot -v nodocker -i empty_db -e future -e circleci -e TODO -e obsolete -d results -L TRACE --noncritical not-ready robot/QUERY_SERVICE
       ## example of "execute single test by it's test-case name" (wildcards accepted):
-      # - robot -v nodocker -t "MF-030 - Create new EHR*" -d results -L TRACE robot/EHR_SERVICE_TESTS
-      - robot -t "MF-030 - Create new EHR*" -d results -L TRACE robot/EHR_SERVICE_TESTS
+      # - robot -v nodocker -t "MF-030 - Create new EHR*" -d results -L TRACE robot/EHR_SERVICE
+      - robot -t "MF-030 - Create new EHR*" -d results -L TRACE robot/EHR_SERVICE
       # - spd-say "Robot is ready! Check the results!"
 
   test-all:
     desc: RUN ALL ROBOT TESTS
     cmds:
-      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output compop.xml --name COMPO robot/COMPOSITION_TESTS
-      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output contri.xml --name CONTRI robot/CONTRIBUTION_TESTS
-      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output folder.xml --name FOLDER robot/DIRECTORY_TESTS
-      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output ehrser.xml --name EHRSERVICE robot/EHR_SERVICE_TESTS
-      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output ehrsta.xml --name EHRSTATUS robot/EHR_STATUS_TESTS
-      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output knowld.xml --name KNOWLEDGE -v ALLOW-TEMPLATE-OVERWRITE:false robot/KNOWLEDGE_TESTS
-      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output aqledb.xml --name "QUERY empty_db"  -i aql_empty_db  robot/QUERY_SERVICE_TESTS
-      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output aqlldb.xml --name "QUERY loaded_db" -i aql_loaded_db robot/QUERY_SERVICE_TESTS
-      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output admint.xml --name ADMIN -v SUT:ADMIN-TEST robot/ADMIN_TESTS
+      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output compop.xml --name COMPO robot/COMPOSITION
+      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output contri.xml --name CONTRI robot/CONTRIBUTION
+      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output folder.xml --name FOLDER robot/DIRECTORY
+      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output ehrser.xml --name EHRSERVICE robot/EHR_SERVICE
+      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output ehrsta.xml --name EHRSTATUS robot/EHR_STATUS
+      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output knowld.xml --name KNOWLEDGE -v ALLOW-TEMPLATE-OVERWRITE:false robot/KNOWLEDGE
+      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output aqledb.xml --name "QUERY empty_db"  -i aql_empty_db  robot/QUERY_SERVICE
+      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output aqlldb.xml --name "QUERY loaded_db" -i aql_loaded_db robot/QUERY_SERVICE
+      - robot -e future -e circleci -e TODO -e obsolete -e libtest -d results/xml -L TRACE --skiponfailure not-ready --log None --report None --output admint.xml --name ADMIN -v SUT:ADMIN-TEST robot/ADMIN
       # TODO: add security tests here (will require proper SUT setup)
 
       ## consolidate results
