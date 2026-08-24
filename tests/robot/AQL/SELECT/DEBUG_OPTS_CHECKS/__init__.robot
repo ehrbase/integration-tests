@@ -10,7 +10,7 @@ Documentation   AQL DEBUG OPTIONS CHECKS
 ...             - ehrbase.rest.aql.response.executed-aql-enabled: true
 ...             \n*To be executed locally only (unless there is a request to enable them in EHRBase OSS pipeline)*
 #...             Robot cmd (from tests folder):
-#...             robot -d results --skiponfailure not-ready -L DEBUG .\robot\AQL_TESTS\SELECT\DEBUG_OPTS_CHECKS
+#...             robot -d results --skiponfailure not-ready -L DEBUG .\robot\AQL\SELECT\DEBUG_OPTS_CHECKS
 Resource    ${CURDIR}${/}../../../_resources/suite_settings.robot
 
 

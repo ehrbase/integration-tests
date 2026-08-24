@@ -12,7 +12,7 @@ Documentation   Checks API calls response for Ad-Hoc and Stored Query endpoints,
                 ...     - ehrbase.rest.aql.response.executed-aql-enabled: true
                 ...     \n*To be executed locally only (unless there is a request to enable them in EHRBase OSS pipeline)*
 #                ...     Robot cmd (from tests folder):
-#                ...     robot -d results --skiponfailure not-ready -L DEBUG .\robot\AQL_TESTS\SELECT\DEBUG_OPTS_CHECKS
+#                ...     robot -d results --skiponfailure not-ready -L DEBUG .\robot\AQL\SELECT\DEBUG_OPTS_CHECKS
 Resource        ../../../_resources/keywords/aql_keywords.robot
 Resource        ../../../_resources/keywords/aql_query_keywords.robot
 Suite Setup     Set Library Search Order For Tests
