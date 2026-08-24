@@ -23,7 +23,7 @@ TODO @WLAD clean this up and move to dev docs
 5. run query robot tests
    
    ```bash
-   robot -v SUT:DEV -e TODO -e future -L TRACE -d results --noncritical not-ready -i AQL_adhoc-queryANDloaded_db robot/QUERY_SERVICE_TESTS/
+   robot -v SUT:DEV -e TODO -e future -L TRACE -d results --noncritical not-ready -i AQL_adhoc-queryANDloaded_db robot/QUERY_SERVICE/
    ```
 
    **ALTERNATIVE!!! (LIVE DB RESTORE WHILE EHRBASE IS CONNECTED TO DB)**
@@ -46,7 +46,7 @@ TODO @WLAD clean this up and move to dev docs
 3. run robot tests to generate test-data and 'expected result data-sets'
    
    ```bash
-   robot -v SUT:DEV -e TODO -e future -L TRACE -d results --noncritical not-ready -i AQL_adhoc-queryANDloaded_db robot/QUERY_SERVICE_TESTS/
+   robot -v SUT:DEV -e TODO -e future -L TRACE -d results --noncritical not-ready -i AQL_adhoc-queryANDloaded_db robot/QUERY_SERVICE/
    ```
 
 4. dump:

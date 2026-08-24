@@ -111,7 +111,7 @@ ADMIN_DEV_CONFIG = {
         "client_id": "ehrbase-client",
         "scope": "openid",
         "username": "admin-robot",  # TODO: recreate exported-keycloak-config to have this user!
-        "password": "admin-robot",  #       check README.md in SECURITY_TESTS folder for how to
+        "password": "admin-robot",  #       check README.md in SECURITY folder for how to
         "grant_type": "password",
     },
     "JWT_ISSUERURI": KC_JWT_ISSUERURI,

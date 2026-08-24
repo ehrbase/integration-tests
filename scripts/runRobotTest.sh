@@ -15,7 +15,7 @@ showHelp()
    echo
    echo "Syntax:  runRobotTests [h|-n|-p|-t|-s]"
    echo
-   echo "Example: runRobotTests --name SANITY --path SANITY_TESTS --tags Sanity -t TEST"
+   echo "Example: runRobotTests --name SANITY --path SANITY --tags Sanity -t TEST"
    echo
    echo "options:"
    echo "n|name         Name of the suite also used as result sub directory."
