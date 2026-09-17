@@ -1,5 +1,5 @@
 # Use the desired base image
-FROM python:3.11.9-slim-bullseye
+FROM python:3.11.9-slim-bookworm
 
 # Set the working directory
 WORKDIR /integration-tests
