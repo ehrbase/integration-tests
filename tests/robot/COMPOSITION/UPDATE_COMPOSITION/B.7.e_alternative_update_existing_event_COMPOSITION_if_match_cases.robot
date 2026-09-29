@@ -38,28 +38,28 @@ Update Compo Not Allowed - If-Match Value Missing
     Set Test Variable   ${preceding_version_uid}    ${EMPTY}
     Update Composition And Expect Precondition Failed
 
-Update Compo Not Allowed - If-Match With Weak Validator Enclosed In Double Quotes
+Update Compo Not Allowed - If-Match Value With Weak Validator Enclosed In Double Quotes
     [Tags]      Negative
     [Documentation]     *If-Match=W/"{uid}::{system_id}::{version}"*
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    W/\"${preceding_version_uid}\"
     Update Composition And Expect Precondition Failed
 
-Update Compo Not Allowed - If-Match With Weak Validator Without Double Quotes
+Update Compo Not Allowed - If-Match Value With Weak Validator Without Double Quotes
     [Tags]      Negative
     [Documentation]     *If-Match=W/{uid}::{system_id}::{version}*
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    W/${preceding_version_uid}
     Update Composition And Expect Precondition Failed
 
-Update Compo Not Allowed - If-Match Asterisc
+Update Compo Not Allowed - If-Match Value Asterisc
     [Tags]      Negative
     [Documentation]     *If-Match=\**
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    *
     Update Composition And Expect Precondition Failed
 
-Update Compo Not Allowed - If-Match Asterisc Enclosed In Double Quotes
+Update Compo Not Allowed - If-Match Value Asterisc Enclosed In Double Quotes
     [Tags]      Negative
     [Documentation]     *If-Match=\"*\"*
     Commit Composition And Expect 201
