@@ -23,7 +23,8 @@ ${update_compo_file}    minimal/minimal_observation.composition.participations.e
 *** Test Cases ***
 Update Compo Allowed - If-Match Value Enclosed In Double Quotes
     [Tags]      Positive
-    [Documentation]     *If-Match="{uid}::{system_id}::{version}"*
+    [Documentation]     Example: *If-Match="{uid}::{system_id}::{version}"*
+    ...                 Expect 200.
     Commit Composition And Expect 201
     update composition (JSON)    ${update_compo_file}
     check content of updated composition (JSON)
@@ -33,56 +34,64 @@ Update Compo Allowed - If-Match Value Enclosed In Double Quotes
 
 Update Compo Not Allowed - If-Match Value Missing
     [Tags]      Negative
-    [Documentation]     *If-Match=*
+    [Documentation]     Example: *If-Match=*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    ${EMPTY}
     Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value With Weak Validator Enclosed In Double Quotes
     [Tags]      Negative
-    [Documentation]     *If-Match=W/"{uid}::{system_id}::{version}"*
+    [Documentation]     Example: *If-Match=W/"{uid}::{system_id}::{version}"*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    W/\"${preceding_version_uid}\"
     Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value With Weak Validator Without Double Quotes
     [Tags]      Negative
-    [Documentation]     *If-Match=W/{uid}::{system_id}::{version}*
+    [Documentation]     Exampple: *If-Match=W/{uid}::{system_id}::{version}*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    W/${preceding_version_uid}
     Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value Asterisc
     [Tags]      Negative
-    [Documentation]     *If-Match=\**
+    [Documentation]     Example: *If-Match=\**
+    ...                 Expect 400.
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    *
     Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value Asterisc Enclosed In Double Quotes
     [Tags]      Negative
-    [Documentation]     *If-Match=\"*\"*
+    [Documentation]     Example: *If-Match=\"*\"*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    \"*\"
     Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value Without Closing Quote
     [Tags]      Negative
-    [Documentation]     *If-Match="{uid}::{system_id}::{version}*
+    [Documentation]     Example: *If-Match="{uid}::{system_id}::{version}*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    \"${preceding_version_uid}
     Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value Without Opening Quote
     [Tags]      Negative
-    [Documentation]     *If-Match={uid}::{system_id}::{version}"*
+    [Documentation]     Example: *If-Match={uid}::{system_id}::{version}"*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}\"
     Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value Stray Quote
     [Tags]      Negative
-    [Documentation]     *If-Match="{uid}"::{system_id}::{version}"*
+    [Documentation]     Example: *If-Match="{uid}"::{system_id}::{version}"*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
@@ -91,7 +100,8 @@ Update Compo Not Allowed - If-Match Value Stray Quote
 
 Update Compo Not Allowed - If-Match Value Is A List
     [Tags]      Negative
-    [Documentation]     *If-Match="{uid}::{system_id}::{version1}","{uid}::{system_id}::{version2}"*
+    [Documentation]     Example: *If-Match="{uid}::{system_id}::{version1}","{uid}::{system_id}::{version2}"*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     update composition (JSON)    ${update_compo_file}
     check content of updated composition (JSON)
@@ -100,14 +110,16 @@ Update Compo Not Allowed - If-Match Value Is A List
 
 Update Compo Not Allowed - If-Match Value Is CompoId
     [Tags]      Negative
-    [Documentation]     *If-Match={uid}*
+    [Documentation]     Example: *If-Match={uid}*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    ${compo_uid_v1}
     Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value With One Separator
     [Tags]      Negative
-    [Documentation]     *If-Match={uid}::{system_id}*
+    [Documentation]     Example: *If-Match={uid}::{system_id}*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
@@ -116,7 +128,8 @@ Update Compo Not Allowed - If-Match Value With One Separator
 
 Update Compo Not Allowed - If-Match Value With Empty Object Id
     [Tags]      Negative
-    [Documentation]     *If-Match=::{system_id}::{version}*
+    [Documentation]     Example: *If-Match=::{system_id}::{version}*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
@@ -125,7 +138,8 @@ Update Compo Not Allowed - If-Match Value With Empty Object Id
 
 Update Compo Not Allowed - If-Match Value With Empty System Id
     [Tags]      Negative
-    [Documentation]     *If-Match={uid}::::{version}*
+    [Documentation]     Example: *If-Match={uid}::::{version}*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
@@ -134,7 +148,8 @@ Update Compo Not Allowed - If-Match Value With Empty System Id
 
 Update Compo Not Allowed - If-Match Value With Empty Version
     [Tags]      Negative
-    [Documentation]     *If-Match={uid}::{system_id}::*
+    [Documentation]     Example: *If-Match={uid}::{system_id}::*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
@@ -143,7 +158,8 @@ Update Compo Not Allowed - If-Match Value With Empty Version
 
 Update Compo Not Allowed - If-Match Value With Four Segments
     [Tags]      Negative
-    [Documentation]     *If-Match={uid}::{system_id}::{version}::2*
+    [Documentation]     Example: *If-Match={uid}::{system_id}::{version}::2*
+    ...                 Expect 400.
     Commit Composition And Expect 201
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
