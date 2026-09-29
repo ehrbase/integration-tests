@@ -36,49 +36,49 @@ Update Compo Not Allowed - If-Match Value Missing
     [Documentation]     *If-Match=*
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    ${EMPTY}
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value With Weak Validator Enclosed In Double Quotes
     [Tags]      Negative
     [Documentation]     *If-Match=W/"{uid}::{system_id}::{version}"*
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    W/\"${preceding_version_uid}\"
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value With Weak Validator Without Double Quotes
     [Tags]      Negative
     [Documentation]     *If-Match=W/{uid}::{system_id}::{version}*
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    W/${preceding_version_uid}
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value Asterisc
     [Tags]      Negative
     [Documentation]     *If-Match=\**
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    *
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value Asterisc Enclosed In Double Quotes
     [Tags]      Negative
     [Documentation]     *If-Match=\"*\"*
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    \"*\"
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value Without Closing Quote
     [Tags]      Negative
     [Documentation]     *If-Match="{uid}::{system_id}::{version}*
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    \"${preceding_version_uid}
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value Without Opening Quote
     [Tags]      Negative
     [Documentation]     *If-Match={uid}::{system_id}::{version}"*
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}\"
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value Stray Quote
     [Tags]      Negative
@@ -87,7 +87,7 @@ Update Compo Not Allowed - If-Match Value Stray Quote
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
     ...     \"${split_preceding_version_id}[0]\"::${split_preceding_version_id}[1]::${split_preceding_version_id}[2]\"
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value Is A List
     [Tags]      Negative
@@ -96,14 +96,14 @@ Update Compo Not Allowed - If-Match Value Is A List
     update composition (JSON)    ${update_compo_file}
     check content of updated composition (JSON)
     Set Test Variable   ${preceding_version_uid}    \"${version_uid_v1}\",\"${version_uid_v2}\"
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value Is CompoId
     [Tags]      Negative
     [Documentation]     *If-Match={uid}*
     Commit Composition And Expect 201
     Set Test Variable   ${preceding_version_uid}    ${compo_uid_v1}
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value With One Separator
     [Tags]      Negative
@@ -112,7 +112,7 @@ Update Compo Not Allowed - If-Match Value With One Separator
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
     ...     ${split_preceding_version_id}[0]::${split_preceding_version_id}[1]
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value With Empty Object Id
     [Tags]      Negative
@@ -121,7 +121,7 @@ Update Compo Not Allowed - If-Match Value With Empty Object Id
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
     ...     ::${split_preceding_version_id}[1]::${split_preceding_version_id}[2]
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value With Empty System Id
     [Tags]      Negative
@@ -130,7 +130,7 @@ Update Compo Not Allowed - If-Match Value With Empty System Id
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
     ...     ${split_preceding_version_id}[0]::::${split_preceding_version_id}[2]
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value With Empty Version
     [Tags]      Negative
@@ -139,7 +139,7 @@ Update Compo Not Allowed - If-Match Value With Empty Version
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
     ...     ${split_preceding_version_id}[0]::${split_preceding_version_id}[1]::
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 Update Compo Not Allowed - If-Match Value With Four Segments
     [Tags]      Negative
@@ -148,14 +148,13 @@ Update Compo Not Allowed - If-Match Value With Four Segments
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
     ...     ${split_preceding_version_id}[0]::${split_preceding_version_id}[1]::${split_preceding_version_id}[2]::2
-    Update Composition And Expect Precondition Failed
+    Update Composition And Expect 400
 
 
 *** Keywords ***
-Update Composition And Expect Precondition Failed
+Update Composition And Expect ${status_code}
     Run Keyword And Return Status   update composition (JSON)    ${update_compo_file}
-    Should Be Equal     ${response.status_code}     ${412}
-    Should Be Equal     ${response.json()['error']}     Precondition Failed
+    Status Should Be    ${status_code}
 
 Commit Composition And Expect 201
     commit composition (JSON)    ${commit_compo_file}

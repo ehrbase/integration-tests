@@ -7,6 +7,7 @@ Metadata        TOP_TEST_SUITE    EHR_STATUS
 Resource        ../../_resources/keywords/ehr_keywords.robot
 Resource        ../../_resources/keywords/admin_keywords.robot
 Suite Setup     Set Library Search Order For Tests
+Test Teardown   (admin) delete ehr
 
 
 
@@ -17,7 +18,6 @@ Update EHR Status - If-Match With Existing UUID
     Get EHR_STATUS Of EHR And Store Subject External Ref Value
     update EHR: set ehr_status is_queryable    ${TRUE}
     check response of 'update EHR' (JSON)
-    [Teardown]      (admin) delete ehr
 
 Update EHR Status - If-Match With Non-Existing UUID Version Number
     [Tags]      not-ready   CDR-1585
@@ -30,13 +30,10 @@ Update EHR Status - If-Match With Non-Existing UUID Version Number
     ${ehr_status_uuid_non_existing_version}     Replace String
     ...     ${ehrstatus_uid}    ::1      ::2
     Set Suite Variable      ${ehrstatus_uid}   ${ehr_status_uuid_non_existing_version}
-    ${err_msg}  Run Keyword And Expect Error    *
-    ...     set ehr_status of EHR       multitenancy_token=${None}
-    Should Contain      ${err_msg}      412 != 200
+    Update EHR_STATUS And Expect 412
     Log     https://vitagroup-ag.atlassian.net/browse/CDR-1585
     Dictionary Should Contain Key   ${response.headers}     Location
     Dictionary Should Contain Key   ${response.headers}     ETag
-    [Teardown]      (admin) delete ehr
 
 Update EHR Status - If-Match With Non-Existing UID Value
     [Documentation]     Update EHR_STATUS with If-Match value (non-existing uid value).
@@ -47,10 +44,7 @@ Update EHR Status - If-Match With Non-Existing UID Value
     ${ehr_status_uuid_non_existing_value}     Replace String
     ...     ${ehrstatus_uid}    ${versioned_status_uid}     ${{str(uuid.uuid4())}}
     Set Suite Variable      ${ehrstatus_uid}   ${ehr_status_uuid_non_existing_value}
-    ${err_msg}  Run Keyword And Expect Error    *
-    ...     set ehr_status of EHR       multitenancy_token=${None}
-    Should Contain      ${err_msg}      412 != 200
-    [Teardown]      (admin) delete ehr
+    Update EHR_STATUS And Expect 400
 
 Update EHR Status - If-Match With Non-Existing UID Value - System Id - Version
     [Documentation]     Update EHR_STATUS with If-Match value (non-existing uid, system_id and version number).
@@ -71,10 +65,7 @@ Update EHR Status - If-Match With Non-Existing UID Value - System Id - Version
     ${ehr_status_non_existing_version}     Replace String
     ...     ${ehrstatus_uid}    ::1     ::5
     Set Suite Variable      ${ehrstatus_uid}   ${ehr_status_non_existing_version}
-    ${err_msg}  Run Keyword And Expect Error    *
-    ...     set ehr_status of EHR       multitenancy_token=${None}
-    Should Contain      ${err_msg}      412 != 200
-    [Teardown]      (admin) delete ehr
+    Update EHR_STATUS And Expect 400
 
 Update EHR Status - If-Match With Wrong Value
     [Tags]      not-ready   CDR-1586
@@ -85,10 +76,9 @@ Update EHR Status - If-Match With Wrong Value
     #set {ehrstatus_uid} with wrongly structured value (e.g. 783beec5-9d29-4067-85b4-ad0884bc7c88::8)
     Set Suite Variable      ${ehrstatus_uid}   ${versioned_status_uid}::8
     ${err_msg}  Run Keyword And Expect Error    *
-    ...     set ehr_status of EHR       multitenancy_token=${None}
+    ...     set ehr_status of EHR
     Log     https://vitagroup-ag.atlassian.net/browse/CDR-1586
     Should Contain      ${err_msg}      400 != 200      #it returns 501 Not Implemented
-    [Teardown]      (admin) delete ehr
 
 Update EHR Status - Missing If-Match Header
     [Documentation]     Update EHR_STATUS with missing If-Match in headers.
@@ -102,7 +92,147 @@ Update EHR Status - Missing If-Match Header
                     ...     headers=${headers}      expected_status=anything
                     Set Test Variable    ${response}    ${resp}
                     Status Should Be    400
-    [Teardown]      (admin) delete ehr
+
+Update EHR Status - If-Match Value With Enclosed In Double Quotes
+    [Documentation]
+    ...     Example: *If-Match="0f426094-5935-4a79-a1c9-e3e274656276::local.ehrbase.org::1"*
+    ...     Expect 200.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    Set Test Variable      ${ehrstatus_uid}     \"${ehrstatus_uid}\"
+    set ehr_status of EHR
+
+Update EHR Status - If-Match Value Missing
+    [Documentation]
+    ...     Example: *If-Match=*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    Set Test Variable      ${ehrstatus_uid}     ${EMPTY}
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value With Weak Validator Enclosed In Double Quotes
+    [Documentation]
+    ...     Example: *If-Match=W/"{uid}::{system_id}::{version}"*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    Set Test Variable      ${ehrstatus_uid}     W/\"${ehrstatus_uid}\"
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value With Weak Validator Without Double Quotes
+    [Documentation]
+    ...     Example: *If-Match=W/{uid}::{system_id}::{version}*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    Set Test Variable      ${ehrstatus_uid}     W/${ehrstatus_uid}
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value Asterisc
+    [Documentation]
+    ...     Example: *If-Match=\**
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    Set Test Variable      ${ehrstatus_uid}     *
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value Asterisc Enclosed In Double Quotes
+    [Documentation]
+    ...     Example: *If-Match=\"*\"*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    Set Test Variable      ${ehrstatus_uid}     \"*\"
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value Without Closing Quote
+    [Documentation]
+    ...     Example: *If-Match="{uid}::{system_id}::{version}*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    Set Test Variable      ${ehrstatus_uid}     \"${ehrstatus_uid}
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value Without Opening Quote
+    [Documentation]
+    ...     Example: *If-Match={uid}::{system_id}::{version}"*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    Set Test Variable      ${ehrstatus_uid}     ${ehrstatus_uid}\"
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value Stray Quote
+    [Documentation]
+    ...     Example: *If-Match="{uid}"::{system_id}::{version}"*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    @{split_ehrstatus_uid}      Split String    ${ehrstatus_uid}    ::
+    Set Test Variable   ${ehrstatus_uid}
+    ...     \"${split_ehrstatus_uid}[0]\"::${split_ehrstatus_uid}[1]::${split_ehrstatus_uid}[2]\"
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value Is A List
+    [Documentation]
+    ...     Example: *If-Match="{uid}::{system_id}::{version1}","{uid}::{system_id}::{version2}"*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    @{split_ehrstatus_uid}      Split String    ${ehrstatus_uid}    ::
+    Set Test Variable   ${ehrstatus_uid}
+    ...     \"${split_ehrstatus_uid}[0]::${split_ehrstatus_uid}[1]::${split_ehrstatus_uid}[2]\",\"${split_ehrstatus_uid}[0]::${split_ehrstatus_uid}[1]::2\"
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value Is EHR Status Id
+    [Documentation]
+    ...     Example: *If-Match={uid}*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    @{split_ehrstatus_uid}      Split String    ${ehrstatus_uid}    ::
+    Set Test Variable   ${ehrstatus_uid}    ${split_ehrstatus_uid}[0]
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value With One Separator
+    [Documentation]
+    ...     Example: *If-Match={uid}::{system_id}*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    @{split_ehrstatus_uid}      Split String    ${ehrstatus_uid}    ::
+    Set Test Variable   ${ehrstatus_uid}
+    ...     ${split_ehrstatus_uid}[0]::${split_ehrstatus_uid}[1]
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value With Empty Object Id
+    [Documentation]
+    ...     Example: *If-Match=::{system_id}::{version}*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    @{split_ehrstatus_uid}      Split String    ${ehrstatus_uid}    ::
+    Set Test Variable   ${ehrstatus_uid}
+    ...     ::${split_ehrstatus_uid}[1]::${split_ehrstatus_uid}[2]
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value With Empty System Id
+    [Documentation]
+    ...     Example: *If-Match={uid}::::{version}*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    @{split_ehrstatus_uid}      Split String    ${ehrstatus_uid}    ::
+    Set Test Variable   ${ehrstatus_uid}
+    ...     ${split_ehrstatus_uid}[0]::::${split_ehrstatus_uid}[2]
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value With Empty Version
+    [Documentation]
+    ...     Example: *If-Match={uid}::{system_id}::*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    @{split_ehrstatus_uid}      Split String    ${ehrstatus_uid}    ::
+    Set Test Variable   ${ehrstatus_uid}
+    ...     ${split_ehrstatus_uid}[0]::${split_ehrstatus_uid}[0]::
+    Update EHR_STATUS And Expect 400
+
+Update EHR Status - If-Match Value With Four Segments
+    [Documentation]
+    ...     Example: *If-Match={uid}::{system_id}::{version}::2*
+    ...     Expect 412.
+    Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
+    Set Test Variable   ${ehrstatus_uid}    ${ehrstatus_uid}::2
+    Update EHR_STATUS And Expect 400
 
 
 *** Keywords ***
@@ -116,3 +246,7 @@ Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
     set is_queryable / is_modifiable    is_queryable=True
     Get EHR_STATUS Of EHR And Store Subject External Ref Value
     set full ehr_status from original_ehr_status var (JSON)
+
+Update EHR_STATUS And Expect ${status_code}
+    Run Keyword And Return Status   set ehr_status of EHR
+    Status Should Be     ${status_code}

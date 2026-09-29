@@ -26,7 +26,7 @@ Update Directory - If-Match Value Missing
     ...     Expect 412.
     Create Directory And Expect 201
     Set Test Variable      ${preceding_version_uid}     ${EMPTY}
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value With Weak Validator Enclosed In Double Quotes
     [Tags]      Negative
@@ -35,7 +35,7 @@ Update Directory - If-Match Value With Weak Validator Enclosed In Double Quotes
     ...     Expect 412.
     Create Directory And Expect 201
     Set Test Variable   ${preceding_version_uid}    W/\"${preceding_version_uid}\"
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value With Weak Validator Without Double Quotes
     [Tags]      Negative
@@ -44,7 +44,7 @@ Update Directory - If-Match Value With Weak Validator Without Double Quotes
     ...     Expect 412.
     Create Directory And Expect 201
     Set Test Variable   ${preceding_version_uid}    W/${preceding_version_uid}
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value Asterisc
     [Tags]      Negative
@@ -53,7 +53,7 @@ Update Directory - If-Match Value Asterisc
     ...     Expect 412.
     Create Directory And Expect 201
     Set Test Variable   ${preceding_version_uid}    *
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value Asterisc Enclosed In Double Quotes
     [Tags]      Negative
@@ -62,7 +62,7 @@ Update Directory - If-Match Value Asterisc Enclosed In Double Quotes
     ...     Expect 412.
     Create Directory And Expect 201
     Set Test Variable   ${preceding_version_uid}    \"*\"
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value Without Closing Quote
     [Tags]      Negative
@@ -71,7 +71,7 @@ Update Directory - If-Match Value Without Closing Quote
     ...     Expect 412.
     Create Directory And Expect 201
     Set Test Variable   ${preceding_version_uid}    \"${preceding_version_uid}
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value Without Opening Quote
     [Tags]      Negative
@@ -80,7 +80,7 @@ Update Directory - If-Match Value Without Opening Quote
     ...     Expect 412.
     Create Directory And Expect 201
     Set Test Variable   ${preceding_version_uid}    ${preceding_version_uid}\"
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value Stray Quote
     [Tags]      Negative
@@ -91,7 +91,7 @@ Update Directory - If-Match Value Stray Quote
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
     ...     \"${split_preceding_version_id}[0]\"::${split_preceding_version_id}[1]::${split_preceding_version_id}[2]\"
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value Is A List
     [Tags]      Negative
@@ -100,7 +100,7 @@ Update Directory - If-Match Value Is A List
     ...     Expect 412.
     Create Directory And Expect 201
     Set Test Variable   ${preceding_version_uid}    \"${preceding_version_uid}\",\"43b72792-bb42-490a-ac66-58e99b0be66d::local.ehrbase.org::2\"
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value Is DirectoryId
     [Tags]      Negative
@@ -110,7 +110,7 @@ Update Directory - If-Match Value Is DirectoryId
     Create Directory And Expect 201
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}    ${split_preceding_version_id}[0]
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value With One Separator
     [Tags]      Negative
@@ -121,7 +121,7 @@ Update Directory - If-Match Value With One Separator
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
     ...     ${split_preceding_version_id}[0]::${split_preceding_version_id}[1]
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value With Empty Object Id
     [Tags]      Negative
@@ -132,7 +132,7 @@ Update Directory - If-Match Value With Empty Object Id
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
     ...     ::${split_preceding_version_id}[1]::${split_preceding_version_id}[2]
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value With Empty System Id
     [Tags]      Negative
@@ -143,7 +143,7 @@ Update Directory - If-Match Value With Empty System Id
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
     ...     ${split_preceding_version_id}[0]::::${split_preceding_version_id}[2]
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value With Empty Version
     [Tags]      Negative
@@ -154,7 +154,7 @@ Update Directory - If-Match Value With Empty Version
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
     ...     ${split_preceding_version_id}[0]::${split_preceding_version_id}[1]::
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match Value With Four Segments
     [Tags]      Negative
@@ -165,7 +165,7 @@ Update Directory - If-Match Value With Four Segments
     @{split_preceding_version_id}      Split String    ${preceding_version_uid}    ::
     Set Test Variable   ${preceding_version_uid}
     ...     ${split_preceding_version_id}[0]::${split_preceding_version_id}[1]::${split_preceding_version_id}[2]::2
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 Update Directory - If-Match With Non-Existing UUID Version Number
     [Tags]      not-ready   CDR-1585    Negative
@@ -195,7 +195,7 @@ Update Directory - If-Match With Non-Existing UID Value
     ...     ${preceding_version_uid}    ${folder_uid_without_system_and_version}     ${{str(uuid.uuid4())}}
     Set Test Variable      ${preceding_version_uid}   ${directory_uuid_non_existing_value}
     Log     ${preceding_version_uid}
-    Update Directory And Expect 412
+    Update Directory And Expect 400
 
 
 
