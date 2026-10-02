@@ -514,6 +514,7 @@ update composition (JSON)
                             ...                 Prefer=return=representation
                             ...                 If-Match=${preceding_version_uid}
         ${resp}             PUT On Session         ${SUT}   /ehr/${ehr_id}/composition/${compo_uid_v1}   data=${file}   expected_status=anything   headers=${headers}
+                            Set Test Variable   ${response}    ${resp}
                             log to console      ${resp.content}
                             Set Test Variable   ${composition_uid_v2}    ${resp.json()['uid']['value']}    # TODO: remove
                             Set Test Variable   ${version_uid_v2}    ${resp.json()['uid']['value']}
@@ -521,7 +522,7 @@ update composition (JSON)
         @{split_compo_id}   Split String        ${version_uid_v2}       ::
                             Set Test Variable   ${versioned_object_uid_v2}    ${split_compo_id}[0]
 
-                            Set Test Variable   ${response}    ${resp}
+                            #Set Test Variable   ${response}    ${resp}
                             capture point in time    2
 
 
