@@ -186,7 +186,7 @@ Update Directory - If-Match With Non-Existing UID Value
     [Tags]      Negative
     [Documentation]     Update Directory with If-Match value (non-existing uid value).
     ...     Example: If-Match=2c7d2873-fcba-4fb6-c55r-13ce977b0547::local.ehrbase.org::1
-    ...     Expect 400.
+    ...     Expect 412.
     Create Directory And Expect 201
     @{temp_folder_uid_list}     Split String    ${preceding_version_uid}    ::
     Set Test Variable    ${folder_uid_without_system_and_version}    ${temp_folder_uid_list}[0]
@@ -195,7 +195,7 @@ Update Directory - If-Match With Non-Existing UID Value
     ...     ${preceding_version_uid}    ${folder_uid_without_system_and_version}     ${{str(uuid.uuid4())}}
     Set Test Variable      ${preceding_version_uid}   ${directory_uuid_non_existing_value}
     Log     ${preceding_version_uid}
-    Update Directory And Expect 400
+    Update Directory And Expect 412
 
 
 

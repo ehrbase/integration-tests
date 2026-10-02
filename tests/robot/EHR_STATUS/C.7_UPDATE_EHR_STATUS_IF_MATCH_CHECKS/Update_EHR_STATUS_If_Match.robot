@@ -40,19 +40,19 @@ Update EHR Status - If-Match With Non-Existing UID Value
     [Tags]      Negative
     [Documentation]     Update EHR_STATUS with If-Match value (non-existing uid value).
     ...     Example: If-Match=2c7d2873-fcba-4fb6-c55r-13ce977b0547::local.ehrbase.org::1
-    ...     Expect 400.
+    ...     Expect 412.
     Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
     #set {ehrstatus_uid} with replaced uid value (non-existing uid value)
     ${ehr_status_uuid_non_existing_value}     Replace String
     ...     ${ehrstatus_uid}    ${versioned_status_uid}     ${{str(uuid.uuid4())}}
     Set Suite Variable      ${ehrstatus_uid}   ${ehr_status_uuid_non_existing_value}
-    Update EHR_STATUS And Expect 400
+    Update EHR_STATUS And Expect 412
 
 Update EHR Status - If-Match With Non-Existing UID Value - System Id - Version
     [Tags]      Negative
     [Documentation]     Update EHR_STATUS with If-Match value (non-existing uid, system_id and version number).
     ...     Example: If-Match=049addcd-9094-4d3c-8b79-9bb62b38cac2::non-existing-system-id::6
-    ...     Expect 400.
+    ...     Expect 412.
     Create EHR - Extract EHR Data - Prepare For Update EHR_STATUS
     #set {ehrstatus_uid} with replaced uid value (non-existing uid value)
     ${ehr_status_uuid_non_existing_value}     Replace String
@@ -68,7 +68,7 @@ Update EHR Status - If-Match With Non-Existing UID Value - System Id - Version
     ${ehr_status_non_existing_version}     Replace String
     ...     ${ehrstatus_uid}    ::1     ::5
     Set Suite Variable      ${ehrstatus_uid}   ${ehr_status_non_existing_version}
-    Update EHR_STATUS And Expect 400
+    Update EHR_STATUS And Expect 412
 
 Update EHR Status - If-Match With Wrong Value
     [Tags]      not-ready   CDR-1586    Negative
