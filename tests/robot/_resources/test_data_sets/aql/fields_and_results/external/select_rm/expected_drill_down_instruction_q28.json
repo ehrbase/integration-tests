@@ -125,7 +125,7 @@
 									},
 									"value": {
 										"_type": "DV_DATE",
-										"value": "2019-01-14"
+										"value": "2019-01"
 									},
 									"archetype_node_id": "at0003"
 								},
@@ -181,14 +181,14 @@
 				},
 				"value": {
 					"_type": "DV_DATE",
-					"value": "2019-01-14"
+					"value": "2019-01"
 				},
 				"archetype_node_id": "at0003"
 			},
 			"partial date",
 			{
 				"_type": "DV_DATE",
-				"value": "2019-01-14"
+				"value": "2019-01"
 			},
 			{
 				"_type": "DV_TEXT",
