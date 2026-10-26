@@ -111,7 +111,7 @@ Create Composition With 24 Hours Average - Invalid Value
     Log     ${response.content}
     Status Should Be        422
     ${errType}      Set Variable     ${response.json()['error']}
-    Should Be Equal As Strings     ${errType}      Unprocessable Entity
+    Should Be Equal As Strings     ${errType}      Unprocessable Content
     ${errMsg}      Set Variable     ${response.json()['message']}
     Set Test Variable       ${errType}
     Set Test Variable       ${errMsg}

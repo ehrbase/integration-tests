@@ -21,7 +21,7 @@ Suite Setup       Run Keywords
     Set Test Variable   ${composition_file}     ${template_id}__.json
     commit composition      format=CANONICAL_JSON
     ...                     composition=${composition_file}
-    Expect 422 Unprocessable Entity - not in template
+    Expect 422 Unprocessable Content - not in template
     [Teardown]      Delete Template Using API
 
 2. Create Composition Fails If Nodes Are Not Present In Template 2
@@ -31,7 +31,7 @@ Suite Setup       Run Keywords
     Set Test Variable   ${composition_file}     ${template_id}__.json
     commit composition      format=CANONICAL_JSON
     ...                     composition=${composition_file}
-    Expect 422 Unprocessable Entity - not in template
+    Expect 422 Unprocessable Content - not in template
     [Teardown]      Run Keywords
     ...     (admin) delete ehr   AND
     ...     Delete Template Using API
@@ -45,7 +45,7 @@ Precondition
     Upload OPT    all_types/${template_id_2}.opt
     create EHR
 
-Expect 422 Unprocessable Entity - Not In Template
+Expect 422 Unprocessable Content - not in template
     Should Be Equal As Strings      ${response.status_code}     422
-    Should Be Equal As Strings      ${response.json()['error']}     Unprocessable Entity
+    Should Be Equal As Strings      ${response.json()['error']}     Unprocessable Content
     Should Contain      ${response.json()['message']}   not in template

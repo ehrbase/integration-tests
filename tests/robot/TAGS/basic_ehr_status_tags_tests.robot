@@ -79,7 +79,7 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
     Should Contain      ${err_msg}      404 != 204
 
 6. Create EHR_STATUS Tag Without Key In Body
-    # Create EHR_STATUS Tag without "key" in JSON body and expect 422 Unprocessable Entity as "key" is mandatory.
+    # Create EHR_STATUS Tag without "key" in JSON body and expect 422 Unprocessable Content as "key" is mandatory.
     [Tags]      Negative
     [Setup]     Precondition Create EHR With EHR_STATUS
     Create Session For EHR_STATUS Tag Calls
@@ -89,7 +89,7 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
     ${err_msg}  Run Keyword And Expect Error    *
     ...     Create EHR_STATUS Tag Call      ${ehr_status_tag_body}
     Should Contain      ${err_msg}      422 != 200
-    Should Be Equal     ${resp.json()['error']}     Unprocessable Entity
+    Should Be Equal     ${resp.json()['error']}     Unprocessable Content
     [Teardown]      (admin) delete ehr
 
 7. Create EHR_STATUS Tag With Invalid Target Path In Body
@@ -103,7 +103,7 @@ ${VALID EHR DATA SETS}       ${PROJECT_ROOT}/tests/robot/_resources/test_data_se
     ${err_msg}  Run Keyword And Expect Error    *
     ...     Create EHR_STATUS Tag Call      ${ehr_status_tag_body}
     Should Contain      ${err_msg}      422 != 200
-    Should Be Equal     ${resp.json()['error']}     Unprocessable Entity
+    Should Be Equal     ${resp.json()['error']}     Unprocessable Content
     Should Contain      ${resp.json()['message']}   target_path 'name/value' does not start at root
     [Teardown]      (admin) delete ehr
 

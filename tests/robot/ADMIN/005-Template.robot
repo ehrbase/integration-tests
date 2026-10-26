@@ -106,7 +106,7 @@ ${CACHE-ENABLED}        ${FALSE}
     commit composition (XML)    minimal/minimal_admin.composition.extdatetimes.xml
     (admin) delete all OPTs
     Status Should Be    422
-    Should Be Equal As Strings      ${response.json()["error"]}     Unprocessable Entity
+    Should Be Equal As Strings      ${response.json()["error"]}     Unprocessable Content
     Should Be Equal As Strings      ${response.json()["message"]}
     ...     Cannot delete template minimal_admin.en.v1 since it is used by at least one composition
     [Teardown]    Run Keywords    (admin) delete composition    AND
@@ -119,7 +119,7 @@ ${CACHE-ENABLED}        ${FALSE}
     commit composition (XML)    minimal/minimal_admin.composition.extdatetimes.xml
     (admin) delete OPT
     Status Should Be    422
-    Should Be Equal As Strings      ${response.json()["error"]}     Unprocessable Entity
+    Should Be Equal As Strings      ${response.json()["error"]}     Unprocessable Content
     Should Be Equal As Strings      ${response.json()["message"]}
     ...     Cannot delete template minimal_admin.en.v1 since it is used by at least one composition
     [Teardown]    Run Keywords    (admin) delete composition    AND
@@ -159,7 +159,7 @@ ${CACHE-ENABLED}        ${FALSE}
     create new EHR (XML)
     commit composition (XML)    minimal/minimal_admin.composition.extdatetimes.xml
     (admin) update OPT    minimal/minimal_admin_updated.opt
-    validate PUT response - 422 unprocessable entity
+    validate PUT response - 422 unprocessable content
     Create Session      ${SUT}      ${BASEURL}      debug=2
     ...     verify=True     #auth=${CREDENTIALS}
     ${resp}     GET On Session      ${SUT}    /definition/template/adl1.4/${template_id}
@@ -249,7 +249,7 @@ validate PUT response - 404 unknown templade_id
                         Should Match    ${response.text}    *Template with template_id '${template_id}' does not exist*
 
 
-validate PUT response - 422 unprocessable entity
+validate PUT response - 422 unprocessable content
                         log   ${response.content}
                         Should Be Equal As Strings    ${response.status_code}    422
                         Should Contain    ${response.text}    is used by
@@ -266,7 +266,7 @@ validate DELETE response - 204 deleted
                         END
 
 
-validate DELETE response - 422 unprocessable entity
+validate DELETE response - 422 unprocessable content
                         Integer    response status   422
                         String     response body message
                         ...        pattern=Cannot delete template minimal_admin.en.v1 since the following compositions are still using it.*
@@ -277,7 +277,7 @@ validate DELETE ALL response - 204 deleted ${amount}
                         Integer    response body deleted    ${amount}
 
 
-validate DELETE ALL response - 422 unprocessable entity
+validate DELETE ALL response - 422 unprocessable content
                         Integer     response status   422
                         String      response body message
                         ...         pattern=Cannot delete template *
