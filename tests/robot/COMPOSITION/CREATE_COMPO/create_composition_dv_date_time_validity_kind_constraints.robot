@@ -35,7 +35,7 @@ ${opt_c_date_time_patternPath}
 ${opt_reference_file}   all_types/Test_dv_date_time_validity_kind_constraint_v0.opt
 ${opt_temp_file}        all_types/Test_dv_date_time_validity_kind_constraint_v0__temp.opt
 ${positiveCode}     201
-${negativeCode}     400
+${negativeCode}     422
 
 
 *** Test Cases ***
