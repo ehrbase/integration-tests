@@ -31,7 +31,7 @@ Suite Setup     Set Library Search Order For Tests
 *** Variables ***
 ${composition_file}     Test_dv_date_time_validity_kind_constraint_v0__.json
 ${opt_c_date_time_patternPath}
-...     .//definition/attributes[3]/children[1]/attributes/children/attributes/children/attributes/children/attributes/children[7]/attributes/children/attributes/children/item/pattern
+...     .//definition/attributes[3]/children/attributes[1]/children/attributes/children/attributes/children/attributes/children/attributes/children/attributes/children/item/pattern
 ${opt_reference_file}   all_types/Test_dv_date_time_validity_kind_constraint_v0.opt
 ${opt_temp_file}        all_types/Test_dv_date_time_validity_kind_constraint_v0__temp.opt
 ${positiveCode}     201
