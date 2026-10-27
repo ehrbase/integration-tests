@@ -31,7 +31,7 @@ Suite Setup     Set Library Search Order For Tests
 *** Variables ***
 ${composition_file}      Test_all_types_v2__.json
 ${opt_c_date_patternPath}
-...     .//attributes//attributes//attributes//attributes//attributes/children/attributes[2]/children/attributes/children[1]/item[1]/pattern[1]
+...     /template/definition/attributes[3]/children[3]/attributes/children/attributes/children[1]/attributes/children[1]/attributes/children/attributes[2]/children/attributes/children[1]/attributes/children/attributes/children/item/pattern
 ${opt_reference_file}
 ...     all_types/Test_all_types_v2.opt
 ${opt_temp_file}
