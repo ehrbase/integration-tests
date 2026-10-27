@@ -31,7 +31,7 @@ Suite Setup     Set Library Search Order For Tests
 *** Variables ***
 ${composition_file}     Test_dv_date_time_validity_kind_constraint_v0__.json
 ${opt_c_date_time_patternPath}
-...     .//item[@*[local-name()='type']='C_DATE_TIME']/pattern
+...     .//pattern[.='yyyy-??-??T??:??:??']
 ${opt_reference_file}   all_types/Test_dv_date_time_validity_kind_constraint_v0.opt
 ${opt_temp_file}        all_types/Test_dv_date_time_validity_kind_constraint_v0__temp.opt
 ${positiveCode}     201
