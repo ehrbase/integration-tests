@@ -31,7 +31,7 @@ Suite Setup     Set Library Search Order For Tests
 *** Variables ***
 ${composition_file}      Test_all_types_v2__.json
 ${opt_c_date_patternPath}
-...     .//pattern[.='yyyy-??-??']
+...     .//item[pattern='yyyy-??-??']/pattern
 ${opt_reference_file}
 ...     all_types/Test_all_types_v2.opt
 ${opt_temp_file}
