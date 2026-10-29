@@ -31,16 +31,15 @@ Suite Setup     Set Library Search Order For Tests
 *** Variables ***
 ${composition_file}     Test_dv_date_time_validity_kind_constraint_v0__.json
 ${opt_c_date_time_patternPath}
-...     .//children[1]/item[1]/pattern[1]
+...     .//definition/attributes[3]/children/attributes[1]/children/attributes/children/attributes/children/attributes/children/attributes/children/attributes/children/item/pattern
 ${opt_reference_file}   all_types/Test_dv_date_time_validity_kind_constraint_v0.opt
 ${opt_temp_file}        all_types/Test_dv_date_time_validity_kind_constraint_v0__temp.opt
 ${positiveCode}     201
-${negativeCode}     400
+${negativeCode}     422
 
 
 *** Test Cases ***
 Test DV Date Time Validity Kind Constraints - C_DATE_TIME With Configured Pattern
-    [Tags]      not-ready   bug
     [Documentation]     *Documentation to be defined*
     [Template]      Configure And Commit DV Date Time Validity Kind Constraints - C_DATE_TIME With Configured Pattern
     #C_DATE_TIME pattern value, DV_DATE_TIME value in COMPOSITION, expected code
@@ -119,7 +118,6 @@ Test DV Date Time Validity Kind Constraints - C_DATE_TIME With Configured Patter
     yyyy-mm-ddTHH:XX:XX     2021-10-24T10:30:47-03:00        ${negativeCode}
     yyyy-XX-XXTXX:XX:XX     2021-10-24T10:30:47-03:00        ${negativeCode}
 
-    [Teardown]      TRACE JIRA ISSUE    CDR-513
 
 *** Keywords ***
 Configure And Commit DV Date Time Validity Kind Constraints - C_DATE_TIME With Configured Pattern
@@ -182,7 +180,7 @@ Change Json KeyValue And Save Back To File
     ...     2 - value to be changed JsonPath key
     [Arguments]     ${jsonContent}      ${valueToUpdate}
     ${objPath}      Set Variable        $.content[0].data.events[0].time.value
-    ${objPath2}     Set Variable        $.content[0].data.events[0].data.items[0].value.value
+    ${objPath2}     Set Variable        $.content[0].data.events[*].data.items[0].value.value
     ${json_object}  Update Value To Json	${jsonContent}
     ...             ${objPath}        ${valueToUpdate}
     ${json_object}  Update Value To Json	${jsonContent}

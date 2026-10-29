@@ -31,7 +31,7 @@ Suite Setup     Set Library Search Order For Tests
 *** Variables ***
 ${composition_file}      Test_all_types_v2__.json
 ${opt_c_date_patternPath}
-...     .//attributes//attributes//attributes//attributes//attributes/children/attributes[2]/children/attributes/children[1]//item
+...     .//definition/attributes[3]/children[3]/attributes/children/attributes/children[1]/attributes/children[1]/attributes/children/attributes[2]/children/attributes/children[1]/attributes/children/attributes/children/item/pattern
 ${opt_reference_file}
 ...     all_types/Test_all_types_v2.opt
 ${opt_temp_file}
@@ -42,7 +42,6 @@ ${negativeCode}     422
 
 *** Test Cases ***
 Test DV_DATE With Constraints On Month And/Or Day Configured In C_DATE
-    [Tags]      not-ready   bug
     [Documentation]     *Documentation to be defined*
     [Template]      Test DV_DATE With Constraints On Month And/Or Day
     yyyy-mm-dd      2022            ${negativeCode}
@@ -61,7 +60,7 @@ Test DV_DATE With Constraints On Month And/Or Day Configured In C_DATE
     yyyy-mm-dd      2022-10-24      ${positiveCode}
     yyyy-mm-??      2022-10-24      ${positiveCode}
     yyyy-??-??      2022-10-24      ${positiveCode}
-    [Teardown]      Run Keywords    TRACE JIRA ISSUE    CDR-498     AND     (admin) delete all OPTs
+    [Teardown]      (admin) delete all OPTs
 
 
 *** Keywords ***
