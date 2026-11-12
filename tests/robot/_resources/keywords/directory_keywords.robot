@@ -1122,7 +1122,9 @@ load valid dir test-data-set
 
     # ${file}=            Get File    ${VALID DIR DATA SETS}/${valid_test_data_set}
     ${json}=            Load JSON From File    ${VALID DIR DATA SETS}/${valid_test_data_set}
-
+    ${json_str}=        Convert JSON To String    ${json}
+    ${json_str}=        Replace Variables    ${json_str}
+    ${json}=            Convert String To JSON    ${json_str}
                         Set Suite Variable    ${test_data}    ${json}
 
 
