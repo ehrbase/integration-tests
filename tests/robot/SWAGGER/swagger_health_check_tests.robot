@@ -32,6 +32,7 @@ ${api_docs_version_part}     /v3/api-docs
                 Dictionary Should Contain Key     ${resp_json_paths}    /rest/openehr/v1/ehr/{ehr_id}/contribution/{contribution_uid}
                 Dictionary Should Contain Key     ${resp_json_paths}    /rest/openehr/v1/definition/template/adl1.4/{template_id}/example
                 Dictionary Should Contain Key     ${resp_json_paths}    /rest/openehr/v1/definition/query
+                Dictionary Should Contain Key     ${resp_json_paths}    /rest/openehr/v1
 
 3. Check Swagger EHRbase Status Endpoint
     ${resp}     GET On Session      ${SUT}      ${api_docs_version_part}/2. EHRbase Status Endpoint    expected_status=anything
