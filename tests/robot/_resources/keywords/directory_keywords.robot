@@ -1123,7 +1123,10 @@ load valid dir test-data-set
     # ${file}=            Get File    ${VALID DIR DATA SETS}/${valid_test_data_set}
     ${json}=            Load JSON From File    ${VALID DIR DATA SETS}/${valid_test_data_set}
     ${json_str}=        Convert JSON To String    ${json}
-    ${json_str}=        Replace Variables    ${json_str}
+    ${comp_id}=         Get Variable Value    \${composition_id}    ${None}
+    IF    $comp_id is not None
+        ${json_str}=    Replace String    ${json_str}    \${composition_id}    ${comp_id}
+    END
     ${json}=            Convert String To JSON    ${json_str}
                         Set Suite Variable    ${test_data}    ${json}
 
