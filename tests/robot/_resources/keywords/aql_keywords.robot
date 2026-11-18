@@ -303,7 +303,7 @@ Get Composition Time Committed
     ...     SELECT cv/commit_audit/time_committed/value
     ...     FROM VERSION cv[LATEST_VERSION]
     ...     CONTAINS COMPOSITION s
-    ...     WHERE cv/uid/value = '${composition_uid}'
+    ...     WHERE s/uid/value = '${composition_uid}'
     Set AQL And Execute Ad Hoc Query    ${query_to_get_time_committed}
     RETURN    ${resp_body['rows'][0][0]}
 
@@ -312,8 +312,9 @@ Get Observation Time Committed
     ${query_to_get_time_committed}      Catenate
     ...     SELECT cv/commit_audit/time_committed/value
     ...     FROM VERSION cv[LATEST_VERSION]
+    ...     CONTAINS COMPOSITION c
     ...     CONTAINS OBSERVATION s
-    ...     WHERE cv/uid/value = '${composition_uid}'
+    ...     WHERE c/uid/value = '${composition_uid}'
     Set AQL And Execute Ad Hoc Query    ${query_to_get_time_committed}
     RETURN    ${resp_body['rows'][0][0]}
 
