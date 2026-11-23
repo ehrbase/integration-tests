@@ -226,6 +226,7 @@ Test GET EHR Endpoint Using Password Grant Valid Token
                     Set Suite Variable      ${ehr_id}           ${resp.json()['ehr_id']['value']}
                     Set Suite Variable      ${ehr_status_id}    ${resp.json()['ehr_status']['uid']['value']}
                     Set Suite Variable      ${ehr_status}       ${resp.json()['ehr_status']}
+                    Set Suite Variable      ${system_id}        ${resp.json()['system_id']['value']}
         ${resp}     Get On Session      ${SUT}      /ehr/${ehr_id}
                     ...                 expected_status=anything
                     ...                 headers=${headers}
@@ -389,6 +390,7 @@ Test POST Contribution Endpoint Using Password Grant Valid Token
         Create Expectation For POST /rest/v1/policy/execute/name/has_consent_template
         ${file}     Load JSON From File
         ...     ${PROJECT_ROOT}/tests/robot/_resources/test_data_sets/contributions/valid/minimal/minimal_evaluation.contribution.json
+        ${file}     use the server system_id    ${file}
         ${resp}     POST On Session     ${SUT}      /ehr/${ehr_id}/contribution     expected_status=anything
                     ...     json=${file}
                     ...     headers=${headers}
@@ -534,7 +536,7 @@ Create Headers Dict And Set Composition Headers With Authorization Bearer
     &{headers}          Create Dictionary     &{EMPTY}
     Set To Dictionary   ${headers}
     ...     Content-Type=application/json   Accept=application/json
-    ...     Prefer=return=representation    openEHR-VERSION.lifecycle_state=complete
+    ...     Prefer=return=representation    openehr-version=lifecycle_state.code_string="532"
     Set Test Variable       ${headers}      ${headers}
 
 ObtainPasswordToken

@@ -461,6 +461,7 @@ load valid test-data-set
     [Arguments]        ${valid_test_data_set}
 
     ${file}=            Load JSON from File             ${VALID CONTRI DATA SETS}/${valid_test_data_set}
+    ${file}=            use the server system_id        ${file}
 
                         Set Test Variable    ${test_data}    ${file}
 
@@ -469,6 +470,7 @@ load invalid test-data-set
     [Arguments]        ${invalid_test_data_set}
 
     ${file}=            Load JSON from File             ${INVALID CONTRI DATA SETS}/${invalid_test_data_set}
+    ${file}=            use the server system_id        ${file}
 
                         Set Test Variable    ${test_data}    ${file}
 
@@ -478,6 +480,7 @@ inject preceding_version_uid into valid test-data-set
     ${test_data}=       Load JSON from File    ${VALID CONTRI DATA SETS}/${valid_test_data_set}
     ${test_data}=       Update Value To Json  ${test_data}  $..versions..preceding_version_uid.value
                         ...                   ${version_id}
+    ${test_data}=       use the server system_id    ${test_data}
                         Set Test Variable    ${test_data}    ${test_data}
                         Output    ${test_data}
 
@@ -487,6 +490,7 @@ inject preceding_version_uid into invalid test-data-set
     ${test_data}=       Load JSON from File    ${INVALID CONTRI DATA SETS}/${invalid_test_data_set}
     ${test_data}=       Update Value To Json  ${test_data}  $..versions..preceding_version_uid.value
                         ...                   ${version_id}
+    ${test_data}=       use the server system_id    ${test_data}
                         Set Test Variable    ${test_data}    ${test_data}
                         Output    ${test_data}
 

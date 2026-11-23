@@ -139,9 +139,10 @@ commit composition - no referenced EHR
 
 
 commit composition (JSON)
-    [Arguments]         ${json_composition}     ${multitenancy_token}=${None}
+    [Arguments]         ${json_composition}     ${multitenancy_token}=${None}    &{audit_headers}
     [Documentation]     Creates the first version of a new COMPOSITION
     ...                 DEPENDENCY: `upload OPT`, `create EHR`
+    ...                 `audit_headers` are sent as extra request headers, e.g. `openehr-audit-details=...`
     ...
     ...                 ENDPOINT: POST /ehr/${ehr_id}/composition
 
@@ -151,6 +152,7 @@ commit composition (JSON)
     &{headers}=         Create Dictionary   Content-Type=application/xml
                         ...                 Accept=application/json
                         ...                 Prefer=return=representation
+                        ...                 &{audit_headers}
     IF     '${multitenancy_token}' != '${None}'
             Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
     END
@@ -281,7 +283,7 @@ Create Session For Commit Composition With Multitenant Token
     ...     - `Dependent of keyword:` commit composition.
     [Arguments]      ${template}     ${multitenancy_token}
     Set To Dictionary   ${headers}
-    ...     Prefer=return=representation    openEHR-VERSION.lifecycle_state=complete
+    ...     Prefer=return=representation    openehr-version=lifecycle_state.code_string="532"
     ...     openEHR-TEMPLATE_ID=${template}     Authorization=Bearer ${multitenancy_token}
     #...     Content-Type=application/json
     #...     Accept=application/json
@@ -293,7 +295,7 @@ Create Session For Commit Composition With Multitenant Token
 commit composition
     [Arguments]         ${format}   ${composition}
     ...         ${need_template_id}=true   ${prefer}=representation
-    ...         ${lifecycle}=complete    ${extTemplateId}=false     ${multitenancy_token}=${None}
+    ...         ${lifecycle}=532    ${extTemplateId}=false     ${multitenancy_token}=${None}
     [Documentation]     Creates the first version of a new COMPOSITION
     ...                 DEPENDENCY: `upload OPT`, `create EHR`
     ...
@@ -309,7 +311,7 @@ commit composition
     ${file}=           Get File   ${COMPO DATA SETS}/${format}/${composition}
 
     &{headers}=        Create Dictionary   Prefer=return=${prefer}
-    ...                openEHR-VERSION.lifecycle_state=${lifecycle}
+    ...                openehr-version=lifecycle_state.code_string="${lifecycle}"
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     ELSE IF     ('${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH') and '${multitenancy_token}' == '${None}'
@@ -1253,15 +1255,18 @@ check versioned composition does not exist
 
 
 delete composition
-    [Arguments]         ${uid}      ${ehrScape}=false       ${multitenancy_token}=${None}
+    [Arguments]         ${uid}      ${ehrScape}=false       ${multitenancy_token}=${None}    &{audit_headers}
     [Documentation]     :uid: preceding_version_uid (format of version_uid)
+    ...                 `audit_headers` are sent with this request only, e.g. `openehr-audit-details=...`
 
     IF     '${multitenancy_token}' != '${None}'
             Set To Dictionary   ${headers}      Authorization=Bearer ${multitenancy_token}
     END
 
     IF      '${ehrScape}' == 'false'
-        ${resp}     Delete On Session   ${SUT}   /ehr/${ehr_id}/composition/${uid}   expected_status=anything   headers=${headers}
+        ${request_headers}=     Copy Dictionary     ${headers}
+        Set To Dictionary       ${request_headers}      &{audit_headers}
+        ${resp}     Delete On Session   ${SUT}   /ehr/${ehr_id}/composition/${uid}   expected_status=anything   headers=${request_headers}
         Status Should Be    204
                             # the ETag comes with quotes, this removes them
         ${del_version_uid}      Get Substring           ${resp.headers['ETag']}    1    -1

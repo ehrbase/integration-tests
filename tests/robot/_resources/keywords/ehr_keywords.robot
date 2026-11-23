@@ -202,6 +202,7 @@ create supernew ehr
     ${resp}             POST On Session     ${SUT}      /ehr
                         ...     expected_status=anything    headers=${headers}
                         Set Test Variable    ${response}    ${resp}
+                        remember the server system_id    ${resp}
                         #Output Debug Info To Console
 
 
@@ -321,6 +322,7 @@ create new EHR with ehr_status
                         ...     expected_status=anything    headers=${headers}
 						Set Suite Variable    ${resp}    	${resp}
                         Set Suite Variable    ${response}	${resp}
+                        remember the server system_id    ${resp}
                         Status Should Be    201
                         Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
                         Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
@@ -368,6 +370,7 @@ create new EHR by ID
     END
     Set Suite Variable    ${resp}    	${resp}
     Set Suite Variable    ${response}	${resp}
+    remember the server system_id    ${resp}
 
 
 create new EHR for subject_id (JSON)
@@ -379,6 +382,7 @@ create new EHR for subject_id (JSON)
     ${resp}             POST On Session     ${SUT}      /ehr    json=${ehr_status_json}
                         ...     expected_status=anything    headers=${headers}
                         Set Suite Variable    ${response}    ${resp}
+                        remember the server system_id    ${resp}
 
 
 create new EHR with subject_id (JSON)
@@ -421,6 +425,7 @@ create new EHR can't be modified
     ${resp}     POST On Session     ${SUT}    /ehr      json=${ehr_status_json}
                 ...     expected_status=anything        headers=${headers}
                 Set Suite Variable    ${response}    ${resp}
+                remember the server system_id    ${resp}
                 extract ehr_id from response (JSON)
 
 
@@ -795,6 +800,28 @@ extract system_id from response (JSON)
         Set Suite Variable      ${system_id}       ${resp.json()['system_id']['value']}
         #Log To Console    \n\tDEBUG OUTPUT - SYSTEM_ID: \n\t${system_id}[0]
     END
+
+use the server system_id
+    [Documentation]     The server rejects audits that carry another system_id than its own.
+    ...                 Replaces the fixture's system_ids with `${system_id}` from the EHR response.
+    [Arguments]         ${test_data}
+    ${system_id}=       Get Variable Value    ${system_id}    ${None}
+    IF    $system_id is None
+        Log    No EHR response gave a system_id, so the fixture's system_ids are sent as they are.    WARN
+        RETURN    ${test_data}
+    END
+    ${test_data}=       Update Value To Json    ${test_data}    $.audit.system_id    ${system_id}
+    ${test_data}=       Update Value To Json    ${test_data}    $.versions[*].commit_audit.system_id    ${system_id}
+    RETURN              ${test_data}
+
+remember the server system_id
+    [Documentation]     Keeps the `system_id` of an EHR response for `use the server system_id`.
+    ...                 A response without a JSON body, e.g. for `Prefer: return=minimal`, keeps the previous value.
+    [Arguments]         ${resp}
+    ${body}=            Evaluate    $resp.json() if 'json' in $resp.headers.get('Content-Type', '') else {}
+    ${value}=           Evaluate    ($body.get('system_id') or {}).get('value') if isinstance($body, dict) else None
+    IF    $value    Set Suite Variable    ${system_id}    ${value}
+
 
 check that headers location response has
    [Documentation]      Extract `Protocol, Host, Port` from Location headers response of preceding request.
