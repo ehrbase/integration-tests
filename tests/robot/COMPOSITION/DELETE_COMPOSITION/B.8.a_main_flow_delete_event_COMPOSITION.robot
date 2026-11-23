@@ -50,15 +50,21 @@ Force Tags
 
 2. Create Update Delete Composition And Check Time Committed
     [Documentation]     Covers bug https://vitagroup-ag.atlassian.net/browse/CDR-2181
+    ...                 Also checks the audit headers on create and delete, the default audit on an update without them,
+    ...                 and that the contribution carries the version's audit.
+    [Tags]              audit-headers
     Upload OPT    minimal/minimal_observation.opt
 
     create EHR
 
     commit composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.xml
+    ...    openehr-audit-details=committer.name="Jane Doe",description.value="created"
     check content of composition (JSON)
     get composition - latest version    JSON
     Set Test Variable   ${create_compo_commit_audit_datetime}     ${response.json()['commit_audit']['time_committed']['value']}
     Should Be Equal     ${response.json()['commit_audit']['change_type']['value']}   creation
+    Should Be Equal     ${response.json()['commit_audit']['committer']['name']}   Jane Doe
+    Should Be Equal     ${response.json()['commit_audit']['description']['value']}   created
     Sleep   0.2s
     update composition (JSON)    minimal/minimal_observation.composition.participations.extdatetimes.v2.xml
     check content of updated composition (JSON)
@@ -67,10 +73,27 @@ Force Tags
     Should Be Equal     ${response.json()['commit_audit']['change_type']['value']}   modification
     Sleep   0.2s
     delete composition    ${composition_uid_v2}
+    ...    openehr-audit-details=committer.name="Del Eter",description.value="deleted"
     get composition - latest version    JSON
     Set Test Variable   ${delete_compo_commit_audit_datetime}     ${response.json()['commit_audit']['time_committed']['value']}
     Should Be Equal     ${response.json()['commit_audit']['change_type']['value']}   deleted
+    Should Be Equal     ${response.json()['commit_audit']['committer']['name']}   Del Eter
+    Should Be Equal     ${response.json()['commit_audit']['description']['value']}   deleted
+    the contribution has the same audit
     Should Be True      '${create_compo_commit_audit_datetime}' != '${update_compo_commit_audit_datetime}'
     Should Be True      '${update_compo_commit_audit_datetime}' != '${delete_compo_commit_audit_datetime}'
     Should Be True      '${create_compo_commit_audit_datetime}' != '${delete_compo_commit_audit_datetime}'
     [Teardown]    Run Keywords      (admin) delete ehr      AND     (admin) delete all OPTs
+
+
+*** Keywords ***
+the contribution has the same audit
+    [Documentation]     Checks that the contribution of the latest version has the version's change type,
+    ...                 committer and description.
+    ${audit}=           Set Variable    ${response.json()}[commit_audit]
+    ${contribution}=    Set Variable    ${response.json()}[contribution][id][value]
+    &{headers}=         Create Dictionary    Accept=application/json
+    ${resp}=            GET On Session    ${SUT}    /ehr/${ehr_id}/contribution/${contribution}    headers=${headers}
+    Should Be Equal     ${resp.json()}[audit][change_type]    ${audit}[change_type]
+    Should Be Equal     ${resp.json()}[audit][committer]    ${audit}[committer]
+    Should Be Equal     ${resp.json()}[audit][description]    ${audit}[description]

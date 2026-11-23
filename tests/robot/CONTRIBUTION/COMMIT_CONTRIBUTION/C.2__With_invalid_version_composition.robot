@@ -55,3 +55,15 @@ Alternative flow 1: commit CONTRIBUTION with errors in VERSION<COMPOSITION>
     commit invalid CONTRIBUTION (JSON)    multiple_valid_and_invalid_compos.json
     check response: is negative indicating errors in committed data
     [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
+
+Alternative flow 2: commit CONTRIBUTION with another system_id than the server's
+    [Tags]    audit-headers
+    Upload OPT    minimal/minimal_evaluation.opt
+    create EHR
+    load valid test-data-set    minimal/minimal_evaluation.contribution.json
+    ${test_data}=    Update Value To Json    ${test_data}    $.audit.system_id    other.system
+    Set Test Variable    ${test_data}
+    POST /ehr/ehr_id/contribution    JSON
+    check response: is negative indicating errors in committed data
+    Should Contain    ${response.text}    system_id [other.system] does not match the system id of this server
+    [Teardown]    Run Keywords    (admin) delete ehr      AND     (admin) delete all OPTs
