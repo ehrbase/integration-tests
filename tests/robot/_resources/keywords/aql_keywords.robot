@@ -190,6 +190,7 @@ Create EHR For AQL
     Set Suite Variable      ${ehr_id_obj}       ${resp.json()['ehr_id']}
     Set Suite Variable      ${ehr_id_value}     ${resp.json()['ehr_id']['value']}
     Set Suite Variable      ${system_id_with_tenant}     ${resp.json()['system_id']['value']}
+    Set Suite Variable      ${system_id}     ${resp.json()['system_id']['value']}
     Set Suite Variable      ${ehr_id}     ${ehr_id_value}
     Set Suite Variable      ${ehr_time_created}		${resp.json()['time_created']['value']}
     Get EHR_STATUS Of EHR And Store Subject External Ref Value
@@ -321,6 +322,7 @@ Get Observation Time Committed
 Commit Contribution For AQL
     [Arguments]     ${valid_test_data_set}
                     ${file}     Load JSON from File     ${VALID CONTRI DATA SETS}/${valid_test_data_set}
+                    ${file}     use the server system_id    ${file}
                     Set Suite Variable    ${test_data}    ${file}
                     prepare new request session     Prefer=return=representation
                     ${resp}     POST On Session     ${SUT}  /ehr/${ehr_id}/contribution   expected_status=anything

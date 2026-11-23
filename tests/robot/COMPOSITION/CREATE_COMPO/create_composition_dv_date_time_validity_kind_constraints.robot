@@ -220,7 +220,7 @@ Load Json File With Composition
 Commit Composition Using Robot Templates
     [Arguments]         ${format}   ${composition}
     ...         ${need_template_id}=true   ${prefer}=representation
-    ...         ${lifecycle}=complete    ${extTemplateId}=false
+    ...         ${lifecycle}=532    ${extTemplateId}=false
     [Documentation]     Creates the first version of a new COMPOSITION
     ...                 DEPENDENCY: `upload OPT`, `create EHR`
     ...
@@ -236,7 +236,7 @@ Commit Composition Using Robot Templates
     ${file}=           Get File   ${COMPO DATA SETS}/${format}/${composition}
 
     &{headers}=        Create Dictionary   Prefer=return=${prefer}
-    ...                openEHR-VERSION.lifecycle_state=${lifecycle}
+    ...                openehr-version=lifecycle_state.code_string="${lifecycle}"
 
     IF    '${need_template_id}' == 'true'
         Set To Dictionary   ${headers}   openEHR-TEMPLATE_ID=${template}

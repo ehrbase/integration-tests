@@ -281,7 +281,7 @@ Create Session For Commit Composition With Multitenant Token
     ...     - `Dependent of keyword:` commit composition.
     [Arguments]      ${template}     ${multitenancy_token}
     Set To Dictionary   ${headers}
-    ...     Prefer=return=representation    openEHR-VERSION.lifecycle_state=complete
+    ...     Prefer=return=representation    openehr-version=lifecycle_state.code_string="532"
     ...     openEHR-TEMPLATE_ID=${template}     Authorization=Bearer ${multitenancy_token}
     #...     Content-Type=application/json
     #...     Accept=application/json
@@ -293,7 +293,7 @@ Create Session For Commit Composition With Multitenant Token
 commit composition
     [Arguments]         ${format}   ${composition}
     ...         ${need_template_id}=true   ${prefer}=representation
-    ...         ${lifecycle}=complete    ${extTemplateId}=false     ${multitenancy_token}=${None}
+    ...         ${lifecycle}=532    ${extTemplateId}=false     ${multitenancy_token}=${None}
     [Documentation]     Creates the first version of a new COMPOSITION
     ...                 DEPENDENCY: `upload OPT`, `create EHR`
     ...
@@ -309,7 +309,7 @@ commit composition
     ${file}=           Get File   ${COMPO DATA SETS}/${format}/${composition}
 
     &{headers}=        Create Dictionary   Prefer=return=${prefer}
-    ...                openEHR-VERSION.lifecycle_state=${lifecycle}
+    ...                openehr-version=lifecycle_state.code_string="${lifecycle}"
     IF  '${multitenancy_token}' != '${None}'
         Set To Dictionary     ${headers}    Authorization=Bearer ${multitenancy_token}
     ELSE IF     ('${AUTH_TYPE}' == 'BASIC' or '${AUTH_TYPE}' == 'OAUTH') and '${multitenancy_token}' == '${None}'
