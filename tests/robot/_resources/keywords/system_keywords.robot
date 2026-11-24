@@ -37,9 +37,10 @@ OPTIONS System Check Response Headers
     Dictionary Should Contain Item      ${resp_headers}     Content-Type    application/json
 
 Solution Value Is Correct
-    ${auth}         Set Variable    ${resp_headers.get("Authorization", "")}
-    ${expected}     Set Variable If    '''${auth}'''.startswith('Bearer ') and len('''${auth}''') > 7
-    ...             HIP-EHRbase    EHRbase
+    ${variable_exists}      Run Keyword And Return Status
+    ...     Variable Should Exist    ${MULTITENANCY_ENV_ENABLED}
+    ${expected}     Set Variable If    '${variable_exists}' == '${FALSE}'
+    ...             EHRbase     HIP EHRbase
     Dictionary Should Contain Item    ${resp_json}    solution    ${expected}
 
 Solution Version Is Correct
